@@ -1,0 +1,131 @@
+<template>
+  <q-page >
+
+
+<div class="q-pa-md" >
+
+
+
+    <div class="bg-bg1 round-borders shadow-5 row justify-between items-center q-pa-md">
+      <div >
+        <q-btn label="console configFile" color="primary" @click="logConfigFile" />
+      </div>
+      <div >
+        <q-btn label="console profile cache" color="primary" @click="logProfileCache" />
+      </div>
+      <div >
+        <network-switcher />
+      </div>
+      <div >
+        <nightModeSwitch />
+      </div>
+    </div>
+
+    <q-btn label="switch node" @click="switchNode" />
+    
+    
+
+    
+    <color-picker />
+    <!-- <lang-selector /> -->
+    <display-custodians />
+
+    <debug-data :data="[{
+      'getIsCustodian': getIsCustodian,
+      'getActiveNetwork': getActiveNetwork,
+      'getMemberStatus': getMemberStatus,
+      'getAgreedTermsVersion': getAgreedTermsVersion,
+      'getMemberTerms': getMemberTerms
+      
+    }]" />
+
+
+
+
+
+
+
+
+</div> <!-- end wrapper -->
+
+    
+  </q-page>
+  
+</template>
+
+<style>
+</style>
+
+<script>
+
+import ecc from 'eosjs-ecc'
+import {mapGetters} from 'vuex'
+import nightModeSwitch from 'components/controls/nightmode-switch'
+import colorPicker from 'components/controls/color-picker'
+import langSelector from 'components/controls/lang-selector'
+import networkSwitcher from 'components/controls/network-switcher'
+import displayCustodians from 'components/ui/display-custodians'
+import debugData from 'components/ui/debug-data'
+export default {
+  name: 'test',
+  components: {
+      nightModeSwitch,
+      colorPicker,
+      langSelector,
+      displayCustodians,
+      networkSwitcher,
+      debugData
+  },
+  data() {
+    return {
+      scatter:null,
+    }
+  },
+  computed:{
+    ...mapGetters({
+      getActiveNetwork: 'global/getActiveNetwork',
+      getAgreedTermsVersion: 'user/getAgreedTermsVersion',
+      getDacBalance: 'user/getDacBalance',
+      getMemberStatus: 'user/getMemberStatus',
+      getIsDark: 'ui/getIsDark',
+      getMemberTerms: 'dac/getMemberTerms',
+      getIsCustodian: 'user/getIsCustodian'
+      // getCustodians: 'dac/getCustodians',
+    }),
+    
+  },
+
+  methods:{
+    logConfigFile(){
+      console.log(this.$configFile)
+    },
+    logProfileCache(){
+      console.log(this.$profiles)
+    },
+    switchNode(){
+      let node =  {
+        host:'jungle2.eosdac.io',
+        protocol:'http',
+        port:8882,
+      }
+      this.$store.dispatch('global/changeNode', 'https://test.com');
+    }
+
+  },
+  mounted(){
+    // Object.keys(this.$store.state).forEach(e => {
+    //   console.log(`key=${e}`)
+    //   console.log(this.$store.state[e])
+    // });
+
+  },
+  watch: {
+  // '$route': function(){
+  //             this.redeemid = this.$route.params.redeemid;
+  //             this.redeemtokens = this.$route.params.redeemtokens;
+  //             console.log(this.redeemid, this.redeemtokens)
+  //           }
+  },
+
+}
+</script>
