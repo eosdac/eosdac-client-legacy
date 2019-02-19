@@ -26,7 +26,9 @@ class helper{
     const re = /^[a-z1-5.]{1,12}$/;
     return re.test(accountname);
   }
-
+  assetToNumber(asset){
+    return parseFloat(asset.split(' ')[0]);
+  }
   toLocaleNumber(number){
     if(!number) return number;
     let test = this.store.getters['user/getSettingByName']('locale_numbers').value;

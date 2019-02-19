@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <div class="q-display-1 text-text1 q-mb-md">Claim Payments</div>
+    <div class="q-display-1 text-text1 q-mb-md">Claim Payments {{totalPayAmount}}</div>
     <div class="row">
       <div class="bg-bg1 round-borders shadow-5 col-xs-12 col-md-6">
         <div v-if="pendingpay.length">
@@ -20,18 +20,18 @@
         </div>
       </div>
     </div>
-
+  <debug-data :data="[{'pendingpay': pendingpay}]" />
   </q-page>
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
+import debugData from 'components/ui/debug-data';
 
 export default {
   name: 'claimpay',
   components: {
-
-
+    debugData
   },
   data() {
     return {
@@ -45,7 +45,16 @@ export default {
     ...mapGetters({
       // getactiveCustodians: 'api/getActiveCustodians',
       // getAccountName: 'account/getAccountName'
-      })
+    }),
+    totalPayAmount(){
+      if(!this.pendingpay.length) return 0;
+
+      let total = this.pendingpay.reduce((total, p) =>{
+        return total + this.$helper.assetToNumber(p.quantity)
+      }, 0);
+
+      return this.$helper.toLocaleNumber(total)+ ' EOS';
+    }
 
   },
   methods:{
