@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="q-mt-sm">
-            <q-btn class="float-right" color="bg2" :label="$t('index.open_discord')" @click.native="openURL($configFile.external.discordUrl)"/>
+            <q-btn class="float-right" color="bg2" :label="$t('index.open_discord')" @click.native="openURL($configFile.get('external').discordUrl)"/>
           </div>
         </div>
       </div>
@@ -62,7 +62,7 @@
             </div>
           </div>
           <div class="q-mt-sm">
-            <q-btn class="float-right" color="bg2" :label="$t('index.eosdac')" @click.native="openURL($configFile.external.homepage)" />
+            <q-btn class="float-right" color="bg2" :label="$t('index.eosdac')" @click.native="openURL($configFile.get('external').homepage)" />
           </div>
         </div>
       </div>
@@ -166,7 +166,7 @@ export default {
         return false;
       }
 
-      let url = this.$helper.noBackSlash(this.$configFile.api.memberClientApiUrl)+'/subscribe';
+      let url = this.$helper.noBackSlash(this.$configFile.get('memberclientapi') )+'/subscribe';
 
       this.loading =true;
       try{

@@ -41,6 +41,12 @@ class configLoader {
       case 'explorer':
         return this.configFile.external.explorer;
         return
+      case 'memberclientapi':
+        return this.configFile.api.memberclient;
+        return
+      case 'external':
+        return this.configFile.external;
+        return
       default:
         return `***${configquery} not yet subscribed in config-loader***`
         break;
