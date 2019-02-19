@@ -138,9 +138,12 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
     }
 
     actions = actions.map(action =>{
-        action.authorization = [{actor: account.name, permission: account.authority} ];
+        if(!action.authorization){
+            action.authorization = [{actor: account.name, permission: account.authority} ];
+        }
         return action;
     });
+
     
     try {
         let [eos] = await dispatch('global/getEosScatter', null, {root: true});
