@@ -1,6 +1,3 @@
-// import configFile from '../statics/config.json'
-// leave the export, even if you don't use it
-
 
 class configLoader {
 
@@ -29,6 +26,9 @@ class configLoader {
       case 'systemtokensymbol':
         return 'EOS';
         break;
+      case 'systemtokencontract':
+        return 'eosio.token';
+        break;
       case 'systemmsigcontract':
         return this.configFile.contracts.system_msig.name;
         break;
@@ -40,13 +40,13 @@ class configLoader {
         break;
       case 'explorer':
         return this.configFile.external.explorer;
-        return
+        break;
       case 'memberclientapi':
         return this.configFile.api.memberclient;
-        return
+        break;
       case 'external':
         return this.configFile.external;
-        return
+        break;
       default:
         return `***${configquery} not yet subscribed in config-loader***`
         break;

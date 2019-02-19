@@ -94,6 +94,13 @@ export async function fetchBalances ({state, commit, dispatch}, accountname=fals
     }
 }
 
+export async function fetchPendingPay({state, dispatch}, accountname=false){
+    const accountN = accountname || state.accountName;
+    const api = await dispatch('global/getEosApi', false, {root : true} );
+    let res = await api.getPendingPay(accountN);
+    return res;
+}
+
 
 
 export async function transact ({state, rootState, commit, dispatch, getters}, payload) {
