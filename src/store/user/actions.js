@@ -152,7 +152,6 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
         commit('ui/setShowTransactionOverlay', 'success', {root: true});
         commit('setLastTransaction', result);
         
-        
         if(getters['getSettingByName']('notify_success_msg').value){
             Notify.create({
                 message:  this._vm.i18n.t('transaction.transaction_successful'),
@@ -173,7 +172,7 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
             });
         }
         return true;
-        
+
     } catch(e){
 
         let message ='unknown_error';

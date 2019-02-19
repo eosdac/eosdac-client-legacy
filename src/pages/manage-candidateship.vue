@@ -100,8 +100,12 @@
 
   <div v-if="getIsCandidate && !getIsCandidate.is_active && parseFloat(getIsCandidate.locked_tokens)" class=" bg-bg1 q-pa-md round-corners shadow-5 q-mt-md" >
     <span>{{$t('regcandidate.unstake_description')}}{{lockup_release_time_delay_days}}</span>
+    
     <div class="row justify-between q-mt-md items-center">
-      <div class="q-caption text-positive q-py-sm">Your stake {{ $helper.assetToLocaleNumber(getIsCandidate.locked_tokens) }}</div>
+      <div class="q-caption q-py-sm">
+        <span class="text-positive">Your stake {{ $helper.assetToLocaleNumber(getIsCandidate.locked_tokens) }}</span>
+        <span class="on-right">Release Date: {{ new Date('2019-05-09T19:17:10').toUTCString(getIsCandidate.custodian_end_time_stamp)}}</span>
+      </div>
       <q-btn class="animate-pop"  color="primary"  @click="unstake" :label="$t('regcandidate.unstake')" />
     </div>
   </div>
