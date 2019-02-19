@@ -172,20 +172,18 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
                 ],
             });
         }
-
         return true;
+        
     } catch(e){
+
         let message ='unknown_error';
-        console.log('error', e);
-
-
         if(e.type=='signature_rejected'){
             message = 'transaction.signature_rejected';
             commit('ui/setShowTransactionOverlay', 'cancelled', {root: true});
         }
         else{
-            // console.log(JSON.stringify(e.json, null, 2) );
-            message = e.json.error.details[0].message;
+ 
+            message = parseError(e.json);
             commit('ui/setShowTransactionOverlay', 'error', {root: true});
         }
 
@@ -200,7 +198,18 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
             });
         }
         return false;
-
-
     }
 }
+
+function parseError(err){
+    // example error: assertion failure with message: ERR::UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND::Cannot unstake tokens for an active candidate. Call withdrawcand first.
+    if(err.error.details[0].message && err.error.details[0].message.indexOf('ERR::') > -1){
+      err = err.error.details[0].message.substr(err.error.details[0].message.indexOf('ERR::'));
+      let t = 'contract_errors.'+err.split('::')[1];
+      err = t;
+    }
+    else{
+      err = err.error.details[0].message;
+    }
+    return err;
+  }
