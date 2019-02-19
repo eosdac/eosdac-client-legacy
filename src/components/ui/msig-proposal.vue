@@ -231,7 +231,8 @@ export default {
 
   data () {
     return {
-      systemmsig: this.$configFile.get('systemmsig'),
+      systemmsig: this.$configFile.get('systemmsigcontract'),
+      dacmsig: this.$configFile.get('dacmsigcontract'),
       provided_approvals: null,
       requested_approvals: null,
       isApproved: false,
@@ -335,11 +336,11 @@ export default {
 
     //approve a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
     approveProposal(proposer, proposal_name, permission="active"){
-        let actions = [
+      let actions = [
         {
-          contract: this.systemmsig, 
-          action: 'approve', 
-          fields: {
+          account: this.systemmsig, 
+          name: 'approve', 
+          data: {
             proposer: proposer,
             proposal_name: proposal_name,
             level: { "actor": this.getAccountName, "permission": permission }
@@ -347,26 +348,29 @@ export default {
           
         },
         {
-          contract: 'dacmultisigs', 
-          action: 'approved',
+          account: this.dacmsig, 
+          name: 'approved',
           authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
-          fields: {
+          data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
             approver: this.getAccountName }
         }
 
       ];
-        this.$refs.Transaction.newTransaction(actions, false, false, 'e_approval');
+      let result = await this.$store.dispatch('user/transact', {actions: actions});
+      if(result){
+        
+      }
     },
   
     //unapprove a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
     unapproveProposal(proposer, proposal_name, permission="active"){
-        let actions = [
+      let actions = [
         {
-          contract: this.systemmsig, 
-          action: 'unapprove', 
-          fields: {
+          account: this.systemmsig, 
+          name: 'unapprove', 
+          data: {
             proposer: proposer,
             proposal_name: proposal_name,
             level: { "actor": this.getAccountName, "permission": permission }
@@ -374,53 +378,58 @@ export default {
           
         },
         {
-          contract: 'dacmultisigs', 
-          action: 'unapproved',
+          account: this.dacmsig, 
+          name: 'unapproved',
           authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
-          fields: {
+          data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
             unapprover: this.getAccountName }
         }
 
       ];
-      this.$refs.Transaction.newTransaction(actions, false, false, 'e_unapproval');
+      let result = await this.$store.dispatch('user/transact', {actions: actions});
+      if(result){
+        
+      }
     },
     //execute a proposal via msig relay {"proposer":0,"proposal_name":0,"executer":0}
     executeProposal(proposer, proposal_name){
-        let actions = [
+      let actions = [
         {
-          contract: this.systemmsig, 
-          action: 'exec', 
-          fields: {
+          account: this.systemmsig, 
+          name: 'exec', 
+          data: {
             proposer: proposer,
             proposal_name: proposal_name,
             executer: this.getAccountName
           }
-          
         },
         {
-          contract: 'dacmultisigs', 
-          action: 'executed',
+          account: this.dacmsig, 
+          name: 'executed',
           authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
-          fields: {
+          data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
             executer: this.getAccountName }
         }
 
       ];
-      this.$refs.Transaction.newTransaction(actions, false, false, 'e_exec');
+      let result = await this.$store.dispatch('user/transact', {actions: actions});
+      if(result){
+        
+      }
 
     },
     
     //cancel a proposal via msig relay {"proposer":0,"proposal_name":0,"canceler":0}
     cancelProposal(proposer, proposal_name){
-        let actions = [
+      let actions = [
         {
-          contract: this.systemmsig, 
-          action: 'cancel', 
-          fields: {
+          account: this.systemmsig, 
+          name: 'cancel', 
+          data: {
             proposer: proposer,
             proposal_name: proposal_name,
             canceler: this.getAccountName
@@ -428,17 +437,20 @@ export default {
           
         },
         {
-          contract: 'dacmultisigs', 
-          action: 'cancelled',
+          account: this.dacmsig, 
+          name: 'cancelled',
           authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
-          fields: {
+          data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
             canceler: this.getAccountName }
         }
 
       ];
-      this.$refs.Transaction.newTransaction(actions, false, false, 'e_cancel');
+      let result = await this.$store.dispatch('user/transact', {actions: actions});
+      if(result){
+        
+      }
 
     },
 
@@ -475,12 +487,6 @@ export default {
       }
       
     },
-
-    enableApprove(){
-      console.log('enabled...')
-    }
-
-
 
   },
 

@@ -1,15 +1,13 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
-import global from './global'
-import user from './user'
-import dac from './dac'
-import ui from './ui'
+import global from './global';
+import user from './user';
+import dac from './dac';
+import ui from './ui';
 
-Vue.use(Vuex)
-
-
+Vue.use(Vuex);
 
   const store = new Vuex.Store({
     modules: {

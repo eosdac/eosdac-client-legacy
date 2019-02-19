@@ -15,6 +15,9 @@
         },
         "system_msig": {
             "name": "eosio.msig"
+        },
+        "dac_msig": {
+            "name": "dacmultisigs"
         }
 
     },

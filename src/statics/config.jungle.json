@@ -15,6 +15,9 @@
         },
         "system_msig": {
             "name": "eosiomsigold"
+        },
+        "dac_msig": {
+            "name": "dacmultisigs"
         }
     },
 

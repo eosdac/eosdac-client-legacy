@@ -23,16 +23,17 @@ class configLoader {
       case 'custodiancontract':
         return this.configFile.contracts.custodian.name;
         break;
-
       case 'dactokensymbol':
         return this.configFile.contracts.token.symbol;
         break;
-
       case 'systemtokensymbol':
         return 'EOS';
         break;
-      case 'systemmsig':
+      case 'systemmsigcontract':
         return this.configFile.contracts.system_msig.name;
+        break;
+      case 'dacmsigcontract':
+        return this.configFile.contracts.dac_msig.name;
         break;
       case 'botcontract':
         return this.configFile.contracts.bot.name;
@@ -40,7 +41,6 @@ class configLoader {
       case 'explorer':
         return this.configFile.external.explorer;
         return
-    
       default:
         return `***${configquery} not yet subscribed in config-loader***`
         break;
