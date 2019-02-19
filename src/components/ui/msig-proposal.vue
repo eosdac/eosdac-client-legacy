@@ -335,7 +335,7 @@ export default {
     },
 
     //approve a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
-    approveProposal(proposer, proposal_name, permission="active"){
+    async approveProposal(proposer, proposal_name, permission="active"){
       let actions = [
         {
           account: this.systemmsig, 
@@ -360,12 +360,12 @@ export default {
       ];
       let result = await this.$store.dispatch('user/transact', {actions: actions});
       if(result){
-        
+        this.transactionCallback('e_approval');
       }
     },
   
     //unapprove a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
-    unapproveProposal(proposer, proposal_name, permission="active"){
+    async unapproveProposal(proposer, proposal_name, permission="active"){
       let actions = [
         {
           account: this.systemmsig, 
@@ -390,11 +390,11 @@ export default {
       ];
       let result = await this.$store.dispatch('user/transact', {actions: actions});
       if(result){
-        
+        this.transactionCallback('e_unapproval');
       }
     },
     //execute a proposal via msig relay {"proposer":0,"proposal_name":0,"executer":0}
-    executeProposal(proposer, proposal_name){
+    async executeProposal(proposer, proposal_name){
       let actions = [
         {
           account: this.systemmsig, 
@@ -418,13 +418,13 @@ export default {
       ];
       let result = await this.$store.dispatch('user/transact', {actions: actions});
       if(result){
-        
+        this.transactionCallback('e_exec');
       }
 
     },
     
     //cancel a proposal via msig relay {"proposer":0,"proposal_name":0,"canceler":0}
-    cancelProposal(proposer, proposal_name){
+    async cancelProposal(proposer, proposal_name){
       let actions = [
         {
           account: this.systemmsig, 
@@ -449,7 +449,7 @@ export default {
       ];
       let result = await this.$store.dispatch('user/transact', {actions: actions});
       if(result){
-        
+        this.transactionCallback('e_cancel');
       }
 
     },
