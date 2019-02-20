@@ -125,7 +125,7 @@ export async function getEosApi({state, commit}, rebuild=false){
     let n = Network.fromJson(state.networks.find(n => n.name == state.active_network) );
     let rpc = new JsonRpc(n.fullhost() );
     let api = await new Api({ rpc, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
-    commit('setEosApi', new EosWrapper(api, state.config) );
+    commit('setEosApi', new EosWrapper(api, this._vm.$configFile) );
     return state.eosApi;
 }
 
@@ -146,11 +146,10 @@ export async function getEosScatter({state, commit}, rebuild=false){
 export async function loadConfig({Vue,state, commit}, payload ){
     console.log(`loading new config file ${payload.networkname} in to store`)
     const config = require(`../../statics/config.${payload.networkname}.json`);
-    state.config = config;
 
     if(payload.vm){
         //setting new config in the plugin
-        payload.vm.$configFile.configFile = state.config;
+        payload.vm.$configFile.setConfig(config);
     }
 }
 
@@ -182,9 +181,9 @@ export async function switchNetwork({state, commit, dispatch, rootGetters}, payl
     await dispatch('logout');
     /////////////////////////////////////////
     console.log('resetting profilecache...');
-    payload.vm.$profiles.cache = [];
+    payload.vm.$profiles.delete();
     console.log('profile cache:', payload.vm.$profiles.cache);
-    payload.vm.$profiles.config = state.config;
+    payload.vm.$profiles.config = this._vm.$configFile;
     /////////////////////////////////////////
 
     dispatch('dac/initRoutine', null, {root : true});

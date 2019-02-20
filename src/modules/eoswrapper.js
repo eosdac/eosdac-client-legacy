@@ -3,7 +3,7 @@ export class EosWrapper {
 
     constructor(eosApi, config){
         this.eos = eosApi.rpc;
-        this.config = config;
+        this.config = config.configFile;
     }
 
 

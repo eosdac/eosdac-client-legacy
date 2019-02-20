@@ -15,9 +15,7 @@ export function getActiveNetworkName (state) {
     return state.active_network;
 }
 
-export function getConfig (state) {
-    return state.config;
-}
+
 
 export function getDapp_version (state){
     return state.dapp_version

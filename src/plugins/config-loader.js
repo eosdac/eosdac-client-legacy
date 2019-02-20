@@ -1,10 +1,10 @@
 
 class configLoader {
 
-  constructor(store, networkname){
+  constructor( networkname){
 
     this.configFile = require(`../statics/config.${networkname}.json`);
-    store.commit('global/setConfig', this.configFile);
+    // store.commit('global/setConfig', this.configFile);
     
   }
 
@@ -52,7 +52,10 @@ class configLoader {
         break;
     }
   }
-
+  
+  setConfig(conf){
+    this.configFile = conf;
+  }
 
 }
 
@@ -63,13 +66,7 @@ export default ({
 
   let networkname = store.getters['global/getActiveNetworkName'];
 
-  // const configFile =  require(`../statics/config.${networkname}.json`);
-  
-  // store.commit('global/setConfig', configFile);
-
-  // Vue.prototype.$configFile = configFile;
-
-  Vue.prototype.$configFile = new configLoader(store, networkname)
+  Vue.prototype.$configFile = new configLoader(networkname);
 }
 
-export {configFile}
+// export {configFile}

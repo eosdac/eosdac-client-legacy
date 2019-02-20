@@ -23,5 +23,5 @@ export default {
   scatter: null,
   eosApi: false,
   eosScatter: false,
-  config: false
+
 }

@@ -53,7 +53,7 @@ class ProfileCache{
 
   async fetchProfiles(accountnames){
 
-    let url = this.config.api.memberclient;
+    let url = this.config.get('memberclientapi');
     // let url = let url = this.$helper.noBackSlash(this.$configFile.api.memberClientApiUrl)+'/subscribe';
     if (url.substr(-1) != '/'){
       url += '/profiles';
@@ -88,11 +88,17 @@ class ProfileCache{
     this.cache = this.cache.filter(p=> !accountnames.includes(p._id) );
   }
 
+  delete(){
+    this.cache = [];
+    console.log('Profile cache emptied')
+  }
+
 }
 
 
 export default ({ Vue, store }) => {
-  Vue.prototype.$profiles = new ProfileCache(store.getters['global/getConfig'] );
+  // Vue.prototype.$profiles = new ProfileCache(store.getters['global/getConfig'] );
+  Vue.prototype.$profiles = new ProfileCache(Vue.prototype.$configFile );
   // Vue.prototype.$profiles = new ProfileCache({api:{memberclient: "http://ns3119712.ip-51-38-42.eu:3000/"} } );
   
 }
