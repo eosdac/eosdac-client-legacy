@@ -84,7 +84,7 @@
                     { label: $t('lang_selector.languages.chinese') + ' - 中文',    value: 'Chinese' },
                     { label: $t('lang_selector.languages.english_us') + ' - English', value: 'English' },
                     { label: $t('lang_selector.languages.french') + ' - Français',     value: 'French' },
-                    { label: $t('lang_selector.languages.german') + ' - Deutsch',     value: 'Dutch' },
+                    { label: $t('lang_selector.languages.german') + ' - Deutsch',     value: 'German' },
                     { label: $t('lang_selector.languages.italian') + ' - Italiano',    value: 'Italian' },
                     { label: $t('lang_selector.languages.japanese') + ' - 日本語',   value: 'Japanese' },
                     { label: $t('lang_selector.languages.korean') + ' - 한국어',     value: 'Korean' },
