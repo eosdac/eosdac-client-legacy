@@ -46,13 +46,13 @@ export default {
         return false;
       }
       else{
-        return  true;
+        return true;
       }
     }
   },
   methods:{
-    startTimer(){
-      TIMER = setInterval(()=>{this.time_flag = true}, 2000);
+    startTimer(ms){
+      TIMER = setInterval(()=>{this.time_flag = true}, ms);
     },
     stopTimer(){
       clearInterval(TIMER);
@@ -60,12 +60,12 @@ export default {
     },
     close(){
       this.stopTimer();
-      this.startTimer();
+      this.startTimer(10000); //reapear after user has closed
     }
 
   },
   mounted(){
-    this.startTimer();
+    this.startTimer(2000);
   },
 
   watch:{
@@ -80,7 +80,7 @@ export default {
     getAccountName: function(v){
       this.stopTimer();
       if(this.getAccountName){
-        this.startTimer();
+        this.startTimer(2000);
       }
 
     }
