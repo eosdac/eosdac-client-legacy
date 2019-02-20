@@ -11,8 +11,6 @@ export function setEosScatter (state, payload) {
     state.eosScatter = payload;
 }
 
-
-
 export function setActiveNetwork (state, payload) {
     state.active_network = payload;
 }

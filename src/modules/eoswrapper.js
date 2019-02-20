@@ -3,7 +3,8 @@ export class EosWrapper {
 
     constructor(eosApi, config){
         this.eos = eosApi.rpc;
-        this.config = config.configFile;
+        // this.config = config.configFile;
+        this.configobj = config
     }
 
 
@@ -11,7 +12,7 @@ export class EosWrapper {
         return this.eos.get_account(accountname).then(x => x).catch(e => false);
     }
 
-    async getBalance(accountname, contract=this.config.contracts.token.name , symbol=this.config.contracts.token.symbol){
+    async getBalance(accountname, contract= this.configobj.get('tokencontract') , symbol= this.configobj.get('dactokensymbol') ){
         return this.eos.get_currency_balance( contract, accountname, symbol ).then(res =>{
             if(res[0]){
                 return parseFloat(res[0]);
@@ -25,8 +26,8 @@ export class EosWrapper {
     async getAgreedTermsVersion(accountname){
         let res =  await this.eos.get_table_rows({
             json: true,
-            code: this.config.contracts.token.name,
-            scope: this.config.contracts.token.name,
+            code: this.configobj.get('tokencontract'), 
+            scope: this.configobj.get('tokencontract'),
             lower_bound: accountname,
             table: 'members',
             limit: 1
@@ -43,8 +44,8 @@ export class EosWrapper {
     async getMemberTerms(){
         let res =  await this.eos.get_table_rows({
             json: true,
-            code: this.config.contracts.token.name,
-            scope: this.config.contracts.token.name,
+            code: this.configobj.get('tokencontract'),
+            scope: this.configobj.get('tokencontract'),
             table: 'memberterms',
             limit: -1
         }).catch(e=> false);
@@ -63,8 +64,8 @@ export class EosWrapper {
     async getTokenStats(){
         let res =  await this.eos.get_table_rows({
             json: true,
-            code: this.config.contracts.token.name,
-            scope: this.config.contracts.token.symbol,
+            code: this.configobj.get('tokencontract'),
+            scope: this.configobj.get('dactokensymbol'),
             table: 'stat',
             limit: 1
         }).catch(e=> false );
@@ -80,7 +81,7 @@ export class EosWrapper {
     async getContractConfig(payload){
         let contract;
         if(payload == 'custodian'){
-            contract = this.config.contracts.custodian.name;
+            contract = this.configobj.get('custodiancontract');
         }
         let res =  await this.eos.get_table_rows({
             json: true,
@@ -100,8 +101,8 @@ export class EosWrapper {
     async getVotes(accountname){
         let res =  await this.eos.get_table_rows({
             json: true,
-            code: this.config.contracts.custodian.name,
-            scope: this.config.contracts.custodian.name,
+            code: this.configobj.get('custodiancontract'),
+            scope: this.configobj.get('custodiancontract'),
             lower_bound: accountname,
             table: 'votes',
             limit: 1
@@ -118,8 +119,8 @@ export class EosWrapper {
     async getCustodians(){
         let res =  await this.eos.get_table_rows({
             json: true,
-            code: this.config.contracts.custodian.name,
-            scope: this.config.contracts.custodian.name,
+            code: this.configobj.get('custodiancontract'),
+            scope: this.configobj.get('custodiancontract'),
             table: 'custodians',
             limit: 12
         }).catch(e=> false);
@@ -140,8 +141,8 @@ export class EosWrapper {
     async isCandidate(accountname){
         let res =  await this.eos.get_table_rows({
             json: true,
-            code: this.config.contracts.custodian.name,
-            scope: this.config.contracts.custodian.name,
+            code: this.configobj.get('custodiancontract'),
+            scope: this.configobj.get('custodiancontract'),
             lower_bound: accountname,
             table: 'candidates',
             limit: 1
@@ -159,8 +160,8 @@ export class EosWrapper {
     async getCandidates(){
         let res =  await this.eos.get_table_rows({
             json: true,
-            code: this.config.contracts.custodian.name,
-            scope: this.config.contracts.custodian.name,
+            code: this.configobj.get('custodiancontract'),
+            scope: this.configobj.get('custodiancontract'),
             table: 'candidates',
             limit: -1
         }).catch(e=> false);
@@ -176,7 +177,7 @@ export class EosWrapper {
     async getApprovalsFromProposal(payload){
         try{
         let approvals = (await this.eos.get_table_rows({
-            code: this.config.contracts.system_msig.name,
+            code: this.configobj.get('systemmsigcontract'),
             json: true,
             limit: 1,
             lower_bound: payload.proposal_name,
@@ -196,8 +197,8 @@ export class EosWrapper {
 
         let pendingpays = await this.eos.get_table_rows({
             json : true,
-            code: this.config.contracts.custodian.name,
-            scope: this.config.contracts.custodian.name,
+            code: this.configobj.get('custodiancontract'),
+            scope: this.configobj.get('custodiancontract'),
             table: 'pendingpay',
             lower_bound : accountname,
             upper_bound : accountname,
