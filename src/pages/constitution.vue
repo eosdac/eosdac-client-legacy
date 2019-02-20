@@ -107,7 +107,7 @@ const CryptoJS = require('crypto-js')
 import marked from 'marked'
 import xspan from 'components/ui/xspan';
 
-import {mapGetters} from 'vuex'
+import {mapGetters} from 'vuex';
 export default {
   components: {
     xspan

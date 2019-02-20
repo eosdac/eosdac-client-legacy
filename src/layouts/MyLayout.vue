@@ -27,12 +27,10 @@
 
     <q-layout-drawer v-model="leftDrawerOpen" content-class="bg-bg1 relative-position overflow-hidden">
       <main-menu />
-      <div style="border: 1px solid grey; height:80px;" class="text-text2 q-pa-sm round-borders q-ma-md absolute-bottom">
-        xxxxxxxxxx
-      </div>
     </q-layout-drawer>
 
-    <q-page-container class="bg-bg2 text-text1">
+    <q-page-container class="bg-bg2 text-text1 relative-position">
+      <request-signature />
       <router-view />
       <transactionOverlay />
     </q-page-container>
@@ -61,6 +59,7 @@ import {mapGetters} from 'vuex';
 import transactionOverlay from 'components/transaction-overlay';
 import toolbarMenu from 'components/controls/toolbar-menu';
 import mainMenu from 'components/controls/main-menu';
+import requestSignature from 'components/ui/request-signature';
 
 
 
@@ -69,7 +68,8 @@ export default {
   components: {
       transactionOverlay,
       toolbarMenu,
-      mainMenu
+      mainMenu,
+      requestSignature
   },
   data() {
     return {

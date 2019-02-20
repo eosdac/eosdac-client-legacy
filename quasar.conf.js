@@ -109,7 +109,8 @@ module.exports = function (ctx) {
         'QCheckbox',
         'QCarousel',
         'QCarouselSlide',
-        'QCarouselControl'
+        'QCarouselControl',
+        'QAlert'
         
 
       ],
@@ -126,7 +127,7 @@ module.exports = function (ctx) {
       i18n: 'en-us' // Quasar language
     },
     // animations: 'all' --- includes all animations
-    animations: [],
+    animations: ['fadeInDown', 'fadeOutUp'],
     ssr: {
       pwa: false
     },
