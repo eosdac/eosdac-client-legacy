@@ -42,7 +42,7 @@
       <!-- header -->
       <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md">
         <span>Create Msig Proposal</span>
-        <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="createmsig_modal = false" />
+        <q-icon class=" cursor-pointer" name="close" @click.native="createmsig_modal = false" />
       </div>
       <!-- content -->
       <!-- <div class="q-mb-lg"><MsigCreator /></div> -->

@@ -25,7 +25,7 @@
       </q-toolbar>
     </q-layout-header>
 
-    <q-layout-drawer v-model="leftDrawerOpen" content-class="bg-bg1 relative-position overflow-hidden">
+    <q-layout-drawer v-model="leftDrawerOpen" @show="handleDrawerEvent(true)" @hide="handleDrawerEvent(false)" content-class="bg-bg1 relative-position overflow-hidden" ref="leftdrawer">
       <main-menu />
     </q-layout-drawer>
 
@@ -94,15 +94,14 @@ export default {
   },
 
   methods:{
-    openURL
+    openURL,
+    handleDrawerEvent(e){
+      this.$store.commit('ui/setDrawerIsOpen', e);
+    }
   },
 
   async mounted(){
-    // this.loading = true;
-    // this.$store.dispatch('dac/initRoutine')
-    // await this.$store.dispatch('global/connectScatter')
-    // this.loading = false;
-
+    this.$store.commit('ui/setDrawerIsOpen', this.$refs.leftdrawer.showing);
   },
 
   watch: {

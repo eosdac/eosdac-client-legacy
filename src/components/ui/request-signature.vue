@@ -1,21 +1,27 @@
 <template>
     <transition appear enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
       
-      <div v-if="getAccountName && needSignature && time_flag && showHere" class="request_signature_msg bg-bg2  q-pa-md bg-logo" style="position:fixed; z-index:2">
-        <div class="row justify-between items-center q-mb-md">
+      <div v-if="getAccountName && needSignature && time_flag && showHere" v-bind:class="{ 'drawer-margin': getDrawerIsOpen }" class=" request_signature_msg bg-bg2 q-pa-md bg-logo fixed" >
+    
+
+        <div class="row justify-between items-center q-mb-md ">
           <div class="q-title">{{ $t('default.sign_the_constitution') }}</div>
           <q-btn class="no-shadow" icon="close" @click="close" />
         </div>
-        <div class="q-mb-md">
-          <!-- <q-icon flat size="30px" class="float-left q-ma-sm" name="icon-register-3"></q-icon> -->
-          <span  class="on-left">{{ $t('default.you_have_not_yet_registered') }}</span>
-          <span  class="on-left">{{ $t('default.constitution_has_been_updated') }}</span>
+
+        <div class="q-mb-md full-width">
+          <span v-if="!getAgreedTermsVersion" class="on-left">{{ $t('default.you_have_not_yet_registered') }}</span>
+          <span  v-else class="on-left">{{ $t('default.constitution_has_been_updated') }}</span>
+          <!-- <span class="on-left">{{ $t('default.you_have_not_yet_registered') }}</span>
+          <span class="on-left">{{ $t('default.constitution_has_been_updated') }}</span> -->
         </div>
-        <!-- <q-btn v-if="$router.currentRoute.path!='/constitution'" class="q-mt-sm" to="/constitution" text-color="blue" color="white">{{  }}</q-btn> -->
+
         <div class="row justify-end">
           <q-btn  color="bg1" to="/constitution" icon="receipt" :label="$t('default.sign_the_constitution')" />
-          <!-- <q-btn class="q-ma-xs" color="bg1"  icon="visibility" label="read constitution" /> -->
         </div>
+        <div style="clear:both"></div>
+
+     
       </div>
       
   </transition>
@@ -38,6 +44,7 @@ export default {
       getLatestMemberTerm: 'dac/getLatestMemberTerm',
       getAccountName: 'user/getAccountName',
       getAgreedTermsVersion: 'user/getAgreedTermsVersion',
+      getDrawerIsOpen: 'ui/getDrawerIsOpen'
  
     }),
 
@@ -66,6 +73,12 @@ export default {
   },
   mounted(){
     this.startTimer(2000);
+    if(this.$router.currentRoute.path=='/constitution'){
+      this.showHere = false;
+    }
+    else{
+      this.showHere = true;
+    }
   },
 
   watch:{
@@ -93,7 +106,19 @@ export default {
 @import '~variables'
 
 .request_signature_msg{
-  border-bottom: 4px solid var(--q-color-info)
+  border-bottom: 4px solid var(--q-color-info);
+  // border-left: 4px solid var(--q-color-info);
+  // border-right: 4px solid var(--q-color-info);
+  z-index:2;
+  width:100%;
+  
+  right:0;
 }
+
+.drawer-margin{
+  padding-left:320px !important;
+}
+
+
 
 </style>

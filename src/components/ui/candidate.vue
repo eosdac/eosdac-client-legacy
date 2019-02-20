@@ -38,7 +38,7 @@
     <q-modal maximized v-model="profilemodal">
       <div style="height:50px" class="bg-bg2 row items-center justify-between q-px-md text-text1">
         <span>Bio</span>
-        <q-btn icon="icon-ui-8" @click="profilemodal = false" class="no-shadow"/>
+        <q-btn icon="close" @click="profilemodal = false" class="no-shadow"/>
       </div>
       <div class="q-pa-md bg-bg1 full-height">
         <div class="row items-center q-mb-md">

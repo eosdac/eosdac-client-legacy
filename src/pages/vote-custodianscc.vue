@@ -106,7 +106,7 @@
                 </router-link>
               </q-item-main>
               <q-item-side right>
-                <q-btn dense round color="primary" icon="icon-ui-8" @click="deleteFromVoteList(cand.candidate_name)" />
+                <q-btn dense round color="primary" icon="close" @click="deleteFromVoteList(cand.candidate_name)" />
               </q-item-side>
             </q-item>
           </transition-group>
@@ -124,7 +124,7 @@
   <q-modal v-model="voting_disabled_modal"  minimized  :content-css="{width: '50%'}" >
     <div  class="bg-dark round-borders q-pa-md">
       <div style="overflow: auto;">
-        <q-btn round color="primary" class="float-right" @click="voting_disabled_modal=false" icon="icon-ui-8" />
+        <q-btn round color="primary" class="float-right" @click="voting_disabled_modal=false" icon="close" />
       </div>
 
       <div class="q-mb-xl q-mt-md">

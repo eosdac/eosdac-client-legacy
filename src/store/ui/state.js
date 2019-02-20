@@ -2,6 +2,7 @@ export default {
   //
   showTransactionOverlay: false,
   activeTheme:'default',
+  drawerIsOpen: true,
 
   themes:[
     {

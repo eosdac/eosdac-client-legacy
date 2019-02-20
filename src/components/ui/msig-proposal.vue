@@ -43,7 +43,7 @@
     <!-- header -->
     <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
       <span>Proposal Details</span>
-      <q-btn icon="icon-ui-8" @click="mobile_details_modal = false" class="no-shadow" />
+      <q-btn icon="close" @click="mobile_details_modal = false" class="no-shadow" />
     </div>
     <!-- content -->
     <div class="q-pa-md " >
@@ -185,7 +185,7 @@
     <!-- header -->
     <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md">
       <span>Approvals <span v-if="provided_approvals" class="q-caption text-weight-thin">needs {{msig.threshold-provided_approvals.length}} more</span></span>
-      <q-btn icon="icon-ui-8" @click="approvals_modal = false" class="no-shadow" />
+      <q-btn icon="close" @click="approvals_modal = false" class="no-shadow" />
     </div>
     <!-- content -->
     <div class="q-pa-md">

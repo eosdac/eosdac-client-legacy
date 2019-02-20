@@ -68,49 +68,31 @@
     </div>
 
   </div>
-  <!-- <pre>memberterms {{getMemberTerms}}</pre>
-  <pre>agreed termsversion {{getAgreedTermsVersion}}</pre>
-  <pre>latest memberterms {{getLatestMemberTerm}}</pre>
-  <pre>need sig {{needSignature}}</pre> -->
+
+
   <q-scroll-observable @scroll="userHasScrolled" />
 
+  <debug-data :data="[{
+    'getMemberTerms': getMemberTerms,
+    'getAgreedTermsVersion': getAgreedTermsVersion
+    }]" />
 
 </q-page>
 </template>
 
-<style lang="stylus">
-@import '~variables'
 
-#registerbox{
-  position:relative;
-  transition: all 1s ease 0s;
-  top: 0;
-}
-.overwrite {
-  background: none !important;
-  color: var(--q-color-text2) !important;
-  // transition: all 0.1s linear;
-}
-.testtt h1, .testtt h2, , .testtt p{
-  color: var(--q-color-text1) !important;
-  // transition: all 0.1s linear;
-}
-.overwrite td, .overwrite th {
-  background: var(--q-color-bg2) !important;
-  // transition: all 0.1s linear;
-}
-
-</style>
 
 <script>
-const CryptoJS = require('crypto-js')
-import marked from 'marked'
+const CryptoJS = require('crypto-js');
+import marked from 'marked';
 import xspan from 'components/ui/xspan';
+import debugData from 'components/ui/debug-data';
 
 import {mapGetters} from 'vuex';
 export default {
   components: {
-    xspan
+    xspan,
+    debugData
   },
   data() {
     return {
@@ -250,3 +232,27 @@ export default {
 
 }
 </script>
+
+<style lang="stylus">
+@import '~variables'
+
+#registerbox{
+  position:relative;
+  transition: all 1s ease 0s;
+  top: 0;
+}
+.overwrite {
+  background: none !important;
+  color: var(--q-color-text2) !important;
+  // transition: all 0.1s linear;
+}
+.testtt h1, .testtt h2, , .testtt p{
+  color: var(--q-color-text1) !important;
+  // transition: all 0.1s linear;
+}
+.overwrite td, .overwrite th {
+  background: var(--q-color-bg2) !important;
+  // transition: all 0.1s linear;
+}
+
+</style>
