@@ -155,7 +155,7 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
     try {
         let [eos] = await dispatch('global/getEosScatter', null, {root: true});
         setTimeout(()=>{commit('ui/setShowTransactionOverlay', 'sign', {root: true}); }, 1500);
-        const result = await eos.transact({actions: actions}, {blocksBehind: 3, expireSeconds: 30} );
+        const result = await eos.transact({delay_sec: 0, actions: actions}, {blocksBehind: 3, expireSeconds: 30} );
         commit('ui/setShowTransactionOverlay', 'success', {root: true});
         commit('setLastTransaction', result);
         

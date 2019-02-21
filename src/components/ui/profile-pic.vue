@@ -1,30 +1,54 @@
 <template>
-  <div >fffffff</div>
+      <div class="profile_image relative-position" style="height:65px; width:65px;"  v-bind:style="style" >
+        <div v-if="is_custodian" style="position:absolute;bottom:-10px;right:-10px;"><q-icon size="36px" color="warning" name="star"/></div>
+      </div>
+
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 
 export default {
   name: 'profilePic',
+  props:{
+    accountname: '',
+    scale: Number
+  },
   data () {
-    return {}
+    return {
+      profilePic: ''
+    }
+  },
+  computed:{
+    ...mapGetters({
+      getCustodians: 'dac/getCustodians'
+    }),
+    style () {
+      return { 
+          transform: `scale(${this.scale})`,
+          'background-image': `url(${this.profilePic})`
+          };
+     },
+     is_custodian(){
+       if(this.getCustodians){
+         return this.getCustodians.find(c=> c.cust_name == this.accountname);
+       }
+       else{
+         return false;
+       }
+     }
   },
   methods:{
-    // loadImage(){
-    //   const imageUrl = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
-    //   let bgElement = document.querySelector("#profilepic");
-    //   bgElement.classList.add("loading");
-    //   let preloaderImg = document.createElement("img");
-    //   preloaderImg.src = imageUrl;
+    async setProfilePic(){
+      let p = await this.$profiles.getAvatars([this.accountname] );
+      this.profilePic = p[0].image;
+      
+    }
+  },
+  mounted(){
+    this.setProfilePic();
+  },
 
-    //   preloaderImg.addEventListener('load', (event) => {
-    //     bgElement.classList.remove("loading");
-    //     bgElement.classList.add("loaded");
-    //     bgElement.style.backgroundImage = `url(${imageUrl})`;
-    //     preloaderImg = null;
-    //   });
-    // }
-  }
 }
 </script>
 

@@ -1,28 +1,29 @@
 <template>
-  <div class="row justify-between" v-if="custodians.length">
-    <!-- <pre>{{custodians}}</pre> -->
-    <div class="column items-center bg-primary" v-for="custodian in custodians" :key="custodian.cust_name">
-      <!-- <div class="center_background_image" style="border-radius:50%; width:20px;height:20px" v-bind:style="{ 'background-image': `url()` }"></div> -->
-      <span  id="profilepic"></span>
-  
+  <div class="row justify-between bg-bg1 shadow-5 round-borders q-pa-md q-mb-md" v-if="custodians.length" >
+
+    <div class="column items-center q-pa-sm" v-for="custodian in custodians" :key="custodian.cust_name">
+      <!-- <div class="profile_image relative-position" style=" width:65px;height:65px;" v-bind:style="{ 'background-image': `url(${custodian.profile.image})` }">
+        <div style="position:absolute;bottom:-10px;right:-10px"><q-icon size="36px" color="warning" name="star"/></div>
+      </div> -->
+      <profile-pic :accountname="custodian.cust_name" :scale="1" />
       <router-link class="q-body-1 a2 q-mt-xs" :to="{path: '/profile/' + custodian.cust_name}" >
         <div class="q-ma-none" >{{custodian.cust_name}}</div>
       </router-link>
-    
-      <!-- <span>{{custodian.cust_name}}</span> -->
     </div>
-    <div class="col"></div>
+
   </div>
 </template>
 
 <script>
-import profilePic from './profile-pic'
-import {mapGetters} from 'vuex'
+import profilePic from './profile-pic';
+import {mapGetters} from 'vuex';
 
 export default {
-  name: 'profilePic',
+  name: 'displayCustodians',
   components:{
     profilePic
+    
+    
   },
   props: {
     data: Object,
@@ -41,14 +42,28 @@ export default {
   },
 
   methods: {
-      //get all custodians + profiles and display avatar
-      async setCustodians () {
 
-          this.custodians = this.getCustodians;
+    async setCustodians () {
+        let custodians;
+        if(!this.getCustodians){
+          custodians = await this.$store.dispatch('dac/fetchCustodians' );
+        }
+        else{
+          custodians = this.getCustodians;
+        }
+        // let p = await this.$profiles.getAvatars(custodians.map(c => c.cust_name) );
+        // p.forEach(pdb =>{
+        //   let cand = custodians.find(x => x.cust_name === pdb._id);
+        //   if(cand.profile === undefined){
+        //     cand.profile = pdb;
+        //   }
+        // })
+        this.custodians = custodians;
+    }
 
         
         
-      }
+      
 
   },
 

@@ -20,7 +20,8 @@
 <div class="q-pa-md"> <!-- padding wrapper -->
 
 
-<!-- <custodians-display /> -->
+<div class="q-display-1 q-mb-md ">{{ $t('vote_custodians.custodian_board') }}</div>
+<display-custodians />
 
 
 <div class="row gutter-md reverse-wrap">
@@ -146,7 +147,9 @@
 
 import Candidate from 'components/ui/candidate';
 import VotingProgress from 'components/ui/voting-progress';
+import displayCustodians from 'components/ui/display-custodians';
 import debugData from 'components/ui/debug-data';
+
 import { Notify } from 'quasar';
 
 import {mapGetters} from 'vuex'
@@ -156,7 +159,8 @@ export default {
   components: {
     Candidate,
     VotingProgress,
-    debugData
+    debugData,
+    displayCustodians
   },
   data() {
     return {

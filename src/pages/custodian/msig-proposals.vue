@@ -1,10 +1,10 @@
 <template>
 <q-page class="text-text2 q-pa-md">
-  <!-- <pre>{{pagination}}{{active_tab}}</pre> -->
-  <div class="row relative-position justify-between q-mb-md">
+
+  <div class="row relative-position justify-start q-mb-md">
     <h4 class="q-display-1 q-my-none">Review Proposals</h4>
-    <span><q-btn color="primary" class="q-mt-xs" label="create new"  @click="createmsig_modal = true" /></span>
   </div>
+
   <q-tabs class="q-mb-md" @select="setActiveTab">
     <!-- Tabs - notice slot="title" -->
     <q-tab default slot="title" name="open" label="open" />
@@ -32,22 +32,7 @@
     <Msigproposal v-for="(msig, index) in proposals" :key="index" :msig="msig" />
   </div>
   
-  <div class="row">
-    <q-btn color="primary" label="create new" @click="createmsig_modal = true" />
-  </div>
  
-
-  <q-modal maximized v-model="createmsig_modal" >
-    <div class="bg-bg1">
-      <!-- header -->
-      <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md">
-        <span>Create Msig Proposal</span>
-        <q-icon class=" cursor-pointer" name="close" @click.native="createmsig_modal = false" />
-      </div>
-      <!-- content -->
-      <!-- <div class="q-mb-lg"><MsigCreator /></div> -->
-    </div> 
-  </q-modal>
 
 </q-page>
 </template>
