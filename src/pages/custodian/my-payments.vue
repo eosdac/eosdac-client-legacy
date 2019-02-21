@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <div class="q-display-1 text-text1 q-my-md">Update Requested Pay <span class="text-text2">({{getIsCandidate.requestedpay}})</span></div>
+      <div class="q-display-1 text-text1 q-my-md full-width">Update Requested Pay <span class="text-text2 q-caption">(current pay: {{getIsCandidate.requestedpay}})</span></div>
       <div class="text-text1 round-borders bg-bg1 q-pa-md">
           <span >{{$t('regcandidate.pay_description', {requested_pay: $helper.assetToLocaleNumber(getCustodianConfig.requested_pay_max) }) }}</span>
           <q-item class="q-pl-none">

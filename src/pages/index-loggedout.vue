@@ -110,18 +110,9 @@
 </q-page>
 </template>
 
-
-
 <script>
-
-
-
-import {
-  openURL
-} from 'quasar'
-import {
-  mapGetters
-} from 'vuex'
+import {openURL} from 'quasar';
+import {mapGetters} from 'vuex';
 export default {
   components:{
     

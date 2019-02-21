@@ -112,7 +112,8 @@ module.exports = function (ctx) {
         'QCarouselControl',
         'QStepper',
         'QStep',
-        'QStepperNavigation'
+        'QStepperNavigation',
+        'QDatetimePicker'
         
 
       ],

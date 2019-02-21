@@ -3,6 +3,10 @@ export function getScatter (state) {
     return state.scatter;
 }
 
+export function getEosApi (state) {
+    return state.eosApi;
+}
+
 export function getAccountName (state) {
     return state.accountName;
 }
