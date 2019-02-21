@@ -44,7 +44,7 @@
               <q-input  color="primary-light" :dark="getIsDark" type="number" :max="20" v-model="new_requested_pay" :stack-label="$t('regcandidate.requestedpay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
             </q-item-main>
           </q-item>
-          <div class="row justify-end">
+          <div class="row justify-end q-mt-md">
             <q-btn label="update" @click="updateRequestedPay" color="primary" />
           </div>
       </div>
