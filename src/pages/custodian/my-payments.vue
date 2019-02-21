@@ -1,6 +1,7 @@
 <template>
   <q-page class="q-pa-md">
     <div class="q-display-1 text-text1 q-mb-md">Pending Payments <span class="text-text2" v-if="pendingpay.length">({{pendingpay.length}})</span></div>
+
     <div class="row">
       <div class="bg-bg1 round-borders shadow-5 col-xs-12 col-md-6">
 
@@ -60,7 +61,7 @@ import {mapGetters} from 'vuex';
 import debugData from 'components/ui/debug-data';
 
 export default {
-  name: 'claimpay',
+  name: 'MyPayments',
   components: {
     debugData
   },
@@ -133,13 +134,13 @@ export default {
       });
       let result = await this.$store.dispatch('user/transact', {actions: actions} );
       if(result){
-        
+        this.getClaimPay();
       }
     },
 
     async updateRequestedPay(){
       if(!this.verifyAndGetRequestedPay){
-        alert('new requested pay not set');
+        alert('Requested pay amount invalid');
         return;
       }
       let actions = [
