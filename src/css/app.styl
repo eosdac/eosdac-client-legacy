@@ -127,3 +127,33 @@ styles*/
 @media only screen and (min-width: 1500px) {
 
 }
+
+
+/* right bounce */
+.fa-arrow-right {
+  -webkit-animation: bounceRight 2s infinite;
+  animation: bounceRight 2s infinite;
+  width:26px;
+  padding-left:12px
+}
+
+
+@keyframes bounceRight {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+  40% {
+    -ms-transform: translateX(-7px);
+    transform: translateX(-7px);
+  }
+  60% {
+    -ms-transform: translateX(-4px);
+    transform: translateX(-4px);
+  }
+}
+/* /right bounce */
