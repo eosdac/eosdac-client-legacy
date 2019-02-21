@@ -1,9 +1,11 @@
 <template>
   <q-page class="q-pa-md">
-    <div class="q-display-1 text-text1 q-mb-md">Claim Payments</div>
+    <div class="q-display-1 text-text1 q-mb-md">Pending Payments <span class="text-text2" v-if="pendingpay.length">({{pendingpay.length}})</span></div>
     <div class="row">
       <div class="bg-bg1 round-borders shadow-5 col-xs-12 col-md-6">
+
         <div v-if="pendingpay.length">
+
           <q-item v-for="(pay, i) in pendingpay" :key="`pay_id_${i}`">
             <q-item-side left>{{pay.key}}</q-item-side>
             <q-item-main>
@@ -31,6 +33,23 @@
           You do not have any pending payments.
         </div>
       </div>
+
+      <div class="q-display-1 text-text1 q-my-md">Update Requested Pay <span class="text-text2">({{getIsCandidate.requestedpay}})</span></div>
+      <div class="text-text1 round-borders bg-bg1 q-pa-md">
+          <span >{{$t('regcandidate.pay_description', {requested_pay: $helper.assetToLocaleNumber(getCustodianConfig.requested_pay_max) }) }}</span>
+          <q-item class="q-pl-none">
+            <q-item-side left icon="icon-type-2"  v-bind:class="{'text-positive':verifyAndGetRequestedPay, 'text-text2': !verifyAndGetRequestedPay}"/>
+            <q-item-main>
+              <q-input  color="primary-light" :dark="getIsDark" type="number" :max="20" v-model="new_requested_pay" :stack-label="$t('regcandidate.requestedpay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
+            </q-item-main>
+          </q-item>
+          <div class="row justify-end">
+            <q-btn label="update" @click="updateRequestedPay" color="primary" />
+          </div>
+      </div>
+
+
+
     </div>
   <debug-data :data="[{'pendingpay': pendingpay}]" />
   </q-page>
@@ -49,14 +68,17 @@ export default {
     return {
       loading: false,
       loadingText: '',
-      pendingpay : []
+      pendingpay : [],
+      new_requested_pay: ''
 
     }
   },
   computed: {
     ...mapGetters({
-      // getactiveCustodians: 'api/getActiveCustodians',
-      // getAccountName: 'account/getAccountName'
+      getCustodianConfig: 'dac/getCustodianConfig',
+      getAccountName: 'user/getAccountName',
+      getIsDark: 'ui/getIsDark',
+      getIsCandidate: 'user/getIsCandidate',
     }),
 
     totalPayAmount(){
@@ -67,7 +89,17 @@ export default {
       }, 0);
 
       return this.$helper.toLocaleNumber(total)+ ' EOS';
-    }
+    },
+    verifyAndGetRequestedPay(){
+      if(this.new_requested_pay && (this.new_requested_pay <= this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max) ) ){
+        return this.$helper.numberToAsset(this.new_requested_pay.toFixed(4), this.$configFile.get('systemtokensymbol') );
+      }
+      else{
+        console.log('requested pay out of range');
+        return false;
+
+      }
+    },
 
   },
   methods:{
@@ -87,6 +119,7 @@ export default {
       }
         
     },
+
     async claimAll(){
       const contract = this.$configFile.get('custodiancontract');
       let actions = this.pendingpay.map(pp=>{
@@ -103,6 +136,29 @@ export default {
         
       }
     },
+
+    async updateRequestedPay(){
+      if(!this.verifyAndGetRequestedPay){
+        alert('new requested pay not set');
+        return;
+      }
+      let actions = [
+        {
+          account: this.$configFile.get('custodiancontract'), 
+          name: 'updatereqpay',
+          data: {
+            cand: this.getAccountName,
+            requestedpay: this.verifyAndGetRequestedPay
+          }
+        }
+      ];
+      console.log(actions)
+      let result = await this.$store.dispatch('user/transact', {actions: actions} );
+      if(result){
+        this.$store.dispatch('user/fetchIsCandidate');
+      }
+    },
+
     async getClaimPay(){
       this.loading = true;
       this.pendingpay =  await this.$store.dispatch('user/fetchPendingPay');

@@ -32,7 +32,7 @@
     <Msigproposal v-for="(msig, index) in proposals" :key="index" :msig="msig" />
   </div>
   
- 
+ <msig-creator />
 
 </q-page>
 </template>
@@ -40,13 +40,13 @@
 <script>
 
 import Msigproposal from 'components/ui/msig-proposal';
+import msigCreator from 'components/controls/msig-creator';
 import {mapGetters} from 'vuex';
 
 export default {
   name: 'MsigProposals',
   components: {
-
-      // MsigCreator,
+      msigCreator,
       Msigproposal
   },
 

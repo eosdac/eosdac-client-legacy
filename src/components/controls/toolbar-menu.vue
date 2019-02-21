@@ -20,7 +20,7 @@
       </q-item>
 </div>
 
-<div v-if="getSettingByName('toolbar_profile_image').value && getAccountName" class="row justify-end" style=" margin-right:-22px;" ref="profileContainer">
+<div v-if="getSettingByName('toolbar_profile_image').value && getAccountName && getProfilePicture" class="row justify-end" style=" margin-right:-22px;" ref="profileContainer">
   <profile-pic :accountname="getAccountName" :scale="0.55" />
 </div>
 
@@ -35,6 +35,8 @@
             </q-item-main>
             <!-- <q-item-side right icon="info" color="amber" /> -->
           </q-item>
+
+
 
           <q-item-separator inset />
 
@@ -90,6 +92,7 @@ export default {
     ...mapGetters({
       getAccountName: 'user/getAccountName',
       getAgreedTermsVersion: 'user/getAgreedTermsVersion',
+      getProfilePicture: 'user/getProfilePicture',
       getDacBalance: 'user/getDacBalance',
       getSystemBalance: 'user/getSystemBalance',
       getMemberStatus: 'user/getMemberStatus',

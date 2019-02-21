@@ -110,7 +110,9 @@ module.exports = function (ctx) {
         'QCarousel',
         'QCarouselSlide',
         'QCarouselControl',
-        'QPageSticky'
+        'QStepper',
+        'QStep',
+        'QStepperNavigation'
         
 
       ],

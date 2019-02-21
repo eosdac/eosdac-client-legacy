@@ -1,8 +1,7 @@
 <template>
-      <div class="profile_image relative-position" style="height:65px; width:65px;"  v-bind:style="style" >
-        <div v-if="is_custodian" style="position:absolute;bottom:-10px;right:-10px;"><q-icon size="36px" color="warning" name="star"/></div>
+      <div class="profile_image relative-position animate-fade" style="height:65px; width:65px;"  v-bind:style="style" >
+        <div v-if="is_custodian" style="position:absolute;bottom:-10px;right:-10px;"><q-icon size="34px" color="warning" name="star"/></div>
       </div>
-
 </template>
 
 <script>
@@ -14,11 +13,13 @@ export default {
     accountname: '',
     scale: Number
   },
+
   data () {
     return {
       profilePic: ''
     }
   },
+
   computed:{
     ...mapGetters({
       getCustodians: 'dac/getCustodians'
@@ -29,6 +30,7 @@ export default {
           'background-image': `url(${this.profilePic})`
           };
      },
+
      is_custodian(){
        if(this.getCustodians){
          return this.getCustodians.find(c=> c.cust_name == this.accountname);

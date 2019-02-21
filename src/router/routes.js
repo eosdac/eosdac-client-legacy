@@ -41,7 +41,7 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/index-loggedout') },
       { path: 'msig-proposals', component: () => import('pages/custodian/msig-proposals') },
-      { path: 'claim-pay', component: () => import('pages/custodian/claim-pay') }
+      { path: 'my-payments', component: () => import('pages/custodian/my-payments') }
       
     ],
     beforeEnter: Guards.custodianCheck

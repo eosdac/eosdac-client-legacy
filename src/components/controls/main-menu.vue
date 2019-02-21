@@ -10,9 +10,9 @@
             <q-item-side icon="list_alt" color="text2" />
             <q-item-main label="Msig Proposals" class="text-text1" />
           </q-item>
-          <q-item class="q-pl-lg" link to="/custodian/claim-pay">
+          <q-item class="q-pl-lg" link to="/custodian/my-payments">
             <q-item-side icon="attach_money" color="text2" />
-            <q-item-main label="Claim Payments" class="text-text1" />
+            <q-item-main label="My Payments" class="text-text1" />
           </q-item>
         </div>
       </q-collapsible>
