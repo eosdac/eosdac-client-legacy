@@ -21,6 +21,7 @@
 
 
 <div class="q-display-1 q-mb-md ">{{ $t('vote_custodians.custodian_board') }}</div>
+
 <display-custodians />
 
 
