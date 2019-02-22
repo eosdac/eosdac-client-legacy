@@ -40,7 +40,8 @@ const routes = [
     component: () => import('layouts/MyLayout.vue'),
     children: [
       { path: '', component: () => import('pages/index-loggedout') },
-      { path: 'msig-proposals', component: () => import('pages/custodian/msig-proposals') },
+      { path: 'review-msigs', component: () => import('pages/custodian/review-msigs') },
+      { path: 'create-msigs', component: () => import('pages/custodian/create-msigs') },
       { path: 'my-payments', component: () => import('pages/custodian/my-payments') }
       
     ],

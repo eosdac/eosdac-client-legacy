@@ -1,7 +1,7 @@
 <template>
 <div class="text-text1">
   <div class="row relative-position justify-start q-mb-md">
-      <h4 class="q-display-1 q-my-none">Create Msig Transaction</h4>
+      <h4 class="q-display-1 text-text2 q-my-none">Create Msig Transaction</h4>
   </div>
   <q-stepper color="primary-light" class="bg-bg1" ref="stepper"  contractable>
 
@@ -15,14 +15,14 @@
         <div class="text-text1">The DAC "dacauthority" controls the following accounts:</div>
         <div class="row q-mb-md">
           <q-btn class="text-text1 q-my-sm q-mr-sm"  v-for="(n,i) in controlled_accounts" :key="i"  :label="n.name" color="bg2" @click="handleSelection(i)" >
-            <q-icon v-if="n.selected" class="animate-fade" name="check" color="positive" />
+            <q-icon v-if="n.selected" class="animate-pop" name="check" color="positive" />
           </q-btn>
         </div>
       </div>
 
       <div class="row justify-end">
         <q-stepper-navigation>
-          <q-btn color="primary" class="animate-fade" @click="$refs.stepper.next()" label="Next" v-if="controlled_accounts.find(ca=> ca.selected==true)" />
+          <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" v-if="controlled_accounts.find(ca=> ca.selected==true)" />
         </q-stepper-navigation>
       </div>
     </q-step>
@@ -32,20 +32,17 @@
       <div class="q-mb-md text-text2">
           Give the msig transaction a name, title and description
       </div>
+      <div class="row gutter-md">
+        <div class="col-xs-12 col-md-6"><div><q-input dark v-model="msig_name" stack-label="Name" placeholder="msig name" /></div></div>
+        <div class="col-xs-12 col-md-6"><div><q-input dark v-model="msig_title" stack-label="Title" placeholder="title" /></div></div>
+      </div>
 
-      <div>
-        <q-input dark v-model="msig_name" stack-label="Name" placeholder="msig name" />
-      </div>
-      <div>
-        <q-input dark v-model="msig_title" stack-label="Title" placeholder="title" />
-      </div>
-      <div>
-        <q-input dark v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" />
-      </div>
+      <div class="q-mt-lg"><q-input dark v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" /></div>
 
       <div class="row justify-end">
-        <q-stepper-navigation>
-          <q-btn color="primary" class="animate-fade" @click="$refs.stepper.next()" label="Next" v-if="msig_title && msig_name && msig_description" />
+        <q-stepper-navigation >
+          <q-btn color="primary" flat @click="$refs.stepper.previous()" label="Back" />
+          <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" v-if="msig_title && msig_name && msig_description" />
         </q-stepper-navigation>
       </div>
     </q-step>
@@ -78,7 +75,7 @@
       <div class="row justify-end q-mt-md">
         <q-stepper-navigation>
           <q-btn color="primary" flat @click="$refs.stepper.previous()" label="Back" />
-          <q-btn v-if="actions.length" color="primary" @click="$refs.stepper.next()" label="Next" />
+          <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" label="Next" />
         </q-stepper-navigation>
       </div>
     </q-step>
@@ -94,7 +91,7 @@
       <div class="row justify-end q-mt-md">
         <q-stepper-navigation>
           <q-btn color="primary" flat @click="$refs.stepper.previous()" label="Back" />
-          <q-btn color="primary" @click="$refs.stepper.next()" label="Next" />
+          <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" />
         </q-stepper-navigation>
       </div>
     </q-step>
@@ -133,7 +130,7 @@
         <!-- <q-stepper-navigation> -->
           <div>
           <q-btn color="primary" flat @click="$refs.stepper.previous()" label="Back" />
-          <q-btn color="positive" @click="proposeMsig" label="submit" />
+          <q-btn color="positive" class="animate-pop" @click="proposeMsig" label="submit" />
           </div>
         <!-- </q-stepper-navigation> -->
       </div>

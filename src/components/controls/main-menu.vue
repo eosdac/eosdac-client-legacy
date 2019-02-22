@@ -6,9 +6,13 @@
           <q-item-main :label="$t('default.custodian_tools')" class="text-text1"/>
         </template>
         <div class="bg-bg1">
-          <q-item class="q-pl-lg" link to="/custodian/msig-proposals">
+          <q-item class="q-pl-lg" link to="/custodian/review-msigs">
             <q-item-side icon="list_alt" color="text2" />
-            <q-item-main label="Msig Proposals" class="text-text1" />
+            <q-item-main label="Review Msigs" class="text-text1" />
+          </q-item>
+          <q-item class="q-pl-lg" link to="/custodian/create-msigs">
+            <q-item-side icon="list_alt" color="text2" />
+            <q-item-main label="Create Msigs" class="text-text1" />
           </q-item>
           <q-item class="q-pl-lg" link to="/custodian/my-payments">
             <q-item-side icon="attach_money" color="text2" />
