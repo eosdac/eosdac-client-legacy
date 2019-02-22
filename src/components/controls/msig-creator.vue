@@ -3,7 +3,7 @@
   <div class="row relative-position justify-start q-mb-md">
       <h4 class="q-display-1 text-text2 q-my-none">Create Msig Transaction</h4>
   </div>
-  <q-stepper color="primary-light" class="bg-bg1" ref="stepper"  contractable>
+  <q-stepper color="primary-light" class="bg-bg1 bg-logo" ref="stepper"  contractable>
 
     <!-- step 1 select msig account -->
     <q-step default name="first" title="Select Msig Account" >
@@ -61,13 +61,13 @@
         <q-tab slot="title" name="tab-2" :label="`send ${this.$configFile.get('dactokensymbol')}`" />
         <q-tab slot="title" name="tab-3" :label="`Advanced`" />
         <!-- Targets -->
-        <q-tab-pane name="tab-1" class="text-text1 bg-bg2 bg-logo">
+        <q-tab-pane name="tab-1" class="text-text1 bg-bg2">
           <action-maker :account="$configFile.get('systemtokencontract')" name="transfer" @actiondata="addAction" />
         </q-tab-pane>
-        <q-tab-pane name="tab-2" class="text-text1 bg-bg2 bg-logo">
+        <q-tab-pane name="tab-2" class="text-text1 bg-bg2">
           <action-maker :account="$configFile.get('tokencontract')" name="transfer" @actiondata="addAction"/>
         </q-tab-pane>
-        <q-tab-pane name="tab-3" class="text-text1 bg-bg2 bg-logo">
+        <q-tab-pane name="tab-3" class="text-text1 bg-bg2">
           <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/>
         </q-tab-pane>
       </q-tabs>
@@ -100,24 +100,24 @@
     <q-step name="fifth" title="Review & Submit" active-icon="remove_red_eye">
       <div class="row">
         <q-item class="animate-pop">
-          <q-item-side icon="vpn_key" color="text1" />
+          <q-item-side icon="mdi-account-key-outline" color="text2" />
           <q-item-main style="margin-left:-5px">
-            <q-item-tile class="text-text2" label>Multisignature Account</q-item-tile>
-            <q-item-tile class="text-text1 q-caption" sublabel>{{getSelectedAccount}}</q-item-tile>
+            <q-item-tile class="text-text1" label>Multisignature Account</q-item-tile>
+            <q-item-tile class="text-text2 q-caption" sublabel>{{getSelectedAccount}}</q-item-tile>
           </q-item-main>
         </q-item>
         <q-item class="animate-pop">
-          <q-item-side icon="timer" color="text1" />
+          <q-item-side icon="timer" color="text2" />
           <q-item-main style="margin-left:-5px">
-            <q-item-tile class="text-text2" label>Expiration</q-item-tile>
-            <q-item-tile class="text-text1 q-caption" sublabel>{{trx_expiration}}</q-item-tile>
+            <q-item-tile class="text-text1" label>Expiration</q-item-tile>
+            <q-item-tile class="text-text2 q-caption" sublabel>{{trx_expiration}}</q-item-tile>
           </q-item-main>
         </q-item>
         <q-item class="animate-pop">
-          <q-item-side icon="donut_large" color="text1" />
+          <q-item-side icon="donut_large" color="text2" />
           <q-item-main style="margin-left:-5px">
-            <q-item-tile class="text-text2" label>Actions</q-item-tile>
-            <q-item-tile class="text-text1 q-caption" sublabel>{{actions.length}}</q-item-tile>
+            <q-item-tile class="text-text1" label>Actions</q-item-tile>
+            <q-item-tile class="text-text2 q-caption" sublabel>{{actions.length}}</q-item-tile>
           </q-item-main>
         </q-item>
       </div>

@@ -4,7 +4,7 @@
   <div appear class="bg-bg1 q-pa-sm round-borders q-ma-xs">
     <q-btn v-if="viewable" size="sm" dense  class="q-mr-xs text-text1" icon="pageview" flat title="view action data" >
       <q-popover class="bg-bg1">
-        <q-list >
+        <q-list>
           <q-item v-close-overlay v-for="(value, key) in action.data">
             <q-item-main>
               <q-item-tile label>{{key}}</q-item-tile>
@@ -38,5 +38,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang ="stylus">
+@import '~variables'
+
+
 </style>
