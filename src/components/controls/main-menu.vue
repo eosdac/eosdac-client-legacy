@@ -2,16 +2,16 @@
       <q-list no-border link inset-delimiter>
       <q-collapsible  v-if="getIsCustodian">
         <template slot="header">
-          <q-item-side icon="person_pin" color="text2"/>
+          <q-item-side icon="mdi-folder-star" color="text2"/>
           <q-item-main :label="$t('default.custodian_tools')" class="text-text1"/>
         </template>
         <div class="bg-bg1">
           <q-item class="q-pl-lg" link to="/custodian/review-msigs">
-            <q-item-side icon="list_alt" color="text2" />
+            <q-item-side icon="mdi-shield-key" color="text2" />
             <q-item-main label="Review Msigs" class="text-text1" />
           </q-item>
           <q-item class="q-pl-lg" link to="/custodian/create-msigs">
-            <q-item-side icon="list_alt" color="text2" />
+            <q-item-side icon="mdi-shield-key-outline" color="text2" />
             <q-item-main label="Create Msigs" class="text-text1" />
           </q-item>
           <q-item class="q-pl-lg" link to="/custodian/my-payments">
@@ -50,13 +50,13 @@
       </q-item> -->
   
 
-        <q-item @click.native="openURL('http://google.com')">
+        <q-item @click.native="openURL($configFile.get('external').dacexplorer)">
           <q-item-side icon="icon-menu-4" color="text2" />
           <q-item-main :label="$t('default.token_explorer')" class="text-text1" />
           <q-item-side right icon="icon-transfer-out" color="text2" />
         </q-item>
 
-        <q-item @click.native="openURL('http://google.com')">
+        <q-item @click.native="openURL($configFile.get('external').discord)">
           <q-item-side icon="contact_support" color="text2" />
           <q-item-main :label="$t('default.support')" class="text-text1" />
           <q-item-side right icon="icon-transfer-out" color="text2" />

@@ -41,7 +41,7 @@
 
       <div class="row justify-end">
         <q-stepper-navigation >
-          <q-btn color="primary" flat @click="$refs.stepper.previous()" label="Back" />
+          <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
           <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" v-if="msig_title && msig_name && msig_description" />
         </q-stepper-navigation>
       </div>
@@ -53,7 +53,7 @@
           Add actions to the multisignature transaction.
       </div>
       <div class="row q-mb-md bg-bg2 q-pa-md round-borders">
-        <display-action v-for="(action,i) in actions" :action="action" closable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
+        <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
         <span class="text-text2" v-if="!actions.length">No actions added yet.</span>
       </div>
       <q-tabs dark>
@@ -74,7 +74,7 @@
 
       <div class="row justify-end q-mt-md">
         <q-stepper-navigation>
-          <q-btn color="primary" flat @click="$refs.stepper.previous()" label="Back" />
+          <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
           <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" label="Next" />
         </q-stepper-navigation>
       </div>
@@ -90,14 +90,14 @@
       </div>
       <div class="row justify-end q-mt-md">
         <q-stepper-navigation>
-          <q-btn color="primary" flat @click="$refs.stepper.previous()" label="Back" />
+          <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
           <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" />
         </q-stepper-navigation>
       </div>
     </q-step>
 
     <!-- step 5 review and submit -->
-    <q-step name="fifth" title="Review & Submit">
+    <q-step name="fifth" title="Review & Submit" active-icon="remove_red_eye">
       <div class="row">
         <q-item class="animate-pop">
           <q-item-side icon="vpn_key" color="text1" />
@@ -129,7 +129,7 @@
         <q-btn label="view full transaction" icon="pageview" color="primary"/>
         <!-- <q-stepper-navigation> -->
           <div>
-          <q-btn color="primary" flat @click="$refs.stepper.previous()" label="Back" />
+          <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
           <q-btn color="positive" class="animate-pop" @click="proposeMsig" label="submit" />
           </div>
         <!-- </q-stepper-navigation> -->
