@@ -27,8 +27,31 @@
       </div>
     </q-step>
 
-    <!-- step 2 add actions -->
-    <q-step  name="second" title="Add Actions" class="text-text1" subtitle="" >
+    <!-- step 2 add description -->
+    <q-step default name="second" title="Add info" >
+      <div class="q-mb-md text-text2">
+          Give the msig transaction a name, title and description
+      </div>
+
+      <div>
+        <q-input dark v-model="msig_name" stack-label="Name" placeholder="msig name" />
+      </div>
+      <div>
+        <q-input dark v-model="msig_title" stack-label="Title" placeholder="title" />
+      </div>
+      <div>
+        <q-input dark v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" />
+      </div>
+
+      <div class="row justify-end">
+        <q-stepper-navigation>
+          <q-btn color="primary" class="animate-fade" @click="$refs.stepper.next()" label="Next" v-if="msig_title && msig_name && msig_description" />
+        </q-stepper-navigation>
+      </div>
+    </q-step>
+
+    <!-- step 3 add actions -->
+    <q-step  name="third" title="Add Actions" class="text-text1" subtitle="" >
       <div class="q-mb-md text-text2">
           Add actions to the multisignature transaction.
       </div>
@@ -60,8 +83,8 @@
       </div>
     </q-step>
 
-    <!-- step 3 set expiration -->
-    <q-step name="third" title="Set Exipiration">
+    <!-- step 4 set expiration -->
+    <q-step name="fourth" title="Set Exipiration">
       <div class="q-mb-md text-text2">
           Set a date on which the transaction should expire. The transaction will be unexecutable after this date even if all signatures are collected.
       </div>
@@ -76,8 +99,8 @@
       </div>
     </q-step>
 
-    <!-- step 4 review and submit -->
-    <q-step name="fourth" title="Review & Submit">
+    <!-- step 5 review and submit -->
+    <q-step name="fifth" title="Review & Submit">
       <div class="row">
         <q-item class="animate-pop">
           <q-item-side icon="vpn_key" color="text1" />
@@ -182,6 +205,9 @@ export default {
   },
   data () {
     return {
+      msig_name:'',
+      msig_title:'',
+      msig_description:'',
       controlled_accounts: [],
       trx_expiration: new Date(new Date().getTime() + (3 * 24 * 60 * 60 * 1000) ).toISOString(),
       mindate: today,
@@ -235,7 +261,7 @@ export default {
             name: 'propose',
             data: {
               proposer: this.getAccountName,
-              proposal_name: 'hardctest',
+              proposal_name: this.msig_name,
               requested: this.getRequested(),
               trx: this.constructMsigTransaction()
             }
@@ -246,8 +272,8 @@ export default {
             authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
             data: {
               proposer: this.getAccountName,
-              proposal_name: 'hardctest',
-              metadata: JSON.stringify({title:"hello world", description:"kqjjlkqh flfksqdhfsqdh sdqfhk l"})
+              proposal_name: this.msig_name,
+              metadata: JSON.stringify({title:this.msig_title, description: this.msig_description})
             }
       };
 
