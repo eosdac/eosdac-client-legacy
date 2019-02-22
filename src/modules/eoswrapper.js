@@ -2,12 +2,9 @@
 
 export class EosWrapper {
 
-    constructor(eosApi, serialize, config){
+    constructor(eosApi, config){
         this.eosapi = eosApi;
         this.eos = eosApi.rpc;
-        this.Serialize = serialize;
-        this.textDecoder = eosApi.textDecoder;
-        this.textEncoder = eosApi.textEncoder;
         // this.config = config.configFile;
         this.configobj = config
     }

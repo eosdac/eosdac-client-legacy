@@ -150,7 +150,7 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
         }
         return action;
     });
-
+    console.log(JSON.stringify(actions) );
     
     try {
         let [eos] = await dispatch('global/getEosScatter', null, {root: true});
@@ -220,10 +220,3 @@ function parseError(err){
     return err;
 }
 
-export async function msigtransact ({state, rootState, commit, dispatch, getters}, payload) {
-
-    let [eos] = await dispatch('global/getEosScatter', null, {root: true});
-    console.log(JSON.stringify(payload) )
-
-    const result = await eos.transact({actions: payload.actions}, {blocksBehind: 3, expireSeconds: 30} );
-}

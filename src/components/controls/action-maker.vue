@@ -28,6 +28,8 @@
 <script>
 import {mapGetters} from 'vuex';
 const {TextDecoder, TextEncoder} = require('text-encoding');
+const {Serialize} = require('eosjs');
+
 import { Notify } from 'quasar';
 
 export default {
@@ -83,12 +85,12 @@ export default {
         data: action_data,
       }
       action.hex = await this.serializeActionData(action);
+
       if(!action.hex){
         return;
       }
 
       this.$emit('actiondata', action);
-      // this.serializeActionData(action);
     },
 
     async serializeActionData(action){
@@ -96,21 +98,23 @@ export default {
         let account = action.account;
         let name = action.name;
         let data = action.data;
+        console.log('actiondataxxxxx', action.data)
 
-        let serialBuffer = new this.getEosApi.Serialize.SerialBuffer({
-            textEncoder: new TextEncoder,
-            textDecoder: new TextDecoder,
+        let sbuf = new Serialize.SerialBuffer({
+            textEncoder: new TextEncoder(),
+            textDecoder: new TextDecoder(),
         });
 
         const contract = await this.getEosApi.eosapi.getContract(account);
-        contract.actions.get(name).serialize(serialBuffer, data, new this.getEosApi.Serialize.SerializerState({ bytesAsUint8Array: false }))
+        contract.actions.get(name).serialize(sbuf, data, new Serialize.SerializerState({ bytesAsUint8Array: false }));
 
-        let action_data_hex = this.getEosApi.Serialize.arrayToHex(serialBuffer.array);
+        let action_data_hex = Serialize.arrayToHex(sbuf.array);
+        console.log(action_data_hex);
         return action_data_hex;
       }
       catch(e){
         // console.log(JSON.stringify(e, Object.getOwnPropertyNames(e)));
-        console.log(e)
+        console.log(e);
         Notify.create({
           message: `Serialize`+e.stack.split('\n')[0],
           detail: 'See console for more info',

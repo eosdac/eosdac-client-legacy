@@ -119,12 +119,14 @@
 <debug-data :data="[{
   'selected_account':controlled_accounts.find(ca=> ca.selected==true),
   'actions': actions,
-  'trx_expiration': trx_expiration
+  'trx_expiration': trx_expiration,
+  'getCustodians': getCustodians
   }]" />
 </div>
 </template>
 
 <script>
+
 import {mapGetters} from 'vuex';
 import debugData from 'components/ui/debug-data';
 import actionMaker from 'components/controls/action-maker';
@@ -133,15 +135,17 @@ import { date } from 'quasar';
 const today = new Date();
 const { addToDate, subtractFromDate } = date;
 const msigTrx_template = { 
-            expiration: '', 
-            ref_block_num: 0, 
-            ref_block_prefix: 0, 
-            max_net_usage_words: 0, 
-            max_cpu_usage_ms: 0, 
-            delay_sec: 0, 
-            context_free_actions: [], 
-            actions: [], 
-            transaction_extensions: [] 
+        expiration: '',
+        ref_block_num: 0,
+        ref_block_prefix: 0,
+        max_net_usage_words: 0,
+        max_cpu_usage_ms: 0,
+        delay_sec: 0,
+        actions:[],
+        context_free_actions: [],
+        transaction_extensions: [],
+        signatures: [],
+        context_free_data: []
         };
 export default {
   // name: 'ComponentName',
@@ -152,7 +156,8 @@ export default {
   },
   computed:{
     ...mapGetters({
-      getAccountName: 'user/getAccountName'
+      getAccountName: 'user/getAccountName',
+      getCustodians: 'dac/getCustodians'
     }),
     parseNumberToAsset(number, symbol){
       return `${number.toFixed(4)} ${symbol}`;
@@ -206,7 +211,7 @@ export default {
       let template = JSON.parse(JSON.stringify(msigTrx_template) );
       template.expiration = this.trx_expiration.split('.')[0]; 
       template.actions = this.actions.map(a=>{
-        a.authorization = {actor: this.getSelectedAccount2.name, permission: this.getSelectedAccount2.permission};
+        a.authorization = [{actor: this.getSelectedAccount2.name, permission: this.getSelectedAccount2.permission}];
         //replace plain data with hex
         if(a.hex){
           a.data = a.hex;
@@ -217,35 +222,41 @@ export default {
       console.log(template);
       return template;
     },
+    getRequested(){
+      let requested = this.getCustodians.map(c => {
+        let req = {actor: c.cust_name, permission: 'active'};
+        return req;
+      });
+      return requested;
+    },
     async proposeMsig(){
       let propose = {
-          account: this.$configFile.get('systemmsigcontract'), 
-          name: 'propose', 
-          data: {
-            proposer: this.getAccountName,
-            proposal_name: 'hardctest',
-            requested: [{actor: "piecesnbitss", permission: "active" }, {actor: "evilmikehere", permission: "active" }],
-            trx: this.constructMsigTransaction()
-          }
+            account: this.$configFile.get('systemmsigcontract'), 
+            name: 'propose',
+            data: {
+              proposer: this.getAccountName,
+              proposal_name: 'hardctest',
+              requested: this.getRequested(),
+              trx: this.constructMsigTransaction()
+            }
       };
       let proposed = {
-          account: this.$configFile.get('dacmsigcontract'), 
-          name: 'proposed', 
-          data: {
-            proposer: this.getAccountName,
-            proposal_name: 'hardctest',
-            metadata: {"title":"hello world","description":"kqjjlkqh flfksqdhfsqdh sdqfhk l"} 
-          }
+            account: this.$configFile.get('dacmsigcontract'), 
+            name: 'proposed',
+            authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+            data: {
+              proposer: this.getAccountName,
+              proposal_name: 'hardctest',
+              metadata: JSON.stringify({title:"hello world", description:"kqjjlkqh flfksqdhfsqdh sdqfhk l"})
+            }
       };
-      console.log( )
-      let result = await this.$store.dispatch('user/msigtransact', {actions: [propose, proposed] } );
+
+      let result = await this.$store.dispatch('user/transact', {actions: [propose, proposed] } );
       if(result){
         console.log('transaction callback', result);
       }
 
     }
-
-    
   },
   mounted(){
     // this.$store.dispatch('dac/fetchControlledAccounts');
