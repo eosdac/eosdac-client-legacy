@@ -27,6 +27,8 @@
 
 <script>
 import {mapGetters} from 'vuex';
+const {TextDecoder, TextEncoder} = require('text-encoding');
+import { Notify } from 'quasar';
 
 export default {
   name: 'actionMaker',
@@ -64,8 +66,8 @@ export default {
       this.data_fields = fields.map(f=> {f.value='';return f});
     },
 
-    processInputs(){
-
+    async processInputs(){
+      
       let action_data = this.data_fields.reduce((res, input) =>{
         let value = input.value;
         if((value.includes('[') && value.includes(']') ) || (value.includes('{') && value.includes('}') ) ){
@@ -78,10 +80,48 @@ export default {
       let action = {
         account: this.account,
         name: this.name,
-        data: action_data
+        data: action_data,
+      }
+      action.hex = await this.serializeActionData(action);
+      if(!action.hex){
+        return;
       }
 
       this.$emit('actiondata', action);
+      // this.serializeActionData(action);
+    },
+
+    async serializeActionData(action){
+      try{
+        let account = action.account;
+        let name = action.name;
+        let data = action.data;
+
+        let serialBuffer = new this.getEosApi.Serialize.SerialBuffer({
+            textEncoder: new TextEncoder,
+            textDecoder: new TextDecoder,
+        });
+
+        const contract = await this.getEosApi.eosapi.getContract(account);
+        contract.actions.get(name).serialize(serialBuffer, data, new this.getEosApi.Serialize.SerializerState({ bytesAsUint8Array: false }))
+
+        let action_data_hex = this.getEosApi.Serialize.arrayToHex(serialBuffer.array);
+        return action_data_hex;
+      }
+      catch(e){
+        // console.log(JSON.stringify(e, Object.getOwnPropertyNames(e)));
+        console.log(e)
+        Notify.create({
+          message: `Serialize`+e.stack.split('\n')[0],
+          detail: 'See console for more info',
+          timeout: 2000,
+          type: 'negative',
+          position: 'bottom-right'
+        });
+        return false;
+      }
+
+
     }
 
   },

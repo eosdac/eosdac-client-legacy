@@ -8,13 +8,16 @@
     <!-- step 1 select msig account -->
     <q-step default name="first" title="Select Msig Account" >
       <div class="q-mb-md text-text2">
-          Select an account from which you want to propose a multisignature transaction
+          Select an account from which you want to propose a multisignature transaction.
       </div>
 
-      <div class="row">
-        <q-btn class="text-text1 q-my-sm q-mr-sm"  v-for="(n,i) in controlled_accounts" :key="i"  :label="n.account" color="bg2" @click="handleSelection(i)" >
-          <q-icon v-if="n.selected" class="animate-fade" name="check" color="positive" />
-        </q-btn>
+      <div>
+        <div class="text-text1">The DAC "dacauthority" controls the following accounts:</div>
+        <div class="row q-mb-md">
+          <q-btn class="text-text1 q-my-sm q-mr-sm"  v-for="(n,i) in controlled_accounts" :key="i"  :label="n.name" color="bg2" @click="handleSelection(i)" >
+            <q-icon v-if="n.selected" class="animate-fade" name="check" color="positive" />
+          </q-btn>
+        </div>
       </div>
 
       <div class="row justify-end">
@@ -27,11 +30,11 @@
     <!-- step 2 add actions -->
     <q-step  name="second" title="Add Actions" class="text-text1" subtitle="" >
       <div class="q-mb-md text-text2">
-          Add actions to the multisignature transaction
+          Add actions to the multisignature transaction.
       </div>
       <div class="row q-mb-md bg-bg2 q-pa-md round-borders">
         <display-action v-for="(action,i) in actions" :action="action" closable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
-        <span class="text-text2" v-if="!actions.length">No actions configured</span>
+        <span class="text-text2" v-if="!actions.length">No actions added yet.</span>
       </div>
       <q-tabs dark>
         <q-tab default slot="title" name="tab-1" :label="`send ${this.$configFile.get('systemtokensymbol')}`" />
@@ -59,6 +62,9 @@
 
     <!-- step 3 set expiration -->
     <q-step name="third" title="Set Exipiration">
+      <div class="q-mb-md text-text2">
+          Set a date on which the transaction should expire. The transaction will be unexecutable after this date even if all signatures are collected.
+      </div>
       <div>
        <q-datetime-picker minimal dark class="bg-bg1" color="positive" v-model="trx_expiration" :min="mindate" :max="maxdate" type="date" />
       </div>
@@ -96,7 +102,7 @@
         </q-item>
       </div>
       <div class="row q-pa-md q-mt-md bg-bg2 round-borders">
-          <display-action v-for="(action,i) in actions" :action="action" :key="`a${i}`"/>
+          <display-action v-for="(action,i) in actions" :action="action" :key="`a${i}`" viewable/>
       </div>
 
       <div class="row justify-between  items-center q-mt-lg ">
@@ -104,13 +110,14 @@
         <!-- <q-stepper-navigation> -->
           <div>
           <q-btn color="primary" flat @click="$refs.stepper.previous()" label="Back" />
-          <q-btn color="positive" @click="" label="submit" />
+          <q-btn color="positive" @click="proposeMsig" label="submit" />
           </div>
         <!-- </q-stepper-navigation> -->
       </div>
     </q-step>
   </q-stepper>
 <debug-data :data="[{
+  'selected_account':controlled_accounts.find(ca=> ca.selected==true),
   'actions': actions,
   'trx_expiration': trx_expiration
   }]" />
@@ -118,13 +125,24 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import debugData from 'components/ui/debug-data';
 import actionMaker from 'components/controls/action-maker';
-import displayAction from 'components/ui/display-action'
+import displayAction from 'components/ui/display-action';
 import { date } from 'quasar';
 const today = new Date();
 const { addToDate, subtractFromDate } = date;
-
+const msigTrx_template = { 
+            expiration: '', 
+            ref_block_num: 0, 
+            ref_block_prefix: 0, 
+            max_net_usage_words: 0, 
+            max_cpu_usage_ms: 0, 
+            delay_sec: 0, 
+            context_free_actions: [], 
+            actions: [], 
+            transaction_extensions: [] 
+        };
 export default {
   // name: 'ComponentName',
   components:{
@@ -133,6 +151,9 @@ export default {
     displayAction
   },
   computed:{
+    ...mapGetters({
+      getAccountName: 'user/getAccountName'
+    }),
     parseNumberToAsset(number, symbol){
       return `${number.toFixed(4)} ${symbol}`;
     },
@@ -142,18 +163,21 @@ export default {
     getSelectedAccount(){
       let selected = this.controlled_accounts.find(ca=> ca.selected==true);
       if(selected){
-        return selected.account
+        return selected.name
+      }
+      return;
+    },
+    getSelectedAccount2(){
+      let selected = this.controlled_accounts.find(ca=> ca.selected==true);
+      if(selected){
+        return selected
       }
       return;
     }
   },
   data () {
     return {
-      controlled_accounts: [
-        {account: 'account1', selected: false},
-        {account: 'account2', selected: false},
-        {account: 'account3', selected: false},
-      ],
+      controlled_accounts: [],
       trx_expiration: new Date(new Date().getTime() + (3 * 24 * 60 * 60 * 1000) ).toISOString(),
       mindate: today,
       maxdate: addToDate(today, {days: 14}),
@@ -171,8 +195,61 @@ export default {
     deleteAction(i){
       console.log(i)
       this.actions.splice(i, 1);
+    },
+    setControlledAccounts(){
+      this.controlled_accounts = this.$configFile.get('authaccount').controlling.map(ca => {
+        ca.selected = false;
+        return ca;
+      })
+    },
+    constructMsigTransaction(){
+      let template = JSON.parse(JSON.stringify(msigTrx_template) );
+      template.expiration = this.trx_expiration.split('.')[0]; 
+      template.actions = this.actions.map(a=>{
+        a.authorization = {actor: this.getSelectedAccount2.name, permission: this.getSelectedAccount2.permission};
+        //replace plain data with hex
+        if(a.hex){
+          a.data = a.hex;
+          delete a.hex;
+        }
+        return a;
+      });
+      console.log(template);
+      return template;
+    },
+    async proposeMsig(){
+      let propose = {
+          account: this.$configFile.get('systemmsigcontract'), 
+          name: 'propose', 
+          data: {
+            proposer: this.getAccountName,
+            proposal_name: 'hardctest',
+            requested: [{actor: "piecesnbitss", permission: "active" }, {actor: "evilmikehere", permission: "active" }],
+            trx: this.constructMsigTransaction()
+          }
+      };
+      let proposed = {
+          account: this.$configFile.get('dacmsigcontract'), 
+          name: 'proposed', 
+          data: {
+            proposer: this.getAccountName,
+            proposal_name: 'hardctest',
+            metadata: {"title":"hello world","description":"kqjjlkqh flfksqdhfsqdh sdqfhk l"} 
+          }
+      };
+      console.log( )
+      let result = await this.$store.dispatch('user/msigtransact', {actions: [propose, proposed] } );
+      if(result){
+        console.log('transaction callback', result);
+      }
+
     }
+
     
+  },
+  mounted(){
+    // this.$store.dispatch('dac/fetchControlledAccounts');
+    this.setControlledAccounts();
   }
 }
 </script>

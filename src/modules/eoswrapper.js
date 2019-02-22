@@ -1,8 +1,13 @@
+// const {TextDecoder, TextEncoder} = require('text-encoding');
 
 export class EosWrapper {
 
-    constructor(eosApi, config){
+    constructor(eosApi, serialize, config){
+        this.eosapi = eosApi;
         this.eos = eosApi.rpc;
+        this.Serialize = serialize;
+        this.textDecoder = eosApi.textDecoder;
+        this.textEncoder = eosApi.textEncoder;
         // this.config = config.configFile;
         this.configobj = config
     }
@@ -212,6 +217,11 @@ export class EosWrapper {
         else {
             return pendingpays.rows;
         }
+    }
+
+    async getControlledAccounts(accountname){
+        let ctrl = await this.eos.history_get_controlled_accounts(accountname);
+        return ctrl;
     }
 
 }

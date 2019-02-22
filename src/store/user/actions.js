@@ -181,7 +181,7 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
         return true;
 
     } catch(e){
-
+        console.log(e);
         let message ='unknown_error';
         if(e.type=='signature_rejected'){
             message = 'transaction.signature_rejected';
@@ -218,4 +218,12 @@ function parseError(err){
       err = err.error.details[0].message;
     }
     return err;
-  }
+}
+
+export async function msigtransact ({state, rootState, commit, dispatch, getters}, payload) {
+
+    let [eos] = await dispatch('global/getEosScatter', null, {root: true});
+    console.log(JSON.stringify(payload) )
+
+    const result = await eos.transact({actions: payload.actions}, {blocksBehind: 3, expireSeconds: 30} );
+}

@@ -20,6 +20,13 @@
             "name": "dacmultisigs"
         }
     },
+    "authAccount": {
+        "name": "dacauthority",
+        "controlling": [
+            {"name":"eosdacdoshhq", "permission": "xfer"}, 
+            {"name":"dacelections", "permission": "xfer"}
+        ]
+    },
 
     "api": {
         "bpNodeApiUrl": "https://eosdac.io/topnodes.json",

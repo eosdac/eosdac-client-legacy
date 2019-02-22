@@ -22,6 +22,14 @@
 
     },
 
+    "authAccount": {
+        "name": "dacauthority",
+        "controlling": [
+            {"name":"eosdacthedac", "permission": "xfer"}, 
+            {"name":"daccustodian", "permission": "xfer"}
+        ]
+    },
+
     "api": {
         "bpNodeApiUrl": "https://eosdac.io/topnodes.json",
         "memberclient": "https://toolkit-api.eosdac.io/"

@@ -88,3 +88,10 @@ export async function fetchApprovalsFromProposal({dispatch}, payload){
     return res;
 }
 
+export async function fetchControlledAccounts({dispatch}){
+    const api = await dispatch('global/getEosApi', false, {root : true} );
+    let ctrl = await api.getControlledAccounts('dacauthority');
+    console.log(ctrl)
+
+}
+

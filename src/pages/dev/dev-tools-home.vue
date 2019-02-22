@@ -104,11 +104,11 @@ export default {
     },
     switchNode(){
       let node =  {
-        host:'jungle2.eosdac.io',
-        protocol:'http',
-        port:8882,
+        host:'junglepeer.eossweden.se',
+        protocol:'https',
+        port:443,
       }
-      this.$store.dispatch('global/changeNode', 'https://test.com');
+      this.$store.dispatch('global/changeNode', node);
     }
 
   },

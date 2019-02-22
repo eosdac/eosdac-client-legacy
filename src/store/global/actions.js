@@ -2,7 +2,7 @@ import ScatterJS, {Network} from 'scatterjs-core';
 import ScatterEOS from 'scatterjs-plugin-eosjs2';
 import { Notify } from 'quasar';
 
-import { Api, JsonRpc, RpcError, JsSignatureProvider } from 'eosjs';
+import { Api, JsonRpc, RpcError, JsSignatureProvider, Serialize } from 'eosjs';
 const { TextDecoder, TextEncoder } = require('text-encoding');
 import {EosWrapper} from '../../modules/eoswrapper.js';
 
@@ -125,7 +125,7 @@ export async function getEosApi({state, commit}, rebuild=false){
     let n = Network.fromJson(state.networks.find(n => n.name == state.active_network) );
     let rpc = new JsonRpc(n.fullhost() );
     let api = await new Api({ rpc, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
-    commit('setEosApi', new EosWrapper(api, this._vm.$configFile) );
+    commit('setEosApi', new EosWrapper(api, Serialize, this._vm.$configFile) );
     return state.eosApi;
 }
 

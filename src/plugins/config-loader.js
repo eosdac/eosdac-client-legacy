@@ -35,6 +35,8 @@ class configLoader {
         return this.configFile.api.memberclient;
       case 'external':
         return this.configFile.external;
+      case 'authaccount':
+        return this.configFile.authAccount;
       default:
         return `***${configquery} not yet subscribed in config-loader***`
     }
