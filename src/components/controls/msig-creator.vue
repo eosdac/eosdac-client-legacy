@@ -188,14 +188,14 @@ export default {
     getSelectedAccount(){
       let selected = this.controlled_accounts.find(ca=> ca.selected==true);
       if(selected){
-        return selected.name
+        return selected.name;
       }
       return;
     },
     getSelectedAccount2(){
       let selected = this.controlled_accounts.find(ca=> ca.selected==true);
       if(selected){
-        return selected
+        return selected;
       }
       return;
     }
@@ -217,19 +217,23 @@ export default {
       this.controlled_accounts = this.controlled_accounts.map(ca=>{ca.selected=false; return ca});
       this.controlled_accounts[index].selected=true;
     },
+    
     addAction(data){
       this.actions.push(data);
     },
+
     deleteAction(i){
-      console.log(i)
+      console.log(i);
       this.actions.splice(i, 1);
     },
+
     setControlledAccounts(){
       this.controlled_accounts = this.$configFile.get('authaccount').controlling.map(ca => {
         ca.selected = false;
         return ca;
       })
     },
+
     constructMsigTransaction(){
       let template = JSON.parse(JSON.stringify(msigTrx_template) );
       template.expiration = this.trx_expiration.split('.')[0]; 
@@ -245,6 +249,7 @@ export default {
       console.log(template);
       return template;
     },
+
     getRequested(){
       let requested = this.getCustodians.map(c => {
         let req = {actor: c.cust_name, permission: 'active'};
@@ -252,6 +257,7 @@ export default {
       });
       return requested;
     },
+
     async proposeMsig(){
       let propose = {
             account: this.$configFile.get('systemmsigcontract'), 
@@ -263,6 +269,7 @@ export default {
               trx: this.constructMsigTransaction()
             }
       };
+
       let proposed = {
             account: this.$configFile.get('dacmsigcontract'), 
             name: 'proposed',
