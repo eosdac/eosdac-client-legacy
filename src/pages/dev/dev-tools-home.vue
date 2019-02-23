@@ -3,8 +3,8 @@
 
 
 <div class="q-pa-md" >
-
-
+  <pre>{{assettest}}</pre>
+  <asset-input  v-model="assettest"  icon="icon-type-2" label="Requested Pay" :min="15" :max="999" />
 
     <div class="bg-bg1 round-borders shadow-5 row justify-between items-center q-pa-md">
       <div >
@@ -66,6 +66,7 @@ import langSelector from 'components/controls/lang-selector'
 import networkSwitcher from 'components/controls/network-switcher'
 import displayCustodians from 'components/ui/display-custodians'
 import debugData from 'components/ui/debug-data'
+import assetInput from 'components/controls/asset-input'
 export default {
   name: 'test',
   components: {
@@ -74,11 +75,13 @@ export default {
       langSelector,
       displayCustodians,
       networkSwitcher,
+      assetInput,
       debugData
   },
   data() {
     return {
       scatter:null,
+      assettest:'',
     }
   },
   computed:{
