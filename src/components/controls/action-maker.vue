@@ -98,7 +98,6 @@ export default {
         let account = action.account;
         let name = action.name;
         let data = action.data;
-        console.log('actiondataxxxxx', action.data)
 
         let sbuf = new Serialize.SerialBuffer({
             textEncoder: new TextEncoder(),
@@ -107,18 +106,16 @@ export default {
 
         const contract = await this.getEosApi.eosapi.getContract(account);
         contract.actions.get(name).serialize(sbuf, data, new Serialize.SerializerState({ bytesAsUint8Array: false }));
-
         let action_data_hex = Serialize.arrayToHex(sbuf.array);
-        console.log(action_data_hex);
+ 
         return action_data_hex;
       }
       catch(e){
-        // console.log(JSON.stringify(e, Object.getOwnPropertyNames(e)));
         console.log(e);
         Notify.create({
           message: `Serialize`+e.stack.split('\n')[0],
           detail: 'See console for more info',
-          timeout: 2000,
+          timeout: 2500,
           type: 'negative',
           position: 'bottom-right'
         });

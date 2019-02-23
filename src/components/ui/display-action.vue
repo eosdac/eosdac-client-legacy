@@ -5,7 +5,7 @@
     <q-btn v-if="viewable" size="sm" dense  class="q-mr-xs text-text1" icon="pageview" flat title="view action data" >
       <q-popover class="bg-bg1">
         <q-list>
-          <q-item v-close-overlay v-for="(value, key) in action.data">
+          <q-item v-close-overlay v-for="(value, key) in action.data" :key="`_${key}`">
             <q-item-main>
               <q-item-tile label>{{key}}</q-item-tile>
               <q-item-tile sublabel>{{value }}</q-item-tile>

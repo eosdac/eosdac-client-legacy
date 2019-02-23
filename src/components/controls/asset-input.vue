@@ -3,7 +3,7 @@
     <q-item>
       <q-item-side v-if="icon" :icon="icon" :class="statusClass"/>
       <q-item-main>
-        <q-input type="number" dark  :stack-label="xlabel" color="primary-light" ref="assetinput" :value="parseInput"  @input="update($event)"/>
+        <q-input type="number" dark  :stack-label="xlabel" color="primary-light" ref="assetinput" :value="parseInput"  @input="update($event)" />
       </q-item-main>
     </q-item>
   </div>
@@ -23,39 +23,44 @@ export default {
   data () {
     return {
       xlabel: '',
-      statusClass:'text-text2'
+      statusClass:'text-text2',
     }
   },
   computed:{
 
     parseInput(){
-        console.log('vallllllll', this.value)
+
       if(this.value){
-        let n = String(this.value).split(' ')[0];
+        let n = Number(this.value);
         this.statusClass= 'text-positive';
         this.setLabel(this.label);
 
         if(this.min && (n < this.min) ){
           this.setLabel(`value less then set min ${this.min}`);
-          this.statusClass= ['text-negative', 'animate-blink'];
+          this.statusClass= ['text-negative', 'fa-vibrate'];
         }
 
         if(this.max && (n > this.max) ){
           this.setLabel(`value greater then set max ${this.max}`);
-          this.statusClass= ['text-negative', 'animate-blink'];
+          this.statusClass= ['text-negative', 'fa-vibrate'];
         }
         return n
       }
+      else{
+        this.statusClass= ['text-text2'];
+      }
+
 
     }
   },
   methods:{
     update(e) {
-      console.log('update',e)
-      e = e || 0;
-      let asset = `${e.toFixed(4)}`;
-      this.$emit('input', asset)
+      if(e != undefined){
+         e = `${e.toFixed(4)}`;
+      }
+      this.$emit('input', e)
     },
+
     setLabel(l){
       this.xlabel = l;
     }

@@ -12,10 +12,10 @@
       </div>
 
       <div>
-        <div class="text-text1">The DAC "dacauthority" controls the following accounts:</div>
-        <div class="row q-mb-md">
-          <q-btn class="text-text1 q-my-sm q-mr-sm"  v-for="(n,i) in controlled_accounts" :key="i"  :label="n.name" color="bg2" @click="handleSelection(i)" >
-            <q-icon v-if="n.selected" class="animate-pop" name="check" color="positive" />
+        <div class="text-text1 q-mb-md">The DAC "dacauthority" controls the following accounts:</div>
+        <div class="row bg-bg2 q-pa-md">
+          <q-btn class=" q-my-sm q-mr-sm"  v-for="(n,i) in controlled_accounts" :key="i"  :label="n.name" color="bg1" @click="handleSelection(i)" >
+            <q-icon v-if="n.selected" class="animate-pop q-ml-sm" name="check" color="positive" />
           </q-btn>
         </div>
       </div>
@@ -126,32 +126,47 @@
       </div>
 
       <div class="row justify-between  items-center q-mt-lg ">
-        <q-btn label="view full transaction" icon="pageview" color="primary"/>
-        <!-- <q-stepper-navigation> -->
-          <div>
+        <q-btn label="view full Msig" icon="pageview" color="primary" @click="openReview_Msig_Modal" />
+        <div>
           <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
           <q-btn color="positive" class="animate-pop" @click="proposeMsig" label="submit" />
-          </div>
-        <!-- </q-stepper-navigation> -->
+        </div>
+
       </div>
     </q-step>
   </q-stepper>
-<debug-data :data="[{
-  'selected_account':controlled_accounts.find(ca=> ca.selected==true),
-  'actions': actions,
-  'trx_expiration': trx_expiration,
-  'getCustodians': getCustodians
-  }]" />
+
+  <!-- review msig modal -->
+    <q-modal maximized v-model="review_msig_modal">
+      <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
+        <span>Review Msig Transaction: {{msig_name}}</span>
+        <q-btn icon="close" @click="review_msig_modal = false; review_msig_modal_content =''" class="no-shadow"/>
+      </div>
+      <div class="q-pa-md bg-bg2 text-text1 full-height ">
+        <div>For convenience the action data is shown in hex and plain text. </div>
+        <div v-html="review_msig_modal_content" class="overflow-hidden" />
+      </div>
+    </q-modal>
+
+  <!-- debug data -->
+  <debug-data :data="[{
+    'selected_account':controlled_accounts.find(ca=> ca.selected==true),
+    'actions': actions,
+    'trx_expiration': trx_expiration,
+    'getCustodians': getCustodians
+    }]" />
+
 </div>
 </template>
 
 <script>
-
+const prettyHtml = require('json-pretty-html').default;
 import {mapGetters} from 'vuex';
 import debugData from 'components/ui/debug-data';
 import actionMaker from 'components/controls/action-maker';
 import displayAction from 'components/ui/display-action';
 import { date } from 'quasar';
+
 const today = new Date();
 const { addToDate, subtractFromDate } = date;
 const msigTrx_template = { 
@@ -173,6 +188,20 @@ export default {
     debugData,
     actionMaker,
     displayAction
+  },
+  data () {
+    return {
+      msig_name:'',
+      msig_title:'',
+      msig_description:'',
+      controlled_accounts: [],
+      trx_expiration: new Date(new Date().getTime() + (3 * 24 * 60 * 60 * 1000) ).toISOString(),
+      mindate: today,
+      maxdate: addToDate(today, {days: 14}),
+      actions:[],
+      review_msig_modal: false,
+      review_msig_modal_content :''
+    }
   },
   computed:{
     ...mapGetters({
@@ -200,30 +229,18 @@ export default {
       return;
     }
   },
-  data () {
-    return {
-      msig_name:'',
-      msig_title:'',
-      msig_description:'',
-      controlled_accounts: [],
-      trx_expiration: new Date(new Date().getTime() + (3 * 24 * 60 * 60 * 1000) ).toISOString(),
-      mindate: today,
-      maxdate: addToDate(today, {days: 14}),
-      actions:[]
-    }
-  },
+
   methods:{
     handleSelection(index){
       this.controlled_accounts = this.controlled_accounts.map(ca=>{ca.selected=false; return ca});
       this.controlled_accounts[index].selected=true;
     },
-    
+
     addAction(data){
       this.actions.push(data);
     },
 
     deleteAction(i){
-      console.log(i);
       this.actions.splice(i, 1);
     },
 
@@ -246,8 +263,15 @@ export default {
         }
         return a;
       });
-      console.log(template);
       return template;
+    },
+
+    openReview_Msig_Modal(){
+      let template = JSON.parse(JSON.stringify(msigTrx_template) );
+      template.expiration = this.trx_expiration.split('.')[0];
+      template.actions = this.actions
+      this.review_msig_modal_content = prettyHtml(template);
+      this.review_msig_modal = true;
     },
 
     getRequested(){

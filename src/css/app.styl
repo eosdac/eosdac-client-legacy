@@ -131,7 +131,6 @@ styles*/
 
 /* right bounce */
 .fa-arrow-right {
-  -webkit-animation: bounceRight 2s infinite;
   animation: bounceRight 2s infinite;
   width:26px;
   padding-left:12px
@@ -157,3 +156,33 @@ styles*/
   }
 }
 /* /right bounce */
+
+.fa-vibrate{
+  animation: vibrate 1s cubic-bezier(.36,.07,.19,.97) both infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+.fa-vibrate-y {
+  animation: vibrate 1s cubic-bezier(.36,.07,.19,.97) both infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+
+}
+
+@keyframes vibrate {
+  10%, 90% {
+    transform: translate3d(0,-1px, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d( 0,2px, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d( 0,-2px, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(2px, 0, 0);
+  }
+}

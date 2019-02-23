@@ -4,11 +4,11 @@
 
 <div class="q-pa-md" >
   <pre>{{assettest}}</pre>
-  <asset-input  v-model="assettest"  icon="icon-type-2" label="Requested Pay" :min="15" :max="999" />
+  <asset-input  v-model="assettest"  icon="icon-type-2" label="Requested Pay" :max="50" :min="0.0001" />
 
     <div class="bg-bg1 round-borders shadow-5 row justify-between items-center q-pa-md">
       <div >
-        <q-btn label="console configFile" color="primary" @click="logConfigFile" />
+        <q-btn label="console.log configfile" color="primary" @click="logConfigFile" />
       </div>
       <div >
         <q-btn label="console profile cache" color="primary" @click="logProfileCache" />
