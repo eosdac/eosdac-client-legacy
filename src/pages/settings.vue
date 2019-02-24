@@ -1,16 +1,19 @@
 <template>
-  <q-page class="q-pa-md">
+  <q-page class="q-pa-md bg-logo">
 
-    <div class="q-display-1 q-mb-md">{{$t('settings.settings')}}</div>
+    <!-- <div class="q-display-1 q-mb-md">{{$t('settings.settings')}}</div> -->
 
     <div class="row gutter-sm">
       <div v-for="(group, j) in groups" class="col-xs-12  col-xl-6" :key="`group_${j}`">
         <div  class="bg-bg1 round-borders shadow-5 relative-position overflow-hidden full-height " >
 
           <q-list no-border>
-            <q-list-header class="text-text2 q-headline capitalize">{{group}}</q-list-header>
+            <q-list-header class=" q-headline capitalize">
+              <q-icon class="text-text2" :name="group.icon"  />
+              <span class="text-text2 on-right">{{group.name}}</span>
+            </q-list-header>
 
-            <div v-for="(setting, i) in getSettings.filter(s=> s.group == group)" :key="`setting_${i}`">
+            <div v-for="(setting, i) in getSettings.filter(s=> s.group == group.name)" :key="`setting_${i}`">
 
               <q-item v-if="setting.type=='boolean' ">
                 <q-item-main>
@@ -69,7 +72,12 @@ export default {
   data() {
     return {
       groups: ['toolbar', 'notify', 'locale', 'debug'],
-      vue : Vue
+      groups:[
+        {name: 'toolbar', icon:'mdi-set-top-box'},
+        {name: 'notify', icon:'mdi-message-text-outline'},
+        {name: 'locale', icon:'mdi-globe-model'},
+        {name: 'debug', icon:'mdi-bug-outline'}
+      ]
     }
   },
   computed:{
