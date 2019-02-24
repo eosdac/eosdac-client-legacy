@@ -7,6 +7,7 @@ import user from './user';
 import dac from './dac';
 import ui from './ui';
 
+
 Vue.use(Vuex);
 
   const store = new Vuex.Store({
@@ -15,6 +16,7 @@ Vue.use(Vuex);
       user,
       dac,
       ui
+
     },
     plugins: [
       createPersistedState({

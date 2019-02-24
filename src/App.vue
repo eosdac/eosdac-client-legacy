@@ -58,12 +58,11 @@ export default {
     this.loading = true;
     this.$store.dispatch('ui/loadTheme');
     this.$store.dispatch('dac/initRoutine', this);
+    
     // this.$root.$emit('helloc');
     await this.$store.dispatch('global/connectScatter');
     this.loading = false;
-    this.checkVersionChange();
-
-  
+    this.checkVersionChange();  
 
   }
 
