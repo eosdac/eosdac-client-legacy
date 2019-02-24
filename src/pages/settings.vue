@@ -4,7 +4,7 @@
     <div class="q-display-1 q-mb-md">{{$t('settings.settings')}}</div>
 
     <div class="row gutter-sm">
-      <div v-for="(group, j) in groups" class="col-xs-12 col-md-6 col-xl-4" :key="`group_${j}`">
+      <div v-for="(group, j) in groups" class="col-xs-12  col-xl-6" :key="`group_${j}`">
         <div  class="bg-bg1 round-borders shadow-5 relative-position overflow-hidden full-height " >
 
           <q-list no-border>
