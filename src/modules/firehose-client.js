@@ -13,7 +13,6 @@ export class FirehoseClient {
         this.websocket = window.WebSocket || window.MozWebSocket;
 
         this.api = eosapi;
-        this.connection = null;
         this.connect();
     }
 

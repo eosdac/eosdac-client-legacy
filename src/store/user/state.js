@@ -38,6 +38,14 @@ export default {
       group: 'toolbar'
     },
     { 
+      name: 'notify_dac_msg',
+      type: 'boolean',
+      label: 'Live DAC Notifications',
+      sublabel: 'Enable live notifications from actions made on the DAC smart contracts',
+      value: true,
+      group: 'notify'
+    },
+    { 
       name: 'notify_success_msg',
       type: 'boolean',
       label: 'Success Notifications',

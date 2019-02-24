@@ -9,6 +9,7 @@
 var FIREHOSE=null;
 import {FirehoseClient} from '../../modules/firehose-client.js';
 import { Notify } from 'quasar';
+import {mapGetters} from 'vuex';
 
 export default {
   name: 'firehose',
@@ -17,6 +18,12 @@ export default {
       firehose_active: false
 
     }
+  },
+  computed:{
+    ...mapGetters({
+      getAccountName: 'user/getAccountName',
+      getSettingByName: 'user/getSettingByName'
+    })
   },
   methods:{
     stop(){
@@ -42,17 +49,26 @@ export default {
       .callback((type, data) => {
           console.log('type', type)
           console.log('data', data)
-          if(type =='action_trace' && data.name =='votecust'){
-            Notify.create({
-                message: `${data.data.voter} has casted new votes`,
-                timeout: 0, // in milliseconds; 0 means no timeout
-                color: 'primary',
-                icon: 'icon-dac-balance',
-                detail: data.data.newvotes.join(', '),
-                position: 'bottom-left', // 'top', 'left', 'bottom-left' etc.
-                closeBtn: true, // or string as button message e.g. 'dismiss'
-            });
+
+          if(this.getSettingByName('notify_dac_msg').value){
+
+            if(type =='action_trace' && data.name =='votecust'){
+              Notify.create({
+                  message: `${data.data.voter} has casted new votes`,
+                  timeout: 0, // in milliseconds; 0 means no timeout
+                  color: 'primary',
+                  icon: 'icon-dac-balance',
+                  detail: data.data.newvotes.join(', '),
+                  position: 'bottom-left', // 'top', 'left', 'bottom-left' etc.
+                  closeBtn: true, // or string as button message e.g. 'dismiss'
+              });
+            }
+
           }
+
+
+
+
       })
 
     }
