@@ -71,7 +71,6 @@ export default {
   },
   data() {
     return {
-      groups: ['toolbar', 'notify', 'locale', 'debug'],
       groups:[
         {name: 'toolbar', icon:'mdi-set-top-box'},
         {name: 'notify', icon:'mdi-message-text-outline'},
