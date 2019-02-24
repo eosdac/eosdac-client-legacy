@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-between bg-bg1 shadow-5 round-borders q-pa-md q-mb-md" v-if="custodians.length" >
+  <div class="row justify-between " v-if="custodians.length" >
 
     <div class="column items-center q-pa-sm animate-fade" v-for="custodian in custodians" :key="custodian.cust_name">
       <!-- <div class="profile_image relative-position" style=" width:65px;height:65px;" v-bind:style="{ 'background-image': `url(${custodian.profile.image})` }">

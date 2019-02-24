@@ -72,6 +72,11 @@
           <q-item-main :label="$t('default.credits')" class="text-text1" />
         </q-item>
 
+        <q-item v-if="getSettingByName('debug_dev_tools').value" class="animate-pop" to="/dashboard" >
+          <q-item-side icon="bug_report" color="positive"/>
+          <q-item-main label="Dashboard" class="text-text1"/>
+        </q-item>
+
         <q-item v-if="getSettingByName('debug_dev_tools').value" class="animate-pop" to="/dev-tools" >
           <q-item-side icon="bug_report" color="negative"/>
           <q-item-main label="Dev Tools" sublabel="debug and test playyard" class="text-text1"/>

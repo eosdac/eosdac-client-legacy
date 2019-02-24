@@ -12,6 +12,7 @@ export async function loggedOutRoutine ({commit} ) {
     commit('global/setEosScatter', null, {root: true});
     commit('setProfilePicture', null);
     commit('setIsCandidate', null);
+    commit('setDacVotes', null);
 
     
 
@@ -50,6 +51,8 @@ export async function loggedInRoutine ({state, commit, dispatch}, accountname) {
         commit('setSystemBalance', x);
     }).catch(e=>console.log(e));
 
+    setTimeout(()=>{dispatch('fetchDacVotes')}, 2000)
+
 }
 
 export async function fetchIsCandidate ({state, commit, dispatch}, accountname=false) {
@@ -70,6 +73,7 @@ export async function fetchDacVotes ({state, commit, dispatch}, accountname=fals
     let votes = await api.getVotes(accountN);
     if(!accountname){
         commit('setDacVotes', votes);
+        return votes;
     }
     else{
         return votes;

@@ -3,6 +3,9 @@
 
 
 <div class="q-pa-md" >
+
+
+
 <firehose />
 
 
@@ -77,6 +80,7 @@ import debugData from 'components/ui/debug-data';
 import assetInput from 'components/controls/asset-input';
 import nodeSelector from 'components/controls/node-selector';
 import firehose from 'components/controls/firehose';
+
 export default {
   name: 'test',
   components: {
@@ -88,6 +92,7 @@ export default {
       assetInput,
       nodeSelector,
       firehose,
+
       debugData
   },
   data() {

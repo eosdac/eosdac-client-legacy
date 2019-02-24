@@ -24,6 +24,7 @@ const routes = [
     component: () => import('layouts/MyLayout.vue'),
     children: [
       { path: '', component: () => import('pages/index-loggedout') },
+      { path: 'dashboard', component: () => import('pages/dashboard'), beforeEnter: Guards.logInCheck },
       { path: 'settings', component: () => import('pages/settings.vue') },
       { path: 'constitution', component: () => import('pages/constitution.vue') },
       { path: 'vote-custodians', component: () => import('pages/vote-custodians.vue') },

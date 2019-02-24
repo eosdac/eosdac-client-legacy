@@ -22,8 +22,9 @@
 
 <div class="q-display-1 q-mb-md ">{{ $t('vote_custodians.custodian_board') }}</div>
 
+<div class="bg-bg1 shadow-5 round-borders q-pa-md q-mb-md">
 <display-custodians />
-
+</div>
 
 <div class="row gutter-md reverse-wrap">
 
@@ -303,7 +304,7 @@ export default {
       if(result){
         this.votesdidchange = false;
         this.sortCandidatesByVotes();
-        // getMemberVotes(); 
+        this.$store.dispatch('user/fetchDacVotes'); 
         // $refs.votebar.initProgressbar(); 
       }
 
@@ -338,7 +339,7 @@ export default {
         return false;
       }
 
-      let votes = await this.$store.dispatch('user/fetchDacVotes', this.getAccountName);
+      let votes = await this.$store.dispatch('user/fetchDacVotes');
       // let votes = [{candidates: ['piecesnbitss', 'evilmikehere']}];
 
       if(votes){
