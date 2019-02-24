@@ -58,8 +58,9 @@ export default ({
 }) => {
 
   let networkname = store.getters['global/getActiveNetworkName'];
-
-  Vue.prototype.$configFile = new configLoader(networkname);
+  let config = new configLoader(networkname);
+  store.commit('global/setNode', config.get('defaultnode') );
+  Vue.prototype.$configFile = config;
 }
 
 // export {configFile}

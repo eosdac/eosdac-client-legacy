@@ -117,7 +117,7 @@ export async function switchAccount({state, dispatch}){
 export async function getEosApi({state, commit}, rebuild=false){
 
     if(state.eosApi && !rebuild){
-        console.log('got eos api from store')
+        console.log('got eos api from store');
         return state.eosApi;
     }
 
@@ -144,7 +144,7 @@ export async function getEosScatter({state, commit}, rebuild=false){
 }
 
 export async function loadConfig({Vue,state, commit}, payload ){
-    console.log(`loading new config file ${payload.networkname} in to store`)
+    console.log(`loading new config file ${payload.networkname}`);
     const config = require(`../../statics/config.${payload.networkname}.json`);
 
     if(payload.vm){
