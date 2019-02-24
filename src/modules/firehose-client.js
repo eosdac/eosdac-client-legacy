@@ -13,11 +13,21 @@ export class FirehoseClient {
         this.websocket = window.WebSocket || window.MozWebSocket;
 
         this.api = eosapi;
-
+        this.connection = null;
         this.connect();
     }
 
+    close(){
+        console.log('closing firehose');
+        this.connection.close();
+        this.connection = null;
+    }
+
     connect(){
+        if(this.connection){
+            console.log('already connected');
+            return;
+        }
         const connection = new this.websocket(this.config.server);
 
         connection.onopen =  () => {
