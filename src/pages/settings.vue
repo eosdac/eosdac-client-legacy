@@ -3,42 +3,41 @@
 
     <div class="q-display-1 q-mb-md">{{$t('settings.settings')}}</div>
 
-    <div v-for="(group, j) in groups" class="bg-bg1 q-mb-md round-borders shadow-5 relative-position overflow-hidden " :key="`group_${j}`">
+    <div class="row gutter-sm">
+      <div v-for="(group, j) in groups" class="col-xs-12 col-md-6 col-xl-4" :key="`group_${j}`">
+        <div  class="bg-bg1 round-borders shadow-5 relative-position overflow-hidden full-height " >
 
-      
-      <q-list no-border>
-        <q-list-header class="text-text2 capitalize">{{group}}</q-list-header>
+          <q-list no-border>
+            <q-list-header class="text-text2 q-headline capitalize">{{group}}</q-list-header>
 
-        <div v-for="(setting, i) in getSettings.filter(s=> s.group == group)" :key="`setting_${i}`">
+            <div v-for="(setting, i) in getSettings.filter(s=> s.group == group)" :key="`setting_${i}`">
 
-          <q-item v-if="setting.type=='boolean' ">
-            <q-item-main>
-              <q-item-tile class="text-text1" label>{{setting.label}}</q-item-tile>
-              <q-item-tile class="text-text2" sublabel>{{setting.sublabel}}</q-item-tile>
-            </q-item-main>
-            <q-item-side right>
-              <q-toggle  :dark="getIsDark"  class="animate-pop" :value="setting.value"  color="primary-light"  @input="handle($event, setting.name)" />
-            </q-item-side>
-          </q-item>
+              <q-item v-if="setting.type=='boolean' ">
+                <q-item-main>
+                  <q-item-tile class="text-text1" label>{{setting.label}}</q-item-tile>
+                  <q-item-tile class="text-text2" sublabel>{{setting.sublabel}}</q-item-tile>
+                </q-item-main>
+                <q-item-side right>
+                  <q-toggle  :dark="getIsDark"  class="animate-pop" :value="setting.value"  color="primary-light"  @input="handle($event, setting.name)" />
+                </q-item-side>
+              </q-item>
 
-          <!-- setting components -->
-          <div v-if="setting.type=='component'">
+              <!-- setting components -->
+              <div v-if="setting.type=='component'">
 
-            <q-item v-if="setting.value=='langselector'" >
-              <q-item-main >
-                <q-item-tile class="text-text1" label>{{ $t(setting.label) }}</q-item-tile>
-                <lang-selector :label="false" />
-              </q-item-main>
-            </q-item>
+                <q-item v-if="setting.value=='langselector'" >
+                  <q-item-main >
+                    <q-item-tile class="text-text1" label>{{ $t(setting.label) }}</q-item-tile>
+                    <lang-selector :label="false" />
+                  </q-item-main>
+                </q-item>
 
-          </div>
+              </div>
+            </div>
+          </q-list>
+        </div> 
+      </div><!-- end v-for = setting group -->
 
-
-        </div>
-
-
-      </q-list>
-      
     </div>
 
     
