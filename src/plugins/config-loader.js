@@ -11,6 +11,8 @@ class configLoader {
   get(configquery){
 
     switch (configquery) {
+      case 'defaultnode':
+        return this.configFile.api.default_eos_node;
       case 'tokencontract':
         return this.configFile.contracts.token.name;
       case 'custodianmemo':
@@ -33,6 +35,8 @@ class configLoader {
         return this.configFile.external.explorer;
       case 'memberclientapi':
         return this.configFile.api.memberclient;
+      case 'bpnodeapi':
+        return this.configFile.api.bpnodes;
       case 'external':
         return this.configFile.external;
       case 'authaccount':

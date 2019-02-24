@@ -56,6 +56,19 @@ class helper{
     return `${num} ${symbol}`;
   }
 
+  fullHostToJson(fullhost){
+
+    let [protocol, host, port] = fullhost.split(':');
+
+    let parts = {
+      protocol : protocol,
+      host: host.replace(/\//g, ''),
+      port : port || (protocol === 'https' ? '443' : '80')
+    }
+
+    return parts;
+  }
+
 }
 
 export default ({ Vue, store }) => {

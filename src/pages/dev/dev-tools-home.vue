@@ -3,6 +3,12 @@
 
 
 <div class="q-pa-md" >
+
+<node-selector />
+
+
+
+
   <pre>{{assettest}}</pre>
   <asset-input  v-model="assettest"  icon="icon-type-2" label="Requested Pay" :max="50" :min="0.0001" />
 
@@ -58,15 +64,16 @@
 
 <script>
 
-import ecc from 'eosjs-ecc'
-import {mapGetters} from 'vuex'
-import nightModeSwitch from 'components/controls/nightmode-switch'
-import colorPicker from 'components/controls/color-picker'
-import langSelector from 'components/controls/lang-selector'
-import networkSwitcher from 'components/controls/network-switcher'
-import displayCustodians from 'components/ui/display-custodians'
-import debugData from 'components/ui/debug-data'
-import assetInput from 'components/controls/asset-input'
+import ecc from 'eosjs-ecc';
+import {mapGetters} from 'vuex';
+import nightModeSwitch from 'components/controls/nightmode-switch';
+import colorPicker from 'components/controls/color-picker';
+import langSelector from 'components/controls/lang-selector';
+import networkSwitcher from 'components/controls/network-switcher';
+import displayCustodians from 'components/ui/display-custodians';
+import debugData from 'components/ui/debug-data';
+import assetInput from 'components/controls/asset-input';
+import nodeSelector from 'components/controls/node-selector';
 export default {
   name: 'test',
   components: {
@@ -76,6 +83,7 @@ export default {
       displayCustodians,
       networkSwitcher,
       assetInput,
+      nodeSelector,
       debugData
   },
   data() {
@@ -106,12 +114,8 @@ export default {
       console.log(this.$profiles)
     },
     switchNode(){
-      let node =  {
-        host:'junglepeer.eossweden.se',
-        protocol:'https',
-        port:443,
-      }
-      this.$store.dispatch('global/changeNode', node);
+
+      this.$store.commit('global/setNode', 'http://testerino.com');
     }
 
   },
@@ -120,6 +124,7 @@ export default {
     //   console.log(`key=${e}`)
     //   console.log(this.$store.state[e])
     // });
+    this.$helper.fullHostToJson(this.$configFile.get('defaultnode') )
 
   },
   watch: {

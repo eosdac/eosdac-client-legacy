@@ -31,7 +31,8 @@
     },
 
     "api": {
-        "bpNodeApiUrl": "https://eosdac.io/topnodes.json",
+        "default_eos_node": "https://proxy.eosnode.tools:443",
+        "bpnodes": "https://eosdac.io/topnodes.json",
         "memberclient": "https://toolkit-api.eosdac.io/"
     },
 

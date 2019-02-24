@@ -191,20 +191,4 @@ export async function switchNetwork({state, commit, dispatch, rootGetters}, payl
  
 }
 
-export async function changeNode({state, commit}, payload){
-
-    let network = state.networks.find(n => n.name == state.active_network);
-
-    if( typeof payload == 'string'){
-        payload = new URL(payload);
-    }
-    console.log(Network);
-
-    network.host=payload.host;
-    network.protocol=payload.protocol;
-    network.port=payload.port;
-    commit('setEosApi', null );
-    commit('setEosScatter', null );
-
-}
 
