@@ -101,6 +101,13 @@ export default {
       label: 'lang_selector.choose_your_language',
       value: 'langselector',
       group: 'locale'
+    },
+    { 
+      name: 'trx_delay',
+      type: 'number',
+      label: 'Set a delay on transactions in seconds',
+      value: 0,
+      group: 'advanced'
     }
     
   ]

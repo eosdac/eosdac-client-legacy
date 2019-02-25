@@ -15,6 +15,7 @@
 
             <div v-for="(setting, i) in getSettings.filter(s=> s.group == group.name)" :key="`setting_${i}`">
 
+              <!-- setting bool -->
               <q-item v-if="setting.type=='boolean' ">
                 <q-item-main>
                   <q-item-tile class="text-text1" label>{{setting.label}}</q-item-tile>
@@ -23,6 +24,14 @@
                 <q-item-side right>
                   <q-toggle  :dark="getIsDark"  class="animate-pop" :value="setting.value"  color="primary-light"  @input="handle($event, setting.name)" />
                 </q-item-side>
+              </q-item>
+
+              <!--- setting number --->
+              <q-item v-if="setting.type=='number' ">
+                <q-item-main>
+                  <q-item-tile class="text-text1" label>{{setting.label}}</q-item-tile>
+                  <q-input :dark="getIsDark" type="number" :value="setting.value" @input="handle($event, setting.name)" />
+                </q-item-main>
               </q-item>
 
               <!-- setting components -->
@@ -75,7 +84,8 @@ export default {
         {name: 'toolbar', icon:'mdi-set-top-box'},
         {name: 'notify', icon:'mdi-message-text-outline'},
         {name: 'locale', icon:'mdi-globe-model'},
-        {name: 'debug', icon:'mdi-bug-outline'}
+        {name: 'debug', icon:'mdi-bug-outline'},
+        {name: 'advanced', icon:'mdi-code-braces'},
       ]
     }
   },

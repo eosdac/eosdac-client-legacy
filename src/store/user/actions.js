@@ -109,6 +109,7 @@ export async function fetchPendingPay({state, dispatch}, accountname=false){
 
 export async function transact ({state, rootState, commit, dispatch, getters}, payload) {
 
+    let DELAY_SEC = getters['getSettingByName']('trx_delay').value > 0 ? getters['getSettingByName']('trx_delay').value : 0;
 
     let actions =payload.actions;
 
@@ -159,7 +160,7 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
     try {
         let [eos] = await dispatch('global/getEosScatter', null, {root: true});
         setTimeout(()=>{commit('ui/setShowTransactionOverlay', 'sign', {root: true}); }, 1500);
-        const result = await eos.transact({delay_sec: 0, actions: actions}, {blocksBehind: 3, expireSeconds: 30} );
+        const result = await eos.transact({delay_sec: DELAY_SEC, actions: actions}, {blocksBehind: 3, expireSeconds: 30} );
         commit('ui/setShowTransactionOverlay', 'success', {root: true});
         commit('setLastTransaction', result);
         
