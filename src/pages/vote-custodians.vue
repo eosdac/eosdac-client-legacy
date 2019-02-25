@@ -1,6 +1,5 @@
 <template>
 <q-page class="text-text1">
-<!-- <Transaction ref="Transaction" v-on:done="getMemberVotes(); $refs.votebar.initProgressbar(); sortCandidatesByVotes()" /> -->
 
   <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
     <div class="row">
@@ -54,8 +53,8 @@
       <Candidate
         v-for="candidate in paginate"
         :key="candidate.candidate_name"
+        :ref="candidate.candidate_name"
         :data="candidate"
-
         @clickvotefor="addToVoteList(candidate.candidate_name)"
         @clickunvotefor="deleteFromVoteList(candidate.candidate_name)"
       />
@@ -141,7 +140,7 @@
 
 </div><!-- end wrapper -->
 
-<debug-data :data="[{'getDacVotes': getDacVotes}]" />
+<debug-data :data="[{'getDacVotes': getDacVotes},{'getCandidates': getCandidates}]" />
 </q-page>
 </template>
 

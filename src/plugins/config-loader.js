@@ -37,6 +37,8 @@ class configLoader {
         return this.configFile.api.memberclient;
       case 'bpnodeapi':
         return this.configFile.api.bpnodes;
+      case 'firehoseapi':
+        return this.configFile.api.firehose;
       case 'external':
         return this.configFile.external;
       case 'authaccount':

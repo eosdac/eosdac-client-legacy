@@ -4,7 +4,7 @@
 
 <div class="q-pa-md" >
 
-
+<div class="elementToAnimate text-positive" style="font-size:20px;display:inline-block">+5000</div>
 
 <firehose />
 
@@ -65,6 +65,7 @@
 </template>
 
 <style>
+
 </style>
 
 <script>
