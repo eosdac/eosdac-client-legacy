@@ -49,8 +49,10 @@ export default {
       })
       .callback((type, data) => {
 
-          if(type =='contract_row'){
+          if(type =='contract_row' ){
             console.log('contract_row', data);
+            this.$store.commit('dac/setCandidateVote', {candidate_name: data.data.candidate_name, total_votes: data.data.total_votes});
+
           }
           if(this.getSettingByName('notify_dac_msg').value){
 

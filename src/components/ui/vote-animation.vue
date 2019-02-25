@@ -1,6 +1,6 @@
 <template>
 <transition name="votedelta">
-  <div v-if="animate" class="vote_delta_common" :class="statusClass" >
+  <div v-if="animate && vote_delta!=0" class="vote_delta_common" :class="statusClass" >
     <q-icon v-if="vote_delta < 0" name="mdi-minus" style="margin-top:-2px" />
     <q-icon v-if="vote_delta > 0" name="mdi-plus" style="margin-top:-2px" />
     <span>{{ $helper.toLocaleNumber( Math.abs(vote_delta/10000) ) }}</span>

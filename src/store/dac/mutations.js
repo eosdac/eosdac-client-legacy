@@ -22,6 +22,14 @@ export function setCustodianConfig(state, payload){
 }
 
 export function setCandidates (state, payload) {
-
     state.candidates = payload;  
+}
+
+export function setCandidateVote (state, payload) {
+    let candidate_name = payload.candidate_name;
+    let vote_amount = payload.total_votes;
+    if(state.candidates){
+        let cand = state.candidates.find(c => c.candidate_name == candidate_name);
+        cand.total_votes = vote_amount;
+    }
 }
