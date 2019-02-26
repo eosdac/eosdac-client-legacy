@@ -7,7 +7,9 @@
 </template>
 
 <script>
-import { Notify } from 'quasar'
+import { Notify } from 'quasar';
+import NodeSelector from './modules/nodeselector.js';
+
 export default {
   name: 'App',
   data() {
@@ -54,7 +56,14 @@ export default {
   },
 
   async mounted(){
-    
+    let test = await this.$store.dispatch('global/testEndpoint', false);
+
+    if(test === false){
+      const NS = new NodeSelector(this.$configFile.get('bpnodeapi') );
+      let fastest = await NS.get_fastest_node();
+      // console.log(fastest)
+      this.$store.commit('global/setNode', fastest.node);
+    }
     this.loading = true;
     this.$store.dispatch('ui/loadTheme');
     this.$store.dispatch('dac/initRoutine', this);

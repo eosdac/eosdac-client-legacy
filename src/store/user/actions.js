@@ -9,6 +9,7 @@ export async function loggedOutRoutine ({commit} ) {
     commit('setAgreedTermsVersion', null);
     commit('setAccount', null);
     commit('global/setEosApi', null, {root: true});
+    commit('global/setScatter', null, {root: true});
     commit('global/setEosScatter', null, {root: true});
     commit('setProfilePicture', null);
     commit('setIsCandidate', null);

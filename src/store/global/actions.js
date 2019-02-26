@@ -1,8 +1,9 @@
 import ScatterJS, {Network} from 'scatterjs-core';
 import ScatterEOS from 'scatterjs-plugin-eosjs2';
 import { Notify } from 'quasar';
+import axios from 'axios';
 
-import { Api, JsonRpc, RpcError, JsSignatureProvider, Serialize } from 'eosjs';
+import { Api, JsonRpc} from 'eosjs';
 const { TextDecoder, TextEncoder } = require('text-encoding');
 import {EosWrapper} from '../../modules/eoswrapper.js';
 
@@ -11,7 +12,7 @@ ScatterJS.plugins( new ScatterEOS() );
 //
 
 export async function connectScatter ({state, commit, dispatch, rootGetters}, trigger_login = false) {
-
+    
     let network = await state.networks.find(n => n.name == state.active_network);
 
     ScatterJS.scatter.connect('testapp', {network}).then(async connected => {
@@ -102,8 +103,9 @@ export async function logout({state, dispatch}){
       console.log('scatter not found');
       return;
     };
-    dispatch('user/loggedOutRoutine',null, {root:true} );
     await state.scatter.logout().catch(e=>console.log(e));
+    dispatch('user/loggedOutRoutine',null, {root:true} );
+    
     
     console.log('loggedout');
 }
@@ -117,7 +119,7 @@ export async function switchAccount({state, dispatch}){
 export async function getEosApi({state, commit}, rebuild=false){
 
     if(state.eosApi && !rebuild){
-        console.log('got eos api from store');
+        // console.log('got eos api from store');
         return state.eosApi;
     }
 
@@ -131,7 +133,7 @@ export async function getEosApi({state, commit}, rebuild=false){
 
 export async function getEosScatter({state, commit}, rebuild=false){
     if(state.eosScatter && !rebuild){
-        console.log('got scatter api from store');
+        // console.log('got scatter api from store');
         return state.eosScatter;
     }
     console.log('build and store scatter api')
@@ -189,6 +191,38 @@ export async function switchNetwork({state, commit, dispatch, rootGetters}, payl
     dispatch('dac/initRoutine', null, {root : true});
     await dispatch('connectScatter', true);
  
+}
+
+export async function testEndpoint({state}, endpointurl=false){
+    if(!endpointurl){
+        let network = await state.networks.find(n => n.name == state.active_network);
+        endpointurl = `${Network.fromJson(network).fullhost()}/v1/chain/get_info` ;
+        // endpointurl = `${Network.fromJson(network).fullhost()}/v1/chadddddin/get_info` ;
+    }
+    let timeout = 3000;
+    console.log('testing', endpointurl );
+    let res = await axios({
+        method: "GET",
+        url: `${endpointurl}`,
+        timeout: timeout,
+        headers: {
+          "Content-Type": "application/json"
+        }
+    })
+    .then(res => {
+        console.log(res.data)
+        return true;
+    })
+    .catch(error => {
+        if(error.code =='ECONNABORTED'){
+            console.log(`Slow endpoint. No response received after ${timeout}ms`)
+        }
+        else{
+            console.log(`bad endpoint: ${endpointurl}`)
+        }
+        return false;
+    });
+    return res;
 }
 
 

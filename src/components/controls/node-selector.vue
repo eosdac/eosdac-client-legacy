@@ -139,7 +139,7 @@ export default {
       let s = new NodeSelector(this.$configFile.get('bpnodeapi') );
       this.loading = true
       this.loadingText = 'nodeselector.gathering_endpoints'
-      let fastest = await s.get_fastest_node()
+      let fastest = await s.get_fastest_node();
       if (fastest) {
         this.connect(fastest.node)
       }

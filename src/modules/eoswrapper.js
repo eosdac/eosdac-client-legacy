@@ -9,7 +9,6 @@ export class EosWrapper {
         this.configobj = config
     }
 
-
     async getAccount(accountname){
         return this.eos.get_account(accountname).then(x => x).catch(e => false);
     }
