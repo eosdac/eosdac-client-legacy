@@ -56,7 +56,7 @@
 import { openURL } from 'quasar';
 import {mapGetters} from 'vuex';
 
-import transactionOverlay from 'components/transaction-overlay';
+import transactionOverlay from 'components/ui/transaction-overlay';
 import toolbarMenu from 'components/controls/toolbar-menu';
 import mainMenu from 'components/controls/main-menu';
 import requestSignature from 'components/ui/request-signature';

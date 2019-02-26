@@ -37,7 +37,7 @@
         <div class="col-xs-12 col-md-6"><div><q-input :dark="getIsDark" v-model="msig_title" stack-label="Title" placeholder="title" /></div></div>
       </div>
 
-      <div class="q-mt-lg"><q-input type="textarea" :max-height="100" :dark="getIsDark" v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" /></div>
+      <div class="q-mt-lg"><q-input type="textarea" :max-height="150" :dark="getIsDark" v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" /></div>
 
       <div class="row justify-end">
         <q-stepper-navigation >
