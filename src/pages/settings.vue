@@ -112,12 +112,12 @@ export default {
       // console.log('dddddd',mutation.payload)
       if(mutation.type !='user/setSettingItem') return;
       switch (mutation.payload.name) {
-        case 'debug_data_structure':
+        case 'debug_console_log':
             if(mutation.payload.value){
-              console.log(`${mutation.payload.name} on`);
+              this.$configFile.enable_ConsoleLog();
             }
             else{
-              console.log(`${mutation.payload.name} off`);
+              this.$configFile.disable_ConsoleLog();
             }
             
           break;

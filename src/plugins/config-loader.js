@@ -52,6 +52,22 @@ class configLoader {
     this.configFile = conf;
   }
 
+  disable_ConsoleLog(){
+    if(this.consoleLogBackup === undefined){
+      alert('cl disabled')
+      this.consoleLogBackup = window.console.log;
+      window['console']['log'] = function(){};
+    }
+  }
+
+  enable_ConsoleLog(){
+    if(this.consoleLogBackup){
+      alert('cl enable')
+      window['console']['log'] = this.consoleLogBackup;
+      this.consoleLogBackup = undefined;
+    }
+  }
+
 }
 
 export default ({
@@ -61,6 +77,10 @@ export default ({
 
   let networkname = store.getters['global/getActiveNetworkName'];
   let config = new configLoader(networkname);
+  
+  if(!store.getters['user/getSettingByName']('debug_console_log').value) {
+    config.disable_ConsoleLog();
+  }
   store.commit('global/setNode', config.get('defaultnode') );
   Vue.prototype.$configFile = config;
 }

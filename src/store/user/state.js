@@ -18,7 +18,7 @@ export default {
       type: 'boolean',
       label: 'Toolbar Menu Items',
       sublabel: 'Display balances in the toolbar. (big screens only)',
-      value: false,
+      value: true,
       group: 'toolbar'
     },
     { 
@@ -83,6 +83,14 @@ export default {
       type: 'boolean',
       label: 'Dev & Debug Tools',
       sublabel: 'debug and dev playyard',
+      value: false,
+      group: 'debug'
+    },
+    { 
+      name: 'debug_console_log',
+      type: 'boolean',
+      label: 'Console Logging',
+      sublabel: 'toggle logging messages to the browser console',
       value: false,
       group: 'debug'
     },
