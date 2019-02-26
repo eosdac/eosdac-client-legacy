@@ -54,7 +54,7 @@ class configLoader {
 
   disable_ConsoleLog(){
     if(this.consoleLogBackup === undefined){
-      alert('cl disabled')
+      // alert('cl disabled')
       this.consoleLogBackup = window.console.log;
       window['console']['log'] = function(){};
     }
@@ -62,7 +62,7 @@ class configLoader {
 
   enable_ConsoleLog(){
     if(this.consoleLogBackup){
-      alert('cl enable')
+      // alert('cl enable')
       window['console']['log'] = this.consoleLogBackup;
       this.consoleLogBackup = undefined;
     }
