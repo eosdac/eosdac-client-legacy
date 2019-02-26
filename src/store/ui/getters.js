@@ -1,7 +1,6 @@
 
 export function getIsDark (state) {
     let activetheme = state.themes.find(t=>t.name==state.activeTheme);
-    console.log(activetheme)
     if(activetheme){
         return activetheme.isdark;
     }
