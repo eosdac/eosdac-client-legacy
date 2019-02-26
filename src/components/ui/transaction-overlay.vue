@@ -18,7 +18,11 @@
 
         <div v-if="getShowTransactionOverlay=='sign'">
           <q-icon style="height:80px"  name="vpn_key" color="primary-light" class="animate-bounce animate-fade" size="50px" />
-          <div class=" text-white animate-fade" style="height:50px">waiting for signature</div>
+          <div class=" text-white animate-fade" style="height:25px">waiting for signature</div>
+          <div v-if="getSettingByName('trx_delay').value" class="q-caption text-text2">
+            <q-icon name="mdi-alarm" style="margin-right:3px" />
+            <span>delay {{getSettingByName('trx_delay').value}} seconds</span>
+          </div>
         </div>
 
         <div v-if="getShowTransactionOverlay=='success'">
@@ -66,6 +70,7 @@ export default {
     ...mapGetters({
       getShowTransactionOverlay: 'ui/getShowTransactionOverlay',
       getLastTransaction: 'user/getLastTransaction',
+      getSettingByName: 'user/getSettingByName'
       // getTransactionDelay: 'usersettings/getTransactionDelay'
     })
   },
