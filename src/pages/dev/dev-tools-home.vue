@@ -1,43 +1,52 @@
 <template>
   <q-page >
-
-
 <div class="q-pa-md" >
 
-<firehose />
+    <div class="row gutter-sm">
 
-
-<node-selector />
-
-
-
-
-  <pre>{{assettest}}</pre>
-  <asset-input  v-model="assettest"  icon="icon-type-2" label="Requested Pay" :max="50" :min="0.0001" />
-
-    <div class="bg-bg1 round-borders shadow-5 row justify-between items-center q-pa-md">
-      <div >
-        <q-btn label="console.log configfile" color="primary" @click="logConfigFile" />
+      <div class="col-xs-12 col-md-6">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="q-title q-mb-md">Profile Cache</div>
+          <div class="row">
+            <q-btn class="q-ma-xs" label="log cache" color="primary" @click="logProfileCache" />
+            <q-btn class="q-ma-xs" label="empty cache" color="primary" @click="emptyProfileCache" />
+          </div>
+        </div>
       </div>
-      <div >
-        <q-btn label="console profile cache" color="primary" @click="logProfileCache" />
+
+      <div class="col-xs-12 col-md-6">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="q-title q-mb-md">Config File</div>
+          <div class="row">
+            <q-btn class="q-ma-xs" label="log config" color="primary" @click="logConfigFile" />
+          </div>
+        </div>
       </div>
-      <div >
-        <network-switcher />
+  
+      <div class="col-xs-12 col-md-6">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="row justify-between q-mb-md"><span class="q-title">Color Scheme</span><nightModeSwitch /></div>
+          <color-picker />
+          <div class="q-mt-md"><q-btn label="log scheme" color="primary" @click="getColorScheme" /></div>
+        </div>
       </div>
-      <div >
-        <nightModeSwitch />
+
+      <div class="col-xs-12 col-md-6">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="q-title q-mb-md">Network</div>
+          <div class="q-mt-md row">
+            <network-switcher class="q-ma-xs" />
+            <firehose class="q-ma-xs" />
+          </div>
+        </div>
       </div>
+
     </div>
 
-    <q-btn label="switch node" @click="switchNode" />
-    
-    
+
 
     
-    <color-picker />
-    <!-- <lang-selector /> -->
-    <display-custodians />
+      
 
     <debug-data :data="[{
       'getIsCustodian': getIsCustodian,
@@ -47,14 +56,6 @@
       'getMemberTerms': getMemberTerms
       
     }]" />
-
-
-
-
-
-
-
-
 </div> <!-- end wrapper -->
 
     
@@ -70,26 +71,24 @@
 
 import ecc from 'eosjs-ecc';
 import {mapGetters} from 'vuex';
-import nightModeSwitch from 'components/controls/nightmode-switch';
+import { colors } from 'quasar';
 import colorPicker from 'components/controls/color-picker';
-import langSelector from 'components/controls/lang-selector';
+
+import nightModeSwitch from 'components/controls/nightmode-switch';
+
 import networkSwitcher from 'components/controls/network-switcher';
-import displayCustodians from 'components/ui/display-custodians';
-import debugData from 'components/ui/debug-data';
-import assetInput from 'components/controls/asset-input';
-import nodeSelector from 'components/controls/node-selector';
+
 import firehose from 'components/controls/firehose';
+
+import debugData from 'components/ui/debug-data';
 
 export default {
   name: 'test',
   components: {
       nightModeSwitch,
       colorPicker,
-      langSelector,
-      displayCustodians,
       networkSwitcher,
-      assetInput,
-      nodeSelector,
+
       firehose,
 
       debugData
@@ -108,7 +107,8 @@ export default {
       getMemberStatus: 'user/getMemberStatus',
       getIsDark: 'ui/getIsDark',
       getMemberTerms: 'dac/getMemberTerms',
-      getIsCustodian: 'user/getIsCustodian'
+      getIsCustodian: 'user/getIsCustodian',
+      getThemes: 'ui/getThemes'
       // getCustodians: 'dac/getCustodians',
     }),
     
@@ -121,9 +121,25 @@ export default {
     logProfileCache(){
       console.log(this.$profiles)
     },
+    emptyProfileCache(){
+      this.$profiles.delete();
+    },
     switchNode(){
 
       this.$store.commit('global/setNode', 'http://testerino.com');
+    },
+
+    getColorScheme(){
+      let new_colors = {};
+      Object.keys(this.getThemes[0].colors).forEach(c => {
+        new_colors[c] = colors.getBrand(c);
+      });
+      let response = {
+          "name": "",
+          "isdark": this.getIsDark,
+          "colors": new_colors
+      }
+      console.log(JSON.stringify(response) )
     }
 
   },

@@ -1,15 +1,16 @@
 <template>
 <div>
-  <pre>{{getThemes}}</pre>
+  <q-select
+    class="q-mb-md"
+    color="primary-light"
+    :dark="getIsDark"
+    v-model="colorvar"
+    float-label="Select a color variable"
+    :options="colorvars.map(cv=> {return {label: cv, value:cv} })"
+  />
   <q-color-picker :dark="getIsDark" no-parent-field inverted format-model="hex" class="bg-bg1" v-model="color" />
-    <q-select
-      color="primary-light"
-      :dark="getIsDark"
-      v-model="colorvar"
-      float-label="Select to change color"
-      :options="colorvars.map(cv=> {return {label: cv, value:cv} })"
-    />
-    <q-btn label="get theme" @click="getTheme" />
+
+
 </div>
 </template>
 
@@ -43,20 +44,6 @@ export default {
       // colors.setBrand('text1', 'black');
       // colors.setBrand('text2', 'rgba(0,0,0,0.7)');
   
-    },
-
-    getTheme(){
-      let new_colors = {};
-      Object.keys(this.getThemes[0].colors).forEach(c => {
-        new_colors[c] = colors.getBrand(c);
-      });
-      let response = {
-          "name": "",
-          "isdark": this.getIsDark,
-          "colors": new_colors
-      }
-      console.log(JSON.stringify(response) )
-
     }
   },
   computed: {
