@@ -6,7 +6,10 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters} from 'vuex';
+import { Dialog } from 'quasar';
+import { Notify } from 'quasar';
+
 export default {
   // name: 'ComponentName',
   data () {
@@ -24,14 +27,70 @@ export default {
   },
   methods:{
     async switchNetwork(networkname){
-      //we need to pass in this for resetting the profilecache. profile cache is a plugin that only can be accessed via Vue/this
+
       this.disable =true;
-      await this.$store.dispatch('global/switchNetwork', {networkname: networkname, vm: this});
+
+      this.$q.dialog({
+        title: `Switching To ${networkname}`,
+        message: `Please enter pin code`,
+        prompt: {
+          model: '',
+          type: 'number' // optional
+        },
+        cancel: true,
+        color: 'primary-light'
+      }).then(async input_data => {
+        if(input_data == '1234'){
+          await this.$store.dispatch('global/switchNetwork', {networkname: networkname, vm: this});
+        }
+        else{
+          this.nofify_wrong_pin();
+        }
+
+      }).catch(() => {
+        //cancel msg
+      })
+      
       this.disable =false;
+    },
+
+    nofify_wrong_pin(){
+
+        Notify.create({
+            message: `Wrong pin`,
+            timeout: 1500, // in milliseconds; 0 means no timeout
+            type: 'negative',
+            detail: `You need a pin for swwitching networks.`,
+            position: 'bottom-right', // 'top', 'left', 'bottom-left' etc.
+        });
     }
+
   }
 }
+
+// this.$q.dialog({
+//   title: 'Prompt',
+//   message: 'Modern front-end framework on steroids.',
+//   prompt: {
+//     model: '',
+//     type: 'text' // optional
+//   },
+//   cancel: true,
+//   color: 'secondary'
+// }).then(data => {
+//   this.$q.notify(`You typed: "${data}"`)
+// }).catch(() => {
+//   this.$q.notify('Ok, no mood for talking, right?')
+// })
+
+
 </script>
 
-<style>
+<style lang="stylus">
+@import '~variables'
+
+.modal-content{
+  background-color: var(--q-color-warning);
+  color: var(--q-color-text1);
+}
 </style>
