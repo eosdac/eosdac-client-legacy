@@ -73,13 +73,13 @@
             <div class="q-body-1 text-text2 relative-position">
               <q-icon name="icon-ui-22" size="48px" class="absolute-top-left" />
               <div style="display:block;margin-left:55px;margin-top:-3px; width: calc(100% - 55px);" >
-                <q-input dark class="q-mb-xs" color="white" v-model="email_address" :stack-label="$t('index.your_email')" @focus="onsubscribemsg=''" />
+                <q-input :dark="getIsDark" class="q-mb-xs" color="white" v-model="email_address" :stack-label="$t('index.your_email')" @focus="onsubscribemsg=''" />
                 <q-select
                 
                 color="white"
                 :stack-label="$t('index.your_language')"
                  @focus="onsubscribemsg=''"
-                dark
+                :dark="getIsDark"
                   :options="[
                     { label: $t('lang_selector.languages.chinese') + ' - 中文',    value: 'Chinese' },
                     { label: $t('lang_selector.languages.english_us') + ' - English', value: 'English' },
@@ -132,10 +132,8 @@ export default {
     ...mapGetters({
       getAccountName: 'user/getAccountName',
       getScatter: 'api/getScatter',
+      getIsDark: 'ui/getIsDark'
     })
-    
-
-
   },
 
   methods:{

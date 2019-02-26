@@ -3,13 +3,14 @@
     <q-item>
       <q-item-side v-if="icon" :icon="icon" :class="statusClass"/>
       <q-item-main>
-        <q-input type="number" dark  :stack-label="xlabel" color="primary-light" ref="assetinput" :value="parseInput"  @input="update($event)" />
+        <q-input type="number" :dark="getIsDark"  :stack-label="xlabel" color="primary-light" ref="assetinput" :value="parseInput"  @input="update($event)" />
       </q-item-main>
     </q-item>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
   name: 'assetInput',
   props:{
@@ -27,7 +28,9 @@ export default {
     }
   },
   computed:{
-
+    ...mapGetters({
+      getIsDark: 'ui/getIsDark'
+    }),
     parseInput(){
 
       if(this.value){

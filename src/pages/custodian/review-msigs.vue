@@ -13,7 +13,7 @@
   </q-tabs>
 
   <div class="row bg-bg1 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="true" >
-    <q-search dark color="primary" v-model="filter" :placeholder="$t('vote_custodians.search')" />
+    <q-search :dark="getIsDark" color="primary" v-model="filter" :placeholder="$t('vote_custodians.search')" />
     <div class="row inline items-center q-mt-sm" style="font-size:12px;">
       <span>{{ $t('vote_custodians.rows_per_page') }}:</span>
         <q-select
@@ -21,7 +21,7 @@
           style="width:45px;"
           hide-underline
           v-model="pagination.items_per_page"
-          dark
+          :dark="getIsDark"
           :options="[{label:'1', value:1},{label:'4', value:4}, {label:'8', value:8}, {label:'16', value:16}, {label:'24', value:24}, {label:'48', value:48}]"
         />
         <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
@@ -65,7 +65,8 @@ export default {
   computed: {
     ...mapGetters({
       getactiveCustodians: 'api/getActiveCustodians',
-      getAccountName: 'account/getAccountName'
+      getAccountName: 'account/getAccountName',
+      getIsDark: 'ui/getIsDark'
     })
 
   },

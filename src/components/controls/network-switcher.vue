@@ -39,7 +39,8 @@ export default {
         },
         cancel: true,
         color: 'primary-light'
-      }).then(async input_data => {
+      })
+      .then(async input_data => {
         if(input_data == '1234'){
           await this.$store.dispatch('global/switchNetwork', {networkname: networkname, vm: this});
         }
@@ -47,11 +48,12 @@ export default {
           this.nofify_wrong_pin();
         }
 
-      }).catch(() => {
+      })
+      .catch(() => {
         //cancel msg
       })
       
-      this.disable =false;
+      this.disable = false;
     },
 
     nofify_wrong_pin(){

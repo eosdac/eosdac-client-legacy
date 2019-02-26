@@ -33,11 +33,11 @@
           Give the msig transaction a name, title and description
       </div>
       <div class="row gutter-md">
-        <div class="col-xs-12 col-md-6"><div><q-input dark v-model="msig_name" stack-label="Name" placeholder="msig name" /></div></div>
-        <div class="col-xs-12 col-md-6"><div><q-input dark v-model="msig_title" stack-label="Title" placeholder="title" /></div></div>
+        <div class="col-xs-12 col-md-6"><div><q-input :dark="getIsDark" v-model="msig_name" stack-label="Name" placeholder="msig name" /></div></div>
+        <div class="col-xs-12 col-md-6"><div><q-input :dark="getIsDark" v-model="msig_title" stack-label="Title" placeholder="title" /></div></div>
       </div>
 
-      <div class="q-mt-lg"><q-input dark v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" /></div>
+      <div class="q-mt-lg"><q-input :dark="getIsDark" v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" /></div>
 
       <div class="row justify-end">
         <q-stepper-navigation >
@@ -56,7 +56,7 @@
         <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
         <span class="text-text2" v-if="!actions.length">No actions added yet.</span>
       </div>
-      <q-tabs dark>
+      <q-tabs :dark="getIsDark">
         <q-tab default slot="title" name="tab-1" :label="`send ${this.$configFile.get('systemtokensymbol')}`" />
         <q-tab slot="title" name="tab-2" :label="`send ${this.$configFile.get('dactokensymbol')}`" />
         <q-tab slot="title" name="tab-3" :label="`Advanced`" />
@@ -86,7 +86,7 @@
           Set a date on which the transaction should expire. The transaction will be unexecutable after this date even if all signatures are collected.
       </div>
       <div>
-       <q-datetime-picker minimal dark class="bg-bg1" color="positive" v-model="trx_expiration" :min="mindate" :max="maxdate" type="date" />
+       <q-datetime-picker minimal :dark="getIsDark" class="bg-bg1" color="positive" v-model="trx_expiration" :min="mindate" :max="maxdate" type="date" />
       </div>
       <div class="row justify-end q-mt-md">
         <q-stepper-navigation>
@@ -206,7 +206,8 @@ export default {
   computed:{
     ...mapGetters({
       getAccountName: 'user/getAccountName',
-      getCustodians: 'dac/getCustodians'
+      getCustodians: 'dac/getCustodians',
+      getIsDark: 'ui/getIsDark'
     }),
     parseNumberToAsset(number, symbol){
       return `${number.toFixed(4)} ${symbol}`;

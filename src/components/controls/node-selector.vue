@@ -10,8 +10,8 @@
       </div>
       <div class="row justify-center">
         <div class="col-sm-12 q-pa-sm text-center">
-          <q-field :label="$t('nodeselector.custom_endpoint')" label-width="12" dark>
-            <q-input color="p-light" dark v-model="endpoint" placeholder="https://endpoint-url.com" />
+          <q-field :label="$t('nodeselector.custom_endpoint')" label-width="12" :dark="getIsDark">
+            <q-input color="p-light" :dark="getIsDark" v-model="endpoint" placeholder="https://endpoint-url.com" />
           </q-field>
           <q-btn :disabled="badEndpoint"  class="q-ma-sm" color="primary" @click="connect(endpoint)" :label="$t('nodeselector.connect')" />
         </div>
@@ -47,8 +47,8 @@
           <div>
               <p class="q-title">{{ $t('nodeselector.select_endpoint') }}</p>
               <p class="text-dimwhite q-body-1" style="min-height:50px" v-html="$t('nodeselector.select_the_endpoint_you_would_like')"></p>
-              <q-field :label="$t('nodeselector.choose_endpoint')" label-width="12" dark>
-              <q-select color="p-light" :placeholder="$t('nodeselector.select_endpoint')" v-model="selectedEndpoint" dark radio :options="endpoints" />
+              <q-field :label="$t('nodeselector.choose_endpoint')" label-width="12" :dark="getIsDark">
+              <q-select color="p-light" :placeholder="$t('nodeselector.select_endpoint')" v-model="selectedEndpoint" :dark="getIsDark" radio :options="endpoints" />
               </q-field>
           </div>
           <div class="q-mt-lg">
@@ -62,8 +62,8 @@
             <div >
               <p class="q-title">{{ $t('nodeselector.manual_connection') }}</p>
               <p class="text-dimwhite q-body-1" style="min-height:50px">{{ $t('nodeselector.specify_your_own') }}</p>
-              <q-field :label="$t('nodeselector.custom_endpoint')" label-width="12" dark>
-                <q-input color="p-light" dark v-model="endpoint" placeholder="https://endpoint-url.com" />
+              <q-field :label="$t('nodeselector.custom_endpoint')" label-width="12" :dark="getIsDark">
+                <q-input color="p-light" :dark="getIsDark" v-model="endpoint" placeholder="https://endpoint-url.com" />
               </q-field>
             </div>
             <div class="q-mt-lg">
@@ -93,7 +93,8 @@ export default {
     ...mapGetters({
       
       getAccountName: 'user/getAccountName',
-      getCurrentEndpoint: 'api/getCurrentEndpoint'
+      getCurrentEndpoint: 'api/getCurrentEndpoint',
+      getIsDark: 'ui/getIsDark'
     })
   },
   data() {

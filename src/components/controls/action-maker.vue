@@ -5,7 +5,7 @@
         
         <q-item v-for="(field, i) in data_fields" :key="`field_${i}`">
           <q-item-main>
-            <q-input v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" dark :stack-label="field.name" type="text" :placeholder="field.type"/>
+            <q-input v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/>
           </q-item-main>
         </q-item>
         <div class="row q-mt-md justify-between items-center">
@@ -46,7 +46,8 @@ export default {
   },
   computed:{
     ...mapGetters({
-      getEosApi: 'global/getEosApi'
+      getEosApi: 'global/getEosApi',
+      getIsDark: 'ui/getIsDark'
     })
 
   },

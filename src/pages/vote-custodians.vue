@@ -35,7 +35,7 @@
       <p class="text-text2 q-body-1">{{ $t('vote_custodians.description_main') }}</p>
 
       <div v-if="!loading" class="row bg-bg1 q-pa-md q-mb-md shadow-5 round-borders justify-between animate-fade"  >
-        <q-search dark color="primary-light"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
+        <q-search :dark="getIsDark" color="primary-light"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
         <div v-if="!loading" class="row inline items-center q-mt-md" style="font-size:12px;">
           <span>{{ $t('vote_custodians.rows_per_page') }}:</span>
            <q-select
@@ -43,7 +43,7 @@
               style="width:45px;"
               hide-underline
               v-model="pagination.items_per_page"
-              dark
+              :dark="getIsDark"
              :options="[{label:'4', value:4}, {label:'8', value:8}, {label:'16', value:16}, {label:'24', value:24}, {label:'48', value:48}]"
             />
             <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
@@ -60,7 +60,7 @@
       />
 
       <div v-if="!loading" class="row bg-bg1 q-pa-md q-mb-md shadow-5 round-borders justify-between animate-fade"  >
-        <q-search dark color="primary-light"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
+        <q-search :dark="getIsDark" color="primary-light"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
         <div  class="row inline items-center q-mt-md " style="font-size:12px;">
           <span>{{ $t('vote_custodians.rows_per_page') }}:</span>
            <q-select
@@ -68,7 +68,7 @@
               style="width:45px;"
               hide-underline
               v-model="pagination.items_per_page"
-              dark
+              :dark="getIsDark"
              :options="[{label:'4', value:4}, {label:'8', value:8}, {label:'16', value:16}, {label:'24', value:24}, {label:'48', value:48}]"
             />
             <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
@@ -187,7 +187,8 @@ export default {
       getAccountName: 'user/getAccountName',
       getTokenBalance: 'user/getDacBalance',
       getCandidates: 'dac/getCandidates',
-      getDacVotes: 'user/getDacVotes'
+      getDacVotes: 'user/getDacVotes',
+      getIsDark: 'ui/getIsDark'
       // getMemberRoles: 'account/getMemberRoles'
     }),
 

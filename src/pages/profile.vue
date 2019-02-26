@@ -28,11 +28,11 @@
       <div class="row profile_header_bottom_row">
         <div class="col-md-2 col-xs-6 q-pr-sm" >
           <div class="text-text2 q-caption uppercase">{{ $t('profile.givenName') }}</div>
-          <q-input color="white" dark :readonly="!is_edit" :hide-underline="!is_edit" v-model="form.givenName"/>
+          <q-input color="white" :dark="getIsDark" :readonly="!is_edit" :hide-underline="!is_edit" v-model="form.givenName"/>
         </div>
         <div class="col-md-2 col-xs-6 q-pr-sm">
           <div class="text-text2 q-caption uppercase">{{ $t('profile.familyName') }}</div>
-          <q-input color="white"  dark :readonly="!is_edit" :hide-underline="!is_edit"  v-model="form.familyName"/>
+          <q-input color="white" :dark="getIsDark" :readonly="!is_edit" :hide-underline="!is_edit"  v-model="form.familyName"/>
         </div>
         <div class="col-md-2 col-xs-6 q-pr-sm">
           <div class="text-text2 q-caption uppercase">{{ $t('profile.gender') }}</div>
@@ -42,7 +42,7 @@
               :readonly="!is_edit"
               :hide-underline="!is_edit"
               v-model="form.gender"
-              dark
+              :dark="getIsDark"
              :options="[{label:$t('profile.female'), value:'female'}, {label:$t('profile.male'), value:'male'}, {label:$t('profile.other'), value:'other'}]"
             />
         </div>
@@ -60,11 +60,8 @@
       <div class="col-md-8 col-xs-12 q-pa-md">
         <div class="" style="height:100%">
           <div class="q-title q-mb-md">{{ $t('profile.bio') }}</div>
-          <!--<q-input v-if="is_edit" inverted rows="8" color="dark" type="textarea" v-model="form.description" dark />
-          <div class="text-text2 q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="!is_edit">{{form.description}}</div>
-        </div>-->
           <MarkdownViewer :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript',
-            'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-bg1" :edit="is_edit" dark :text="form.description" v-on:update="updateText" />
+            'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-bg1" :edit="is_edit" :dark="getIsDark" :text="form.description" v-on:update="updateText" />
 
         </div>
       </div>
@@ -84,8 +81,8 @@
           <!-- on is_edit -->
           <div v-if="is_edit">
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
-            <q-input color="p-light" dark type="url" v-model="form.url"  placeholder="http://example.com" />
-            <q-input color="p-light" dark type="url"
+            <q-input color="p-light" :dark="getIsDark" type="url" v-model="form.url"  placeholder="http://example.com" />
+            <q-input color="p-light" :dark="getIsDark" type="url"
               class="q-mt-md q-mb-md"
               v-model="social.link"
               v-for="(social, i) in form.sameAs"
@@ -116,17 +113,13 @@
     <TimeZone :offset="form.timezone" />
   </div>
 
-
-  <!-- <q-input color="p-light" dark type="url" v-model="profileUrl" />
-  <q-btn size="md" class="animate-pop"  color="primary" @click="saveProfileUrl" :label="$t('profile.save_url')" /> -->
-
   <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}" >
     <div  class="bg-dark round-borders q-pa-md">
       <div style="overflow: auto;">
         <q-btn round color="primary" class="float-right" @click="visible=false" icon="icon-plus" />
       </div>
       <div>
-        <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md " :float-label="$t('profile.profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
+        <q-input :dark="getIsDark" type="url" v-model="form.image" @input="loaded=false" class="q-mt-md " :float-label="$t('profile.profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
       </div>
     </div>
   </q-modal>
@@ -151,12 +144,9 @@ import TimeZone from 'components/ui/time-zone'
 import ProfileTemplate from '../statics/profile.template.json'
 import MarkdownViewer from 'components/ui/markdown-viewer'
 import debugData from 'components/ui/debug-data'
-import {
-  openURL
-} from 'quasar'
-import {
-  mapGetters
-} from 'vuex'
+import {openURL} from 'quasar'
+import {mapGetters} from 'vuex'
+
 export default {
   components:{
     debugData,
@@ -187,6 +177,7 @@ export default {
   computed: {
     ...mapGetters({
       getAccountName: 'user/getAccountName',
+      getIsDark: 'ui/getIsDark'
 
     }),
     setImgSrc(){

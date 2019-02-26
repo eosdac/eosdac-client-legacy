@@ -27,7 +27,7 @@
     </div>
 
     <div class="bg-bg2 text-italic text-text2 q-body-1 q-mx-xs q-pa-sm round-borders" v-if="data.profile">
-      <MarkdownViewer v-if="data.profile" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" dark :text="data.profile.description.slice(0, 140)+'...'" />
+      <MarkdownViewer v-if="data.profile" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" :dark="getIsDark" :text="data.profile.description.slice(0, 140)+'...'" />
     </div>
 
     <div class="row justify-between q-pa-md">
@@ -51,7 +51,7 @@
             <q-icon :title="$t('candidate.nominated_next')" style="margin-top:-5px" v-if="data.rank < 13" name="fiber_manual_record" color="primary" />{{ data.candidate_name }}
           </router-link>
         </div>
-        <MarkdownViewer v-if="data.profile" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" dark :text="data.profile.description" />
+        <MarkdownViewer v-if="data.profile" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" :dark="getIsDark" :text="data.profile.description" />
         <SocialLinks class="q-mt-md" :links="sociallinks" />
       </div>
     </q-modal>
@@ -98,7 +98,7 @@
         <div class="q-my-md">BIO <div class="float-right q-body-2"><span class="text-text2">{{$t('candidate.requestedpay')}}: </span>{{ $helper.assetToLocaleNumber(data.requestedpay) }}</div></div>
         <!--<div class="text-text2 q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="data.profile !== undefined">{{data.profile.description}}</div>-->
         <MarkdownViewer v-if="data.profile" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript',
-          'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" dark :text="data.profile.description" />
+          'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" :dark="getIsDark" :text="data.profile.description" />
         </q-scroll-area>
         <div class="row justify-between items-center full-height q-pb-sm">
           <div class="q-mb-md" style="border-bottom:1px solid grey; width:100%;height:5px"></div>
@@ -141,6 +141,7 @@ export default {
     ...mapGetters({
       getCustodians: 'dac/getCustodians',
       getTokenBalance: 'user/getDacBalance',
+      getIsDark: 'ui/getIsDark'
     }),
     is_custodian(){
       if(this.getCustodians){
