@@ -181,7 +181,7 @@ export default {
 
     }),
     setImgSrc(){
-      let image = '../statics/img/default-avatar.png'; //default image
+      let image = '../statics/images/default-avatar.png'; //default image
       if(this.$helper.isUrl(this.form.image)){
         image = this.form.image;
       }
