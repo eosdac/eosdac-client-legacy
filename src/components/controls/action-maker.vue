@@ -1,7 +1,7 @@
 <template>
   <div style="min-height:350px">
 
-    <!-- no props set -->
+    <!-- no props set = custom_mode -->
     <div v-if="account=='' && name=='' ">
       <div>
         <q-item>
@@ -15,6 +15,7 @@
       </div>
       <div v-if="custom_mode.abi.actions" class="row" >
         <q-btn size="sm" v-for="(action, i) in custom_mode.abi.actions" :label="action.name" :key="`a${i}`" color="bg1" class="animate-pop q-ma-xs" @click="custom_mode.action_name= action.name" />
+        <q-btn size="sm" label="abi" class="animate-pop q-ma-xs" color="positive" @click="view_abi_modal=true" />
       </div>
       
     </div>
@@ -38,8 +39,16 @@
         </div>
     </div>
 
-
-
+    <!-- view abi modal -->
+    <q-modal minimized v-model="view_abi_modal">
+      <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
+        <span>ABI: {{custom_mode.account}}</span>
+        <q-btn icon="close" @click="view_abi_modal = false;" class="no-shadow"/>
+      </div>
+      <div class="q-pa-md bg-bg2 text-text1">
+        <div v-html="prettyHtml(custom_mode.abi)" class="overflow-hidden" />
+      </div>
+    </q-modal>
 
 
 
@@ -47,10 +56,11 @@
 </template>
 
 <script>
+const prettyHtml = require('json-pretty-html').default;
 import {mapGetters} from 'vuex';
 const {TextDecoder, TextEncoder} = require('text-encoding');
 const {Serialize} = require('eosjs');
-
+const numberTypes =['bool','uint8','int8','uint16','int16','uint32','uint64','int64','int32','varuint32','varint32','uint128','int128','float32','float64','float128'];
 import { Notify } from 'quasar';
 
 export default {
@@ -69,6 +79,8 @@ export default {
     return {
       data_fields: [],
 
+      view_abi_modal : false,
+
       custom_mode:{
         account:'',
         action_name:'',
@@ -86,6 +98,7 @@ export default {
   },
 
   methods:{
+    prettyHtml,
     async getAbi(contract){
       let abi = await this.getEosApi.eos.get_abi(contract) ;
       if(abi){
