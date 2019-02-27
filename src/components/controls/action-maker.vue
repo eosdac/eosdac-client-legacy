@@ -9,7 +9,7 @@
             <q-input :dark="getIsDark" v-model="custom_mode.account" type="text" stack-label="Contract" placeholder="input a contract name" />
           </q-item-main>
           <q-item-side right>
-            <q-btn color="primary"  label="load" @click="data_fields=[];custom_mode_parse_actions(custom_mode.account)" />
+            <q-btn color="primary-light"  flat label="load" @click="data_fields=[];custom_mode_parse_actions(custom_mode.account)" />
           </q-item-side>
         </q-item>
       </div>
@@ -155,7 +155,7 @@ export default {
         Notify.create({
           message: `Serialize`+e.stack.split('\n')[0],
           detail: 'See console for more info',
-          timeout: 2500,
+          timeout: 2000,
           type: 'negative',
           position: 'bottom-right'
         });

@@ -1,26 +1,8 @@
 <template>
       <q-list no-border link inset-delimiter>
-      <q-collapsible  v-if="getIsCustodian">
-        <template slot="header">
-          <q-item-side icon="mdi-folder-star" color="text2"/>
-          <q-item-main :label="$t('default.custodian_tools')" class="text-text1"/>
-        </template>
-        <div class="bg-bg1">
-          <q-item class="q-pl-lg" link to="/custodian/review-msigs">
-            <q-item-side icon="mdi-shield-key" color="text2" />
-            <q-item-main label="Review Msigs" class="text-text1" />
-          </q-item>
-          <q-item class="q-pl-lg" link to="/custodian/create-msigs">
-            <q-item-side icon="mdi-shield-key-outline" color="text2" />
-            <q-item-main label="Create Msigs" class="text-text1" />
-          </q-item>
-          <q-item class="q-pl-lg" link to="/custodian/my-payments">
-            <q-item-side icon="attach_money" color="text2" />
-            <q-item-main label="My Payments" class="text-text1" />
-          </q-item>
-        </div>
-      </q-collapsible>
 
+        <custodian-menu />
+        <member-menu />
         <q-item to="/constitution" >
           <q-item-side icon="receipt" color="text2"/>
           <q-item-main :label="$t('default.sign_the_constitution')" class="text-text1"/>
@@ -88,9 +70,15 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {openURL} from 'quasar'
+import {openURL} from 'quasar';
+import custodianMenu from './custodian-menu';
+import memberMenu from './member-menu';
 export default {
   name: 'MainMenu',
+  components:{
+    custodianMenu,
+    memberMenu
+  },
   data () {
     return {}
   },
@@ -99,7 +87,7 @@ export default {
       getAccountName: 'user/getAccountName',
       getSettingByName: 'user/getSettingByName',
       getIsCustodian: 'user/getIsCustodian',
-      getIsCandidate: 'user/getIsCandidate'
+      getIsCandidate: 'user/getIsCandidate',
     })
     
   },

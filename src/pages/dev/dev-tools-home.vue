@@ -4,15 +4,6 @@
 
     <div class="row gutter-sm">
 
-      <div class="col-xs-12 q-mb-md" >
-        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
-          <div class="q-title q-mb-md">Push Transactions</div>
-          <div class="q-mt-md">
-            <transaction-builder />
-          </div>
-        </div>
-      </div>
-
       <div class="col-xs-12 col-md-6">
         <div class="bg-bg1 round-borders shadow-5 q-pa-md">
           <div class="q-title q-mb-md">Profile Cache</div>
@@ -32,7 +23,7 @@
         </div>
       </div>
   
-      <div class="col-xs-12 col-md-6">
+      <div class="col-xs-12 col-md-6 ">
         <div class="bg-bg1 round-borders shadow-5 q-pa-md">
           <div class="row justify-between q-mb-md"><span class="q-title">Color Scheme</span><nightModeSwitch /></div>
           <color-picker />
@@ -40,8 +31,8 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-md-6">
-        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+      <div class="col-xs-12 col-md-6 ">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height">
           <div class="q-title q-mb-md">Network</div>
           <div class="q-mt-md row">
             <network-switcher class="q-ma-xs" />
@@ -50,6 +41,14 @@
         </div>
       </div>
 
+      <div class="col-xs-12 q-mb-md " >
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="q-title q-mb-md">Push Transactions</div>
+          <div class="q-mt-md">
+            <transaction-builder />
+          </div>
+        </div>
+      </div>
 
     </div>
 

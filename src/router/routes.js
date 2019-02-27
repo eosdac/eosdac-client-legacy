@@ -36,6 +36,7 @@ const routes = [
       
     ]
   },
+  
   {
     path: '/custodian',
     component: () => import('layouts/MyLayout.vue'),
@@ -47,7 +48,16 @@ const routes = [
       
     ],
     beforeEnter: Guards.custodianCheck
-    
+  },
+
+  {
+    path: '/member',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/home') },
+      { path: 'create-worker-proposal', component: () => import('pages/member/create-worker-proposal') },
+    ],
+    // beforeEnter: Guards.custodianCheck
   }
 ]
 
