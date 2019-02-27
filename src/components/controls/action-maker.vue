@@ -52,6 +52,8 @@
 </template>
 
 <script>
+const numberTypes =['bool','uint8','int8','uint16','int16','uint32','uint64','int64','int32','varuint32','varint32','uint128','int128','float32','float64','float128'];
+
 import {mapGetters} from 'vuex';
 const {TextDecoder, TextEncoder} = require('text-encoding');
 const {Serialize} = require('eosjs');
