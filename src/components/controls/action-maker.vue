@@ -24,12 +24,7 @@
         
         <q-item v-for="(field, i) in data_fields" :key="`field_${i}`" >
           <q-item-main>
-            <!-- <div v-if="field.type == 'bytes'">
-              <input type="file" name="abi" id="abifile">
-            </div> -->
-            <div>
-              <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/>
-            </div>
+            <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/>
           </q-item-main>
         </q-item>
         <div class="row q-mt-md justify-between items-center">
@@ -52,8 +47,6 @@
 </template>
 
 <script>
-const numberTypes =['bool','uint8','int8','uint16','int16','uint32','uint64','int64','int32','varuint32','varint32','uint128','int128','float32','float64','float128'];
-
 import {mapGetters} from 'vuex';
 const {TextDecoder, TextEncoder} = require('text-encoding');
 const {Serialize} = require('eosjs');
@@ -74,7 +67,6 @@ export default {
   },
   data () {
     return {
-      testurl:'',
       data_fields: [],
 
       custom_mode:{
@@ -117,13 +109,12 @@ export default {
     },
 
     async processInputs(){
-      // console.log(await this.getFile() );
-      let action_data = this.data_fields.reduce(async (res, input) =>{
+      
+      let action_data = this.data_fields.reduce((res, input) =>{
         let value = input.value;
         if((value.includes('[') && value.includes(']') ) || (value.includes('{') && value.includes('}') ) ){
           value = JSON.parse(value);
         }
-
         res[`${input.name}`] = value;
         return res;
       }, {});
@@ -184,27 +175,6 @@ export default {
         this.custom_mode.abi = abi;
       }
       
-    },
-    async getFile (){
-
-      let bytes = true;
-      var file = document.getElementById('abifile').files[0];
-      console.log(file)
-      return new Promise((resolve, reject) => {
-        var fr = new FileReader();  
-        fr.onload = function(result){
-          console.log(result)
-            return resolve(fr.result);
-        };  
-        if(bytes){
-            fr.readAsBinaryString(file);
-        }
-        else{
-            fr.readAsText(file);
-        }
-        
-      });
-    
     }
 
   },

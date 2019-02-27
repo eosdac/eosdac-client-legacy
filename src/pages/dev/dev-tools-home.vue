@@ -4,6 +4,15 @@
 
     <div class="row gutter-sm">
 
+      <div class="col-xs-12 q-mb-md" >
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="q-title q-mb-md">Push Transactions</div>
+          <div class="q-mt-md">
+            <transaction-builder />
+          </div>
+        </div>
+      </div>
+
       <div class="col-xs-12 col-md-6">
         <div class="bg-bg1 round-borders shadow-5 q-pa-md">
           <div class="q-title q-mb-md">Profile Cache</div>
@@ -41,14 +50,6 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-md-6">
-        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
-          <div class="q-title q-mb-md">Transactions</div>
-          <div class="q-mt-md">
-            <transaction-builder />
-          </div>
-        </div>
-      </div>
 
     </div>
 
