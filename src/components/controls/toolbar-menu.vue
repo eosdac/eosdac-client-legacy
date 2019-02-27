@@ -28,10 +28,13 @@
         <q-list  link class="bg-bg2 text-text1"  >
           <q-list-header class="text-text2" style="min-width:300px">{{getActiveNetworkName}}</q-list-header>
            <q-item>
-            <q-item-side icon="folder" color="text2" />
+            <q-item-side v-if="getMemberStatus=='member'" icon="check" color="positive" />
+            <q-item-side v-if="getMemberStatus=='pending'" icon="mdi-timer-sand" color="warning" />
+            <q-item-side v-if="getMemberStatus===false"  />
             <q-item-main>
               <q-item-tile class="text-text1" label>Member Status</q-item-tile>
-              <q-item-tile class="text-text2" sublabel>{{getMemberStatus}}</q-item-tile>
+              <q-item-tile v-if="getMemberStatus" class="text-text2" sublabel>{{getMemberStatus}}</q-item-tile>
+              <q-item-tile v-else class="text-text2" sublabel><q-btn color="primary" to='/constitution' dense label="Signature Required" /> </q-item-tile>
             </q-item-main>
             <!-- <q-item-side right icon="info" color="amber" /> -->
           </q-item>
@@ -41,7 +44,7 @@
           <q-item-separator inset />
 
           <q-item v-close-overlay @click.native="$store.dispatch('global/switchAccount')">
-            <q-item-side icon="cached" color="warning" />
+            <q-item-side icon="cached" color="info" />
             <q-item-main>
               <q-item-tile label>Switch account</q-item-tile>
             </q-item-main>

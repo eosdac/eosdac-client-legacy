@@ -32,7 +32,6 @@
 
       <div class="row justify-end q-mt-md">
         <q-stepper-navigation>
-          <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
           <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" label="Next" />
         </q-stepper-navigation>
       </div>
@@ -137,13 +136,14 @@ export default {
     },
 
     async pushTransaction(){
-
       let result = await this.$store.dispatch('user/transact', {actions: this.actions } );
       if(result){
         console.log('transaction callback', result);
+        this.$refs.stepper.reset();
+        this.actions = [];
       }
-
     }
+    
   }
 }
 </script>
