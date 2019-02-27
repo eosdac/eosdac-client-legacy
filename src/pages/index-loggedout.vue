@@ -14,7 +14,7 @@
               <p>{{$t('index.description_p2')}}</p>
             </div>
             <div class="q-mb-lg">
-              <q-btn  v-if="!getAccountName" class="float-left q-px-xl" icon="icon-topmenu-3" size="lg" color="primary" :label="$t('index.signin')" @click="login"/>
+              <q-btn  v-if="!getAccountName" class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signin')" @click="login"/>
               <q-btn  v-else class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signout')" @click="logout"/>
             </div>
           </div>
