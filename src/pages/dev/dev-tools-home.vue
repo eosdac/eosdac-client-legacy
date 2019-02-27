@@ -41,6 +41,15 @@
         </div>
       </div>
 
+      <div class="col-xs-12 col-md-6">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="q-title q-mb-md">Transactions</div>
+          <div class="q-mt-md">
+            <transaction-builder />
+          </div>
+        </div>
+      </div>
+
     </div>
 
 
@@ -78,6 +87,8 @@ import nightModeSwitch from 'components/controls/nightmode-switch';
 
 import networkSwitcher from 'components/controls/network-switcher';
 
+import transactionBuilder from 'components/controls/transaction-builder';
+
 import firehose from 'components/controls/firehose';
 
 import debugData from 'components/ui/debug-data';
@@ -88,10 +99,9 @@ export default {
       nightModeSwitch,
       colorPicker,
       networkSwitcher,
-
       firehose,
-
-      debugData
+      debugData,
+      transactionBuilder
   },
   data() {
     return {

@@ -68,7 +68,9 @@
           <action-maker :account="$configFile.get('tokencontract')" name="transfer" @actiondata="addAction"/>
         </q-tab-pane>
         <q-tab-pane name="tab-3" class="text-text1 bg-bg2">
-          <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/>
+          <!-- <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/> -->
+          <action-maker @actiondata="addAction"/>
+
         </q-tab-pane>
       </q-tabs>
 

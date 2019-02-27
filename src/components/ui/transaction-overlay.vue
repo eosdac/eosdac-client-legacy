@@ -3,7 +3,7 @@
   <div class="animate-fade" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:99999" v-if="getShowTransactionOverlay" >
     
     <div class="row justify-end q-pa-md">
-      <q-btn v-if="" round class="animate-pop" color="primary" icon="close" @click="close();" />
+      <q-btn round class="animate-pop" color="primary" icon="close" @click="close();" />
     </div>
 
     <div class="fixed-center">
