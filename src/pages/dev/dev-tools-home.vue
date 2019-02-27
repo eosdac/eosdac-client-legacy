@@ -118,7 +118,8 @@ export default {
       getIsDark: 'ui/getIsDark',
       getMemberTerms: 'dac/getMemberTerms',
       getIsCustodian: 'user/getIsCustodian',
-      getThemes: 'ui/getThemes'
+      getThemes: 'ui/getThemes',
+      getEosApi: 'global/getEosApi'
       // getCustodians: 'dac/getCustodians',
     }),
     
@@ -158,7 +159,7 @@ export default {
     //   console.log(`key=${e}`)
     //   console.log(this.$store.state[e])
     // });
-    this.$helper.fullHostToJson(this.$configFile.get('defaultnode') )
+    console.log(this.getEosApi)
 
   },
   watch: {

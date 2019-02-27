@@ -3,7 +3,9 @@
   <div class="relative-position">
     <div class=" round-borders  shadow-14 bg-bg1 relative-position" style="min-height:600px; padding-bottom: 120px; overflow:hidden">
       <div class="big_logo animate-scale" style="background-size: 200%;"></div>
-      <div class="row q-px-xl" style="margin-bottom:-40px; padding-top:40px; text-shadow: 2px 2px rgba(0,0,0,0.5);"><div class="col-xs-12 col-lg-6 q-display-3">{{$t('index.welcome_to_esodac_member_client')}}</div></div>
+      <div class="row q-px-xl" style="margin-bottom:-40px; padding-top:40px; text-shadow: 2px 2px rgba(0,0,0,0.5);">
+        <div class="col-xs-12 col-lg-6 q-display-3 index-title" style="transition: font-size 0.5s">{{$t('index.welcome_to_esodac_member_client')}}</div>
+      </div>
       <div class="row" >
         <div class="col-xl-6 col-md-12 col-sm-12 col-xs-12  index_border_right_col q-px-xl" style="min-height:300px">
           <div class="column justify-between full-height">
