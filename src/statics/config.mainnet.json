@@ -18,6 +18,12 @@
         },
         "dac_msig": {
             "name": "dacmultisigs"
+        },        
+        "wpproposal":{
+            "name": "dacproposals"
+        },
+        "escrow":{
+            "name": "eosdacescrow"
         }
 
     },
