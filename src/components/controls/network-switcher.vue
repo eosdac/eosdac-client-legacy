@@ -93,6 +93,6 @@ export default {
 
 .modal-content{
   background-color: var(--q-color-warning);
-  color: var(--q-color-text1);
+
 }
 </style>
