@@ -100,7 +100,8 @@
 
     <!-- step 5 review and submit -->
     <q-step name="fifth" title="Review & Submit" active-icon="remove_red_eye">
-      <div class="row">
+      <div class="row justify-between">
+        <div class="row">
         <q-item class="animate-pop">
           <q-item-side icon="mdi-account-key-outline" color="text2" />
           <q-item-main style="margin-left:-5px">
@@ -122,14 +123,16 @@
             <q-item-tile class="text-text2 q-caption" sublabel>{{actions.length}}</q-item-tile>
           </q-item-main>
         </q-item>
+        </div>
+        <q-checkbox :dark="getIsDark" class="text-text2" color="primary-light" v-model="reset_form_after_success" left-label label="Reset after submit" />
       </div>
       <div class="row q-pa-md q-mt-md bg-bg2 round-borders">
           <display-action v-for="(action,i) in actions" :action="action" :key="`a${i}`" viewable/>
       </div>
 
       <div class="row justify-between  items-center q-mt-lg ">
-        <q-btn label="view full Msig" icon="pageview" color="primary" @click="openReview_Msig_Modal" />
-        <div>
+        <q-btn label="view full Msig" icon="pageview" class="q-my-xs" color="primary" @click="openReview_Msig_Modal" />
+        <div class="q-my-xs">
           <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
           <q-btn color="positive" class="animate-pop" @click="proposeMsig" label="submit" />
         </div>
@@ -193,6 +196,7 @@ export default {
   },
   data () {
     return {
+      reset_form_after_success: true,
       msig_name:'',
       msig_title:'',
       msig_description:'',
@@ -311,6 +315,12 @@ export default {
       let result = await this.$store.dispatch('user/transact', {actions: [propose, proposed] } );
       if(result){
         console.log('transaction callback', result);
+        if(this.reset_form_after_success){
+          this.$refs.stepper.reset();
+          Object.assign(this.$data, this.$options.data());
+          this.setControlledAccounts();
+        }
+        
       }
 
     }
