@@ -11,12 +11,12 @@
 
         <q-toolbar-title>
           <span v-if="getIsDark">
-          <img class="cursor-pointer gt-xs" @click="$router.push('/')" src="~assets/images/logo-main-white.svg" style="height:48px;" :title="$t('default.member_client')">
-          <img class="cursor-pointer lt-sm" @click="$router.push('/')" src="~assets/images/logo-notext-white.svg" style="height:48px;" :title="$t('default.member_client')">
+            <img class="cursor-pointer gt-xs" @click="$router.push('/')" src="~assets/images/logo-main-white.svg" style="height:48px;" :title="$t('default.member_client')">
+            <img class="cursor-pointer lt-sm" @click="$router.push('/')" src="~assets/images/logo-notext-white.svg" style="height:48px;" :title="$t('default.member_client')">
           </span>
           <span v-if="!getIsDark">
-          <img class="cursor-pointer gt-xs" @click="$router.push('/')" src="~assets/images/logo-main-black.svg" style="height:48px;" :title="$t('default.member_client')">
-          <img class="cursor-pointer lt-sm" @click="$router.push('/')" src="~assets/images/logo-notext-black.svg" style="height:48px;" :title="$t('default.member_client')">
+            <img class="cursor-pointer gt-xs" @click="$router.push('/')" src="~assets/images/logo-main-black.svg" style="height:48px;" :title="$t('default.member_client')">
+            <img class="cursor-pointer lt-sm" @click="$router.push('/')" src="~assets/images/logo-notext-black.svg" style="height:48px;" :title="$t('default.member_client')">
           </span>
         </q-toolbar-title>
         <!-- <div v-if="getIsloaded" class="bg-positive" style="width:30px;height:30px;"></div> -->

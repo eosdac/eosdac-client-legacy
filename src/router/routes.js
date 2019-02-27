@@ -23,7 +23,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/index-loggedout') },
+      { path: '', component: () => import('pages/home') },
       { path: 'dashboard', component: () => import('pages/dashboard'), beforeEnter: Guards.logInCheck },
       { path: 'settings', component: () => import('pages/settings.vue') },
       { path: 'constitution', component: () => import('pages/constitution.vue') },
@@ -40,7 +40,7 @@ const routes = [
     path: '/custodian',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/index-loggedout') },
+      { path: '', component: () => import('pages/home') },
       { path: 'review-msigs', component: () => import('pages/custodian/review-msigs') },
       { path: 'create-msigs', component: () => import('pages/custodian/create-msigs') },
       { path: 'my-payments', component: () => import('pages/custodian/my-payments') }
