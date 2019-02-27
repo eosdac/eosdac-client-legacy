@@ -1,5 +1,5 @@
 <template>
-<q-page class="text-text1 bg-bg2">
+<q-page class="text-text1 bg-bg2 bg-logo">
   <!-- retro style -->
   <div class="retro_bg full-height full-width absolute"  v-bind:class="{ 'fadeit': !isPlaying }" ></div>
   <div v-if="isPlaying" class="q-pa-md ">
