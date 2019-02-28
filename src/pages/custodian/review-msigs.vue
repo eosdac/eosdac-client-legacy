@@ -24,7 +24,7 @@
           :dark="getIsDark"
           :options="[{label:'1', value:1},{label:'4', value:4}, {label:'8', value:8}, {label:'16', value:16}, {label:'24', value:24}, {label:'48', value:48}]"
         />
-        <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
+        <q-pagination color="primary-light" v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
     </div>
   </div>
 

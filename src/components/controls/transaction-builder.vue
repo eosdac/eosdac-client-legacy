@@ -74,7 +74,7 @@
   <!-- review msig modal -->
     <q-modal maximized v-model="view_actions_modal">
       <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
-        <span>Review Actions:</span>
+        <span>Review Actions</span>
         <q-btn icon="close" @click="view_actions_modal = false;" class="no-shadow"/>
       </div>
       <div class="q-pa-md bg-bg2 text-text1 full-height ">

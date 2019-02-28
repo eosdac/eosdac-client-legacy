@@ -13,7 +13,6 @@
           </q-item-side>
         </q-item>
       </div>
-      <div v-if="isLoading"><q-spinner color="primary-light" :size="30" /></div>
       <div v-if="custom_mode.abi.actions" class="row" >
         <q-btn size="sm" v-for="(action, i) in custom_mode.abi.actions" :label="action.name" :key="`a${i}`" color="bg1" class="animate-pop q-ma-xs" @click="custom_mode.action_name= action.name" />
         <q-btn size="sm" title="view abi" icon="mdi-magnify" class="animate-pop q-ma-xs" color="positive" @click="view_abi_modal=true" />
@@ -39,7 +38,7 @@
           <q-btn color="primary" label="add" @click="processInputs"  />
         </div>
     </div>
-    <div v-else-if="isLoading" class="row justify-center"><q-spinner color="primary-light" :size="60" /></div>
+    <div v-if="isLoading" class="row justify-center"><q-spinner color="primary-light" :size="60" /></div>
 
     <!-- view abi modal -->
     <q-modal minimized v-model="view_abi_modal">
@@ -196,7 +195,7 @@ export default {
       }
       this.custom_mode.abi = {};
       
-      let abi = await this.getAbi(accountname);
+      let abi = await this.getAbi(accountname).catch(e=>{this.isLoading = false});
       if(abi){
         this.custom_mode.abi = abi;
       }
