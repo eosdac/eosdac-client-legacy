@@ -39,6 +39,7 @@
           <q-btn color="primary" label="add" @click="processInputs"  />
         </div>
     </div>
+    <div v-else-if="isLoading" class="row justify-center"><q-spinner color="primary-light" :size="60" /></div>
 
     <!-- view abi modal -->
     <q-modal minimized v-model="view_abi_modal">
@@ -103,13 +104,16 @@ export default {
   methods:{
     prettyHtml,
     async getAbi(contract){
+      this.isLoading = true;
       let abi = await this.getEosApi.eos.get_abi(contract) ;
+      this.isLoading = false;
       if(abi){
         return abi.abi
       }
       else{
         return false;
       }
+
       
     },
 
@@ -191,12 +195,12 @@ export default {
         return false;
       }
       this.custom_mode.abi = {};
-      this.isLoading = true;
+      
       let abi = await this.getAbi(accountname);
       if(abi){
         this.custom_mode.abi = abi;
       }
-      this.isLoading = false;
+      
       
     }
 
