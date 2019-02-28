@@ -117,6 +117,13 @@ export default {
       label: 'Set a delay on transactions in seconds',
       value: 0,
       group: 'advanced'
+    },
+    { 
+      name: 'auto_logout_delay',
+      type: 'number',
+      label: 'Automatically log out after the specified amount of inactivity in minutes. 0 is never log out',
+      value: 0,
+      group: 'advanced'
     }
     
   ]

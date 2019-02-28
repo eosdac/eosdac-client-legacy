@@ -14,8 +14,11 @@ export default {
 
   onIdle() {
     console.log('sleeping')
-    if(SCHEDULE_AUTO_LOGOUT_TIMER === null && this.getAccountName){
+    if(SCHEDULE_AUTO_LOGOUT_TIMER === null && this.getAccountName && this.getSettingByName('auto_logout_delay').value > 0 ){
       this.sheduleAutoLogout();
+    }
+    else{
+      console.log('already logged out or auto logout disabled')
     }
   },
 
@@ -38,12 +41,14 @@ export default {
   },
 
   methods:{
+
     sheduleAutoLogout(){
-      let time = 10000;
+      if(this.getSettingByName('auto_logout_delay').value <= 0) return;
+      let time = this.getSettingByName('auto_logout_delay').value*60*1000;
+      console.log('shedule logout in', time, 'ms' );
       SCHEDULE_AUTO_LOGOUT_TIMER = setTimeout(()=>{
         this.doAutoLogout();
-      }, time)
-
+      }, time);
     },
 
     doAutoLogout(){
@@ -74,6 +79,7 @@ export default {
       DO_AUTO_LOGOUT_TIMER = null;
       SCHEDULE_AUTO_LOGOUT_TIMER = null;
     }
+
   }
 }
 </script>
