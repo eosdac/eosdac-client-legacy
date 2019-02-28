@@ -13,6 +13,7 @@
           </q-item-side>
         </q-item>
       </div>
+      <div v-if="isLoading"><q-spinner color="primary-light" :size="30" /></div>
       <div v-if="custom_mode.abi.actions" class="row" >
         <q-btn size="sm" v-for="(action, i) in custom_mode.abi.actions" :label="action.name" :key="`a${i}`" color="bg1" class="animate-pop q-ma-xs" @click="custom_mode.action_name= action.name" />
         <q-btn size="sm" title="view abi" icon="mdi-magnify" class="animate-pop q-ma-xs" color="positive" @click="view_abi_modal=true" />
@@ -77,6 +78,8 @@ export default {
   },
   data () {
     return {
+      isLoading: false,
+
       data_fields: [],
 
       view_abi_modal : false,
@@ -128,6 +131,10 @@ export default {
         if((value.includes('[') && value.includes(']') ) || (value.includes('{') && value.includes('}') ) ){
           value = JSON.parse(value);
         }
+        else if(numberTypes.includes(input.type) ){
+          value = Number(value);
+        }
+        console.log('input type',input.type)
         res[`${input.name}`] = value;
         return res;
       }, {});
@@ -183,10 +190,13 @@ export default {
         console.log(`"${accountname}" is not a valid accountname`);
         return false;
       }
+      this.custom_mode.abi = {};
+      this.isLoading = true;
       let abi = await this.getAbi(accountname);
       if(abi){
         this.custom_mode.abi = abi;
       }
+      this.isLoading = false;
       
     }
 

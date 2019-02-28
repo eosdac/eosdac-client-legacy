@@ -20,14 +20,15 @@ export default {
       for(let i = 0; i < this.$refs.z.length; i++){
         
         this.$refs.z[i].classList.add('z-animate');
-        await  new Promise(resolve => setTimeout(resolve, 500))
+        await new Promise(resolve => setTimeout(resolve, 500))
       }
-      await  new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 500));
 
       for(let i = 0; i < this.$refs.z.length; i++){
         this.$refs.z[i].classList.remove('z-animate');
       }
-      await  new Promise(resolve => setTimeout(resolve, 9000))
+      let wait = this.$helper.randomIntFromInterval(5, 20)*1000;
+      await new Promise(resolve => setTimeout(resolve, wait) );
       this.animateZs();
 
     }
