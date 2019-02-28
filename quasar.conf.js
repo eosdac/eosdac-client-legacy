@@ -8,6 +8,7 @@ module.exports = function (ctx) {
       'axios',
       'i18n',
       'helper',
+      'idle-vue',
       'profile-cache',
       'iconfont-loader',
       'medium-editor'

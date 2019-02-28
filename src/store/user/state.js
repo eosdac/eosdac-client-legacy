@@ -1,5 +1,6 @@
 export default {
   //
+  isIdle: null,
   language: false,
   isLoaded: false,
   accountName:null,

@@ -3,15 +3,22 @@
   <div id="q-app">
     <router-view />
      <q-ajax-bar position="left" color="primary-light" size="3px" />
+     <sleep-handler />
   </div>
 </template>
 
 <script>
+
 import { Notify } from 'quasar';
 import NodeSelector from './modules/nodeselector.js';
+import sleepHandler from 'components/controls/sleep-handler'
 
 export default {
   name: 'App',
+  components:{
+    sleepHandler
+  },
+
   data() {
     return {
       leftDrawerOpen: true,
@@ -52,7 +59,8 @@ export default {
     clearLocalStorage(){
         window.localStorage.clear();
         window.location.reload(); 
-    }
+    },
+
   },
 
   async mounted(){

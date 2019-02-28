@@ -18,10 +18,12 @@
           <q-item-tile class="text-text1 q-caption" sublabel><xspan :value="$helper.toLocaleNumber(getSystemBalance)" /></q-item-tile>
         </q-item-main>
       </q-item>
+      
 </div>
 
-<div v-if="getSettingByName('toolbar_profile_image').value && getAccountName && getProfilePicture" class="row justify-end" style=" margin-right:-22px;" ref="profileContainer">
-  <profile-pic :accountname="getAccountName" :scale="0.55" />
+<div v-if="getSettingByName('toolbar_profile_image').value && getAccountName && getProfilePicture" class="row justify-end relative-position" style=" margin-right:-22px;" ref="profileContainer">
+  <!-- <div style="position:absolute" v-if="true">zzZ</div> -->
+  <profile-pic :class="{'grey_scale': isAppIdle}" style="transition: all 0.5s ease;" :accountname="getAccountName" :scale="0.55" />
 </div>
 
 <q-btn-dropdown id="login_button" v-if="getAccountName" no-ripple text-color="text1"  class="no-shadow animate-fade" :label="getAccountName" content-style="margin-top:4px" >
@@ -100,7 +102,7 @@ export default {
       getSystemBalance: 'user/getSystemBalance',
       getMemberStatus: 'user/getMemberStatus',
       getActiveNetworkName: 'global/getActiveNetworkName',
-      getSettingByName: 'user/getSettingByName'
+      getSettingByName: 'user/getSettingByName',
     })
     
   },
@@ -124,5 +126,8 @@ export default {
   #login_button .q-focus-helper {
     opacity: 0;
     transition: unset;
+  }
+  .grey_scale{
+    filter: grayscale(80%);
   }
 </style>

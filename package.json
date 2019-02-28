@@ -14,6 +14,7 @@
     "connect": "^3.6.6",
     "crypto-js": "^3.1.9-1",
     "eosjs": "^20.0.0-beta3",
+    "idle-vue": "^2.0.5",
     "int64-buffer": "^0.99.1007",
     "json-pretty-html": "^1.1.6",
     "marked": "^0.6.0",
