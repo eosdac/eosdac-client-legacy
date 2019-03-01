@@ -94,8 +94,6 @@ export default {
       getSettingByName: 'user/getSettingByName'
 
     })
-
-    
   },
 
   methods:{

@@ -43,6 +43,8 @@ class configLoader {
         return this.configFile.external;
       case 'authaccount':
         return this.configFile.authAccount;
+      case 'wpcontract':
+        return this.configFile.contracts.wpproposal.name;
       default:
         return `***${configquery} not yet subscribed in config-loader***`
     }

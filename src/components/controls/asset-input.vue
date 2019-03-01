@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-item>
-      <q-item-side v-if="icon" :icon="icon" :class="statusClass"/>
+      <q-item-side v-if="icon"  :icon="icon" :class="statusClass"/>
       <q-item-main>
         <q-input type="number" :dark="getIsDark"  :stack-label="xlabel" color="primary-light" ref="assetinput" :value="parseInput"  @input="update($event)" />
       </q-item-main>
@@ -18,12 +18,18 @@ export default {
 
     label: String,
     icon: String,
-    min: Number,
-    max: Number
+    min: {
+      type: Number,
+      default: null
+    },
+    max:{
+      type: Number,
+      default: null
+    }
   },
   data () {
     return {
-      xlabel: '',
+      xlabel: this.label || '',
       statusClass:'text-text2',
     }
   },
@@ -32,18 +38,20 @@ export default {
       getIsDark: 'ui/getIsDark'
     }),
     parseInput(){
-
+      console.log(this.value)
       if(this.value){
         let n = Number(this.value);
         this.statusClass= 'text-positive';
         this.setLabel(this.label);
 
-        if(this.min && (n < this.min) ){
+        if(this.min !=null && (n < this.min) ){
+          console.log(`value less then set min ${this.min}`)
           this.setLabel(`value less then set min ${this.min}`);
           this.statusClass= ['text-negative', 'fa-vibrate'];
         }
 
-        if(this.max && (n > this.max) ){
+        if(this.max!=null && (n > this.max) ){
+          console.log(`value greater then set max ${this.max}`)
           this.setLabel(`value greater then set max ${this.max}`);
           this.statusClass= ['text-negative', 'fa-vibrate'];
         }
@@ -51,6 +59,7 @@ export default {
       }
       else{
         this.statusClass= ['text-text2'];
+        this.setLabel(this.label);
       }
 
 
