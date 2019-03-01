@@ -15,6 +15,14 @@ const Guards = {
     } else {
       next();
     }
+  },
+  memberCheck (to, from, next) {
+    let status = store.getters['user/getMemberStatus'];
+    if (status !== 'member') {
+      next({path: ''});
+    } else {
+      next();
+    }
   }
 };
 
@@ -59,7 +67,7 @@ const routes = [
       { path: 'new-worker-proposal', component: () => import('pages/member/new-worker-proposal') },
       { path: 'my-worker-proposals', component: () => import('pages/member/my-worker-proposals') },
     ],
-    // beforeEnter: Guards.custodianCheck
+    beforeEnter: Guards.memberCheck
   }
 ]
 
