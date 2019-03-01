@@ -44,6 +44,7 @@ const routes = [
       { path: '', component: () => import('pages/home') },
       { path: 'review-msigs', component: () => import('pages/custodian/review-msigs') },
       { path: 'create-msigs', component: () => import('pages/custodian/create-msigs') },
+      { path: 'review-worker-proposals', component: () => import('pages/custodian/review-worker-proposals') },
       { path: 'my-payments', component: () => import('pages/custodian/my-payments') }
       
     ],
@@ -55,7 +56,8 @@ const routes = [
     component: () => import('layouts/MyLayout.vue'),
     children: [
       { path: '', component: () => import('pages/home') },
-      { path: 'create-worker-proposal', component: () => import('pages/member/create-worker-proposal') },
+      { path: 'new-worker-proposal', component: () => import('pages/member/new-worker-proposal') },
+      { path: 'my-worker-proposals', component: () => import('pages/member/my-worker-proposals') },
     ],
     // beforeEnter: Guards.custodianCheck
   }
