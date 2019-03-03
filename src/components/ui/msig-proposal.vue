@@ -117,7 +117,7 @@
         <q-item-main >
           <div class="q-ml-lg">
             <!-- <div class="q-title q-mb-xs"><span class="text-text1">{{msig.proposal_name}}:</span> {{msig.title}}</div> -->
-            <div class="q-body-3 q-mb-xs text-text1 capitalize" style="min-width:800px">{{msig.title}}</div>
+            <div class="q-body-3 q-mb-xs text-text1 capitalize" >{{msig.title}}</div>
             <div class="q-caption">
               <div>
                 <span class="text-text2">Submitted by: </span>
