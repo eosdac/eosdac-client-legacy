@@ -13,6 +13,7 @@ import sanitizeHtml from 'sanitize-html'
 import marked from 'marked'
 import TurndownService from 'turndown'
 const turndownService = new TurndownService()
+
 export default {
   name: 'MarkdownViewer',
   props: {
