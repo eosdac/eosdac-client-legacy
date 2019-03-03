@@ -35,7 +35,7 @@
         </div>
         <div class="row gutter-md">
           <div class="col-xs-12 col-md-6"><div><q-input readonly :dark="getIsDark" v-model="msig_name" stack-label="ID/Name" placeholder="msig name" /></div></div>
-          <div class="col-xs-12 col-md-6"><div><q-input type="text" :dark="getIsDark" maxlength="60" v-model="msig_title" stack-label="Title" placeholder="title" /></div></div>
+          <div class="col-xs-12 col-md-6"><div><q-input type="text" :dark="getIsDark" maxlength="70" v-model="msig_title" stack-label="Title" placeholder="title" /></div></div>
         </div>
 
         <div class="q-mt-lg"><q-input type="textarea" :row="5" :dark="getIsDark" v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" /></div>
