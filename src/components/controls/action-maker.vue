@@ -38,7 +38,9 @@
           <q-btn color="primary" label="add" @click="processInputs"  />
         </div>
     </div>
+
     <div v-if="isLoading" class="row justify-center"><q-spinner color="primary-light" :size="60" /></div>
+    <div v-if="abi_load_error !='' " class="animate-fade q-pa-md text-negative q-caption">{{abi_load_error}}</div>
 
     <!-- view abi modal -->
     <q-modal minimized v-model="view_abi_modal">
@@ -82,6 +84,8 @@ export default {
   },
   data () {
     return {
+      abi_load_error: '',
+
       isLoading: false,
 
       data_fields: [],
@@ -107,13 +111,17 @@ export default {
   methods:{
     prettyHtml,
     async getAbi(contract){
+      this.abi_load_error ='';
       this.isLoading = true;
-      let abi = await this.getEosApi.eos.get_abi(contract) ;
+      let abi = await this.getEosApi.eos.get_abi(contract).catch(e=>{ console.log(e)}) ;
+      
       this.isLoading = false;
-      if(abi){
+      if(abi && abi.abi){
+        
         return abi.abi
       }
       else{
+        this.abi_load_error =`ABI for ${contract} not found`;
         return false;
       }
 

@@ -74,6 +74,15 @@ class helper{
     return Math.floor(Math.random()*(max-min+1)+min);
   }
 
+  randomName(){
+    let name = "";
+    let possible = "abcdefghijklmnopqrstuvwxyz12345.";
+    for (var i = 0; i < 13; i++){
+      name += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return name;
+  }
+
 }
 
 export default ({ Vue, store }) => {
