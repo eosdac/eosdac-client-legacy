@@ -31,10 +31,10 @@
       <!-- step 2 add description -->
       <q-step default name="second" title="Add info" >
         <div class="q-mb-md text-text2">
-            Give the msig transaction a name, title and description
+            Give the msig transaction a title and description
         </div>
         <div class="row gutter-md">
-          <div class="col-xs-12 col-md-6"><div><q-input :dark="getIsDark" v-model="msig_name" stack-label="Name" placeholder="msig name" /></div></div>
+          <div class="col-xs-12 col-md-6"><div><q-input readonly :dark="getIsDark" v-model="msig_name" stack-label="ID/Name" placeholder="msig name" /></div></div>
           <div class="col-xs-12 col-md-6"><div><q-input :dark="getIsDark" v-model="msig_title" stack-label="Title" placeholder="title" /></div></div>
         </div>
 
@@ -63,10 +63,10 @@
           <q-tab slot="title" name="tab-3" :label="`Advanced`" />
           <!-- Targets -->
           <q-tab-pane name="tab-1" class="text-text1 bg-bg2">
-            <action-maker :account="$configFile.get('systemtokencontract')"  name="transfer" @actiondata="addAction" />
+            <action-maker :account="$configFile.get('systemtokencontract')"  name="transfer" :prefill="{from: getSelectedAccount}" @actiondata="addAction" />
           </q-tab-pane>
           <q-tab-pane name="tab-2" class="text-text1 bg-bg2">
-            <action-maker :account="$configFile.get('tokencontract')" name="transfer" @actiondata="addAction"/>
+            <action-maker :account="$configFile.get('tokencontract')" name="transfer" :prefill="{from: getSelectedAccount}" @actiondata="addAction"/>
           </q-tab-pane>
           <q-tab-pane name="tab-3" class="text-text1 bg-bg2">
             <!-- <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/> -->
@@ -316,10 +316,12 @@ export default {
       let result = await this.$store.dispatch('user/transact', {actions: [propose, proposed] } );
       if(result){
         console.log('transaction callback', result);
+        this.msig_name = this.$helper.randomName();
         if(this.reset_form_after_success){
           this.$refs.stepper.reset();
           Object.assign(this.$data, this.$options.data());
           this.setControlledAccounts();
+
         }
         
       }
@@ -329,6 +331,7 @@ export default {
   mounted(){
     // this.$store.dispatch('dac/fetchControlledAccounts');
     this.setControlledAccounts();
+    this.msig_name = this.$helper.randomName();
   }
 }
 </script>
