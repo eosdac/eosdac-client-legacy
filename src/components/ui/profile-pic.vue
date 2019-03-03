@@ -1,6 +1,9 @@
 <template>
-      <div class="profile_image relative-position animate-fade" style="height:65px; width:65px;"  v-bind:style="style" >
+      <div v-if="loaded" class="profile_image relative-position animate-fade" style="height:65px; width:65px;"  v-bind:style="style" >
         <div v-if="is_custodian" style="position:absolute;bottom:-10px;right:-10px;"><q-icon size="34px" color="warning" name="star"/></div>
+      </div>
+      <div v-else v-bind:style="preloaderStyle" style="height:65px; width:65px;" class="row justify-center items-center">
+        <q-spinner size="30px" color="primary-light"  />
       </div>
 </template>
 
@@ -16,7 +19,8 @@ export default {
 
   data () {
     return {
-      profilePic: ''
+      profilePic: '',
+      loaded: false
     }
   },
 
@@ -30,6 +34,11 @@ export default {
           'background-image': `url(${this.profilePic})`
           };
      },
+     preloaderStyle(){
+       return{
+         transform: `scale(${this.scale})`
+       }
+     },
 
      is_custodian(){
        if(this.getCustodians){
@@ -42,9 +51,21 @@ export default {
   },
   methods:{
     async setProfilePic(){
+      this.loaded = false;
       let p = await this.$profiles.getAvatars([this.accountname] );
       this.profilePic = p[0].image;
+
+      let preloaderImg = document.createElement("img");
+      preloaderImg.src = this.profilePic;
+      preloaderImg.addEventListener('load', (event) => {
+        this.loaded = true;
+        preloaderImg = null;
+      });
       
+    },
+    profilepicloading(){
+
+
     }
   },
   mounted(){

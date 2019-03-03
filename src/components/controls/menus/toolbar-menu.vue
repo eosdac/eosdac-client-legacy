@@ -26,7 +26,7 @@
 
 <div v-if="getSettingByName('toolbar_profile_image').value && getAccountName && getProfilePicture" class="row justify-end relative-position" style=" margin-right:-22px;" ref="profileContainer">
   
-  <profile-pic :class="{'grey_scale': isAppIdle}" style="transition: all 0.5s ease;" :accountname="getAccountName" :scale="0.55" />
+  <profile-pic :class="{'grey_scale': isAppIdle}" :accountname="getAccountName" :scale="0.55" />
   <div style="position:absolute;top:7px;right:40px" v-if="isAppIdle"><zzz-sleep /></div>
 </div>
 
