@@ -1,9 +1,7 @@
 <template>
 <div>
-  <div class="row bg-bg2">
-
-    <span class="q-pa-sm bg-primary">{{actions[activeSlide].account}}</span>
-    <span class="q-pa-sm bg-primary-light">{{actions[activeSlide].name}}</span>
+  <div class="row bg-bg2 items-center">
+    <display-action :action="actions[activeSlide]"/>
     <span class="q-pa-sm bg-bg2">
       <span class="on-left">Authorization</span>
       <span class="text-text2">{{actions[activeSlide].authorization.map(a => a.actor+'@'+a.permission).join(', ')}}</span>
@@ -31,11 +29,11 @@
 </template>
 
 <script>
-
+import displayAction from 'components/ui/display-action'
 export default {
   name: 'Actionparser',
   components: {
-
+    displayAction
   },
 
   props: {
