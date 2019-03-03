@@ -8,7 +8,7 @@
         <div class="relative-position" style="text-align:center">
           <q-chip  v-if="msig.trx.actions.length > 1"   dense class="absolute" style="top:12px;left:100px" color="dark">{{msig.trx.actions.length}}</q-chip>
           <q-icon style="border:2px solid #4A1289;border-radius:50%" size="48px" count="5" :name="'icon-'+matchIcon" class="q-pa-md q-mr-xs q-mb-xs text-text2" :color="getStatusColor" />
-          <div class="q-title">{{msig.title}}</div>
+          <div class="q-body-3 text-text1 capitalize">{{msig.title}}</div>
         </div>
     </div>
 
@@ -116,7 +116,8 @@
         </q-item-side>
         <q-item-main >
           <div class="q-ml-lg">
-            <div class="q-title q-mb-xs"><span class="text-text1">{{msig.proposal_name}}:</span> {{msig.title}}</div>
+            <!-- <div class="q-title q-mb-xs"><span class="text-text1">{{msig.proposal_name}}:</span> {{msig.title}}</div> -->
+            <div class="q-body-3 q-mb-xs text-text1 capitalize" style="min-width:800px">{{msig.title}}</div>
             <div class="q-caption">
               <div>
                 <span class="text-text2">Submitted by: </span>
