@@ -19,14 +19,14 @@
         <q-tab slot="title" name="tab-3" :label="`Advanced`" />
         <!-- Targets -->
         <q-tab-pane name="tab-1" class="text-text1 bg-bg2">
-          <action-maker :account="$configFile.get('systemtokencontract')" name="transfer" @actiondata="addAction" />
+          <action-maker :account="$configFile.get('systemtokencontract')" :prefill="{from: getAccountName}" name="transfer" @actiondata="addAction" />
         </q-tab-pane>
         <q-tab-pane name="tab-2" class="text-text1 bg-bg2">
-          <action-maker :account="$configFile.get('tokencontract')" name="transfer" @actiondata="addAction"/>
+          <action-maker :account="$configFile.get('tokencontract')" name="transfer" :prefill="{from: getAccountName}" @actiondata="addAction"/>
         </q-tab-pane>
         <q-tab-pane name="tab-3" class="text-text1 bg-bg2">
           <!-- <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/> -->
-          <action-maker @actiondata="addAction"/>
+          <action-maker @actiondata="addAction" :prefill="{from: getAccountName}"/>
         </q-tab-pane>
       </q-tabs>
 

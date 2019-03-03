@@ -17,7 +17,7 @@
           <q-item-tile class="text-text2 q-caption" label>{{$t('default.your_token_balance', { tokenName: $configFile.get('systemtokensymbol') }) }}</q-item-tile>
           <q-item-tile class="text-text1 q-caption" sublabel>
             <xspan :value="$helper.toLocaleNumber(getSystemBalance)" />
-            <q-icon name="mdi-water" color="text2" style="margin-left:5px" title="Liquid Balance" />
+            <q-icon name="mdi-water" color="text2" style="margin-left:3px" title="Liquid Balance" />
           </q-item-tile>
         </q-item-main>
       </q-item>

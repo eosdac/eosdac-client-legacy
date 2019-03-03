@@ -74,6 +74,10 @@ export default {
     name:{
       type: String,
       default: ''
+    },
+    prefill:{
+      type: Object,
+      default: function () { return {} }
     }
   },
   data () {
@@ -124,7 +128,15 @@ export default {
     async setFieldsModel(contract, action_name, abi=false){
       let actions = abi || await this.getAbi(contract);
       let fields = this.getDataFieldsForActionName(actions, action_name);
-      this.data_fields = fields.map(f=> {f.value=''; return f});
+      this.data_fields = fields.map(f=> {
+        if(this.prefill[f.name] ){
+          f.value=this.prefill[f.name];
+        }
+        else{
+          f.value='';
+        }
+        return f;
+      });
     },
 
     async processInputs(){

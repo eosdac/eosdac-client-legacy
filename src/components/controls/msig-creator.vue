@@ -63,7 +63,7 @@
           <q-tab slot="title" name="tab-3" :label="`Advanced`" />
           <!-- Targets -->
           <q-tab-pane name="tab-1" class="text-text1 bg-bg2">
-            <action-maker :account="$configFile.get('systemtokencontract')" name="transfer" @actiondata="addAction" />
+            <action-maker :account="$configFile.get('systemtokencontract')"  name="transfer" @actiondata="addAction" />
           </q-tab-pane>
           <q-tab-pane name="tab-2" class="text-text1 bg-bg2">
             <action-maker :account="$configFile.get('tokencontract')" name="transfer" @actiondata="addAction"/>
