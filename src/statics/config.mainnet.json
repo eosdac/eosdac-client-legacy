@@ -39,7 +39,7 @@
     "api": {
         "default_eos_node": "https://proxy.eosnode.tools:443",
         "bpnodes": "https://eosdac.io/topnodes.json",
-        "memberclient": "https://toolkit-api.eosdac.io/",
+        "memberclient": "https://toolkit-api.eosdac.io",
         "firehose": "ws://bos.eosdac.io:1337"
     },
 

@@ -75,9 +75,9 @@ class helper{
   }
 
   randomName(){
-    let name = "";
-    let possible = "abcdefghijklmnopqrstuvwxyz12345.";
-    for (var i = 0; i < 12; i++){
+    let name = '';
+    let possible = 'abcdefghijklmnopqrstuvwxyz12345.';
+    for (let i = 0; i < 12; i++){
       name += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return name;

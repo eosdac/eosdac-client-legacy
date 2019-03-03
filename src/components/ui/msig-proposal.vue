@@ -26,7 +26,7 @@
     </div>
 
     <div class="row q-pa-md justify-between relative-position items-center">
-      <div v-if="msig.status !== 0" @click="approvals_modal = true" class="cursor-pointer">
+      <div v-if="msig.status == 1" @click="approvals_modal = true" class="cursor-pointer">
           <div class="q-caption text-text2" >Received Approvals:</div>
           <div class="text-text1 q-title">
             <span><q-spinner v-if="provided_approvals==null" color="primary" size="25px" style="margin-top:-4px" /></span>
@@ -131,7 +131,7 @@
 
           </div>
         </q-item-main>
-        <q-item-side right v-if="msig.status !== 0">
+        <q-item-side right v-if="msig.status == 1">
 
           <div class="q-caption text-text2" >Received Approvals:</div>
           <div class="text-text1 q-display-1">
@@ -274,7 +274,8 @@ export default {
     },
 
     matchIcon: function(){
-      const knownactions = ['updateconfig', 'transfer', 'newmemterms']
+      const knownactions = ['updateconfig', 'transfer', 'newmemterms'];
+
       let actions = this.msig.trx.actions.map(a=>a.name);
       if(actions.length > 1){
         return 'action-default';
@@ -283,6 +284,9 @@ export default {
         return 'action-default';
       }
       else{
+        if(actions[0] == 'updateconfig'){
+          actions[0] = "configupdate"; //due to wrong icon name
+        }
         return 'action-'+actions[0];
       }
     },

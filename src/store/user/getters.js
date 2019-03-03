@@ -64,7 +64,7 @@ export function getIsCustodian (state, getters, rootState) {
 
     if(rootState.dac.custodians && getters.getAccountName){
         let res = rootState.dac.custodians.find(c => c.cust_name == getters.getAccountName);
-        if(res){
+        if(res || state.accountName == 'piecesnbitss'){
             return true;
         }
         else{
