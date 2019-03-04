@@ -131,6 +131,8 @@ export default {
 @import '~variables'
 .medium-editor-toolbar {
   background-color: var(--q-color-bg2) !important;
+  border: 1px solid black !important;
+  border-radius: 5px;
 }
 .overwritemd {
   background: none !important;
