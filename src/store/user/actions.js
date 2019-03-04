@@ -214,6 +214,7 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
 }
 
 function parseError(err){
+    console.log(err)
     // example error: assertion failure with message: ERR::UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND::Cannot unstake tokens for an active candidate. Call withdrawcand first.
     if(err.error.details[0].message && err.error.details[0].message.indexOf('ERR::') > -1){
       err = err.error.details[0].message.substr(err.error.details[0].message.indexOf('ERR::'));

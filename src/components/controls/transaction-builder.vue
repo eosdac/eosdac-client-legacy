@@ -17,6 +17,7 @@
         <q-tab default slot="title" name="tab-1" :label="`send ${this.$configFile.get('systemtokensymbol')}`" />
         <q-tab slot="title" name="tab-2" :label="`send ${this.$configFile.get('dactokensymbol')}`" />
         <q-tab slot="title" name="tab-3" :label="`Advanced`" />
+        <q-tab slot="title" name="tab-4" :label="`Super Advanced`" />
         <!-- Targets -->
         <q-tab-pane name="tab-1" class="text-text1 bg-bg2">
           <action-maker :account="$configFile.get('systemtokencontract')" :prefill="{from: getAccountName}" name="transfer" @actiondata="addAction" />
@@ -27,6 +28,11 @@
         <q-tab-pane name="tab-3" class="text-text1 bg-bg2">
           <!-- <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/> -->
           <action-maker @actiondata="addAction" :prefill="{from: getAccountName}"/>
+        </q-tab-pane>
+        <q-tab-pane name="tab-4" class="text-text1 bg-bg2">
+          <div class="text-text2">Add a raw json action to the transaction (experimental)</div>
+          <q-input dark  :max-height="100" rows="7" color="primary-light" type="textarea" v-model="raw_action_object" />
+          <q-btn label="add" color="primary" :disabled="raw_action_object ==''" class="q-mt-md" @click="addAction(JSON.parse(raw_action_object) )" />
         </q-tab-pane>
       </q-tabs>
 
@@ -102,6 +108,7 @@ export default {
 
   data () {
     return {
+      raw_action_object: '',
       actions:[],
       view_actions_modal: false
 

@@ -6,7 +6,7 @@
       <div class="text-text1 q-title q-mb-md">Submit Worker Proposal</div>
       <div class="q-mb-md text-text2">Please fill in the form to explain your worker proposal. There need to be more text here to guide the potential worker. </div>
       <q-input type="text" stack-label="Title" color="primary-light" :dark="getIsDark" v-model="wp_data.title" :error="$v.wp_data.title.$error" />
-
+      <!-- <div class="text-negative q-caption" v-if="!$v.wp_data.title.required">Field is required.</div> -->
       <div class="row gutters-sm q-my-md">
         <div class="col-xs-12 col-lg-6">
           <!-- <asset-input v-model="wp_data.pay_amount" label="Pay Amount" :maw="100" :min="0" icon="icon-type-2" /> -->

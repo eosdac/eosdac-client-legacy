@@ -19,7 +19,7 @@ export default {
     }
   ],
   dapp_version: null,
-  active_network: 'jungle',
+  active_network: 'mainnet',
   scatter: null,
   eosApi: false,
   eosScatter: false,

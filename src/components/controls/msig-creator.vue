@@ -34,7 +34,14 @@
             Give the msig transaction a title and description
         </div>
         <div class="row gutter-md">
-          <div class="col-xs-12 col-md-6"><div><q-input readonly :dark="getIsDark" v-model="msig_name" stack-label="ID/Name" placeholder="msig name" /></div></div>
+          <div class="col-xs-12 col-md-6">
+            <q-item class="no-padding">
+              <q-item-main>
+                <q-input readonly :dark="getIsDark" v-model="msig_name" stack-label="ID/Name" placeholder="msig name" />
+              </q-item-main>
+              <q-btn icon="refresh" flat color="primary-light" title="generate new id" @click="msig_name = $helper.randomName();" />
+            </q-item>
+          </div>
           <div class="col-xs-12 col-md-6"><div><q-input type="text" :dark="getIsDark" maxlength="70" v-model="msig_title" stack-label="Title" placeholder="title" /></div></div>
         </div>
 
@@ -317,11 +324,17 @@ export default {
       if(result){
         console.log('transaction callback', result);
         this.msig_name = this.$helper.randomName();
+        
         if(this.reset_form_after_success){
-          this.$refs.stepper.reset();
-          Object.assign(this.$data, this.$options.data());
-          this.setControlledAccounts();
 
+          this.$refs.stepper.reset();
+          this.msig_title='';
+          this.msig_description='';
+          this.controlled_accounts = [];
+          this.trx_expiration= new Date(new Date().getTime() + (3 * 24 * 60 * 60 * 1000) ).toISOString();
+          this.actions=[];
+          this.review_msig_modal_content ='';
+          this.setControlledAccounts();
         }
         
       }
