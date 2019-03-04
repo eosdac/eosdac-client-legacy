@@ -94,3 +94,12 @@ export async function fetchControlledAccounts({dispatch}){
 
 }
 
+export async function fetchCustodianContractState({commit, dispatch, state}){
+    const api = await dispatch('global/getEosApi', false, {root : true} );
+    let xstate = await api.getCustodianContractState();
+    if(xstate){
+        commit('setCustodianState', xstate)
+    }
+
+}
+

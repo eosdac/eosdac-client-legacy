@@ -220,5 +220,43 @@ export class EosWrapper {
         return ctrl;
     }
 
+    async getWps(accountname){
+
+        let wps = await this.eos.get_table_rows({
+            json : true,
+            code: this.configobj.get('wpcontract'),
+            scope: this.configobj.get('wpcontract'),
+            table: 'proposals',
+            // lower_bound : accountname,
+            // upper_bound : accountname,
+            // index_position : 2,
+            // key_type : 'name',
+            limit: -1,
+        });
+        if (!wps.rows.length) {
+            return [];
+        } 
+        else {
+            return wps.rows;
+        }
+    }
+
+    async getCustodianContractState(){
+        let res =  await this.eos.get_table_rows({
+            json: true,
+            code: this.configobj.get('custodiancontract'),
+            scope: this.configobj.get('custodiancontract'),
+            table: 'state',
+            limit: 1
+        }).catch(e=> false );
+
+        if(res.rows){
+            return res.rows[0];
+        }
+        else{
+            return false;
+        }
+    }
+
 }
 

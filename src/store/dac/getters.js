@@ -39,3 +39,7 @@ export function getCandidates (state, payload) {
 
     return state.candidates;  
 }
+
+export function getCustodianState (state, payload) {
+    return state.custodianState;  
+}

@@ -217,9 +217,7 @@
 
 import Actionparser from 'components/ui/action-parser';
 
-import {
-  mapGetters
-} from 'vuex'
+import {mapGetters} from 'vuex';
 export default {
   name: 'Msigproposal',
   components: {

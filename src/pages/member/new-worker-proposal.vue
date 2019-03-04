@@ -85,11 +85,11 @@ export default {
       }
     }
   },
-    computed:{
+  computed:{
     ...mapGetters({
       getAccountName: 'user/getAccountName',
       getIsDark: 'ui/getIsDark',
-      getSettingByName: 'user/getSettingByName'
+      getSettingByName: 'user/getSettingByName',
 
     })
   },

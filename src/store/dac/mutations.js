@@ -33,3 +33,7 @@ export function setCandidateVote (state, payload) {
         cand.total_votes = vote_amount;
     }
 }
+
+export function setCustodianState (state, payload) {
+    state.custodianState = payload;  
+}

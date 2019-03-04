@@ -20,5 +20,14 @@ export default {
     "auth_threshold_low": null,
     "lockup_release_time_delay": null,
     "requested_pay_max": null
+  },
+
+  custodianState: {
+    "lastperiodtime": null,
+    "total_weight_of_votes": null,
+    "total_votes_on_candidates": null,
+    "number_active_candidates": null,
+    "met_initial_votes_threshold": null
   }
+
 }
