@@ -62,10 +62,6 @@ export default {
         preloaderImg = null;
       });
       
-    },
-    profilepicloading(){
-
-
     }
   },
   mounted(){

@@ -5,7 +5,7 @@
     <div class="bg-bg1 round-borders shadow-5 q-pa-md bg-logo">
       <div class="text-text1 q-title q-mb-md">Submit Worker Proposal</div>
       <div class="q-mb-md text-text2">Please fill in the form to explain your worker proposal. There need to be more text here to guide the potential worker. </div>
-      <q-input type="text" stack-label="Title" color="primary-light" :dark="getIsDark" v-model="wp_data.title" />
+      <q-input type="text" stack-label="Title" color="primary-light" :dark="getIsDark" v-model="wp_data.title" :error="$v.wp_data.title.$error" />
 
       <div class="row gutters-sm q-my-md">
         <div class="col-xs-12 col-lg-6">
@@ -13,7 +13,7 @@
             <q-item>
               <q-item-side left icon="icon-ui-19" class="text-text2"/>
               <q-item-main>
-                <q-input type="number" stack-label="Pay Amount" color="primary-light" :dark="getIsDark" v-model="wp_data.pay_amount" />
+                <q-input type="number" stack-label="Pay Amount" color="primary-light" :dark="getIsDark" v-model="wp_data.pay_amount" :error="$v.wp_data.pay_amount.$error" />
               </q-item-main>
               <q-item-side left >
                 <q-select stack-label="&nbsp" hide-underline v-model="wp_data.symbol" :dark="getIsDark" color="primary-light" :options="allowed_currencies.map(c => {return {label:c, value:c} })"/>
@@ -26,7 +26,7 @@
             <q-item>
               <q-item-side left icon="mdi-teach" class="text-text2"/>
               <q-item-main>
-                <q-input type="text" stack-label="Arbitrator" color="primary-light" :dark="getIsDark" v-model="wp_data.arbitrator" />
+                <q-input type="text" stack-label="Arbitrator" color="primary-light" :dark="getIsDark" v-model="wp_data.arbitrator" :error="$v.wp_data.arbitrator.$error" />
               </q-item-main>
               <q-item-side left >
                 <help-btn title="Arbitrator" content="An arbitrator is a crazy person..." />
@@ -50,8 +50,15 @@
 import {mapGetters} from 'vuex';
 import assetInput from 'components/controls/asset-input';
 import helpBtn from 'components/controls/help-btn';
+import {required, minValue} from 'vuelidate/lib/validators';
+const isEosName = (accountname) => {
+      const re = /^[a-z1-5.]{1,12}$/;
+      return re.test(accountname);
+}
+
 export default {
   name: 'newWorkerProposal',
+
   components:{
     assetInput,
     helpBtn
@@ -78,6 +85,12 @@ export default {
   },
   methods:{
     async submitProposal(){
+      this.$v.wp_data.$touch()
+
+      if (this.$v.wp_data.$error) {
+        this.$q.notify('Please review fields again.');
+        return;
+      }
       let actions = [{
           account: this.$configFile.get('wpcontract'),
           name: "createprop",
@@ -97,7 +110,20 @@ export default {
       }
     }
 
+  },
+
+  validations:{
+      wp_data:{
+        arbitrator: {required, isEosName},
+        title: {required},
+        pay_amount: {
+          required, 
+          minValue:minValue(0)
+        }
+      }
   }
+
+
 }
 
 </script>

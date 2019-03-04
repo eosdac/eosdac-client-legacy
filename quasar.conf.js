@@ -7,6 +7,7 @@ module.exports = function (ctx) {
       'config-loader',
       'axios',
       'i18n',
+      'vuelidate',
       'helper',
       'idle-vue',
       'profile-cache',

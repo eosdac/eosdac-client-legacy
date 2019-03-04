@@ -363,7 +363,7 @@ export default {
         return false;
       }
       // console.log(`votebox: ${offset(votebox).top} scroll: ${scroll.position}`);
-      votebox.style.top = (scroll.position-375)+'px';
+      votebox.style.top = (scroll.position-500)+'px';
     }
 
   },
