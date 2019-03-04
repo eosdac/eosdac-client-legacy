@@ -182,16 +182,17 @@ export default {
         let name = action.name;
         let data = action.data;
 
-        let sbuf = new Serialize.SerialBuffer({
-            textEncoder: new TextEncoder(),
-            textDecoder: new TextDecoder(),
-        });
+        // let sbuf = new Serialize.SerialBuffer({
+        //     textEncoder: new TextEncoder,
+        //     textDecoder: new TextDecoder,
+        // });
 
         const contract = await this.getEosApi.eosapi.getContract(account);
-        contract.actions.get(name).serialize(sbuf, data, new Serialize.SerializerState({ bytesAsUint8Array: false }));
-        let action_data_hex = Serialize.arrayToHex(sbuf.array);
- 
-        return action_data_hex;
+        // contract.actions.get(name).serialize(sbuf, data, new Serialize.SerializerState({ bytesAsUint8Array: true }));
+        // let action_data_hex = Serialize.arrayToHex(sbuf.array);
+        let hex = Serialize.serializeActionData(contract, account, name, data, new TextEncoder, new TextDecoder);
+        return hex;
+        // return action_data_hex;
       }
       catch(e){
         console.log(e);

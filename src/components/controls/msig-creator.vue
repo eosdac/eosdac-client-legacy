@@ -324,9 +324,8 @@ export default {
       if(result){
         console.log('transaction callback', result);
         this.msig_name = this.$helper.randomName();
-        
-        if(this.reset_form_after_success){
 
+        if(this.reset_form_after_success){
           this.$refs.stepper.reset();
           this.msig_title='';
           this.msig_description='';
