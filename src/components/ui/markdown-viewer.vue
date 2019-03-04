@@ -1,10 +1,10 @@
 <template>
 <div>
-  <div v-if="!edit" v-html="convertedAndSanitizedHtml" class="markdown-body q-body-ow" v-bind:class="{ overwritemd: dark }"></div>
-  <div v-else class="relative-position q-pb-lg">
-  <medium-editor ref="markeditor" id="markeditor" class="markdown-body q-body-ow" v-bind:class="{ overwritemd: dark }" :text='editText' custom-tag='div' :options="options" v-on:edit='applyTextEdit' />
-  <div class="absolute-bottom bg-dark2">{{ $t('markdown_viewer.select_text_to_edit') }}</div>
+  <div v-if="!edit" v-html="convertedAndSanitizedHtml"  class="markdown-body q-body-ow" v-bind:class="{ overwritemd: dark }"></div>
+  <div v-else class="relative-position bg-bg2">
+    <medium-editor ref="markeditor" id="markeditor" class="markdown-body q-body-ow" v-bind:class="{ overwritemd: dark }" :text='editText' custom-tag='div' :options="options" v-on:edit='applyTextEdit' />
   </div>
+  <div v-if="edit" class="row justify-end q-caption q-pa-sm" style="">{{ $t('markdown_viewer.select_text_to_edit') }}</div>
 </div>
 </template>
 
@@ -148,6 +148,8 @@ export default {
   font-size: 14px !important;
   font-weight: 400 !important;
   line-height:20px !important;
+  padding:15px;
+  min-height:200px;
 }
 
 .medium-toolbar-arrow-under:after {

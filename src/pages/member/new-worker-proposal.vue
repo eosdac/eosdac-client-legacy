@@ -36,18 +36,26 @@
           </div>
         </div>
       </div>
+        <div class="q-caption q-mb-xs">Description</div>
+        <MarkdownViewer :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript',
+            'superscript', 'anchor', 'orderedlist', 'unorderedlist']"   :edit="true" :dark="getIsDark" :text="wp_data.summary" v-on:update="updateText" />
 
-      <q-input class="bg-bg2 q-pa-md" type="textarea" :rows="10" stack-label="Description" color="primary-light" :dark="getIsDark" v-model="wp_data.summary" />
       <div class="row justify-end q-mt-md">
         <q-btn label="submit" color="primary" @click="submitProposal" class="animate-pop" />
       </div>
     </div>
-    <pre>{{wp_data}}</pre>
+
+    <debug-data :data="[{
+      'wp_data': wp_data
+    }]" />
+
   </q-page>
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
+import debugData from 'components/ui/debug-data'
+import MarkdownViewer from 'components/ui/markdown-viewer';
 import assetInput from 'components/controls/asset-input';
 import helpBtn from 'components/controls/help-btn';
 import {required, minValue} from 'vuelidate/lib/validators';
@@ -61,7 +69,9 @@ export default {
 
   components:{
     assetInput,
-    helpBtn
+    helpBtn,
+    MarkdownViewer,
+    debugData
   },
   data() {
     return {
@@ -84,6 +94,9 @@ export default {
     })
   },
   methods:{
+    updateText (val) {
+      this.wp_data.summary = val
+    },
     async submitProposal(){
       this.$v.wp_data.$touch()
 
