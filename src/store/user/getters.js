@@ -6,6 +6,10 @@ export function getAccountName (state) {
     return state.accountName;
 }
 
+export function getAccount (state) {
+    return state.account;
+}
+
 export function getProfilePicture (state) {
     return state.profilePicture;
 }

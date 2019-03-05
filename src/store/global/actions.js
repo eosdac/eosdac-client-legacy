@@ -39,7 +39,7 @@ export async function connectScatter ({state, commit, dispatch, rootGetters}, tr
           if(ScatterJS.scatter.identity){
               //logged in
               console.log('logged in')
-              dispatch('user/loggedInRoutine', state.scatter.identity.accounts[0].name, {root:true} );
+              dispatch('user/loggedInRoutine', state.scatter.identity, {root:true} );
 
               if(rootGetters['user/getSettingByName']('notify_info_msg').value){
                 Notify.create({
@@ -61,7 +61,7 @@ export async function connectScatter ({state, commit, dispatch, rootGetters}, tr
     })
 }
 
-export async function login({state, dispatch, rootGetters}){
+export async function login({state, dispatch, rootGetters, commit}){
 
     console.log('request login')
     if(state.scatter === null){
@@ -80,7 +80,7 @@ export async function login({state, dispatch, rootGetters}){
     let account = await state.scatter.login().catch(e=> {console.log(e); return false});
 
     if(account && account.accounts[0]){
-        dispatch('user/loggedInRoutine', account.accounts[0].name, {root:true} );
+        dispatch('user/loggedInRoutine', account, {root:true} );
         console.log(`logged in ${account.accounts[0].name} on ${state.active_network}`);
 
         if(rootGetters['user/getSettingByName']('notify_info_msg').value){

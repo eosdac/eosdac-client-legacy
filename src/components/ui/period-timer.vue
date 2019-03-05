@@ -1,9 +1,8 @@
 <template>
   <div>
     <div v-if="loaded">
-      <div class="row justify-center q-mb-xs">Next Period</div>
-      <!-- <flip-countdown ></flip-countdown> -->
-      <flip-clock :deadline="periodEnds" :labels=" {days: 'Days',hours: 'Hours',minutes: 'Minutes',seconds: 'Seconds'}" />
+      <div class="row justify-center q-mb-xs">Next Period In</div>
+      <flip-clock :deadline="periodEnds" :labels=" {days: 'Days', hours: 'Hours', minutes: 'Minutes', seconds: 'Seconds'}" />
     </div>
     <div v-else>
       <q-spinner color="primary-light" />
@@ -13,7 +12,7 @@
 
 <script>
 import flipClock from 'components/ui/flip-clock';
-// import FlipCountdown from 'vue2-flip-countdown';
+
 import {mapGetters} from 'vuex';
 
 import { date } from 'quasar';

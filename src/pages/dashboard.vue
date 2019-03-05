@@ -62,9 +62,9 @@
       </div>
 
       <div class="col-xs-12 col-md-6 col-xl-4">
-        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
-          <!-- <period-timer style="transform: scale(0.6)" /> -->
-          <flip-clock deadline="2020-12-25 00:00:00" />
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height bg-logo">
+          <period-timer />
+          <div class="text-text2 q-mt-md">A new custodian board will be elected every 7 days when the timer expires.</div>
         </div>
       </div>
 
@@ -80,16 +80,16 @@
 import {mapGetters} from 'vuex';
 import profilePic from 'components/ui/profile-pic';
 import displayCustodians from 'components/ui/display-custodians';
-// import periodTimer from 'components/ui/period-timer';
-import flipClock from 'components/ui/flip-clock';
+import periodTimer from 'components/ui/period-timer';
+
 import { openURL } from 'quasar';
 export default {
   name: 'Grid',
   components:{
     profilePic,
     displayCustodians,
-    // periodTimer,
-    flipClock
+    periodTimer
+
   },
   computed:{
     ...mapGetters({

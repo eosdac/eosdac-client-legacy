@@ -12,7 +12,7 @@
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="column  justify-center q-px-md full-height">
         
-          <period-timer style="transform: scale(0.7)" />
+          <period-timer />
         
         <!-- <VotingProgress height="30px" ref="votebar"/> -->
       </div>

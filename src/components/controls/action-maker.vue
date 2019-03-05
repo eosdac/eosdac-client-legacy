@@ -80,6 +80,10 @@ export default {
     prefill:{
       type: Object,
       default: function () { return {} }
+    },
+    auth:{
+      type: Array,
+      default: function () { return [] }
     }
   },
   data () {
@@ -103,7 +107,9 @@ export default {
   computed:{
     ...mapGetters({
       getEosApi: 'global/getEosApi',
-      getIsDark: 'ui/getIsDark'
+      getIsDark: 'ui/getIsDark',
+      getAccountName: 'user/getAccountName',
+      getAccount: 'user/getAccount'
     })
 
   },
@@ -165,9 +171,16 @@ export default {
       let action = {
         account: this.account || this.custom_mode.account,
         name: this.name || this.custom_mode.action_name,
-        data: action_data,
+        data: action_data
       }
       action.hex = await this.serializeActionData(action);
+
+      if(this.auth.length){
+        action.authorization = this.auth;
+      }
+      else{
+        action.authorization = [{actor: this.getAccountName, permission: this.getAccount.authority }];
+      }
 
       if(!action.hex){
         return;

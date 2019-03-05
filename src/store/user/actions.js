@@ -4,10 +4,10 @@ import {openURL} from 'quasar'
 export async function loggedOutRoutine ({commit} ) {
     commit('setIsLoaded', false );
 
+    commit('setAccount', null);
     commit('setAccountName', null );
     commit('setDacBalance', null);
     commit('setAgreedTermsVersion', null);
-    commit('setAccount', null);
     commit('global/setEosApi', null, {root: true});
     commit('global/setScatter', null, {root: true});
     commit('global/setEosScatter', null, {root: true});
@@ -19,8 +19,9 @@ export async function loggedOutRoutine ({commit} ) {
 
 }
 
-export async function loggedInRoutine ({state, commit, dispatch}, accountname) {
-
+export async function loggedInRoutine ({state, commit, dispatch}, account) {
+    let accountname = account.accounts[0].name;
+    commit('setAccount', account.accounts[0]);
     commit('setAccountName', accountname );
     commit('setIsLoaded', false );
 
@@ -147,6 +148,7 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
 
     if((account.name !== state.accountName) ){
         console.log('Yooo stop messing with scatter!');
+        commit('setAccount', account);
         commit('setAccountName', account.name );
     }
 
