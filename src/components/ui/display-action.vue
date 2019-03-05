@@ -11,11 +11,11 @@
               <q-item-tile sublabel>{{value }}</q-item-tile>
             </q-item-main>
           </q-item>
-          <q-item v-if="action.authorization.length" v-close-overlay>
+          <q-item v-if="action.authorization && action.authorization.length" v-close-overlay>
             <q-item-main>
               <q-item-tile label>authorization</q-item-tile>
               <q-item-tile sublabel>
-                <span v-for="(auth, i) in action.authorization" :key="`auth${i}`">{{`${auth.actor}@${auth.permission}` }}</span>
+                <div v-for="(auth, i) in action.authorization" :key="`auth${i}`" class="q-caption">{{`${auth.actor}@${auth.permission}`}}</div>
               </q-item-tile>
             </q-item-main>
           </q-item>
