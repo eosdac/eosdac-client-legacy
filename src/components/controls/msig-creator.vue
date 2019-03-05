@@ -70,14 +70,14 @@
           <q-tab slot="title" name="tab-3" :label="`Advanced`" />
           <!-- Targets -->
           <q-tab-pane name="tab-1" class="text-text1 bg-bg2">
-            <action-maker :account="$configFile.get('systemtokencontract')"  name="transfer" :prefill="{from: getSelectedAccount}" @actiondata="addAction" />
+            <action-maker :account="$configFile.get('systemtokencontract')"  name="transfer" :prefill="{from: getSelectedAccount}" :auth="[{actor: getSelectedAccount2.name, permission: getSelectedAccount2.permission}]" @actiondata="addAction" />
           </q-tab-pane>
           <q-tab-pane name="tab-2" class="text-text1 bg-bg2">
-            <action-maker :account="$configFile.get('tokencontract')" name="transfer" :prefill="{from: getSelectedAccount}" @actiondata="addAction"/>
+            <action-maker :account="$configFile.get('tokencontract')" name="transfer" :prefill="{from: getSelectedAccount}" :auth="[{actor: getSelectedAccount2.name, permission: getSelectedAccount2.permission}]" @actiondata="addAction"/>
           </q-tab-pane>
           <q-tab-pane name="tab-3" class="text-text1 bg-bg2">
             <!-- <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/> -->
-            <action-maker @actiondata="addAction"/>
+            <action-maker @actiondata="addAction" :auth="[{actor: getSelectedAccount2.name, permission: getSelectedAccount2.permission}]"/>
 
           </q-tab-pane>
         </q-tabs>
@@ -241,7 +241,7 @@ export default {
       if(selected){
         return selected;
       }
-      return;
+      return {};
     }
   },
 
@@ -270,7 +270,7 @@ export default {
       let template = JSON.parse(JSON.stringify(msigTrx_template) );
       template.expiration = this.trx_expiration.split('.')[0]; 
       template.actions = this.actions.map(a=>{
-        a.authorization = [{actor: this.getSelectedAccount2.name, permission: this.getSelectedAccount2.permission}];
+        // a.authorization = [{actor: this.getSelectedAccount2.name, permission: this.getSelectedAccount2.permission}];
         //replace plain data with hex
         if(a.hex){
           a.data = a.hex;
