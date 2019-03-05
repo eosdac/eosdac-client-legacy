@@ -2,7 +2,8 @@
   <div>
     <div v-if="loaded">
       <div class="row justify-center q-mb-xs">Next Period</div>
-      <flip-countdown :deadline="periodEnds" :labels=" {days: 'Days',hours: 'Hours',minutes: 'Minutes',seconds: 'Seconds'}"></flip-countdown>
+      <!-- <flip-countdown ></flip-countdown> -->
+      <flip-clock :deadline="periodEnds" :labels=" {days: 'Days',hours: 'Hours',minutes: 'Minutes',seconds: 'Seconds'}" />
     </div>
     <div v-else>
       <q-spinner color="primary-light" />
@@ -11,8 +12,8 @@
 </template>
 
 <script>
-
-import FlipCountdown from 'vue2-flip-countdown';
+import flipClock from 'components/ui/flip-clock';
+// import FlipCountdown from 'vue2-flip-countdown';
 import {mapGetters} from 'vuex';
 
 import { date } from 'quasar';
@@ -23,7 +24,7 @@ const { addToDate, subtractFromDate } = date;
 export default {
   name: 'periodTimer',
   components:{
-    FlipCountdown
+    flipClock
   },
   data () {
     return {
@@ -61,33 +62,6 @@ export default {
 }
 </script>
 
-<style lang ="stylus">
-@import '~variables'
-
-.flip-card__top,
-.flip-card__bottom,
-.flip-card__back-bottom,
-.flip-card__back::before,
-.flip-card__back::after {
-  color: var(--q-color-primary) !important;
-  background: #222;
-
-}
-.flip-card__bottom,
-.flip-card__back-bottom {
-  color: var(--q-color-primary-light) !important;
-  border-top: solid 1px #000;
-  background: #393939;
-
-}
-
-.flip-clock {
-  
-  text-align: center;
-  margin: 0 !important;
-
-}
-
-
+<style>
 
 </style>

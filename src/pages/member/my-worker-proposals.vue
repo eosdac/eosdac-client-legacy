@@ -30,6 +30,22 @@ export default {
     }
   }
 }
+
+
+
+// enum VoteType {
+//             none = 0,
+//             // a vote type to indicate a custodian's approval of a worker proposal.
+//            1= proposal_approve, 
+//             // a vote type to indicate a custodian's denial of a worker proposal.
+//             2=proposal_deny, 
+//             // a vote type to indicate a custodian's acceptance of a worker proposal as completed.
+//            3= claim_approve,
+//             // a vote type to indicate a custodian's rejection of a worker proposal as completed.
+//            4= claim_deny
+//         };
+
+
 </script>
 
 <style>
