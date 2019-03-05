@@ -16,8 +16,8 @@
       <q-tabs :dark="getIsDark">
         <q-tab default slot="title" name="tab-1" :label="`send ${this.$configFile.get('systemtokensymbol')}`" />
         <q-tab slot="title" name="tab-2" :label="`send ${this.$configFile.get('dactokensymbol')}`" />
-        <q-tab slot="title" name="tab-3" :label="`Advanced`" />
-        <q-tab slot="title" name="tab-4" :label="`Super Advanced`" />
+        <q-tab slot="title" name="tab-3" :label="`Custom`" />
+        <q-tab slot="title" name="tab-4" :label="`Advanced`" />
         <!-- Targets -->
         <q-tab-pane name="tab-1" class="text-text1 bg-bg2">
           <action-maker :account="$configFile.get('systemtokencontract')" :prefill="{from: getAccountName}" name="transfer" @actiondata="addAction" />
