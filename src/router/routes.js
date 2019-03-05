@@ -58,7 +58,7 @@ const routes = [
     ],
     beforeEnter: Guards.custodianCheck
   },
-
+/*
   {
     path: '/member',
     component: () => import('layouts/MyLayout.vue'),
@@ -69,6 +69,7 @@ const routes = [
     ],
     beforeEnter: Guards.memberCheck
   }
+*/  
 ]
 
 // Always leave this as last one
