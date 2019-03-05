@@ -2,8 +2,6 @@
   <q-page >
 <div class="q-pa-md" >
 
-    <period-timer />
-
     <div class="row gutter-sm">
 
       <div class="col-xs-12 col-md-6">
@@ -84,8 +82,6 @@ import ecc from 'eosjs-ecc';
 import {mapGetters} from 'vuex';
 import { colors } from 'quasar';
 
-import periodTimer from 'components/ui/period-timer';
-
 import colorPicker from 'components/controls/color-picker';
 
 import nightModeSwitch from 'components/controls/nightmode-switch';
@@ -106,8 +102,8 @@ export default {
       networkSwitcher,
       firehose,
       debugData,
-      transactionBuilder,
-      periodTimer
+      transactionBuilder
+ 
   },
   data() {
     return {

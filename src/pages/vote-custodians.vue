@@ -11,8 +11,12 @@
 
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="column  justify-center q-px-md full-height">
+        
+          <period-timer style="transform: scale(0.7)" />
+        
         <!-- <VotingProgress height="30px" ref="votebar"/> -->
       </div>
+
     </div>
   </div>
 
@@ -148,6 +152,7 @@
 
 import Candidate from 'components/ui/candidate';
 import VotingProgress from 'components/ui/voting-progress';
+import periodTimer from 'components/ui/period-timer';
 import displayCustodians from 'components/ui/display-custodians';
 import debugData from 'components/ui/debug-data';
 
@@ -161,7 +166,8 @@ export default {
     Candidate,
     VotingProgress,
     debugData,
-    displayCustodians
+    displayCustodians,
+    periodTimer
   },
   data() {
     return {

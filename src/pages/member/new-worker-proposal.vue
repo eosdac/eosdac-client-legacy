@@ -16,7 +16,7 @@
                 <q-input type="number" stack-label="Pay Amount" color="primary-light" :dark="getIsDark" v-model="wp_data.pay_amount" :error="$v.wp_data.pay_amount.$error" />
               </q-item-main>
               <q-item-side left >
-                <q-select stack-label="&nbsp" hide-underline v-model="wp_data.symbol" :dark="getIsDark" color="primary-light" :options="allowed_currencies.map(c => {return {label:c, value:c} })"/>
+                <q-select stack-label="&nbsp" hide-underline v-model="wp_data.symbol" :dark="getIsDark" color="primary-light" :options="allowed_currencies.map(c => {return {label:c.symbol, value:c.symbol} })"/>
               </q-item-side>
             </q-item>
         </div>
@@ -75,7 +75,10 @@ export default {
   },
   data() {
     return {
-      allowed_currencies: ['EOS', 'EOSDAC'],
+      allowed_currencies: [
+        {symbol: 'EOS', contract: 'eosio.token'}, 
+        {symbol: this.$configFile.get('dactokensymbol'), contract: this.$configFile.get('tokencontract')} 
+      ],
       wp_data:{
         title: '',
         summary: '',
@@ -104,6 +107,10 @@ export default {
         this.$q.notify('Please review fields again.');
         return;
       }
+      let extended_asset = {
+        quantity: `${Number(this.wp_data.pay_amount).toFixed(4)} ${this.wp_data.symbol}`, 
+        contract: this.allowed_currencies.find(ac => ac.symbol==this.wp_data.symbol).contract
+      }
       let actions = [{
           account: this.$configFile.get('wpcontract'),
           name: "createprop",
@@ -112,7 +119,7 @@ export default {
             title: this.wp_data.title,
             summary: this.wp_data.summary,
             arbitrator: this.wp_data.arbitrator,
-            pay_amount: `${Number(this.wp_data.pay_amount).toFixed(4)} ${this.wp_data.symbol}`,
+            pay_amount: extended_asset,
             content_hash: "00000000000000000000000000000000"
           }
         }];
