@@ -2,7 +2,7 @@
       <q-list no-border link inset-delimiter>
 
         <custodian-menu />
-        <!--<member-menu />-->
+        <member-menu />
         <q-item to="/constitution" >
           <q-item-side icon="receipt" color="text2"/>
           <q-item-main :label="$t('default.sign_the_constitution')" class="text-text1"/>
