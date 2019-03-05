@@ -1,0 +1,52 @@
+{
+    "contracts": {
+        "token": {
+            "name": "kasdactokens",
+            "symbol": "KASDAC",
+            "totalSupply": 1000000000.0000
+        },
+        "custodian": {
+            "name": "dacelections",
+            "memo": "dacelections",
+            "enable_voting" : true
+        },
+        "bot":{
+            "name": "piecesnbitss"
+        },
+        "system_msig": {
+            "name": "eosiomsigold"
+        },
+        "dac_msig": {
+            "name": "dacmultisigs"
+        },
+        "wpproposal":{
+            "name": "dacproposals"
+        },
+        "escrow":{
+            "name": "eosdacescrow"
+        }
+          
+    },
+    "authAccount": {
+        "name": "dacauthority",
+        "controlling": [
+            {"name":"eosdacdoshhq", "permission": "xfer"}, 
+            {"name":"dacelections", "permission": "xfer"}
+        ]
+    },
+
+    "api": {
+        "default_eos_node": "https://jungle2.cryptolions.io:443",
+        "bpnodes": "https://eosdac.io/topnodes.json",
+        "memberclient": "http://ns3119712.ip-51-38-42.eu:3000",
+        "firehose": "ws://jungle.eosdac.io:1337"
+
+    },
+
+    "external":{
+        "homepage": "https://eosdac.io",
+        "discordUrl": "https://discord.io/eosdac",
+        "explorer": "https://jungle.bloks.io",
+        "dacexplorer": "https://explorer.eosdac.io"
+    }
+}

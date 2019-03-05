@@ -1,0 +1,80 @@
+// App Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Stylus variables found in Quasar's source Stylus files. Setting
+// variables before Quasar's Stylus will use these variables rather than
+// Quasar's default Stylus variable values. Stylus variables specific
+// to the themes belong in either the variables.ios.styl or variables.mat.styl files.
+// Check documentation for full list of Quasar variables https://quasar-framework.org/components/stylus-variables.html
+$toolbar-min-height = 80px
+$item-highlight-color = rgba(255,255,255,0.1)
+$tabs-min-height = 70px
+
+// App Shared Color Variables
+// --------------------------------------------------
+// It's highly recommended to change the default colors
+// to match your app's branding.
+$primary   = #4A1289
+$secondary = #26A69A
+$tertiary  = #555
+
+$neutral   = #E0E1E2
+$positive  = #21BA45
+$negative  = #DB2828
+$info      = #31CCEC
+$warning   = #F2C037
+
+//default colors
+$bg1 = #1E2128
+$bg2 = #272B35
+$text1 = rgba(255,255,255,0.9)
+$text2 = #939597
+
+
+$primary-light = lighten($primary, 20)
+
+
+
+:root
+  --q-color-primary-light $primary-light
+  --q-color-bg1 $bg1
+  --q-color-bg2 $bg2
+  --q-color-text1 $text1
+  --q-color-text2 $text2
+
+
+.text-primary-light
+  color $primary-light !important
+  color var(--q-color-primary-light) !important
+.bg-primary-light
+  background-color $primary-light !important
+  background-color var(--q-color-primary-light) !important
+
+.text-bg1
+  color $bg1 !important
+  color var(--q-color-bg1) !important
+.bg-bg1
+  background-color $bg1 !important
+  background-color var(--q-color-bg1) !important
+
+.text-bg2
+  color $bg2 !important
+  color var(--q-color-bg2) !important
+.bg-bg2
+  background-color $bg2 !important
+  background-color var(--q-color-bg2) !important
+
+.text-text1
+  color $text1 !important
+  color var(--q-color-text1) !important
+.bg-text1
+  background-color $text1 !important
+  background-color var(--q-color-text1) !important
+
+.text-text2
+  color $text2 !important
+  color var(--q-color-text2) !important
+.bg-text2
+  background-color $text2 !important
+  background-color var(--q-color-text2) !important
+

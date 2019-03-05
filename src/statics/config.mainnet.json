@@ -1,0 +1,52 @@
+{
+    "contracts": {
+        "token": {
+            "name": "eosdactokens",
+            "symbol": "EOSDAC",
+            "totalSupply": 1000000000.0000
+        },
+        "custodian": {
+            "name": "daccustodian",
+            "memo": "daccustodian",
+            "enable_voting" : true
+        },
+        "bot":{
+            "name": "eosdacthebot"
+        },
+        "system_msig": {
+            "name": "eosio.msig"
+        },
+        "dac_msig": {
+            "name": "dacmultisigs"
+        },        
+        "wpproposal":{
+            "name": "dacproposals"
+        },
+        "escrow":{
+            "name": "eosdacescrow"
+        }
+
+    },
+
+    "authAccount": {
+        "name": "dacauthority",
+        "controlling": [
+            {"name":"eosdacthedac", "permission": "xfer"}, 
+            {"name":"daccustodian", "permission": "xfer"}
+        ]
+    },
+
+    "api": {
+        "default_eos_node": "https://proxy.eosnode.tools:443",
+        "bpnodes": "https://eosdac.io/topnodes.json",
+        "memberclient": "https://toolkit-api.eosdac.io",
+        "firehose": "ws://bos.eosdac.io:1337"
+    },
+
+    "external":{
+        "homepage": "https://eosdac.io",
+        "discordUrl": "https://discord.io/eosdac",
+        "explorer": "https://bloks.io",
+        "dacexplorer": "https://explorer.eosdac.io"
+    }
+}
