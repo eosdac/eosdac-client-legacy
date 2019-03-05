@@ -13,9 +13,9 @@
           </q-item>
           <q-item v-if="action.authorization && action.authorization.length" v-close-overlay>
             <q-item-main>
-              <q-item-tile label>authorization</q-item-tile>
+              <q-item-tile label><q-icon name="mdi-shield-account" class="text-text2" style="margin-right:3px"/>Authorization</q-item-tile>
               <q-item-tile sublabel>
-                <div v-for="(auth, i) in action.authorization" :key="`auth${i}`" class="q-caption">{{`${auth.actor}@${auth.permission}`}}</div>
+                <div v-for="(auth, i) in action.authorization" :key="`auth${i}`" class="q-caption q-pl-xs">{{`${auth.actor}@${auth.permission}`}}</div>
               </q-item-tile>
             </q-item-main>
           </q-item>
