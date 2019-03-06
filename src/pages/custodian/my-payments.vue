@@ -41,7 +41,7 @@
           <q-item class="q-pl-none">
             <q-item-side left icon="icon-type-2"  v-bind:class="{'text-positive':verifyAndGetRequestedPay, 'text-text2': !verifyAndGetRequestedPay}"/>
             <q-item-main>
-              <q-input  color="primary-light" :dark="getIsDark" type="number" :max="20" v-model="new_requested_pay" :stack-label="$t('regcandidate.requestedpay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
+              <q-input  color="primary-light" :dark="getIsDark" type="number" v-model="new_requested_pay" :error="$v.new_requested_pay.$error" :stack-label="$t('regcandidate.requestedpay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
             </q-item-main>
           </q-item>
           <div class="row justify-end q-mt-md">
@@ -59,7 +59,7 @@
 <script>
 import {mapGetters} from 'vuex';
 import debugData from 'components/ui/debug-data';
-
+import {required, minValue, maxValue} from 'vuelidate/lib/validators';
 export default {
   name: 'MyPayments',
   components: {
@@ -92,7 +92,7 @@ export default {
       return this.$helper.toLocaleNumber(total)+ ' EOS';
     },
     verifyAndGetRequestedPay(){
-      if(this.new_requested_pay && (this.new_requested_pay <= this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max) ) ){
+      if(this.new_requested_pay && (this.new_requested_pay > 0) && (this.new_requested_pay <= this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max) ) ){
         return this.$helper.numberToAsset(this.new_requested_pay.toFixed(4), this.$configFile.get('systemtokensymbol') );
       }
       else{
@@ -139,10 +139,14 @@ export default {
     },
 
     async updateRequestedPay(){
-      if(!this.verifyAndGetRequestedPay){
+
+      this.$v.new_requested_pay.$touch()
+
+      if (this.$v.new_requested_pay.$error) {
         alert('Requested pay amount invalid');
         return;
       }
+
       let actions = [
         {
           account: this.$configFile.get('custodiancontract'), 
@@ -169,6 +173,17 @@ export default {
   },
   mounted(){
     this.getClaimPay();
+  },
+
+  validations(){
+    return {
+      new_requested_pay: {
+        required, 
+        minValue:minValue(0.0001), 
+        maxValue: maxValue(this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max) )
+      }
+    }
+
   }
 
 }
