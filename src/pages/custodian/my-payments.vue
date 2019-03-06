@@ -39,9 +39,9 @@
       <div class="text-text1 round-borders bg-bg1 q-pa-md">
           <span >{{$t('regcandidate.pay_description', {requested_pay: $helper.assetToLocaleNumber(getCustodianConfig.requested_pay_max) }) }}</span>
           <q-item class="q-pl-none">
-            <q-item-side left icon="icon-type-2"  v-bind:class="{'text-positive':verifyAndGetRequestedPay, 'text-text2': !verifyAndGetRequestedPay}"/>
+            <q-item-side left icon="icon-type-2"  v-bind:class="{'text-negative': $v.new_requested_pay.$error}"/>
             <q-item-main>
-              <q-input  color="primary-light" :dark="getIsDark" type="number" v-model="new_requested_pay" :error="$v.new_requested_pay.$error" :stack-label="$t('regcandidate.requestedpay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
+              <q-input  color="primary-light" :dark="getIsDark" type="number" v-model="new_requested_pay" @input="$v.new_requested_pay.$touch()" :error="$v.new_requested_pay.$error" :stack-label="$t('regcandidate.requestedpay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
             </q-item-main>
           </q-item>
           <div class="row justify-end q-mt-md">
@@ -59,7 +59,7 @@
 <script>
 import {mapGetters} from 'vuex';
 import debugData from 'components/ui/debug-data';
-import {required, minValue, maxValue} from 'vuelidate/lib/validators';
+import {required, between} from 'vuelidate/lib/validators';
 export default {
   name: 'MyPayments',
   components: {
@@ -92,13 +92,8 @@ export default {
       return this.$helper.toLocaleNumber(total)+ ' EOS';
     },
     verifyAndGetRequestedPay(){
-      if(this.new_requested_pay && (this.new_requested_pay > 0) && (this.new_requested_pay <= this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max) ) ){
+      if(this.new_requested_pay && (this.new_requested_pay > 0) ){
         return this.$helper.numberToAsset(this.new_requested_pay.toFixed(4), this.$configFile.get('systemtokensymbol') );
-      }
-      else{
-        console.log('requested pay out of range');
-        return false;
-
       }
     },
 
@@ -179,8 +174,7 @@ export default {
     return {
       new_requested_pay: {
         required, 
-        minValue:minValue(0.0001), 
-        maxValue: maxValue(this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max) )
+        between:between(0.0001, this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max) )
       }
     }
 
