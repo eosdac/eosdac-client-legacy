@@ -116,7 +116,7 @@ export default {
       ];
       let result = await this.$store.dispatch('user/transact', {actions: actions} );
       if(result){
-        
+        this.getClaimPay();
       }
         
     },
