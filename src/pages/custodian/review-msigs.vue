@@ -29,7 +29,7 @@
   </div>
 
   <div style="min-height:200px">
-    <Msigproposal v-for="(msig, index) in proposals" :key="index" :msig="msig" />
+    <Msigproposal v-for="(msig, index) in proposals" :edit="true" :key="index" :msig="msig" />
   </div>
 </q-page>
 </template>
