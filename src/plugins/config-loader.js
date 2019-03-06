@@ -80,7 +80,7 @@ export default ({
   let networkname = store.getters['global/getActiveNetworkName'];
   let config = new configLoader(networkname);
   
-  if(!store.getters['user/getSettingByName']('debug_console_log').value) {
+  if(store.getters['user/getSettingByName']('debug_console_log') && !store.getters['user/getSettingByName']('debug_console_log').value) {
     config.disable_ConsoleLog();
   }
   store.commit('global/setNode', config.get('defaultnode') );
