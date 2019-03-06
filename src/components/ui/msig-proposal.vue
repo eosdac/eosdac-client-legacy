@@ -89,7 +89,7 @@
       <div class=" bg-bg2">
         <Actionparser class="q-body-1" @seenAllActions="disable_approve = false" :actions="msig.trx.actions" />
       </div>
-    <div v-if="edit" class="q-mt-md">  
+    <div v-if="!read_only" class="q-mt-md">  
         <q-btn v-if="!isApproved" class="full-width q-mb-md" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
         <q-btn v-if="isApproved" class="full-width q-mb-md" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
         <q-btn v-if="isCreator" class="full-width q-mb-md" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
@@ -162,7 +162,7 @@
           </div>
 
           <div v-if="msig.status == 1 || msig.status == 2" class="row justify-between">
-            <span v-if="edit">
+            <span v-if="!read_only">
               <q-btn v-if="!isApproved" class="on-left" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
               <q-btn v-if="isApproved" class="on-left" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
               <q-btn v-if="isCreator" class="on-left" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
@@ -226,9 +226,9 @@ export default {
 
   props: {
     msig: Object,
-    edit:{
+    read_only:{
       type: Boolean,
-      default: true
+      default: false
     }
   },
 
