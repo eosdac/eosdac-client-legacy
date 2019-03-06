@@ -26,7 +26,7 @@
     </div>
 
     <div class="row q-pa-md justify-between relative-position items-center">
-      <div v-if="msig.status == 1" @click="approvals_modal = true" class="cursor-pointer">
+      <div v-if="msig.status == 1 || msig.status == 2" @click="approvals_modal = true" class="cursor-pointer">
           <div class="q-caption text-text2" >Received Approvals:</div>
           <div class="text-text1 q-title">
             <span><q-spinner v-if="provided_approvals==null" color="primary" size="25px" style="margin-top:-4px" /></span>
@@ -132,7 +132,7 @@
 
           </div>
         </q-item-main>
-        <q-item-side right v-if="msig.status == 1">
+        <q-item-side right v-if="msig.status == 1 || msig.status == 2">
 
           <div class="q-caption text-text2" >Received Approvals:</div>
           <div class="text-text1 q-display-1">
@@ -161,7 +161,7 @@
 
           </div>
 
-          <div v-if="msig.status == 1" class="row justify-between">
+          <div v-if="msig.status == 1 || msig.status == 2" class="row justify-between">
             <span>
               <q-btn v-if="!isApproved" class="on-left" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
               <q-btn v-if="isApproved" class="on-left" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
@@ -314,26 +314,38 @@ export default {
   methods: {
     //get the requested and provided approvals for this msg proposal from chain
     async checkApprovals(){
-
+      let approvals = undefined;
       if(this.msig.status === 1){
-        let approvals = await this.$store.dispatch('dac/fetchApprovalsFromProposal', {proposer: this.msig.proposer, proposal_name: this.msig.proposal_name});
-        let avatars = await this.$profiles.getAvatars([...approvals.provided_approvals.map(a=>a.actor), ...approvals.requested_approvals.map(a=>a.actor) ]);
-
-        this.provided_approvals = approvals.provided_approvals.map(pa=>{
-          pa.avatar = avatars.find(p=> p._id===pa.actor );
-          // this.$set(pa, 'avatar', avatars.find(p=> p._id===pa.actor ))
-          return pa;
-        });
-        
-        this.requested_approvals = approvals.requested_approvals.map(ra=>{
-          ra.avatar = avatars.find(p=>p._id===ra.actor);
-          return ra;
-        });
-        //check if user has already approved the proposal
-        this.isApproved = this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
-        //check if the proposal is created by current user
-        this.isCreator = this.getAccountName == this.msig.proposer
+        approvals = await this.$store.dispatch('dac/fetchApprovalsFromProposal', {proposer: this.msig.proposer, proposal_name: this.msig.proposal_name});
       }
+      else if(this.msig.status === 2){
+        approvals = {
+          provided_approvals:this.msig.provided_approvals,
+          requested_approvals:this.msig.requested_approvals
+        }
+      }
+
+      if(!approvals){
+        return;
+      }
+
+      let avatars = await this.$profiles.getAvatars([...approvals.provided_approvals.map(a=>a.actor), ...approvals.requested_approvals.map(a=>a.actor) ]);
+
+      this.provided_approvals = approvals.provided_approvals.map(pa=>{
+        pa.avatar = avatars.find(p=> p._id===pa.actor );
+        // this.$set(pa, 'avatar', avatars.find(p=> p._id===pa.actor ))
+        return pa;
+      });
+        
+      this.requested_approvals = approvals.requested_approvals.map(ra=>{
+        ra.avatar = avatars.find(p=>p._id===ra.actor);
+        return ra;
+      });
+      //check if user has already approved the proposal
+      this.isApproved = this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
+      //check if the proposal is created by current user
+      this.isCreator = this.getAccountName == this.msig.proposer
+      
 
     },
 
