@@ -10,6 +10,12 @@
 <script>
 export default {
   name: 'fileInput',
+  props:{
+    asbuffer:{
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
 
@@ -17,12 +23,14 @@ export default {
   },
   methods:{
     async handleInput(){
-      let f = await this._readLocalFile();
+      console.log(this.asbuffer)
+      let f = await this._readLocalFile(this.asbuffer);
       // console.log(Buffer.from(f))
-      this.$emit('input', Buffer.from(f) );
+      // this.$emit('input', Buffer.from(f) );
+      this.$emit('input', f)
     },
 
-    async _readLocalFile(bytes=false) {
+    async _readLocalFile(asbuffer=false) {
 
       var file = this.$refs.myfileinput.files[0]
       
@@ -32,11 +40,11 @@ export default {
 
             return resolve(fr.result);
         }; 
-        if(bytes){
-            fr.readAsBinaryString(file);
+        if(asbuffer){
+            fr.readAsArrayBuffer(file);
         }
         else{
-            fr.readAsText(file);
+            fr.readAsText(file, `utf8` );
         }
       });
     },

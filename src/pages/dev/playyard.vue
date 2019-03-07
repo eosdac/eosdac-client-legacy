@@ -1,35 +1,25 @@
 <template>
   <q-page padding>
     <!-- content -->
-  <file-input v-model ="abi" />
-  <q-btn color="primary" label="set abi" @click="setAbi" />
+   <pre> {{abi}}</pre>
+   <pre>{{wasm.toString(`hex`)}}</pre>
+  <file-input v-model ="abi" :asbuffer="false"/>
+  <q-btn color="primary" label="set abi"  @click="setAbi" />
 
-  <file-input v-model ="wasm" />
-  <q-btn color="primary" label="set code" @click="setCode" />
-<!-- <div v-if="abi_info">{{abi_info}}</div>
-<div v-if="wasm_info">{{wasm_info}}</div> -->
+  <file-input v-model ="wasm" :asbuffer="true"/>
+  <q-btn color="primary" label="set code"  @click="setCode" />
 
-<!-- <div class="fileContainer q-mb-md ">
-    Click here to add wasm!
-    <input type="file" id="wasm" @input="handleInput('wasm')" />
-</div>
-<q-btn color="primary" label="set code" @click="setCode" />
-
-    
-    
-
-<div class="fileContainer">
-    Click here to add abi!
-    <input type="file" id="abi" @input="handleInput('abi')"/>
-</div>
-<q-btn color="primary" label="set abi" @click="setAbi" /> -->
 
 
   </q-page>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import fileInput from 'components/controls/file-input'
+const {TextDecoder, TextEncoder} = require('text-encoding');
+const {Serialize} = require('eosjs');
+
 
 export default {
   name: 'playyard',
@@ -43,6 +33,12 @@ export default {
 
     }
   },
+  computed:{
+    ...mapGetters({
+      getEosApi: 'global/getEosApi'
+    })
+
+  },
   methods:{
 
     async setCode(){
@@ -53,7 +49,7 @@ export default {
             account: 'piecesnbitss',
             vmtype:0 ,
             vmversion: 0,
-            code: this.wasm,
+            code: this.buf2hex(this.wasm),
 
           }
         }];
@@ -65,12 +61,13 @@ export default {
     },
 
     async setAbi(){
+
       let actions = [{
           account: 'eosio',
           name: "setabi",
           data: {
             account: 'piecesnbitss',
-            abi: this.abi,
+            abi: await this.parseAbi(),
           }
         }];
       let result = await this.$store.dispatch('user/transact', {actions: actions} );
@@ -78,6 +75,28 @@ export default {
         // this.$store.commit('user/setIsCandidate', false );
         console.log(result);
       }
+    },
+
+    async parseAbi(){
+
+      const buffer = new Serialize.SerialBuffer({
+          textEncoder: new TextEncoder,
+          textDecoder: new TextDecoder,
+      });
+      let abi = JSON.parse(this.abi);
+      const abiDefinition = await this.getEosApi.eosapi.abiTypes.get(`abi_def`);
+
+      abi = abiDefinition.fields.reduce(
+          (acc, { name: fieldName }) => Object.assign(acc, { [fieldName]: acc[fieldName] || [] }),
+          abi,
+      );
+
+      abiDefinition.serialize(buffer, abi);
+      return Buffer.from(buffer.asUint8Array()).toString(`hex`);
+    },
+
+    buf2hex(buffer) { 
+      return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
     }
 
 
