@@ -1,27 +1,10 @@
 <template>
 <q-page class="text-text1">
 
-  <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
-    <div class="row">
-      <div class="col-12">
-        <!-- <q-btn v-if="!getMemberRoles.candidate && getAccountName" class="float-right" color="dark" to="/managecandidateship" :label="$t('vote_custodians.candidate_registration')" /> -->
-        <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("default.custodians") }}</h4>
-      </div>
-    </div>
 
-    <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
-      <div class="column  justify-center q-px-md full-height">
-        
-          <period-timer />
-        
-        <!-- <VotingProgress height="30px" ref="votebar"/> -->
-      </div>
-
-    </div>
-  </div>
 
 <div class="q-pa-md"> <!-- padding wrapper -->
-
+<!-- <period-timer style="transform: scale(0.5)" /> -->
 
 <div class="q-display-1 q-mb-md ">{{ $t('vote_custodians.custodian_board') }}</div>
 
@@ -369,7 +352,7 @@ export default {
         return false;
       }
       // console.log(`votebox: ${offset(votebox).top} scroll: ${scroll.position}`);
-      votebox.style.top = (scroll.position-500)+'px';
+      votebox.style.top = (scroll.position-315)+'px';
     }
 
   },

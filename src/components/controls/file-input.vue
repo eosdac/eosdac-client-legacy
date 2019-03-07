@@ -3,7 +3,9 @@
 
   <div class="fileContainer on-left">
       <span v-if="filename !=''" class="animate-fade">{{filename}}</span>
-      <span v-else class="animate-fade">{{label}}</span>
+      <span v-else class="animate-fade">
+        <q-icon name="mdi-file-plus" style="margin-right:5px" />{{label}}
+      </span>
       <input type="file" ref="myfileinput" @input="handleInput()" />
   </div>
 
@@ -108,7 +110,7 @@ export default {
 .fileContainer {
     overflow: hidden;
     position:relative;
-    background: var(--q-color-primary);
+    background: var(--q-color-primary-light);
     padding:8px;
     cursor: pointer !important;
     border-radius:3px;

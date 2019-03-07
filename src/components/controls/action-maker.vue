@@ -3,7 +3,7 @@
 
     <!-- no props set = custom_mode -->
     <div v-if="account=='' && name=='' ">
-      <div>
+      <div class="q-mb-sm">
         <q-item>
           <q-item-main>
             <q-input :dark="getIsDark" v-model="custom_mode.account" type="text" stack-label="Contract" placeholder="input a contract name" />
@@ -13,6 +13,7 @@
           </q-item-side>
         </q-item>
       </div>
+      
       <div v-if="custom_mode.abi.actions" class="row" >
         <q-btn size="sm" v-for="(action, i) in custom_mode.abi.actions" :label="action.name" :key="`a${i}`" color="bg1" class="animate-pop q-ma-xs" @click="custom_mode.action_name= action.name" />
         <q-btn size="sm" title="view abi" icon="mdi-magnify" class="animate-pop q-ma-xs" color="positive" @click="view_abi_modal=true" />
@@ -21,8 +22,8 @@
     </div>
 
 
-    <div v-if="data_fields.length">
-        
+    <div v-if="data_fields.length" class="bg-bg1 q-pa-md round-borders q-mt-md animate-fade">
+        <div>Action Data</div>
         <q-item v-for="(field, i) in data_fields" :key="`field_${i}`" >
           <q-item-main>
 
