@@ -2,7 +2,7 @@
   <div>
 <div class="fileContainer q-mb-md ">
     Add file
-    <input type="file" ref="myfileinput" @input="handleInput('wasm')" />
+    <input type="file" ref="myfileinput" @input="handleInput()" />
 </div>
   </div>
 </template>
@@ -18,12 +18,12 @@ export default {
   methods:{
     async handleInput(){
       let f = await this._readLocalFile();
-      console.log(Buffer.from(f))
+      // console.log(Buffer.from(f))
       this.$emit('input', Buffer.from(f) );
     },
 
-    async _readLocalFile(id, bytes=false) {
-      // var file = document.getElementById(id).files[0];
+    async _readLocalFile(bytes=false) {
+
       var file = this.$refs.myfileinput.files[0]
       
       return new Promise((resolve, reject) => {
@@ -31,7 +31,7 @@ export default {
         fr.onload = function(result){
 
             return resolve(fr.result);
-        };  // CHANGE to whatever function you want which would eventually call resolve
+        }; 
         if(bytes){
             fr.readAsBinaryString(file);
         }
