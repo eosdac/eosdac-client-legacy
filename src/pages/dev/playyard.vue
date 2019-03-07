@@ -28,7 +28,6 @@ export default {
     return {
       abi:'',
       wasm:''
-
     }
   },
   computed:{

@@ -25,11 +25,19 @@
         
         <q-item v-for="(field, i) in data_fields" :key="`field_${i}`" >
           <q-item-main>
-            <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/>
+
+            <div v-if="field.type == 'bytes'">
+              <file-input v-if="field.name == 'abi'" v-model ="data_fields[i].value" label="Select abi" :asbuffer="false"/>
+              <file-input v-if="field.name == 'code'" v-model ="data_fields[i].value" label="Select wasm" :asbuffer="true"/>
+            </div>
+            <div v-else>
+              <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/>
+            </div>
+
           </q-item-main>
         </q-item>
+
         <div class="row q-mt-md justify-between items-center">
-          
           <div class="q-pa-sm q-caption">
             <span class="text-text2">{{this.account || custom_mode.account}}</span>
             <div style="display:inline-block" class="fa-arrow-right">></div>
@@ -59,6 +67,7 @@
 </template>
 
 <script>
+import fileInput from 'components/controls/file-input'
 const prettyHtml = require('json-pretty-html').default;
 import {mapGetters} from 'vuex';
 const {TextDecoder, TextEncoder} = require('text-encoding');
@@ -68,6 +77,9 @@ import { Notify } from 'quasar';
 
 export default {
   name: 'actionMaker',
+  components:{
+    fileInput
+  },
   props:{
     account:{
       type: String,

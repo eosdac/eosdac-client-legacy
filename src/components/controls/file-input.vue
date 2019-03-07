@@ -59,7 +59,7 @@ export default {
     async _readLocalFile(asbuffer=false) {
 
       var file = this.$refs.myfileinput.files[0];
-      console.log(file)
+      // console.log(file)
       this.filename = file.name;
       this.filesize = `${(file.size/1024).toFixed(2)}KB`;
       

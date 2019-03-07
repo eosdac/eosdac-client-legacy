@@ -8,7 +8,8 @@
           <q-item v-close-overlay v-for="(value, key) in action.data" :key="`_${key}`">
             <q-item-main>
               <q-item-tile label>{{key}}</q-item-tile>
-              <q-item-tile sublabel>{{value }}</q-item-tile>
+              <q-item-tile v-if="(action.name == 'setcode' || action.name == 'setabi') && (key=='code' || key=='abi')" sublabel><q-icon name="mdi-code-not-equal-variant" class="q-mr-xs" />{{$helper.truncate(value, 10)}}</q-item-tile>
+              <q-item-tile v-else sublabel>{{ value }}</q-item-tile>
             </q-item-main>
           </q-item>
           <q-item v-if="action.authorization && action.authorization.length" v-close-overlay>
