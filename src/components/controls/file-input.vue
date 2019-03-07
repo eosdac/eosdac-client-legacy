@@ -1,10 +1,14 @@
 <template>
-  <div>
-<div class="fileContainer q-mb-md ">
-    Add file
-    <input type="file" ref="myfileinput" @input="handleInput()" />
-</div>
+<div class="row items-center q-mb-md">
+
+  <div class="fileContainer on-left">
+      <span v-if="filename !=''" class="animate-fade">{{filename}}</span>
+      <span v-else class="animate-fade">{{label}}</span>
+      <input type="file" ref="myfileinput" @input="handleInput()" />
   </div>
+
+  <div v-if="filesize" class="animate-fade q-caption">{{filesize}}</div>
+</div>
 </template>
 
 <script>
@@ -18,10 +22,16 @@ export default {
     asbuffer:{
       type: Boolean,
       default: false 
+    },
+    label:{
+      type: String,
+      default: 'Select File'
     }
   },
   data () {
     return {
+      filename:'',
+      filesize:''
 
     }
   },
@@ -48,7 +58,10 @@ export default {
 
     async _readLocalFile(asbuffer=false) {
 
-      var file = this.$refs.myfileinput.files[0]
+      var file = this.$refs.myfileinput.files[0];
+      console.log(file)
+      this.filename = file.name;
+      this.filesize = `${(file.size/1024).toFixed(2)}KB`;
       
       return new Promise((resolve, reject) => {
         var fr = new FileReader();  
@@ -90,22 +103,21 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
+@import '~variables'
 .fileContainer {
     overflow: hidden;
-    position: relative;
-    background:blue;
-    display: inline-block;
-    padding:10px;
-    cursor: pointer;
-    
+    position:relative;
+    background: var(--q-color-primary);
+    padding:8px;
+    cursor: pointer !important;
+    border-radius:3px;
 }
 
 .fileContainer [type=file] {
     cursor: inherit;
     display: block;
     font-size: 999px;
-    filter: alpha(opacity=0);
     min-height: 100%;
     min-width: 100%;
     opacity: 0;
