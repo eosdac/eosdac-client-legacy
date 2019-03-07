@@ -39,6 +39,7 @@ const routes = [
       { path: 'profile/:accountname', component: () => import('pages/profile') },
       { path: 'credits', component: () => import('pages/credits.vue') },
       { path: 'dev-tools', component: () => import('pages/dev/dev-tools-home') },
+      { path: 'playyard', component: () => import('pages/dev/playyard') },
       { path: 'manage-candidateship', component: () => import('pages/manage-candidateship.vue') },
       { path: 'verify/:token', component: () => import('pages/verify-token')},
       
