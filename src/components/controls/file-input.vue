@@ -8,12 +8,16 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+const {TextDecoder, TextEncoder} = require('text-encoding');
+const {Serialize} = require('eosjs');
+
 export default {
   name: 'fileInput',
   props:{
     asbuffer:{
       type: Boolean,
-      default: false
+      default: false 
     }
   },
   data () {
@@ -21,13 +25,25 @@ export default {
 
     }
   },
+  computed:{
+    ...mapGetters({
+      getEosApi: 'global/getEosApi'
+    })
+
+  },
   methods:{
     async handleInput(){
-      console.log(this.asbuffer)
+
       let f = await this._readLocalFile(this.asbuffer);
-      // console.log(Buffer.from(f))
-      // this.$emit('input', Buffer.from(f) );
-      this.$emit('input', f)
+
+      if(this.asbuffer){
+        f = this.buf2hex(f);//convert the wasm buf to hex
+      }
+      else{
+        f = await this.parseAbi(f); //convert abi text to hex
+      }
+
+      this.$emit('input', f);
     },
 
     async _readLocalFile(asbuffer=false) {
@@ -40,14 +56,36 @@ export default {
 
             return resolve(fr.result);
         }; 
-        if(asbuffer){
+        if(asbuffer){//for wasm
             fr.readAsArrayBuffer(file);
         }
-        else{
+        else{//for abi
             fr.readAsText(file, `utf8` );
         }
       });
     },
+
+    async parseAbi(abifile){
+
+      const buffer = new Serialize.SerialBuffer({
+          textEncoder: new TextEncoder,
+          textDecoder: new TextDecoder,
+      });
+      let abi = JSON.parse(abifile);
+      const abiDefinition = await this.getEosApi.eosapi.abiTypes.get(`abi_def`);
+
+      abi = abiDefinition.fields.reduce(
+          (acc, { name: fieldName }) => Object.assign(acc, { [fieldName]: acc[fieldName] || [] }),
+          abi,
+      );
+
+      abiDefinition.serialize(buffer, abi);
+      return Buffer.from(buffer.asUint8Array()).toString(`hex`);
+    },
+
+    buf2hex(buffer) { 
+      return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+    }
   }
 }
 </script>

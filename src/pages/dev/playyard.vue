@@ -2,7 +2,7 @@
   <q-page padding>
     <!-- content -->
    <pre> {{abi}}</pre>
-   <pre>{{wasm.toString(`hex`)}}</pre>
+   <pre>{{wasm}}</pre>
   <file-input v-model ="abi" :asbuffer="false"/>
   <q-btn color="primary" label="set abi"  @click="setAbi" />
 
@@ -17,8 +17,8 @@
 <script>
 import {mapGetters} from 'vuex';
 import fileInput from 'components/controls/file-input'
-const {TextDecoder, TextEncoder} = require('text-encoding');
-const {Serialize} = require('eosjs');
+// const {TextDecoder, TextEncoder} = require('text-encoding');
+// const {Serialize} = require('eosjs');
 
 
 export default {
@@ -49,7 +49,7 @@ export default {
             account: 'piecesnbitss',
             vmtype:0 ,
             vmversion: 0,
-            code: this.buf2hex(this.wasm),
+            code: this.wasm,
 
           }
         }];
@@ -67,7 +67,7 @@ export default {
           name: "setabi",
           data: {
             account: 'piecesnbitss',
-            abi: await this.parseAbi(),
+            abi: this.abi,
           }
         }];
       let result = await this.$store.dispatch('user/transact', {actions: actions} );
@@ -77,27 +77,27 @@ export default {
       }
     },
 
-    async parseAbi(){
+    // async parseAbi(){
 
-      const buffer = new Serialize.SerialBuffer({
-          textEncoder: new TextEncoder,
-          textDecoder: new TextDecoder,
-      });
-      let abi = JSON.parse(this.abi);
-      const abiDefinition = await this.getEosApi.eosapi.abiTypes.get(`abi_def`);
+    //   const buffer = new Serialize.SerialBuffer({
+    //       textEncoder: new TextEncoder,
+    //       textDecoder: new TextDecoder,
+    //   });
+    //   let abi = JSON.parse(this.abi);
+    //   const abiDefinition = await this.getEosApi.eosapi.abiTypes.get(`abi_def`);
 
-      abi = abiDefinition.fields.reduce(
-          (acc, { name: fieldName }) => Object.assign(acc, { [fieldName]: acc[fieldName] || [] }),
-          abi,
-      );
+    //   abi = abiDefinition.fields.reduce(
+    //       (acc, { name: fieldName }) => Object.assign(acc, { [fieldName]: acc[fieldName] || [] }),
+    //       abi,
+    //   );
 
-      abiDefinition.serialize(buffer, abi);
-      return Buffer.from(buffer.asUint8Array()).toString(`hex`);
-    },
+    //   abiDefinition.serialize(buffer, abi);
+    //   return Buffer.from(buffer.asUint8Array()).toString(`hex`);
+    // },
 
-    buf2hex(buffer) { 
-      return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
-    }
+    // buf2hex(buffer) { 
+    //   return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+    // }
 
 
   }
