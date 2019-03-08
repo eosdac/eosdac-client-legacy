@@ -7,9 +7,11 @@ class configLoader {
   constructor( networkname){
 
     this.configFile = require(`../statics/config.${networkname}.json`);
+    this.icon = require(`../statics/iconmap.json`);
     // store.commit('global/setConfig', this.configFile);
     
   }
+
 
   get(configquery){
 

@@ -35,7 +35,7 @@
           </q-item>
           
           <q-item>
-            <q-item-side icon="check" color="positive" />
+            <q-item-side :icon="$configFile.icon.check" color="positive" />
             <q-item-main>
               <q-item-tile class="text-text1" label>{{$t('constitution.hash')}}</q-item-tile>
               <q-item-tile class="text-text2" style="overflow:hidden; white-space:nowrap;" sublabel>
