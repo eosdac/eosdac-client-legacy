@@ -1,4 +1,5 @@
 <template>
+  <div>
       <q-collapsible group="main-menu-sub" v-if="getIsCustodian">
         <template slot="header">
           <q-item-side :icon="$configFile.icon.cust_tools" color="text2"/>
@@ -19,6 +20,23 @@
           </q-item>
         </div>
       </q-collapsible>
+
+      <q-collapsible group="main-menu-sub" v-else>
+        <template slot="header">
+          <q-item-side :icon="$configFile.icon.dactoken" color="text2"/>
+          <q-item-main label="eosDAC Activity" class="text-text1"/>
+        </template>
+        <div class="bg-bg1">
+
+          <q-item class="q-pl-lg animate-fade" link to="/custodian/review-msigs">
+            <q-item-main label="View Msigs" class="text-text1 text-weight-thin" />
+          </q-item>
+          <q-item class="q-pl-lg animate-fade" link to="/custodian/review-worker-proposals">
+            <q-item-main label="View Worker Proposals" class="text-text1 text-weight-thin" />
+          </q-item>
+        </div>
+      </q-collapsible>
+  </div>
 </template>
 
 <script>

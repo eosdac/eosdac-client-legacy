@@ -1,6 +1,6 @@
 <template>
-  <q-page padding>
-    <!-- content -->
+  <q-page class="q-pa-md">
+    coming soon!
   </q-page>
 </template>
 

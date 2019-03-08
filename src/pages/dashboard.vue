@@ -38,7 +38,7 @@
         <div class="bg-bg1 round-borders shadow-5 q-pa-md bg-logo dashboard-box">
           <q-item  class="no-padding" style="margin-left:-10px;margin-top:-10px">
             <q-item-side left >
-              <div class=""><q-icon name="star" color="warning" size="70px" /></div>
+              <div class=""><q-icon :name="$configFile.icon.cust_symbol" color="warning" size="70px" /></div>
             </q-item-side>
             <q-item-main>
               <q-item-tile label class="q-headline">Custodian</q-item-tile>

@@ -106,8 +106,13 @@ export default {
 
   watch: {
     getAccountName: function(v){
+      console.log(this.$route.fullPath)
       if(this.$route.fullPath.startsWith('/custodian/') && !this.getAccountName){
-        this.$router.push({ path: '/' })
+        if(this.$route.fullPath != '/custodian/review-msigs'){
+          this.$router.push({ path: '/' })
+        }
+        
+        
       }
     }
   },

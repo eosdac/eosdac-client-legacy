@@ -1,30 +1,5 @@
-import store from '../store'
 
-const Guards = {
-  logInCheck (to, from, next) {
-    if (!store.getters['user/getAccountName']) {
-      next({ path: '' })
-    } else {
-      next()
-    }
-  },
-  custodianCheck (to, from, next) {
-    let isCustodian = store.getters['user/getIsCustodian'];
-    if (!isCustodian) {
-      next({path: ''});
-    } else {
-      next();
-    }
-  },
-  memberCheck (to, from, next) {
-    let status = store.getters['user/getMemberStatus'];
-    if (status !== 'member') {
-      next({path: ''});
-    } else {
-      next();
-    }
-  }
-};
+import Guards from './guards'
 
 const routes = [
   {
@@ -52,12 +27,12 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/home') },
       { path: 'review-msigs', component: () => import('pages/custodian/review-msigs') },
-      { path: 'create-msigs', component: () => import('pages/custodian/create-msigs') },
+      { path: 'create-msigs', component: () => import('pages/custodian/create-msigs'), beforeEnter: Guards.custodianCheck},
       { path: 'review-worker-proposals', component: () => import('pages/custodian/review-worker-proposals') },
-      { path: 'my-payments', component: () => import('pages/custodian/my-payments') }
+      { path: 'my-payments', component: () => import('pages/custodian/my-payments'), beforeEnter: Guards.custodianCheck }
       
-    ],
-    beforeEnter: Guards.custodianCheck
+    ]
+    
   },
 
   {

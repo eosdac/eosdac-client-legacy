@@ -19,5 +19,6 @@
     "liquid": "mdi-water",
     "pending_sand": "mdi-timer-sand",
     "refresh" : "cached",
-    "account": "person"
+    "account": "person",
+    "cust_symbol": "star"
 }

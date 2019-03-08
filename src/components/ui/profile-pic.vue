@@ -1,6 +1,6 @@
 <template>
       <div v-if="loaded" class="profile_image relative-position animate-fade" style="height:65px; width:65px;"  v-bind:style="style" >
-        <div v-if="is_custodian" style="position:absolute;bottom:-10px;right:-10px;"><q-icon size="34px" color="warning" name="star"/></div>
+        <div v-if="is_custodian" style="position:absolute;bottom:-10px;right:-10px;"><q-icon size="34px" color="warning" :name="$configFile.icon.cust_symbol"/></div>
       </div>
       <div v-else v-bind:style="preloaderStyle" style="height:65px; width:65px;" class="row justify-center items-center">
         <q-spinner size="30px" color="primary-light"  />

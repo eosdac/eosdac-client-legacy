@@ -226,10 +226,7 @@ export default {
 
   props: {
     msig: Object,
-    read_only:{
-      type: Boolean,
-      default: false
-    }
+
   },
 
   data () {
@@ -253,8 +250,13 @@ export default {
   computed: {
     ...mapGetters({
       getAccountName: 'user/getAccountName',
-      getMsigIsSeenCache: 'user/getMsigIsSeenCache'
+      getMsigIsSeenCache: 'user/getMsigIsSeenCache',
+      getIsCustodian: 'user/getIsCustodian'
     }),
+
+    read_only:function(){
+      return !this.getIsCustodian;
+    },
 
     isExecutable: function(){
       if(this.provided_approvals){
@@ -512,7 +514,8 @@ export default {
 
   mounted:function(){
    this.checkApprovals();
-  }
+  },
+
 
 }
 </script>

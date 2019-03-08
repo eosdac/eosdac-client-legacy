@@ -5,7 +5,7 @@
     <q-chip class="q-ma-xs absolute-top-left" color="bg2" >{{data.rank}}</q-chip>
     <div class="row justify-center q-pt-md">
       <div class="profile_image animate-fade relative-position"  style="width: 100px; height:100px" v-bind:style="{ 'background-image': 'url(' + profileImage + ')' }" >
-        <div v-if="is_custodian" style="position:absolute;bottom:-5px;right:-5px"><q-icon size="36px" color="warning" name="star"/></div>
+        <div v-if="is_custodian" style="position:absolute;bottom:-5px;right:-5px"><q-icon size="36px" color="warning" :name="$configFile.icon.cust_symbol"/></div>
       </div>
     </div>
 
@@ -45,7 +45,7 @@
       <div class="q-pa-md bg-bg1 full-height">
         <div class="row items-center q-mb-md">
           <div class="profile_image on-left animate-fade relative-position"  style="width: 60px; height:60px" v-bind:style="{ 'background-image': 'url(' + profileImage + ')' }" >
-            <div v-if="is_custodian" style="position:absolute;bottom:-5px;right:-5px"><q-icon size="24px" color="warning" name="star"/></div>
+            <div v-if="is_custodian" style="position:absolute;bottom:-5px;right:-5px"><q-icon size="24px" color="warning" :name="$configFile.icon.cust_symbol" /></div>
           </div>
           <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >
             <q-icon :title="$t('candidate.nominated_next')" style="margin-top:-5px" v-if="data.rank < 13" name="fiber_manual_record" color="primary" />{{ data.candidate_name }}
@@ -67,7 +67,7 @@
             <q-btn v-if="!data.selected" class="q-mr-md float-left" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:0px;" @click="emit_add_vote" />
             <q-btn v-else class="q-mr-md" icon="icon-ui-6" round color="positive" style="height:55px;width:55px;margin-top:0px;" @click="$emit('clickunvotefor')"/>
             <div class="profile_image float-left animate-fade relative-position"  style="width: 60px; height:60px" v-bind:style="{ 'background-image': 'url(' + profileImage + ')' }" >
-              <div v-if="is_custodian" style="position:absolute;bottom:-5px;right:-5px"><q-icon size="24px" color="warning" name="star"/></div>
+              <div v-if="is_custodian" style="position:absolute;bottom:-5px;right:-5px"><q-icon size="24px" color="warning" :name="$configFile.icon.cust_symbol" /></div>
             </div>
             <vote-animation :vote_delta="vote_delta" />
           </div>
