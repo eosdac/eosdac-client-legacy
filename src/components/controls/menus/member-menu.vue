@@ -1,7 +1,7 @@
 <template>
       <q-collapsible  group="main-menu-sub" v-if="getMemberStatus=='member'">
         <template slot="header">
-          <q-item-side icon="mdi-folder-account" color="text2"/>
+          <q-item-side :icon="$configFile.icon.cust_tools" color="text2"/>
           <q-item-main :label="$t('default.member_tools')" class="text-text1"/>
         </template>
         <div class="bg-bg1">
