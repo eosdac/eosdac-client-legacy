@@ -13,23 +13,23 @@
         <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
         <span class="text-text2" v-if="!actions.length">No actions added yet.</span>
       </div>
-      <q-tabs :dark="getIsDark">
+      <q-tabs :dark="getIsDark" >
         <q-tab default slot="title" name="tab-1" :label="`send ${this.$configFile.get('systemtokensymbol')}`" />
         <q-tab slot="title" name="tab-2" :label="`send ${this.$configFile.get('dactokensymbol')}`" />
         <q-tab slot="title" name="tab-3" :label="`Custom`" />
         <q-tab slot="title" name="tab-4" :label="`Advanced`" />
         <!-- Targets -->
-        <q-tab-pane name="tab-1" class="text-text1 bg-bg2">
+        <q-tab-pane name="tab-1" class="text-text1 bg-bg2 tb-builder-pane-height" >
           <action-maker :account="$configFile.get('systemtokencontract')" :prefill="{from: getAccountName}" name="transfer" @actiondata="addAction" />
         </q-tab-pane>
-        <q-tab-pane name="tab-2" class="text-text1 bg-bg2">
+        <q-tab-pane name="tab-2" class="text-text1 bg-bg2 tb-builder-pane-height">
           <action-maker :account="$configFile.get('tokencontract')" name="transfer" :prefill="{from: getAccountName}" @actiondata="addAction"/>
         </q-tab-pane>
-        <q-tab-pane name="tab-3" class="text-text1 bg-bg2">
+        <q-tab-pane name="tab-3" class="text-text1 bg-bg2 tb-builder-pane-height">
           <!-- <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/> -->
           <action-maker @actiondata="addAction" :prefill="{from: getAccountName}"/>
         </q-tab-pane>
-        <q-tab-pane name="tab-4" class="text-text1 bg-bg2">
+        <q-tab-pane name="tab-4" class="text-text1 bg-bg2 tb-builder-pane-height">
           <div class="text-text2">Add a raw json action object to the transaction</div>
           <q-input dark   rows="7" color="primary-light" type="textarea" v-model="raw_action_object" />
           <q-btn label="add" color="primary" :disabled="raw_action_object ==''" class="q-mt-md" @click="addAction(JSON.parse(raw_action_object) )" />
@@ -158,5 +158,8 @@ export default {
 <style>
 .q-stepper-title{
   color:white;
+}
+.tb-builder-pane-height{
+  min-height:450px;
 }
 </style>

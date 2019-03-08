@@ -31,7 +31,6 @@
   <div style="min-height:200px">
     <Msigproposal v-for="(msig, index) in proposals"  :key="index" :msig="msig" />
   </div>
-  <pre>{{getIsCustodian}}</pre>
 </q-page>
 </template>
 
