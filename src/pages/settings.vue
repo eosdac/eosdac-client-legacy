@@ -13,36 +13,38 @@
 
             <div v-for="(setting, i) in getSettings.filter(s=> s.group == group.name)" :key="`setting_${i}`">
 
-              <!-- setting bool -->
-              <q-item v-if="setting.type=='boolean' ">
-                <q-item-main>
-                  <q-item-tile class="text-text1" label>{{setting.label}}</q-item-tile>
-                  <q-item-tile class="text-text2" sublabel>{{setting.sublabel}}</q-item-tile>
-                </q-item-main>
-                <q-item-side right>
-                  <q-toggle  :dark="getIsDark"  class="animate-pop" :value="setting.value"  color="primary-light"  @input="handle($event, setting.name)" />
-                </q-item-side>
-              </q-item>
+              <span v-if="!setting.disabled">
+                    <!-- setting bool -->
+                    <q-item v-if="setting.type=='boolean' ">
+                      <q-item-main>
+                        <q-item-tile class="text-text1" label>{{setting.label}}</q-item-tile>
+                        <q-item-tile class="text-text2" sublabel>{{setting.sublabel}}</q-item-tile>
+                      </q-item-main>
+                      <q-item-side right>
+                        <q-toggle  :dark="getIsDark"  class="animate-pop" :value="setting.value"  color="primary-light"  @input="handle($event, setting.name)" />
+                      </q-item-side>
+                    </q-item>
 
-              <!--- setting number --->
-              <q-item v-if="setting.type=='number' ">
-                <q-item-main>
-                  <q-item-tile class="text-text1" label>{{setting.label}}</q-item-tile>
-                  <q-input :dark="getIsDark" type="number" :value="setting.value" @input="handle($event, setting.name)" />
-                </q-item-main>
-              </q-item>
+                    <!--- setting number --->
+                    <q-item v-if="setting.type=='number' ">
+                      <q-item-main>
+                        <q-item-tile class="text-text1" label>{{setting.label}}</q-item-tile>
+                        <q-input :dark="getIsDark" type="number" :value="setting.value" @input="handle($event, setting.name)" />
+                      </q-item-main>
+                    </q-item>
 
-              <!-- setting components -->
-              <div v-if="setting.type=='component'">
+                    <!-- setting components -->
+                    <div v-if="setting.type=='component'">
 
-                <q-item v-if="setting.value=='langselector'" >
-                  <q-item-main >
-                    <q-item-tile class="text-text1" label>{{ $t(setting.label) }}</q-item-tile>
-                    <lang-selector :label="false" />
-                  </q-item-main>
-                </q-item>
+                      <q-item v-if="setting.value=='langselector'" >
+                        <q-item-main >
+                          <q-item-tile class="text-text1" label>{{ $t(setting.label) }}</q-item-tile>
+                          <lang-selector :label="false" />
+                        </q-item-main>
+                      </q-item>
+                    </div>
 
-              </div>
+              </span>
             </div>
           </q-list>
         </div> 

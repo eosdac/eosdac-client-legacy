@@ -43,8 +43,9 @@ export default {
       type: 'boolean',
       label: 'Live DAC Notifications',
       sublabel: 'Enable live notifications from actions made on the DAC smart contracts',
-      value: true,
-      group: 'notify'
+      value: false,
+      group: 'notify',
+      disabled: true
     },
     { 
       name: 'notify_success_msg',

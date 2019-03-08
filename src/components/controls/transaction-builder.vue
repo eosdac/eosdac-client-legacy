@@ -30,7 +30,7 @@
           <action-maker @actiondata="addAction" :prefill="{from: getAccountName}"/>
         </q-tab-pane>
         <q-tab-pane name="tab-4" class="text-text1 bg-bg2">
-          <div class="text-text2">Add a raw json action to the transaction (experimental)</div>
+          <div class="text-text2">Add a raw json action object to the transaction</div>
           <q-input dark   rows="7" color="primary-light" type="textarea" v-model="raw_action_object" />
           <q-btn label="add" color="primary" :disabled="raw_action_object ==''" class="q-mt-md" @click="addAction(JSON.parse(raw_action_object) )" />
         </q-tab-pane>

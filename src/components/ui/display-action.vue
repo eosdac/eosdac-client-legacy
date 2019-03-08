@@ -5,14 +5,14 @@
     <q-btn v-if="viewable" size="sm" dense  class="q-mr-xs text-text1" icon="pageview" flat title="view action data" >
       <q-popover class="bg-bg1">
         <q-list>
-          <q-item v-close-overlay v-for="(value, key) in action.data" :key="`_${key}`">
+          <q-item  v-for="(value, key) in action.data" :key="`_${key}`">
             <q-item-main>
               <q-item-tile label>{{key}}</q-item-tile>
               <q-item-tile v-if="(action.name == 'setcode' || action.name == 'setabi') && (key=='code' || key=='abi')" sublabel><q-icon name="mdi-code-not-equal-variant" class="q-mr-xs" />{{$helper.truncate(value, 10)}}</q-item-tile>
               <q-item-tile v-else sublabel>{{ value }}</q-item-tile>
             </q-item-main>
           </q-item>
-          <q-item v-if="action.authorization && action.authorization.length" v-close-overlay>
+          <q-item v-if="action.authorization && action.authorization.length" >
             <q-item-main>
               <q-item-tile label><q-icon name="mdi-shield-account" class="text-text2" style="margin-right:3px"/>Authorization</q-item-tile>
               <q-item-tile sublabel>
