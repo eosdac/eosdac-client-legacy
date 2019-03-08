@@ -6,7 +6,7 @@
       <div class="q-mb-sm">
         <q-item>
           <q-item-main>
-            <q-input :dark="getIsDark" v-model="custom_mode.account" type="text" stack-label="Contract" placeholder="input a contract name" />
+            <q-input :dark="getIsDark" v-model="custom_mode.account" type="text" stack-label="Contract" placeholder="input a contract name" @keyup.enter.native="data_fields=[];custom_mode_parse_actions(custom_mode.account)" />
           </q-item-main>
           <q-item-side right>
             <q-btn color="primary-light"  flat label="load" @click="data_fields=[];custom_mode_parse_actions(custom_mode.account)" />
