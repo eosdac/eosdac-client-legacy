@@ -11,7 +11,6 @@ module.exports = function (ctx) {
       'helper',
       'idle-vue',
       'profile-cache',
-      'iconfont-loader',
       'medium-editor'
       
 

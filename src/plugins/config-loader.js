@@ -1,3 +1,6 @@
+require('../assets/icon-fonts/eosdac-iconfont-v1-9/styles.css')
+require('../assets/icon-fonts/extended_material_icons/css/materialdesignicons.css')
+
 
 class configLoader {
 
