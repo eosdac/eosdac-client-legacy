@@ -35,7 +35,7 @@
         <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height">
           <div class="q-title q-mb-md">Network</div>
           <div class="q-mt-md row">
-            <network-switcher class="q-ma-xs" />
+            <network-switcher class="q-ma-xs" :enable_pin="false" />
             <firehose class="q-ma-xs" />
           </div>
         </div>
