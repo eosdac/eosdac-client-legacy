@@ -1,7 +1,7 @@
 <template>
 <div class="text-text1">
 
-  <q-stepper color="primary-light" class="bg-bg1 bg-logo" ref="stepper"  contractable>
+  <q-stepper color="primary-light" class="bg-bg1 bg-logo" ref="stepper"  contractable style="min-height:700px">
 
 
     <!-- step 1 add actions -->
