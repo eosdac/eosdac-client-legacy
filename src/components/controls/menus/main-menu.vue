@@ -61,7 +61,7 @@
 
         <q-item v-if="getSettingByName('debug_dev_tools').value" class="animate-pop" to="/dev-tools" >
           <q-item-side :icon="$configFile.icon.dev" color="negative"/>
-          <q-item-main label="Dev Tools" sublabel="debug and test playyard" class="text-text1"/>
+          <q-item-main label="Dev Tools" sublabel="debug and test playground" class="text-text1"/>
         </q-item>
 
       </q-list>
