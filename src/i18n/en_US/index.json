@@ -319,7 +319,35 @@
     "transaction_popup_desc": "Enable/disable transaction popups",
     "transaction_popup_label": "Transaction Popups",
     "unregister_membership": "Unregister Membership",
-    "user_preference": "User Settings"
+    "user_preference": "User Settings",
+
+    "toolbar_menu_items_l": "Toolbar Menu Items",
+    "toolbar_menu_items_s": "Display balances in the toolbar. (big screens only)",
+    "toolbar_profile_image_l":"Toolbar Profile Image",
+    "toolbar_profile_image_s":"Display your avatar next to the login button",
+    "toolbar_reveal_l": "Hide Toolbar",
+    "toolbar_reveal_s": "Hide toolbar when scrolling down",
+    "notify_dac_msg_l": "Live DAC Notifications",
+    "notify_dac_msg_s": "Enable live notifications from actions made on the DAC smart contracts",
+    "notify_success_msg_l": "Success Notifications",
+    "notify_success_msg_s": "Enable success messages",
+    "notify_info_msg_l": "Info Notifications",
+    "notify_info_msg_s": "Enable info messages",
+    "notify_error_msg_l": "Error Notifications",
+    "notify_error_msg_s": "Enabele error messages",
+    "debug_data_structure_l": "Data Structures",
+    "debug_data_structure_s": "Display data structures on the bottom of each page",
+    "debug_dev_tools_l": "Dev & Debug Tools",
+    "debug_dev_tools_s": "debug and dev playground",
+    "debug_console_log_l": "Console Logging",
+    "debug_console_log_s": "Toggle logging messages to the browser console",
+    "locale_numbers_l": "Localize Numbers",
+    "locale_numbers_s": "Toggle number localization",
+    "locale_language_l": "Choose your Language",
+    "trx_delay_l": "Set a delay on transactions in seconds",
+    "auto_logout_delay_l": "Automatically log out after the specified amount of inactivity in minutes. 0 is never log out"
+
+
   },
   "transaction": {
     "action": "Action",

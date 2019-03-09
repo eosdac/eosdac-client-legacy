@@ -19,7 +19,7 @@
   </q-carousel>
 
   <!-- controls -->
-  <div v-if="actions.length > 1" class="bg-bg2">
+  <div v-if="actions.length > 1" class="bg-bg1 q-pt-sm">
     <q-btn  color="primary" @click="prevAction()" icon="arrow_left" size="sm" />
     <span class="q-mx-sm">{{activeSlide+1}}/{{actions.length}}</span>
     <q-btn  color="primary" @click="nextAction()" icon="arrow_right" size="sm" />
