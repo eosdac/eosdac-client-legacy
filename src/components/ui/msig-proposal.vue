@@ -235,8 +235,8 @@ export default {
       dacmsig: this.$configFile.get('dacmsigcontract'),
       provided_approvals: null,
       requested_approvals: null,
-      isApproved: false,
-      isCreator: false,
+      // isApproved: false,
+      // isCreator: false,
       isHidden: false,
       approvals_modal: false,
       mobile_details_modal: false,
@@ -266,6 +266,17 @@ export default {
       else{
         return false;
       }
+    },
+    isApproved :function(){
+      if(this.provided_approvals){
+        return this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
+      } 
+      else{
+        return false;
+      }
+    },
+    isCreator: function(){
+      return this.getAccountName == this.msig.proposer;
     },
 
     parseActions: function(){
@@ -348,9 +359,9 @@ export default {
         return ra;
       });
       //check if user has already approved the proposal
-      this.isApproved = this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
+      // this.isApproved = this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
       //check if the proposal is created by current user
-      this.isCreator = this.getAccountName == this.msig.proposer
+      // this.isCreator = this.getAccountName == this.msig.proposer
       
 
     },
