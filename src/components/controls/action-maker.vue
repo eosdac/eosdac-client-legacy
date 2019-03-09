@@ -74,7 +74,7 @@ const prettyHtml = require('json-pretty-html').default;
 import {mapGetters} from 'vuex';
 const {TextDecoder, TextEncoder} = require('text-encoding');
 const {Serialize} = require('eosjs');
-const numberTypes =['bool','uint8','int8','uint16','int16','uint32','uint64','int64','int32','varuint32','varint32','uint128','int128','float32','float64','float128'];
+const numberTypes =['uint8','int8','uint16','int16','uint32','uint64','int64','int32','varuint32','varint32','uint128','int128','float32','float64','float128'];
 import { Notify } from 'quasar';
 
 export default {
@@ -178,6 +178,9 @@ export default {
         else if(numberTypes.includes(input.type) ){
           value = Number(value);
         }
+        else if(input.type =='bool'){
+          value = value === 'true' ? true : false
+        }
         console.log('input type',input.type)
         res[`${input.name}`] = value;
         return res;
@@ -269,6 +272,8 @@ export default {
     name: function(){
       if(this.account  && this.name ){
         this.setFieldsModel(this.account, this.name);
+        console.log('fff', JSON.stringify(this.prefill))
+         
       }
     }
 

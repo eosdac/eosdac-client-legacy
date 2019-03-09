@@ -46,7 +46,7 @@
             :options="trx_templates.map(t => {return {label: t.name, value: t.name} })"
           />
           <div v-for="(action, i) in getSelectedTemplate" :key="`at${i}`">
-            <action-maker :account="action.contract" :name="action.action"  @actiondata="addAction"/>
+            <action-maker :account="action.contract" :name="action.action" :prefill="action.prefill" @actiondata="addAction"/>
           </div>
           
         </q-tab-pane>
@@ -115,7 +115,7 @@ const prettyHtml = require('json-pretty-html').default;
 import {mapGetters} from 'vuex';
 import actionMaker from 'components/controls/action-maker';
 import displayAction from 'components/ui/display-action';
-
+var test ="hhhhh"
 export default {
   name: 'transactionBuilder',
   components:{
@@ -138,8 +138,8 @@ export default {
         {
           name:"setcontract",
           actions: [
-            {action: 'setabi', contract:'eosio'}, 
-            {action: 'setcode', contract:'eosio'}
+            {action: 'setabi', contract:'eosio', prefill:{account: this.$store.getters['user/getAccountName'] } }, 
+            {action: 'setcode', contract:'eosio', prefill:{vmtype: '0', vmversion:'0', account: this.$store.getters['user/getAccountName'] } } 
           ]
         }
       ],
