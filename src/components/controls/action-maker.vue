@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height:350px">
+  <div>
 
     <!-- no props set = custom_mode -->
     <div v-if="account=='' && name=='' ">
@@ -22,8 +22,13 @@
     </div>
 
 
-    <div v-if="data_fields.length" class="bg-bg1 q-pa-md round-borders q-mt-md animate-fade">
-        <div>Action Data</div>
+    <div v-if="data_fields.length" class="bg-bg1 q-pa-md round-borders animate-fade">
+ 
+        <div class="q-pa-sm q-title">
+          <span class="text-text2">{{this.account || custom_mode.account}}</span>
+          <div style="display:inline-block" class="fa-arrow-right">></div>
+          <span class="text-text2">{{this.name || custom_mode.action_name}}</span>
+        </div>
         <q-item v-for="(field, i) in data_fields" :key="`field_${i}`" >
           <q-item-main>
 
@@ -38,12 +43,8 @@
           </q-item-main>
         </q-item>
 
-        <div class="row q-mt-md justify-between items-center">
-          <div class="q-pa-sm q-caption">
-            <span class="text-text2">{{this.account || custom_mode.account}}</span>
-            <div style="display:inline-block" class="fa-arrow-right">></div>
-            <span class="text-text2">{{this.name || custom_mode.action_name}}</span>
-          </div>
+        <div class="row q-mt-md justify-end items-center">
+
           <q-btn color="primary" label="add" @click="processInputs"  />
         </div>
     </div>
@@ -153,6 +154,7 @@ export default {
     },
 
     async setFieldsModel(contract, action_name, abi=false){
+      this.data_fields = [];
       let actions = abi || await this.getAbi(contract);
       let fields = this.getDataFieldsForActionName(actions, action_name);
       this.data_fields = fields.map(f=> {
@@ -263,6 +265,11 @@ export default {
     'custom_mode.action_name': function(){
       this.setFieldsModel(this.custom_mode.account, this.custom_mode.action_name, this.custom_mode.abi)
 
+    },
+    name: function(){
+      if(this.account  && this.name ){
+        this.setFieldsModel(this.account, this.name);
+      }
     }
 
   }

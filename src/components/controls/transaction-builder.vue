@@ -18,6 +18,7 @@
         <q-tab slot="title" name="tab-2" :label="`send ${this.$configFile.get('dactokensymbol')}`" />
         <q-tab slot="title" name="tab-3" :label="`Custom`" />
         <q-tab slot="title" name="tab-4" :label="`Advanced`" />
+        <q-tab slot="title" name="tab-5" :label="`Load Trx`" />
         <!-- Targets -->
         <q-tab-pane name="tab-1" class="text-text1 bg-bg2 tb-builder-pane-height" >
           <action-maker :account="$configFile.get('systemtokencontract')" :prefill="{from: getAccountName}" name="transfer" @actiondata="addAction" />
@@ -34,6 +35,22 @@
           <q-input dark   rows="7" color="primary-light" type="textarea" v-model="raw_action_object" />
           <q-btn label="add" color="primary" :disabled="raw_action_object ==''" class="q-mt-md" @click="addAction(JSON.parse(raw_action_object) )" />
         </q-tab-pane>
+
+        <q-tab-pane name="tab-5" class="text-text1 bg-bg2 tb-builder-pane-height">
+          <q-select
+          stack-label="Select Transaction"
+          class="q-mb-md"
+          dark
+          color="primary-light"
+          v-model="selected_template"
+            :options="trx_templates.map(t => {return {label: t.name, value: t.name} })"
+          />
+          <div v-for="(action, i) in getSelectedTemplate" :key="`at${i}`">
+            <action-maker :account="action.contract" :name="action.action"  @actiondata="addAction"/>
+          </div>
+          
+        </q-tab-pane>
+
       </q-tabs>
 
       <div class="row justify-end q-mt-md">
@@ -108,6 +125,24 @@ export default {
 
   data () {
     return {
+      selected_template:'',
+      trx_templates:[
+        {
+          name:"newaccount",
+          actions: [
+            {action: 'newaccount', contract:'eosio'}, 
+            {action: 'buyrambytes', contract:'eosio'}, 
+            {action: 'delegatebw', contract:'eosio'}
+          ]
+        },
+        {
+          name:"setcontract",
+          actions: [
+            {action: 'setabi', contract:'eosio'}, 
+            {action: 'setcode', contract:'eosio'}
+          ]
+        }
+      ],
       raw_action_object: '',
       actions:[],
       view_actions_modal: false
@@ -121,6 +156,15 @@ export default {
       getIsDark: 'ui/getIsDark',
       getSettingByName: 'user/getSettingByName'
     }),
+    getSelectedTemplate(){
+      let selected =  this.trx_templates.find(t => t.name == this.selected_template)
+      if(selected){
+        return selected.actions
+      }
+      else{
+        return []
+      }
+    },
     parseNumberToAsset(number, symbol){
       return `${number.toFixed(4)} ${symbol}`;
     },
