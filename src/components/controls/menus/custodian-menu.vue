@@ -7,16 +7,16 @@
         </template>
         <div class="bg-bg1">
           <q-item class="q-pl-lg animate-fade" link to="/custodian/create-msigs">
-            <q-item-main label="Create Msigs" class="text-text1 text-weight-thin" />
+            <q-item-main label="Create Msigs" class="text-text1 text-weight-light" />
           </q-item>
           <q-item class="q-pl-lg animate-fade" link to="/custodian/review-msigs">
-            <q-item-main label="Vote Msigs" class="text-text1 text-weight-thin" />
+            <q-item-main label="Vote Msigs" class="text-text1 text-weight-light" />
           </q-item>
           <q-item class="q-pl-lg animate-fade" link to="/custodian/review-worker-proposals">
-            <q-item-main label="Vote Worker Proposals" class="text-text1 text-weight-thin" />
+            <q-item-main label="Vote Worker Proposals" class="text-text1 text-weight-light" />
           </q-item>
           <q-item class="q-pl-lg animate-fade" link to="/custodian/my-payments">
-            <q-item-main label="My Payments" class="text-text1 text-weight-thin" />
+            <q-item-main label="My Payments" class="text-text1 text-weight-light" />
           </q-item>
         </div>
       </q-collapsible>
@@ -29,10 +29,10 @@
         <div class="bg-bg1">
 
           <q-item class="q-pl-lg animate-fade" link to="/custodian/review-msigs">
-            <q-item-main label="View Msigs" class="text-text1 text-weight-thin" />
+            <q-item-main label="View Msigs" class="text-text1 text-weight-light" />
           </q-item>
           <q-item class="q-pl-lg animate-fade" link to="/custodian/review-worker-proposals">
-            <q-item-main label="View Worker Proposals" class="text-text1 text-weight-thin" />
+            <q-item-main label="View Worker Proposals" class="text-text1 text-weight-light" />
           </q-item>
         </div>
       </q-collapsible>

@@ -6,10 +6,10 @@
         </template>
         <div class="bg-bg1">
           <q-item class="q-pl-lg" link to="/member/new-worker-proposal">
-            <q-item-main label="New Worker Proposal" class="text-text1 text-weight-thin" />
+            <q-item-main label="New Worker Proposal" class="text-text1 text-weight-light" />
           </q-item>
           <q-item class="q-pl-lg" link to="/member/my-worker-proposals">
-            <q-item-main label="My Worker Proposals" class="text-text1 text-weight-thin" />
+            <q-item-main label="My Worker Proposals" class="text-text1 text-weight-light" />
           </q-item>
 
         </div>

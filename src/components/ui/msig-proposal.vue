@@ -235,8 +235,7 @@ export default {
       dacmsig: this.$configFile.get('dacmsigcontract'),
       provided_approvals: null,
       requested_approvals: null,
-      // isApproved: false,
-      // isCreator: false,
+
       isHidden: false,
       approvals_modal: false,
       mobile_details_modal: false,
