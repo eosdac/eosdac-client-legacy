@@ -126,27 +126,10 @@ export default {
   data () {
     return {
       selected_template:'',
-      trx_templates:[
-        {
-          name:"newaccount",
-          actions: [
-            {action: 'newaccount', contract:'eosio'}, 
-            {action: 'buyrambytes', contract:'eosio'}, 
-            {action: 'delegatebw', contract:'eosio'}
-          ]
-        },
-        {
-          name:"setcontract",
-          actions: [
-            {action: 'setabi', contract:'eosio', prefill:{account: this.$store.getters['user/getAccountName'] } }, 
-            {action: 'setcode', contract:'eosio', prefill:{vmtype: '0', vmversion:'0', account: this.$store.getters['user/getAccountName'] } } 
-          ]
-        }
-      ],
+      trx_templates: require('../../statics/transaction.templates.json'),
       raw_action_object: '',
       actions:[],
       view_actions_modal: false
-
     }
   },
 
@@ -159,6 +142,17 @@ export default {
     getSelectedTemplate(){
       let selected =  this.trx_templates.find(t => t.name == this.selected_template)
       if(selected){
+        selected.actions.map(a =>{
+          if(a.prefill){
+            Object.keys(a.prefill).forEach(key => { 
+              if(String(a.prefill[key]).startsWith('$')){
+                a.prefill[key] = this.$store.getters[a.prefill[key].substr(1)]
+              }
+            })
+          }
+          
+          return a;
+        })
         return selected.actions
       }
       else{
