@@ -7,7 +7,7 @@
         <q-chip  v-if="!is_seen_computed"  dense class="animate-fade absolute" style="top:10px;right:10px"  color="negative">new</q-chip>
         <div class="relative-position" style="text-align:center">
           <q-chip  v-if="msig.trx.actions.length > 1"   dense class="absolute" style="top:12px;left:100px" color="dark">{{msig.trx.actions.length}}</q-chip>
-          <q-icon style="border:2px solid #4A1289;border-radius:50%" size="48px" count="5" :name="'icon-'+matchIcon" class="q-pa-md q-mr-xs q-mb-xs text-text2" :color="getStatusColor" />
+          <q-icon style="border:2px solid #4A1289;border-radius:50%" size="48px" count="5" :name="'icon-'+matchIcon" class="q-pa-md q-mr-xs q-mb-xs" :color="getStatusColor" />
           <div class="q-body-3 text-text1 capitalize">{{msig.title}}</div>
         </div>
     </div>
@@ -50,7 +50,7 @@
 
       <q-item >
         <q-item-side left >
-          <q-icon size="48px" count="5" :name="'icon-'+matchIcon" class=" text-text2" :color="getStatusColor" />
+          <q-icon size="48px" count="5" :name="'icon-'+matchIcon"  :color="getStatusColor" />
         </q-item-side>
         <q-item-main >
           {{msig.title}}
