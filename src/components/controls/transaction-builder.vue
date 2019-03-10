@@ -3,6 +3,7 @@
     <div class="text-text1">
 
       <div class="row justify-between">
+
         <div class="row">
           <q-item class="animate-pop">
             <q-item-side icon="timer" color="text2" />
@@ -19,10 +20,12 @@
             </q-item-main>
           </q-item>
         </div>
+
         <div class="">
           <q-btn v-if="actions.length" label="view all actions" class="on-left animate-pop" icon="pageview" color="primary" @click="view_actions_modal = true" />
           <q-btn :disabled="!actions.length " color="positive" class="animate-pop" @click="pushTransaction" label="Push TRX" />
         </div>
+
       </div>
 
       <div class="row q-mb-md bg-bg2 q-pa-md round-borders" style="min-height:80px">
@@ -32,7 +35,7 @@
 
 
 
-      <q-tabs :dark="getIsDark" >
+      <q-tabs :dark="getIsDark" color="primary">
         <q-tab default slot="title" name="tab-1" :label="`send ${this.$configFile.get('systemtokensymbol')}`" />
         <q-tab slot="title" name="tab-2" :label="`send ${this.$configFile.get('dactokensymbol')}`" />
         <q-tab slot="title" name="tab-3" :label="`Custom`" />
@@ -50,7 +53,7 @@
           <action-maker @actiondata="addAction" :prefill="{from: getAccountName}"/>
         </q-tab-pane>
         <q-tab-pane name="tab-4" class="text-text1  tb-builder-pane-height no-padding">
-          <div class="text-text2">Add a raw json action object to the transaction</div>
+          <div class="text-text2 q-my-md">Add a raw json action object to the transaction</div>
           <q-input dark   rows="7" color="primary-light" type="textarea" v-model="raw_action_object" />
           <q-btn label="add" color="primary" :disabled="raw_action_object ==''" class="q-mt-md" @click="addAction(JSON.parse(raw_action_object) )" />
         </q-tab-pane>
@@ -58,7 +61,7 @@
         <q-tab-pane name="tab-5" class="text-text1  tb-builder-pane-height no-padding">
           <q-select
           stack-label="Select Transaction"
-          class="q-mb-md"
+          class="q-my-md"
           dark
           color="primary-light"
           v-model="selected_template"

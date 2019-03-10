@@ -14,7 +14,7 @@
         </q-item>
       </div>
       
-      <div v-if="custom_mode.abi.actions" class="row q-mb-md" >
+      <div v-if="custom_mode.abi.actions" class="row q-mb-md bg-bg2" >
         <q-btn size="sm" v-for="(action, i) in custom_mode.abi.actions" :label="action.name" :key="`a${i}`" color="bg1" class="animate-pop q-ma-xs" @click="custom_mode.action_name= action.name" />
         <q-btn size="sm" title="view abi" icon="mdi-magnify" class="animate-pop q-ma-xs" color="positive" @click="view_abi_modal=true" />
       </div>
@@ -22,31 +22,35 @@
     </div>
 
 
-    <div v-if="data_fields.length" class="bg-bg1 q-pa-md round-borders animate-fade">
- 
-        <div class="q-pa-sm q-title">
-          <span class="text-text2">{{this.account || custom_mode.account}}</span>
-          <div style="display:inline-block" class="fa-arrow-right">></div>
-          <span class="text-text2">{{this.name || custom_mode.action_name}}</span>
-        </div>
-        <q-item v-for="(field, i) in data_fields" :key="`field_${i}`" >
-          <q-item-main>
-
-            <div v-if="field.type == 'bytes'">
-              <file-input v-if="field.name == 'abi'" v-model ="data_fields[i].value" label="Select abi" :asbuffer="false"/>
-              <file-input v-if="field.name == 'code'" v-model ="data_fields[i].value" label="Select wasm" :asbuffer="true"/>
-            </div>
-            <div v-else>
-              <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/>
-            </div>
-
-          </q-item-main>
-        </q-item>
-
-        <div class="row q-mt-md justify-between items-center">
-          <!-- <pre>{{authorization}}</pre> -->
+    <div v-if="data_fields.length" class=" animate-fade bg-bg2 q-pa-md q-mt-md round-borders">
+        <div class="row justify-between">
+          <div class="q-py-sm q-title ">
+            <span class="text-text1">{{this.account || custom_mode.account}}</span>
+            <div style="display:inline-block" class="fa-arrow-right">></div>
+            <span class="text-text1">{{this.name || custom_mode.action_name}}</span>
+          </div>
           <auth-display v-model="authorization" :auth="getAuth" />
-          <q-btn color="primary" label="add" @click="processInputs"  />
+        </div>
+        <div class="row gutter-md">
+          <div v-for="(field, i) in data_fields" :key="`field_${i}`" class="col-xs-12 col-md-6">
+            <q-item  class=" no-padding" >
+              <q-item-main>
+
+                <div v-if="field.type == 'bytes'">
+                  <file-input v-if="field.name == 'abi'" v-model ="data_fields[i].value" label="Select abi" :asbuffer="false"/>
+                  <file-input v-if="field.name == 'code'" v-model ="data_fields[i].value" label="Select wasm" :asbuffer="true"/>
+                </div>
+                <div v-else>
+                  <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/>
+                </div>
+
+              </q-item-main>
+            </q-item>
+          </div>
+        </div>
+
+        <div class="row q-mt-md justify-end items-center">
+          <q-btn color="primary" icon="add" label="add action" @click="processInputs"  />
         </div>
     </div>
 
