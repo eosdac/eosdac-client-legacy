@@ -14,7 +14,7 @@
         </q-item>
       </div>
       
-      <div v-if="custom_mode.abi.actions" class="row" >
+      <div v-if="custom_mode.abi.actions" class="row q-mb-md" >
         <q-btn size="sm" v-for="(action, i) in custom_mode.abi.actions" :label="action.name" :key="`a${i}`" color="bg1" class="animate-pop q-ma-xs" @click="custom_mode.action_name= action.name" />
         <q-btn size="sm" title="view abi" icon="mdi-magnify" class="animate-pop q-ma-xs" color="positive" @click="view_abi_modal=true" />
       </div>
@@ -43,8 +43,9 @@
           </q-item-main>
         </q-item>
 
-        <div class="row q-mt-md justify-end items-center">
-
+        <div class="row q-mt-md justify-between items-center">
+          <!-- <pre>{{authorization}}</pre> -->
+          <auth-display v-model="authorization" :auth="getAuth" />
           <q-btn color="primary" label="add" @click="processInputs"  />
         </div>
     </div>
@@ -70,6 +71,7 @@
 
 <script>
 import fileInput from 'components/controls/file-input'
+import authDisplay from 'components/ui/auth-display'
 const prettyHtml = require('json-pretty-html').default;
 import {mapGetters} from 'vuex';
 const {TextDecoder, TextEncoder} = require('text-encoding');
@@ -80,7 +82,8 @@ import { Notify } from 'quasar';
 export default {
   name: 'actionMaker',
   components:{
-    fileInput
+    fileInput,
+    authDisplay
   },
   props:{
     account:{
@@ -107,7 +110,7 @@ export default {
       isLoading: false,
 
       data_fields: [],
-
+      authorization: [],
       view_abi_modal : false,
 
       custom_mode:{
@@ -124,7 +127,23 @@ export default {
       getIsDark: 'ui/getIsDark',
       getAccountName: 'user/getAccountName',
       getAccount: 'user/getAccount'
-    })
+    }),
+    getAuth(){
+    
+      if(this.getAccountName && this.getAccount){
+        if(this.auth.length){
+          return this.auth;
+        }
+        else{
+          return [{actor: this.getAccountName, permission: this.getAccount.authority }];
+        }
+      }
+      else{
+        return [];
+      }
+
+    }
+
 
   },
 
@@ -193,12 +212,9 @@ export default {
       }
       action.hex = await this.serializeActionData(action);
 
-      if(this.auth.length){
-        action.authorization = this.auth;
-      }
-      else{
-        action.authorization = [{actor: this.getAccountName, permission: this.getAccount.authority }];
-      }
+      
+      action.authorization = this.getAuth;
+
 
       if(!action.hex){
         return;
@@ -212,18 +228,10 @@ export default {
         let account = action.account;
         let name = action.name;
         let data = action.data;
-
-        // let sbuf = new Serialize.SerialBuffer({
-        //     textEncoder: new TextEncoder,
-        //     textDecoder: new TextDecoder,
-        // });
-
         const contract = await this.getEosApi.eosapi.getContract(account);
-        // contract.actions.get(name).serialize(sbuf, data, new Serialize.SerializerState({ bytesAsUint8Array: true }));
-        // let action_data_hex = Serialize.arrayToHex(sbuf.array);
         let hex = Serialize.serializeActionData(contract, account, name, data, new TextEncoder, new TextDecoder);
         return hex;
-        // return action_data_hex;
+
       }
       catch(e){
         console.log(e);
@@ -251,8 +259,6 @@ export default {
       if(abi){
         this.custom_mode.abi = abi;
       }
-      
-      
     }
 
   },
@@ -272,7 +278,6 @@ export default {
     name: function(){
       if(this.account  && this.name ){
         this.setFieldsModel(this.account, this.name);
-        console.log('fff', JSON.stringify(this.prefill))
          
       }
     }

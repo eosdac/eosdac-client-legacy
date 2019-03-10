@@ -1,17 +1,26 @@
 [
     {
-      "name":"newaccount",
-      "actions": [
-        {"action": "newaccount", "contract":"eosio"}, 
-        {"action": "buyrambytes", "contract":"eosio"}, 
-        {"action": "delegatebw", "contract":"eosio"}
-      ]
+        "name":"newaccount",
+        "actions": [
+            {"action": "newaccount", "contract":"eosio"}, 
+            {"action": "buyrambytes", "contract":"eosio"}, 
+            {"action": "delegatebw", "contract":"eosio"}
+        ]
+
     },
     {
-      "name":"setcontract",
-      "actions": [
-        {"action": "setabi", "contract":"eosio", "prefill":{"account": "$user/getAccountName" } }, 
-        {"action": "setcode", "contract":"eosio", "prefill":{"vmtype": "0", "vmversion":"0", "account": "$user/getAccountName" } } 
-      ]
+        "name":"setcontract",
+        "actions": [
+            {"action": "setabi", "contract":"eosio", "prefill":{"account": "$user/getAccountName" } }, 
+            {"action": "setcode", "contract":"eosio", "prefill":{"vmtype": "0", "vmversion":"0", "account": "$user/getAccountName" } } 
+        ]
+
+    },
+    {
+        "name":"voteprop",
+        "actions": [
+            {"action": "voteprop", "contract":"dacproposals", "prefill":{"custodian": "$user/getAccountName" }, "auth": ["$user/getAuthString", "dacauthority@one"] }
+        ]
+        
     }
-  ]
+]

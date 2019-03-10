@@ -45,8 +45,8 @@
           v-model="selected_template"
             :options="trx_templates.map(t => {return {label: t.name, value: t.name} })"
           />
-          <div v-for="(action, i) in getSelectedTemplate" :key="`at${i}`">
-            <action-maker :account="action.contract" :name="action.action" :prefill="action.prefill" @actiondata="addAction"/>
+          <div v-for="(action, i) in getSelectedTemplate.actions" :key="`at${i}`">
+            <action-maker :account="action.contract" :name="action.action" :prefill="action.prefill" :auth="action.auth" @actiondata="addAction"/>
           </div>
           
         </q-tab-pane>
@@ -115,7 +115,7 @@ const prettyHtml = require('json-pretty-html').default;
 import {mapGetters} from 'vuex';
 import actionMaker from 'components/controls/action-maker';
 import displayAction from 'components/ui/display-action';
-var test ="hhhhh"
+
 export default {
   name: 'transactionBuilder',
   components:{
@@ -137,11 +137,14 @@ export default {
     ...mapGetters({
       getAccountName: 'user/getAccountName',
       getIsDark: 'ui/getIsDark',
-      getSettingByName: 'user/getSettingByName'
+      getSettingByName: 'user/getSettingByName',
+      getAuthString: 'user/getAuthString'
     }),
+
     getSelectedTemplate(){
       let selected =  this.trx_templates.find(t => t.name == this.selected_template)
       if(selected){
+
         selected.actions.map(a =>{
           if(a.prefill){
             Object.keys(a.prefill).forEach(key => { 
@@ -150,10 +153,19 @@ export default {
               }
             })
           }
-          
+          if(a.auth && !a.processed){
+            a.auth = a.auth.map(a => {
+              if(a.startsWith('$')){
+                a = this.$store.getters[a.substr(1)]
+              }
+              let [actor, permission] = a.split('@');
+              return {actor: actor, permission: permission};
+            })
+          }
+          a.processed = true;
           return a;
         })
-        return selected.actions
+        return selected
       }
       else{
         return []
