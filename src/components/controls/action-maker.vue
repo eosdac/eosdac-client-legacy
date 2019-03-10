@@ -134,9 +134,6 @@ export default {
         if(this.auth.length){
           return this.auth;
         }
-        else{
-          return [{actor: this.getAccountName, permission: this.getAccount.authority }];
-        }
       }
       else{
         return [];
@@ -213,7 +210,7 @@ export default {
       action.hex = await this.serializeActionData(action);
 
       
-      action.authorization = this.getAuth;
+      action.authorization = JSON.parse(this.authorization);
 
 
       if(!action.hex){

@@ -115,7 +115,7 @@ module.exports = function (ctx) {
         'QStep',
         'QStepperNavigation',
         'QDatetimePicker',
-        'QUploader'
+        'QChipsInput'
         
 
       ],
