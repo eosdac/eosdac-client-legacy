@@ -9,7 +9,7 @@
   </div>
   <!-- <q-chips-input v-model="auths" /> -->
   <q-btn icon="add" flat round @click="addAuth(new_auth)"/>
-  <q-input dark color="primary-light" placeholder="actor@permission" style="margin-left:5px" v-model="new_auth" />
+  <q-input dark color="primary-light" placeholder="actor@permission" style="margin-left:5px" v-model="new_auth" @keyup.enter.native="addAuth(new_auth)"/>
 
 </div>
 </template>
