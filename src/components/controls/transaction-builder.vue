@@ -1,18 +1,37 @@
 <template>
 <div class="text-text1">
+    <div class="text-text1">
 
-  <q-stepper color="primary-light" class="bg-bg1 bg-logo" ref="stepper"  contractable style="min-height:700px">
-
-
-    <!-- step 1 add actions -->
-    <q-step  name="first" title="Add Actions" class="text-text1" subtitle="" >
-      <div class="q-mb-md text-text2">
-          Add actions to the transaction
+      <div class="row justify-between">
+        <div class="row">
+          <q-item class="animate-pop">
+            <q-item-side icon="timer" color="text2" />
+            <q-item-main style="margin-left:-5px">
+              <q-item-tile class="text-text1" label>Trx Delay</q-item-tile>
+              <q-item-tile class="text-text2 q-caption" sublabel>{{getSettingByName('trx_delay').value}}</q-item-tile>
+            </q-item-main>
+          </q-item>
+          <q-item class="animate-pop">
+            <q-item-side icon="donut_large" color="text2" />
+            <q-item-main style="margin-left:-5px">
+              <q-item-tile class="text-text1" label>Actions</q-item-tile>
+              <q-item-tile class="text-text2 q-caption" sublabel>{{actions.length}}</q-item-tile>
+            </q-item-main>
+          </q-item>
+        </div>
+        <div class="">
+          <q-btn v-if="actions.length" label="view all actions" class="on-left animate-pop" icon="pageview" color="primary" @click="view_actions_modal = true" />
+          <q-btn :disabled="!actions.length " color="positive" class="animate-pop" @click="pushTransaction" label="Push TRX" />
+        </div>
       </div>
-      <div class="row q-mb-md bg-bg2 q-pa-md round-borders">
+
+      <div class="row q-mb-md bg-bg2 q-pa-md round-borders" style="min-height:80px">
         <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
         <span class="text-text2" v-if="!actions.length">No actions added yet.</span>
       </div>
+
+
+
       <q-tabs :dark="getIsDark" >
         <q-tab default slot="title" name="tab-1" :label="`send ${this.$configFile.get('systemtokensymbol')}`" />
         <q-tab slot="title" name="tab-2" :label="`send ${this.$configFile.get('dactokensymbol')}`" />
@@ -20,23 +39,23 @@
         <q-tab slot="title" name="tab-4" :label="`Advanced`" />
         <q-tab slot="title" name="tab-5" :label="`Load Trx`" />
         <!-- Targets -->
-        <q-tab-pane name="tab-1" class="text-text1 bg-bg2 tb-builder-pane-height" >
+        <q-tab-pane name="tab-1" class="text-text1  tb-builder-pane-height no-padding" >
           <action-maker :account="$configFile.get('systemtokencontract')" :prefill="{from: getAccountName}" name="transfer" @actiondata="addAction" />
         </q-tab-pane>
-        <q-tab-pane name="tab-2" class="text-text1 bg-bg2 tb-builder-pane-height">
+        <q-tab-pane name="tab-2" class="text-text1  tb-builder-pane-height no-padding">
           <action-maker :account="$configFile.get('tokencontract')" name="transfer" :prefill="{from: getAccountName}" @actiondata="addAction"/>
         </q-tab-pane>
-        <q-tab-pane name="tab-3" class="text-text1 bg-bg2 tb-builder-pane-height">
+        <q-tab-pane name="tab-3" class="text-text1  tb-builder-pane-height no-padding">
           <!-- <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/> -->
           <action-maker @actiondata="addAction" :prefill="{from: getAccountName}"/>
         </q-tab-pane>
-        <q-tab-pane name="tab-4" class="text-text1 bg-bg2 tb-builder-pane-height">
+        <q-tab-pane name="tab-4" class="text-text1  tb-builder-pane-height no-padding">
           <div class="text-text2">Add a raw json action object to the transaction</div>
           <q-input dark   rows="7" color="primary-light" type="textarea" v-model="raw_action_object" />
           <q-btn label="add" color="primary" :disabled="raw_action_object ==''" class="q-mt-md" @click="addAction(JSON.parse(raw_action_object) )" />
         </q-tab-pane>
 
-        <q-tab-pane name="tab-5" class="text-text1 bg-bg2 tb-builder-pane-height">
+        <q-tab-pane name="tab-5" class="text-text1  tb-builder-pane-height no-padding">
           <q-select
           stack-label="Select Transaction"
           class="q-mb-md"
@@ -50,51 +69,12 @@
           </div>
           
         </q-tab-pane>
-
       </q-tabs>
 
-      <div class="row justify-end q-mt-md">
-        <q-stepper-navigation>
-          <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" label="Next" />
-        </q-stepper-navigation>
-      </div>
-    </q-step>
+    </div>
 
-
-    <!-- step 2 review and submit -->
-    <q-step name="second" title="Review & Submit" active-icon="remove_red_eye">
-      <div class="row">
-        <q-item class="animate-pop">
-          <q-item-side icon="timer" color="text2" />
-          <q-item-main style="margin-left:-5px">
-            <q-item-tile class="text-text1" label>Trx Delay</q-item-tile>
-            <q-item-tile class="text-text2 q-caption" sublabel>{{getSettingByName('trx_delay').value}}</q-item-tile>
-          </q-item-main>
-        </q-item>
-        <q-item class="animate-pop">
-          <q-item-side icon="donut_large" color="text2" />
-          <q-item-main style="margin-left:-5px">
-            <q-item-tile class="text-text1" label>Actions</q-item-tile>
-            <q-item-tile class="text-text2 q-caption" sublabel>{{actions.length}}</q-item-tile>
-          </q-item-main>
-        </q-item>
-      </div>
-      <div class="row q-pa-md q-mt-md bg-bg2 round-borders">
-          <display-action v-for="(action,i) in actions" :action="action" :key="`a${i}`" viewable/>
-      </div>
-
-      <div class="row justify-between  items-center q-mt-lg ">
-        <q-btn label="view all actions" icon="pageview" color="primary" @click="view_actions_modal = true" />
-        <div>
-          <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
-          <q-btn color="positive" class="animate-pop" @click="pushTransaction" label="submit" />
-        </div>
-
-      </div>
-    </q-step>
-  </q-stepper>
-
-  <!-- review msig modal -->
+ 
+  <!-- review modal -->
     <q-modal maximized v-model="view_actions_modal">
       <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
         <span>Review Actions</span>
