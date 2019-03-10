@@ -28,7 +28,7 @@
 
       </div>
 
-      <div class="row q-mb-md bg-bg2 q-pa-md round-borders" style="min-height:80px">
+      <div class="row q-mb-md bg-bg2 q-pa-md q-mt-md round-borders" style="min-height:80px">
         <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
         <span class="text-text2" v-if="!actions.length">No actions added yet.</span>
       </div>
@@ -59,14 +59,16 @@
         </q-tab-pane>
 
         <q-tab-pane name="tab-5" class="text-text1  tb-builder-pane-height no-padding">
-          <q-select
-          stack-label="Select Transaction"
-          class="q-my-md"
-          dark
-          color="primary-light"
-          v-model="selected_template"
-            :options="trx_templates.map(t => {return {label: t.name, value: t.name} })"
-          />
+          <div class="row">
+            <q-select
+            stack-label="Select Transaction"
+            class="q-my-md"
+            dark
+            color="primary-light"
+            v-model="selected_template"
+              :options="trx_templates.map(t => {return {label: t.name, value: t.name} })"
+            />
+          </div>
           <div v-for="(action, i) in getSelectedTemplate.actions" :key="`at${i}`">
             <action-maker :account="action.contract" :name="action.action" :prefill="action.prefill" :auth="action.auth" @actiondata="addAction"/>
           </div>

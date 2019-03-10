@@ -25,6 +25,7 @@
     <div v-if="data_fields.length" class=" animate-fade bg-bg2 q-pa-md q-mt-md round-borders">
         <div class="row justify-between">
           <div class="q-py-sm q-title ">
+            <q-icon name="donut_large" class="q-mr-xs" size="24px"/>
             <span class="text-text1">{{this.account || custom_mode.account}}</span>
             <div style="display:inline-block" class="fa-arrow-right">></div>
             <span class="text-text1">{{this.name || custom_mode.action_name}}</span>

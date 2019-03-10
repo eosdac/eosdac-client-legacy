@@ -1,15 +1,15 @@
 <template>
 <div class="row items-center q-mb-md">
 
-  <div class="fileContainer on-left">
-      <span v-if="filename !=''" class="animate-fade">{{filename}}</span>
+  <div class="fileContainer ">
+      <span v-if="filename !=''" class="animate-fade row "><q-icon :name="$configFile.icon.check" color="positive" class="q-mr-xs" />{{filename}}</span>
       <span v-else class="animate-fade">
-        <q-icon name="mdi-file-plus" style="margin-right:5px" />{{label}}
+        <q-icon name="add" style="margin-right:5px;margin-top:-3px" />{{label}}
       </span>
       <input type="file" ref="myfileinput" @input="handleInput()" />
   </div>
 
-  <div v-if="filesize" class="animate-fade q-caption">{{filesize}}</div>
+  <div v-if="filesize" class="animate-fade on-right q-caption">{{filesize}}</div>
 </div>
 </template>
 
@@ -110,7 +110,7 @@ export default {
 .fileContainer {
     overflow: hidden;
     position:relative;
-    background: var(--q-color-primary-light);
+    background: var(--q-color-bg1);
     padding:8px;
     cursor: pointer !important;
     border-radius:3px;
