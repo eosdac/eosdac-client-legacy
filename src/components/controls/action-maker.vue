@@ -41,6 +41,10 @@
                   <file-input v-if="field.name == 'abi'" v-model ="data_fields[i].value" label="Select abi" :asbuffer="false"/>
                   <file-input v-if="field.name == 'code'" v-model ="data_fields[i].value" label="Select wasm" :asbuffer="true"/>
                 </div>
+                <div v-else-if="field.type == 'bool'">
+                  <q-select v-model="data_fields[i].value" :stack-label="field.name" color="primary-light" :dark="getIsDark" :options="[{value:'true', label: 'true'}, {value:'false', label: 'false'}]" />
+                  <!-- <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/> -->
+                </div>
                 <div v-else>
                   <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/>
                 </div>
@@ -51,6 +55,7 @@
         </div>
 
         <div class="row q-mt-md justify-end items-center">
+          <span v-if="add_action_feedback!=''" class="text-positive on-left animate-fade q-caption">{{add_action_feedback}}</span>
           <q-btn color="primary" icon="add" label="add action" @click="processInputs"  />
         </div>
     </div>
@@ -110,6 +115,7 @@ export default {
   },
   data () {
     return {
+      add_action_feedback: '',
       abi_load_error: '',
 
       isLoading: false,
@@ -225,7 +231,8 @@ export default {
       if(!action.hex){
         return;
       }
-
+      this.add_action_feedback = `Action added`;
+      setTimeout(()=>{this.add_action_feedback = ''}, 1500)
       this.$emit('actiondata', action);
     },
 

@@ -181,8 +181,8 @@ export default {
       let result = await this.$store.dispatch('user/transact', {actions: this.actions } );
       if(result){
         console.log('transaction callback', result);
-        this.$refs.stepper.reset();
         this.actions = [];
+        // this.latest_trx_id = result.transaction_id
       }
     }
     

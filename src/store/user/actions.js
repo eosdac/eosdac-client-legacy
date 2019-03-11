@@ -186,7 +186,7 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
                 ],
             });
         }
-        return true;
+        return result;
 
     } catch(e){
         console.log(e);
