@@ -35,7 +35,7 @@
 
 
 
-      <q-tabs :dark="getIsDark" color="primary">
+      <q-tabs :dark="getIsDark" color="primary" swipeable>
         <q-tab default slot="title" name="tab-1" :label="`send ${this.$configFile.get('systemtokensymbol')}`" />
         <q-tab slot="title" name="tab-2" :label="`send ${this.$configFile.get('dactokensymbol')}`" />
         <q-tab slot="title" name="tab-3" :label="`Custom`" />
@@ -195,6 +195,6 @@ export default {
   color:white;
 }
 .tb-builder-pane-height{
-  min-height:450px;
+  min-height:420px;
 }
 </style>

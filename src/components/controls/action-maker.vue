@@ -38,8 +38,8 @@
               <q-item-main>
 
                 <div v-if="field.type == 'bytes'">
-                  <file-input v-if="field.name == 'abi'" v-model ="data_fields[i].value" label="Select abi" :asbuffer="false"/>
-                  <file-input v-if="field.name == 'code'" v-model ="data_fields[i].value" label="Select wasm" :asbuffer="true"/>
+                  <file-input style="margin-top:20px" v-if="field.name == 'abi'" v-model ="data_fields[i].value" label="Select abi" :asbuffer="false"/>
+                  <file-input style="margin-top:20px" v-if="field.name == 'code'" v-model ="data_fields[i].value" label="Select wasm" :asbuffer="true"/>
                 </div>
                 <div v-else-if="field.type == 'bool'">
                   <q-select v-model="data_fields[i].value" :stack-label="field.name" color="primary-light" :dark="getIsDark" :options="[{value:'true', label: 'true'}, {value:'false', label: 'false'}]" />
@@ -204,7 +204,7 @@ export default {
     async processInputs(){
       
       let action_data = this.data_fields.reduce((res, input) =>{
-        let value = input.value;
+        let value = String(input.value);
         if((value.includes('[') && value.includes(']') ) || (value.includes('{') && value.includes('}') ) ){
           value = JSON.parse(value);
         }

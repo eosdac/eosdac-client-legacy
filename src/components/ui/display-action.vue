@@ -3,7 +3,7 @@
 <transition appear enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
   <div appear class="bg-bg1 q-pa-sm round-borders q-ma-xs">
     <q-btn v-if="viewable" size="sm" dense  class="q-mr-xs text-text1" icon="pageview" flat title="view action data" >
-      <q-popover class="bg-bg1">
+      <q-popover :class="{'bg-dark': getIsDark}">
         <q-list>
           <q-item  v-for="(value, key) in action.data" :key="`_${key}`">
             <q-item-main>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
   name: 'displayAction',
   props:{
@@ -43,6 +44,11 @@ export default {
   },
   data () {
     return {}
+  },
+  computed:{
+    ...mapGetters({
+      getIsDark: 'ui/getIsDark',
+    })
   }
 }
 </script>

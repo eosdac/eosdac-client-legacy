@@ -15,22 +15,18 @@
 
         <q-item to="/vote-custodians" >
           <q-item-side :icon="$configFile.icon.vote" color="text2"/>
-          <q-item-main :label="$t('default.custodians')" class="text-text1"/>
+          <q-item-main v-if="getAccountName" :label="$t('default.custodians')" class="text-text1"/>
+          <q-item-main v-else :label="$t('default.view_custodians')" class="text-text1"/>
         </q-item>
 
-      <q-item v-if="getAccountName && (!getIsCandidate || !getIsCandidate.is_active)" to="/manage-candidateship">
-        <q-item-side :icon="$configFile.icon.cand_reg" color="text2"/>
-        <q-item-main :label="$t('default.register_as_candidate')" class="text-text1"/>
-      </q-item>
-      <q-item v-if="getAccountName && (getIsCandidate && getIsCandidate.is_active)" to="/manage-candidateship">
-        <q-item-side :icon="$configFile.icon.cand_reg" color="text2"/>
-        <q-item-main :label="$t('default.unregister_as_candidate')" class="text-text1"/>
-      </q-item>
-      <!-- <q-item v-if="getMemberRoles.candidate" to="/managecandidateship" :disabled="!getAccountName">
-        <q-item-side icon="icon-menu-12" />
-        <q-item-main :label="$t('default.unregister_as_candidate')" sublabel="" />
-      </q-item> -->
-  
+        <q-item v-if="getAccountName && (!getIsCandidate || !getIsCandidate.is_active)" to="/manage-candidateship">
+          <q-item-side :icon="$configFile.icon.cand_reg" color="text2"/>
+          <q-item-main :label="$t('default.register_as_candidate')" class="text-text1"/>
+        </q-item>
+        <q-item v-if="getAccountName && (getIsCandidate && getIsCandidate.is_active)" to="/manage-candidateship">
+          <q-item-side :icon="$configFile.icon.cand_reg" color="text2"/>
+          <q-item-main :label="$t('default.unregister_as_candidate')" class="text-text1"/>
+        </q-item>
 
         <q-item @click.native="openURL($configFile.get('external').dacexplorer)">
           <q-item-side :icon="$configFile.icon.explorer"  color="text2" />
@@ -54,7 +50,8 @@
           <q-item-main :label="$t('default.credits')" class="text-text1" />
         </q-item>
 
-        <q-item v-if="getSettingByName('debug_dev_tools').value" class="animate-pop" to="/dashboard" >
+        <dev-menu />
+        <!-- <q-item v-if="getSettingByName('debug_dev_tools').value" class="animate-pop" to="/dashboard" >
           <q-item-side :icon="$configFile.icon.dev" color="positive"/>
           <q-item-main label="Dashboard" class="text-text1"/>
         </q-item>
@@ -62,7 +59,7 @@
         <q-item v-if="getSettingByName('debug_dev_tools').value" class="animate-pop" to="/dev-tools" >
           <q-item-side :icon="$configFile.icon.dev" color="negative"/>
           <q-item-main label="Dev Tools" sublabel="debug and test playground" class="text-text1"/>
-        </q-item>
+        </q-item> -->
 
       </q-list>
       
@@ -73,11 +70,13 @@ import {mapGetters} from 'vuex';
 import {openURL} from 'quasar';
 import custodianMenu from './custodian-menu';
 import memberMenu from './member-menu';
+import devMenu from './dev-menu';
 export default {
   name: 'MainMenu',
   components:{
     custodianMenu,
-    memberMenu
+    memberMenu,
+    devMenu
   },
   data () {
     return {}

@@ -13,11 +13,23 @@ const routes = [
       { path: 'vote-custodians', component: () => import('pages/vote-custodians.vue') },
       { path: 'profile/:accountname', component: () => import('pages/profile') },
       { path: 'credits', component: () => import('pages/credits.vue') },
-      { path: 'dev-tools', component: () => import('pages/dev/dev-tools-home') },
-      { path: 'playyard', component: () => import('pages/dev/playyard') },
+      // { path: 'dev-tools', component: () => import('pages/dev/dev-tools-home') },
+      // { path: 'playyard', component: () => import('pages/dev/playyard') },
       { path: 'manage-candidateship', component: () => import('pages/manage-candidateship.vue') },
       { path: 'verify/:token', component: () => import('pages/verify-token')},
       
+    ]
+  },
+
+  {
+    path: '/dev-tools',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/home') },
+      { path: 'memberclient', component: () => import('pages/dev/dev-tools-home') },
+      { path: 'playground', component: () => import('pages/dev/playground') },
+      { path: 'transactions', component: () => import('pages/dev/transactions') }
+
     ]
   },
   
