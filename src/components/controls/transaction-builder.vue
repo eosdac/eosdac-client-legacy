@@ -30,7 +30,7 @@
 
       <div class="row q-mb-md bg-bg2 q-pa-md q-mt-md round-borders" style="min-height:80px">
         <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
-        <span class="text-text2" v-if="!actions.length">No actions added yet.</span>
+        <span class="text-negative text-weight-light" v-if="!actions.length">No actions added yet.</span>
       </div>
 
 

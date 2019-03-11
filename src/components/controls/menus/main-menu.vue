@@ -50,16 +50,12 @@
           <q-item-main :label="$t('default.credits')" class="text-text1" />
         </q-item>
 
-        <dev-menu />
-        <!-- <q-item v-if="getSettingByName('debug_dev_tools').value" class="animate-pop" to="/dashboard" >
+        <q-item v-if="getSettingByName('debug_dev_tools').value" class="animate-pop" to="/dashboard" >
           <q-item-side :icon="$configFile.icon.dev" color="positive"/>
           <q-item-main label="Dashboard" class="text-text1"/>
         </q-item>
+        <dev-menu />
 
-        <q-item v-if="getSettingByName('debug_dev_tools').value" class="animate-pop" to="/dev-tools" >
-          <q-item-side :icon="$configFile.icon.dev" color="negative"/>
-          <q-item-main label="Dev Tools" sublabel="debug and test playground" class="text-text1"/>
-        </q-item> -->
 
       </q-list>
       
