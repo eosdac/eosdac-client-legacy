@@ -43,8 +43,10 @@
                 </div>
                 <div v-else-if="field.type == 'bool'">
                   <q-select v-model="data_fields[i].value" :stack-label="field.name" color="primary-light" :dark="getIsDark" :options="[{value:'true', label: 'true'}, {value:'false', label: 'false'}]" />
-                  <!-- <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/> -->
                 </div>
+                <div v-else-if="isNumberType(field.type)">
+                  <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="number" :placeholder="field.type"/>
+                </div>         
                 <div v-else>
                   <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/>
                 </div>
@@ -206,7 +208,7 @@ export default {
         if((value.includes('[') && value.includes(']') ) || (value.includes('{') && value.includes('}') ) ){
           value = JSON.parse(value);
         }
-        else if(numberTypes.includes(input.type) ){
+        else if(this.isNumberType(input.type) ){
           value = Number(value);
         }
         else if(input.type =='bool'){
@@ -272,6 +274,10 @@ export default {
       if(abi){
         this.custom_mode.abi = abi;
       }
+    },
+
+    isNumberType(type){
+      return numberTypes.includes(type);
     }
 
   },

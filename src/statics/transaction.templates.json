@@ -4,7 +4,7 @@
         "actions": [
             {"action": "newaccount", "contract":"eosio"}, 
             {"action": "buyrambytes", "contract":"eosio"}, 
-            {"action": "delegatebw", "contract":"eosio"}
+            {"action": "delegatebw", "contract":"eosio", "prefill":{"transfer": "false" }}
         ]
 
     },
