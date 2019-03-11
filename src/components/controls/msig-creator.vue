@@ -69,13 +69,13 @@
           <q-tab slot="title" name="tab-2" :label="`send ${this.$configFile.get('dactokensymbol')}`" />
           <q-tab slot="title" name="tab-3" :label="`Advanced`" />
           <!-- Targets -->
-          <q-tab-pane name="tab-1" class="text-text1 bg-bg2">
+          <q-tab-pane name="tab-1" class="text-text1 bg-bg2" style="min-height:320px">
             <action-maker :account="$configFile.get('systemtokencontract')"  name="transfer" :prefill="{from: getSelectedAccount}" :auth="[{actor: getSelectedAccount2.name, permission: getSelectedAccount2.permission}]" @actiondata="addAction" />
           </q-tab-pane>
-          <q-tab-pane name="tab-2" class="text-text1 bg-bg2">
+          <q-tab-pane name="tab-2" class="text-text1 bg-bg2" style="min-height:320px">
             <action-maker :account="$configFile.get('tokencontract')" name="transfer" :prefill="{from: getSelectedAccount}" :auth="[{actor: getSelectedAccount2.name, permission: getSelectedAccount2.permission}]" @actiondata="addAction"/>
           </q-tab-pane>
-          <q-tab-pane name="tab-3" class="text-text1 bg-bg2">
+          <q-tab-pane name="tab-3" class="text-text1 bg-bg2" style="min-height:320px">
             <!-- <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/> -->
             <action-maker @actiondata="addAction" :auth="[{actor: getSelectedAccount2.name, permission: getSelectedAccount2.permission}]"/>
 
@@ -125,7 +125,7 @@
               </q-item-main>
             </q-item>
             <q-item class="animate-pop">
-              <q-item-side icon="donut_large" color="text2" />
+              <q-item-side :icon="$configFile.icon.action" color="text2" />
               <q-item-main style="margin-left:-5px">
                 <q-item-tile class="text-text1" label>Actions</q-item-tile>
                 <q-item-tile class="text-text2 q-caption" sublabel>{{actions.length}}</q-item-tile>

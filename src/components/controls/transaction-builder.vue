@@ -4,18 +4,18 @@
 
       <div class="row justify-between">
 
-        <div class="row">
+        <div class="row ">
           <q-item class="animate-pop">
             <q-item-side icon="timer" color="text2" />
             <q-item-main style="margin-left:-5px">
-              <q-item-tile class="text-text1" label>Trx Delay</q-item-tile>
-              <q-item-tile class="text-text2 q-caption" sublabel>{{getSettingByName('trx_delay').value}}</q-item-tile>
+              <q-item-tile class="text-text1 q-title" label>Trx Delay</q-item-tile>
+              <q-item-tile class="text-text2 q-caption" sublabel>{{getSettingByName('trx_delay').value}} seconds</q-item-tile>
             </q-item-main>
           </q-item>
           <q-item class="animate-pop">
-            <q-item-side icon="donut_large" color="text2" />
+            <q-item-side :icon="$configFile.icon.action" color="text2" />
             <q-item-main style="margin-left:-5px">
-              <q-item-tile class="text-text1" label>Actions</q-item-tile>
+              <q-item-tile class="text-text1 q-title" label>Actions</q-item-tile>
               <q-item-tile class="text-text2 q-caption" sublabel>{{actions.length}}</q-item-tile>
             </q-item-main>
           </q-item>
@@ -54,7 +54,7 @@
         </q-tab-pane>
         <q-tab-pane name="tab-4" class="text-text1  tb-builder-pane-height no-padding">
           <div class="text-text2 q-my-md">Add a raw json action object to the transaction</div>
-          <q-input dark   rows="7" color="primary-light" type="textarea" v-model="raw_action_object" />
+          <q-input :dark="getIsDark"   rows="7" color="primary-light" type="textarea" v-model="raw_action_object" />
           <q-btn label="add" color="primary" :disabled="raw_action_object ==''" class="q-mt-md" @click="addAction(JSON.parse(raw_action_object) )" />
         </q-tab-pane>
 
@@ -63,7 +63,7 @@
             <q-select
             stack-label="Select Transaction"
             class="q-my-md"
-            dark
+            :dark="getIsDark"
             color="primary-light"
             v-model="selected_template"
               :options="trx_templates.map(t => {return {label: t.name, value: t.name} })"

@@ -14,9 +14,9 @@
         </q-item>
       </div>
       
-      <div v-if="custom_mode.abi.actions" class="row q-mb-md bg-bg2" >
-        <q-btn size="sm" v-for="(action, i) in custom_mode.abi.actions" :label="action.name" :key="`a${i}`" color="bg1" class="animate-pop q-ma-xs" @click="custom_mode.action_name= action.name" />
-        <q-btn size="sm" title="view abi" icon="mdi-magnify" class="animate-pop q-ma-xs" color="positive" @click="view_abi_modal=true" />
+      <div v-if="custom_mode.abi.actions" class="row q-mb-md bg-bg2 q-pa-xs" >
+        <q-btn size="10px" :icon="$configFile.icon.action" v-for="(action, i) in custom_mode.abi.actions" :label="action.name" :key="`a${i}`" color="bg1" class="animate-pop q-ma-xs" @click="custom_mode.action_name= action.name" />
+        <q-btn size="10px" title="view abi" icon="mdi-magnify" class="animate-pop q-ma-xs" color="positive" @click="view_abi_modal=true" />
       </div>
       
     </div>
@@ -25,7 +25,7 @@
     <div v-if="data_fields.length" class=" animate-fade bg-bg2 q-pa-md q-mt-md round-borders">
         <div class="row justify-between">
           <div class="q-py-sm q-title ">
-            <q-icon name="donut_large" class="q-mr-xs" size="24px"/>
+            <q-icon :name="$configFile.icon.action" class="q-mr-xs" size="24px"/>
             <span class="text-text1">{{this.account || custom_mode.account}}</span>
             <div style="display:inline-block" class="fa-arrow-right">></div>
             <span class="text-text1">{{this.name || custom_mode.action_name}}</span>

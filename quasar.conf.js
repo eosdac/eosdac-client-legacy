@@ -114,10 +114,7 @@ module.exports = function (ctx) {
         'QStepper',
         'QStep',
         'QStepperNavigation',
-        'QDatetimePicker',
-        'QChipsInput'
-        
-
+        'QDatetimePicker'
       ],
       directives: [
         'Ripple',

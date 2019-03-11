@@ -20,5 +20,6 @@
     "pending_sand": "mdi-timer-sand",
     "refresh" : "cached",
     "account": "person",
-    "cust_symbol": "star"
+    "cust_symbol": "star",
+    "action": "donut_large"
 }
