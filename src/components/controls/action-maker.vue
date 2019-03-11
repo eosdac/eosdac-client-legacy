@@ -170,14 +170,18 @@ export default {
     },
 
     getDataFieldsForActionName(abi, action_name){
-      let struct = abi.structs.find(s=> s.name == action_name);
-      return struct.fields;
+      if(abi && abi.structs){
+        let struct = abi.structs.find(s=> s.name == action_name);
+        return struct.fields;
+      }
+
     },
 
     async setFieldsModel(contract, action_name, abi=false){
       this.data_fields = [];
       let actions = abi || await this.getAbi(contract);
       let fields = this.getDataFieldsForActionName(actions, action_name);
+      if(!fields) return;
       this.data_fields = fields.map(f=> {
         if(this.prefill[f.name] ){
           f.value=this.prefill[f.name];
