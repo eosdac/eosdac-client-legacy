@@ -23,7 +23,7 @@
 
 
     <div v-if="data_fields.length" class=" animate-fade bg-bg2 q-pa-md q-mt-md round-borders">
-        <div class="row justify-between">
+        <div class="row justify-between q-mb-md">
           <div class="q-py-sm q-title ">
             <q-icon :name="$configFile.icon.action" class="q-mr-xs" size="24px"/>
             <span class="text-text1">{{this.account || custom_mode.account}}</span>
@@ -37,7 +37,7 @@
             <q-item  class=" no-padding" >
               <q-item-main>
 
-                <div v-if="field.type == 'bytes'">
+                <div v-if="field.type == 'bytes'" class="full-width">
                   <file-input style="margin-top:20px" v-if="field.name == 'abi'" v-model ="data_fields[i].value" label="Select abi" :asbuffer="false"/>
                   <file-input style="margin-top:20px" v-if="field.name == 'code'" v-model ="data_fields[i].value" label="Select wasm" :asbuffer="true"/>
                 </div>
@@ -209,7 +209,7 @@ export default {
     async processInputs(){
       let process_error = false;
       let action_data = this.data_fields.reduce((res, input) =>{
-
+console.log(this.data_fields)
         //validate and cast types
         let value = String(input.value).trim();
         if((value.includes('[') && value.includes(']') ) || (value.includes('{') && value.includes('}') ) ){
@@ -221,15 +221,15 @@ export default {
         else if(input.type =='bool'){
           value = value === 'true' ? true : false
         }
-        else if(input.type =='name'){
+        else if(input.type =='name' || input.type =='account_name'){
           if(!this.$helper.isAccountname(value)){
-            process_error = 'Invalid accountname';
+            process_error = `${input.name}: invalid accountname`;
           }
         }
         else if(input.type =='asset'){
-          let [quantity, symbol] = value.split(' ');
+          let [quantity, symbol] = value.replace(/\s\s+/g, ' ').split(' ');
           if(!quantity || !symbol || symbol.length < 3){
-            process_error = 'Invalid asset';
+            process_error = `${input.name}: invalid asset`;
           }
           else{
             value = Number(quantity).toFixed(4) +' '+symbol.toUpperCase();

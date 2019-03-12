@@ -27,11 +27,39 @@
         }
           
     },
-    "authAccount": {
+    "authAccountx": {
         "name": "dacauthority",
         "controlling": [
             {"name":"eosdacdoshhq", "permission": "xfer"}, 
             {"name":"dacelections", "permission": "xfer"}
+        ]
+    },
+
+    "authAccount": {
+        "name": "dacauthority",
+        "controlling": [
+            {
+                "name":"eosdacdoshhq", 
+                "linkedAuths": [
+                    {"contract": "eosio.token", "action": "transfer", "permission": "xfer"}
+                ]
+            }, 
+            {
+                "name":"dacelections", 
+                "linkedAuths":[
+                    {"contract": "kasdactokens", "action": "transfer", "permission": "xfer"},
+                    {"contract": "eosio", "action": "setabi", "permission": "active"},
+                    {"contract": "eosio", "action": "setcode", "permission": "active"}
+                ]
+            },
+            {
+                "name":"dacmultisigs", 
+                "linkedAuths":[
+                    {"contract": "eosio", "action": "setabi", "permission": "active"},
+                    {"contract": "eosio", "action": "setcode", "permission": "active"}
+                ]
+            }
+
         ]
     },
 

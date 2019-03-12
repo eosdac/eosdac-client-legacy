@@ -15,20 +15,9 @@
         <div>
           <div class="text-text1 q-mb-md">The DAC "dacauthority" controls the following accounts:</div>
           <div class="row bg-bg2 q-pa-md">
-            <!-- <q-btn class=" q-my-sm q-mr-sm"  v-for="(n,i) in controlled_accounts" :key="i"  :label="n.name" color="bg1" @click="handleSelection(i)" >
+            <q-btn class=" q-my-sm q-mr-sm"  v-for="(n,i) in controlled_accounts" :key="i"  :label="n.name" color="bg1" @click="handleSelection(i)" >
               <q-icon v-if="n.selected" class="animate-pop q-ml-sm" name="check" color="positive" />
-            </q-btn> -->
-<q-btn-dropdown  dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" @click="handleSelection(i)">
-  <!-- dropdown content -->
-  <div class="bg-dark q-pa-sm" >
-    <div v-for="(la, i) in n.linkedAuths" :key="`la${i}`" >
-      
-
-        <div  class="q-caption text-text2">{{`${la.contract}::${la.action}`}}</div>
-     
-    </div>
-  </div>
-</q-btn-dropdown>
+            </q-btn>
           </div>
         </div>
 
@@ -75,22 +64,23 @@
           <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
           <span class="text-text2" v-if="!actions.length">No actions added yet.</span>
         </div>
-        <div v-if="getSelectedAccount2">
+        <q-tabs :dark="getIsDark">
+          <q-tab default slot="title" name="tab-1" :label="`send ${this.$configFile.get('systemtokensymbol')}`" />
+          <q-tab slot="title" name="tab-2" :label="`send ${this.$configFile.get('dactokensymbol')}`" />
+          <q-tab slot="title" name="tab-3" :label="`Advanced`" />
+          <!-- Targets -->
+          <q-tab-pane name="tab-1" class="text-text1 bg-bg2" style="min-height:320px">
+            <action-maker :account="$configFile.get('systemtokencontract')"  name="transfer" :prefill="{from: getSelectedAccount}" :auth="[{actor: getSelectedAccount2.name, permission: getSelectedAccount2.permission}]" @actiondata="addAction" />
+          </q-tab-pane>
+          <q-tab-pane name="tab-2" class="text-text1 bg-bg2" style="min-height:320px">
+            <action-maker :account="$configFile.get('tokencontract')" name="transfer" :prefill="{from: getSelectedAccount}" :auth="[{actor: getSelectedAccount2.name, permission: getSelectedAccount2.permission}]" @actiondata="addAction"/>
+          </q-tab-pane>
+          <q-tab-pane name="tab-3" class="text-text1 bg-bg2" style="min-height:320px">
+            <!-- <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/> -->
+            <action-maker @actiondata="addAction" :auth="[{actor: getSelectedAccount2.name, permission: getSelectedAccount2.permission}]"/>
 
-
-          <div v-for="(linkedauth, i) in getSelectedAccount2.linkedAuths" :key="`la${i}`" class="text-text1">
-          
-            <action-maker 
-            :account="linkedauth.contract" 
-            :name="linkedauth.action" 
-            :prefill="{from: getSelectedAccount, account: getSelectedAccount}" 
-            :auth="[{actor: getSelectedAccount, permission: linkedauth.permission}]" 
-            @actiondata="addAction"
-            />
-
-          </div>
-
-        </div>
+          </q-tab-pane>
+        </q-tabs>
 
         <div class="row justify-end q-mt-md">
           <q-stepper-navigation>
@@ -259,7 +249,6 @@ export default {
     handleSelection(index){
       this.controlled_accounts = this.controlled_accounts.map(ca=>{ca.selected=false; return ca});
       this.controlled_accounts[index].selected=true;
-      this.$refs.stepper.next()
     },
 
     addAction(data){
