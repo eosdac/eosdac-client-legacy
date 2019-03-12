@@ -29,7 +29,9 @@
       </div>
 
       <div class="row q-mb-md bg-bg2 q-pa-md q-mt-md round-borders" style="min-height:80px">
-        <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
+        <draggable v-model="actions" group="actions" @start="drag=true" @end="drag=false" style="display:flex">
+          <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer" />
+        </draggable>
         <span class="text-negative text-weight-light" v-if="!actions.length">No actions added yet.</span>
       </div>
 
@@ -101,15 +103,19 @@ import {mapGetters} from 'vuex';
 import actionMaker from 'components/controls/action-maker';
 import displayAction from 'components/ui/display-action';
 
+import draggable from 'vuedraggable'
+
 export default {
   name: 'transactionBuilder',
   components:{
     actionMaker,
-    displayAction
+    displayAction,
+    draggable
   },
 
   data () {
     return {
+      drag: false,
       selected_template:'',
       trx_templates: require('../../statics/transaction.templates.json'),
       raw_action_object: '',
@@ -197,4 +203,28 @@ export default {
 .tb-builder-pane-height{
   min-height:420px;
 }
+
+
+
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.no-move {
+  transition: transform 0s;
+}
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
+}
+.list-group {
+  min-height: 20px;
+}
+.list-group-item {
+  cursor: move;
+}
+.list-group-item i {
+  cursor: pointer;
+}
+
+
 </style>
