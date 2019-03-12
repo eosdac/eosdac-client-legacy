@@ -54,6 +54,7 @@
           <q-item-side :icon="$configFile.icon.dev" color="positive"/>
           <q-item-main label="Dashboard" class="text-text1"/>
         </q-item>
+        
         <dev-menu />
 
 
