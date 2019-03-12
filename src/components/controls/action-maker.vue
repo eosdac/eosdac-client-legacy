@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
 
     <!-- no props set = custom_mode -->
     <div v-if="account=='' && name=='' ">
@@ -160,8 +160,10 @@ export default {
   methods:{
     prettyHtml,
     async getAbi(contract){
+      if(!this.getEosApi) return;
       this.abi_load_error ='';
       this.isLoading = true;
+      
       let abi = await this.getEosApi.eos.get_abi(contract).catch(e=>{ console.log(e)}) ;
       
       this.isLoading = false;
