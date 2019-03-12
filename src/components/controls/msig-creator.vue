@@ -7,7 +7,7 @@
     <q-stepper color="primary-light" class="bg-bg1 bg-logo" ref="stepper"  contractable>
 
       <!-- step 1 select msig account -->
-      <q-step default name="first" title="Select Msig Account" >
+      <q-step default name="first" title="Select Msig Account" :subtitle="getSelectedAccount">
         <div class="q-mb-md text-text2">
             Select an account from which you want to propose a multisignature transaction.
         </div>
@@ -18,17 +18,13 @@
             <!-- <q-btn class=" q-my-sm q-mr-sm"  v-for="(n,i) in controlled_accounts" :key="i"  :label="n.name" color="bg1" @click="handleSelection(i)" >
               <q-icon v-if="n.selected" class="animate-pop q-ml-sm" name="check" color="positive" />
             </q-btn> -->
-<q-btn-dropdown  dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" @click="handleSelection(i)">
-  <!-- dropdown content -->
-  <div class="bg-dark q-pa-sm" >
-    <div v-for="(la, i) in n.linkedAuths" :key="`la${i}`" >
-      
-
-        <div  class="q-caption text-text2">{{`${la.contract}::${la.action}`}}</div>
-     
-    </div>
-  </div>
-</q-btn-dropdown>
+            <q-btn-dropdown  dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" @click="handleSelection(i)">
+              <div class="bg-dark q-pa-sm" >
+                <div v-for="(la, i) in n.linkedAuths" :key="`la${i}`" >
+                    <div  class="q-caption text-text2">{{`${la.contract}::${la.action}`}}</div>
+                </div>
+              </div>
+            </q-btn-dropdown>
           </div>
         </div>
 
@@ -71,13 +67,20 @@
         <div class="q-mb-md text-text2">
             Add actions to the multisignature transaction.
         </div>
-        <div class="row q-mb-md bg-bg2 q-pa-md round-borders">
+        <!-- <div class="row q-mb-md bg-bg2 q-pa-md round-borders">
           <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
           <span class="text-text2" v-if="!actions.length">No actions added yet.</span>
+        </div> -->
+
+        <div class="row q-mb-md bg-bg2 q-pa-md q-mt-md round-borders" style="min-height:80px">
+          <draggable v-model="actions" group="actions" @start="drag=true" @end="drag=false" style="display:flex">
+            <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer" />
+          </draggable>
+          <span class="text-negative text-weight-light" v-if="!actions.length">No actions added yet.</span>
         </div>
+
+
         <div v-if="getSelectedAccount2">
-
-
           <div v-for="(linkedauth, i) in getSelectedAccount2.linkedAuths" :key="`la${i}`" class="text-text1">
           
             <action-maker 
@@ -189,7 +192,7 @@ import debugData from 'components/ui/debug-data';
 import actionMaker from 'components/controls/action-maker';
 import displayAction from 'components/ui/display-action';
 import { date } from 'quasar';
-
+import draggable from 'vuedraggable';
 const today = new Date();
 const { addToDate, subtractFromDate } = date;
 const msigTrx_template = { 
@@ -210,7 +213,8 @@ export default {
   components:{
     debugData,
     actionMaker,
-    displayAction
+    displayAction,
+    draggable
   },
   data () {
     return {
