@@ -204,9 +204,10 @@ export default {
     },
 
     async processInputs(){
-      
+      let process_error = false;
       let action_data = this.data_fields.reduce((res, input) =>{
-        let value = String(input.value);
+
+        let value = String(input.value).trim();
         if((value.includes('[') && value.includes(']') ) || (value.includes('{') && value.includes('}') ) ){
           value = JSON.parse(value);
         }
@@ -216,10 +217,35 @@ export default {
         else if(input.type =='bool'){
           value = value === 'true' ? true : false
         }
+        else if(input.type =='asset'){
+          let [quantity, symbol] = value.split(' ');
+          if(!quantity || !symbol || symbol.length < 3){
+            process_error = 'Invalid asset';
+            value='a'
+          }
+          else{
+            value = Number(quantity).toFixed(4) +' '+symbol.toUpperCase();
+            console.log(value)
+          }
+          
+        }
         console.log('input type',input.type)
         res[`${input.name}`] = value;
         return res;
+
       }, {});
+
+      if(process_error){
+            this.$q.notify({
+                message: `Input Error`,
+                timeout: 7000,
+                type: 'negative',
+                detail: process_error,
+                position: 'bottom-right', 
+                closeBtn: true, 
+            });
+            return;
+      }
 
       let action = {
         account: this.account || this.custom_mode.account,
