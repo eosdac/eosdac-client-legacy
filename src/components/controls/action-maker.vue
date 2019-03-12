@@ -46,7 +46,10 @@
                 </div>
                 <div v-else-if="isNumberType(field.type)">
                   <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="number" :placeholder="field.type"/>
-                </div>         
+                </div>
+                <div v-else-if="field.type=='asset'" >
+                  <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="`${field.name} & symbol`" type="text" :placeholder="field.type"/>
+                </div>       
                 <div v-else>
                   <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/>
                 </div>
@@ -207,6 +210,7 @@ export default {
       let process_error = false;
       let action_data = this.data_fields.reduce((res, input) =>{
 
+        //validate and cast types
         let value = String(input.value).trim();
         if((value.includes('[') && value.includes(']') ) || (value.includes('{') && value.includes('}') ) ){
           value = JSON.parse(value);
@@ -217,19 +221,21 @@ export default {
         else if(input.type =='bool'){
           value = value === 'true' ? true : false
         }
+        else if(input.type =='name'){
+          if(!this.$helper.isAccountname(value)){
+            process_error = 'Invalid accountname';
+          }
+        }
         else if(input.type =='asset'){
           let [quantity, symbol] = value.split(' ');
           if(!quantity || !symbol || symbol.length < 3){
             process_error = 'Invalid asset';
-            value='a'
           }
           else{
             value = Number(quantity).toFixed(4) +' '+symbol.toUpperCase();
-            console.log(value)
           }
-          
         }
-        console.log('input type',input.type)
+
         res[`${input.name}`] = value;
         return res;
 
