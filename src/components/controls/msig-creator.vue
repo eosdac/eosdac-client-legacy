@@ -9,15 +9,13 @@
       <!-- step 1 select msig account -->
       <q-step default name="first" title="Select Msig Account" :subtitle="getSelectedAccount">
         <div class="q-mb-md text-text2">
-            Select an account from which you want to propose a multisignature transaction.
+            Select an account from which you want to propose a multisignature transaction or specify an individual action. 
         </div>
 
         <div>
-          <div class="text-text1 q-mb-md">The DAC "dacauthority" controls the following accounts:</div>
+
           <div class="row bg-bg2 q-pa-md">
-            <!-- <q-btn class=" q-my-sm q-mr-sm"  v-for="(n,i) in controlled_accounts" :key="i"  :label="n.name" color="bg1" @click="handleSelection(i)" >
-              <q-icon v-if="n.selected" class="animate-pop q-ml-sm" name="check" color="positive" />
-            </q-btn> -->
+
             <q-btn-dropdown  dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" @click="actionfilter=false; handleSelection(i)">
 
               <q-list  link class="bg-dark"  >
@@ -41,8 +39,48 @@
         </div>
       </q-step>
 
-      <!-- step 2 add description -->
-      <q-step default name="second" title="Add info" >
+      <!-- step 2 add actions -->
+      <q-step  name="second" title="Add Actions" class="text-text1" subtitle="" >
+        <div class="q-mb-md text-text2">
+            Add actions to the multisignature transaction. <span v-if="actions.length >1" class="animate-fade">Sort the actions by dragging.</span>
+        </div>
+
+        <div class="row q-mb-md bg-bg2 q-pa-md q-mt-md round-borders" style="min-height:80px">
+          <draggable v-model="actions" group="actions" @start="drag=true" @end="drag=false" style="display:flex">
+            <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer" />
+          </draggable>
+          <span class="text-negative text-weight-light" v-if="!actions.length">No actions added yet.</span>
+        </div>
+        
+        <div v-if="getSelectedAccount2">
+          <q-btn v-if="actionfilter!==false && getSelectedAccount2.linkedAuths.length > 1" label="show all linked actions" color="bg2" @click="actionfilter=false"/>
+
+          <div v-for="(linkedauth, i) in getSelectedAccount2.linkedAuths" :key="`la${i}`" class="text-text1 animate-fade">
+            <action-maker
+            v-if="actionfilter===false || actionfilter==i"
+            :account="linkedauth.contract" 
+            :name="linkedauth.action" 
+            :prefill="{from: getSelectedAccount, account: getSelectedAccount}" 
+            :auth="[{actor: getSelectedAccount, permission: linkedauth.permission}]" 
+            @actiondata="addAction"
+            />
+
+          </div>
+
+        </div>
+
+        <div class="row justify-end q-mt-md">
+          <q-stepper-navigation>
+            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
+            <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" label="Next" >
+              <q-chip floating count="5" >{{actions.length}}</q-chip>
+              </q-btn>
+          </q-stepper-navigation>
+        </div>
+      </q-step>
+
+      <!-- step 3 add description -->
+      <q-step default name="third" title="Add info" >
         <div class="q-mb-md text-text2">
             Give the msig transaction a title and description
         </div>
@@ -64,21 +102,13 @@
               </q-item>
             </div>
           </div>
-
-
-
           <div class="col-xs-12">
             <div class="full-height">
               <q-input type="textarea"  :max-height="200" :dark="getIsDark" v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" />
 
             </div>
           </div>
-
-
-
-
         </div>
-
 
         <div class="row justify-end">
           <q-stepper-navigation >
@@ -88,46 +118,7 @@
         </div>
       </q-step>
 
-      <!-- step 3 add actions -->
-      <q-step  name="third" title="Add Actions" class="text-text1" subtitle="" >
-        <div class="q-mb-md text-text2">
-            Add actions to the multisignature transaction.
-        </div>
-        <!-- <div class="row q-mb-md bg-bg2 q-pa-md round-borders">
-          <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
-          <span class="text-text2" v-if="!actions.length">No actions added yet.</span>
-        </div> -->
 
-        <div class="row q-mb-md bg-bg2 q-pa-md q-mt-md round-borders" style="min-height:80px">
-          <draggable v-model="actions" group="actions" @start="drag=true" @end="drag=false" style="display:flex">
-            <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer" />
-          </draggable>
-          <span class="text-negative text-weight-light" v-if="!actions.length">No actions added yet.</span>
-        </div>
-        <q-btn v-if="actionfilter!==false" label="show all actions" color="bg2" @click="actionfilter=false"/>
-
-        <div v-if="getSelectedAccount2">
-          <div v-for="(linkedauth, i) in getSelectedAccount2.linkedAuths" :key="`la${i}`" class="text-text1 animate-fade">
-            <action-maker
-            v-if="actionfilter===false || actionfilter==i"
-            :account="linkedauth.contract" 
-            :name="linkedauth.action" 
-            :prefill="{from: getSelectedAccount, account: getSelectedAccount}" 
-            :auth="[{actor: getSelectedAccount, permission: linkedauth.permission}]" 
-            @actiondata="addAction"
-            />
-
-          </div>
-
-        </div>
-
-        <div class="row justify-end q-mt-md">
-          <q-stepper-navigation>
-            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
-            <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" label="Next" />
-          </q-stepper-navigation>
-        </div>
-      </q-step>
 
       <!-- step 4 set expiration -->
       <q-step name="fourth" title="Set Exipiration">
@@ -147,6 +138,9 @@
 
       <!-- step 5 review and submit -->
       <q-step name="fifth" title="Review & Submit" active-icon="remove_red_eye">
+        <div class="q-mb-md text-text2">
+            Please review your msig carefully. You can jump back and forth to make changes. 
+        </div>
         <div class="row justify-between">
           <div class="row">
             <q-item class="animate-pop">
@@ -173,6 +167,7 @@
           </div>
           <q-checkbox :dark="getIsDark" class="text-text2" color="primary-light" v-model="reset_form_after_success" left-label label="Reset after submit" />
         </div>
+
         <div class="row q-pa-md q-mt-md bg-bg2 round-borders">
             <display-action v-for="(action,i) in actions" :action="action" :key="`a${i}`" viewable/>
         </div>
