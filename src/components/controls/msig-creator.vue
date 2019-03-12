@@ -18,12 +18,18 @@
             <!-- <q-btn class=" q-my-sm q-mr-sm"  v-for="(n,i) in controlled_accounts" :key="i"  :label="n.name" color="bg1" @click="handleSelection(i)" >
               <q-icon v-if="n.selected" class="animate-pop q-ml-sm" name="check" color="positive" />
             </q-btn> -->
-            <q-btn-dropdown  dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" @click="handleSelection(i)">
-              <div class="bg-dark q-pa-sm" >
-                <div v-for="(la, i) in n.linkedAuths" :key="`la${i}`" >
-                    <div  class="q-caption text-text2">{{`${la.contract}::${la.action}`}}</div>
-                </div>
-              </div>
+            <q-btn-dropdown  dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" @click="actionfilter=false; handleSelection(i)">
+
+              <q-list  link class="bg-dark"  >
+                <q-item v-for="(la, j) in n.linkedAuths" :key="`la${j}`" @click.native=" actionfilter=j; handleSelection(i)">
+                  <q-item-main>
+                    <q-item-tile class="text-text1 q-body-1" label>{{`${la.contract}::${la.action}`}}</q-item-tile>
+                    <q-item-tile class="text-text2 q-caption" sublabel>{{`@${la.permission}`}}</q-item-tile>
+                  </q-item-main>
+                  <!-- <q-item-side right icon="info" color="amber" /> -->
+                </q-item>
+              </q-list>
+
             </q-btn-dropdown>
           </div>
         </div>
@@ -42,17 +48,37 @@
         </div>
         <div class="row gutter-md">
           <div class="col-xs-12 col-md-6">
-            <q-item class="no-padding">
-              <q-item-main>
-                <q-input readonly :dark="getIsDark" v-model="msig_name" stack-label="ID/Name" placeholder="msig name" />
-              </q-item-main>
-              <q-btn icon="refresh" flat color="primary-light" title="generate new id" @click="msig_name = $helper.randomName();" />
-            </q-item>
+            <div class="full-height">
+              <q-input type="text" :dark="getIsDark" maxlength="70" v-model="msig_title" stack-label="Title" placeholder="title" class="q-mb-md" />
+
+            </div>
           </div>
-          <div class="col-xs-12 col-md-6"><div><q-input type="text" :dark="getIsDark" maxlength="70" v-model="msig_title" stack-label="Title" placeholder="title" /></div></div>
+
+          <div class="col-xs-12 col-md-6">
+            <div class="full-height">
+              <q-item class="no-padding">
+                <q-btn icon="refresh" flat color="primary-light" title="generate new id" @click="msig_name = $helper.randomName();" />
+                <q-item-main class="q-pa-md">
+                  <q-input readonly hide-underline :dark="getIsDark" v-model="msig_name" stack-label="ID/Name" placeholder="msig name" />
+                </q-item-main>
+              </q-item>
+            </div>
+          </div>
+
+
+
+          <div class="col-xs-12">
+            <div class="full-height">
+              <q-input type="textarea"  :max-height="200" :dark="getIsDark" v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" />
+
+            </div>
+          </div>
+
+
+
+
         </div>
 
-        <div class="q-mt-lg"><q-input type="textarea" :row="5" :dark="getIsDark" v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" /></div>
 
         <div class="row justify-end">
           <q-stepper-navigation >
@@ -78,12 +104,12 @@
           </draggable>
           <span class="text-negative text-weight-light" v-if="!actions.length">No actions added yet.</span>
         </div>
-
+        <q-btn v-if="actionfilter!==false" label="show all actions" color="bg2" @click="actionfilter=false"/>
 
         <div v-if="getSelectedAccount2">
-          <div v-for="(linkedauth, i) in getSelectedAccount2.linkedAuths" :key="`la${i}`" class="text-text1">
-          
-            <action-maker 
+          <div v-for="(linkedauth, i) in getSelectedAccount2.linkedAuths" :key="`la${i}`" class="text-text1 animate-fade">
+            <action-maker
+            v-if="actionfilter===false || actionfilter==i"
             :account="linkedauth.contract" 
             :name="linkedauth.action" 
             :prefill="{from: getSelectedAccount, account: getSelectedAccount}" 
@@ -218,6 +244,7 @@ export default {
   },
   data () {
     return {
+      actionfilter:false,
       reset_form_after_success: true,
       msig_name:'',
       msig_title:'',
