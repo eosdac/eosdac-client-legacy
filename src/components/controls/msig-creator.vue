@@ -14,7 +14,7 @@
 
         <div>
 
-          <div class="row bg-bg2 q-pa-md">
+          <div class="row bg-bg2 q-pa-md ">
 
             <q-btn-dropdown  dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" @click="actionfilter=false; handleSelection(i)">
 
@@ -29,13 +29,14 @@
               </q-list>
 
             </q-btn-dropdown>
+            
+            
           </div>
         </div>
 
-        <div class="row justify-end">
-          <q-stepper-navigation>
-            <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" v-if="controlled_accounts.find(ca=> ca.selected==true)" />
-          </q-stepper-navigation>
+        <div class="row justify-between q-mt-md" style="min-height:36px">
+          <div><q-btn label="advanced"  :icon="allow_advanced ? 'check': ''" size="sm" flat color="primary-light" @click="allow_advanced=!allow_advanced; unSelectAll()" /></div>
+          <div><q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" v-if="controlled_accounts.find(ca=> ca.selected==true) || allow_advanced" /></div>
         </div>
       </q-step>
 
@@ -51,8 +52,8 @@
           </draggable>
           <span class="text-negative text-weight-light" v-if="!actions.length">No actions added yet.</span>
         </div>
-        
-        <div v-if="getSelectedAccount2">
+
+        <div v-if="getSelectedAccount">
           <q-btn v-if="actionfilter!==false && getSelectedAccount2.linkedAuths.length > 1" label="show all linked actions" color="bg2" @click="actionfilter=false"/>
 
           <div v-for="(linkedauth, i) in getSelectedAccount2.linkedAuths" :key="`la${i}`" class="text-text1 animate-fade">
@@ -67,6 +68,9 @@
 
           </div>
 
+        </div>
+        <div v-else class="text-text1">
+          <action-maker @actiondata="addAction" :prefill="{from: getAccountName}"/>
         </div>
 
         <div class="row justify-end q-mt-md">
@@ -250,7 +254,8 @@ export default {
       maxdate: addToDate(today, {days: 14}),
       actions:[],
       review_msig_modal: false,
-      review_msig_modal_content :''
+      review_msig_modal_content :'',
+      allow_advanced: false
     }
   },
   computed:{
@@ -283,9 +288,13 @@ export default {
 
   methods:{
     handleSelection(index){
+      this.allow_advanced = false;
       this.controlled_accounts = this.controlled_accounts.map(ca=>{ca.selected=false; return ca});
       this.controlled_accounts[index].selected=true;
       this.$refs.stepper.next()
+    },
+    unSelectAll(){
+      this.controlled_accounts = this.controlled_accounts.map(ca=>{ca.selected=false; return ca});
     },
 
     addAction(data){
