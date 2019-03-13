@@ -240,10 +240,12 @@ export default {
     debugData,
     actionMaker,
     displayAction,
+  
     draggable
   },
   data () {
     return {
+      customAction: false,
       actionfilter:false,
       reset_form_after_success: true,
       msig_name:'',
@@ -288,6 +290,7 @@ export default {
   },
 
   methods:{
+
     handleSelection(index){
       this.allow_advanced = false;
       this.controlled_accounts = this.controlled_accounts.map(ca=>{ca.selected=false; return ca});

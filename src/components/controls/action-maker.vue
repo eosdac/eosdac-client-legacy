@@ -15,10 +15,10 @@
       </div>
       
       <div v-if="custom_mode.abi.actions" class="row q-mb-md bg-bg2 q-pa-xs" >
-        <q-btn size="10px" :icon="$configFile.icon.action" v-for="(action, i) in custom_mode.abi.actions" :label="action.name" :key="`a${i}`" color="bg1" class="animate-pop q-ma-xs" @click="custom_mode.action_name= action.name" />
+        <q-btn size="10px" :icon="$configFile.icon.action" v-for="(action, i) in custom_mode.abi.actions" :label="action.name" :key="`a${i}`" color="bg1" class="animate-pop q-ma-xs" @click="data_fields=[];custom_mode.action_name= action.name" />
         <q-btn size="10px" title="view abi" icon="mdi-magnify" class="animate-pop q-ma-xs" color="positive" @click="view_abi_modal=true" />
       </div>
-      
+
     </div>
 
 
@@ -38,20 +38,21 @@
               <q-item-main>
 
                 <div v-if="field.type == 'bytes'" class="full-width">
-                  <file-input style="margin-top:20px" v-if="field.name == 'abi'" v-model ="data_fields[i].value" label="Select abi" :asbuffer="false"/>
-                  <file-input style="margin-top:20px" v-if="field.name == 'code'" v-model ="data_fields[i].value" label="Select wasm" :asbuffer="true"/>
+                  <file-input style="margin-top:20px" v-if="field.name == 'abi'" v-model ="field.value" label="Select abi" :asbuffer="false"/>
+                  <file-input style="margin-top:20px" v-if="field.name == 'code'" v-model ="field.value" label="Select wasm" :asbuffer="true"/>
                 </div>
                 <div v-else-if="field.type == 'bool'">
-                  <q-select v-model="data_fields[i].value" :stack-label="field.name" color="primary-light" :dark="getIsDark" :options="[{value:true, label: 'true'}, {value:false, label: 'false'}]"  />
+                  <!-- <q-toggle v-model="data_fields[i].value" :label="field.name" /> -->
+                  <q-select v-model="field.value" :stack-label="field.name" color="primary-light" :dark="getIsDark" :options="[{value:true, label: 'true'}, {value:false, label: 'false'}]"  />
                 </div>
                 <div v-else-if="isNumberType(field.type)">
-                  <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="number" :placeholder="field.type"/>
+                  <q-input class="animate-fade" v-model="field.value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="number" :placeholder="field.type"/>
                 </div>
                 <div v-else-if="field.type=='asset'" >
-                  <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="`${field.name} & symbol`" type="text" :placeholder="field.type"/>
+                  <q-input class="animate-fade" v-model="field.value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="`${field.name} & symbol`" type="text" :placeholder="field.type"/>
                 </div>       
                 <div v-else>
-                  <q-input class="animate-fade" v-model="data_fields[i].value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/>
+                  <q-input class="animate-fade" v-model="field.value"  :name="field.name" ref="input" color="primary-light" :dark="getIsDark" :stack-label="field.name" type="text" :placeholder="field.type"/>
                 </div>
 
               </q-item-main>
@@ -157,7 +158,6 @@ export default {
 
     }
 
-
   },
 
   methods:{
@@ -192,6 +192,7 @@ export default {
 
     async setFieldsModel(contract, action_name, abi=false){
       this.data_fields = [];
+    
       let actions = abi || await this.getAbi(contract);
       let fields = this.getDataFieldsForActionName(actions, action_name);
       if(!fields) return;
@@ -267,9 +268,11 @@ export default {
       if(!action.hex){
         return;
       }
+      
       this.add_action_feedback = `Action added`;
       setTimeout(()=>{this.add_action_feedback = ''}, 1500)
       this.$emit('actiondata', action);
+      
     },
 
     async serializeActionData(action){
@@ -317,7 +320,7 @@ export default {
   },
 
   async mounted(){
-    if(this.account  && this.name ){
+    if(this.account!=''  && this.name!='' ){
       await this.setFieldsModel(this.account, this.name);
     }
     
@@ -325,8 +328,7 @@ export default {
   },
   watch:{
     'custom_mode.action_name': function(){
-      this.setFieldsModel(this.custom_mode.account, this.custom_mode.action_name, this.custom_mode.abi)
-
+        this.setFieldsModel(this.custom_mode.account, this.custom_mode.action_name, JSON.parse(JSON.stringify(this.custom_mode.abi) ) );
     },
 
     name: function(){

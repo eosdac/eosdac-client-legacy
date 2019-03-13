@@ -30,7 +30,7 @@
 
           
         </div>
-        <div v-else>
+        <div v-else class="q-ma-md">
           You do not have any pending payments.
         </div>
       </div>
