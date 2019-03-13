@@ -7,7 +7,7 @@
     <q-stepper color="primary-light" class="bg-bg1 bg-logo" ref="stepper"  contractable>
 
       <!-- step 1 select msig account -->
-      <q-step default name="first" title="Select Msig Account" :subtitle="getSelectedAccount">
+      <q-step default name="first" title="Select Msig Account" :subtitle="getSelectedAccount2.name">
         <div class="q-mb-md text-text2">
             Select an account from which you want to propose a multisignature transaction or specify an individual action. 
         </div>
@@ -16,12 +16,12 @@
 
           <div class="row bg-bg2 q-pa-md ">
 
-            <q-btn-dropdown  dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" @click="actionfilter=false; handleSelection(i)">
+            <q-btn-dropdown :disable="allow_advanced" dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" @click="actionfilter=false; handleSelection(i)">
 
               <q-list  link class="bg-dark"  >
                 <q-item v-for="(la, j) in n.linkedAuths" :key="`la${j}`" @click.native=" actionfilter=j; handleSelection(i)">
                   <q-item-main>
-                    <q-item-tile class="text-text1 q-body-1" label>{{`${la.contract}::${la.action}`}}</q-item-tile>
+                    <q-item-tile class="text-text1 q-body-1" label>{{`${la.contract} > ${la.action}`}}</q-item-tile>
                     <q-item-tile class="text-text2 q-caption" sublabel>{{`@${la.permission}`}}</q-item-tile>
                   </q-item-main>
                   <!-- <q-item-side right icon="info" color="amber" /> -->
@@ -35,8 +35,9 @@
         </div>
 
         <div class="row justify-between q-mt-md" style="min-height:36px">
-          <div><q-btn label="advanced"  :icon="allow_advanced ? 'check': ''" size="sm" flat color="primary-light" @click="allow_advanced=!allow_advanced; unSelectAll()" /></div>
-          <div><q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" v-if="controlled_accounts.find(ca=> ca.selected==true) || allow_advanced" /></div>
+          <q-btn label="advanced"  :icon="allow_advanced ? 'check': ''" size="sm" flat color="primary-light" @click="allow_advanced=!allow_advanced; unSelectAll()" />
+          <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" v-if="controlled_accounts.find(ca=> ca.selected==true) || allow_advanced" >
+          </q-btn>
         </div>
       </q-step>
 
@@ -151,7 +152,7 @@
               <q-item-side icon="mdi-account-key-outline" color="text2" />
               <q-item-main style="margin-left:-5px">
                 <q-item-tile class="text-text1" label>Multisignature Account</q-item-tile>
-                <q-item-tile class="text-text2 q-caption" sublabel>{{getSelectedAccount}}</q-item-tile>
+                <q-item-tile class="text-text2 q-caption" sublabel>{{getSelectedAccount2.name}}</q-item-tile>
               </q-item-main>
             </q-item>
             <q-item class="animate-pop">
@@ -316,8 +317,7 @@ export default {
       let template = JSON.parse(JSON.stringify(msigTrx_template) );
       template.expiration = this.trx_expiration.split('.')[0]; 
       template.actions = this.actions.map(a=>{
-        // a.authorization = [{actor: this.getSelectedAccount2.name, permission: this.getSelectedAccount2.permission}];
-        //replace plain data with hex
+
         if(a.hex){
           a.data = a.hex;
           delete a.hex;
