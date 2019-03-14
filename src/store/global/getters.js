@@ -24,3 +24,7 @@ export function getActiveNetworkName (state) {
 export function getDapp_version (state){
     return state.dapp_version
 }
+
+export function getLocal_storage_version (state){
+    return state.local_storage_version;
+}

@@ -1,10 +1,11 @@
 {
-  "name": "testquasar",
+  "name": "eosdacmemberclient",
   "version": "0.0.5",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "local_storage_version": "0.1",
+  "description": "Toolkit GUI for eosDAC",
+  "productName": "eosDAC Member Client",
   "cordovaId": "org.cordova.quasar.app",
-  "author": "",
+"author": "eosDAC <hello@eosdac.io>",
   "private": true,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0"
