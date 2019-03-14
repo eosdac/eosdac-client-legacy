@@ -30,8 +30,10 @@ export default {
     checkVersionChange(){
       //check if localstorage needs an update
       let stored_version = this.$store.getters['global/getLocal_storage_version'];
-      const version = require('../package.json').local_storage_version;
+      let pj = require('../package.json');
+      const version = pj.local_storage_version;
 
+      this.$store.commit('global/setDapp_version', pj.version ); //store the app version too
 
       if(stored_version === null){
         console.log(`Loaded LS v${version} for the first time`);

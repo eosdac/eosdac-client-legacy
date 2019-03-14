@@ -2,6 +2,14 @@
   <q-page class="q-pa-md bg-logo">
 
     <div class="row gutter-sm">
+
+      <!-- <div class="col-xs-12 col-xl-6">
+        <div  class="bg-bg1 round-borders shadow-5 relative-position overflow-hidden full-height q-pa-md " >
+        Memberclient version: v{{getDapp_version}}
+        Local Storage version: v{{getLocal_storage_version}}
+        </div>
+      </div> -->
+
       <div v-for="(group, j) in groups" class="col-xs-12  col-xl-6" :key="`group_${j}`">
         <div  class="bg-bg1 round-borders shadow-5 relative-position overflow-hidden full-height " >
 
@@ -52,7 +60,6 @@
 
     </div>
 
-    
 
     <debug-data :data="[{'getSettings': getSettings}]" />
   </q-page>
@@ -93,7 +100,10 @@ export default {
     ...mapGetters({
       getSettings: 'user/getSettings',
       getIsDark: 'ui/getIsDark',
-      getSettingByName: 'user/getSettingByName'
+      getSettingByName: 'user/getSettingByName',
+      getLocal_storage_version: 'global/getLocal_storage_version',
+      getDapp_version: 'global/getDapp_version'
+
 
     })
   },
