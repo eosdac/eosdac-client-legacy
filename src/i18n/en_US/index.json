@@ -194,12 +194,13 @@
     "step1": "Select Msig Account",
     "step2": "Add Actions",
     "step3": "Add Info",
-    "step4": "Set Expiration",
+    "step4": "Set Options",
     "step5": "Review & Submit",
     "step1_desc": "Select an account from which you want to propose a multisignature transaction or specify an individual action.",
     "step2_desc":"Add actions to the multisignature transaction.",
     "step3_desc": "Give the msig transaction a title and description",
-    "step4_desc": "Set a date on which the transaction should expire. The transaction will be unexecutable after this date even if all signatures are collected.",
+    "step4_descl": "Set a date on which the transaction should expire. The transaction will be unexecutable after this date even if all signatures are collected.",
+    "step4_descr": "Configure additional options from the msig. Don't change if you're not sure.",
     "step5_desc": "Please review your msig carefully. You can jump back and forth to make changes.",
     "sort_notify": "Sort the actions by dragging.",
     "title": "title",
@@ -211,7 +212,8 @@
     "id_name": "ID/name",
     "summary": "Description",
     "reset": "Reset after submit",
-    "sum_placeholder": "Short info about the transaction"
+    "sum_placeholder": "Short info about the transaction",
+    "msig_delay": "Add a delay for executing the msig in seconds "
   },
 
   "multi_modal": {

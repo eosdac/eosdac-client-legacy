@@ -127,11 +127,24 @@
 
       <!-- step 4 set expiration -->
       <q-step name="fourth" :title="$t('msig_creator.step4')">
-        <div class="q-mb-md text-text2">
-            {{ $t('msig_creator.step4_desc') }}
-        </div>
-        <div>
-        <q-datetime-picker minimal :dark="getIsDark" class="bg-bg1" color="positive" v-model="trx_expiration" :min="mindate" :max="maxdate" type="date" />
+        <div class="row gutter-md">
+          <div class="col-xs-12 col-lg-6">
+            <div>
+              <div class="q-mb-md text-text2">
+                  {{ $t('msig_creator.step4_descl') }}
+              </div>
+              <q-datetime-picker minimal :dark="getIsDark" class="bg-bg2" color="positive" v-model="trx_expiration" :min="mindate" :max="maxdate" type="date" />
+            </div>
+          </div>
+          <div class="col-xs-12 col-lg-6">
+            <div>
+              <div class="q-mb-md text-text2">
+                  {{ $t('msig_creator.step4_descr') }}
+              </div>
+              <q-input type="number" :dark="getIsDark" v-model="msig_delay" :stack-label="$t('msig_creator.msig_delay')"/>
+            </div>
+          </div>
+          
         </div>
         <div class="row justify-end q-mt-md">
           <q-stepper-navigation>
@@ -248,6 +261,7 @@ export default {
       customAction: false,
       actionfilter:false,
       reset_form_after_success: true,
+      msig_delay:0,
       msig_name:'',
       msig_title:'',
       msig_description:'',
@@ -318,6 +332,7 @@ export default {
 
     constructMsigTransaction(){
       let template = JSON.parse(JSON.stringify(msigTrx_template) );
+      template.delay_sec = this.msig_delay;
       template.expiration = this.trx_expiration.split('.')[0]; 
       template.actions = this.actions.map(a=>{
 
@@ -332,8 +347,9 @@ export default {
 
     openReview_Msig_Modal(){
       let template = JSON.parse(JSON.stringify(msigTrx_template) );
+      template.delay_sec = this.msig_delay;
       template.expiration = this.trx_expiration.split('.')[0];
-      template.actions = this.actions
+      template.actions = this.actions;
       this.review_msig_modal_content = prettyHtml(template);
       this.review_msig_modal = true;
     },
