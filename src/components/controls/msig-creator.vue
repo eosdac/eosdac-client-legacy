@@ -43,8 +43,11 @@
 
       <!-- step 2 add actions -->
       <q-step  name="second" title="Add Actions" class="text-text1" subtitle="" >
-        <div class="q-mb-md text-text2">
-            Add actions to the multisignature transaction. <span v-if="actions.length >1" class="animate-fade">Sort the actions by dragging.</span>
+        <div class="q-mb-md text-text2 row justify-between items-center" style="min-height:35px">
+            <div>Add actions to the multisignature transaction. <span v-if="actions.length >1" class="animate-fade">Sort the actions by dragging.</span></div>
+            <!-- <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" label="Next" >
+              <q-chip floating count="5" >{{actions.length}}</q-chip>
+            </q-btn> -->
         </div>
 
         <div class="row q-mb-md bg-bg2 q-pa-md q-mt-md round-borders" style="min-height:80px">
@@ -79,7 +82,7 @@
             <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
             <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" label="Next" >
               <q-chip floating count="5" >{{actions.length}}</q-chip>
-              </q-btn>
+            </q-btn>
           </q-stepper-navigation>
         </div>
       </q-step>

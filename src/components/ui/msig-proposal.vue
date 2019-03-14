@@ -26,6 +26,7 @@
     </div>
 
     <div class="row q-pa-md justify-between relative-position items-center">
+     
       <div v-if="msig.status == 1 || msig.status == 2" @click="approvals_modal = true" class="cursor-pointer">
           <div class="q-caption text-text2" >Received Approvals:</div>
           <div class="text-text1 q-title">
@@ -133,7 +134,6 @@
           </div>
         </q-item-main>
         <q-item-side right v-if="msig.status == 1 || msig.status == 2">
-
           <div class="q-caption text-text2" >Received Approvals:</div>
           <div class="text-text1 q-display-1">
             <span><q-spinner v-if="provided_approvals==null" color="primary" size="25px" style="margin-top:-4px" /></span>
@@ -216,12 +216,14 @@
 <script>
 
 import Actionparser from 'components/ui/action-parser';
+import profilePic from 'components/ui/profile-pic';
 
 import {mapGetters} from 'vuex';
 export default {
   name: 'Msigproposal',
   components: {
-    Actionparser
+    Actionparser,
+    profilePic
   },
 
   props: {

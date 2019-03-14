@@ -1,8 +1,8 @@
 <template>
 <div>
 <transition appear enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
-  <div appear class="bg-bg1 q-pa-sm round-borders q-ma-xs">
-    <q-btn v-if="viewable" size="sm" dense  class="q-mr-xs text-text1" icon="pageview" flat title="view action data" >
+  <div appear class="bg-bg1 q-pa-sm round-borders q-ma-xs" >
+    <q-btn v-if="viewable" size="sm" dense  class="q-mr-xs text-text1" icon="pageview" flat title="view action data">
       <q-popover :class="{'bg-dark': getIsDark}">
         <q-list>
           <q-item  v-for="(value, key) in action.data" :key="`_${key}`">
@@ -23,6 +23,7 @@
         </q-list>
       </q-popover>
     </q-btn>
+    <!-- <q-btn size="sm" dense  class="q-mr-xs text-text1" icon="edit" flat @click="edit_action_modal=true" title="edit action" /> -->
     <span class="text-text2">{{action.account}}</span>
     <div style="display:inline-block " class="fa-arrow-right text-text1">></div>
     <span class="text-text2">{{action.name}}</span>
@@ -30,26 +31,49 @@
 
   </div>
 </transition>
+
+    <q-modal minimized v-model="edit_action_modal">
+      <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
+        <span>ABI:</span>
+        <q-btn icon="close" @click="edit_action_modal = false;" class="no-shadow"/>
+      </div>
+      <div class="q-pa-md bg-bg2 text-text1">
+        <!-- <action-maker :account="getaction.account" :name="getaction.name" :prefill="getaction.data" /> -->
+        <!-- <div v-html="prettyHtml(abi)" class="overflow-hidden" /> -->
+      </div>
+    </q-modal>
+
+
 </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
+import actionMaker from 'components/controls/action-maker';
 export default {
   name: 'displayAction',
+  components:{
+    actionMaker
+  },
   props:{
     action: Object,
     closable: Boolean,
     viewable: Boolean
   },
   data () {
-    return {}
+    return {
+      edit_action_modal: false
+    }
   },
   computed:{
     ...mapGetters({
       getIsDark: 'ui/getIsDark',
-    })
+    }),
+    getaction(){
+      return this.action;
+    }
   }
+
 }
 </script>
 

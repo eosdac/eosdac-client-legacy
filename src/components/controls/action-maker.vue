@@ -15,7 +15,7 @@
       </div>
       
       <div v-if="custom_mode.abi.actions" class="row q-mb-md bg-bg2 q-pa-xs" >
-        <q-btn size="10px" :icon="$configFile.icon.action" v-for="(action, i) in custom_mode.abi.actions" :label="action.name" :key="`a${i}`" color="bg1" class="animate-pop q-ma-xs" @click="data_fields=[];custom_mode.action_name= action.name" />
+        <q-btn size="10px" :icon="$configFile.icon.action" v-for="(action, i) in custom_mode.abi.actions" :label="action.name" :key="`a${i}`" color="bg1" class="animate-pop q-ma-xs" @click="custom_mode.action_name= action.name" />
         <q-btn size="10px" title="view abi" icon="mdi-magnify" class="animate-pop q-ma-xs" color="positive" @click="view_abi_modal=true" />
       </div>
 
@@ -301,6 +301,7 @@ export default {
     },
 
     async custom_mode_parse_actions(accountname){
+      this.custom_mode.action_name='';
       if(!this.$helper.isAccountname(accountname)){
         console.log(`"${accountname}" is not a valid accountname`);
         return false;
@@ -327,8 +328,11 @@ export default {
 
   },
   watch:{
-    'custom_mode.action_name': function(){
+    'custom_mode.action_name': function(oldv, newv){
+      if(oldv != newv){
         this.setFieldsModel(this.custom_mode.account, this.custom_mode.action_name, JSON.parse(JSON.stringify(this.custom_mode.abi) ) );
+      }
+        
     },
 
     name: function(){
