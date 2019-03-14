@@ -1,15 +1,15 @@
 <template>
 <div class="text-text1">
   <div class="row relative-position justify-start q-mb-md">
-      <h4 class="q-display-1 text-text2 q-my-none">Create Msig Transaction</h4>
+      <h4 class="q-display-1 text-text2 q-my-none">{{ $t('msig_creator.page_title') }}</h4>
   </div>
   <div class="bg-bg1 round-borders shadow-5 q-pa-md">
     <q-stepper color="primary-light" class="bg-bg1 bg-logo" ref="stepper"  contractable>
 
       <!-- step 1 select msig account -->
-      <q-step default name="first" title="Select Msig Account" :subtitle="getSelectedAccount2.name">
+      <q-step default name="first" :title="$t('msig_creator.step1')" :subtitle="getSelectedAccount2.name">
         <div class="q-mb-md text-text2">
-            Select an account from which you want to propose a multisignature transaction or specify an individual action. 
+             {{ $t('msig_creator.step1_desc') }}
         </div>
 
         <div>
@@ -35,26 +35,23 @@
         </div>
 
         <div class="row justify-between q-mt-md" style="min-height:36px">
-          <q-btn label="advanced"  :icon="allow_advanced ? 'check': ''" size="sm" flat color="primary-light" @click="allow_advanced=!allow_advanced; unSelectAll()" />
-          <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" v-if="controlled_accounts.find(ca=> ca.selected==true) || allow_advanced" >
+          <q-btn :label="$t('msig_creator.advanced')"  :icon="allow_advanced ? 'check': ''" size="sm" flat color="primary-light" @click="allow_advanced=!allow_advanced; unSelectAll()" />
+          <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" :label="$t('msig_creator.next')" v-if="controlled_accounts.find(ca=> ca.selected==true) || allow_advanced" >
           </q-btn>
         </div>
       </q-step>
 
       <!-- step 2 add actions -->
-      <q-step  name="second" title="Add Actions" class="text-text1" subtitle="" >
+      <q-step  name="second" :title="$t('msig_creator.step2')" class="text-text1" subtitle="" >
         <div class="q-mb-md text-text2 row justify-between items-center" style="min-height:35px">
-            <div>Add actions to the multisignature transaction. <span v-if="actions.length >1" class="animate-fade">Sort the actions by dragging.</span></div>
-            <!-- <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" label="Next" >
-              <q-chip floating count="5" >{{actions.length}}</q-chip>
-            </q-btn> -->
+            <div>{{ $t('msig_creator.step2_desc') }}<span v-if="actions.length >1" class="animate-fade">{{ $t('msig_creator.sort_notify') }}</span></div>
         </div>
 
         <div class="row q-mb-md bg-bg2 q-pa-md q-mt-md round-borders" style="min-height:80px">
           <draggable v-model="actions" group="actions" @start="drag=true" @end="drag=false" style="display:flex">
             <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer" />
           </draggable>
-          <span class="text-negative text-weight-light" v-if="!actions.length">No actions added yet.</span>
+          <span class="text-negative text-weight-light" v-if="!actions.length">{{ $t('msig_creator.no_actions') }}</span>
         </div>
 
         <div v-if="getSelectedAccount">
@@ -79,8 +76,8 @@
 
         <div class="row justify-end q-mt-md">
           <q-stepper-navigation>
-            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
-            <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" label="Next" >
+            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" :label="$t('msig_creator.back')" />
+            <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" :label="$t('msig_creator.next')" >
               <q-chip floating count="5" >{{actions.length}}</q-chip>
             </q-btn>
           </q-stepper-navigation>
@@ -88,14 +85,14 @@
       </q-step>
 
       <!-- step 3 add description -->
-      <q-step default name="third" title="Add info" >
+      <q-step default name="third" :title="$t('msig_creator.step3')" >
         <div class="q-mb-md text-text2">
-            Give the msig transaction a title and description
+            {{ $t('msig_creator.step3_desc') }}
         </div>
         <div class="row gutter-md">
           <div class="col-xs-12 col-md-6">
             <div class="full-height">
-              <q-input type="text" :dark="getIsDark" maxlength="70" v-model="msig_title" stack-label="Title" placeholder="title" class="q-mb-md" />
+              <q-input type="text" :dark="getIsDark" maxlength="70" v-model="msig_title" stack-label="Title" :placeholder="$t('msig_creator.title')" class="q-mb-md" />
 
             </div>
           </div>
@@ -103,16 +100,16 @@
           <div class="col-xs-12 col-md-6">
             <div class="full-height">
               <q-item class="no-padding">
-                <q-btn icon="refresh" flat color="primary-light" title="generate new id" @click="msig_name = $helper.randomName();" />
+                <q-btn icon="refresh" flat color="primary-light" :title="$t('msig_creator.new_id')" @click="msig_name = $helper.randomName();" />
                 <q-item-main class="q-pa-md">
-                  <q-input readonly hide-underline :dark="getIsDark" v-model="msig_name" stack-label="ID/Name" placeholder="msig name" />
+                  <q-input readonly hide-underline :dark="getIsDark" v-model="msig_name" :stack-label="$t('msig_creator.id_name')" />
                 </q-item-main>
               </q-item>
             </div>
           </div>
           <div class="col-xs-12">
             <div class="full-height">
-              <q-input type="textarea"  :max-height="200" :dark="getIsDark" v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" />
+              <q-input type="textarea"  :max-height="200" :dark="getIsDark" v-model="msig_description" :stack-label="$t('msig_creator.summary')" :placeholder="$t('msig_creator.sum_placeholder')" />
 
             </div>
           </div>
@@ -120,8 +117,8 @@
 
         <div class="row justify-end">
           <q-stepper-navigation >
-            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
-            <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" v-if="msig_title && msig_name && msig_description" />
+            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" :label="$t('msig_creator.back')"  />
+            <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" :label="$t('msig_creator.next')"  v-if="msig_title && msig_name && msig_description" />
           </q-stepper-navigation>
         </div>
       </q-step>
@@ -129,25 +126,25 @@
 
 
       <!-- step 4 set expiration -->
-      <q-step name="fourth" title="Set Exipiration">
+      <q-step name="fourth" :title="$t('msig_creator.step4')">
         <div class="q-mb-md text-text2">
-            Set a date on which the transaction should expire. The transaction will be unexecutable after this date even if all signatures are collected.
+            {{ $t('msig_creator.step4_desc') }}
         </div>
         <div>
         <q-datetime-picker minimal :dark="getIsDark" class="bg-bg1" color="positive" v-model="trx_expiration" :min="mindate" :max="maxdate" type="date" />
         </div>
         <div class="row justify-end q-mt-md">
           <q-stepper-navigation>
-            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
-            <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" />
+            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" :label="$t('msig_creator.back')" />
+            <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" :label="$t('msig_creator.next')" />
           </q-stepper-navigation>
         </div>
       </q-step>
 
       <!-- step 5 review and submit -->
-      <q-step name="fifth" title="Review & Submit" active-icon="remove_red_eye">
+      <q-step name="fifth" :title="$t('msig_creator.step5')" active-icon="remove_red_eye">
         <div class="q-mb-md text-text2">
-            Please review your msig carefully. You can jump back and forth to make changes. 
+            {{ $t('msig_creator.step4_desc') }}
         </div>
         <div class="row justify-between">
           <div class="row">
@@ -161,19 +158,19 @@
             <q-item class="animate-pop">
               <q-item-side icon="timer" color="text2" />
               <q-item-main style="margin-left:-5px">
-                <q-item-tile class="text-text1" label>Expiration</q-item-tile>
+                <q-item-tile class="text-text1" label>{{ $t('msig_creator.expiration') }}</q-item-tile>
                 <q-item-tile class="text-text2 q-caption" sublabel>{{trx_expiration}}</q-item-tile>
               </q-item-main>
             </q-item>
             <q-item class="animate-pop">
               <q-item-side :icon="$configFile.icon.action" color="text2" />
               <q-item-main style="margin-left:-5px">
-                <q-item-tile class="text-text1" label>Actions</q-item-tile>
+                <q-item-tile class="text-text1" label>{{ $t('msig_creator.actions') }}</q-item-tile>
                 <q-item-tile class="text-text2 q-caption" sublabel>{{actions.length}}</q-item-tile>
               </q-item-main>
             </q-item>
           </div>
-          <q-checkbox :dark="getIsDark" class="text-text2" color="primary-light" v-model="reset_form_after_success" left-label label="Reset after submit" />
+          <q-checkbox :dark="getIsDark" class="text-text2" color="primary-light" v-model="reset_form_after_success" left-label :label="$t('msig_creator.reset')" />
         </div>
 
         <div class="row q-pa-md q-mt-md bg-bg2 round-borders">
@@ -183,7 +180,7 @@
         <div class="row justify-between  items-center q-mt-lg ">
           <q-btn label="view full Msig" icon="pageview" class="q-my-xs" color="primary" @click="openReview_Msig_Modal" />
           <div class="q-my-xs">
-            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
+            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" :label="$t('msig_creator.back')" />
             <q-btn color="positive" class="animate-pop" @click="proposeMsig" label="submit" />
           </div>
 

@@ -186,6 +186,34 @@
   "markdown_viewer": {
     "select_text_to_edit": "Highlight the text you want to edit."
   },
+  "msig_creator":{
+    "actions": "Actions",
+    "expiration": "Expiration",
+    "page_title": "Create Msig Transaction",
+    
+    "step1": "Select Msig Account",
+    "step2": "Add Actions",
+    "step3": "Add Info",
+    "step4": "Set Expiration",
+    "step5": "Review & Submit",
+    "step1_desc": "Select an account from which you want to propose a multisignature transaction or specify an individual action.",
+    "step2_desc":"Add actions to the multisignature transaction.",
+    "step3_desc": "Give the msig transaction a title and description",
+    "step4_desc": "Set a date on which the transaction should expire. The transaction will be unexecutable after this date even if all signatures are collected.",
+    "step5_desc": "Please review your msig carefully. You can jump back and forth to make changes.",
+    "sort_notify": "Sort the actions by dragging.",
+    "title": "title",
+    "back": "Back",
+    "next": "Next",
+    "no_actions": "No actions added yet.",
+    "advanced": "advanced",
+    "new_id": "generate new id",
+    "id_name": "ID/name",
+    "summary": "Description",
+    "reset": "Reset after submit",
+    "sum_placeholder": "Short info about the transaction"
+  },
+
   "multi_modal": {
     "register_as_dac_member": "REGISTER AS A DAC-MEMBER",
     "registration": "Registration",

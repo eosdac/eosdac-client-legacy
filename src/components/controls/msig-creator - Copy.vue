@@ -1,7 +1,7 @@
 <template>
 <div class="text-text1">
   <div class="row relative-position justify-start q-mb-md">
-      <h4 class="q-display-1 text-text2 q-my-none">Create Msig Transaction</h4>
+      <h4 class="q-display-1 text-text2 q-my-none">{{ $t('msig_creator.step1') }}</h4>
   </div>
   <div class="bg-bg1 round-borders shadow-5 q-pa-md">
     <q-stepper color="primary-light" class="bg-bg1 bg-logo" ref="stepper"  contractable>
