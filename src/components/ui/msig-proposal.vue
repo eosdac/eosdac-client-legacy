@@ -92,8 +92,8 @@
       </div>
     <div v-if="!read_only" class="q-mt-md">  
         <q-btn v-if="!isApproved" class="full-width q-mb-md" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
-        <q-btn v-if="isApproved" class="full-width q-mb-md" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
-        <q-btn v-if="isCreator" class="full-width q-mb-md" color="negative" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
+        <q-btn v-if="isApproved" class="full-width q-mb-md" color="negative" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
+        <q-btn v-if="isCreator" class="full-width q-mb-md" flat color="negative" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
         <q-btn v-if="isExecutable" class="full-width q-mb-md" color="info" label="execute" />
     </div>
 
@@ -164,8 +164,8 @@
           <div v-if="msig.status == 1 || msig.status == 2" class="row justify-between">
             <span v-if="!read_only">
               <q-btn v-if="!isApproved" class="on-left" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
-              <q-btn v-if="isApproved" class="on-left" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
-              <q-btn v-if="isCreator" class="on-left" color="negative" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
+              <q-btn v-if="isApproved" class="on-left" color="negative" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
+              <q-btn v-if="isCreator" class="on-left" flat color="negative" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
               <q-btn v-if="isExecutable" color="info" label="execute" @click="executeProposal(msig.proposer, msig.proposal_name)" />
             </span>
             <span>

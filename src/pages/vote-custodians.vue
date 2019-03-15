@@ -67,7 +67,7 @@
   <!-- second column -->
   <div class="col-xs-12 col-xl-4" >
     <div>
-      <div class="q-display-1 q-mb-md">{{ $t('vote_custodians.my_votes') }} <span class="text-text2">- {{getSelectedCand.length}}/{{maxvotes}}</span></div>
+      <div class="q-display-1 q-mb-md">{{ $t('vote_custodians.my_votes') }} <span class="text-text2">- {{getSelectedCand.length}}/{{getMaxVotes}}</span></div>
       <p class="text-text2 q-body-1">{{ $t('vote_custodians.description_side') }}</p>
 
       <q-card id="votebox" class="q-pa-lg q-mt-md bg-bg1 bg-logo">
@@ -123,7 +123,7 @@
     </div>
   </q-modal>
 
-
+{{getCustodianConfig}}
 
 </div><!-- end wrapper -->
 
@@ -165,7 +165,6 @@ export default {
         items_per_page: 24
       },
       filter : '',
-      maxvotes : 5,
       oldvotes : [],
       votesdidchange : false
     }
@@ -177,12 +176,19 @@ export default {
       getTokenBalance: 'user/getDacBalance',
       getCandidates: 'dac/getCandidates',
       getDacVotes: 'user/getDacVotes',
-      getIsDark: 'ui/getIsDark'
+      getIsDark: 'ui/getIsDark',
+      getCustodianConfig: 'dac/getCustodianConfig'
       // getMemberRoles: 'account/getMemberRoles'
     }),
 
     getSelectedCand(){
       return this.custodians.filter(x => x.selected == true);
+    },
+
+    getMaxVotes(){
+      if(this.getCustodianConfig.maxvotes){
+        return this.getCustodianConfig.maxvotes
+      }
     },
 
     paginate(){
@@ -234,7 +240,7 @@ export default {
 
     addToVoteList(name, init=false){
       let selected = this.custodians.filter(x => x.selected == true);
-      if(selected.length < 5){//todo get this var out of contract config
+      if(selected.length < this.getMaxVotes){
         let cand = this.custodians.find(x => x.candidate_name === name);
         if(cand){
           cand.selected = true;

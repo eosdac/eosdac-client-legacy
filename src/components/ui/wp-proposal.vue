@@ -1,5 +1,5 @@
 <template>
-  <div v-if="wp.key" class="q-mb-md q-pa-md bg-bg1 round-borders shadow-5">
+  <div v-if="wp.key && show" class="q-mb-md q-pa-md bg-bg1 round-borders shadow-5">
     <div><profile-pic :accountname="wp.proposer" /></div>
     <div>{{wp.key}}</div>
     <div>{{wp.title}}</div>
@@ -31,9 +31,21 @@
         <q-btn  v-if="getVoterStatus==2 || getVoterStatus==0" class="on-right"  color="positive" label="Approve" @click="voteprop('voteApprove')"  />
         <q-btn  v-if="getVoterStatus==1 || getVoterStatus==0" class="on-right"  color="negative" label="Deny" @click="voteprop('voteDeny')"  />
       </div>
-      <div v-if="wp.state==1">
+      <div v-if="wp.state==2">
         <q-btn  class="on-right"  color="positive" label="Approve Claim" @click="voteprop('claimApprove')"  />
         <q-btn  class="on-right"  color="negative" label="Deny Claim" @click="voteprop('claimDeny')"  />
+        <q-btn   v-if="getIsArbitrator" class="on-right"  flat color="positive" label="arb approve" @click="arbApprove()" />
+      </div>
+      <div v-if="wp.state==1">
+        Work is being executed
+      </div>
+      <div v-if="getIsCreator">
+        <q-btn   class="on-right"  flat color="negative" label="cancel" @click="cancelProp()"  />
+        <q-btn   class="on-right"  flat color="info" label="Start work" @click="startWork()" />
+        <q-btn   class="on-right"  flat color="info" label="complete work" @click="completeWork()" />
+      </div>
+      <div >
+        
       </div>
     </div>
 
@@ -55,6 +67,11 @@ export default {
       default: ()=>{ return {} }
     }
   },
+  data () {
+    return {
+      show: true
+    }
+  },
   computed:{
     ...mapGetters({
       getAccountName: 'user/getAccountName',
@@ -68,6 +85,9 @@ export default {
     getIsCreator(){
       return this.getAccountName === this.wp.proposer;
     },
+    getIsArbitrator(){
+      return this.getAccountName === this.wp.arbitrator;
+    },
     getVoterStatus(){
       let myvote = this.wp.votes.find(v => v.voter==this.getAccountName);
       if(!myvote){
@@ -79,9 +99,7 @@ export default {
       }
     }
   },
-  data () {
-    return {}
-  },
+
   methods:{
 
     async voteprop(votetype){
@@ -112,6 +130,69 @@ export default {
         console.log(result);
       }
 
+    },
+    async cancelProp(){
+      let actions = [{
+        account: this.$configFile.get('wpcontract'),
+        name: "cancel",
+        authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
+        data: {
+          proposal_id: Number(this.wp.key),
+        }
+      }];
+
+      let result = await this.$store.dispatch('user/transact', {actions: actions});
+      if(result){
+        this.show = false;
+        console.log(result);
+      }
+    },
+    async startWork(){
+      let actions = [{
+        account: this.$configFile.get('wpcontract'),
+        name: "startwork",
+        // authorization: [ {actor: this.getAccountName, permission: 'active'}],
+        data: {
+          proposal_id: Number(this.wp.key),
+        }
+      }];
+
+      let result = await this.$store.dispatch('user/transact', {actions: actions});
+      if(result){
+        console.log(result);
+      }
+    },
+    async completeWork(){
+      let actions = [{
+        account: this.$configFile.get('wpcontract'),
+        name: "completework",
+        // authorization: [ {actor: this.getAccountName, permission: 'active'}],
+        data: {
+          proposal_id: Number(this.wp.key),
+        }
+      }];
+
+      let result = await this.$store.dispatch('user/transact', {actions: actions});
+      if(result){
+        console.log(result);
+      }
+    },
+
+    async arbApprove(){
+      let actions = [{
+        account: this.$configFile.get('wpcontract'),
+        name: "arbapprove",
+        // authorization: [ {actor: this.getAccountName, permission: 'active'}],
+        data: {
+          arbitrator: this.getAccountName,
+          proposal_id: Number(this.wp.key),
+        }
+      }];
+
+      let result = await this.$store.dispatch('user/transact', {actions: actions});
+      if(result){
+        console.log(result);
+      }
     }
 
 
@@ -119,6 +200,8 @@ export default {
 
 }
 
+
+//  wp status: pending_approval == 0, work_in_progress == 1 after approved when a worker is working on the WP, and pending_claim == 2 
 
 // enum VoteType {
 //             none = 0,
