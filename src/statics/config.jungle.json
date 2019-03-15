@@ -67,6 +67,7 @@
         "default_eos_node": "https://jungle2.cryptolions.io:443",
         "bpnodes": "https://eosdac.io/topnodes.json",
         "memberclient": "http://ns3119712.ip-51-38-42.eu:3000",
+        "memberclient_state_api": "http://ex2.eosdac.io:8383/v1/eosdac",
         "firehose": "ws://jungle.eosdac.io:1337"
 
     },

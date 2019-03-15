@@ -142,6 +142,8 @@
                   {{ $t('msig_creator.step4_descr') }}
               </div>
               <q-input type="number" :dark="getIsDark" v-model="msig_delay" :stack-label="$t('msig_creator.msig_delay')"/>
+              <!-- <div class="text-text1">Add/remove requested authorizations</div> -->
+              <!-- <auth-display class="text-text1 bg-bg2" v-model="msig_requested"  /> -->
             </div>
           </div>
           
@@ -201,6 +203,7 @@
       </q-step>
     </q-stepper>
   </div>
+  <!-- {{msig_requested}} -->
   <!-- review msig modal -->
     <q-modal maximized v-model="review_msig_modal">
       <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
@@ -226,6 +229,7 @@
 
 <script>
 const prettyHtml = require('json-pretty-html').default;
+import authDisplay from 'components/ui/auth-display'
 import {mapGetters} from 'vuex';
 import debugData from 'components/ui/debug-data';
 import actionMaker from 'components/controls/action-maker';
@@ -253,7 +257,7 @@ export default {
     debugData,
     actionMaker,
     displayAction,
-  
+    authDisplay,
     draggable
   },
   data () {
@@ -261,6 +265,7 @@ export default {
       customAction: false,
       actionfilter:false,
       reset_form_after_success: true,
+      msig_requested: [{"actor":"boiboiboiboi","permission":"active"}],
       msig_delay:0,
       msig_name:'',
       msig_title:'',
@@ -359,6 +364,7 @@ export default {
         let req = {actor: c.cust_name, permission: 'active'};
         return req;
       });
+      console.log(requested)
       return requested;
     },
 

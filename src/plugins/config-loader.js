@@ -40,6 +40,8 @@ class configLoader {
         return this.configFile.external.explorer;
       case 'memberclientapi':
         return this.configFile.api.memberclient;
+      case 'memberclientstateapi':
+        return this.configFile.api.memberclient_state_api;
       case 'bpnodeapi':
         return this.configFile.api.bpnodes;
       case 'firehoseapi':

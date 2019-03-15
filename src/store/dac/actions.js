@@ -103,3 +103,14 @@ export async function fetchCustodianContractState({commit, dispatch, state}){
 
 }
 
+export async function fetchWorkerProposals({rootState}, payload={status:1}){
+    //status 1: active; 2: executed; 0: cancelled
+    let url = this._vm.$configFile.get('memberclientstateapi');
+    return this._vm.$axios.get(url+'/get_proposals?state=0&limit=10&skip=1', payload).then(r => {
+        // console.log(r.data)
+        return r.data;
+      }).catch(e => {
+        console.log('could not load worker proposals from api');
+        return [];});
+}
+
