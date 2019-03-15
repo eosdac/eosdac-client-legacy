@@ -37,11 +37,11 @@ export default {
 
     async voteprop(votetype){
       const map = {voteApprove: 1, voteDeny: 2, claimApprove: 3, claimDeny: 4};
-      
+
       let action = {
-        account: "dacproposals",
+        account: this.$configFile.get('wpcontract'),
         name: "voteprop",
-        authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+        authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
         data: {
           custodian: this.getAccountName,
           proposal_id: wp.key,

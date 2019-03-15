@@ -383,7 +383,7 @@ export default {
         {
           account: this.dacmsig, 
           name: 'approved',
-          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
           data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
@@ -413,7 +413,7 @@ export default {
         {
           account: this.dacmsig, 
           name: 'unapproved',
-          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
           data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
@@ -441,7 +441,7 @@ export default {
         {
           account: this.dacmsig, 
           name: 'executed',
-          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
           data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
@@ -472,7 +472,7 @@ export default {
         {
           account: this.dacmsig, 
           name: 'cancelled',
-          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
           data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
