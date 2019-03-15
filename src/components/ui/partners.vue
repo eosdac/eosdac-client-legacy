@@ -1,6 +1,6 @@
 <template>
-  <div v-if="partners.length">
-    <a v-for="(p, i) in partners"  class="on-left" :key ="i" :href="p.url" target="_blank" style=" display:inline-block">
+  <div v-if="items.length">
+    <a v-for="(p, i) in items"  class="on-left" :key ="i" :href="p.url" target="_blank" style=" display:inline-block">
       <div class="row items-center">
       <img :style="style" :src="p.logo" />
       <span>{{p.name}}</span>
@@ -11,16 +11,11 @@
 
 <script>
 
-import credits from '../../statics/credits.json'
 export default {
-  name: 'partnerbp',
+  name: 'partners',
   props: {
     size: String,
-  },
-  data() {
-    return {
-      partners : credits.bps
-    }
+    items: Array
   },
   computed:{
       style () {
@@ -32,7 +27,6 @@ export default {
 
   },
   mounted(){
-
   }
 
 }

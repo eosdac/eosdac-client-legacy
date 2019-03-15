@@ -24,7 +24,7 @@
       <span style="font-size:60px;opacity: 0.7;color:black">AND BPs!!</span>
     </div>
     <div class="row q-pa-lg relative-position retrobox "  >
-      <partnerbps class="retrotext animate-pop" size="30px" />
+      <partners class="retrotext animate-pop" size="30px" :items="bps" />
     </div>
 
     <div class="relative-position retrotext row items-center q-mt-md" >
@@ -37,7 +37,7 @@
       <img class="on-right" src="../statics/gifs/heart.gif" style="height:40px" />
     </div>
     <div class="row q-pa-lg relative-position retrobox retrotext" style="font-size:20px; color:grey">
-      <partnerothers class="retrotext animate-pop" size="30px" />
+      <partners class="retrotext animate-pop" size="30px" :items="others" />
     </div>
 
     <div class="retrotext relative-position full-width q-mt-xl" style="font-size:20px; text-align:right">© eosDAC</div>
@@ -62,14 +62,13 @@
 
     <div class=" q-pa-lg q-mt-md relative-position round-borders bg-bg1 shadow-5">
       <div class="q-mb-md">Partner BPs</div>
-      <partnerbps size="20px"/>
+      <partners size="20px" :items="bps" />
     </div>
 
     <div class=" q-pa-lg relative-position round-borders bg-bg1 shadow-5 q-mt-md">
       <div class="q-mb-md">Partner</div>
-      <partnerothers size="20px"/>
+      <partners size="20px" :items="others" />
     </div>
-
   </div>
   <!-- --- -->
 
@@ -81,8 +80,7 @@
 
 <script>
 import credits from '../statics/credits.json'
-import Partnerbps from 'components/ui/partner_bp'
-import Partnerothers from 'components/ui/partner_others'
+import Partners from 'components/ui/partners'
 
 const audio = new Audio('../statics/sounds/retro.mp3');
 audio.addEventListener('ended', function() {
@@ -90,22 +88,19 @@ audio.addEventListener('ended', function() {
     this.play();
 }, false);
 
-import {
-  mapGetters
-} from 'vuex'
+import {mapGetters} from 'vuex'
 export default {
   name: 'credits',
   components: {
-      Partnerbps,
-      Partnerothers
+      Partners,
   },
   data() {
     return {
       // isPlaying: this.getRetroStyle,
       isPlaying: false,
       dac_workers: credits.dac_workers,
-      others: credits.others
-
+      others: credits.others,
+      bps: credits.bps
     }
   },
   computed: {
@@ -131,7 +126,7 @@ export default {
   },
 
   mounted(){
-
+    
     if(this.getRetroStyle){
       this.playAudio();
     }
