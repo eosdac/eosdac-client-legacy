@@ -19,7 +19,6 @@
               <q-item-tile label>Votes</q-item-tile>
               <div v-for="(vote,i) in getVotes" :key="`v${i}`" class="row justify-start" >
                 <profile-pic  :accountname="vote.voter"  :scale="0.5"/>
-                <profile-pic  :accountname="vote.voter"  :scale="0.5" />
               </div>
             </q-item-main>
           </q-item>
