@@ -5,6 +5,20 @@
     <div>{{wp.summary}}</div>
     <div>{{wp.pay_amount}}</div>
     <div>{{getVotes}}</div>
+    <div>{{wp.state}}</div>
+    <div>{{getIsCreator}}</div>
+
+    <div v-if="!read_only">
+      <div v-if="wp.state==0">
+        <q-btn  class="on-left"  color="positive" label="Approve" @click="voteprop('voteApprove')"  />
+        <q-btn  class="on-left"  color="negative" label="Deny" @click="voteprop('voteDeny')"  />
+      </div>
+      <div v-if="wp.state==1">
+        <q-btn  class="on-left"  color="positive" label="Approve Claim" @click="voteprop('claimApprove')"  />
+        <q-btn  class="on-left"  color="negative" label="Deny Claim" @click="voteprop('claimDeny')"  />
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -28,6 +42,9 @@ export default {
       if(this.wp.votes){
         return this.wp.votes;
       }
+    },
+    getIsCreator(){
+      return this.getAccountName === this.wp.proposer;
     }
   },
   data () {
@@ -38,16 +55,16 @@ export default {
     async voteprop(votetype){
       const map = {voteApprove: 1, voteDeny: 2, claimApprove: 3, claimDeny: 4};
 
-      let action = {
+      let actions = [{
         account: this.$configFile.get('wpcontract'),
         name: "voteprop",
         authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
         data: {
           custodian: this.getAccountName,
-          proposal_id: wp.key,
+          proposal_id: Number(this.wp.key),
           vote: map[votetype]
         }
-      };
+      }];
 
       let result = await this.$store.dispatch('user/transact', {actions: actions});
       if(result){
