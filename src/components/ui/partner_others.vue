@@ -13,13 +13,13 @@
 
 import credits from '../../statics/credits.json'
 export default {
-  name: 'partnerbp',
+  name: 'partnerothers',
   props: {
     size: String,
   },
   data() {
     return {
-      partners : credits.bps
+      partners : credits.others
     }
   },
   computed:{

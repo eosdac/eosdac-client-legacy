@@ -3,14 +3,14 @@
   <!-- retro style -->
   <div class="retro_bg full-height full-width absolute"  v-bind:class="{ 'fadeit': !isPlaying }" ></div>
   <div v-if="isPlaying" class="q-pa-md ">
-    
+
     <div class="row justify-between q-mb-lg">
       <div class="relative-position retrotext animate-pop" style="font-size:8vw; opacity: 0.7;text-decoration: underline;">CREDITS</div>
       <span>
         <q-btn v-if="isPlaying" color="primary" icon="volume_up" @click="pauseAudio" />
       </span>
     </div>
-    
+
     <div class="relative-position retrotext row items-center q-mt-md" >
       <img class="on-left" src="../statics/gifs/heart.gif" style="height:40px" />
       <span style="font-size:60px;opacity: 0.7;color:black">THANK YOU DAC Workers...</span>
@@ -37,7 +37,7 @@
       <img class="on-right" src="../statics/gifs/heart.gif" style="height:40px" />
     </div>
     <div class="row q-pa-lg relative-position retrobox retrotext" style="font-size:20px; color:grey">
-      [ {{others.join(', ')}}, ... ]
+      <partnerothers class="retrotext animate-pop" size="30px" />
     </div>
 
     <div class="retrotext relative-position full-width q-mt-xl" style="font-size:20px; text-align:right">© eosDAC</div>
@@ -47,7 +47,7 @@
 
   <!-- eosdac corporate style -->
   <div v-if="!isPlaying" class="q-pa-md animate-fade">
-    
+
     <div class="row justify-between q-mb-md">
       <div class="relative-position q-display-1 ">Credits</div>
       <span>
@@ -64,15 +64,15 @@
       <div class="q-mb-md">Partner BPs</div>
       <partnerbps size="20px"/>
     </div>
-  
+
     <div class=" q-pa-lg relative-position round-borders bg-bg1 shadow-5 q-mt-md">
-      <div class="q-mb-md">Others</div>
-      <div class="text-text2">{{others.join(', ')}}</div>
+      <div class="q-mb-md">Partner</div>
+      <partnerothers size="20px"/>
     </div>
 
   </div>
   <!-- --- -->
-  
+
 
 
 
@@ -82,6 +82,7 @@
 <script>
 import credits from '../statics/credits.json'
 import Partnerbps from 'components/ui/partner_bp'
+import Partnerothers from 'components/ui/partner_others'
 
 const audio = new Audio('../statics/sounds/retro.mp3');
 audio.addEventListener('ended', function() {
@@ -95,8 +96,8 @@ import {
 export default {
   name: 'credits',
   components: {
-      Partnerbps
-
+      Partnerbps,
+      Partnerothers
   },
   data() {
     return {
@@ -150,12 +151,12 @@ export default {
   background-image: url('../statics/gifs/colors.gif');
   background-size : cover;
   border-top:2px solid white;
- 
+
 }
 .retro_bg{
   background-image: url('../statics/gifs/retro_star.gif');
   background-size : cover;
-  
+
 }
 .fadeit{
   opacity: 0.0;
@@ -165,7 +166,7 @@ export default {
   font-family: 'VT323', monospace;
 }
 .retrobox{
-  
+
   box-sizing: border-box;
   border: 8px solid green;
   outline-color: red;
