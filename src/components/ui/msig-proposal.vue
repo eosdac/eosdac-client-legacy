@@ -93,8 +93,8 @@
     <div v-if="!read_only" class="q-mt-md">  
         <q-btn v-if="!isApproved" class="full-width q-mb-md" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
         <q-btn v-if="isApproved" class="full-width q-mb-md" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
-        <q-btn v-if="isCreator" class="full-width q-mb-md" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
-        <q-btn v-if="isExecutable" class="full-width q-mb-md" label="execute" />
+        <q-btn v-if="isCreator" class="full-width q-mb-md" color="negative" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
+        <q-btn v-if="isExecutable" class="full-width q-mb-md" color="info" label="execute" />
     </div>
 
     </div>
@@ -165,8 +165,8 @@
             <span v-if="!read_only">
               <q-btn v-if="!isApproved" class="on-left" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
               <q-btn v-if="isApproved" class="on-left" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
-              <q-btn v-if="isCreator" class="on-left" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
-              <q-btn v-if="isExecutable" color="blue" label="execute" @click="executeProposal(msig.proposer, msig.proposal_name)" />
+              <q-btn v-if="isCreator" class="on-left" color="negative" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
+              <q-btn v-if="isExecutable" color="info" label="execute" @click="executeProposal(msig.proposer, msig.proposal_name)" />
             </span>
             <span>
               <q-checkbox color="primary-light" left-label :label="isSeen ?'Unmark as seen':'Mark as seen' " v-model="isSeen" @input="handleIsSeenCache" />

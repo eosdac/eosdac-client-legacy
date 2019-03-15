@@ -1,21 +1,40 @@
 <template>
-  <div v-if="wp.key" class="q-mb-md">
+  <div v-if="wp.key" class="q-mb-md q-pa-md bg-bg1 round-borders shadow-5">
+    <div><profile-pic :accountname="wp.proposer" /></div>
     <div>{{wp.key}}</div>
     <div>{{wp.title}}</div>
     <div>{{wp.summary}}</div>
     <div>{{wp.pay_amount}}</div>
+    <div>{{wp.pay_amount.quantity}}</div>
+    <div>{{wp.arbitrator}}</div>
     <div>{{getVotes}}</div>
     <div>{{wp.state}}</div>
     <div>{{getIsCreator}}</div>
+    
+    <div>
+      
+          <q-item class="no-padding" >
+            <!-- <q-item-side :icon="$configFile.icon.refresh" color="info" /> -->
+            <q-item-main>
+              <q-item-tile label>Votes</q-item-tile>
+              <div v-for="(vote,i) in getVotes" :key="`v${i}`" class="row justify-start" >
+                <profile-pic  :accountname="vote.voter"  :scale="0.5"/>
+                <profile-pic  :accountname="vote.voter"  :scale="0.5" />
+              </div>
+            </q-item-main>
+          </q-item>
+    </div>
+    
+    <!-- <div><profile-pic :accountname="wp.arbitrator" :scale="0.7"/></div> -->
 
-    <div v-if="!read_only">
+    <div v-if="!read_only" class="row justify-end">
       <div v-if="wp.state==0">
-        <q-btn  class="on-left"  color="positive" label="Approve" @click="voteprop('voteApprove')"  />
-        <q-btn  class="on-left"  color="negative" label="Deny" @click="voteprop('voteDeny')"  />
+        <q-btn  v-if="getVoterStatus==2 || getVoterStatus==0" class="on-right"  color="positive" label="Approve" @click="voteprop('voteApprove')"  />
+        <q-btn  v-if="getVoterStatus==1 || getVoterStatus==0" class="on-right"  color="negative" label="Deny" @click="voteprop('voteDeny')"  />
       </div>
       <div v-if="wp.state==1">
-        <q-btn  class="on-left"  color="positive" label="Approve Claim" @click="voteprop('claimApprove')"  />
-        <q-btn  class="on-left"  color="negative" label="Deny Claim" @click="voteprop('claimDeny')"  />
+        <q-btn  class="on-right"  color="positive" label="Approve Claim" @click="voteprop('claimApprove')"  />
+        <q-btn  class="on-right"  color="negative" label="Deny Claim" @click="voteprop('claimDeny')"  />
       </div>
     </div>
 
@@ -24,8 +43,12 @@
 
 <script>
 import {mapGetters} from 'vuex';
+import profilePic from 'components/ui/profile-pic';
 export default {
   name: 'wpProposal',
+  components:{
+    profilePic
+  },
   props:{
     read_only: false,
     wp:{
@@ -45,6 +68,16 @@ export default {
     },
     getIsCreator(){
       return this.getAccountName === this.wp.proposer;
+    },
+    getVoterStatus(){
+      let myvote = this.wp.votes.find(v => v.voter==this.getAccountName);
+      if(!myvote){
+        console.log('not voted yet')
+        return 0;
+      }
+      else{
+        return myvote.vote
+      }
     }
   },
   data () {
@@ -68,6 +101,15 @@ export default {
 
       let result = await this.$store.dispatch('user/transact', {actions: actions});
       if(result){
+        let vote = this.wp.votes.find(v => v.voter==this.getAccountName);
+
+        if(vote){
+          vote.vote = map[votetype];
+        }
+        else {
+          this.wp.votes.push({"proposal_id": Number(this.wp.key), "voter": this.getAccountName, "vote": map[votetype], "comment_hash": "" })
+        }
+
         console.log(result);
       }
 
