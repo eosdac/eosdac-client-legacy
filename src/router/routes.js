@@ -17,7 +17,6 @@ const routes = [
       // { path: 'playyard', component: () => import('pages/dev/playyard') },
       { path: 'manage-candidateship', component: () => import('pages/manage-candidateship.vue') },
       { path: 'verify/:token', component: () => import('pages/verify-token')},
-      
     ]
   },
 
@@ -29,10 +28,9 @@ const routes = [
       { path: 'memberclient', component: () => import('pages/dev/dev-tools-home') },
       { path: 'playground', component: () => import('pages/dev/playground') },
       { path: 'transactions', component: () => import('pages/dev/transactions') }
-
     ]
   },
-  
+
   {
     path: '/custodian',
     component: () => import('layouts/MyLayout.vue'),
@@ -42,9 +40,7 @@ const routes = [
       { path: 'create-msigs', component: () => import('pages/custodian/create-msigs'), beforeEnter: Guards.custodianCheck},
       { path: 'review-worker-proposals', component: () => import('pages/custodian/review-worker-proposals') },
       { path: 'my-payments', component: () => import('pages/custodian/my-payments'), beforeEnter: Guards.custodianCheck }
-      
     ]
-    
   },
 
   {

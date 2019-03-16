@@ -15,6 +15,4 @@ export default {
   msigIsSeenCache: [],
 
   settings: require('../../statics/settings.json')
-
-  
 }

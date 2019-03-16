@@ -3,7 +3,6 @@ import {openURL} from 'quasar'
 
 export async function loggedOutRoutine ({commit} ) {
     commit('setIsLoaded', false );
-
     commit('setAccount', null);
     commit('setAccountName', null );
     commit('setDacBalance', null);
@@ -14,9 +13,6 @@ export async function loggedOutRoutine ({commit} ) {
     commit('setProfilePicture', null);
     commit('setIsCandidate', null);
     commit('setDacVotes', null);
-
-    
-
 }
 
 export async function loggedInRoutine ({state, commit, dispatch}, account) {
@@ -32,26 +28,19 @@ export async function loggedInRoutine ({state, commit, dispatch}, account) {
     const api = await dispatch('global/getEosApi', false, {root : true} );
 
     //requests for setting up the logged in user
-    let requests = [
-        // api.getAccount(accountname),
-        api.getBalance(accountname),
-        api.getAgreedTermsVersion(accountname),
-        api.isCandidate(accountname)
-        
-    ]
-
-    let [ balance, termsversion, isCandidate] = await Promise.all(requests);
-    console.log('is canddate:', isCandidate)
+    const balance = await api.getBalance(accountname)
     commit('setDacBalance', balance);
+
+    const systemBalance = await api.getBalance(accountname, 'eosio.token' , 'EOS');
+    commit('setSystemBalance', systemBalance);
+
+    const termsversion = await api.getAgreedTermsVersion(accountname)
     commit('setAgreedTermsVersion', termsversion);
-    // commit('setAccount', account);
+
+    const isCandidate = await api.isCandidate(accountname)
     commit('setIsCandidate', isCandidate);
 
     commit('setIsLoaded', true );
-
-    api.getBalance(accountname, 'eosio.token' , 'EOS').then(x =>{
-        commit('setSystemBalance', x);
-    }).catch(e=>console.log(e));
 
     setTimeout(()=>{dispatch('fetchDacVotes')}, 2000)
 
@@ -60,11 +49,10 @@ export async function loggedInRoutine ({state, commit, dispatch}, account) {
 export async function fetchIsCandidate ({state, commit, dispatch}, accountname=false) {
     const accountN = accountname || state.accountName;
     const api = await dispatch('global/getEosApi', false, {root : true} );
-    let isCandidate = await api.isCandidate(accountN);
-    if(!accountname){
+    const isCandidate = await api.isCandidate(accountN);
+    if (!accountname) {
         commit('setIsCandidate', isCandidate);
-    }
-    else{
+    } else{
         return isCandidate;
     }
 }
@@ -77,7 +65,7 @@ export async function fetchDacVotes ({state, commit, dispatch}, accountname=fals
         commit('setDacVotes', votes);
         return votes;
     }
-    else{
+    else {
         return votes;
     }
 }
@@ -85,17 +73,13 @@ export async function fetchDacVotes ({state, commit, dispatch}, accountname=fals
 export async function fetchBalances ({state, commit, dispatch}, accountname=false) {
     const accountN = accountname || state.accountName;
     const api = await dispatch('global/getEosApi', false, {root : true} );
-    let requests = [
-        api.getBalance(accountN),
-        api.getBalance(accountN, 'eosio.token' , 'EOS')
-        
-    ]
-    let [dacbalance, systembalance] = await Promise.all(requests);
-    if(!accountname){
+    const dacbalance = await api.getBalance(accountN);
+    const systembalance = await api.getBalance(accountN, 'eosio.token' , 'EOS');
+
+    if (!accountname) {
         commit('setDacBalance', dacbalance);
         commit('setSystemBalance', systembalance);
-    }
-    else{
+    } else {
         return [dacbalance, systembalance];
     }
 }
@@ -137,7 +121,7 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
                 ],
             });
         }
-        
+
         return;
     }
 
@@ -159,15 +143,15 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
         return action;
     });
     console.log(JSON.stringify(actions) );
-    
+
     try {
         let [eos] = await dispatch('global/getEosScatter', null, {root: true});
         setTimeout(()=>{commit('ui/setShowTransactionOverlay', 'sign', {root: true}); }, 1500);
         const result = await eos.transact({delay_sec: DELAY_SEC, actions: actions}, {blocksBehind: 3, expireSeconds: 30} );
         commit('ui/setShowTransactionOverlay', 'success', {root: true});
         commit('setLastTransaction', result);
-        
-        if(getters['getSettingByName']('notify_success_msg').value){
+
+        if (getters['getSettingByName']('notify_success_msg').value) {
             Notify.create({
                 message:  this._vm.i18n.t('transaction.transaction_successful'),
                 timeout: 7000, // in milliseconds; 0 means no timeout
@@ -180,7 +164,7 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
                       label: 'Explorer',
                       icon: 'link', // optional
                       handler: () => {
-                        openURL(`${this._vm.$configFile.get('explorer')}/transaction/${result.transaction_id}`) 
+                        openURL(`${this._vm.$configFile.get('explorer')}/transaction/${result.transaction_id}`)
                       }
                     }
                 ],
@@ -196,7 +180,7 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
             commit('ui/setShowTransactionOverlay', 'cancelled', {root: true});
         }
         else{
- 
+
             message = parseError(e.json);
             commit('ui/setShowTransactionOverlay', 'error', {root: true});
         }

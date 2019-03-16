@@ -14,7 +14,6 @@ export function getAuthString(state){
     if(state.account){
         return `${state.account.name}@${state.account.authority}`;
     }
-    
 }
 
 export function getProfilePicture (state) {
@@ -37,22 +36,20 @@ export function getSettings (state) {
     return state.settings;
 }
 export function getSettingByName (state) {
-        return (settingname) => {
-          return state.settings.find(s => settingname == s.name);
-        }
+    return (settingname) => {
+        return state.settings.find(s => settingname == s.name);
+    }
 }
 
 export function getMemberStatus (state, getters) {
-    if(!getters.getAccountName || !getters.getAgreedTermsVersion){
+    if (!getters.getAccountName || !getters.getAgreedTermsVersion) {
         return false;
     }
-    if(getters.getDacBalance && getters.getAgreedTermsVersion){
+    if (getters.getDacBalance && getters.getAgreedTermsVersion) {
         return 'member'
-    }
-    else{
+    } else {
         return 'pending'
     }
-    
 }
 
 export function getLastTransaction (state) {
@@ -72,25 +69,18 @@ export function getDacVotes (state) {
 }
 
 export function getIsCustodian (state, getters, rootState) {
-
-    if(rootState.dac.custodians && getters.getAccountName){
+    if (rootState.dac.custodians && getters.getAccountName) {
         let res = rootState.dac.custodians.find(c => c.cust_name == getters.getAccountName);
-        if(res || state.accountName == 'piecesnbitss'){
+        if (res || state.accountName == 'piecesnbitss') {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
-    }
-    else{
+    } else {
         return false;
     }
-
 }
 
 export function getMsigIsSeenCache(state){
     return state.msigIsSeenCache;
 }
-
-
-

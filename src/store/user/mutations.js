@@ -51,7 +51,7 @@ export const setMsigIsSeenCache = (state, payload) => {
     let mode = payload.mode;
     let msig_id = payload.msig_id;
 
-    switch(mode) {
+    switch (mode) {
         case 'add':
           if (state.msigIsSeenCache.indexOf(msig_id) === -1) state.msigIsSeenCache.push(msig_id);
           break;

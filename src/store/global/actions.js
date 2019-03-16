@@ -12,7 +12,7 @@ ScatterJS.plugins( new ScatterEOS() );
 //
 
 export async function connectScatter ({state, commit, dispatch, rootGetters}, trigger_login = false) {
-    
+
     let network = await state.networks.find(n => n.name == state.active_network);
 
     ScatterJS.scatter.connect('testapp', {network}).then(async connected => {
@@ -97,7 +97,7 @@ export async function login({state, dispatch, rootGetters, commit}){
 
 
 export async function logout({state, dispatch}){
-    
+
     console.log('request logout')
     if(!state.scatter){
       console.log('scatter not found');
@@ -105,8 +105,8 @@ export async function logout({state, dispatch}){
     };
     await state.scatter.logout().catch(e=>console.log(e));
     dispatch('user/loggedOutRoutine',null, {root:true} );
-    
-    
+
+
     console.log('loggedout');
 }
 
@@ -142,7 +142,7 @@ export async function getEosScatter({state, commit}, rebuild=false){
     let eos = state.scatter.eos(network, Api, {rpc, beta3:true} );
     commit('setEosScatter', [eos] );
     return [eos];
-    
+
 }
 
 export async function loadConfig({Vue,state, commit}, payload ){
@@ -190,7 +190,7 @@ export async function switchNetwork({state, commit, dispatch, rootGetters}, payl
 
     dispatch('dac/initRoutine', null, {root : true});
     await dispatch('connectScatter', true);
- 
+
 }
 
 export async function testEndpoint({state}, endpointurl=false){

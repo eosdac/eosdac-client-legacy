@@ -16,11 +16,11 @@ export function getLatestMemberTerm (state) {
         console.log('memberterms not loaded yet');
         return {};
     }
-    return state.memberTerms.slice(-1)[0];  
+    return state.memberTerms.slice(-1)[0];
 }
 
 export function getlatestTermsUrl (state) {
-    return state.latestTermsUrl;  
+    return state.latestTermsUrl;
 }
 
 export function getCustodians (state) {
@@ -28,7 +28,7 @@ export function getCustodians (state) {
         console.log('custodians not loaded yet');
         return [];
     }
-    return state.custodians;  
+    return state.custodians;
 }
 
 export function getCustodianConfig(state, payload){
@@ -37,9 +37,9 @@ export function getCustodianConfig(state, payload){
 
 export function getCandidates (state, payload) {
 
-    return state.candidates;  
+    return state.candidates;
 }
 
 export function getCustodianState (state, payload) {
-    return state.custodianState;  
+    return state.custodianState;
 }
