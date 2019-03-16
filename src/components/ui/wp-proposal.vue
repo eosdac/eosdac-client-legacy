@@ -1,85 +1,94 @@
 <template>
-  <div v-if="wp.key && show" class="q-mb-md q-pa-md bg-bg1 round-borders shadow-5 bg-logo full-height">
-    <div class="row">
-    
-        <profile-pic :accountname="wp.proposer" />
-        <q-item >
-          <q-item-main>
-            <q-item-tile label>Proposer</q-item-tile>
-            <q-item-tile sublabel>{{wp.proposer}}</q-item-tile>
-          </q-item-main>
-        </q-item>
-        <q-item >
-          <q-item-main>
-            <q-item-tile label>Requested Pay</q-item-tile>
-            <q-item-tile sublabel>{{wp.pay_amount.quantity}}</q-item-tile>
-          </q-item-main>
-        </q-item>
-        <q-item >
-        <q-item-main>
-            <q-item-tile label>Arbitrator</q-item-tile>
-            <q-item-tile sublabel>{{wp.arbitrator}}</q-item-tile>
-          </q-item-main>
-        </q-item>
-        <q-item >
-          <q-item-main>
-            <q-item-tile label>Status</q-item-tile>
-            <q-item-tile sublabel>{{wp.state}}</q-item-tile>
-          </q-item-main>
-        </q-item>
-      
-      
-    </div>
-    
-
-    <div class="q-mt-md q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
-    
-    <div class="bg-bg2 q-pa-md q-mt-sm round-borders text-weight-light text-text2">{{wp.summary}}</div>
-
-    <!-- <div>{{getVotes}}</div>
-    <div>{{wp.state}}</div>
-    <div>{{getIsCreator}}</div> -->
-    
-    <div class="q-mt-md ">
-      
+  <div v-if="wp.key && show" class="q-mb-md q-pa-md column justify-between bg-bg1 round-borders shadow-5 bg-logo full-height">
+    <div>
       <div class="row">
-          <div v-for="(vote,i) in getVotes" :key="`v${i}`" >
-            <div style=""><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
-          </div>
-      </div>
-
-
-    </div>
-    
-    <!-- <div><profile-pic :accountname="wp.arbitrator" :scale="0.7"/></div> -->
-
-    <div v-if="!read_only" class="row justify-end">
-      <div v-if="wp.state==0">
-        <q-btn  v-if="getVoterStatus==2 || getVoterStatus==0" class="on-right"  color="positive" label="Approve" @click="voteprop('voteApprove')"  />
-        <q-btn  v-if="getVoterStatus==1 || getVoterStatus==0" class="on-right"  color="negative" label="Deny" @click="voteprop('voteDeny')"  />
-      </div>
-      <div v-if="wp.state==2">
-        <q-btn  class="on-right"  color="positive" label="Approve Claim" @click="voteprop('claimApprove')"  />
-        <q-btn  class="on-right"  color="negative" label="Deny Claim" @click="voteprop('claimDeny')"  />
-        <q-btn   v-if="getIsArbitrator" class="on-right"  flat color="positive" label="arb approve" @click="arbApprove()" />
-      </div>
-      <div v-if="wp.state==1">
-        Work is being executed
-      </div>
-      <div v-if="getIsCreator">
-        <q-btn   class="on-right"  flat color="negative" label="cancel" @click="cancelProp()"  />
-        <q-btn   class="on-right"  flat color="info" label="Start work" @click="startWork()" />
-        <q-btn   class="on-right"  flat color="info" label="complete work" @click="completeWork()" />
-      </div>
-      <div >
+      
+          <profile-pic :accountname="wp.proposer" />
+          <q-item >
+            <q-item-main>
+              <q-item-tile label>Proposer</q-item-tile>
+              <q-item-tile sublabel>{{wp.proposer}}</q-item-tile>
+            </q-item-main>
+          </q-item>
+          <q-item >
+            <q-item-main>
+              <q-item-tile label>Requested Pay</q-item-tile>
+              <q-item-tile sublabel>{{wp.pay_amount.quantity}}</q-item-tile>
+            </q-item-main>
+          </q-item>
+          <q-item >
+          <q-item-main>
+              <q-item-tile label>Arbitrator</q-item-tile>
+              <q-item-tile sublabel>{{wp.arbitrator}}</q-item-tile>
+            </q-item-main>
+          </q-item>
+          <q-item >
+            <q-item-main>
+              <q-item-tile label>Status</q-item-tile>
+              <q-item-tile sublabel>{{wp.state}}</q-item-tile>
+            </q-item-main>
+          </q-item>
         
       </div>
+      
+      <div class="q-mt-md q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
+      <q-scroll-area
+        class="bg-bg2 q-pa-md q-mt-sm round-borders text-weight-light text-text2"
+        style="height: 200px"
+        color="primary"
+        :thumb-style="{
+          right: '0px',
+          background: '#7c41ba',
+          width: '8px',
+          opacity: 1
+        }"
+        :delay="1500"
+      >
+        <div  >{{wp.summary}}</div>
+      </q-scroll-area>
+      
     </div>
-{{proposal_threshold_met}}
+
+    <div  class="row justify-between items-center">
+
+      
+      <div class="row">
+        <div v-for="(vote,i) in getVotes.filter(v => v.vote == 1)" :key="`v1${i}`" class="bg-positive">
+          <div style=""><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
+        </div>
+        <div v-for="(vote,i) in getVotes.filter(v => v.vote == 2)" :key="`v2${i}`" class="bg-negative">
+          <div style=""><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
+        </div>
+      </div>
+      
+
+      <div v-if="!read_only" class="row">
+        <div v-if="wp.state==0">
+          <q-btn v-if="getVoterStatus==2 || getVoterStatus==0" class="on-right"  color="positive" label="Approve" @click="voteprop('voteApprove')"  />
+          <q-btn v-if="getVoterStatus==1 || getVoterStatus==0" class="on-right"  color="negative" label="Deny" @click="voteprop('voteDeny')"  />
+        </div>
+        <div v-else-if="wp.state==2">
+          <q-btn class="on-right"  color="positive" label="Approve Claim" @click="voteprop('claimApprove')"  />
+          <q-btn class="on-right"  color="negative" label="Deny Claim" @click="voteprop('claimDeny')"  />
+          <q-btn v-if="getIsArbitrator" class="on-right"  flat color="positive" label="arb approve" @click="arbApprove()" />
+        </div>
+        <div v-else-if="wp.state==1">
+          Work is being executed
+        </div>
+        <div v-if="getIsCreator">
+          <q-btn class="on-right"  flat color="negative" label="cancel" @click="cancelProp()"  />
+          <q-btn v-if="proposal_threshold_met" class="on-right"  flat color="info" label="Start work" @click="startWork()" />
+          <q-btn v-if="wp.state==1" class="on-right"  flat color="info" label="complete work" @click="completeWork()" />
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </template>
 
 <script>
+
 import {mapGetters} from 'vuex';
 import profilePic from 'components/ui/profile-pic';
 export default {
@@ -119,11 +128,11 @@ export default {
     getVoterStatus(){
       let myvote = this.wp.votes.find(v => v.voter==this.getAccountName);
       if(!myvote){
-        console.log('not voted yet')
+        console.log('not voted yet');
         return 0;
       }
       else{
-        return myvote.vote
+        return myvote.vote;
       }
     },
     //when wp state is 0
