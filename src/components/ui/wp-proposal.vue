@@ -32,7 +32,7 @@
     </div>
     
 
-    <div class="q-mt-lg q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
+    <div class="q-mt-md q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
     
     <div class="bg-bg2 q-pa-md q-mt-sm round-borders text-weight-light text-text2">{{wp.summary}}</div>
 
@@ -40,17 +40,15 @@
     <div>{{wp.state}}</div>
     <div>{{getIsCreator}}</div> -->
     
-    <div class="q-mt-md">
+    <div class="q-mt-md ">
       
-          <q-item class="no-padding" >
-            <!-- <q-item-side :icon="$configFile.icon.refresh" color="info" /> -->
-            <q-item-main>
-              <q-item-tile label>Votes</q-item-tile>
-              <div v-for="(vote,i) in getVotes" :key="`v${i}`" class="row justify-start" >
-                <profile-pic  :accountname="vote.voter"  :scale="0.5"/>
-              </div>
-            </q-item-main>
-          </q-item>
+      <div class="row">
+          <div v-for="(vote,i) in getVotes" :key="`v${i}`" >
+            <div style=""><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
+          </div>
+      </div>
+
+
     </div>
     
     <!-- <div><profile-pic :accountname="wp.arbitrator" :scale="0.7"/></div> -->
@@ -77,7 +75,7 @@
         
       </div>
     </div>
-
+{{getWpConfig.authority_account}}
   </div>
 </template>
 
@@ -104,7 +102,7 @@ export default {
   computed:{
     ...mapGetters({
       getAccountName: 'user/getAccountName',
-      getIsCustodian: 'user/getIsCustodian'
+      getWpConfig: 'dac/getWpConfig'
     }),
     getVotes(){
       if(this.wp.votes){

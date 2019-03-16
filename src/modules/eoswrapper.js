@@ -81,14 +81,19 @@ export class EosWrapper {
 
     async getContractConfig(payload){
         let contract;
+        let table = 'config';
         if(payload == 'custodian'){
             contract = this.configobj.get('custodiancontract');
+        }
+        else if(payload == 'wp'){
+            contract = this.configobj.get('wpcontract');
+            table = "configtype";
         }
         let res =  await this.eos.get_table_rows({
             json: true,
             code: contract,
             scope: contract,
-            table: 'config',
+            table: table,
         }).catch(e=> false);
 
         if (!res.rows.length) {

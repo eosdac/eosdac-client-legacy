@@ -103,6 +103,15 @@ export async function fetchCustodianContractState({commit, dispatch, state}){
 
 }
 
+export async function fetchWpConfig({commit, dispatch, state}){
+    const api = await dispatch('global/getEosApi', false, {root : true} );
+    let conf = await api.getContractConfig('wp');
+    if(conf){
+        commit('setWpConfig', conf);
+    }
+
+}
+
 export async function fetchWorkerProposals({rootState}, payload={}){
 
     let url = this._vm.$configFile.get('memberclientstateapi');

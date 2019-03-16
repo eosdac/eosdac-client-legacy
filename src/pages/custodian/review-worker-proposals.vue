@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import wpProposal from 'components/ui/wp-proposal'
+import wpProposal from 'components/ui/wp-proposal';
+import {mapGetters} from 'vuex';
 export default {
   name: 'ReviewWP',
   components:{
@@ -21,6 +22,12 @@ export default {
     return {
       wps: []
     }
+  },
+  computed:{
+    ...mapGetters({
+      getWpConfig: 'dac/getWpConfig',
+      getIsCustodian: 'user/getIsCustodian'
+    }),
   },
   methods:{
     async fetchWps(){
@@ -32,7 +39,12 @@ export default {
   },
   mounted(){
     this.fetchWps()
-  }
+  },
+  created() {
+    if(this.getWpConfig.service_account===null){
+      this.$store.dispatch('dac/fetchWpConfig');
+    }
+  },
 }
 </script>
 
