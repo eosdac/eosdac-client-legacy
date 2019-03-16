@@ -46,7 +46,7 @@ export function getMemberStatus (state, getters) {
     if(!getters.getAccountName || !getters.getAgreedTermsVersion){
         return false;
     }
-    if(getters.getDacBalance && getters.getAgreedTermsVersion){
+    if(getters.getDacBalance !== null && getters.getAgreedTermsVersion){
         return 'member'
     }
     else{
