@@ -184,7 +184,7 @@ export default {
       }
     },
     verifyAndGetRequestedPay(){
-      if(this.inputs.requestedpay && (this.inputs.requestedpay <= this.assetToNumber(this.getCustodianConfig.requested_pay_max) ) ){
+      if(this.inputs.requestedpay !== null && (this.inputs.requestedpay <= this.assetToNumber(this.getCustodianConfig.requested_pay_max) ) ){
         return this.numberToAsset(this.inputs.requestedpay.toFixed(4), this.$configFile.get('systemtokensymbol') );
       }
       else{
@@ -194,7 +194,7 @@ export default {
       }
     },
     verifyAndGetStakeAmount(){
-      if(this.inputs.stakeamount && (this.inputs.stakeamount >= this.assetToNumber(this.getCustodianConfig.lockupasset) ) ){
+      if(this.inputs.stakeamount !== null && (this.inputs.stakeamount >= this.assetToNumber(this.getCustodianConfig.lockupasset) ) ){
         return this.numberToAsset(this.inputs.stakeamount.toFixed(4), this.$configFile.get('dactokensymbol') );
       }
       else{
