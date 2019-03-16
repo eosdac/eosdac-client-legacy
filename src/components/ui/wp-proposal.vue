@@ -1,5 +1,5 @@
 <template>
-  <div v-if="wp.key && show" class="q-mb-md q-pa-md column justify-between bg-bg1 round-borders shadow-5 bg-logo full-height">
+  <div v-if="wp.key && show" class="q-mb-md q-pa-md column justify-between bg-bg1 round-borders shadow-5 bg-logo full-height animate-fade">
     <div>
       <div class="row">
       
@@ -101,6 +101,10 @@ export default {
     wp:{
       type: Object,
       default: ()=>{ return {} }
+    },
+    expanded:{
+      type: Boolean,
+      default: false
     }
   },
   data () {
