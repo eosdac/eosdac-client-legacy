@@ -128,7 +128,8 @@ export default {
     },
     //when wp state is 0
     proposal_threshold_met(){
-      if(this.getWpConfig.proposal_threshold !== null && this.getWpConfig.proposal_threshold <= this.wp.votes.filter(wpv => wpv.vote == 1).length ){
+      const approved_votes = this.wp.votes.filter(wpv => wpv.vote == 1).length;
+      if(this.getWpConfig.proposal_threshold !== null && this.getWpConfig.proposal_threshold <= approved_votes ){
         return true;
       }
       else{
@@ -137,7 +138,8 @@ export default {
     },
     //when wp state is 2
     claim_threshold_met(){
-      if(this.getWpConfig.claim_threshold !== null && this.getWpConfig.claim_threshold <= this.wp.votes.filter(wpv => wpv.vote == 3).length ){
+      const approved_claim = this.wp.votes.filter(wpv => wpv.vote == 3).length;
+      if(this.getWpConfig.claim_threshold !== null && this.getWpConfig.claim_threshold <= approved_claim ){
         return true;
       }
       else{
