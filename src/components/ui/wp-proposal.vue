@@ -1,17 +1,46 @@
 <template>
-  <div v-if="wp.key && show" class="q-mb-md q-pa-md bg-bg1 round-borders shadow-5">
-    <div><profile-pic :accountname="wp.proposer" /></div>
-    <div>{{wp.key}}</div>
-    <div>{{wp.title}}</div>
-    <div>{{wp.summary}}</div>
-    <div>{{wp.pay_amount}}</div>
-    <div>{{wp.pay_amount.quantity}}</div>
-    <div>{{wp.arbitrator}}</div>
-    <div>{{getVotes}}</div>
-    <div>{{wp.state}}</div>
-    <div>{{getIsCreator}}</div>
+  <div v-if="wp.key && show" class="q-mb-md q-pa-md bg-bg1 round-borders shadow-5 bg-logo full-height">
+    <div class="row">
     
-    <div>
+        <profile-pic :accountname="wp.proposer" />
+        <q-item >
+          <q-item-main>
+            <q-item-tile label>Proposer</q-item-tile>
+            <q-item-tile sublabel>{{wp.proposer}}</q-item-tile>
+          </q-item-main>
+        </q-item>
+        <q-item >
+          <q-item-main>
+            <q-item-tile label>Requested Pay</q-item-tile>
+            <q-item-tile sublabel>{{wp.pay_amount.quantity}}</q-item-tile>
+          </q-item-main>
+        </q-item>
+        <q-item >
+        <q-item-main>
+            <q-item-tile label>Arbitrator</q-item-tile>
+            <q-item-tile sublabel>{{wp.arbitrator}}</q-item-tile>
+          </q-item-main>
+        </q-item>
+        <q-item >
+          <q-item-main>
+            <q-item-tile label>Status</q-item-tile>
+            <q-item-tile sublabel>{{wp.state}}</q-item-tile>
+          </q-item-main>
+        </q-item>
+      
+      
+    </div>
+    
+
+    <div class="q-mt-lg q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
+    
+    <div class="bg-bg2 q-pa-md q-mt-sm round-borders text-weight-light text-text2">{{wp.summary}}</div>
+
+    <!-- <div>{{getVotes}}</div>
+    <div>{{wp.state}}</div>
+    <div>{{getIsCreator}}</div> -->
+    
+    <div class="q-mt-md">
       
           <q-item class="no-padding" >
             <!-- <q-item-side :icon="$configFile.icon.refresh" color="info" /> -->

@@ -1,8 +1,10 @@
 <template>
   <q-page class="q-pa-md">
     
-    <div v-for="(wp, i)  in wps" :key="`wp${i}`">
-      <wp-proposal :wp="wp" />
+    <div  class="row gutter-sm">
+      <div class="col-xs-12 col-xl-6" v-for="(wp, i)  in wps" :key="`wp${i}`">
+        <wp-proposal :wp="wp"  />
+      </div>
     </div>
     
   </q-page>
