@@ -92,7 +92,7 @@ export default {
       return this.$helper.toLocaleNumber(total)+ ' EOS';
     },
     verifyAndGetRequestedPay(){
-      if(this.new_requested_pay && (this.new_requested_pay > 0) ){
+      if( (this.new_requested_pay >= 0) ){
         return this.$helper.numberToAsset(this.new_requested_pay.toFixed(4), this.$configFile.get('systemtokensymbol') );
       }
     },
@@ -174,7 +174,7 @@ export default {
     return {
       new_requested_pay: {
         required, 
-        between:between(0.0001, this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max) )
+        between:between(0.0000, this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max) )
       }
     }
 
