@@ -75,7 +75,7 @@
         
       </div>
     </div>
-{{getWpConfig.authority_account}}
+{{proposal_threshold_met}}
   </div>
 </template>
 
@@ -115,6 +115,7 @@ export default {
     getIsArbitrator(){
       return this.getAccountName === this.wp.arbitrator;
     },
+    //get vote type of logged in user
     getVoterStatus(){
       let myvote = this.wp.votes.find(v => v.voter==this.getAccountName);
       if(!myvote){
@@ -123,6 +124,24 @@ export default {
       }
       else{
         return myvote.vote
+      }
+    },
+    //when wp state is 0
+    proposal_threshold_met(){
+      if(this.getWpConfig.proposal_threshold !== null && this.getWpConfig.proposal_threshold <= this.wp.votes.filter(wpv => wpv.vote == 1).length ){
+        return true;
+      }
+      else{
+        return false;
+      }
+    },
+    //when wp state is 2
+    claim_threshold_met(){
+      if(this.getWpConfig.claim_threshold !== null && this.getWpConfig.claim_threshold <= this.wp.votes.filter(wpv => wpv.vote == 3).length ){
+        return true;
+      }
+      else{
+        return false;
       }
     }
   },
