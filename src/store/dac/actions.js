@@ -115,7 +115,7 @@ export async function fetchWpConfig({commit, dispatch, state}){
 export async function fetchWorkerProposals({rootState}, payload={}){
 
     let url = this._vm.$configFile.get('memberclientstateapi');
-    return this._vm.$axios.get(url+'/get_proposals?state=0&limit=10&skip=0', payload).then(r => {
+    return this._vm.$axios.get(url+'/get_proposals', {params: payload}).then(r => {
         // console.log(r.data)
         return r.data;
       }).catch(e => {
