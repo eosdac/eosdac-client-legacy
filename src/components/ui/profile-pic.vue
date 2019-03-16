@@ -67,6 +67,11 @@ export default {
   mounted(){
     this.setProfilePic();
   },
+  watch:{
+    accountname: function(){
+      this.setProfilePic();
+    }
+  }
 
 }
 </script>

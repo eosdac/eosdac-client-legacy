@@ -22,12 +22,23 @@
       </div>
     </div>
 
-
     <div  class="row gutter-sm">
       <div class="col-xs-12 col-xl-6" v-for="(wp, i)  in wps" :key="`wp${i}`">
-        <wp-proposal :wp="wp"  />
+        <wp-proposal :wp="wp" @wp_expand="expanded_modal=true; expanded_modal_key=$event" />
       </div>
     </div>
+
+    <q-modal maximized v-model="expanded_modal">
+      <div class="full-height bg-bg2">
+        <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
+          <span>WP: {{expanded_modal_key}}</span>
+          <q-btn icon="close" @click="expanded_modal = false;" flat />
+        </div>
+        <div class=" text-text1">
+          <wp-proposal :wp="wps.find(w=> w.key == expanded_modal_key )"  />
+        </div>
+      </div>
+    </q-modal>
     
   </q-page>
 </template>
@@ -42,6 +53,8 @@ export default {
   },
   data () {
     return {
+      expanded_modal: false,
+      expanded_modal_key: 0,
       wps: [],
       active_tab : '',
       pagination :{

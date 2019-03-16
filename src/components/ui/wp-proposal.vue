@@ -17,7 +17,7 @@
             </q-item-main>
           </q-item>
           <q-item >
-          <q-item-main>
+            <q-item-main>
               <q-item-tile label>Arbitrator</q-item-tile>
               <q-item-tile sublabel>{{wp.arbitrator}}</q-item-tile>
             </q-item-main>
@@ -28,7 +28,7 @@
               <q-item-tile sublabel>{{wp.state}}</q-item-tile>
             </q-item-main>
           </q-item>
-        
+          <q-btn icon="expand" flat @click="$emit('wp_expand', wp.key)" />
       </div>
       
       <div class="q-mt-md q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
