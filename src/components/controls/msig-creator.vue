@@ -208,7 +208,7 @@
     <q-modal maximized v-model="review_msig_modal">
       <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
         <span>Review Msig Transaction: {{msig_name}}</span>
-        <q-btn icon="close" @click="review_msig_modal = false; review_msig_modal_content =''" class="no-shadow"/>
+        <q-btn icon="close" @click="review_msig_modal = false; review_msig_modal_content =''" flat dense/>
       </div>
       <div class="q-pa-md bg-bg2 text-text1 full-height ">
         <div>For convenience the action data is shown in hex and plain text. </div>

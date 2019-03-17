@@ -73,7 +73,7 @@
     <q-modal minimized v-model="view_abi_modal">
       <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
         <span>ABI: {{custom_mode.account}}</span>
-        <q-btn icon="close" @click="view_abi_modal = false;" class="no-shadow"/>
+        <q-btn icon="close" @click="view_abi_modal = false;" flat dense/>
       </div>
       <div class="q-pa-md bg-bg2 text-text1">
         <div v-html="prettyHtml(custom_mode.abi)" class="overflow-hidden" />

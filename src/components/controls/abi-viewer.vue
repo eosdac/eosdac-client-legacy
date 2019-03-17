@@ -30,7 +30,7 @@
     <q-modal minimized v-model="view_abi_modal">
       <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
         <span>ABI: {{contract}}</span>
-        <q-btn icon="close" @click="view_abi_modal = false;" class="no-shadow"/>
+        <q-btn icon="close" @click="view_abi_modal = false;" dense class="no-shadow"/>
       </div>
       <div class="q-pa-md bg-bg2 text-text1">
         <div v-html="prettyHtml(abi)" class="overflow-hidden" />

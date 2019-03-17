@@ -24,22 +24,29 @@
 
     <div  class="row gutter-sm">
       <div class="col-xs-12 col-xl-6" v-for="(wp, i)  in wps" :key="`wp${i}`">
-        <wp-proposal :wp="wp" @wp_expand="expanded_modal=true; expanded_modal_key=Number($event)" />
+        <wp-proposal :wp="wp" :array_index="i" @wp_expand="expanded_modal=true; expanded_modal_index=Number($event)" />
       </div>
     </div>
 
     <q-modal maximized v-model="expanded_modal" >
-
-      <div class="full-height bg-bg2">
-        <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
-          <span>WP: {{expanded_modal_key}}</span>
-          <q-btn icon="close" @click="expanded_modal = false;" flat />
-        </div>
-        <div class=" text-text1">
-          <wp-proposal :wp="wps.find(w=> w.key == expanded_modal_key )" :expanded="true" />
-        </div>
-      </div>
-
+      <q-carousel
+        color="white"
+        height="100%"
+        quick-nav
+        arrows
+        v-model="expanded_modal_index"
+      >
+        <q-carousel-slide  class="no-padding full-height" v-for="(wp,i) in wps" :key="`exp${i}`" >
+          <div class="full-height bg-bg2">
+            <div style="height:50px" class="bg-bg1 row items-center justify-end q-px-md text-text1">
+              <q-btn icon="close" @click="expanded_modal = false;" flat dense />
+            </div>
+            <div class=" text-text1">
+              <wp-proposal :wp="wp" :expanded="true" />
+            </div>
+          </div>
+        </q-carousel-slide>
+      </q-carousel>
     </q-modal>
     
   </q-page>
@@ -56,7 +63,7 @@ export default {
   data () {
     return {
       expanded_modal: false,
-      expanded_modal_key: 0,
+      expanded_modal_index: 0,
       wps: [],
       active_tab : '',
       pagination :{
@@ -78,8 +85,11 @@ export default {
     async fetchWps(query){
       let res = await this.$store.dispatch('dac/fetchWorkerProposals', query);
       console.log(res)
-      this.wps = res.results;
-      this.pagination.max = Math.ceil(res.count/this.pagination.items_per_page);
+      if(res.results){
+        this.wps = res.results;
+        this.pagination.max = Math.ceil(res.count/this.pagination.items_per_page);
+      }
+
 
 
     },

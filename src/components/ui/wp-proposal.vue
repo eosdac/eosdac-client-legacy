@@ -1,7 +1,7 @@
 <template>
   <div v-if="wp.key && show" class="q-mb-md q-pa-md column justify-between bg-bg1 round-borders shadow-5 bg-logo full-height animate-fade">
     <div>
-      <div class="row">
+      <div class="row relative-position">
       
           <profile-pic :accountname="wp.proposer" />
           <q-item >
@@ -28,7 +28,7 @@
               <q-item-tile sublabel>{{wp.state}}</q-item-tile>
             </q-item-main>
           </q-item>
-          <q-btn icon="expand" flat @click="$emit('wp_expand', wp.key)" />
+          <q-btn v-if="!expanded" dense class="absolute-top-right text-text2" icon="mdi-arrow-expand-all" flat @click="$emit('wp_expand', array_index)" />
       </div>
       
       <div class="q-mt-md q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
@@ -44,7 +44,7 @@
         }"
         :delay="1500"
       >
-        <div  >{{wp.summary}}</div>
+        <div>{{wp.summary}}</div>
       </q-scroll-area>
       
     </div>
@@ -62,7 +62,7 @@
       </div>
       
 
-      <div v-if="!read_only" class="row">
+      <div v-if="!read_only && getAccountName" class="row animate-pop">
         <div v-if="wp.state==0">
           <q-btn v-if="getVoterStatus==2 || getVoterStatus==0" class="on-right"  color="positive" label="Approve" @click="voteprop('voteApprove')"  />
           <q-btn v-if="getVoterStatus==1 || getVoterStatus==0" class="on-right"  color="negative" label="Deny" @click="voteprop('voteDeny')"  />
@@ -97,6 +97,7 @@ export default {
     profilePic
   },
   props:{
+    array_index: null,
     read_only: false,
     wp:{
       type: Object,
@@ -132,7 +133,6 @@ export default {
     getVoterStatus(){
       let myvote = this.wp.votes.find(v => v.voter==this.getAccountName);
       if(!myvote){
-        console.log('not voted yet');
         return 0;
       }
       else{
@@ -275,6 +275,10 @@ export default {
 //             // a vote type to indicate a custodian's rejection of a worker proposal as completed.
 //            4= claim_deny
 //         };
+
+
+// The values only support integers on the input into the contract. Inside the values are cast to Doubles for the percentage calculation and then assert for >= to required perecentage
+// eg. double(approved_count) / double(approved_count + deny_count) * 100.0
 
 </script>
 
