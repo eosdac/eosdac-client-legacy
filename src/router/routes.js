@@ -40,13 +40,13 @@ const routes = [
       { path: '', component: () => import('pages/home') },
       { path: 'review-msigs', component: () => import('pages/custodian/review-msigs') },
       { path: 'create-msigs', component: () => import('pages/custodian/create-msigs'), beforeEnter: Guards.custodianCheck},
-      { path: 'review-worker-proposals', component: () => import('pages/custodian/review-worker-proposals') },
+      //{ path: 'review-worker-proposals', component: () => import('pages/custodian/review-worker-proposals') },
       { path: 'my-payments', component: () => import('pages/custodian/my-payments'), beforeEnter: Guards.custodianCheck }
       
     ]
     
-  },
-
+  }
+/*
   {
     path: '/member',
     component: () => import('layouts/MyLayout.vue'),
@@ -57,6 +57,7 @@ const routes = [
     ],
     beforeEnter: Guards.memberCheck
   }
+*/
 ]
 
 // Always leave this as last one
