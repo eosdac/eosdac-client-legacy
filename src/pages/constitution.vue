@@ -25,7 +25,7 @@
         
 
           <q-item>
-            <q-item-side icon="receipt" color="text2" />
+            <q-item-side :icon="$configFile.icon.constitution" color="text2" />
             <q-item-main>
               <q-item-tile class="text-text1" label>{{$t('default.constitution')}}</q-item-tile>
               <q-item-tile class="text-text2" sublabel>
@@ -35,7 +35,7 @@
           </q-item>
           
           <q-item>
-            <q-item-side icon="check" color="positive" />
+            <q-item-side :icon="$configFile.icon.check" color="positive" />
             <q-item-main>
               <q-item-tile class="text-text1" label>{{$t('constitution.hash')}}</q-item-tile>
               <q-item-tile class="text-text2" style="overflow:hidden; white-space:nowrap;" sublabel>
@@ -45,7 +45,7 @@
           </q-item>
 
           <q-item>
-            <q-item-side icon="link" color="text2" />
+            <q-item-side :icon="$configFile.icon.link" color="text2" />
             <q-item-main style="overflow:hidden">
               <q-item-tile class="text-text1" label>{{$t('constitution.direct_link')}}</q-item-tile>
               <q-item-tile class="text-text2" style="overflow:hidden; white-space:nowrap;" sublabel>

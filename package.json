@@ -1,10 +1,11 @@
 {
-  "name": "testquasar",
-  "version": "0.0.2",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "name": "eosdacmemberclient",
+  "version": "0.0.5",
+  "local_storage_version": "0.1",
+  "description": "Toolkit GUI for eosDAC",
+  "productName": "eosDAC Member Client",
   "cordovaId": "org.cordova.quasar.app",
-  "author": "",
+"author": "eosDAC <hello@eosdac.io>",
   "private": true,
   "scripts": {
     "start": "quasar dev",
@@ -25,6 +26,7 @@
     "turndown": "^5.0.3",
     "vue-i18n": "^7.3.3",
     "vue2-medium-editor": "^1.1.6",
+    "vuedraggable": "^2.19.2",
     "vuelidate": "^0.7.4",
     "vuex-persistedstate": "^2.5.4"
   },

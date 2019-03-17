@@ -7,7 +7,7 @@
         <q-chip  v-if="!is_seen_computed"  dense class="animate-fade absolute" style="top:10px;right:10px"  color="negative">new</q-chip>
         <div class="relative-position" style="text-align:center">
           <q-chip  v-if="msig.trx.actions.length > 1"   dense class="absolute" style="top:12px;left:100px" color="dark">{{msig.trx.actions.length}}</q-chip>
-          <q-icon style="border:2px solid #4A1289;border-radius:50%" size="48px" count="5" :name="'icon-'+matchIcon" class="q-pa-md q-mr-xs q-mb-xs text-text2" :color="getStatusColor" />
+          <q-icon style="border:2px solid #4A1289;border-radius:50%" size="48px" count="5" :name="'icon-'+matchIcon" class="q-pa-md q-mr-xs q-mb-xs" :color="getStatusColor" />
           <div class="q-body-3 text-text1 capitalize">{{msig.title}}</div>
         </div>
     </div>
@@ -26,7 +26,8 @@
     </div>
 
     <div class="row q-pa-md justify-between relative-position items-center">
-      <div v-if="msig.status == 1" @click="approvals_modal = true" class="cursor-pointer">
+     
+      <div v-if="msig.status == 1 || msig.status == 2" @click="approvals_modal = true" class="cursor-pointer">
           <div class="q-caption text-text2" >Received Approvals:</div>
           <div class="text-text1 q-title">
             <span><q-spinner v-if="provided_approvals==null" color="primary" size="25px" style="margin-top:-4px" /></span>
@@ -43,14 +44,14 @@
     <!-- header -->
     <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
       <span>Proposal Details</span>
-      <q-btn icon="close" @click="mobile_details_modal = false" class="no-shadow" />
+      <q-btn icon="close" @click="mobile_details_modal = false" flat dense />
     </div>
     <!-- content -->
     <div class="q-pa-md " >
 
       <q-item >
         <q-item-side left >
-          <q-icon size="48px" count="5" :name="'icon-'+matchIcon" class=" text-text2" :color="getStatusColor" />
+          <q-icon size="48px" count="5" :name="'icon-'+matchIcon"  :color="getStatusColor" />
         </q-item-side>
         <q-item-main >
           {{msig.title}}
@@ -89,11 +90,11 @@
       <div class=" bg-bg2">
         <Actionparser class="q-body-1" @seenAllActions="disable_approve = false" :actions="msig.trx.actions" />
       </div>
-    <div class="q-mt-md">  
+    <div v-if="!read_only" class="q-mt-md">  
         <q-btn v-if="!isApproved" class="full-width q-mb-md" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
-        <q-btn v-if="isApproved" class="full-width q-mb-md" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
-        <q-btn v-if="isCreator" class="full-width q-mb-md" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
-        <q-btn v-if="isExecutable" class="full-width q-mb-md" label="execute" />
+        <q-btn v-if="isApproved" class="full-width q-mb-md" color="negative" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
+        <q-btn v-if="isCreator" class="full-width q-mb-md" flat color="negative" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
+        <q-btn v-if="isExecutable" class="full-width q-mb-md" color="info" label="execute" />
     </div>
 
     </div>
@@ -132,8 +133,7 @@
 
           </div>
         </q-item-main>
-        <q-item-side right v-if="msig.status == 1">
-
+        <q-item-side right v-if="msig.status == 1 || msig.status == 2">
           <div class="q-caption text-text2" >Received Approvals:</div>
           <div class="text-text1 q-display-1">
             <span><q-spinner v-if="provided_approvals==null" color="primary" size="25px" style="margin-top:-4px" /></span>
@@ -161,12 +161,12 @@
 
           </div>
 
-          <div v-if="msig.status == 1" class="row justify-between">
-            <span>
+          <div v-if="msig.status == 1 || msig.status == 2" class="row justify-between">
+            <span v-if="!read_only">
               <q-btn v-if="!isApproved" class="on-left" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
-              <q-btn v-if="isApproved" class="on-left" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
-              <q-btn v-if="isCreator" class="on-left" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
-              <q-btn v-if="isExecutable" color="blue" label="execute" @click="executeProposal(msig.proposer, msig.proposal_name)" />
+              <q-btn v-if="isApproved" class="on-left" color="negative" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
+              <q-btn v-if="isCreator" class="on-left" flat color="negative" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
+              <q-btn v-if="isExecutable" color="info" label="execute" @click="executeProposal(msig.proposer, msig.proposal_name)" />
             </span>
             <span>
               <q-checkbox color="primary-light" left-label :label="isSeen ?'Unmark as seen':'Mark as seen' " v-model="isSeen" @input="handleIsSeenCache" />
@@ -186,7 +186,7 @@
     <!-- header -->
     <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md">
       <span>Approvals <span v-if="provided_approvals" class="q-caption text-weight-thin">needs {{msig.threshold-provided_approvals.length}} more</span></span>
-      <q-btn icon="close" @click="approvals_modal = false" class="no-shadow" />
+      <q-btn icon="close" @click="approvals_modal = false" flat dense />
     </div>
     <!-- content -->
     <div class="q-pa-md">
@@ -216,16 +216,19 @@
 <script>
 
 import Actionparser from 'components/ui/action-parser';
+import profilePic from 'components/ui/profile-pic';
 
 import {mapGetters} from 'vuex';
 export default {
   name: 'Msigproposal',
   components: {
-    Actionparser
+    Actionparser,
+    profilePic
   },
 
   props: {
     msig: Object,
+
   },
 
   data () {
@@ -234,8 +237,7 @@ export default {
       dacmsig: this.$configFile.get('dacmsigcontract'),
       provided_approvals: null,
       requested_approvals: null,
-      isApproved: false,
-      isCreator: false,
+
       isHidden: false,
       approvals_modal: false,
       mobile_details_modal: false,
@@ -249,8 +251,13 @@ export default {
   computed: {
     ...mapGetters({
       getAccountName: 'user/getAccountName',
-      getMsigIsSeenCache: 'user/getMsigIsSeenCache'
+      getMsigIsSeenCache: 'user/getMsigIsSeenCache',
+      getIsCustodian: 'user/getIsCustodian'
     }),
+
+    read_only:function(){
+      return !this.getIsCustodian;
+    },
 
     isExecutable: function(){
       if(this.provided_approvals){
@@ -260,6 +267,17 @@ export default {
       else{
         return false;
       }
+    },
+    isApproved :function(){
+      if(this.provided_approvals){
+        return this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
+      } 
+      else{
+        return false;
+      }
+    },
+    isCreator: function(){
+      return this.getAccountName == this.msig.proposer;
     },
 
     parseActions: function(){
@@ -314,26 +332,38 @@ export default {
   methods: {
     //get the requested and provided approvals for this msg proposal from chain
     async checkApprovals(){
-
+      let approvals = undefined;
       if(this.msig.status === 1){
-        let approvals = await this.$store.dispatch('dac/fetchApprovalsFromProposal', {proposer: this.msig.proposer, proposal_name: this.msig.proposal_name});
-        let avatars = await this.$profiles.getAvatars([...approvals.provided_approvals.map(a=>a.actor), ...approvals.requested_approvals.map(a=>a.actor) ]);
-
-        this.provided_approvals = approvals.provided_approvals.map(pa=>{
-          pa.avatar = avatars.find(p=> p._id===pa.actor );
-          // this.$set(pa, 'avatar', avatars.find(p=> p._id===pa.actor ))
-          return pa;
-        });
-        
-        this.requested_approvals = approvals.requested_approvals.map(ra=>{
-          ra.avatar = avatars.find(p=>p._id===ra.actor);
-          return ra;
-        });
-        //check if user has already approved the proposal
-        this.isApproved = this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
-        //check if the proposal is created by current user
-        this.isCreator = this.getAccountName == this.msig.proposer
+        approvals = await this.$store.dispatch('dac/fetchApprovalsFromProposal', {proposer: this.msig.proposer, proposal_name: this.msig.proposal_name});
       }
+      else if(this.msig.status === 2){
+        approvals = {
+          provided_approvals:this.msig.provided_approvals,
+          requested_approvals:this.msig.requested_approvals
+        }
+      }
+
+      if(!approvals){
+        return;
+      }
+
+      let avatars = await this.$profiles.getAvatars([...approvals.provided_approvals.map(a=>a.actor), ...approvals.requested_approvals.map(a=>a.actor) ]);
+
+      this.provided_approvals = approvals.provided_approvals.map(pa=>{
+        pa.avatar = avatars.find(p=> p._id===pa.actor );
+        // this.$set(pa, 'avatar', avatars.find(p=> p._id===pa.actor ))
+        return pa;
+      });
+        
+      this.requested_approvals = approvals.requested_approvals.map(ra=>{
+        ra.avatar = avatars.find(p=>p._id===ra.actor);
+        return ra;
+      });
+      //check if user has already approved the proposal
+      // this.isApproved = this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
+      //check if the proposal is created by current user
+      // this.isCreator = this.getAccountName == this.msig.proposer
+      
 
     },
 
@@ -353,7 +383,7 @@ export default {
         {
           account: this.dacmsig, 
           name: 'approved',
-          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
           data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
@@ -383,7 +413,7 @@ export default {
         {
           account: this.dacmsig, 
           name: 'unapproved',
-          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
           data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
@@ -411,7 +441,7 @@ export default {
         {
           account: this.dacmsig, 
           name: 'executed',
-          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
           data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
@@ -442,7 +472,7 @@ export default {
         {
           account: this.dacmsig, 
           name: 'cancelled',
-          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
           data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
@@ -496,7 +526,8 @@ export default {
 
   mounted:function(){
    this.checkApprovals();
-  }
+  },
+
 
 }
 </script>

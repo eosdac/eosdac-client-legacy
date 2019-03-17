@@ -23,7 +23,8 @@ Vue.use(Vuex);
         key: 'global',
         paths: [
           'global.active_network',
-          'global.dapp_version'
+          'global.dapp_version',
+          'global.local_storage_version'
         ]
       }),
       createPersistedState({

@@ -18,6 +18,10 @@ export function setActiveNetwork (state, payload) {
 export function setDapp_version (state, payload){
     state.dapp_version = payload;
 }
+export function setLocal_storage_version (state, payload){
+    state.local_storage_version = payload;
+}
+
 
 export function setNode (state, nodeurl){
 

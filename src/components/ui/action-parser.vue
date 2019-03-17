@@ -7,7 +7,7 @@
       <span class="text-text2">{{actions[activeSlide].authorization.map(a => a.actor+'@'+a.permission).join(', ')}}</span>
     </span>
   </div>
-  <q-carousel class="text-text1 bg-bg2" v-model="activeSlide" @input="handleslide($event)">
+  <q-carousel class="text-text1 bg-bg2 " v-model="activeSlide" @input="handleslide($event)">
     <q-carousel-slide v-for="(action, i) in actions" :key="i+'actionslide'">
 
       <div class="action_data_parser q-py-md" v-for="(key, i) in Object.keys(action.data)" :key="i+'actionkey'">
@@ -19,7 +19,7 @@
   </q-carousel>
 
   <!-- controls -->
-  <div v-if="actions.length > 1" class="q-mt-sm">
+  <div v-if="actions.length > 1" class="bg-bg1 q-pt-sm">
     <q-btn  color="primary" @click="prevAction()" icon="arrow_left" size="sm" />
     <span class="q-mx-sm">{{activeSlide+1}}/{{actions.length}}</span>
     <q-btn  color="primary" @click="nextAction()" icon="arrow_right" size="sm" />

@@ -3469,10 +3469,6 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.4
   version "4.1.15"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
 
-gsap@^1.20.4:
-  version "1.20.6"
-  resolved "https://registry.yarnpkg.com/gsap/-/gsap-1.20.6.tgz#0f6829052e94fbfffa92be3265f24b88729c9d1d"
-
 gzip-size@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-5.0.0.tgz#a55ecd99222f4c48fd8c01c625ce3b349d0a0e80"
@@ -6563,6 +6559,10 @@ sockjs@0.3.19:
     faye-websocket "^0.10.0"
     uuid "^3.0.1"
 
+sortablejs@^1.8.4:
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.8.4.tgz#1bbfeafa96d399b83f28e25d8e49d4fbfd867f30"
+
 source-list-map@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
@@ -7303,12 +7303,6 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-flip-countdown@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/vue-flip-countdown/-/vue-flip-countdown-0.0.3.tgz#d1a5f0f97315cfd87b42988051cfad7441fdd3b7"
-  dependencies:
-    gsap "^1.20.4"
-
 vue-hot-reload-api@^2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
@@ -7362,12 +7356,6 @@ vue-template-es2015-compiler@^1.8.2:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.8.2.tgz#dd73e80ba58bb65dd7a8aa2aeef6089cf6116f2a"
 
-vue2-flip-countdown@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/vue2-flip-countdown/-/vue2-flip-countdown-0.5.3.tgz#a33416dce7d5909668324ef11fb8fc38d1afde49"
-  dependencies:
-    uuid "^3.3.2"
-
 vue2-medium-editor@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/vue2-medium-editor/-/vue2-medium-editor-1.1.6.tgz#1eb56a81ffeb3d590cacf8fa34dc287047f8b595"
@@ -7381,6 +7369,12 @@ vue2-medium-editor@^1.1.6:
 vue@2.5.17:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
+
+vuedraggable@^2.19.2:
+  version "2.19.2"
+  resolved "https://registry.yarnpkg.com/vuedraggable/-/vuedraggable-2.19.2.tgz#a82a35e081eb63272c53c71b51b7e4e4f906e394"
+  dependencies:
+    sortablejs "^1.8.4"
 
 vuelidate@^0.7.4:
   version "0.7.4"

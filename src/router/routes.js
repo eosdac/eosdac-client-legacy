@@ -1,30 +1,5 @@
-import store from '../store'
 
-const Guards = {
-  logInCheck (to, from, next) {
-    if (!store.getters['user/getAccountName']) {
-      next({ path: '' })
-    } else {
-      next()
-    }
-  },
-  custodianCheck (to, from, next) {
-    let isCustodian = store.getters['user/getIsCustodian'];
-    if (!isCustodian) {
-      next({path: ''});
-    } else {
-      next();
-    }
-  },
-  memberCheck (to, from, next) {
-    let status = store.getters['user/getMemberStatus'];
-    if (status !== 'member') {
-      next({path: ''});
-    } else {
-      next();
-    }
-  }
-};
+import Guards from './guards'
 
 const routes = [
   {
@@ -38,10 +13,23 @@ const routes = [
       { path: 'vote-custodians', component: () => import('pages/vote-custodians.vue') },
       { path: 'profile/:accountname', component: () => import('pages/profile') },
       { path: 'credits', component: () => import('pages/credits.vue') },
-      { path: 'dev-tools', component: () => import('pages/dev/dev-tools-home') },
+      // { path: 'dev-tools', component: () => import('pages/dev/dev-tools-home') },
+      // { path: 'playyard', component: () => import('pages/dev/playyard') },
       { path: 'manage-candidateship', component: () => import('pages/manage-candidateship.vue') },
       { path: 'verify/:token', component: () => import('pages/verify-token')},
       
+    ]
+  },
+
+  {
+    path: '/dev-tools',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/home') },
+      { path: 'memberclient', component: () => import('pages/dev/dev-tools-home') },
+      { path: 'playground', component: () => import('pages/dev/playground') },
+      { path: 'transactions', component: () => import('pages/dev/transactions') }
+
     ]
   },
   
@@ -51,14 +39,14 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/home') },
       { path: 'review-msigs', component: () => import('pages/custodian/review-msigs') },
-      { path: 'create-msigs', component: () => import('pages/custodian/create-msigs') },
+      { path: 'create-msigs', component: () => import('pages/custodian/create-msigs'), beforeEnter: Guards.custodianCheck},
       { path: 'review-worker-proposals', component: () => import('pages/custodian/review-worker-proposals') },
-      { path: 'my-payments', component: () => import('pages/custodian/my-payments') }
+      { path: 'my-payments', component: () => import('pages/custodian/my-payments'), beforeEnter: Guards.custodianCheck }
       
-    ],
-    beforeEnter: Guards.custodianCheck
+    ]
+    
   },
-/*
+
   {
     path: '/member',
     component: () => import('layouts/MyLayout.vue'),
@@ -69,7 +57,6 @@ const routes = [
     ],
     beforeEnter: Guards.memberCheck
   }
-*/  
 ]
 
 // Always leave this as last one

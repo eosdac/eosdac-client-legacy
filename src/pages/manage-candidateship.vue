@@ -184,7 +184,7 @@ export default {
       }
     },
     verifyAndGetRequestedPay(){
-      if(this.inputs.requestedpay && (this.inputs.requestedpay <= this.assetToNumber(this.getCustodianConfig.requested_pay_max) ) ){
+      if(this.inputs.requestedpay !==null && this.inputs.requestedpay >=0 && (this.inputs.requestedpay <= this.assetToNumber(this.getCustodianConfig.requested_pay_max) ) ){
         return this.numberToAsset(this.inputs.requestedpay.toFixed(4), this.$configFile.get('systemtokensymbol') );
       }
       else{

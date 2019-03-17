@@ -5,7 +5,7 @@
     <div class="row">
       <div class="bg-bg1 round-borders shadow-5 col-xs-12 col-md-6">
 
-        <div v-if="pendingpay.length">
+        <div v-if="pendingpay.length" class="animate-fade">
 
           <q-item v-for="(pay, i) in pendingpay" :key="`pay_id_${i}`">
             <q-item-side left>{{pay.key}}</q-item-side>
@@ -30,7 +30,7 @@
 
           
         </div>
-        <div v-else>
+        <div v-else class="q-ma-md">
           You do not have any pending payments.
         </div>
       </div>
@@ -39,9 +39,9 @@
       <div class="text-text1 round-borders bg-bg1 q-pa-md">
           <span >{{$t('regcandidate.pay_description', {requested_pay: $helper.assetToLocaleNumber(getCustodianConfig.requested_pay_max) }) }}</span>
           <q-item class="q-pl-none">
-            <q-item-side left icon="icon-type-2"  v-bind:class="{'text-positive':verifyAndGetRequestedPay, 'text-text2': !verifyAndGetRequestedPay}"/>
+            <q-item-side left icon="icon-type-2"  v-bind:class="{'text-negative': $v.new_requested_pay.$error}"/>
             <q-item-main>
-              <q-input  color="primary-light" :dark="getIsDark" type="number" :max="20" v-model="new_requested_pay" :stack-label="$t('regcandidate.requestedpay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
+              <q-input  color="primary-light" :dark="getIsDark" type="number" v-model="new_requested_pay" @input="$v.new_requested_pay.$touch()" :error="$v.new_requested_pay.$error" :stack-label="$t('regcandidate.requestedpay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
             </q-item-main>
           </q-item>
           <div class="row justify-end q-mt-md">
@@ -59,7 +59,7 @@
 <script>
 import {mapGetters} from 'vuex';
 import debugData from 'components/ui/debug-data';
-
+import {required, between} from 'vuelidate/lib/validators';
 export default {
   name: 'MyPayments',
   components: {
@@ -92,13 +92,8 @@ export default {
       return this.$helper.toLocaleNumber(total)+ ' EOS';
     },
     verifyAndGetRequestedPay(){
-      if(this.new_requested_pay && (this.new_requested_pay <= this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max) ) ){
+      if( (this.new_requested_pay >= 0) ){
         return this.$helper.numberToAsset(this.new_requested_pay.toFixed(4), this.$configFile.get('systemtokensymbol') );
-      }
-      else{
-        console.log('requested pay out of range');
-        return false;
-
       }
     },
 
@@ -116,7 +111,7 @@ export default {
       ];
       let result = await this.$store.dispatch('user/transact', {actions: actions} );
       if(result){
-        
+        this.getClaimPay();
       }
         
     },
@@ -139,10 +134,14 @@ export default {
     },
 
     async updateRequestedPay(){
-      if(!this.verifyAndGetRequestedPay){
+
+      this.$v.new_requested_pay.$touch()
+
+      if (this.$v.new_requested_pay.$error) {
         alert('Requested pay amount invalid');
         return;
       }
+
       let actions = [
         {
           account: this.$configFile.get('custodiancontract'), 
@@ -169,6 +168,16 @@ export default {
   },
   mounted(){
     this.getClaimPay();
+  },
+
+  validations(){
+    return {
+      new_requested_pay: {
+        required, 
+        between:between(0.0000, this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max) )
+      }
+    }
+
   }
 
 }

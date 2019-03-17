@@ -31,15 +31,18 @@ export function getCustodians (state) {
     return state.custodians;  
 }
 
-export function getCustodianConfig(state, payload){
+export function getCustodianConfig(state){
     return state.custodianConfig;
 }
 
-export function getCandidates (state, payload) {
+export function getWpConfig(state){
+    return state.wpConfig;
+}
 
+export function getCandidates (state) {
     return state.candidates;  
 }
 
-export function getCustodianState (state, payload) {
+export function getCustodianState (state) {
     return state.custodianState;  
 }

@@ -1,193 +1,139 @@
 <template>
 <div class="text-text1">
   <div class="row relative-position justify-start q-mb-md">
-      <h4 class="q-display-1 text-text2 q-my-none">{{ $t('msig_creator.page_title') }}</h4>
+      <h4 class="q-display-1 text-text2 q-my-none">{{ $t('msig_creator.step1') }}</h4>
   </div>
   <div class="bg-bg1 round-borders shadow-5 q-pa-md">
     <q-stepper color="primary-light" class="bg-bg1 bg-logo" ref="stepper"  contractable>
 
       <!-- step 1 select msig account -->
-      <q-step default name="first" :title="$t('msig_creator.step1')" :subtitle="getSelectedAccount2.name">
+      <q-step default name="first" title="Select Msig Account" >
         <div class="q-mb-md text-text2">
-             {{ $t('msig_creator.step1_desc') }}
+            Select an account from which you want to propose a multisignature transaction.
         </div>
 
         <div>
-
-          <div class="row bg-bg2 q-pa-md ">
-
-            <q-btn-dropdown :disable="allow_advanced" dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" @click="actionfilter=false; handleSelection(i)">
-
-              <q-list  link class="bg-dark"  >
-                <q-item v-for="(la, j) in n.linkedAuths" :key="`la${j}`" @click.native=" actionfilter=j; handleSelection(i)">
-                  <q-item-main>
-                    <q-item-tile class="text-text1 q-body-1" label>{{`${la.contract} > ${la.action}`}}</q-item-tile>
-                    <q-item-tile class="text-text2 q-caption" sublabel>{{`@${la.permission}`}}</q-item-tile>
-                  </q-item-main>
-                  <!-- <q-item-side right icon="info" color="amber" /> -->
-                </q-item>
-              </q-list>
-
-            </q-btn-dropdown>
-            
-            
-          </div>
-        </div>
-
-        <div class="row justify-between q-mt-md" style="min-height:36px">
-          <q-btn :label="$t('msig_creator.advanced')"  :icon="allow_advanced ? 'check': ''" size="sm" flat color="primary-light" @click="allow_advanced=!allow_advanced; unSelectAll()" />
-          <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" :label="$t('msig_creator.next')" v-if="controlled_accounts.find(ca=> ca.selected==true) || allow_advanced" >
-          </q-btn>
-        </div>
-      </q-step>
-
-      <!-- step 2 add actions -->
-      <q-step  name="second" :title="$t('msig_creator.step2')" class="text-text1" subtitle="" >
-        <div class="q-mb-md text-text2 row justify-between items-center" style="min-height:35px">
-            <div>{{ $t('msig_creator.step2_desc') }}<span v-if="actions.length >1" class="animate-fade">{{ $t('msig_creator.sort_notify') }}</span></div>
-        </div>
-
-        <div class="row q-mb-md bg-bg2 q-pa-md q-mt-md round-borders" style="min-height:80px">
-          <draggable v-model="actions" group="actions" @start="drag=true" @end="drag=false" style="display:flex">
-            <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer" />
-          </draggable>
-          <span class="text-negative text-weight-light" v-if="!actions.length">{{ $t('msig_creator.no_actions') }}</span>
-        </div>
-
-        <div v-if="getSelectedAccount">
-          <q-btn v-if="actionfilter!==false && getSelectedAccount2.linkedAuths.length > 1" label="show all linked actions" color="bg2" @click="actionfilter=false"/>
-
-          <div v-for="(linkedauth, i) in getSelectedAccount2.linkedAuths" :key="`la${i}`" class="text-text1 animate-fade">
-            <action-maker
-            v-if="actionfilter===false || actionfilter==i"
-            :account="linkedauth.contract" 
-            :name="linkedauth.action" 
-            :prefill="{from: getSelectedAccount, account: getSelectedAccount}" 
-            :auth="[{actor: getSelectedAccount, permission: linkedauth.permission}]" 
-            @actiondata="addAction"
-            />
-
-          </div>
-
-        </div>
-        <div v-else class="text-text1">
-          <action-maker @actiondata="addAction" :prefill="{from: getAccountName}"/>
-        </div>
-
-        <div class="row justify-end q-mt-md">
-          <q-stepper-navigation>
-            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" :label="$t('msig_creator.back')" />
-            <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" :label="$t('msig_creator.next')" >
-              <q-chip floating count="5" >{{actions.length}}</q-chip>
+          <div class="text-text1 q-mb-md">The DAC "dacauthority" controls the following accounts:</div>
+          <div class="row bg-bg2 q-pa-md">
+            <q-btn class=" q-my-sm q-mr-sm"  v-for="(n,i) in controlled_accounts" :key="i"  :label="n.name" color="bg1" @click="handleSelection(i)" >
+              <q-icon v-if="n.selected" class="animate-pop q-ml-sm" name="check" color="positive" />
             </q-btn>
-          </q-stepper-navigation>
-        </div>
-      </q-step>
-
-      <!-- step 3 add description -->
-      <q-step default name="third" :title="$t('msig_creator.step3')" >
-        <div class="q-mb-md text-text2">
-            {{ $t('msig_creator.step3_desc') }}
-        </div>
-        <div class="row gutter-md">
-          <div class="col-xs-12 col-md-6">
-            <div class="full-height">
-              <q-input type="text" :dark="getIsDark" maxlength="70" v-model="msig_title" stack-label="Title" :placeholder="$t('msig_creator.title')" class="q-mb-md" />
-
-            </div>
-          </div>
-
-          <div class="col-xs-12 col-md-6">
-            <div class="full-height">
-              <q-item class="no-padding">
-                <q-btn icon="refresh" flat color="primary-light" :title="$t('msig_creator.new_id')" @click="msig_name = $helper.randomName();" />
-                <q-item-main class="q-pa-md">
-                  <q-input readonly hide-underline :dark="getIsDark" v-model="msig_name" :stack-label="$t('msig_creator.id_name')" />
-                </q-item-main>
-              </q-item>
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="full-height">
-              <q-input type="textarea"  :max-height="200" :dark="getIsDark" v-model="msig_description" :stack-label="$t('msig_creator.summary')" :placeholder="$t('msig_creator.sum_placeholder')" />
-
-            </div>
           </div>
         </div>
 
         <div class="row justify-end">
-          <q-stepper-navigation >
-            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" :label="$t('msig_creator.back')"  />
-            <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" :label="$t('msig_creator.next')"  v-if="msig_title && msig_name && msig_description" />
+          <q-stepper-navigation>
+            <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" v-if="controlled_accounts.find(ca=> ca.selected==true)" />
           </q-stepper-navigation>
         </div>
       </q-step>
 
+      <!-- step 2 add description -->
+      <q-step default name="second" title="Add info" >
+        <div class="q-mb-md text-text2">
+            Give the msig transaction a title and description
+        </div>
+        <div class="row gutter-md">
+          <div class="col-xs-12 col-md-6">
+            <q-item class="no-padding">
+              <q-item-main>
+                <q-input readonly :dark="getIsDark" v-model="msig_name" stack-label="ID/Name" placeholder="msig name" />
+              </q-item-main>
+              <q-btn icon="refresh" flat color="primary-light" title="generate new id" @click="msig_name = $helper.randomName();" />
+            </q-item>
+          </div>
+          <div class="col-xs-12 col-md-6"><div><q-input type="text" :dark="getIsDark" maxlength="70" v-model="msig_title" stack-label="Title" placeholder="title" /></div></div>
+        </div>
 
+        <div class="q-mt-lg"><q-input type="textarea" :row="5" :dark="getIsDark" v-model="msig_description" stack-label="Description" placeholder="Short info about the transaction" /></div>
+
+        <div class="row justify-end">
+          <q-stepper-navigation >
+            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
+            <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" v-if="msig_title && msig_name && msig_description" />
+          </q-stepper-navigation>
+        </div>
+      </q-step>
+
+      <!-- step 3 add actions -->
+      <q-step  name="third" title="Add Actions" class="text-text1" subtitle="" >
+        <div class="q-mb-md text-text2">
+            Add actions to the multisignature transaction.
+        </div>
+        <div class="row q-mb-md bg-bg2 q-pa-md round-borders">
+          <display-action v-for="(action,i) in actions" :action="action" closable viewable @close="deleteAction(i)" :key="`a${i}`" class="cursor-pointer"/>
+          <span class="text-text2" v-if="!actions.length">No actions added yet.</span>
+        </div>
+        <q-tabs :dark="getIsDark">
+          <q-tab default slot="title" name="tab-1" :label="`send ${this.$configFile.get('systemtokensymbol')}`" />
+          <q-tab slot="title" name="tab-2" :label="`send ${this.$configFile.get('dactokensymbol')}`" />
+          <q-tab slot="title" name="tab-3" :label="`Advanced`" />
+          <!-- Targets -->
+          <q-tab-pane name="tab-1" class="text-text1 bg-bg2" style="min-height:320px">
+            <action-maker :account="$configFile.get('systemtokencontract')"  name="transfer" :prefill="{from: getSelectedAccount}" :auth="[{actor: getSelectedAccount2.name, permission: getSelectedAccount2.permission}]" @actiondata="addAction" />
+          </q-tab-pane>
+          <q-tab-pane name="tab-2" class="text-text1 bg-bg2" style="min-height:320px">
+            <action-maker :account="$configFile.get('tokencontract')" name="transfer" :prefill="{from: getSelectedAccount}" :auth="[{actor: getSelectedAccount2.name, permission: getSelectedAccount2.permission}]" @actiondata="addAction"/>
+          </q-tab-pane>
+          <q-tab-pane name="tab-3" class="text-text1 bg-bg2" style="min-height:320px">
+            <!-- <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/> -->
+            <action-maker @actiondata="addAction" :auth="[{actor: getSelectedAccount2.name, permission: getSelectedAccount2.permission}]"/>
+
+          </q-tab-pane>
+        </q-tabs>
+
+        <div class="row justify-end q-mt-md">
+          <q-stepper-navigation>
+            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
+            <q-btn v-if="actions.length" class="animate-pop" color="primary" @click="$refs.stepper.next()" label="Next" />
+          </q-stepper-navigation>
+        </div>
+      </q-step>
 
       <!-- step 4 set expiration -->
-      <q-step name="fourth" :title="$t('msig_creator.step4')">
-        <div class="row gutter-md">
-          <div class="col-xs-12 col-lg-6">
-            <div>
-              <div class="q-mb-md text-text2">
-                  {{ $t('msig_creator.step4_descl') }}
-              </div>
-              <q-datetime-picker minimal :dark="getIsDark" class="bg-bg2" color="positive" v-model="trx_expiration" :min="mindate" :max="maxdate" type="date" />
-            </div>
-          </div>
-          <div class="col-xs-12 col-lg-6">
-            <div>
-              <div class="q-mb-md text-text2">
-                  {{ $t('msig_creator.step4_descr') }}
-              </div>
-              <q-input type="number" :dark="getIsDark" v-model="msig_delay" :stack-label="$t('msig_creator.msig_delay')"/>
-              <!-- <div class="text-text1">Add/remove requested authorizations</div> -->
-              <!-- <auth-display class="text-text1 bg-bg2" v-model="msig_requested"  /> -->
-            </div>
-          </div>
-          
+      <q-step name="fourth" title="Set Exipiration">
+        <div class="q-mb-md text-text2">
+            Set a date on which the transaction should expire. The transaction will be unexecutable after this date even if all signatures are collected.
+        </div>
+        <div>
+        <q-datetime-picker minimal :dark="getIsDark" class="bg-bg1" color="positive" v-model="trx_expiration" :min="mindate" :max="maxdate" type="date" />
         </div>
         <div class="row justify-end q-mt-md">
           <q-stepper-navigation>
-            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" :label="$t('msig_creator.back')" />
-            <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" :label="$t('msig_creator.next')" />
+            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
+            <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" label="Next" />
           </q-stepper-navigation>
         </div>
       </q-step>
 
       <!-- step 5 review and submit -->
-      <q-step name="fifth" :title="$t('msig_creator.step5')" active-icon="remove_red_eye">
-        <div class="q-mb-md text-text2">
-            {{ $t('msig_creator.step4_desc') }}
-        </div>
+      <q-step name="fifth" title="Review & Submit" active-icon="remove_red_eye">
         <div class="row justify-between">
           <div class="row">
             <q-item class="animate-pop">
               <q-item-side icon="mdi-account-key-outline" color="text2" />
               <q-item-main style="margin-left:-5px">
                 <q-item-tile class="text-text1" label>Multisignature Account</q-item-tile>
-                <q-item-tile class="text-text2 q-caption" sublabel>{{getSelectedAccount2.name}}</q-item-tile>
+                <q-item-tile class="text-text2 q-caption" sublabel>{{getSelectedAccount}}</q-item-tile>
               </q-item-main>
             </q-item>
             <q-item class="animate-pop">
               <q-item-side icon="timer" color="text2" />
               <q-item-main style="margin-left:-5px">
-                <q-item-tile class="text-text1" label>{{ $t('msig_creator.expiration') }}</q-item-tile>
+                <q-item-tile class="text-text1" label>Expiration</q-item-tile>
                 <q-item-tile class="text-text2 q-caption" sublabel>{{trx_expiration}}</q-item-tile>
               </q-item-main>
             </q-item>
             <q-item class="animate-pop">
               <q-item-side :icon="$configFile.icon.action" color="text2" />
               <q-item-main style="margin-left:-5px">
-                <q-item-tile class="text-text1" label>{{ $t('msig_creator.actions') }}</q-item-tile>
+                <q-item-tile class="text-text1" label>Actions</q-item-tile>
                 <q-item-tile class="text-text2 q-caption" sublabel>{{actions.length}}</q-item-tile>
               </q-item-main>
             </q-item>
           </div>
-          <q-checkbox :dark="getIsDark" class="text-text2" color="primary-light" v-model="reset_form_after_success" left-label :label="$t('msig_creator.reset')" />
+          <q-checkbox :dark="getIsDark" class="text-text2" color="primary-light" v-model="reset_form_after_success" left-label label="Reset after submit" />
         </div>
-
         <div class="row q-pa-md q-mt-md bg-bg2 round-borders">
             <display-action v-for="(action,i) in actions" :action="action" :key="`a${i}`" viewable/>
         </div>
@@ -195,7 +141,7 @@
         <div class="row justify-between  items-center q-mt-lg ">
           <q-btn label="view full Msig" icon="pageview" class="q-my-xs" color="primary" @click="openReview_Msig_Modal" />
           <div class="q-my-xs">
-            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" :label="$t('msig_creator.back')" />
+            <q-btn color="primary-light" flat @click="$refs.stepper.previous()" label="Back" />
             <q-btn color="positive" class="animate-pop" @click="proposeMsig" label="submit" />
           </div>
 
@@ -203,7 +149,6 @@
       </q-step>
     </q-stepper>
   </div>
-  <!-- {{msig_requested}} -->
   <!-- review msig modal -->
     <q-modal maximized v-model="review_msig_modal">
       <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
@@ -229,13 +174,12 @@
 
 <script>
 const prettyHtml = require('json-pretty-html').default;
-import authDisplay from 'components/ui/auth-display'
 import {mapGetters} from 'vuex';
 import debugData from 'components/ui/debug-data';
 import actionMaker from 'components/controls/action-maker';
 import displayAction from 'components/ui/display-action';
 import { date } from 'quasar';
-import draggable from 'vuedraggable';
+
 const today = new Date();
 const { addToDate, subtractFromDate } = date;
 const msigTrx_template = { 
@@ -256,17 +200,11 @@ export default {
   components:{
     debugData,
     actionMaker,
-    displayAction,
-    authDisplay,
-    draggable
+    displayAction
   },
   data () {
     return {
-      customAction: false,
-      actionfilter:false,
       reset_form_after_success: true,
-      msig_requested: [{"actor":"boiboiboiboi","permission":"active"}],
-      msig_delay:0,
       msig_name:'',
       msig_title:'',
       msig_description:'',
@@ -276,8 +214,7 @@ export default {
       maxdate: addToDate(today, {days: 14}),
       actions:[],
       review_msig_modal: false,
-      review_msig_modal_content :'',
-      allow_advanced: false
+      review_msig_modal_content :''
     }
   },
   computed:{
@@ -309,15 +246,9 @@ export default {
   },
 
   methods:{
-
     handleSelection(index){
-      this.allow_advanced = false;
       this.controlled_accounts = this.controlled_accounts.map(ca=>{ca.selected=false; return ca});
       this.controlled_accounts[index].selected=true;
-      this.$refs.stepper.next()
-    },
-    unSelectAll(){
-      this.controlled_accounts = this.controlled_accounts.map(ca=>{ca.selected=false; return ca});
     },
 
     addAction(data){
@@ -337,10 +268,10 @@ export default {
 
     constructMsigTransaction(){
       let template = JSON.parse(JSON.stringify(msigTrx_template) );
-      template.delay_sec = this.msig_delay;
       template.expiration = this.trx_expiration.split('.')[0]; 
       template.actions = this.actions.map(a=>{
-
+        // a.authorization = [{actor: this.getSelectedAccount2.name, permission: this.getSelectedAccount2.permission}];
+        //replace plain data with hex
         if(a.hex){
           a.data = a.hex;
           delete a.hex;
@@ -352,9 +283,8 @@ export default {
 
     openReview_Msig_Modal(){
       let template = JSON.parse(JSON.stringify(msigTrx_template) );
-      template.delay_sec = this.msig_delay;
       template.expiration = this.trx_expiration.split('.')[0];
-      template.actions = this.actions;
+      template.actions = this.actions
       this.review_msig_modal_content = prettyHtml(template);
       this.review_msig_modal = true;
     },
@@ -364,7 +294,6 @@ export default {
         let req = {actor: c.cust_name, permission: 'active'};
         return req;
       });
-      console.log(requested)
       return requested;
     },
 

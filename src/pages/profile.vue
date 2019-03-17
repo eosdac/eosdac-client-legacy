@@ -252,7 +252,7 @@ export default {
       this.form.timezone = new Date().getTimezoneOffset();
 
       let actions = [{
-          account: 'dacelections',
+          account: this.$configFile.get('custodiancontract'),
           name: 'stprofileuns',
           data: {
             cand: this.getAccountName,

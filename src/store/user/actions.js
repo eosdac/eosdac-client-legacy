@@ -180,13 +180,13 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
                       label: 'Explorer',
                       icon: 'link', // optional
                       handler: () => {
-                        openURL(`https://jungle.bloks.io/transaction/${result.transaction_id}`)
+                        openURL(`${this._vm.$configFile.get('explorer')}/transaction/${result.transaction_id}`) 
                       }
                     }
                 ],
             });
         }
-        return true;
+        return result;
 
     } catch(e){
         console.log(e);

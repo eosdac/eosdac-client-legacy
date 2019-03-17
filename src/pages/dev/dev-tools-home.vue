@@ -35,20 +35,20 @@
         <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height">
           <div class="q-title q-mb-md">Network</div>
           <div class="q-mt-md row">
-            <network-switcher class="q-ma-xs" />
+            <network-switcher class="q-ma-xs" :enable_pin="false" />
             <firehose class="q-ma-xs" />
           </div>
         </div>
       </div>
 
-      <div class="col-xs-12 q-mb-md " >
+      <!-- <div class="col-xs-12 q-mb-md " >
         <div class="bg-bg1 round-borders shadow-5 q-pa-md">
           <div class="q-title q-mb-md">Push Transactions</div>
           <div class="q-mt-md">
             <transaction-builder />
           </div>
         </div>
-      </div>
+      </div> -->
 
     </div>
 
@@ -88,8 +88,6 @@ import nightModeSwitch from 'components/controls/nightmode-switch';
 
 import networkSwitcher from 'components/controls/network-switcher';
 
-import transactionBuilder from 'components/controls/transaction-builder';
-
 import firehose from 'components/controls/firehose';
 
 import debugData from 'components/ui/debug-data';
@@ -101,8 +99,7 @@ export default {
       colorPicker,
       networkSwitcher,
       firehose,
-      debugData,
-      transactionBuilder
+      debugData
  
   },
   data() {

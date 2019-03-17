@@ -10,6 +10,13 @@ export function getAccount (state) {
     return state.account;
 }
 
+export function getAuthString(state){
+    if(state.account){
+        return `${state.account.name}@${state.account.authority}`;
+    }
+    
+}
+
 export function getProfilePicture (state) {
     return state.profilePicture;
 }

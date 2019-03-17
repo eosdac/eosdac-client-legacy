@@ -1,12 +1,17 @@
+require('../assets/icon-fonts/eosdac-iconfont-v1-9/styles.css')
+require('../assets/icon-fonts/extended_material_icons/css/materialdesignicons.css')
+
 
 class configLoader {
 
   constructor( networkname){
 
     this.configFile = require(`../statics/config.${networkname}.json`);
+    this.icon = require(`../statics/iconmap.json`);
     // store.commit('global/setConfig', this.configFile);
     
   }
+
 
   get(configquery){
 
@@ -35,6 +40,8 @@ class configLoader {
         return this.configFile.external.explorer;
       case 'memberclientapi':
         return this.configFile.api.memberclient;
+      case 'memberclientstateapi':
+        return this.configFile.api.memberclient_state_api;
       case 'bpnodeapi':
         return this.configFile.api.bpnodes;
       case 'firehoseapi':
@@ -43,6 +50,8 @@ class configLoader {
         return this.configFile.external;
       case 'authaccount':
         return this.configFile.authAccount;
+      case 'authaccountname':
+        return this.configFile.authAccount.name;
       case 'wpcontract':
         return this.configFile.contracts.wpproposal.name;
       default:

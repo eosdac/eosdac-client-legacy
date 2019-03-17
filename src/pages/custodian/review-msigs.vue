@@ -29,7 +29,7 @@
   </div>
 
   <div style="min-height:200px">
-    <Msigproposal v-for="(msig, index) in proposals" :key="index" :msig="msig" />
+    <Msigproposal v-for="(msig, index) in proposals"  :key="index" :msig="msig" />
   </div>
 </q-page>
 </template>
@@ -49,7 +49,6 @@ export default {
 
   data() {
     return {
-      systemmsig: 'eosio.msig',
       proposals: [],
       createmsig_modal: false,
       active_tab : '',
@@ -66,7 +65,8 @@ export default {
     ...mapGetters({
       getactiveCustodians: 'api/getActiveCustodians',
       getAccountName: 'account/getAccountName',
-      getIsDark: 'ui/getIsDark'
+      getIsDark: 'ui/getIsDark',
+      getIsCustodian: 'user/getIsCustodian'
     })
 
   },

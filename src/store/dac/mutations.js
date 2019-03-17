@@ -21,6 +21,10 @@ export function setCustodianConfig(state, payload){
     state.custodianConfig = payload
 }
 
+export function setWpConfig(state, payload){
+    state.wpConfig = payload;
+}
+
 export function setCandidates (state, payload) {
     state.candidates = payload;  
 }

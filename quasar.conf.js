@@ -11,7 +11,6 @@ module.exports = function (ctx) {
       'helper',
       'idle-vue',
       'profile-cache',
-      'iconfont-loader',
       'medium-editor'
       
 
@@ -115,10 +114,7 @@ module.exports = function (ctx) {
         'QStepper',
         'QStep',
         'QStepperNavigation',
-        'QDatetimePicker',
-        'QUploader'
-        
-
+        'QDatetimePicker'
       ],
       directives: [
         'Ripple',

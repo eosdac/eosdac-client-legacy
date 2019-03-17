@@ -11,7 +11,13 @@ import { Dialog } from 'quasar';
 import { Notify } from 'quasar';
 
 export default {
-  // name: 'ComponentName',
+  name: 'networkSwitcher',
+  props:{
+    enable_pin:{
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       disable: false
@@ -29,6 +35,12 @@ export default {
     async switchNetwork(networkname){
 
       this.disable =true;
+      
+      if(!this.enable_pin){
+        await this.$store.dispatch('global/switchNetwork', {networkname: networkname, vm: this});
+        this.disable =false;
+        return;
+      }
 
       this.$q.dialog({
         title: `Switching To ${networkname}`,
@@ -69,22 +81,6 @@ export default {
 
   }
 }
-
-// this.$q.dialog({
-//   title: 'Prompt',
-//   message: 'Modern front-end framework on steroids.',
-//   prompt: {
-//     model: '',
-//     type: 'text' // optional
-//   },
-//   cancel: true,
-//   color: 'secondary'
-// }).then(data => {
-//   this.$q.notify(`You typed: "${data}"`)
-// }).catch(() => {
-//   this.$q.notify('Ok, no mood for talking, right?')
-// })
-
 
 </script>
 

@@ -28,6 +28,18 @@ export default {
     "total_votes_on_candidates": null,
     "number_active_candidates": null,
     "met_initial_votes_threshold": null
+  },
+
+  wpConfig:{
+    "service_account": null,
+    "authority_account": null,
+    "member_terms_account": null,
+    "treasury_account": null,
+    "proposal_threshold": null,
+    "proposal_approval_threshold_percent": null,
+    "claim_threshold": null,
+    "claim_approval_threshold_percent": null,
+    "escrow_expiry": null
   }
 
 }

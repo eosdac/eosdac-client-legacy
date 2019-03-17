@@ -38,7 +38,7 @@
         <div class="bg-bg1 round-borders shadow-5 q-pa-md bg-logo dashboard-box">
           <q-item  class="no-padding" style="margin-left:-10px;margin-top:-10px">
             <q-item-side left >
-              <div class=""><q-icon name="star" color="warning" size="70px" /></div>
+              <div class=""><q-icon :name="$configFile.icon.cust_symbol" color="warning" size="70px" /></div>
             </q-item-side>
             <q-item-main>
               <q-item-tile label class="q-headline">Custodian</q-item-tile>
@@ -73,6 +73,13 @@
       <div class="q-headline">Custodian Board</div>
       <display-custodians />
     </div>
+
+      <div class="row justify-end">
+        <div  class="text-weight-thin q-pa-md q-caption" >
+          Memberclient: v{{getDapp_version}} · Local Storage: v{{getLocal_storage_version}} · Network: {{getActiveNetworkName}}
+        </div>
+      </div>
+
   </q-page>
 </template>
 
@@ -94,7 +101,10 @@ export default {
   computed:{
     ...mapGetters({
       getAccountName: 'user/getAccountName',
-      getDacVotes: 'user/getDacVotes'
+      getDacVotes: 'user/getDacVotes',
+      getLocal_storage_version: 'global/getLocal_storage_version',
+      getDapp_version: 'global/getDapp_version',
+      getActiveNetworkName: 'global/getActiveNetworkName'
     }),
   },
   data () {

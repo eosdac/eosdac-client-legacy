@@ -11,12 +11,12 @@
 
         <q-toolbar-title>
           <span v-if="getIsDark">
-            <img class="cursor-pointer gt-xs" @click="$router.push('/')" src="~assets/images/logo-main-white.svg" style="height:48px;" :title="$t('default.member_client')">
-            <img class="cursor-pointer lt-sm" @click="$router.push('/')" src="~assets/images/logo-notext-white.svg" style="height:48px;" :title="$t('default.member_client')">
+            <img class="cursor-pointer gt-xs" @click="$router.push('/')" src="~assets/images/logo-main-light.svg" style="height:48px;" :title="$t('default.member_client')">
+            <img class="cursor-pointer lt-sm" @click="$router.push('/')" src="~assets/images/logo-notext-light.svg" style="height:48px;" :title="$t('default.member_client')">
           </span>
           <span v-if="!getIsDark">
-            <img class="cursor-pointer gt-xs" @click="$router.push('/')" src="~assets/images/logo-main-black.svg" style="height:48px;" :title="$t('default.member_client')">
-            <img class="cursor-pointer lt-sm" @click="$router.push('/')" src="~assets/images/logo-notext-black.svg" style="height:48px;" :title="$t('default.member_client')">
+            <img class="cursor-pointer gt-xs" @click="$router.push('/')" src="~assets/images/logo-main-dark.svg" style="height:48px;" :title="$t('default.member_client')">
+            <img class="cursor-pointer lt-sm" @click="$router.push('/')" src="~assets/images/logo-notext-dark.svg" style="height:48px;" :title="$t('default.member_client')">
           </span>
         </q-toolbar-title>
         <!-- <div v-if="getIsloaded" class="bg-positive" style="width:30px;height:30px;"></div> -->
@@ -106,8 +106,13 @@ export default {
 
   watch: {
     getAccountName: function(v){
+      console.log(this.$route.fullPath)
       if(this.$route.fullPath.startsWith('/custodian/') && !this.getAccountName){
-        this.$router.push({ path: '/' })
+        if(this.$route.fullPath != '/custodian/review-msigs'){
+          this.$router.push({ path: '/' })
+        }
+        
+        
       }
     }
   },

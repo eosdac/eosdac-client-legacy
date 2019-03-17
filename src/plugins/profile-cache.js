@@ -1,8 +1,5 @@
 
-// import configFile from '../statics/config.jungle.json';
 import axios from 'axios';
-import helper from './helper.js';
-
 
 class ProfileCache{
 
