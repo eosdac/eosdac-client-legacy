@@ -33,6 +33,7 @@
         color="text2"
         height="100%"
         quick-nav
+        :quick-nav-icon="$configFile.icon.dactoken"
         quick-nav-position="top"
         arrows
         v-model="expanded_modal_index"
