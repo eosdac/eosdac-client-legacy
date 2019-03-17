@@ -38,9 +38,9 @@
         arrows
         v-model="expanded_modal_index"
       >
-        <q-carousel-slide  class="no-padding full-height" v-for="(wp,i) in wps" :key="`exp${i}`" >
-          <div class="full-height bg-bg2" >
-            <div class=" text-text1" style="padding-top:40px">
+        <q-carousel-slide  class="no-padding " v-for="(wp,i) in wps" :key="`exp${i}`" >
+          <div class="full-height bg-bg2">
+            <div class=" text-text1" style="padding-top:38px; height:100%;">
               <wp-proposal :wp="wp" :expanded="true" @wp_compress="expanded_modal = false;" />
             </div>
           </div>

@@ -1,6 +1,6 @@
 <template>
-  <div v-if="wp.key && show" class="q-mb-md q-pa-md column justify-between bg-bg1 round-borders shadow-5 bg-logo full-height animate-fade">
-    <div>
+  <div v-if="wp.key && show" style="min-height:100%" class=" q-pa-md column no-wrap justify-between bg-bg1 round-borders shadow-5 bg-logo animate-fade">
+    <div class="full-width">
       <div class="row relative-position">
       
           <profile-pic :accountname="wp.proposer" />
@@ -29,7 +29,7 @@
             </q-item-main>
           </q-item>
           <q-btn v-if="!expanded" dense class="absolute-top-right text-text2" icon="fullscreen" flat @click="$emit('wp_expand', array_index)" />
-          <q-btn v-if="expanded" dense class="absolute-top-right text-text2" icon="fullscreen_exit" flat @click="$emit('wp_compress')" />
+          <q-btn v-if="expanded" dense class="absolute-top-right text-text2" icon="fullscreen_exit" flat @click="$emit('wp_compress');" />
       </div>
       
       <div class="q-mt-md q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
@@ -50,41 +50,41 @@
       
     </div>
 
-    <div  class="row justify-between items-center q-mt-md">
+    <div class="q-mt-md full-width">
+      <div  class="row justify-between items-center">
 
-      
-      <div class="row">
-        <div v-for="(vote,i) in getVotes.filter(v => v.vote == 1)" :key="`v1${i}`" class="bg-positive">
-          <div style=""><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
+        <div class="row">
+          <div v-for="(vote,i) in getVotes.filter(v => v.vote == 1)" :key="`v1${i}`" class="bg-positive">
+            <div style=""><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
+          </div>
+          <div v-for="(vote,i) in getVotes.filter(v => v.vote == 2)" :key="`v2${i}`" class="bg-negative">
+            <div style=""><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
+          </div>
         </div>
-        <div v-for="(vote,i) in getVotes.filter(v => v.vote == 2)" :key="`v2${i}`" class="bg-negative">
-          <div style=""><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
+        
+
+        <div v-if="!read_only && getAccountName" class="row animate-pop">
+          <div v-if="wp.state==0">
+            <q-btn v-if="getVoterStatus==2 || getVoterStatus==0" class="on-right"  color="positive" label="Approve" @click="voteprop('voteApprove')"  />
+            <q-btn v-if="getVoterStatus==1 || getVoterStatus==0" class="on-right"  color="negative" label="Deny" @click="voteprop('voteDeny')"  />
+          </div>
+          <div v-else-if="wp.state==2">
+            <q-btn class="on-right"  color="positive" label="Approve Claim" @click="voteprop('claimApprove')"  />
+            <q-btn class="on-right"  color="negative" label="Deny Claim" @click="voteprop('claimDeny')"  />
+            <q-btn v-if="getIsArbitrator" class="on-right"  flat color="positive" label="arb approve" @click="arbApprove()" />
+          </div>
+          <div v-else-if="wp.state==1">
+            Work is being executed
+          </div>
+          <div v-if="getIsCreator">
+            <q-btn class="on-right"  flat color="negative" label="cancel" @click="cancelProp()"  />
+            <q-btn v-if="proposal_threshold_met" class="on-right"  flat color="info" label="Start work" @click="startWork()" />
+            <q-btn v-if="wp.state==1" class="on-right"  flat color="info" label="complete work" @click="completeWork()" />
+          </div>
         </div>
+
       </div>
-      
-
-      <div v-if="!read_only && getAccountName" class="row animate-pop">
-        <div v-if="wp.state==0">
-          <q-btn v-if="getVoterStatus==2 || getVoterStatus==0" class="on-right"  color="positive" label="Approve" @click="voteprop('voteApprove')"  />
-          <q-btn v-if="getVoterStatus==1 || getVoterStatus==0" class="on-right"  color="negative" label="Deny" @click="voteprop('voteDeny')"  />
-        </div>
-        <div v-else-if="wp.state==2">
-          <q-btn class="on-right"  color="positive" label="Approve Claim" @click="voteprop('claimApprove')"  />
-          <q-btn class="on-right"  color="negative" label="Deny Claim" @click="voteprop('claimDeny')"  />
-          <q-btn v-if="getIsArbitrator" class="on-right"  flat color="positive" label="arb approve" @click="arbApprove()" />
-        </div>
-        <div v-else-if="wp.state==1">
-          Work is being executed
-        </div>
-        <div v-if="getIsCreator">
-          <q-btn class="on-right"  flat color="negative" label="cancel" @click="cancelProp()"  />
-          <q-btn v-if="proposal_threshold_met" class="on-right"  flat color="info" label="Start work" @click="startWork()" />
-          <q-btn v-if="wp.state==1" class="on-right"  flat color="info" label="complete work" @click="completeWork()" />
-        </div>
-      </div>
-
     </div>
-
   </div>
 </template>
 
@@ -121,10 +121,10 @@ export default {
     }),
     scroll_area_style(){
       if(this.expanded){
-        return {height: '400px'}
+        return {height: '400px', width: '100%'}
       }
       else{
-        return {height: '200px'}
+        return {height: '200px', width: '100%'}
       }
     },
     getVotes(){
