@@ -28,13 +28,14 @@
               <q-item-tile sublabel>{{wp.state}}</q-item-tile>
             </q-item-main>
           </q-item>
-          <q-btn v-if="!expanded" dense class="absolute-top-right text-text2" icon="mdi-arrow-expand-all" flat @click="$emit('wp_expand', array_index)" />
+          <q-btn v-if="!expanded" dense class="absolute-top-right text-text2" icon="fullscreen" flat @click="$emit('wp_expand', array_index)" />
+          <q-btn v-if="expanded" dense class="absolute-top-right text-text2" icon="fullscreen_exit" flat @click="$emit('wp_compress')" />
       </div>
       
       <div class="q-mt-md q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
       <q-scroll-area
         class="bg-bg2 q-pa-md q-mt-sm round-borders text-weight-light text-text2"
-        style="height: 200px"
+        :style="scroll_area_style"
         color="primary"
         :thumb-style="{
           right: '0px',
@@ -49,7 +50,7 @@
       
     </div>
 
-    <div  class="row justify-between items-center">
+    <div  class="row justify-between items-center q-mt-md">
 
       
       <div class="row">
@@ -118,6 +119,14 @@ export default {
       getAccountName: 'user/getAccountName',
       getWpConfig: 'dac/getWpConfig'
     }),
+    scroll_area_style(){
+      if(this.expanded){
+        return {height: '400px'}
+      }
+      else{
+        return {height: '200px'}
+      }
+    },
     getVotes(){
       if(this.wp.votes){
         return this.wp.votes;

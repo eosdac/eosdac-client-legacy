@@ -24,25 +24,23 @@
 
     <div  class="row gutter-sm">
       <div class="col-xs-12 col-xl-6" v-for="(wp, i)  in wps" :key="`wp${i}`">
-        <wp-proposal :wp="wp" :array_index="i" @wp_expand="expanded_modal=true; expanded_modal_index=Number($event)" />
+        <wp-proposal :wp="wp" :array_index="i" @wp_expand="expanded_modal_index=Number($event); expanded_modal=true;" />
       </div>
     </div>
 
     <q-modal maximized v-model="expanded_modal" >
       <q-carousel
-        color="white"
+        color="text2"
         height="100%"
         quick-nav
+        quick-nav-position="top"
         arrows
         v-model="expanded_modal_index"
       >
         <q-carousel-slide  class="no-padding full-height" v-for="(wp,i) in wps" :key="`exp${i}`" >
-          <div class="full-height bg-bg2">
-            <div style="height:50px" class="bg-bg1 row items-center justify-end q-px-md text-text1">
-              <q-btn icon="close" @click="expanded_modal = false;" flat dense />
-            </div>
-            <div class=" text-text1">
-              <wp-proposal :wp="wp" :expanded="true" />
+          <div class="full-height bg-bg2" >
+            <div class=" text-text1" style="padding-top:40px">
+              <wp-proposal :wp="wp" :expanded="true" @wp_compress="expanded_modal = false;" />
             </div>
           </div>
         </q-carousel-slide>
