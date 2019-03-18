@@ -24,13 +24,13 @@
       
 </div>
 
-<div v-if="getSettingByName('toolbar_profile_image').value && getAccountName && getProfilePicture" class="row justify-end relative-position" style=" margin-right:-22px;" ref="profileContainer">
+<div v-if="getSettingByName('toolbar_profile_image').value && getAccountName && getProfilePicture" class="row justify-end relative-position" style=" margin-right:-12px;" ref="profileContainer">
   
   <profile-pic :class="{'grey_scale': isAppIdle}" :accountname="getAccountName" :scale="0.55" />
   <div style="position:absolute;top:7px;right:40px" v-if="isAppIdle"><zzz-sleep /></div>
 </div>
 
-<q-btn-dropdown id="login_button" v-if="getAccountName" no-ripple text-color="text1"  class="no-shadow animate-fade" :label="getAccountName" content-style="margin-top:4px" >
+<q-btn-dropdown id="login_button" v-if="getAccountName" dense  flat no-ripple text-color="text1"  class="animate-fade" :label="getAccountName" content-style="margin-top:4px" >
         <q-list  link class="bg-bg2 text-text1"  >
           <q-list-header class="text-text2" style="min-width:300px">{{getActiveNetworkName}}</q-list-header>
            <q-item>
