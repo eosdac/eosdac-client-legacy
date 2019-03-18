@@ -1,5 +1,6 @@
 {
     "contracts": {
+        
         "token": {
             "name": "eosdactokens",
             "symbol": "EOSDAC",
@@ -28,12 +29,8 @@
 
     },
 
-    "authAccountx": {
-        "name": "dacauthority",
-        "controlling": [
-            {"name":"eosdacthedac", "permission": "xfer"}, 
-            {"name":"daccustodian", "permission": "xfer"}
-        ]
+    "bpAccount": {
+        "name": "eosdacserver"
     },
 
     "authAccount": {

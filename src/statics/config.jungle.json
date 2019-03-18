@@ -27,12 +27,9 @@
         }
           
     },
-    "authAccountx": {
-        "name": "dacauthority",
-        "controlling": [
-            {"name":"eosdacdoshhq", "permission": "xfer"}, 
-            {"name":"dacelections", "permission": "xfer"}
-        ]
+
+    "bpAccount": {
+        "name": "eosdacserval"
     },
 
     "authAccount": {
