@@ -1,8 +1,10 @@
 <template>
   <q-page class="q-pa-md">
 
-
-    <line-chart ref="linechart" :chartData="chartData" :options="chartOptions"/>
+    <div class="bg-bg1 q-pa-md round-borders shadow-5">
+      <line-chart ref="linechart" :chartData="chartData" :options="chartOptions"/>
+    </div>
+    
   </q-page>
 </template>
 
