@@ -22,12 +22,19 @@
               <q-item-tile sublabel>{{wp.arbitrator}}</q-item-tile>
             </q-item-main>
           </q-item>
+          <q-item v-if="expanded">
+            <q-item-main>
+              <q-item-tile label>Submitted</q-item-tile>
+              <q-item-tile sublabel>date</q-item-tile>
+            </q-item-main>
+          </q-item>
           <q-item >
             <q-item-main>
               <q-item-tile label>Status</q-item-tile>
               <q-item-tile sublabel>{{wp.state}}</q-item-tile>
             </q-item-main>
           </q-item>
+
           <q-btn v-if="!expanded" dense class="absolute-top-right text-text2" icon="fullscreen" flat @click="$emit('wp_expand', array_index)" />
           <q-btn v-if="expanded" dense class="absolute-top-right text-text2" icon="fullscreen_exit" flat @click="$emit('wp_compress');" />
       </div>
@@ -47,7 +54,11 @@
       >
         <div>{{wp.summary}}</div>
       </q-scroll-area>
-      
+
+      <div v-if="expanded" class="row justify-end q-mt-xs items-center">
+        <a target="_blank" :href="$configFile.get('explorer')+`/transaction/${wp.txid}`" class="q-body-1">xxxxxxxxxxxxxx</a>
+      </div>
+
     </div>
 
     <div class="q-mt-md full-width">
