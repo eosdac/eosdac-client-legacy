@@ -6,6 +6,7 @@
 import { colors } from 'quasar';
 import {mapGetters} from 'vuex';
 import lineChart from 'components/ui/line-chart';
+import { date } from 'quasar';
 
 export default {
   name: 'balanceTimeline',
@@ -36,6 +37,8 @@ export default {
   },
   data () {
     return {
+      refblock: null,
+      refdate: null,
       chartData:null,
       chartOptions: {
         responsive: true, 
@@ -73,7 +76,7 @@ methods:{
       let res = await this.$store.dispatch('dac/fetchTokenTimeLine', query);
       if(!res || !res.results) return false;
       this.chartData = {
-        labels: res.results.map(p => p.block_num),
+        labels: res.results.map(p => this.numToTime(p.block_num) ),
         datasets:[
           {
             label: `${query.account} ${query.symbol}`,
@@ -88,14 +91,24 @@ methods:{
           }
         ]
       }
+    },
+    numToTime(blocknum){
+      
+      let diff = (this.refblock - blocknum)*2; //seconds
+      let r = date.subtractFromDate(this.refdate, { seconds: diff} );
+      return date.formatDate(r, 'MMM ddd Do')
+
+
+
     }
   },
-  mounted(){
+  async mounted(){
+    let {head_block_num, head_block_time} = await this.$store.dispatch('global/testEndpoint');
+    this.refblock = head_block_num;
+    this.refdate = new Date(head_block_time);
     //this.$configFile.get('treasuryaccount')
     //this.$configFile.get('bpaccount')
     this.getTokenTimeLine({ account: this.account, contract: this.contract, symbol:this.symbol, start_block: this.start_block, end_block: this.end_block });
-
-    
   }
 }
 </script>
