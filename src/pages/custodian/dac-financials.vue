@@ -56,14 +56,15 @@ export default {
       return gradient;
     },
     async getTokenTimeLine(){
-      let query = {account: 'evilmikehere', contract:'eosio.token', symbol:'EOS', start_block:0, end_block:17000000000};
-      let res = await this.$store.dispatch('dac/fetchTokenTimeLine', query)
-      this.chartData ={
-        labels: res.map(p => p.block_num),
+      const query = {account: 'evilmikehere', contract:'eosio.token', symbol:'EOS', start_block:0, end_block:17000000000};
+      let res = await this.$store.dispatch('dac/fetchTokenTimeLine', query);
+      console.log(res)
+      this.chartData = {
+        labels: res.results.map(p => p.block_num),
         datasets:[
           {
             label: 'evilmikehere',
-            data: res.map(p => p.balance.split(' ')[0]),
+            data: res.results.map(p => p.balance.split(' ')[0]),
 
             backgroundColor: this.getGradient(),
             borderColor: 'purple', 
