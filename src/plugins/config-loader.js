@@ -54,6 +54,8 @@ class configLoader {
         return this.configFile.authAccount.name;
       case 'wpcontract':
         return this.configFile.contracts.wpproposal.name;
+      case 'bpaccount':
+        return this.configFile.bpAccount.name;
       default:
         return `***${configquery} not yet subscribed in config-loader***`
     }
