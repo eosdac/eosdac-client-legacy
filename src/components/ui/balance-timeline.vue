@@ -1,5 +1,8 @@
 <template>
-  <div><line-chart ref="linechart" :chartData="chartData" :options="chartOptions"/></div>
+  <div>
+    <div>{{getLatestBalance}}</div>
+    <line-chart ref="linechart" :chartData="chartData" :options="chartOptions"/>
+  </div>
 </template>
 
 <script>
@@ -45,6 +48,13 @@ export default {
         maintainAspectRatio: false,
         scales: {
             xAxes: [{
+              type: 'time',
+              time: {
+                unit: 'day',
+                unitStepSize: 5,
+                displayFormats: {
+                  'day': 'MMM DD'
+                }},
                 gridLines: {
                     color: "rgba(0, 0, 0, 0)",
                 }
@@ -59,7 +69,15 @@ export default {
  
     }
   },
-methods:{
+  computed:{
+    getLatestBalance(){
+      if(this.chartData){
+        let vals = this.chartData.datasets[0].data
+         return `${vals[vals.length - 1]} ${this.symbol}`
+      }
+    }
+  },
+  methods:{
     getGradient(){
       let {r, g, b} = colors.hexToRgb(colors.getBrand('primary') );
       // console.log(r,g,b)
@@ -96,7 +114,8 @@ methods:{
       
       let diff = (this.refblock - blocknum)*2; //seconds
       let r = date.subtractFromDate(this.refdate, { seconds: diff} );
-      return date.formatDate(r, 'MMM ddd Do')
+      return r;
+      // return date.formatDate(r, 'MMM ddd Do')
 
 
 
@@ -106,9 +125,10 @@ methods:{
     let {head_block_num, head_block_time} = await this.$store.dispatch('global/testEndpoint');
     this.refblock = head_block_num;
     this.refdate = new Date(head_block_time);
+
     //this.$configFile.get('treasuryaccount')
     //this.$configFile.get('bpaccount')
-    this.getTokenTimeLine({ account: this.account, contract: this.contract, symbol:this.symbol, start_block: this.start_block, end_block: this.end_block });
+    this.getTokenTimeLine({ account: this.account, contract: this.contract, symbol:this.symbol, start_block: this.refblock-1814400, end_block: this.end_block });
   }
 }
 </script>
