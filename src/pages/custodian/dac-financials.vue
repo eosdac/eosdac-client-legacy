@@ -61,7 +61,7 @@ export default {
     async getTokenTimeLine(query){
 
       let res = await this.$store.dispatch('dac/fetchTokenTimeLine', query);
-      console.log(res)
+      if(!res || !res.results) return false;
       this.chartData = {
         labels: res.results.map(p => p.block_num),
         datasets:[
@@ -81,6 +81,7 @@ export default {
     }
   },
   mounted(){
+    //this.$configFile.get('treasuryaccount')
     this.getTokenTimeLine({account: this.$configFile.get('bpaccount'), contract:'eosio.token', symbol:'EOS', start_block:0, end_block:17000000000});
 
     

@@ -29,8 +29,12 @@
 
     },
 
+
     "bpAccount": {
         "name": "eosdacserver"
+    },
+    "treasuryAccount":{
+        "name": "eosdacthedac"
     },
 
     "authAccount": {
@@ -62,6 +66,7 @@
         "default_eos_node": "https://proxy.eosnode.tools:443",
         "bpnodes": "https://eosdac.io/topnodes.json",
         "memberclient": "https://toolkit-api.eosdac.io",
+        "memberclient_state_api": "https://api.eosdac.io/v1/eosdac",
         "firehose": "ws://bos.eosdac.io:1337"
     },
 

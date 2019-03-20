@@ -31,6 +31,9 @@
     "bpAccount": {
         "name": "eosdacserval"
     },
+    "treasuryAccount":{
+        "name": "eosdacdoshhq"
+    },
 
     "authAccount": {
         "name": "dacauthority",
