@@ -20,7 +20,22 @@ export default {
   data () {
     return {
       chartData:null,
-      chartOptions: {responsive: true, maintainAspectRatio: false},
+      chartOptions: {
+        responsive: true, 
+        maintainAspectRatio: false,
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    color: "rgba(0, 0, 0, 0)",
+                }
+            }],
+            yAxes: [{
+                gridLines: {
+                    color: "rgba(0, 0, 0, 0)",
+                }   
+            }]
+        }
+      },
  
     }
   },

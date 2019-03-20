@@ -96,7 +96,7 @@ export class EosWrapper {
             table: table,
         }).catch(e=> false);
 
-        if (!res.rows.length) {
+        if (!res.rows && !res.rows.length) {
             return false
         }
         else {
