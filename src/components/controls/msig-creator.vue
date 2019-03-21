@@ -315,7 +315,8 @@ export default {
         return 'Advanced'
       }
       else if(this.getSelectedAccount2.name){
-        return this.getSelectedAccount2.name;
+        const t = this.getSelectedAccount2.linkedAuths[this.actionfilter];
+        return  `${t.contract} > ${t.action}` ;
       }
     }
   },
