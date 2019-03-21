@@ -77,7 +77,7 @@
           
         </q-tab-pane>
       </q-tabs>
-
+      <q-toggle class="q-mt-md" :dark="getIsDark" color="primary-light" v-model="broadcast" label="broadcast" :left-label="true" />
     </div>
 
  
@@ -120,7 +120,8 @@ export default {
       trx_templates: require('../../statics/transaction.templates.json'),
       raw_action_object: '',
       actions:[],
-      view_actions_modal: false
+      view_actions_modal: false,
+      broadcast: true,
     }
   },
 
@@ -184,7 +185,7 @@ export default {
     },
 
     async pushTransaction(){
-      let result = await this.$store.dispatch('user/transact', {actions: this.actions } );
+      let result = await this.$store.dispatch('user/transact', {actions: this.actions, options: {broadcast: this.broadcast} } );
       if(result){
         console.log('transaction callback', result);
         this.actions = [];
