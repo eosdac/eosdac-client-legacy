@@ -43,7 +43,7 @@
             {
                 "name":"eosdacthedac", 
                 "linkedAuths": [
-                    {"contract": "eosio.token", "action": "transfer", "permission": "xfer"}
+                    {"contract": "eosio.token", "action": "transfer", "permission": "xfer", "label": "Transfer EOS"}
                 ]
             }, 
             {
