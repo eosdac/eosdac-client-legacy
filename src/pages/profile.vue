@@ -113,17 +113,6 @@
     <TimeZone :offset="form.timezone" />
   </div>
 
-  <!-- <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}" >
-    <div  class="bg-dark round-borders q-pa-md">
-      <div style="overflow: auto;">
-        <q-btn round color="primary" class="float-right" @click="visible=false" icon="icon-plus" />
-      </div>
-      <div>
-        <q-input :dark="getIsDark" type="url" v-model="form.image" @input="loaded=false" class="q-mt-md" :float-label="$t('profile.profile_picture_url')" placeholder="https://example.site/mypic.jpg" />
-      </div>
-    </div>
-  </q-modal> -->
-
   <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}">
     <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
       <span>{{$t('profile.profile_picture_url')}}</span>
