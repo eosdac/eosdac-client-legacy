@@ -43,20 +43,18 @@
                 "linkedAuths": [
                     {"contract": "eosio.token", "action": "transfer", "permission": "xfer", "label": "Transfer EOS"}
                 ]
-            }, 
+            },
             {
                 "name":"dacelections", 
-                "linkedAuths":[
-                    {"contract": "kasdactokens", "action": "transfer", "permission": "xfer"},
-                    {"contract": "eosio", "action": "setabi", "permission": "active"},
-                    {"contract": "eosio", "action": "setcode", "permission": "active"}
+                "linkedAuths": [
+                    {"contract": "kasdactokens", "action": "transfer", "permission": "xfer", "label": "Transfer KASDAC"}
                 ]
             },
             {
-                "name":"dacmultisigs", 
+                "name":"dacauthority", 
                 "linkedAuths":[
-                    {"contract": "eosio", "action": "setabi", "permission": "active"},
-                    {"contract": "eosio", "action": "setcode", "permission": "active"}
+                    {"contract": "dacelections", "action": "firecust", "permission": "med", "label": "Fire Custodian"},
+                    {"contract": "dacelections", "action": "firecand", "permission": "med", "label": "Fire Candidate"}
                 ]
             }
 

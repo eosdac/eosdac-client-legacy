@@ -26,8 +26,8 @@
                 </q-item>
               </q-list>
             </q-btn-dropdown> -->
-            <div v-for="(n,i) in controlled_accounts" :key="`si${i}`" >
-              <div v-for="(la, j) in n.linkedAuths" :key="`la${j}`">
+            <div v-for="(n,i) in controlled_accounts" :key="`si${i}`" class="row">
+              <div v-for="(la, j) in n.linkedAuths" :key="`la${j}`" class="q-ma-xs">
                 <q-btn  v-if="la.label" :label="la.label" color="bg1" @click="actionfilter=j; handleSelection(i); allow_advanced=false" />
               </div>
             </div>

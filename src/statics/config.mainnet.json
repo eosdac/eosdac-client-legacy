@@ -45,18 +45,18 @@
                 "linkedAuths": [
                     {"contract": "eosio.token", "action": "transfer", "permission": "xfer", "label": "Transfer EOS"}
                 ]
-            }, 
+            },
             {
                 "name":"daccustodian", 
-                "linkedAuths":[
-                    {"contract": "eosdactokens", "action": "transfer", "permission": "xfer"}
+                "linkedAuths": [
+                    {"contract": "eosdactokens", "action": "transfer", "permission": "xfer", "label": "Transfer EOSDAC"}
                 ]
             },
             {
-                "name":"dacmultisigs", 
+                "name":"dacauthority", 
                 "linkedAuths":[
-                    {"contract": "eosio", "action": "setabi", "permission": "active"},
-                    {"contract": "eosio", "action": "setcode", "permission": "active"}
+                    {"contract": "daccustodian", "action": "firecust", "permission": "med", "label": "Fire Custodian"},
+                    {"contract": "daccustodian", "action": "firecand", "permission": "med", "label": "Fire Candidate"}
                 ]
             }
         ]
