@@ -252,6 +252,7 @@
     "female": "Female",
     "gender": "Gender",
     "givenName": "Name",
+    "http_error": "Image link should be https",
     "loading_text": "Loading profile data...",
     "male": "Male",
     "maxLinksmsg": "Sorry, max {number_allowed_links} links allowed.",
