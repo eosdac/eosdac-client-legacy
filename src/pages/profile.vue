@@ -115,7 +115,7 @@
 
   <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}">
     <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
-      <span>{{$t('profile.profile_picture_url')}}</span>
+      <span>{{$t('profile.profile_picture_url')}} (https)</span>
       <q-btn icon="close" @click="visible=false" flat dense/>
     </div>
     <div class="q-pa-md bg-bg2 text-text1">
