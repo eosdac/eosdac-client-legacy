@@ -39,7 +39,7 @@
         </div>
 
         <div class="row justify-between q-mt-md" style="min-height:36px">
-          <q-btn :label="$t('msig_creator.advanced')"  :icon="allow_advanced ? 'check': ''" size="sm" flat color="primary-light" @click="allow_advanced=!allow_advanced; unSelectAll()" />
+          <q-btn :label="$t('msig_creator.advanced')" :dense="!allow_advanced" :icon="allow_advanced ? 'check': ''" size="sm" flat color="primary-light" @click="allow_advanced=!allow_advanced; unSelectAll()" />
           <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" :label="$t('msig_creator.next')" v-if="controlled_accounts.find(ca=> ca.selected==true) || allow_advanced" >
           </q-btn>
         </div>
