@@ -24,16 +24,35 @@
             <div class="q-headline q-mb-lg">{{$t('index.key_features')}}</div> 
             <div class="row text-text1">
               <div class="col-lg-6 col-sm-12">
-                <div class="row q-pb-lg items-center"><q-icon :name="$configFile.icon.member" size="36px" class="q-mr-sm text-text2" /><span class="q-title">{{$t('index.reg_as_member')}}</span></div>
-                <div class="row q-pb-lg items-center"><q-icon :name="$configFile.icon.work_prop" size="36px" class="q-mr-sm text-text2" /><span class="q-title">{{$t('index.submit_wp')}}</span></div>
-                <div class="row q-pb-lg items-center"><q-icon :name="$configFile.icon.constitution" size="36px" class="q-mr-sm text-text2" /><span class="q-title">{{$t('index.read_constitution')}}</span></div>
+                <q-item class="no-padding q-mb-md">
+                  <q-item-side left><q-icon :name="$configFile.icon.member" size="48px" class="q-mr-sm text-text2" /></q-item-side>
+                  <q-item-main><span class="q-title">{{$t('index.reg_as_member')}}</span></q-item-main>
+                </q-item>
+                <q-item class="no-padding q-mb-md">
+                  <q-item-side left><q-icon :name="$configFile.icon.work_prop" size="48px" class="q-mr-sm text-text2" /></q-item-side>
+                  <q-item-main><span class="q-title">{{$t('index.submit_wp')}}</span></q-item-main>
+                </q-item>
+                <q-item class="no-padding q-mb-md">
+                  <q-item-side left><q-icon :name="$configFile.icon.constitution" size="48px" class="q-mr-sm text-text2" /></q-item-side>
+                  <q-item-main><span class="q-title">{{$t('index.read_constitution')}}</span></q-item-main>
+                </q-item>
               </div>
               <div class="col-lg-6 col-sm-12">
-                <div class="row q-pb-lg items-center"><q-icon name="account_balance_wallet" size="36px" class="q-mr-sm text-text2" /><span class="q-title">{{$t('index.wallet')}}</span></div>
-                <div class="row q-pb-lg items-center"><q-icon :name="$configFile.icon.cand_reg" size="36px" class="q-mr-sm text-text2" /><span class="q-title">{{$t('index.reg_as_cust_cand')}}</span></div>
-                <div class="row q-pb-lg items-center"><q-icon :name="$configFile.icon.vote" size="36px" class="q-mr-sm text-text2" /><span class="q-title">{{$t('index.vote_cust')}}</span></div>
+                <q-item class="no-padding q-mb-md">
+                  <q-item-side left><q-icon name="account_balance_wallet" size="48px" class="q-mr-sm text-text2" /></q-item-side>
+                  <q-item-main><span class="q-title">{{$t('index.wallet')}}</span></q-item-main>
+                </q-item>
+                <q-item class="no-padding q-mb-md">
+                  <q-item-side left><q-icon :name="$configFile.icon.cand_reg" size="48px" class="q-mr-sm text-text2" /></q-item-side>
+                  <q-item-main><span class="q-title">{{$t('index.reg_as_cust_cand')}}</span></q-item-main>
+                </q-item>
+                <q-item class="no-padding q-mb-md">
+                  <q-item-side left><q-icon :name="$configFile.icon.vote" size="48px" class="q-mr-sm text-text2" /></q-item-side>
+                  <q-item-main><span class="q-title">{{$t('index.vote_cust')}}</span></q-item-main>
+                </q-item>
               </div>
             </div>
+
             
           </div>
         </div>

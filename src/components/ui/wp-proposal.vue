@@ -47,7 +47,7 @@
           style="height: 4px"
         />
       </div>
-      
+
       <div class="q-mt-sm q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
       <q-scroll-area
         class="bg-bg2 q-pa-md q-mt-sm round-borders text-weight-light text-text2"
@@ -74,11 +74,11 @@
       <div  class="row justify-between items-center">
 
         <div class="row">
-          <div v-for="(vote,i) in getVotes.filter(v => v.vote == 1)" :key="`v1${i}`" class="bg-positive">
-            <div style=""><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
+          <div v-for="(vote,i) in getVotes.filter(v => v.vote == 1)" :key="`v1${i}`" class="bg-positive" >
+            <div><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
           </div>
-          <div v-for="(vote,i) in getVotes.filter(v => v.vote == 2)" :key="`v2${i}`" class="bg-negative">
-            <div style=""><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
+          <div v-for="(vote,i) in getVotes.filter(v => v.vote == 2)" :key="`v2${i}`" class="bg-negative" >
+            <div><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
           </div>
         </div>
         
