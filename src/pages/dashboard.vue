@@ -41,7 +41,7 @@
       </div><!-- box profile -->
 
       <div class="col-xs-12 col-md-6 col-xl-4" >
-        <div class="bg-bg1 round-borders shadow-5 q-pa-md bg-logo dashboard-box">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md bg-logo dashboard-box full-height">
           <q-item  class="no-padding" style="margin-left:-10px;margin-top:-10px">
             <q-item-side left >
               <div class=""><q-icon :name="$configFile.icon.cust_symbol" color="warning" size="70px" /></div>
@@ -74,7 +74,7 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-md-6 col-xl-4">
+      <div class="col-xs-12 col-md-6 col-xl-8">
         <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height">
           <balance-timeline :account="getAccountName"  :contract="this.$configFile.get('tokencontract')" :symbol="this.$configFile.get('dactokensymbol')"  />
         </div>
