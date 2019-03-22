@@ -113,14 +113,13 @@
     <TimeZone :offset="form.timezone" />
   </div>
 
-  <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}" >
-    <div  class="bg-dark round-borders q-pa-md">
-      <div style="overflow: auto;">
-        <q-btn round color="primary" class="float-right" @click="visible=false" icon="icon-plus" />
-      </div>
-      <div>
-        <q-input :dark="getIsDark" type="url" v-model="form.image" @input="loaded=false" class="q-mt-md " :float-label="$t('profile.profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
-      </div>
+  <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}">
+    <div style="height:50px" class="bg-bg1 row items-center justify-between q-px-md text-text1">
+      <span>{{$t('profile.profile_picture_url')}} (https)</span>
+      <q-btn icon="close" @click="visible=false" flat dense/>
+    </div>
+    <div class="q-pa-md bg-bg2 text-text1">
+      <q-input :dark="getIsDark" type="url" v-model="form.image" @input="loaded=false" class="q-mt-md" :float-label="$t('profile.profile_picture_url')" placeholder="https://example.site/mypic.jpg" />
     </div>
   </q-modal>
 
@@ -138,7 +137,7 @@
 
 <script>
 
-
+import { Notify } from 'quasar';
 import SocialLinks from 'components/ui/social-links'
 import TimeZone from 'components/ui/time-zone'
 import ProfileTemplate from '../statics/profile.template.json'
@@ -182,6 +181,17 @@ export default {
     }),
     setImgSrc(){
       let image = '../statics/images/default-avatar.png'; //default image
+      if(this.form.image.startsWith('http:') ){
+        console.log('need https image');
+        Notify.create({
+          message: this.$t('profile.http_error'),
+          timeout: 5000,
+          type: 'negative',
+          position: 'bottom-right', // 'top', 'left', 'bottom-left' etc.
+          closeBtn: true, // or string as button message e.g. 'dismiss'
+        });
+        return false;
+      }
       if(this.$helper.isUrl(this.form.image)){
         image = this.form.image;
       }
@@ -294,7 +304,7 @@ export default {
 
     handleModalClose(){
       setTimeout(()=>{
-        if(!this.loaded){
+        if(!this.loaded  ){
           this.form.image = '';
         }
       },300)

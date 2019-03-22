@@ -20,10 +20,13 @@
           <q-item class="q-pl-lg animate-fade" link to="/custodian/my-payments">
             <q-item-main label="My Payments" class="text-text1 text-weight-light" />
           </q-item>
+          <q-item class="q-pl-lg animate-fade" link to="/custodian/dac-financials">
+            <q-item-main label="DAC Financials" class="text-text1 text-weight-light" />
+          </q-item>
         </div>
       </q-collapsible>
 
-      <q-collapsible group="main-menu-sub" v-else  class="animate-fade">
+      <q-collapsible v-else group="main-menu-sub" class="animate-fade">
         <template slot="header">
           <q-item-side :icon="$configFile.icon.dactoken" color="text2"/>
           <q-item-main label="eosDAC Activity" class="text-text1"/>
@@ -36,6 +39,9 @@
           <!--
           <q-item class="q-pl-lg animate-fade" link to="/custodian/review-worker-proposals">
             <q-item-main label="View Worker Proposals" class="text-text1 text-weight-light" />
+          </q-item>
+          <q-item class="q-pl-lg animate-fade" link to="/custodian/dac-financials">
+            <q-item-main label="DAC Financials" class="text-text1 text-weight-light" />
           </q-item>
           -->
         </div>

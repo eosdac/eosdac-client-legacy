@@ -112,7 +112,7 @@ export async function fetchWpConfig({commit, dispatch, state}){
 
 }
 
-export async function fetchWorkerProposals({rootState}, payload={}){
+export async function fetchWorkerProposals({}, payload={}){
 
     let url = this._vm.$configFile.get('memberclientstateapi');
     return this._vm.$axios.get(url+'/get_proposals', {params: payload}).then(r => {
@@ -122,4 +122,17 @@ export async function fetchWorkerProposals({rootState}, payload={}){
         console.log('could not load worker proposals from api');
         return [];});
 }
+
+export async function fetchTokenTimeLine({}, payload={}){
+    // {account: 'piecesnbitss', contract:'kasdactokens', symbol:'KASDAC', start_block:10000000, end_block:17000000}
+    let url = this._vm.$configFile.get('memberclientstateapi');
+    return this._vm.$axios.get(url+'/token_timeline', {params: payload}).then(r => {
+        // console.log(r.data)
+        return r.data;
+      }).catch(e => {
+        console.log('could not load token timeline from api');
+        return [];});
+}
+
+
 

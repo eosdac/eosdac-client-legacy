@@ -31,6 +31,12 @@ class ProfileCache{
     //fetch profiles only when not in cache
     if(profiles.fetch.length){
       profiles.fetch = await this.fetchProfiles(profiles.fetch);
+      //remove http images
+      profiles.fetch.forEach(p=>{
+        if(p.profile.image.startsWith('http:') ){
+          p.profile.image ="";
+        }
+      })
     }
 
     //return combined array of profiles

@@ -135,7 +135,10 @@ export default {
             else{
               this.$configFile.disable_ConsoleLog();
             }
-            
+          break;
+        case 'debug_dev_tools':
+            //enable/disable console.log when dev tools is open/close
+            this.$store.commit('user/setSettingItem', {name: 'debug_console_log', value: mutation.payload.value })
           break;
       
         default:

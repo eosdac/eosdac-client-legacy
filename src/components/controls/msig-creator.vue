@@ -7,7 +7,7 @@
     <q-stepper color="primary-light" class="bg-bg1 bg-logo" ref="stepper"  contractable>
 
       <!-- step 1 select msig account -->
-      <q-step default name="first" :title="$t('msig_creator.step1')" :subtitle="getSelectedAccount2.name">
+      <q-step default name="first" :title="$t('msig_creator.step1')" :subtitle="getStep1SubTitle"> 
         <div class="q-mb-md text-text2">
              {{ $t('msig_creator.step1_desc') }}
         </div>
@@ -15,27 +15,31 @@
         <div>
 
           <div class="row bg-bg2 q-pa-md ">
-
-            <q-btn-dropdown :disable="allow_advanced" dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" @click="actionfilter=false; handleSelection(i)">
-
+            <!-- @click="actionfilter=false; handleSelection(i)" -->
+            <!-- <q-btn-dropdown :disable="allow_advanced" dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" > 
               <q-list  link class="bg-dark"  >
                 <q-item v-for="(la, j) in n.linkedAuths" :key="`la${j}`" @click.native=" actionfilter=j; handleSelection(i)">
                   <q-item-main>
                     <q-item-tile class="text-text1 q-body-1" label>{{`${la.contract} > ${la.action}`}}</q-item-tile>
                     <q-item-tile class="text-text2 q-caption" sublabel>{{`@${la.permission}`}}</q-item-tile>
                   </q-item-main>
-                  <!-- <q-item-side right icon="info" color="amber" /> -->
                 </q-item>
               </q-list>
+            </q-btn-dropdown> -->
+            <div v-for="(n,i) in controlled_accounts" :key="`si${i}`" class="row">
+              <div v-for="(la, j) in n.linkedAuths" :key="`la${j}`" class="q-ma-xs">
+                <q-btn  v-if="la.label" :label="la.label" color="bg1" @click="actionfilter=j; handleSelection(i); allow_advanced=false" />
+              </div>
+            </div>
 
-            </q-btn-dropdown>
-            
-            
           </div>
+
+
+
         </div>
 
         <div class="row justify-between q-mt-md" style="min-height:36px">
-          <q-btn :label="$t('msig_creator.advanced')"  :icon="allow_advanced ? 'check': ''" size="sm" flat color="primary-light" @click="allow_advanced=!allow_advanced; unSelectAll()" />
+          <q-btn :label="$t('msig_creator.advanced')" :dense="!allow_advanced" :icon="allow_advanced ? 'check': ''" size="sm" flat color="primary-light" @click="allow_advanced=!allow_advanced; unSelectAll()" />
           <q-btn color="primary" class="animate-pop" @click="$refs.stepper.next()" :label="$t('msig_creator.next')" v-if="controlled_accounts.find(ca=> ca.selected==true) || allow_advanced" >
           </q-btn>
         </div>
@@ -55,7 +59,7 @@
         </div>
 
         <div v-if="getSelectedAccount">
-          <q-btn v-if="actionfilter!==false && getSelectedAccount2.linkedAuths.length > 1" label="show all linked actions" color="bg2" @click="actionfilter=false"/>
+          <!-- <q-btn v-if="actionfilter!==false && getSelectedAccount2.linkedAuths.length > 1" label="show all linked actions" color="bg2" @click="actionfilter=false"/> -->
 
           <div v-for="(linkedauth, i) in getSelectedAccount2.linkedAuths" :key="`la${i}`" class="text-text1 animate-fade">
             <action-maker
@@ -305,6 +309,15 @@ export default {
         return selected;
       }
       return {};
+    },
+    getStep1SubTitle(){
+      if(this.allow_advanced){
+        return 'Advanced'
+      }
+      else if(this.getSelectedAccount2.name){
+        const t = this.getSelectedAccount2.linkedAuths[this.actionfilter];
+        return  `${t.contract} > ${t.action}` ;
+      }
     }
   },
 

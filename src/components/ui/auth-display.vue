@@ -10,7 +10,7 @@
 
   <div class="row">
     <q-btn icon="add" flat dense round @click="addAuth(new_auth)"/>
-    <q-input :dark="getIsDark" hide-underline color="primary-light" placeholder="actor@permission" style="margin-left:5px" v-model="new_auth" @keyup.enter.native="addAuth(new_auth)"/>
+    <q-input :dark="getIsDark" color="primary-light" placeholder="actor@permission" style="margin-left:5px" v-model="new_auth" @keyup.enter.native="addAuth(new_auth)"/>
   </div>
 </div>
 </template>

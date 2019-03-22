@@ -1,5 +1,11 @@
 <template>
   <q-page class="q-pa-md">
+
+    <div class="bg-bg1 shadow-5 round-borders q-pa-md q-mb-md">
+      <div class="q-headline">Custodian Board</div>
+      <display-custodians />
+    </div>
+
     <div v-if="getAccountName" class="row gutter-sm">
       <!-- box profile -->
       <div class="col-xs-12 col-md-6 col-xl-4">
@@ -35,7 +41,7 @@
       </div><!-- box profile -->
 
       <div class="col-xs-12 col-md-6 col-xl-4" >
-        <div class="bg-bg1 round-borders shadow-5 q-pa-md bg-logo dashboard-box">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md bg-logo dashboard-box full-height">
           <q-item  class="no-padding" style="margin-left:-10px;margin-top:-10px">
             <q-item-side left >
               <div class=""><q-icon :name="$configFile.icon.cust_symbol" color="warning" size="70px" /></div>
@@ -68,11 +74,14 @@
         </div>
       </div>
 
+      <div class="col-xs-12 col-md-6 col-xl-8">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height">
+          <balance-timeline :account="getAccountName"  :contract="this.$configFile.get('tokencontract')" :symbol="this.$configFile.get('dactokensymbol')"  />
+        </div>
+      </div>
+
     </div>
-    <div class="bg-bg1 shadow-5 round-borders q-pa-md q-mt-md">
-      <div class="q-headline">Custodian Board</div>
-      <display-custodians />
-    </div>
+
 
       <div class="row justify-end">
         <div  class="text-weight-thin q-pa-md q-caption" >
@@ -88,6 +97,7 @@ import {mapGetters} from 'vuex';
 import profilePic from 'components/ui/profile-pic';
 import displayCustodians from 'components/ui/display-custodians';
 import periodTimer from 'components/ui/period-timer';
+import balanceTimeline from 'components/ui/balance-timeline';
 
 import { openURL } from 'quasar';
 export default {
@@ -95,7 +105,8 @@ export default {
   components:{
     profilePic,
     displayCustodians,
-    periodTimer
+    periodTimer,
+    balanceTimeline
 
   },
   computed:{

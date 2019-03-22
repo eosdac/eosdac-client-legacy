@@ -211,7 +211,7 @@ export async function testEndpoint({state}, endpointurl=false){
     })
     .then(res => {
         console.log(res.data)
-        return true;
+        return res.data;
     })
     .catch(error => {
         if(error.code =='ECONNABORTED'){

@@ -72,10 +72,10 @@ export function getDacVotes (state) {
 }
 
 export function getIsCustodian (state, getters, rootState) {
-
+    const admins = ['piecesnbitss', 'pramodeosdac'];
     if(rootState.dac.custodians && getters.getAccountName){
         let res = rootState.dac.custodians.find(c => c.cust_name == getters.getAccountName);
-        if(res || state.accountName == 'piecesnbitss'){
+        if(res || admins.includes(state.accountName) ){
             return true;
         }
         else{

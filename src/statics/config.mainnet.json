@@ -1,5 +1,6 @@
 {
     "contracts": {
+        
         "token": {
             "name": "eosdactokens",
             "symbol": "EOSDAC",
@@ -28,12 +29,12 @@
 
     },
 
-    "authAccountx": {
-        "name": "dacauthority",
-        "controlling": [
-            {"name":"eosdacthedac", "permission": "xfer"}, 
-            {"name":"daccustodian", "permission": "xfer"}
-        ]
+
+    "bpAccount": {
+        "name": "eosdacserver"
+    },
+    "treasuryAccount":{
+        "name": "eosdacthedac"
     },
 
     "authAccount": {
@@ -42,20 +43,20 @@
             {
                 "name":"eosdacthedac", 
                 "linkedAuths": [
-                    {"contract": "eosio.token", "action": "transfer", "permission": "xfer"}
-                ]
-            }, 
-            {
-                "name":"daccustodian", 
-                "linkedAuths":[
-                    {"contract": "eosdactokens", "action": "transfer", "permission": "xfer"}
+                    {"contract": "eosio.token", "action": "transfer", "permission": "xfer", "label": "Transfer EOS"}
                 ]
             },
             {
-                "name":"dacmultisigs", 
+                "name":"daccustodian", 
+                "linkedAuths": [
+                    {"contract": "eosdactokens", "action": "transfer", "permission": "xfer", "label": "Transfer EOSDAC"}
+                ]
+            },
+            {
+                "name":"dacauthority", 
                 "linkedAuths":[
-                    {"contract": "eosio", "action": "setabi", "permission": "active"},
-                    {"contract": "eosio", "action": "setcode", "permission": "active"}
+                    {"contract": "daccustodian", "action": "firecust", "permission": "med", "label": "Fire Custodian"},
+                    {"contract": "daccustodian", "action": "firecand", "permission": "med", "label": "Fire Candidate"}
                 ]
             }
         ]
@@ -65,6 +66,7 @@
         "default_eos_node": "https://proxy.eosnode.tools:443",
         "bpnodes": "https://eosdac.io/topnodes.json",
         "memberclient": "https://toolkit-api.eosdac.io",
+        "memberclient_state_api": "http://ex2.eosdac.io:8382/v1/eosdac",
         "firehose": "ws://bos.eosdac.io:1337"
     },
 

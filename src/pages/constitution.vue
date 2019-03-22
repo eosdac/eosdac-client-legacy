@@ -113,6 +113,7 @@ export default {
       getLatestMemberTerm: 'dac/getLatestMemberTerm',
       getAccountName: 'user/getAccountName',
       getAgreedTermsVersion: 'user/getAgreedTermsVersion',
+      getIsLoaded: 'dac/getIsLoaded'
  
     }),
 
@@ -217,16 +218,19 @@ export default {
     }
   },
   watch: {
-    getLatestMemberTerm (oldval, newval) {
-      console.log(oldval, newval)
-      if(newval.terms){
-        this.getConstitution();
-      }
-    },
-    getMemberTerms (oldval, newval) {
-      if(newval && newval[0] ){
-        this.getConstitution();
-      }
+    // getLatestMemberTerm (oldval, newval) {
+    //   console.log(oldval, newval)
+    //   if(newval.terms){
+    //     this.getConstitution();
+    //   }
+    // },
+    // getMemberTerms (oldval, newval) {
+    //   if(newval && newval[0] ){
+    //     this.getConstitution();
+    //   }
+    // },
+    getIsLoaded(){
+      this.getConstitution();
     }
   }
 

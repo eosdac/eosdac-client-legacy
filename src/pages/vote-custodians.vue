@@ -123,8 +123,6 @@
     </div>
   </q-modal>
 
-{{getCustodianConfig}}
-
 </div><!-- end wrapper -->
 
 <debug-data :data="[{'getDacVotes': getDacVotes},{'getCandidates': getCandidates}]" />

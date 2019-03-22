@@ -112,6 +112,17 @@ export async function fetchPendingPay({state, dispatch}, accountname=false){
 export async function transact ({state, rootState, commit, dispatch, getters}, payload) {
 
     let DELAY_SEC = getters['getSettingByName']('trx_delay').value > 0 ? getters['getSettingByName']('trx_delay').value : 0;
+    let BROADCAST = true;
+
+    if(payload.options){
+        if(payload.options.delay !== undefined){
+            DELAY_SEC = payload.options.delay;
+        }
+        if(payload.options.broadcast !== undefined){
+            BROADCAST = payload.options.broadcast;
+        }
+    }
+
 
     let actions =payload.actions;
 
@@ -163,7 +174,7 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
     try {
         let [eos] = await dispatch('global/getEosScatter', null, {root: true});
         setTimeout(()=>{commit('ui/setShowTransactionOverlay', 'sign', {root: true}); }, 1500);
-        const result = await eos.transact({delay_sec: DELAY_SEC, actions: actions}, {blocksBehind: 3, expireSeconds: 30} );
+        const result = await eos.transact({delay_sec: DELAY_SEC, actions: actions}, {blocksBehind: 3, expireSeconds: 60, broadcast: BROADCAST} );
         commit('ui/setShowTransactionOverlay', 'success', {root: true});
         commit('setLastTransaction', result);
         
@@ -216,15 +227,18 @@ export async function transact ({state, rootState, commit, dispatch, getters}, p
 }
 
 function parseError(err){
-    console.log(err)
+
     // example error: assertion failure with message: ERR::UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND::Cannot unstake tokens for an active candidate. Call withdrawcand first.
-    if(err.error.details[0].message && err.error.details[0].message.indexOf('ERR::') > -1){
+    if(err && err.error.details[0].message && err.error.details[0].message.indexOf('ERR::') > -1){
       err = err.error.details[0].message.substr(err.error.details[0].message.indexOf('ERR::'));
       let t = 'contract_errors.'+err.split('::')[1];
       err = t;
     }
     else{
-      err = err.error.details[0].message;
+        if(err && err.error){
+            err = err.error.details[0].message;
+        }
+      
     }
     return err;
 }

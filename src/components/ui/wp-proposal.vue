@@ -22,19 +22,35 @@
               <q-item-tile sublabel>{{wp.arbitrator}}</q-item-tile>
             </q-item-main>
           </q-item>
+          <q-item v-if="expanded">
+            <q-item-main>
+              <q-item-tile label>Submitted</q-item-tile>
+              <q-item-tile sublabel>date</q-item-tile>
+            </q-item-main>
+          </q-item>
           <q-item >
             <q-item-main>
               <q-item-tile label>Status</q-item-tile>
               <q-item-tile sublabel>{{wp.state}}</q-item-tile>
             </q-item-main>
           </q-item>
+
           <q-btn v-if="!expanded" dense class="absolute-top-right text-text2" icon="fullscreen" flat @click="$emit('wp_expand', array_index)" />
           <q-btn v-if="expanded" dense class="absolute-top-right text-text2" icon="fullscreen_exit" flat @click="$emit('wp_compress');" />
       </div>
-      
-      <div class="q-mt-md q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
+
+      <div class="q-my-md">
+        <div class="q-caption q-mb-xs text-text2">Expiration</div>
+        <q-progress
+          :percentage="wp_expiration"
+          color= "primary-light"
+          style="height: 4px"
+        />
+      </div>
+
+      <div class="q-mt-sm q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
       <q-scroll-area
-        class="bg-bg2 q-pa-md q-mt-sm round-borders text-weight-light text-text2"
+        class="bg-bg2  q-mt-sm round-borders text-weight-light text-text2"
         :style="scroll_area_style"
         color="primary"
         :thumb-style="{
@@ -45,20 +61,24 @@
         }"
         :delay="1500"
       >
-        <div>{{wp.summary}}</div>
+        <MarkdownViewer  :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']"  :dark="getIsDark" :text="wp.summary" />
       </q-scroll-area>
-      
+
+      <div v-if="expanded" class="row justify-end q-mt-xs items-center">
+        <a target="_blank" :href="$configFile.get('explorer')+`/transaction/${wp.txid}`" class="q-body-1">xxxxxxxxxxxxxx</a>
+      </div>
+
     </div>
 
     <div class="q-mt-md full-width">
       <div  class="row justify-between items-center">
 
         <div class="row">
-          <div v-for="(vote,i) in getVotes.filter(v => v.vote == 1)" :key="`v1${i}`" class="bg-positive">
-            <div style=""><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
+          <div v-for="(vote,i) in getVotes.filter(v => v.vote == 1)" :key="`v1${i}`" class="bg-positive" >
+            <div><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
           </div>
-          <div v-for="(vote,i) in getVotes.filter(v => v.vote == 2)" :key="`v2${i}`" class="bg-negative">
-            <div style=""><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
+          <div v-for="(vote,i) in getVotes.filter(v => v.vote == 2)" :key="`v2${i}`" class="bg-negative" >
+            <div><profile-pic  :accountname="vote.voter" :scale="0.7" /></div>
           </div>
         </div>
         
@@ -92,10 +112,13 @@
 
 import {mapGetters} from 'vuex';
 import profilePic from 'components/ui/profile-pic';
+import MarkdownViewer from 'components/ui/markdown-viewer';
+
 export default {
   name: 'wpProposal',
   components:{
-    profilePic
+    profilePic,
+    MarkdownViewer
   },
   props:{
     array_index: null,
@@ -111,13 +134,15 @@ export default {
   },
   data () {
     return {
-      show: true
+      show: true,
+      wp_expiration: this.$helper.randomIntFromInterval(10, 100)
     }
   },
   computed:{
     ...mapGetters({
       getAccountName: 'user/getAccountName',
-      getWpConfig: 'dac/getWpConfig'
+      getWpConfig: 'dac/getWpConfig',
+      getIsDark: 'ui/getIsDark'
     }),
     scroll_area_style(){
       if(this.expanded){

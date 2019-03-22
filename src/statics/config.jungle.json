@@ -27,12 +27,12 @@
         }
           
     },
-    "authAccountx": {
-        "name": "dacauthority",
-        "controlling": [
-            {"name":"eosdacdoshhq", "permission": "xfer"}, 
-            {"name":"dacelections", "permission": "xfer"}
-        ]
+
+    "bpAccount": {
+        "name": "eosdacserval"
+    },
+    "treasuryAccount":{
+        "name": "eosdacdoshhq"
     },
 
     "authAccount": {
@@ -41,22 +41,20 @@
             {
                 "name":"eosdacdoshhq", 
                 "linkedAuths": [
-                    {"contract": "eosio.token", "action": "transfer", "permission": "xfer"}
-                ]
-            }, 
-            {
-                "name":"dacelections", 
-                "linkedAuths":[
-                    {"contract": "kasdactokens", "action": "transfer", "permission": "xfer"},
-                    {"contract": "eosio", "action": "setabi", "permission": "active"},
-                    {"contract": "eosio", "action": "setcode", "permission": "active"}
+                    {"contract": "eosio.token", "action": "transfer", "permission": "xfer", "label": "Transfer EOS"}
                 ]
             },
             {
-                "name":"dacmultisigs", 
+                "name":"dacelections", 
+                "linkedAuths": [
+                    {"contract": "kasdactokens", "action": "transfer", "permission": "xfer", "label": "Transfer KASDAC"}
+                ]
+            },
+            {
+                "name":"dacauthority", 
                 "linkedAuths":[
-                    {"contract": "eosio", "action": "setabi", "permission": "active"},
-                    {"contract": "eosio", "action": "setcode", "permission": "active"}
+                    {"contract": "dacelections", "action": "firecust", "permission": "med", "label": "Fire Custodian"},
+                    {"contract": "dacelections", "action": "firecand", "permission": "med", "label": "Fire Candidate"}
                 ]
             }
 
