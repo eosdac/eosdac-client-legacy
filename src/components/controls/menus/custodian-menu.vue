@@ -20,9 +20,11 @@
           <q-item class="q-pl-lg animate-fade" link to="/custodian/my-payments">
             <q-item-main label="My Payments" class="text-text1 text-weight-light" />
           </q-item>
+          <!--
           <q-item class="q-pl-lg animate-fade" link to="/custodian/dac-financials">
             <q-item-main label="DAC Financials" class="text-text1 text-weight-light" />
           </q-item>
+          -->
         </div>
       </q-collapsible>
 
