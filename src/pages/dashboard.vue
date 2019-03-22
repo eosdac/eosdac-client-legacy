@@ -68,6 +68,12 @@
         </div>
       </div>
 
+      <div class="col-xs-12 col-md-6 col-xl-4">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height">
+          <balance-timeline :account="getAccountName"  :contract="this.$configFile.get('tokencontract')" :symbol="this.$configFile.get('dactokensymbol')"  />
+        </div>
+      </div>
+
     </div>
     <div class="bg-bg1 shadow-5 round-borders q-pa-md q-mt-md">
       <div class="q-headline">Custodian Board</div>
@@ -88,6 +94,7 @@ import {mapGetters} from 'vuex';
 import profilePic from 'components/ui/profile-pic';
 import displayCustodians from 'components/ui/display-custodians';
 import periodTimer from 'components/ui/period-timer';
+import balanceTimeline from 'components/ui/balance-timeline';
 
 import { openURL } from 'quasar';
 export default {
@@ -95,7 +102,8 @@ export default {
   components:{
     profilePic,
     displayCustodians,
-    periodTimer
+    periodTimer,
+    balanceTimeline
 
   },
   computed:{
