@@ -11,17 +11,17 @@
       </div>
     </div>
 
-    <div class="col-xs-12 col-lg-6">
+    <!-- <div class="col-xs-12 col-lg-6">
       <div class="bg-bg1 q-pa-md round-borders shadow-5" >
         <balance-timeline account="evilmikehere"  :contract="this.$configFile.get('systemtokencontract')" :symbol="this.$configFile.get('systemtokensymbol')"  />
       </div>
-    </div>
+    </div> -->
 
-    <div class="col-xs-12 col-lg-6">
+    <!-- <div class="col-xs-12 col-lg-6">
       <div class="bg-bg1 q-pa-md round-borders shadow-5" >
         <balance-timeline account="piecesnbitss"  :contract="this.$configFile.get('tokencontract')" :symbol="this.$configFile.get('dactokensymbol')"  />
       </div>
-    </div>
+    </div> -->
 
     <div class="col-xs-12 col-lg-6">
       <div class="bg-bg1 q-pa-md round-borders shadow-5" >

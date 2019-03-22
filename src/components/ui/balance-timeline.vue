@@ -124,6 +124,7 @@ export default {
     this.refdate = new Date(head_block_time);
     this.getTokenTimeLine({ account: this.account, contract: this.contract, symbol:this.symbol, start_block: this.refblock-1814400, end_block: this.end_block });
   }
+  //
 }
 </script>
 

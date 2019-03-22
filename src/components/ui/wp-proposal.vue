@@ -61,7 +61,6 @@
         }"
         :delay="1500"
       >
-        <!-- <div>{{wp.summary}}</div> -->
         <MarkdownViewer  :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']"  :dark="getIsDark" :text="wp.summary" />
       </q-scroll-area>
 
