@@ -1,5 +1,11 @@
 <template>
   <q-page class="q-pa-md">
+
+    <div class="bg-bg1 shadow-5 round-borders q-pa-md q-mb-md">
+      <div class="q-headline">Custodian Board</div>
+      <display-custodians />
+    </div>
+
     <div v-if="getAccountName" class="row gutter-sm">
       <!-- box profile -->
       <div class="col-xs-12 col-md-6 col-xl-4">
@@ -75,10 +81,7 @@
       </div>
 
     </div>
-    <div class="bg-bg1 shadow-5 round-borders q-pa-md q-mt-md">
-      <div class="q-headline">Custodian Board</div>
-      <display-custodians />
-    </div>
+
 
       <div class="row justify-end">
         <div  class="text-weight-thin q-pa-md q-caption" >
