@@ -8,7 +8,8 @@
   "author": "eosDAC <hello@eosdac.io>",
   "private": true,
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "start": "quasar dev",
+    "build": "quasar build"
   },
   "dependencies": {
     "axios": "^0.18.0",
