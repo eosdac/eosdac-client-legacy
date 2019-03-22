@@ -38,8 +38,17 @@
           <q-btn v-if="!expanded" dense class="absolute-top-right text-text2" icon="fullscreen" flat @click="$emit('wp_expand', array_index)" />
           <q-btn v-if="expanded" dense class="absolute-top-right text-text2" icon="fullscreen_exit" flat @click="$emit('wp_compress');" />
       </div>
+
+      <div class="q-my-md">
+        <div class="q-caption q-mb-xs text-text2">Expiration</div>
+        <q-progress
+          :percentage="wp_expiration"
+          color= "primary-light"
+          style="height: 4px"
+        />
+      </div>
       
-      <div class="q-mt-md q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
+      <div class="q-mt-sm q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
       <q-scroll-area
         class="bg-bg2 q-pa-md q-mt-sm round-borders text-weight-light text-text2"
         :style="scroll_area_style"
@@ -122,7 +131,8 @@ export default {
   },
   data () {
     return {
-      show: true
+      show: true,
+      wp_expiration: 50
     }
   },
   computed:{
