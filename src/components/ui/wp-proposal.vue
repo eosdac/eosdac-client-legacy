@@ -50,7 +50,7 @@
 
       <div class="q-mt-sm q-title text-weight-thin capitalize">WP{{wp.key}}: {{wp.title}}</div>
       <q-scroll-area
-        class="bg-bg2 q-pa-md q-mt-sm round-borders text-weight-light text-text2"
+        class="bg-bg2  q-mt-sm round-borders text-weight-light text-text2"
         :style="scroll_area_style"
         color="primary"
         :thumb-style="{
@@ -61,7 +61,8 @@
         }"
         :delay="1500"
       >
-        <div>{{wp.summary}}</div>
+        <!-- <div>{{wp.summary}}</div> -->
+        <MarkdownViewer  :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']"  :dark="getIsDark" :text="wp.summary" />
       </q-scroll-area>
 
       <div v-if="expanded" class="row justify-end q-mt-xs items-center">
@@ -112,10 +113,13 @@
 
 import {mapGetters} from 'vuex';
 import profilePic from 'components/ui/profile-pic';
+import MarkdownViewer from 'components/ui/markdown-viewer';
+
 export default {
   name: 'wpProposal',
   components:{
-    profilePic
+    profilePic,
+    MarkdownViewer
   },
   props:{
     array_index: null,
@@ -132,13 +136,14 @@ export default {
   data () {
     return {
       show: true,
-      wp_expiration: 50
+      wp_expiration: this.$helper.randomIntFromInterval(10, 100)
     }
   },
   computed:{
     ...mapGetters({
       getAccountName: 'user/getAccountName',
-      getWpConfig: 'dac/getWpConfig'
+      getWpConfig: 'dac/getWpConfig',
+      getIsDark: 'ui/getIsDark'
     }),
     scroll_area_style(){
       if(this.expanded){
