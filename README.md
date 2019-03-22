@@ -25,3 +25,21 @@ Opens browser window automatically [http://localhost:8080](http://localhost:8080
 ```bash
 $ npm start
 ```
+
+## Deployment
+
+You can run the deploy script to checkout the correct release tag and copy the dist/spa-mat files to a dist/deploy folder which you can then make the root folder of your nginx website.
+
+Example:
+
+```bash
+$ deploy.sh v0.3.1 true
+```
+
+That will run tag v0.3.1 locally.
+
+```bash
+$ deploy.sh v0.3.1
+```
+
+That will build v0.3.1 and copy the results to the dist/deploy folder.
