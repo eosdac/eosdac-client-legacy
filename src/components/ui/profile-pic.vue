@@ -63,6 +63,13 @@ export default {
         this.loaded = true;
         preloaderImg = null;
       });
+      setTimeout(()=>{
+        if(this.loaded == false){
+          this.profilePic = this.$profiles.default_avatar;
+          this.loaded = true;
+          preloaderImg = null;
+        }
+      }, 3000)
       
     }
   },

@@ -276,10 +276,12 @@ export default {
       }
     },
 
-    saveProfileSuccessCallback(){
+    async saveProfileSuccessCallback(){
       // this.allow_edit = this.is_edit = this.profile_is_irrevirsible = false;
       this.allow_edit = this.is_edit = false;
-      this.$profiles.removeFromCache([this.getAccountName]);
+      let newprofile = await this.$profiles.removeFromCache([this.getAccountName]);
+      
+      this.$store.commit('user/setProfilePicture', this.form.image)
     },
 
     addSocial(){

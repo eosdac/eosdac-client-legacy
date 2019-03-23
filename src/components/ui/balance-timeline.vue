@@ -122,7 +122,7 @@ export default {
     let {head_block_num, head_block_time} = await this.$store.dispatch('global/testEndpoint');
     this.refblock = head_block_num;
     this.refdate = new Date(head_block_time);
-    this.getTokenTimeLine({ account: this.account, contract: this.contract, symbol:this.symbol, start_block: this.refblock-1814400, end_block: this.end_block });
+    this.getTokenTimeLine({ account: this.account, contract: this.contract, symbol:this.symbol, start_block: 0, end_block: this.end_block });
   }
   //
 }
