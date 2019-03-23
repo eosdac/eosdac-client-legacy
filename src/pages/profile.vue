@@ -3,7 +3,6 @@
   <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px">
     <div class="row">
       <div class="col-12">
-        <q-btn v-if="!profile_is_irrevirsible" @click="initProfile" class="float-right" color="red" :label="$t('profile.not_confirmed')" />
         <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("profile.profile") }}</h4>
       </div>
     </div>
@@ -110,7 +109,7 @@
     </div>
   </div>
   <div v-if="rawprofiledata" class="q-pa-md q-my-md text-text2">
-    <TimeZone :offset="form.timezone" />
+    <TimeZone :offset="Number(form.timezone)" />
   </div>
 
   <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}">
@@ -160,7 +159,6 @@ export default {
       is_edit:false,
       allow_edit: false,
       profile_is_loading : false,
-      profile_is_irrevirsible : true,
       rawprofiledata: false,
       profileUrl: '',
 
@@ -230,8 +228,7 @@ export default {
         this.rawprofiledata = p[0];
         //todo validate profile
         this.form = p[0].profile;
-        this.profile_is_irrevirsible = p[0].irrevirsible;
-        this.allow_edit = this.account_name === this.getAccountName && this.profile_is_irrevirsible ? true : false;
+        this.allow_edit = this.account_name === this.getAccountName;
 
       }
       else{
@@ -277,7 +274,6 @@ export default {
     },
 
     async saveProfileSuccessCallback(){
-      // this.allow_edit = this.is_edit = this.profile_is_irrevirsible = false;
       this.allow_edit = this.is_edit = false;
       let newprofile = await this.$profiles.removeFromCache([this.getAccountName]);
       
@@ -329,7 +325,7 @@ export default {
                 this.initProfile();
               },
     getAccountName : function(val){
-      this.allow_edit = this.account_name === val && this.profile_is_irrevirsible ? true : false;
+      this.allow_edit = this.account_name === val;
     }
 
   }
