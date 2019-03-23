@@ -3,6 +3,7 @@
 
         <custodian-menu />
         <member-menu />
+        
         <q-item to="/constitution" >
           <q-item-side :icon="$configFile.icon.constitution" color="text2"/>
           <q-item-main :label="$t('default.sign_the_constitution')" class="text-text1"/>
@@ -66,13 +67,13 @@
 import {mapGetters} from 'vuex';
 import {openURL} from 'quasar';
 import custodianMenu from './custodian-menu';
-//import memberMenu from './member-menu';
+import memberMenu from './member-menu';
 import devMenu from './dev-menu';
 export default {
   name: 'MainMenu',
   components:{
     custodianMenu,
-//    memberMenu,
+   memberMenu,
     devMenu
   },
   data () {

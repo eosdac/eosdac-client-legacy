@@ -72,7 +72,7 @@
 
     "external":{
         "homepage": "https://eosdac.io",
-        "discordUrl": "https://discord.io/eosdac",
+        "discord": "https://discord.io/eosdac",
         "explorer": "https://jungle.bloks.io",
         "dacexplorer": "https://explorer.eosdac.io"
     }
