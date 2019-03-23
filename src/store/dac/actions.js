@@ -126,7 +126,7 @@ export async function fetchWorkerProposals({}, payload={}){
 export async function fetchTokenTimeLine({}, payload={}){
     // {account: 'piecesnbitss', contract:'kasdactokens', symbol:'KASDAC', start_block:10000000, end_block:17000000}
     let url = this._vm.$configFile.get('memberclientstateapi');
-    return this._vm.$axios.get(url+'/token_timeline', {params: payload}).then(r => {
+    return this._vm.$axios.get(url+'/balance_timeline', {params: payload}).then(r => {
         // console.log(r.data)
         return r.data;
       }).catch(e => {
