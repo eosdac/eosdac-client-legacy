@@ -13,12 +13,10 @@
       </div>
     </div>
 
-    <div class="animate-pop profile_image_outer_wrap" style="">
+    <div class="animate-pop profile_image_outer_wrap">
       <q-btn v-if="is_edit" round size="md" class="animate-pop" color="primary" icon="icon-plus" style="position:absolute;bottom:0;right:7px;z-index:2" @click="visible=true" />
       <div class="fit profile_image_inner_wrap">
-        <transition name="fade">
-          <img  :class="{ 'hack_center': centerimage, 'full-width': setwidth, 'full-height': !setwidth }" v-bind:src="setImgSrc" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
-        </transition>
+        <div v-if="loaded" class="profile_image relative-position animate-fade" style="height:140px; width:140px;"  v-bind:style="{'background-image': `url(${setImgSrc})`}" ></div>
         <q-spinner-oval color="white" class="hack_center" v-if="!loaded" size="139px" />
       </div>
     </div>
@@ -118,7 +116,7 @@
       <q-btn icon="close" @click="visible=false" flat dense/>
     </div>
     <div class="q-pa-md bg-bg2 text-text1">
-      <q-input :dark="getIsDark" type="url" v-model="form.image" @input="loaded=false" class="q-mt-md" :float-label="$t('profile.profile_picture_url')" placeholder="https://example.site/mypic.jpg" />
+      <q-input :dark="getIsDark" type="url" v-model="form.image" @input="" class="q-mt-md" :float-label="$t('profile.profile_picture_url')" placeholder="https://example.site/mypic.jpg" />
     </div>
   </q-modal>
 
@@ -160,12 +158,9 @@ export default {
       allow_edit: false,
       profile_is_loading : false,
       rawprofiledata: false,
-      profileUrl: '',
-
       visible:false,
-      centerimage:true,
-      setwidth: true,
-      loaded:false,
+
+      loaded:true,
       form:ProfileTemplate,
       maxLinksmsg: ''
     }
@@ -178,7 +173,7 @@ export default {
 
     }),
     setImgSrc(){
-      let image = '../statics/images/default-avatar.png'; //default image
+      let image = this.$profiles.default_avatar; //default image
       if(this.form.image.startsWith('http:') ){
         console.log('need https image');
         Notify.create({
@@ -188,7 +183,7 @@ export default {
           position: 'bottom-right', // 'top', 'left', 'bottom-left' etc.
           closeBtn: true, // or string as button message e.g. 'dismiss'
         });
-        return false;
+        return image;
       }
       if(this.$helper.isUrl(this.form.image)){
         image = this.form.image;
@@ -201,17 +196,6 @@ export default {
     openURL,
     updateText (val) {
       this.form.description = val
-    },
-     onLoaded() {
-        let img = this.$refs.profile_pic;
-        if(img == undefined){
-          return false;
-        }
-        // this.$consoleMsg('Profile image size: '+img.width +' x '+ img.height);
-        this.setwidth = img.width <= img.height ? true : false;
-        this.centerimage = img.width == img.height ? false : true;
-        this.visible = false;
-        this.loaded = true;
     },
     //init profile page
     initProfile(){
@@ -274,7 +258,7 @@ export default {
     },
 
     async saveProfileSuccessCallback(){
-      this.allow_edit = this.is_edit = false;
+      this.is_edit = false;
       let newprofile = await this.$profiles.removeFromCache([this.getAccountName]);
       
       this.$store.commit('user/setProfilePicture', this.form.image)
@@ -293,10 +277,8 @@ export default {
     },
 
     deleteEmptyLinks(){
-      var self =this;
-
-      this.form.sameAs = this.form.sameAs.filter(function(item){
-        return item.link !='' && self.$helper.isUrl(item.link);
+      this.form.sameAs = this.form.sameAs.filter((item)=>{
+        return item.link !='' && this.$helper.isUrl(item.link);
       });
     },
 
@@ -348,12 +330,8 @@ export default {
 }
 
 .profile_image_inner_wrap{
-  border-radius:50%;
-  border:4px solid white;
-  background: #7c41ba;
   overflow:hidden;
   position:relative;
-
 }
 .profile_image_outer_wrap{
   position:absolute;

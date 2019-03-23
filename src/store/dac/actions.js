@@ -56,7 +56,7 @@ export async function fetchActiveCandidates ({state, commit, dispatch} ) {
     let candidate_names = candidates.map(c => c.candidate_name);
     let profiles = await this._vm.$profiles.getProfiles(candidate_names);
     candidates.forEach(c =>{
-        let cand_profile = profiles.find(p => p._id == c.candidate_name);
+        let cand_profile = profiles.find(p => p.account == c.candidate_name);
         if(cand_profile){
             c.profile = cand_profile.profile;
         }

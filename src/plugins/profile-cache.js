@@ -87,10 +87,6 @@ class ProfileCache{
 
 }
 
-
 export default ({ Vue, store }) => {
-  // Vue.prototype.$profiles = new ProfileCache(store.getters['global/getConfig'] );
   Vue.prototype.$profiles = new ProfileCache(Vue.prototype.$configFile );
-  // Vue.prototype.$profiles = new ProfileCache({api:{memberclient: "http://ns3119712.ip-51-38-42.eu:3000/"} } );
-  
 }
