@@ -1,5 +1,6 @@
 <template>
 <div>
+  <!-- <pre>{{msig}}</pre> -->
  <!--small screens mobile-->
 <div v-if="!isHidden" class="q-mb-md bg-bg1 round-borders shadow-5 animate-fade lt-sm">
 
@@ -21,7 +22,7 @@
         <router-link :to="{path: '/profile/' + msig.proposer}" >{{ msig.proposer }}</router-link>
       </div>
       <div class="full-width q-mt-xs">
-        <span class="text-text1">Submitted on:&nbsp;<span class="text-text2">{{new Date(msig.block_time).toDateString()}}</span></span>
+        <span class="text-text1">Submitted on:&nbsp;<span class="text-text2">{{new Date(msig.block_timestamp).toDateString()}}</span></span>
       </div>
     </div>
 
@@ -71,7 +72,7 @@
         </div>
 
         <div class="q-pb-xs">
-          <span>Submitted on: </span> <span class="text-text2">{{new Date(msig.block_time).toUTCString()}}</span>
+          <span>Submitted on: </span> <span class="text-text2">{{new Date(msig.block_timestamp).toUTCString()}}</span>
         </div>
         <div class="q-pb-xs">
           <span>Expiration: </span> <span class="text-text2">{{new Date(msig.trx.expiration).toUTCString()}}</span>
@@ -127,7 +128,7 @@
                 </router-link>
               </div>
               <div>
-                <span class="text-text2">Submitted on:&nbsp;<span class="text-text1">{{new Date(msig.block_time).toDateString()}}</span></span>
+                <span class="text-text2">Submitted on:&nbsp;<span class="text-text1">{{new Date(msig.block_timestamp).toDateString()}}</span></span>
               </div>
             </div>
 
@@ -323,7 +324,7 @@ export default {
     },
 
     is_seen_computed: function(){
-      return this.getMsigIsSeenCache.includes(this.msig._id);
+      return this.getMsigIsSeenCache.includes(this.msig.trxid);
     }
 
 
@@ -350,13 +351,12 @@ export default {
       let avatars = await this.$profiles.getAvatars([...approvals.provided_approvals.map(a=>a.actor), ...approvals.requested_approvals.map(a=>a.actor) ]);
 
       this.provided_approvals = approvals.provided_approvals.map(pa=>{
-        pa.avatar = avatars.find(p=> p._id===pa.actor );
-        // this.$set(pa, 'avatar', avatars.find(p=> p._id===pa.actor ))
+        pa.avatar = avatars.find(p=> p.account===pa.actor );
         return pa;
       });
         
       this.requested_approvals = approvals.requested_approvals.map(ra=>{
-        ra.avatar = avatars.find(p=>p._id===ra.actor);
+        ra.avatar = avatars.find(p=>p.account===ra.actor);
         return ra;
       });
       //check if user has already approved the proposal
@@ -507,16 +507,16 @@ export default {
     },
 
     handleIsSeenCache(isSeen_toggle_bool){
-      console.log(isSeen_toggle_bool, this.msig._id);
+      console.log(isSeen_toggle_bool, this.msig.trxid);
       
       if(isSeen_toggle_bool){
         this.isSeen = true;
-        this.$store.commit('user/setMsigIsSeenCache', {mode: 'add', msig_id: this.msig._id} );
+        this.$store.commit('user/setMsigIsSeenCache', {mode: 'add', msig_id: this.msig.trxid} );
 
       }
       else{
         this.isSeen = false;
-        this.$store.commit('user/setMsigIsSeenCache', {mode: 'remove', msig_id: this.msig._id} );
+        this.$store.commit('user/setMsigIsSeenCache', {mode: 'remove', msig_id: this.msig.trxid} );
       }
       
     },

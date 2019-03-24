@@ -58,7 +58,7 @@ class ProfileCache{
 
     let url = this.config.get('memberclientstateapi').replace(/\/+$/, "");
 
-    return axios.get(`${url}/get_profile?account=${accountnames.join(',') }`).then(r => {
+    return axios.get(`${url}/profile?account=${accountnames.join(',') }`).then(r => {
 
         console.log('fetched new profiles', r.data.results.length)
         this.cache = this.cache.concat( r.data.results );

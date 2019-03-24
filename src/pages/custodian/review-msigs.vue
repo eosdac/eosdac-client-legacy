@@ -96,15 +96,17 @@ export default {
       if(find.status === 0){
         find =  {$or: [ { status: 0 }, { "trx.expiration": { $lt: new Date() }  } ] }  
       }
-      this.getProposals({find: find, skip: skip, limit: this.pagination.items_per_page});
+      // this.getProposals({find: find, skip: skip, limit: this.pagination.items_per_page});
+      this.getProposals({status: 1, limit: this.pagination.items_per_page, skip: skip});
     },
 
     async getProposals(query){
       //todo: loading animation
       this.proposals = [];
       let p =  await this.$store.dispatch('dac/fetchMsigProposals', query );
-      this.pagination.max = Math.ceil(p.total/this.pagination.items_per_page);
-      this.proposals = p.data;
+      // console.log(p)
+      this.pagination.max = Math.ceil(p.count/this.pagination.items_per_page);
+      this.proposals = p.results;
     },
 
     getProposalsWithDelay(){

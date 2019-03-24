@@ -70,7 +70,7 @@ export async function fetchActiveCandidates ({state, commit, dispatch} ) {
 
 }
 
-export async function fetchMsigProposals({rootState}, payload={status:1}){
+export async function fetchMsigProposalsx({rootState}, payload={status:1}){
     //status 1: active; 2: executed; 0: cancelled
     let url = this._vm.$configFile.get('memberclientapi');
     return this._vm.$axios.post(url+'/msigproposals', payload).then(r => {
@@ -115,7 +115,18 @@ export async function fetchWpConfig({commit, dispatch, state}){
 export async function fetchWorkerProposals({}, payload={}){
 
     let url = this._vm.$configFile.get('memberclientstateapi');
-    return this._vm.$axios.get(url+'/get_proposals', {params: payload}).then(r => {
+    return this._vm.$axios.get(url+'/proposals', {params: payload}).then(r => {
+        // console.log(r.data)
+        return r.data;
+      }).catch(e => {
+        console.log('could not load worker proposals from api');
+        return [];});
+}
+
+export async function fetchMsigProposals({}, payload={}){
+    // {status: 1, limit:0, skip: 1}
+    let url = this._vm.$configFile.get('memberclientstateapi');
+    return this._vm.$axios.get(url+'/msig_proposals', {params: payload}).then(r => {
         // console.log(r.data)
         return r.data;
       }).catch(e => {
