@@ -326,28 +326,20 @@ export default {
     is_seen_computed: function(){
       return this.getMsigIsSeenCache.includes(this.msig.trxid);
     }
-
-
   },
 
   methods: {
 
     async checkApprovals(){
 
-      let approvals = {
-        provided_approvals:this.msig.provided_approvals,
-        requested_approvals:this.msig.requested_approvals
-      }
+      let avatars = await this.$profiles.getAvatars([...this.msig.provided_approvals.map(a=>a.actor), ...this.msig.requested_approvals.map(a=>a.actor) ]);
 
-
-      let avatars = await this.$profiles.getAvatars([...approvals.provided_approvals.map(a=>a.actor), ...approvals.requested_approvals.map(a=>a.actor) ]);
-
-      this.provided_approvals = approvals.provided_approvals.map(pa=>{
+      this.provided_approvals = this.msig.provided_approvals.map(pa=>{
         pa.avatar = avatars.find(p=> p.account===pa.actor );
         return pa;
       });
         
-      this.requested_approvals = approvals.requested_approvals.map(ra=>{
+      this.requested_approvals = this.msig.requested_approvals.map(ra=>{
         ra.avatar = avatars.find(p=>p.account===ra.actor);
         return ra;
       });
