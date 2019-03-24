@@ -28,7 +28,7 @@
 
     <div class="row q-pa-md justify-between relative-position items-center">
      
-      <div v-if="msig.status == 1 || msig.status == 2" @click="approvals_modal = true" class="cursor-pointer">
+      <div  @click="approvals_modal = true" class="cursor-pointer">
           <div class="q-caption text-text2" >Received Approvals:</div>
           <div class="text-text1 q-title">
             <span><q-spinner v-if="provided_approvals==null" color="primary" size="25px" style="margin-top:-4px" /></span>
@@ -91,7 +91,7 @@
       <div class=" bg-bg2">
         <Actionparser class="q-body-1" @seenAllActions="disable_approve = false" :actions="msig.trx.actions" />
       </div>
-    <div v-if="!read_only" class="q-mt-md">  
+    <div v-if="!read_only && msig.status === 1" class="q-mt-md">  
         <q-btn v-if="!isApproved" class="full-width q-mb-md" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
         <q-btn v-if="isApproved" class="full-width q-mb-md" color="negative" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
         <q-btn v-if="isCreator" class="full-width q-mb-md" flat color="negative" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
@@ -134,7 +134,7 @@
 
           </div>
         </q-item-main>
-        <q-item-side right v-if="msig.status == 1 || msig.status == 2">
+        <q-item-side right >
           <div class="q-caption text-text2" >Received Approvals:</div>
           <div class="text-text1 q-display-1">
             <span><q-spinner v-if="provided_approvals==null" color="primary" size="25px" style="margin-top:-4px" /></span>
@@ -162,8 +162,8 @@
 
           </div>
 
-          <div v-if="msig.status == 1 || msig.status == 2" class="row justify-between">
-            <span v-if="!read_only">
+          <div class="row justify-between">
+            <span v-if="!read_only && msig.status === 1">
               <q-btn v-if="!isApproved" class="on-left" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
               <q-btn v-if="isApproved" class="on-left" color="negative" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
               <q-btn v-if="isCreator" class="on-left" flat color="negative" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
@@ -331,22 +331,14 @@ export default {
   },
 
   methods: {
-    //get the requested and provided approvals for this msg proposal from chain
+
     async checkApprovals(){
-      let approvals = undefined;
-      if(this.msig.status === 1){
-        approvals = await this.$store.dispatch('dac/fetchApprovalsFromProposal', {proposer: this.msig.proposer, proposal_name: this.msig.proposal_name});
-      }
-      else if(this.msig.status === 2){
-        approvals = {
-          provided_approvals:this.msig.provided_approvals,
-          requested_approvals:this.msig.requested_approvals
-        }
+
+      let approvals = {
+        provided_approvals:this.msig.provided_approvals,
+        requested_approvals:this.msig.requested_approvals
       }
 
-      if(!approvals){
-        return;
-      }
 
       let avatars = await this.$profiles.getAvatars([...approvals.provided_approvals.map(a=>a.actor), ...approvals.requested_approvals.map(a=>a.actor) ]);
 
@@ -359,11 +351,6 @@ export default {
         ra.avatar = avatars.find(p=>p.account===ra.actor);
         return ra;
       });
-      //check if user has already approved the proposal
-      // this.isApproved = this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
-      //check if the proposal is created by current user
-      // this.isCreator = this.getAccountName == this.msig.proposer
-      
 
     },
 
@@ -489,8 +476,16 @@ export default {
 
     transactionCallback(e_t){
       
-      if(e_t === 'e_unapproval' || e_t === 'e_approval'){
+      if(e_t === 'e_approval'){
         this.provided_approvals = null;//temporary show spinner by setting to null
+        this.msig.requested_approvals = this.msig.requested_approvals.filter(ra => ra.actor != this.getAccountName);
+        this.msig.provided_approvals.push({actor: this.getAccountName, permission: 'active'});
+        this.checkApprovals();
+      }
+      if(e_t === 'e_unapproval'){
+        this.provided_approvals = null;//temporary show spinner by setting to null
+        this.msig.provided_approvals = this.msig.provided_approvals.filter(pa => pa.actor != this.getAccountName);
+        this.msig.requested_approvals.push({actor: this.getAccountName, permission: 'active'});
         this.checkApprovals();
       }
 

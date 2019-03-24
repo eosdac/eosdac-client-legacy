@@ -9,7 +9,8 @@
     <!-- Tabs - notice slot="title" -->
     <q-tab default slot="title" name="open" label="open" />
     <q-tab slot="title" name="executed" label="executed"  />
-    <q-tab slot="title" name="cancelled" label="cancelled/expired"  />
+    <q-tab slot="title" name="cancelled" label="cancelled"  />
+    <q-tab slot="title" name="expired" label="expired"  />
   </q-tabs>
 
   <div class="row bg-bg1 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="true" >
@@ -83,28 +84,18 @@ export default {
 
     managePagination(){
       //map tab to number for making the request 
-      const map = {open:1, executed:2, cancelled:0};
+      const map = {open:1, executed:2, cancelled:0, expired: 3};
       //calculate skip
       let skip = (this.pagination.page-1) * this.pagination.items_per_page;
-      //make request
-      let find = {
-        status: map[this.active_tab]
-      }
-      if(find.status === 1){
-        find["trx.expiration"] = { $gt: new Date()};
-      }
-      if(find.status === 0){
-        find =  {$or: [ { status: 0 }, { "trx.expiration": { $lt: new Date() }  } ] }  
-      }
       // this.getProposals({find: find, skip: skip, limit: this.pagination.items_per_page});
-      this.getProposals({status: 1, limit: this.pagination.items_per_page, skip: skip});
+      this.getProposals({status: map[this.active_tab], limit: this.pagination.items_per_page, skip: skip});
     },
 
     async getProposals(query){
       //todo: loading animation
       this.proposals = [];
       let p =  await this.$store.dispatch('dac/fetchMsigProposals', query );
-      // console.log(p)
+      console.log(p)
       this.pagination.max = Math.ceil(p.count/this.pagination.items_per_page);
       this.proposals = p.results;
     },
