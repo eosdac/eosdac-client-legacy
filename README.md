@@ -22,6 +22,7 @@ Add the default language strings to the project by executing the below command. 
 ```bash
 yarn add_i18n https://github.com/eosdac/memberclient_i18n.git i18n
 ```
+A i18n folder will be added to the memberclients src folder which you can manage with git. The newly added folder is in the .gitignore file so you can pull future memberclient updates without losing your custom strings.
 
 ## Quickstart
 
