@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-
+let  profile_template = require('../statics/profile.template.json');
 class ProfileCache{
 
   constructor(config){
@@ -36,6 +36,7 @@ class ProfileCache{
         if(p.profile.image.startsWith('http:') ){
           p.profile.image ="";
         }
+
       })
     }
 
@@ -59,10 +60,15 @@ class ProfileCache{
     let url = this.config.get('memberclientstateapi').replace(/\/+$/, "");
 
     return axios.get(`${url}/profile?account=${accountnames.join(',') }`).then(r => {
-
         console.log('fetched new profiles', r.data.results.length)
-        this.cache = this.cache.concat( r.data.results );
-        return r.data.results;
+        let p = r.data.results.map(p=>{
+          if(p.profile.description == undefined){
+            p.profile= profile_template;
+          }
+          return p;
+        })
+        this.cache = this.cache.concat( p );
+        return p;
       })
       .catch(e => {
         console.log('could not load profile file');
