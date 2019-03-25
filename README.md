@@ -17,7 +17,7 @@ $ git clone https://github.com/eosdac/memberclient.git
 $ cd memberclient
 $ yarn
 ```
-## add language strings
+## Add language strings
 Add the default language strings to the project. You can use your own repo too. Don't forget the "." after the git url.
 ```bash
 yarn add_i18n https://github.com/eosdac/memberclient_i18n.git .
