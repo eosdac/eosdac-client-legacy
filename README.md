@@ -18,9 +18,9 @@ $ cd memberclient
 $ yarn
 ```
 ## Add language strings
-Add the default language strings to the project. You can use your own repo too. Don't forget the "." after the git url.
+Add the default language strings to the project. You can use your own repo too.
 ```bash
-yarn add_i18n https://github.com/eosdac/memberclient_i18n.git .
+yarn add_i18n https://github.com/eosdac/memberclient_i18n.git i18n
 ```
 
 ## Quickstart

@@ -10,7 +10,7 @@
   "scripts": {
     "start": "quasar dev",
     "build": "quasar build",
-    "add_i18n": "git -C ./src/i18n clone"
+    "add_i18n": "git -C ./src clone"
   },
   "dependencies": {
     "axios": "^0.18.0",
