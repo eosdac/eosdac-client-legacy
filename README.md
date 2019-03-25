@@ -18,6 +18,12 @@ $ cd memberclient
 $ yarn
 ```
 
+## add language strings
+Add the default language strings to the project. You can use your own repo too.
+```bash
+yarn add_i18n https://github.com/eosdac/memberclient_i18n.git .
+```
+
 ## Quickstart
 
 Opens browser window automatically [http://localhost:8080](http://localhost:8080)
