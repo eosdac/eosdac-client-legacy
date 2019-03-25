@@ -1,5 +1,5 @@
 import VueI18n from 'vue-i18n';
-// import messages from 'src/i18n';
+
 let messages;
 try {
   messages = require('src/i18n').default;
@@ -12,8 +12,7 @@ let i18n;
 export default ({
   app,
   Vue,
-  store,
-  router
+  store
 }) => {
 
   Vue.use(VueI18n);

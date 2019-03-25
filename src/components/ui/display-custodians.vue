@@ -2,7 +2,7 @@
   <div class="row justify-between " v-if="custodians.length" >
 
     <div class="column items-center q-pa-sm animate-fade" v-for="custodian in custodians" :key="custodian.cust_name">
-      <profile-pic :accountname="custodian.cust_name" :scale="1" />
+      <profile-pic :accountname="custodian.cust_name" :scale="1" :show_role="true" />
       <router-link class="q-body-1 a2 q-mt-xs" :to="{path: '/profile/' + custodian.cust_name}" >
         <div class="q-ma-none" >{{custodian.cust_name}}</div>
       </router-link>
