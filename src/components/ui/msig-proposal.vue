@@ -253,7 +253,8 @@ export default {
     ...mapGetters({
       getAccountName: 'user/getAccountName',
       getMsigIsSeenCache: 'user/getMsigIsSeenCache',
-      getIsCustodian: 'user/getIsCustodian'
+      getIsCustodian: 'user/getIsCustodian',
+      getSettingByName: 'user/getSettingByName'
     }),
 
     read_only:function(){
@@ -469,15 +470,18 @@ export default {
     transactionCallback(e_t){
       
       if(e_t === 'e_approval'){
+        
         this.provided_approvals = null;//temporary show spinner by setting to null
         this.msig.requested_approvals = this.msig.requested_approvals.filter(ra => ra.actor != this.getAccountName);
         this.msig.provided_approvals.push({actor: this.getAccountName, permission: 'active'});
+        console.log('trx will be executed in ', this.getSettingByName('trx_delay').value, 'seconds');
         this.checkApprovals();
       }
       if(e_t === 'e_unapproval'){
         this.provided_approvals = null;//temporary show spinner by setting to null
         this.msig.provided_approvals = this.msig.provided_approvals.filter(pa => pa.actor != this.getAccountName);
         this.msig.requested_approvals.push({actor: this.getAccountName, permission: 'active'});
+        console.log('trx will be executed in ', this.getSettingByName('trx_delay').value, 'seconds');
         this.checkApprovals();
       }
 

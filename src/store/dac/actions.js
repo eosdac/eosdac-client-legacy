@@ -70,17 +70,6 @@ export async function fetchActiveCandidates ({state, commit, dispatch} ) {
 
 }
 
-export async function fetchMsigProposalsx({rootState}, payload={status:1}){
-    //status 1: active; 2: executed; 0: cancelled
-    let url = this._vm.$configFile.get('memberclientapi');
-    return this._vm.$axios.post(url+'/msigproposals', payload).then(r => {
-        // console.log(r.data)
-        return r.data;
-      }).catch(e => {
-        console.log('could not load msig proposals from db');
-        return [];});
-}
-
 export async function fetchApprovalsFromProposal({dispatch}, payload){
     const api = await dispatch('global/getEosApi', false, {root : true} );
     let res = await api.getApprovalsFromProposal(payload);

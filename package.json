@@ -9,7 +9,8 @@
   "private": true,
   "scripts": {
     "start": "quasar dev",
-    "build": "quasar build"
+    "build": "quasar build",
+    "add_i18n": "git -C ./src/i18n clone"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -48,4 +49,5 @@
     "last 2 versions",
     "not ie <= 10"
   ]
+
 }
