@@ -25,7 +25,7 @@ yarn add_i18n https://github.com/eosdac/memberclient_i18n.git i18n
 A i18n folder will be added to the memberclients src folder which you can manage with git. The newly added folder is in the .gitignore file so you can pull future memberclient updates without losing your custom strings.
 
 ## Extend memberclient
-Add custom pages, routes and vuex stores. It's recommended to extend and customize the memberclient in the extensions folder so you can pull in future updates without losing your custom modules. The extensions folder will already be present when you pull in the memberclient. However you can delete the folder and add your own repo with the following command.
+Add custom pages, routes and vuex stores. It's recommended to extend and customize the memberclient in the extensions folder so you can pull in future updates without losing your customizations. The extensions folder will already be present when you pull in the memberclient and will contain the eosDAC home screen and a custom example page with dedicated vuex store. You'll also find a component to extend the main menu. In production you might want to manage the contents of the extention folder with git.
 ```bash
 yarn add_extensions https://github.com/eosdac/memberclient_extension.git extensions
 ``` 
