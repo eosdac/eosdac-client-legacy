@@ -16,7 +16,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/home') },
+      { path: '', component: () => import('../extensions/pages/home') },
       { path: 'dashboard', component: () => import('pages/dashboard'), beforeEnter: Guards.logInCheck },
       { path: 'settings', component: () => import('pages/settings.vue') },
       { path: 'constitution', component: () => import('pages/constitution.vue') },
@@ -33,7 +33,7 @@ const routes = [
     path: '/dev-tools',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/home') },
+      { path: '', component: () => import('../extensions/pages/home') },
       { path: 'memberclient', component: () => import('pages/dev/dev-tools-home') },
       { path: 'playground', component: () => import('pages/dev/playground') },
       { path: 'transactions', component: () => import('pages/dev/transactions') }
@@ -45,7 +45,7 @@ const routes = [
     path: '/custodian',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/home') },
+      { path: '', component: () => import('../extensions/pages/home') },
       { path: 'review-msigs', component: () => import('pages/custodian/review-msigs') },
       { path: 'create-msigs', component: () => import('pages/custodian/create-msigs'), beforeEnter: Guards.custodianCheck},
       { path: 'review-worker-proposals', component: () => import('pages/custodian/review-worker-proposals') },
@@ -59,7 +59,7 @@ const routes = [
     path: '/member',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/home') },
+      { path: '', component: () => import('../extensions/pages/home') },
       { path: 'new-worker-proposal', component: () => import('pages/member/new-worker-proposal') },
       { path: 'my-worker-proposals', component: () => import('pages/member/my-worker-proposals') },
     ],
