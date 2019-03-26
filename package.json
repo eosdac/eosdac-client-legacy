@@ -23,6 +23,7 @@
     "int64-buffer": "^0.99.1007",
     "json-pretty-html": "^1.1.6",
     "marked": "^0.6.0",
+    "nested-object-assign": "^1.0.3",
     "sanitize-html": "^1.20.0",
     "scatterjs-core": "^2.7.9",
     "scatterjs-plugin-eosjs2": "^1.5.0",
@@ -50,5 +51,4 @@
     "last 2 versions",
     "not ie <= 10"
   ]
-
 }

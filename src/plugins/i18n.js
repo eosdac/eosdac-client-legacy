@@ -1,12 +1,11 @@
+import nestedObjectAssign from 'nested-object-assign';
 import VueI18n from 'vue-i18n';
 
-let messages;
-try {
-  messages = require('src/i18n').default;
-} catch (e) {
-  console.log(e)
-  messages = {};
-}
+import messages from 'src/i18n';
+import custom_messages from 'src/extensions/i18n';
+
+let msg = nestedObjectAssign({}, messages, custom_messages);
+
 
 let i18n;
 export default ({
@@ -23,7 +22,7 @@ export default ({
   } 
   else {
 
-    if (typeof(messages[browserLocale()]) === 'undefined') {
+    if (typeof(msg[browserLocale()]) === 'undefined') {
       lang = 'en-us';
     } 
     else {
@@ -39,17 +38,17 @@ export default ({
     locale: lang,
     fallbackLocale: 'en-us',
     messages: {
-      'de': messages['de'],
-      'en-gb': messages['en-gb'],
-      'en-us': messages['en-us'],
-      'es': messages['es'],
-      'fr': messages['fr'],
-      'it': messages['it'],
-      'ja': messages['ja'],
-      'ko': messages['ko'],
-      'ru': messages['ru'],
-      'vi': messages['vi'],
-      'zh-hans': messages['zh-hans'],
+      'de': msg['de'],
+      'en-gb': msg['en-gb'],
+      'en-us': msg['en-us'],
+      'es': msg['es'],
+      'fr': msg['fr'],
+      'it': msg['it'],
+      'ja': msg['ja'],
+      'ko': msg['ko'],
+      'ru': msg['ru'],
+      'vi': msg['vi'],
+      'zh-hans': msg['zh-hans'],
     }
   });
   Vue.prototype.i18n = app.i18n;
