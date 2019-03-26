@@ -7,11 +7,23 @@ import user from './user';
 import dac from './dac';
 import ui from './ui';
 
+let store_extension;
+try{
+  store_extension = require('../extensions/store/store_extension').default;
+}
+catch(e){
+  store_extension = {
+    modules:{},
+    plugins:[]
+  }
+}
+
 
 Vue.use(Vuex);
 
   const store = new Vuex.Store({
     modules: {
+      ...store_extension.modules,
       global,
       user,
       dac,
@@ -19,6 +31,7 @@ Vue.use(Vuex);
 
     },
     plugins: [
+      ...store_extension.plugins,
       createPersistedState({
         key: 'global',
         paths: [

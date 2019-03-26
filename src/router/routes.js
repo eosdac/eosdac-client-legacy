@@ -1,7 +1,17 @@
 
-import Guards from './guards'
+import Guards from './guards';
+
+let routes_extension;
+try{
+  routes_extension = require('../extensions/router/routes').default;
+}
+catch(e){
+  routes_extension = [];
+}
+
 
 const routes = [
+  ...routes_extension,
   {
     path: '/',
     component: () => import('layouts/MyLayout.vue'),
