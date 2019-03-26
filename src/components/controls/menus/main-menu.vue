@@ -28,6 +28,8 @@
           <q-item-side :icon="$configFile.icon.cand_reg" color="text2"/>
           <q-item-main :label="$t('default.unregister_as_candidate')" class="text-text1"/>
         </q-item>
+        
+        <menu-extension />
 
         <q-item @click.native="openURL($configFile.get('external').dacexplorer)">
           <q-item-side :icon="$configFile.icon.explorer"  color="text2" />
@@ -69,12 +71,15 @@ import {openURL} from 'quasar';
 import custodianMenu from './custodian-menu';
 import memberMenu from './member-menu';
 import devMenu from './dev-menu';
+import menuExtension from '../../../extensions/components/menu/menu-extension';
 export default {
   name: 'MainMenu',
   components:{
     custodianMenu,
-   memberMenu,
-    devMenu
+    memberMenu,
+    devMenu,
+    menuExtension
+
   },
   data () {
     return {}
