@@ -70,7 +70,7 @@ let routes = [
 
 //extend the default routes
 routes_extension.forEach(re =>{
-  let existing_path = routes.find(r => r.path == re.path);
+  let existing_path = routes.find(r => r.path.trim() == re.path.trim() );
   if(existing_path){
     existing_path.children = existing_path.children.concat(re.children);
   }
