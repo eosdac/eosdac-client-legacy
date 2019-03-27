@@ -29,8 +29,11 @@
     </div>
   </div>
 
-  <div style="min-height:200px">
+  <div v-if="proposals.length" style="min-height:200px">
     <Msigproposal v-for="(msig, index) in proposals"  :key="index" :msig="msig" />
+  </div>
+  <div v-else class="text-text2 bg-bg1 q-pa-md round-borders shadow-5">
+    No Multisignature proposals available
   </div>
 </q-page>
 </template>
