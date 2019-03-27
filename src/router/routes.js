@@ -10,8 +10,8 @@ catch(e){
 }
 
 
-const routes = [
-  ...routes_extension,
+let routes = [
+
   {
     path: '/',
     component: () => import('layouts/MyLayout.vue'),
@@ -67,6 +67,17 @@ const routes = [
   }
 
 ]
+
+//extend the default routes
+routes_extension.forEach(re =>{
+  let existing_path = routes.find(r => r.path == re.path);
+  if(existing_path){
+    existing_path.children = existing_path.children.concat(re.children);
+  }
+  else{
+    routes.push(re);
+  }
+})
 
 // Always leave this as last one
 if (process.env.MODE !== 'ssr') {
