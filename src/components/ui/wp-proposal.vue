@@ -210,6 +210,9 @@ export default {
         }
       }];
       let result = await this.$store.dispatch('user/transact', {actions: actions});
+      if(result){
+        console.log(result);
+      }
     },
 
     async voteprop(votetype){
@@ -222,7 +225,8 @@ export default {
         data: {
           custodian: this.getAccountName,
           proposal_id: Number(this.wp.key),
-          vote: map[votetype]
+          vote: map[votetype],
+          dac_scope: "dacauthority"//xxx
         }
       }];
 
@@ -248,6 +252,7 @@ export default {
         authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
         data: {
           proposal_id: Number(this.wp.key),
+          dac_scope: "dacauthority"//xxx
         }
       }];
 
@@ -264,6 +269,7 @@ export default {
         // authorization: [ {actor: this.getAccountName, permission: 'active'}],
         data: {
           proposal_id: Number(this.wp.key),
+          dac_scope: "dacauthority"//xxx
         }
       }];
 
@@ -279,6 +285,7 @@ export default {
         // authorization: [ {actor: this.getAccountName, permission: 'active'}],
         data: {
           proposal_id: Number(this.wp.key),
+          dac_scope: "dacauthority"//xxx
         }
       }];
 
@@ -296,6 +303,7 @@ export default {
         data: {
           arbitrator: this.getAccountName,
           proposal_id: Number(this.wp.key),
+          dac_scope: "dacauthority"//xxx
         }
       }];
 
@@ -303,8 +311,24 @@ export default {
       if(result){
         console.log(result);
       }
-    }
+    },
 
+    async finalize(){
+      let actions = [{
+        account: this.$configFile.get('wpcontract'),
+        name: "finalize",
+        // authorization: [ {actor: this.getAccountName, permission: 'active'}],
+        data: {
+          proposal_id: Number(this.wp.key),
+          dac_scope: "dacauthority"//xxx
+        }
+      }];
+
+      let result = await this.$store.dispatch('user/transact', {actions: actions});
+      if(result){
+        console.log(result);
+      }
+    },
 
   }
 
