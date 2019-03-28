@@ -196,7 +196,19 @@ export default {
   },
 
   methods:{
-
+    async delegatevote(){
+      let actions = [{   
+        account: this.$configFile.get('wpcontract'),
+        name: 'delegatevote',
+        data: {
+          custodian: this.getAccountName,
+          proposal_id: Number(this.wp.key),
+          dalegatee_custodian: "piecesnbitss",//xxxx
+          dac_scope: "dacauthority"//xxx
+        }
+      }];
+      let result = await this.$store.dispatch('user/transact', {actions: actions});
+    },
     async voteprop(votetype){
       const map = {voteApprove: 1, voteDeny: 2, claimApprove: 3, claimDeny: 4};
 
