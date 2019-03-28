@@ -6,7 +6,6 @@
 
 <script>
 
-import { colors } from 'quasar';
 import {mapGetters} from 'vuex';
 
 export default {
@@ -28,10 +27,10 @@ export default {
     handleMode(v){
       console.log('toggle val',v)
       if(v){
-        this.$store.dispatch('ui/loadTheme', 'default');
+        this.$store.dispatch('ui/loadColorScheme', 'dark');
       }
       else{
-        this.$store.dispatch('ui/loadTheme', 'light');
+        this.$store.dispatch('ui/loadColorScheme', 'light');
       }
     }
   }

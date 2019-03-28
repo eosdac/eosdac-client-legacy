@@ -27,7 +27,10 @@
         <div class="bg-bg1 round-borders shadow-5 q-pa-md">
           <div class="row justify-between q-mb-md"><span class="q-title">Color Scheme</span><nightModeSwitch /></div>
           <color-picker />
-          <div class="q-mt-md"><q-btn label="log scheme" color="primary" @click="getColorScheme" /></div>
+          <div class="q-mt-md row justify-between">
+            <q-btn label="log scheme" color="primary" @click="getColorScheme" />
+            <color-scheme-switch />
+          </div>
         </div>
       </div>
 
@@ -84,7 +87,9 @@ import { colors } from 'quasar';
 
 import colorPicker from 'components/controls/color-picker';
 
-import nightModeSwitch from 'components/controls/nightmode-switch';
+import nightModeSwitch from 'components/ui/nightmode-switch';
+
+import colorSchemeSwitch from 'components/ui/color-scheme-switch';
 
 import networkSwitcher from 'components/controls/network-switcher';
 
@@ -98,6 +103,7 @@ export default {
       nightModeSwitch,
       colorPicker,
       networkSwitcher,
+      colorSchemeSwitch,
       firehose,
       debugData
  

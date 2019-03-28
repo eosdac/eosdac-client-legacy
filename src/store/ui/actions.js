@@ -1,25 +1,10 @@
 import { colors } from 'quasar';
 
-
-export async function loadTheme ({state, commit, dispatch}, themename=false ) {
+export async function loadColorScheme ({state, commit, dispatch}, themename=false ) {
     themename = themename ? themename : state.activeTheme;
     console.log(`loading theme ${themename}`);
 
-    if(themename == 'default'){
-        commit('setActiveTheme', themename);
-        document.body.removeAttribute("style");
-        return;
-    }
-
     let activetheme = state.themes.find(t=>t.name==themename);
-    // let activetheme;
-    // try {
-    //     activetheme = require(`../../statics/themes/${themename}.json`)
-    // } 
-    // catch (e) {
-    //     console.log(`loading theme ${themename} failed`,e );
-    //     activetheme = false;
-    // }
 
     if(!activetheme){
         console.log('this theme doesn\'t exists');
@@ -34,5 +19,4 @@ export async function loadTheme ({state, commit, dispatch}, themename=false ) {
         } 
     }        
 
-    
 }

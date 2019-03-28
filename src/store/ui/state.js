@@ -1,21 +1,10 @@
+import colorschemes from '../../extensions/branding/color_schemes';
+
 export default {
   //
   showTransactionOverlay: false,
-  activeTheme:'default',
+  activeTheme:'dark',
   drawerIsOpen: true,
 
-  themes:[
-    {
-      name: "light",
-      isdark: false,
-      colors:{
-        'primary': '#8661B0',
-        'bg1': '#babdbe',
-        'bg2': '#eceff1',
-        'text1': 'black',
-        'text2': 'rgba(0,0,0,0.7)'
-
-      }
-    }
-  ]
+  themes:colorschemes
 }

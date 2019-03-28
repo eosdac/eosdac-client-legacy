@@ -87,7 +87,6 @@ export class EosWrapper {
         }
         else if(payload == 'wp'){
             contract = this.configobj.get('wpcontract');
-            table = "configtype";
         }
         let res =  await this.eos.get_table_rows({
             json: true,
