@@ -28,7 +28,7 @@
           <div class="row justify-between q-mb-md"><span class="q-title">Color Scheme</span><nightModeSwitch /></div>
           <color-picker />
           <div class="q-mt-md row justify-between">
-            <q-btn label="log scheme" color="primary" @click="getColorScheme" />
+            <q-btn label="download scheme" color="primary" @click="getColorScheme" />
             <color-scheme-switch />
           </div>
         </div>
@@ -151,11 +151,18 @@ export default {
         new_colors[c] = colors.getBrand(c);
       });
       let response = {
-          "name": "",
+          "name": "xxxRenamexxx",
           "isdark": this.getIsDark,
           "colors": new_colors
       }
-      console.log(JSON.stringify(response) )
+
+      let a = document.createElement("a");
+      let file = new Blob([JSON.stringify(response,null, 4)], {type: 'JSON'});
+      a.href = URL.createObjectURL(file);
+      a.download = 'custom_colors.json';
+      a.click();
+    
+      console.log(JSON.stringify(response, null, 4) )
     }
 
   },
