@@ -120,7 +120,10 @@ export default {
             summary: this.wp_data.summary,
             arbitrator: this.wp_data.arbitrator,
             pay_amount: extended_asset,
-            content_hash: "00000000000000000000000000000000"
+            content_hash: "00000000000000000000000000000000",
+            id: this.$helper.randomIntFromInterval(1, 999999999999999999),
+            category: 1,
+            dac_scope: "dacauthority" //WARNING HARDCODED NEED TO FETCH FROM CONFIG XXXXXXXXXXXXXXXXXXXXX
           }
         }];
       let result = await this.$store.dispatch('user/transact', {actions: actions} );
