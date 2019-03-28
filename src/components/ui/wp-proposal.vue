@@ -200,6 +200,7 @@ export default {
       let actions = [{   
         account: this.$configFile.get('wpcontract'),
         name: 'delegatevote',
+        //todo get permission from account instead hardcoding it
         authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
         data: {
           custodian: this.getAccountName,
@@ -210,7 +211,7 @@ export default {
       }];
       let result = await this.$store.dispatch('user/transact', {actions: actions});
     },
-    
+
     async voteprop(votetype){
       const map = {voteApprove: 1, voteDeny: 2, claimApprove: 3, claimDeny: 4};
 
