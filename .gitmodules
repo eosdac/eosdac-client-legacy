@@ -1,0 +1,3 @@
+[submodule "src/extensions"]
+	path = src/extensions
+	url = https://github.com/eosdac/memberclient_extension.git
