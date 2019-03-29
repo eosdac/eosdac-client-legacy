@@ -19,10 +19,15 @@ $ yarn
 ```
 
 ## Extend memberclient
-Add custom pages, routes and vuex stores. It's recommended to extend and customize the memberclient in the extensions folder so you can pull in future updates without losing your customizations. The extensions folder will already be present when you pull in the memberclient and will contain the eosDAC home screen and a custom example page with dedicated vuex store. You'll also find a component to extend the main menu. In production you might want to manage the contents of the extention folder with git.
+Add custom pages, routes and vuex stores. It's recommended to extend and customize the memberclient in the extensions folder so you can pull in future updates without losing your customizations. The extensions folder will already be present when you pull in the memberclient and will contain the eosDAC home screen and a custom example page with dedicated vuex store. You'll also find a component to extend the main menu. In production you might want to manage the contents of the extention folder as a git submodule. The command below will simply clone the remote repo in the src/extensions folder.
 ```bash
 yarn add_extensions https://github.com/eosdac/memberclient_extension.git extensions
-``` 
+```
+If you want a tighter coupling between the main repo and your extensions repo you can create a git submodule.
+```bash
+git submodule add https://github.com/your_repo/your_extension.git src/extensions
+```
+
 ## Add or change language strings
 Use the extensions/i18n folder to add your custom strings or overwrite existing keys
 
