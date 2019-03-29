@@ -17,6 +17,8 @@ export async function loadColorScheme ({state, commit, dispatch}, themename=fals
         if( activetheme.colors.hasOwnProperty(c) ) {
           colors.setBrand(c, activetheme.colors[c] );
         } 
-    }        
+    } 
+    
+    colors.setBrand('primary-light', colors.lighten(activetheme.colors['primary'], 20) );
 
 }
