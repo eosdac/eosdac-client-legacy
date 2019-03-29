@@ -254,7 +254,8 @@ export default {
       getAccountName: 'user/getAccountName',
       getMsigIsSeenCache: 'user/getMsigIsSeenCache',
       getIsCustodian: 'user/getIsCustodian',
-      getSettingByName: 'user/getSettingByName'
+      getSettingByName: 'user/getSettingByName',
+      getAuth: 'user/getAuth'
     }),
 
     read_only:function(){
@@ -329,6 +330,7 @@ export default {
     }
   },
 
+
   methods: {
 
     async checkApprovals(){
@@ -348,7 +350,7 @@ export default {
     },
 
     //approve a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
-    async approveProposal(proposer, proposal_name, permission="active"){
+    async approveProposal(proposer, proposal_name){
       let actions = [
         {
           account: this.systemmsig, 
@@ -356,14 +358,14 @@ export default {
           data: {
             proposer: proposer,
             proposal_name: proposal_name,
-            level: { "actor": this.getAccountName, "permission": permission }
+            level: { "actor": this.getAccountName, "permission": this.getAuth }
           }
           
         },
         {
           account: this.dacmsig, 
           name: 'approved',
-          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
+          authorization: [ {actor: this.getAccountName, permission: this.getAuth}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
           data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
@@ -378,7 +380,7 @@ export default {
     },
   
     //unapprove a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
-    async unapproveProposal(proposer, proposal_name, permission="active"){
+    async unapproveProposal(proposer, proposal_name){
       let actions = [
         {
           account: this.systemmsig, 
@@ -386,14 +388,14 @@ export default {
           data: {
             proposer: proposer,
             proposal_name: proposal_name,
-            level: { "actor": this.getAccountName, "permission": permission }
+            level: { "actor": this.getAccountName, "permission": this.getAuth }
           }
           
         },
         {
           account: this.dacmsig, 
           name: 'unapproved',
-          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
+          authorization: [ {actor: this.getAccountName, permission: this.getAuth}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
           data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
@@ -421,7 +423,7 @@ export default {
         {
           account: this.dacmsig, 
           name: 'executed',
-          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
+          authorization: [ {actor: this.getAccountName, permission: this.getAuth}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
           data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
@@ -452,7 +454,7 @@ export default {
         {
           account: this.dacmsig, 
           name: 'cancelled',
-          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
+          authorization: [ {actor: this.getAccountName, permission: this.getAuth}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
           data: {
             proposer: proposer, 
             proposal_name: proposal_name, 
@@ -473,14 +475,14 @@ export default {
         
         this.provided_approvals = null;//temporary show spinner by setting to null
         this.msig.requested_approvals = this.msig.requested_approvals.filter(ra => ra.actor != this.getAccountName);
-        this.msig.provided_approvals.push({actor: this.getAccountName, permission: 'active'});
+        this.msig.provided_approvals.push({actor: this.getAccountName, permission: this.getAuth});
         console.log('trx will be executed in ', this.getSettingByName('trx_delay').value, 'seconds');
         this.checkApprovals();
       }
       if(e_t === 'e_unapproval'){
         this.provided_approvals = null;//temporary show spinner by setting to null
         this.msig.provided_approvals = this.msig.provided_approvals.filter(pa => pa.actor != this.getAccountName);
-        this.msig.requested_approvals.push({actor: this.getAccountName, permission: 'active'});
+        this.msig.requested_approvals.push({actor: this.getAccountName, permission: this.getAuth});
         console.log('trx will be executed in ', this.getSettingByName('trx_delay').value, 'seconds');
         this.checkApprovals();
       }

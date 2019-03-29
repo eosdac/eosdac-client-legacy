@@ -25,7 +25,7 @@ export default {
   },
   methods:{
     async test(){
-      let wps = await this.getEosApi.getWps(this.getAccountName);
+      let wps = await this.getEosApi.getWps({ account:this.getAccountName, dac_scope:'dacauthority'});
       console.log(wps)
     }
   }

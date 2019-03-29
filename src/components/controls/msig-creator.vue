@@ -288,7 +288,8 @@ export default {
     ...mapGetters({
       getAccountName: 'user/getAccountName',
       getCustodians: 'dac/getCustodians',
-      getIsDark: 'ui/getIsDark'
+      getIsDark: 'ui/getIsDark',
+      getAuth: 'user/getAuth'
     }),
     parseNumberToAsset(number, symbol){
       return `${number.toFixed(4)} ${symbol}`;
@@ -396,7 +397,7 @@ export default {
       let proposed = {
             account: this.$configFile.get('dacmsigcontract'), 
             name: 'proposed',
-            authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+            authorization: [ {actor: this.getAccountName, permission: this.getAuth}, {actor: 'dacauthority', permission: 'one'}],
             data: {
               proposer: this.getAccountName,
               proposal_name: this.msig_name,

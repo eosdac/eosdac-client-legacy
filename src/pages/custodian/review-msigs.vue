@@ -67,8 +67,6 @@ export default {
 
   computed: {
     ...mapGetters({
-      getactiveCustodians: 'api/getActiveCustodians',
-      getAccountName: 'account/getAccountName',
       getIsDark: 'ui/getIsDark',
       getIsCustodian: 'user/getIsCustodian'
     })

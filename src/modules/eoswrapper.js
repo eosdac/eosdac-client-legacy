@@ -224,14 +224,14 @@ export class EosWrapper {
         return ctrl;
     }
 
-    async getWps(accountname){
+    async getWps(payload){
 
         let wps = await this.eos.get_table_rows({
             json : true,
             code: this.configobj.get('wpcontract'),
-            scope: this.configobj.get('wpcontract'),
+            scope: payload.dac_scope,
             table: 'proposals',
-            // lower_bound : accountname,
+            // lower_bound : payload.account,
             // upper_bound : accountname,
             // index_position : 2,
             // key_type : 'name',

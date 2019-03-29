@@ -93,7 +93,6 @@ export default {
     ...mapGetters({
       
       getAccountName: 'user/getAccountName',
-      getCurrentEndpoint: 'api/getCurrentEndpoint',
       getIsDark: 'ui/getIsDark'
     })
   },

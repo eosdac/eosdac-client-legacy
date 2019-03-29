@@ -41,6 +41,7 @@
 
       <div class="q-my-md">
         <div class="q-caption q-mb-xs text-text2">Expiration</div>
+        {{getExpiryPercent}}
         <q-progress
           :percentage="wp_expiration"
           color= "primary-light"
@@ -142,7 +143,8 @@ export default {
     ...mapGetters({
       getAccountName: 'user/getAccountName',
       getWpConfig: 'dac/getWpConfig',
-      getIsDark: 'ui/getIsDark'
+      getIsDark: 'ui/getIsDark',
+      getAuth: 'user/getAuth'
     }),
     scroll_area_style(){
       if(this.expanded){
@@ -192,6 +194,18 @@ export default {
       else{
         return false;
       }
+    },
+    getExpiryPercent(){
+      let expiration_seconds;
+      if( this.wp.state === 0 ){
+        expiration_seconds = this.getWpConfig.approval_expiry;
+      }
+      if(this.wp.state === 2 ){
+        expiration_seconds = this.getWpConfig.claim_expiry;
+      }
+      const expiration_days = expiration_seconds/60/60/24;
+      //todo calculate relative expiration based on NOW and expiration
+      return expiration_days
     }
   },
 
@@ -201,7 +215,7 @@ export default {
         account: this.$configFile.get('wpcontract'),
         name: 'delegatevote',
         //todo get permission from account instead hardcoding it
-        authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
+        authorization: [ {actor: this.getAccountName, permission: this.getAuth }, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
         data: {
           custodian: this.getAccountName,
           proposal_id: Number(this.wp.key),
@@ -221,7 +235,7 @@ export default {
       let actions = [{
         account: this.$configFile.get('wpcontract'),
         name: "voteprop",
-        authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
+        authorization: [ {actor: this.getAccountName, permission: this.getAuth}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
         data: {
           custodian: this.getAccountName,
           proposal_id: Number(this.wp.key),
@@ -249,7 +263,7 @@ export default {
       let actions = [{
         account: this.$configFile.get('wpcontract'),
         name: "cancel",
-        authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
+        authorization: [ {actor: this.getAccountName, permission: this.getAuth }, {actor: this.$configFile.get('authaccountname'), permission: 'one'}],
         data: {
           proposal_id: Number(this.wp.key),
           dac_scope: "dacauthority"//xxx
