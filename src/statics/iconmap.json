@@ -21,5 +21,6 @@
     "refresh" : "cached",
     "account": "person",
     "cust_symbol": "star",
-    "action": "donut_large"
+    "action": "donut_large",
+    "collapse": "icon-ui-11"
 }

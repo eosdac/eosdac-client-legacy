@@ -107,7 +107,7 @@
 
  <!--big screens desktop-->
 <div v-if="!isHidden" class="q-mb-md bg-bg1 round-borders shadow-5 animate-fade gt-xs">
-    <q-collapsible  label="First" group="msigproposals" icon-toggle header-class="msigproposal_header" collapse-icon="icon-ui-11" @show="handleIsSeenCache(true)">
+    <q-collapsible  label="First" group="msigproposals" header-class="msigproposal_header" :collapse-icon="$configFile.icon.collapse" @show="handleIsSeenCache(true)">
       <template slot="header" >
         <q-item-side left >
           <div class="row full-height items-center relative-position">

@@ -26,7 +26,7 @@
         </div>
       </q-collapsible>
 
-      <q-collapsible v-else group="main-menu-sub" class="animate-fade">
+      <q-collapsible v-else group="main-menu-sub" class="animate-fade" >
         <template slot="header">
           <q-item-side :icon="$configFile.icon.dactoken" color="text2"/>
           <q-item-main label="eosDAC Activity" class="text-text1"/>
