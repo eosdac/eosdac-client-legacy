@@ -105,7 +105,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      // getAccountName: 'account/getAccountName'
+     
         // getRetroStyle: 'usersettings/getRetroStyle'
       })
 
