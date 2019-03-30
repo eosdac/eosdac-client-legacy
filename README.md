@@ -61,3 +61,11 @@ $ deploy.sh v0.3.1
 ```
 
 That will build v0.3.1 and copy the results to the dist/deploy folder.
+
+![image](https://user-images.githubusercontent.com/44613132/55268765-5b787c80-528d-11e9-8d6c-24f75526888b.png)
+
+![image](https://user-images.githubusercontent.com/44613132/55268803-aa261680-528d-11e9-97bb-8d492bc5b3f1.png)
+
+![image](https://user-images.githubusercontent.com/44613132/55268811-c75ae500-528d-11e9-8332-fd71ff648dc0.png)
+
+![image](https://user-images.githubusercontent.com/44613132/55268728-d2f9dc00-528c-11e9-890c-d5d7c2997678.png)
