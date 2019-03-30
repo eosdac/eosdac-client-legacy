@@ -1,4 +1,5 @@
-# eosdactoolkit
+# eosDAC Memberclient
+![image](https://user-images.githubusercontent.com/44613132/55268494-4bab6900-528a-11e9-8ac6-9e5a27310fb3.png)
 
 ## Purpose
 This is the member client where the DAC members will interface with the deployed smart contract code. The code is written in javascript using Vue.js and Quasar-framework.js.
