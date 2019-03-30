@@ -1,5 +1,6 @@
 # eosDAC Memberclient
-![image](https://user-images.githubusercontent.com/44613132/55268494-4bab6900-528a-11e9-8ac6-9e5a27310fb3.png)
+
+![image](https://user-images.githubusercontent.com/44613132/55268864-1dc82380-528e-11e9-9715-454457b8506e.png)
 
 ## Purpose
 This is the member client where the DAC members will interface with the deployed smart contract code. The code is written in javascript using Vue.js and Quasar-framework.js.
@@ -67,5 +68,7 @@ That will build v0.3.1 and copy the results to the dist/deploy folder.
 ![image](https://user-images.githubusercontent.com/44613132/55268803-aa261680-528d-11e9-97bb-8d492bc5b3f1.png)
 
 ![image](https://user-images.githubusercontent.com/44613132/55268811-c75ae500-528d-11e9-8332-fd71ff648dc0.png)
+
+![image](https://user-images.githubusercontent.com/44613132/55268494-4bab6900-528a-11e9-8ac6-9e5a27310fb3.png)
 
 ![image](https://user-images.githubusercontent.com/44613132/55268728-d2f9dc00-528c-11e9-890c-d5d7c2997678.png)
