@@ -19,7 +19,10 @@ $ yarn
 ```
 
 ## Extend memberclient
+eosDAC the DAC is branded and customized with the following repo https://github.com/eosdac/memberclient_extension. You can use it as a boiler plate.
+
 Add custom pages, routes and vuex stores. It's recommended to extend and customize the memberclient in the extensions folder so you can pull in future updates without losing your customizations. The extensions folder will already be present when you pull in the memberclient and will contain the eosDAC home screen and a custom example page with dedicated vuex store. You'll also find a component to extend the main menu. In production you might want to manage the contents of the extention folder as a git submodule. The command below will simply clone the remote repo in the src/extensions folder.
+
 ```bash
 yarn add_extensions https://github.com/eosdac/memberclient_extension.git extensions
 ```
