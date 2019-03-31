@@ -2838,7 +2838,7 @@ entities@^1.1.1, entities@~1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
 
-eosjs-ecc@^4.0.1:
+eosjs-ecc@^4.0.1, eosjs-ecc@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/eosjs-ecc/-/eosjs-ecc-4.0.4.tgz#431450f30a6f73088ff5d7ba1ebdfe967a5ca4ab"
   dependencies:
@@ -2851,7 +2851,7 @@ eosjs-ecc@^4.0.1:
     ecurve "^1.0.5"
     randombytes "^2.0.5"
 
-eosjs@^20.0.0-beta3:
+eosjs@20.0.0-beta3, eosjs@^20.0.0-beta3:
   version "20.0.0-beta3"
   resolved "https://registry.yarnpkg.com/eosjs/-/eosjs-20.0.0-beta3.tgz#b5a078d4627ad63343bae6897ea5952d2d4fd26d"
   dependencies:
@@ -6395,9 +6395,9 @@ sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-scatterjs-core@^2.7.9:
-  version "2.7.9"
-  resolved "https://registry.yarnpkg.com/scatterjs-core/-/scatterjs-core-2.7.9.tgz#ffc5e5da5af3feab4d0023b9e67d217c612f5e88"
+scatterjs-core@^2.7.16:
+  version "2.7.16"
+  resolved "https://registry.yarnpkg.com/scatterjs-core/-/scatterjs-core-2.7.16.tgz#b262b743888ab2329a434ce0bcce2e7727a720c3"
   dependencies:
     create-hash "^1.2.0"
     es6-promise "^4.2.4"
@@ -6408,6 +6408,13 @@ scatterjs-core@^2.7.9:
 scatterjs-plugin-eosjs2@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/scatterjs-plugin-eosjs2/-/scatterjs-plugin-eosjs2-1.5.0.tgz#4e8e08859c82af7b9c0b275ea57c9739a373cc18"
+
+scatterjs-plugin-lynx@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/scatterjs-plugin-lynx/-/scatterjs-plugin-lynx-1.5.3.tgz#f247f44cbd40a8db861b0d95010346711034e9a3"
+  dependencies:
+    eosjs "20.0.0-beta3"
+    eosjs-ecc "^4.0.4"
 
 schema-utils@^0.4.4, schema-utils@^0.4.5:
   version "0.4.7"

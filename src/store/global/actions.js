@@ -1,5 +1,7 @@
 import ScatterJS, {Network} from 'scatterjs-core';
 import ScatterEOS from 'scatterjs-plugin-eosjs2';
+import ScatterLynx from 'scatterjs-plugin-lynx';
+
 import { Notify } from 'quasar';
 import axios from 'axios';
 
@@ -8,7 +10,7 @@ const { TextDecoder, TextEncoder } = require('text-encoding');
 import {EosWrapper} from '../../modules/eoswrapper.js';
 
 
-ScatterJS.plugins( new ScatterEOS() );
+ScatterJS.plugins( new ScatterEOS(), new ScatterLynx() );
 //
 
 export async function connectScatter ({state, commit, dispatch, rootGetters}, trigger_login = false) {

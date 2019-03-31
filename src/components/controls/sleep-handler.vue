@@ -36,7 +36,8 @@ export default {
   computed:{
     ...mapGetters({
       getSettingByName: 'user/getSettingByName',
-      getAccountName: 'user/getAccountName'
+      getAccountName: 'user/getAccountName',
+      getScatter: 'global/getScatter'
     })
   },
 
@@ -78,9 +79,17 @@ export default {
       clearTimeout(DO_AUTO_LOGOUT_TIMER);
       DO_AUTO_LOGOUT_TIMER = null;
       SCHEDULE_AUTO_LOGOUT_TIMER = null;
-    }
+    },
 
-  }
+    // checkScatterConnection(){
+      // console.log('scatterisconnected', this.getScatter.isConnected());
+      // if(this.getAccountName && this.getScatter.isConnected() ){
+
+      // }
+    // }
+
+  },
+
 }
 </script>
 
