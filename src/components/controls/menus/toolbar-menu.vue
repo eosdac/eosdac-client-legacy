@@ -2,6 +2,10 @@
 
 <div class="row items-center ">
 
+<transition
+  appear
+  leave-class="animated fadeOut"
+>
 <div v-if="getSettingByName('toolbar_menu_items').value && getAccountName" class="row  justify-start gt-md q-mr-xl">
       <q-item class="animate-pop">
         <q-item-side :icon="$configFile.icon.dactoken" color="text1" />
@@ -21,8 +25,8 @@
           </q-item-tile>
         </q-item-main>
       </q-item>
-      
 </div>
+</transition>
 
 <div v-if="getSettingByName('toolbar_profile_image').value && getAccountName && getProfilePicture" class="row justify-end relative-position" style=" margin-right:-12px;" ref="profileContainer">
   
