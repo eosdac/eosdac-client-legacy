@@ -50,10 +50,10 @@ export default {
             xAxes: [{
               type: 'time',
               time: {
-                unit: 'day',
-                unitStepSize: 5,
+                unit: 'month',
+                unitStepSize: 3,
                 displayFormats: {
-                  'day': 'MMM DD'
+                  'month': 'MMM'
                 }},
                 gridLines: {
                     color: "rgba(0, 0, 0, 0)",

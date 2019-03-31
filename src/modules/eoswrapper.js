@@ -237,7 +237,7 @@ export class EosWrapper {
             // key_type : 'name',
             limit: -1,
         });
-        if (!wps.rows.length) {
+        if (!wps.rows || !wps.rows.length) {
             return [];
         } 
         else {
