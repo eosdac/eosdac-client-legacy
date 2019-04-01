@@ -31,7 +31,7 @@ module.exports = function (ctx) {
     supportIE: false,
     build: {
       env: {
-        NETWORK: JSON.stringify(process.env.NETWORK)
+        NETWORK: JSON.stringify(process.env.DEFAULT_NETWORK)
       },
       scopeHoisting: true,
       vueRouterMode: 'history',
