@@ -1,10 +1,9 @@
 export default {
-  //
   isIdle: null,
   language: false,
   isLoaded: false,
-  accountName:null,
-  profilePicture:null,
+  accountName: null,
+  profilePicture: null,
   account: null,
   dacBalance: null,
   systemBalance: null,
@@ -15,6 +14,4 @@ export default {
   msigIsSeenCache: [],
 
   settings: require('../../statics/settings.json')
-
-  
-}
+};

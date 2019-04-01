@@ -1,22 +1,35 @@
 <template>
-    <div class="container flip-clock">
-        <template v-for="data in timeData" v-show="show">
-            <span v-bind:key="data.label" class="flip-clock__piece" :id="data.elementId">
-                <span class="flip-clock__card flip-card">
-                <b class="flip-card__top">{{data.current | twoDigits}}</b>
-                <b class="flip-card__bottom" v-bind:data-value="data.current | twoDigits"></b>
-                <b class="flip-card__back" v-bind:data-value="data.previous | twoDigits"></b>
-                <b class="flip-card__back-bottom" v-bind:data-value="data.previous | twoDigits"></b>
-                </span>
-                <span class="flip-clock__slot">{{data.label}}</span>
-            </span>
-        </template>
-    </div>
+  <div class="container flip-clock">
+    <template v-for="data in timeData" v-show="show">
+      <span
+        v-bind:key="data.label"
+        class="flip-clock__piece"
+        :id="data.elementId"
+      >
+        <span class="flip-clock__card flip-card">
+          <b class="flip-card__top">{{ data.current | twoDigits }}</b>
+          <b
+            class="flip-card__bottom"
+            v-bind:data-value="data.current | twoDigits"
+          ></b>
+          <b
+            class="flip-card__back"
+            v-bind:data-value="data.previous | twoDigits"
+          ></b>
+          <b
+            class="flip-card__back-bottom"
+            v-bind:data-value="data.previous | twoDigits"
+          ></b>
+        </span>
+        <span class="flip-clock__slot">{{ data.label }}</span>
+      </span>
+    </template>
+  </div>
 </template>
 
 <script>
-let interval = null
-const uuidv4 = require('uuid/v4')
+let interval = null;
+const uuidv4 = require('uuid/v4');
 export default {
   name: 'flipCountdown',
   props: {
@@ -29,18 +42,18 @@ export default {
     labels: {
       type: Object,
       required: false,
-      default: function () {
+      default: function() {
         return {
           days: 'Days',
           hours: 'Hours',
           minutes: 'Minutes',
           seconds: 'Seconds'
-        }
+        };
       }
     }
   },
-  data () {
-    const uuid = uuidv4()
+  data() {
+    const uuid = uuidv4();
     return {
       now: Math.trunc(new Date().getTime() / 1000),
       date: null,
@@ -73,103 +86,103 @@ export default {
           elementId: 'flip-card-seconds-' + uuid
         }
       ]
-    }
+    };
   },
-  created () {
+  created() {
     if (!this.deadline) {
-      throw new Error("Missing props 'deadline'")
+      throw new Error("Missing props 'deadline'");
     }
-    const endTime = this.deadline
-    this.date = Math.trunc(Date.parse(endTime.replace(/-/g, '/')) / 1000)
+    const endTime = this.deadline;
+    this.date = Math.trunc(Date.parse(endTime.replace(/-/g, '/')) / 1000);
     if (!this.date) {
-      throw new Error("Invalid props value, correct the 'deadline'")
+      throw new Error("Invalid props value, correct the 'deadline'");
     }
     this.interval = setInterval(() => {
-      this.now = Math.trunc(new Date().getTime() / 1000)
-    }, 1000)
+      this.now = Math.trunc(new Date().getTime() / 1000);
+    }, 1000);
   },
-  mounted () {
+  mounted() {
     if (this.diff !== 0) {
-      this.show = true
+      this.show = true;
     }
   },
   computed: {
-    seconds () {
-      return Math.trunc(this.diff) % 60
+    seconds() {
+      return Math.trunc(this.diff) % 60;
     },
-    minutes () {
-      return Math.trunc(this.diff / 60) % 60
+    minutes() {
+      return Math.trunc(this.diff / 60) % 60;
     },
-    hours () {
-      return Math.trunc(this.diff / 60 / 60) % 24
+    hours() {
+      return Math.trunc(this.diff / 60 / 60) % 24;
     },
-    days () {
-      return Math.trunc(this.diff / 60 / 60 / 24)
+    days() {
+      return Math.trunc(this.diff / 60 / 60 / 24);
     }
   },
   watch: {
-    now (value) {
-      this.diff = this.date - this.now
+    now(value) {
+      this.diff = this.date - this.now;
       if (this.diff <= 0 || this.stop) {
-        this.diff = 0
-        this.updateTime(3, 0)
-        clearInterval(this.interval)
+        this.diff = 0;
+        this.updateTime(3, 0);
+        clearInterval(this.interval);
       } else {
-        this.updateTime(0, this.days)
-        this.updateTime(1, this.hours)
-        this.updateTime(2, this.minutes)
-        this.updateTime(3, this.seconds)
+        this.updateTime(0, this.days);
+        this.updateTime(1, this.hours);
+        this.updateTime(2, this.minutes);
+        this.updateTime(3, this.seconds);
       }
     }
   },
   filters: {
-    twoDigits (value) {
+    twoDigits(value) {
       if (value.toString().length <= 1) {
-        return '0' + value.toString()
+        return '0' + value.toString();
       }
-      return value.toString()
+      return value.toString();
     }
   },
   methods: {
-    updateTime (idx, newValue) {
+    updateTime(idx, newValue) {
       if (idx >= this.timeData.length || newValue === undefined) {
-        return
+        return;
       }
       if (window['requestAnimationFrame']) {
-        this.frame = requestAnimationFrame(this.updateTime.bind(this))
+        this.frame = requestAnimationFrame(this.updateTime.bind(this));
       }
-      const d = this.timeData[idx]
-      const val = (newValue < 0 ? 0 : newValue)
+      const d = this.timeData[idx];
+      const val = newValue < 0 ? 0 : newValue;
       if (val !== d.current) {
-        d.previous = d.current
-        d.current = val
-        const el = document.querySelector(`#${d.elementId}`)
+        d.previous = d.current;
+        d.current = val;
+        const el = document.querySelector(`#${d.elementId}`);
         if (el) {
-          el.classList.remove('flip')
-          void el.offsetWidth
-          el.classList.add('flip')
+          el.classList.remove('flip');
+          void el.offsetWidth;
+          el.classList.add('flip');
         }
       }
     }
   },
-  beforeDestroy () {
+  beforeDestroy() {
     if (window['cancelAnimationFrame']) {
-      cancelAnimationFrame(this.frame)
+      cancelAnimationFrame(this.frame);
     }
   },
-  destroyed () {
-    clearInterval(interval)
+  destroyed() {
+    clearInterval(interval);
   }
-}
+};
 </script>
 
-<style lang ="stylus">
+<style lang="stylus">
 @import '~variables'
 .flip-clock {
   text-align: center;
   perspective: 600px;
   margin: 0 auto;
-  
+
 }
 .flip-clock__piece {
   display: inline-block;

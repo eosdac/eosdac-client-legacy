@@ -1,7 +1,7 @@
 <template>
   <span>
     <q-spinner v-if="value === null" color="text1" />
-    <span v-else>{{value}}</span>
+    <span v-else>{{ value }}</span>
   </span>
 </template>
 
@@ -9,24 +9,21 @@
 export default {
   name: 'Xspan',
   props: {
-    value: false,
+    value: false
   },
-  data () {
-    return {
-  
-    }
+  data() {
+    return {};
   },
-  mounted(){
+  mounted() {
     // console.log(this.value)
-  },
-  // watch: { 
+  }
+  // watch: {
   //   value: function(newVal, oldVal) { // watch it
   //     // console.log('Prop changed: ', newVal, ' | was: ', oldVal)
   //     this.test = newVal
   //   }
   // }
-}
+};
 </script>
 
-<style>
-</style>
+<style></style>

@@ -1,6 +1,6 @@
 // Configuration for your app
 
-module.exports = function (ctx) {
+module.exports = function(ctx) {
   return {
     // app plugins (/src/plugins)
     plugins: [
@@ -12,8 +12,6 @@ module.exports = function (ctx) {
       'idle-vue',
       'profile-cache',
       'medium-editor'
-      
-
     ],
     css: [
       'app.styl',
@@ -37,25 +35,35 @@ module.exports = function (ctx) {
       // analyze: true,
       // extractCSS: false,
       extendWebpack(cfg) {
-        cfg.resolve.extensions = [ ...cfg.resolve.extensions, '.json' ]
+        cfg.resolve.extensions = [...cfg.resolve.extensions, '.json'];
 
         cfg.module.rules.push({
           test: /\.json$/i,
           type: 'javascript/auto',
-          loader: 'json-loader',
-        })
+          loader: 'json-loader'
+        });
 
         cfg.module.rules.push({
           resourceQuery: /blockType=i18n/,
-          use: [
-            {loader: '@kazupon/vue-i18n-loader'},
-          ]
-        })
+          use: [{ loader: '@kazupon/vue-i18n-loader' }]
+        });
+
+        cfg.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /node_modules/,
+          options: {
+            fix: true
+          }
+        });
 
         for (const rule of cfg.module.rules) {
-          if (!rule.oneOf) continue
+          if (!rule.oneOf) continue;
           for (const ruleOneOf of rule.oneOf) {
-            ruleOneOf.use = ruleOneOf.use.filter(u => u.loader !== 'postcss-loader')
+            ruleOneOf.use = ruleOneOf.use.filter(
+              u => u.loader !== 'postcss-loader'
+            );
           }
         }
       }
@@ -116,16 +124,9 @@ module.exports = function (ctx) {
         'QStepperNavigation',
         'QDatetimePicker'
       ],
-      directives: [
-        'Ripple',
-        'CloseOverlay',
-        'BackToTop'
-      ],
+      directives: ['Ripple', 'CloseOverlay', 'BackToTop'],
       // Quasar plugins
-      plugins: [
-        'Notify',
-        'Dialog'
-      ],
+      plugins: ['Notify', 'Dialog'],
       // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
       i18n: 'en-us' // Quasar language
     },
@@ -147,29 +148,29 @@ module.exports = function (ctx) {
         theme_color: '#027be3',
         icons: [
           {
-            'src': 'statics/icons/icon-128x128.png',
-            'sizes': '128x128',
-            'type': 'image/png'
+            src: 'statics/icons/icon-128x128.png',
+            sizes: '128x128',
+            type: 'image/png'
           },
           {
-            'src': 'statics/icons/icon-192x192.png',
-            'sizes': '192x192',
-            'type': 'image/png'
+            src: 'statics/icons/icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
           },
           {
-            'src': 'statics/icons/icon-256x256.png',
-            'sizes': '256x256',
-            'type': 'image/png'
+            src: 'statics/icons/icon-256x256.png',
+            sizes: '256x256',
+            type: 'image/png'
           },
           {
-            'src': 'statics/icons/icon-384x384.png',
-            'sizes': '384x384',
-            'type': 'image/png'
+            src: 'statics/icons/icon-384x384.png',
+            sizes: '384x384',
+            type: 'image/png'
           },
           {
-            'src': 'statics/icons/icon-512x512.png',
-            'sizes': '512x512',
-            'type': 'image/png'
+            src: 'statics/icons/icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
           }
         ]
       }
@@ -179,26 +180,23 @@ module.exports = function (ctx) {
     },
     electron: {
       // bundler: 'builder', // or 'packager'
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         // do something with Electron process Webpack cfg
       },
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
-
         // OS X / Mac App Store
         // appBundleId: '',
         // appCategoryType: '',
         // osxSign: '',
         // protocol: 'myapp://path',
-
         // Window only
         // win32metadata: { ... }
       },
       builder: {
         // https://www.electron.build/configuration/configuration
-
         // appId: 'quasar-app'
       }
     }
-  }
-}
+  };
+};
