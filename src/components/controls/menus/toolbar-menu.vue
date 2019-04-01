@@ -36,7 +36,9 @@
 
 <q-btn-dropdown id="login_button" v-if="getAccountName" dense  flat no-ripple text-color="text1"  class="animate-fade" :label="getAccountName" content-style="margin-top:4px" >
         <q-list  link class="bg-bg2 text-text1"  >
-          <q-list-header class="text-text2" style="min-width:300px">{{getActiveNetworkName}}</q-list-header>
+           <q-list-header class="text-text2" style="min-width:300px">
+            {{getActiveNetworkName}} <span class="q-caption">{{getAuthString}}</span>
+           </q-list-header>
            <q-item>
             <q-item-side v-if="getMemberStatus=='member'" :icon="$configFile.icon.check" color="positive" />
             <q-item-side v-if="getMemberStatus=='pending'" :icon="$configFile.icon.pending_sand" color="warning" />
@@ -106,6 +108,7 @@ export default {
   computed:{
     ...mapGetters({
       getAccountName: 'user/getAccountName',
+      getAuthString: 'user/getAuthString',
       getAgreedTermsVersion: 'user/getAgreedTermsVersion',
       getProfilePicture: 'user/getProfilePicture',
       getDacBalance: 'user/getDacBalance',
