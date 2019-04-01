@@ -1,34 +1,39 @@
 <template>
-  <div class="row justify-between " v-if="custodians.length" >
-
-    <div class="column items-center q-pa-sm animate-fade" v-for="custodian in custodians" :key="custodian.cust_name">
+  <div class="row justify-between " v-if="custodians.length">
+    <div
+      class="column items-center q-pa-sm animate-fade"
+      v-for="custodian in custodians"
+      :key="custodian.cust_name"
+    >
       <profile-pic :accountname="custodian.cust_name" :scale="1" />
-      <router-link class="q-body-1 a2 q-mt-xs" :to="{path: '/profile/' + custodian.cust_name}" >
-        <div class="q-ma-none" >{{custodian.cust_name}}</div>
+      <router-link
+        class="q-body-1 a2 q-mt-xs"
+        :to="{ path: '/profile/' + custodian.cust_name }"
+      >
+        <div class="q-ma-none">{{ custodian.cust_name }}</div>
       </router-link>
     </div>
-
   </div>
 </template>
 
 <script>
 import profilePic from './profile-pic';
-import {mapGetters} from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'displayCustodians',
-  components:{
+  components: {
     profilePic
   },
 
   props: {
-    data: Object,
+    data: Object
   },
 
-  data () {
+  data() {
     return {
-      custodians:[]
-    }
+      custodians: []
+    };
   },
 
   computed: {
@@ -38,37 +43,34 @@ export default {
   },
 
   methods: {
-
-    async setCustodians () {
-        let custodians;
-        if(!this.getCustodians){
-          custodians = await this.$store.dispatch('dac/fetchCustodians' );
-        }
-        else{
-          custodians = this.getCustodians;
-        }
-        this.custodians = custodians;
+    async setCustodians() {
+      let custodians;
+      if (!this.getCustodians) {
+        custodians = await this.$store.dispatch('dac/fetchCustodians');
+      } else {
+        custodians = this.getCustodians;
+      }
+      this.custodians = custodians;
     }
   },
 
   mounted: function() {
-    if(this.getCustodians){
+    if (this.getCustodians) {
       this.setCustodians();
     }
   },
 
   watch: {
-    getCustodians (oldval, newval) {
-      if(newval){
+    getCustodians(oldval, newval) {
+      if (newval) {
         this.setCustodians();
       }
     }
   }
-
-}
+};
 </script>
 
-<style lang ="stylus">
+<style lang="stylus">
 @import '~variables'
 
 .loading {
@@ -79,6 +81,4 @@ export default {
 .loaded {
   opacity: 1;
 }
-
 </style>
-
