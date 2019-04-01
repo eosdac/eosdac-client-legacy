@@ -6,5 +6,6 @@ export default {
   active_network: 'mainnet',
   scatter: null,
   eosApi: false,
-  eosScatter: false
-};
+  eosScatter: false,
+
+}

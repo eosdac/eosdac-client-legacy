@@ -1,14 +1,20 @@
-require('../assets/icon-fonts/eosdac-iconfont-v1-9/styles.css');
-require('../assets/icon-fonts/extended_material_icons/css/materialdesignicons.css');
+require('../assets/icon-fonts/eosdac-iconfont-v1-9/styles.css')
+require('../assets/icon-fonts/extended_material_icons/css/materialdesignicons.css')
 
-class ConfigLoader {
-  constructor(networkname) {
+
+class configLoader {
+
+  constructor( networkname){
+
     this.configFile = require(`../statics/config.${networkname}.json`);
     this.icon = require(`../statics/iconmap.json`);
     // store.commit('global/setConfig', this.configFile);
+    
   }
 
-  get(configquery) {
+
+  get(configquery){
+
     switch (configquery) {
       case 'defaultnode':
         return this.configFile.api.default_eos_node;
@@ -53,43 +59,45 @@ class ConfigLoader {
       case 'treasuryaccount':
         return this.configFile.treasuryAccount.name;
       default:
-        return `***${configquery} not yet subscribed in config-loader***`;
+        return `***${configquery} not yet subscribed in config-loader***`
     }
   }
-
-  setConfig(conf) {
+  
+  setConfig(conf){
     this.configFile = conf;
   }
 
-  disable_ConsoleLog() {
-    if (this.consoleLogBackup === undefined) {
+  disable_ConsoleLog(){
+    if(this.consoleLogBackup === undefined){
       // alert('cl disabled')
       this.consoleLogBackup = window.console.log;
-      window['console']['log'] = function() {};
+      window['console']['log'] = function(){};
     }
   }
 
-  enable_ConsoleLog() {
-    if (this.consoleLogBackup) {
+  enable_ConsoleLog(){
+    if(this.consoleLogBackup){
       // alert('cl enable')
       window['console']['log'] = this.consoleLogBackup;
       this.consoleLogBackup = undefined;
     }
   }
+
 }
 
-export default ({ Vue, store }) => {
-  let networkname = store.getters['global/getActiveNetworkName'];
-  let config = new ConfigLoader(networkname);
+export default ({
+  Vue,
+  store
+}) => {
 
-  if (
-    store.getters['user/getSettingByName']('debug_console_log') &&
-    !store.getters['user/getSettingByName']('debug_console_log').value
-  ) {
+  let networkname = store.getters['global/getActiveNetworkName'];
+  let config = new configLoader(networkname);
+  
+  if(store.getters['user/getSettingByName']('debug_console_log') && !store.getters['user/getSettingByName']('debug_console_log').value) {
     config.disable_ConsoleLog();
   }
-  store.commit('global/setNode', config.get('defaultnode'));
+  store.commit('global/setNode', config.get('defaultnode') );
   Vue.prototype.$configFile = config;
-};
+}
 
 // export {configFile}
