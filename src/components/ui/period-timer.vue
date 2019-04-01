@@ -2,7 +2,15 @@
   <div>
     <div v-if="loaded">
       <div class="row justify-center q-mb-xs">Next Period In</div>
-      <flip-clock :deadline="periodEnds" :labels=" {days: 'Days', hours: 'Hours', minutes: 'Minutes', seconds: 'Seconds'}" />
+      <flip-clock
+        :deadline="periodEnds"
+        :labels="{
+          days: 'Days',
+          hours: 'Hours',
+          minutes: 'Minutes',
+          seconds: 'Seconds'
+        }"
+      />
     </div>
     <div v-else>
       <q-spinner color="primary-light" />
@@ -11,56 +19,57 @@
 </template>
 
 <script>
-import flipClock from 'components/ui/flip-clock';
+import flipClock from "components/ui/flip-clock";
 
-import {mapGetters} from 'vuex';
+import { mapGetters } from "vuex";
 
-import { date } from 'quasar';
+import { date } from "quasar";
 const today = new Date();
 const { addToDate, subtractFromDate } = date;
 
-
 export default {
-  name: 'periodTimer',
-  components:{
+  name: "periodTimer",
+  components: {
     flipClock
   },
-  data () {
+  data() {
     return {
       loaded: false
-    }
+    };
   },
-  computed:{
+  computed: {
     ...mapGetters({
-      getCustodianState: 'dac/getCustodianState',
-      getCustodianConfig: 'dac/getCustodianConfig'
+      getCustodianState: "dac/getCustodianState",
+      getCustodianConfig: "dac/getCustodianConfig"
     }),
-    periodEnds(){
-      if(this.getCustodianConfig.periodlength && this.getCustodianState.lastperiodtime ){
-        let end =  addToDate(new Date(this.getCustodianState.lastperiodtime*1000), { days: this.getCustodianConfig.periodlength/60/60/24 });
-        return date.formatDate(end, 'YYYY-MM-DD HH:mm:ss');
+    periodEnds() {
+      if (
+        this.getCustodianConfig.periodlength &&
+        this.getCustodianState.lastperiodtime
+      ) {
+        let end = addToDate(
+          new Date(this.getCustodianState.lastperiodtime * 1000),
+          { days: this.getCustodianConfig.periodlength / 60 / 60 / 24 }
+        );
+        return date.formatDate(end, "YYYY-MM-DD HH:mm:ss");
       }
     }
   },
-  methods:{
-    async getCustodianContractstate(){
+  methods: {
+    async getCustodianContractstate() {
       this.loaded = false;
-      if(this.getCustodianState.lastperiodtime == null){
-        await this.$store.dispatch('dac/fetchCustodianContractState');
-        this.loaded = true
-      }
-      else{
+      if (this.getCustodianState.lastperiodtime == null) {
+        await this.$store.dispatch("dac/fetchCustodianContractState");
+        this.loaded = true;
+      } else {
         this.loaded = true;
       }
     }
   },
-  mounted(){
+  mounted() {
     this.getCustodianContractstate();
-
   }
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

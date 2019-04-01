@@ -5,15 +5,14 @@
 </template>
 
 <script>
-import msigCreator from 'components/controls/msig-creator';
-import {mapGetters} from 'vuex';
+import msigCreator from "components/controls/msig-creator";
+import { mapGetters } from "vuex";
 export default {
-  name: 'CreateMsigs',
-  components:{
+  name: "CreateMsigs",
+  components: {
     msigCreator
   }
-}
+};
 </script>
 
-<style>
-</style>
+<style></style>

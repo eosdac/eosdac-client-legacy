@@ -1,27 +1,34 @@
 <template>
   <div>
-    <a v-if="social.link!=''" v-for="(social, i) in parseLinks"  class="on-left" :key ="i" :href="social.link" target="_blank">
-        <q-btn  class="hvr-grow" round color="bg2" >
-          <q-icon  :name="'icon-'+social.icon" />
-        </q-btn>
+    <a
+      v-if="social.link != ''"
+      v-for="(social, i) in parseLinks"
+      class="on-left"
+      :key="i"
+      :href="social.link"
+      target="_blank"
+    >
+      <q-btn class="hvr-grow" round color="bg2">
+        <q-icon :name="'icon-' + social.icon" />
+      </q-btn>
     </a>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SocialLinks',
+  name: "SocialLinks",
 
   props: {
-    links: Array,
+    links: Array
   },
 
-  computed:{
-    parseLinks(){
+  computed: {
+    parseLinks() {
       let parsed = [];
 
       this.links.forEach(link => {
-        if(!this.$helper.isUrl(link)){
+        if (!this.$helper.isUrl(link)) {
           return false;
         }
         link = this.matchSocialIcon(link);
@@ -31,39 +38,57 @@ export default {
     }
   },
 
-  methods:{
-
-    matchSocialIcon(link){
+  methods: {
+    matchSocialIcon(link) {
       //supported social networks
-      link = (link.indexOf('://') === -1) ? 'http://' + link : link;
+      link = link.indexOf("://") === -1 ? "http://" + link : link;
       // console.log(link)
-      const icons = ['social-youtube-com', 'social-linkedin-com', 'social-ask-fm', 'social-tumblr-com',
-                    'social-weibo-com', 'social-qzoneqq-com', 'social-flickr-com', 'social-instagram-com',
-                    'social-facebook-com', 'social-plusgoogle-com', 'social-meetup-com', 'social-ok-ru',
-                    'social-reddit-com', 'social-twitter-com', 'social-vk-com', 'social-pinterest-com',
-                    'social-behance-net', 'social-dribble-com', 'social-github-com', 'social-medium-com',
-                    'social-steemit-com', 'social-general'];
-      
-      let lookup = icons.map(icon=> { return icon.split('-')[1] } );
+      const icons = [
+        "social-youtube-com",
+        "social-linkedin-com",
+        "social-ask-fm",
+        "social-tumblr-com",
+        "social-weibo-com",
+        "social-qzoneqq-com",
+        "social-flickr-com",
+        "social-instagram-com",
+        "social-facebook-com",
+        "social-plusgoogle-com",
+        "social-meetup-com",
+        "social-ok-ru",
+        "social-reddit-com",
+        "social-twitter-com",
+        "social-vk-com",
+        "social-pinterest-com",
+        "social-behance-net",
+        "social-dribble-com",
+        "social-github-com",
+        "social-medium-com",
+        "social-steemit-com",
+        "social-general"
+      ];
 
-      let urlparts = new URL(link);//does not work in IE
-      let hostparts = urlparts.hostname.split('.');
+      let lookup = icons.map(icon => {
+        return icon.split("-")[1];
+      });
 
-      if(hostparts[0] ==='www'){
+      let urlparts = new URL(link); //does not work in IE
+      let hostparts = urlparts.hostname.split(".");
+
+      if (hostparts[0] === "www") {
         delete hostparts[0];
       }
-      hostparts.pop();//remove TLD
-      let host = hostparts.join('');
+      hostparts.pop(); //remove TLD
+      let host = hostparts.join("");
       let i = lookup.indexOf(host);
-      if(i > -1){
-        return {link: link, icon: icons[i]};
-      }
-      else{
-        return {link: link, icon: 'social-general'};
+      if (i > -1) {
+        return { link: link, icon: icons[i] };
+      } else {
+        return { link: link, icon: "social-general" };
       }
     }
   }
-}
+};
 </script>
 
 <style>
@@ -79,7 +104,9 @@ export default {
   -webkit-transition-property: transform;
   transition-property: transform;
 }
-.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }

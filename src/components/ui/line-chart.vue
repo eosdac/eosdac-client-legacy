@@ -1,6 +1,5 @@
-
 <script>
-import { Line, mixins } from 'vue-chartjs'
+import { Line, mixins } from "vue-chartjs";
 
 export default {
   extends: Line,
@@ -15,12 +14,10 @@ export default {
       default: null
     }
   },
-  mounted () {
-    this.renderChart(this.chartData, this.options)
+  mounted() {
+    this.renderChart(this.chartData, this.options);
   }
-}
-
+};
 </script>
 
-<style>
-</style>
+<style></style>

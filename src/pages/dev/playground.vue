@@ -5,36 +5,27 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
-import abiViewer from 'components/controls/abi-viewer'
+import { mapGetters } from "vuex";
+import abiViewer from "components/controls/abi-viewer";
 
 export default {
-  name: 'playyard',
-  components:{
+  name: "playyard",
+  components: {
     abiViewer
   },
-  data () {
+  data() {
     return {
-      abi:'',
-      wasm:''
-    }
+      abi: "",
+      wasm: ""
+    };
   },
-  computed:{
+  computed: {
     ...mapGetters({
       // getEosApi: 'global/getEosApi'
     })
-
   },
-  methods:{
-
-
-  }
-}
+  methods: {}
+};
 </script>
 
-<style>
-
-
-
-
-</style>
+<style></style>

@@ -1,50 +1,52 @@
 <template>
-<transition name="votedelta">
-  <div v-if="animate && vote_delta!=0" class="vote_delta_common" :class="statusClass" >
-    <q-icon v-if="vote_delta < 0" name="mdi-minus" style="margin-top:-2px" />
-    <q-icon v-if="vote_delta > 0" name="mdi-plus" style="margin-top:-2px" />
-    <span>{{ $helper.toLocaleNumber( Math.abs(vote_delta/10000) ) }}</span>
-  </div>
-</transition>
+  <transition name="votedelta">
+    <div
+      v-if="animate && vote_delta != 0"
+      class="vote_delta_common"
+      :class="statusClass"
+    >
+      <q-icon v-if="vote_delta < 0" name="mdi-minus" style="margin-top:-2px" />
+      <q-icon v-if="vote_delta > 0" name="mdi-plus" style="margin-top:-2px" />
+      <span>{{ $helper.toLocaleNumber(Math.abs(vote_delta / 10000)) }}</span>
+    </div>
+  </transition>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-  name: 'voteAnimation',
-  props:{
+  name: "voteAnimation",
+  props: {
     vote_delta: Number
   },
-  data () {
+  data() {
     return {
       statusClass: [],
       animate: false
-    }
+    };
   },
   // computed:{
   //   ...mapGetters({
   //     getSettingByName: 'user/getSettingByName'
   //   })
-    
+
   // },
-  watch:{
-    vote_delta(){
-      if(this.vote_delta > 0){
-        this.statusClass = ['vote_delta_positive'];
+  watch: {
+    vote_delta() {
+      if (this.vote_delta > 0) {
+        this.statusClass = ["vote_delta_positive"];
         this.animate = true;
-        
-      }
-      else{
-        this.statusClass = ['vote_delta_negative'];
+      } else {
+        this.statusClass = ["vote_delta_negative"];
         this.animate = true;
       }
-      setTimeout(()=>{this.animate=false}, 1200)
+      setTimeout(() => {
+        this.animate = false;
+      }, 1200);
     }
-
   }
-}
+};
 </script>
-
 
 <style lang="stylus">
 @import '~variables'

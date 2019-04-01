@@ -1,10 +1,10 @@
-import colorschemes from '../../extensions/branding/color_schemes';
+import colorschemes from "../../extensions/branding/color_schemes";
 
 export default {
   //
   showTransactionOverlay: false,
-  activeTheme:'dark',
+  activeTheme: "dark",
   drawerIsOpen: true,
 
-  themes:colorschemes
-}
+  themes: colorschemes
+};
