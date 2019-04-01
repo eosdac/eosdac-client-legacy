@@ -262,5 +262,10 @@ export class EosWrapper {
         }
     }
 
+    async getCurrencyStats(contract, symbol){
+        let res =  await this.eos.get_currency_stats(contract, symbol);
+        return res;
+    }
+
 }
 

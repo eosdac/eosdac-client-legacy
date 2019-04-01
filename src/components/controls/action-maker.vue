@@ -209,10 +209,11 @@ export default {
 
     async processInputs(){
       let process_error = false;
-      let action_data = this.data_fields.reduce((res, input) =>{
+      let action_data = this.data_fields.reduce( ( res, input) =>{
 
         //validate and cast types
         let value = String(input.value).trim();
+        
         if((value.includes('[') && value.includes(']') ) || (value.includes('{') && value.includes('}') ) ){
           value = JSON.parse(value);
         }
@@ -240,7 +241,7 @@ export default {
         res[`${input.name}`] = value;
         return res;
 
-      }, {});
+      }, {} );
 
       if(process_error){
             this.$q.notify({
