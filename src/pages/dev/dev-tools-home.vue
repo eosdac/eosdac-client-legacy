@@ -1,98 +1,85 @@
 <template>
-  <q-page>
-    <div class="q-pa-md">
-      <div class="row gutter-sm">
-        <div class="col-xs-12 col-md-6">
-          <div class="bg-bg1 round-borders shadow-5 q-pa-md">
-            <div class="q-title q-mb-md">Profile Cache</div>
-            <div class="row">
-              <q-btn
-                class="q-ma-xs"
-                label="log cache"
-                color="primary"
-                @click="logProfileCache"
-              />
-              <q-btn
-                class="q-ma-xs"
-                label="empty cache"
-                color="primary"
-                @click="emptyProfileCache"
-              />
-            </div>
+  <q-page >
+<div class="q-pa-md" >
+
+    <div class="row gutter-sm">
+
+      <div class="col-xs-12 col-md-6">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="q-title q-mb-md">Profile Cache</div>
+          <div class="row">
+            <q-btn class="q-ma-xs" label="log cache" color="primary" @click="logProfileCache" />
+            <q-btn class="q-ma-xs" label="empty cache" color="primary" @click="emptyProfileCache" />
           </div>
         </div>
+      </div>
 
-        <div class="col-xs-12 col-md-6">
-          <div class="bg-bg1 round-borders shadow-5 q-pa-md">
-            <div class="q-title q-mb-md">Config File</div>
-            <div class="row">
-              <q-btn
-                class="q-ma-xs"
-                label="log config"
-                color="primary"
-                @click="logConfigFile"
-              />
-            </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="q-title q-mb-md">Config File</div>
+          <div class="row">
+            <q-btn class="q-ma-xs" label="log config" color="primary" @click="logConfigFile" />
           </div>
         </div>
+      </div>
+  
+      <div class="col-xs-12 col-md-6 ">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="row justify-between q-mb-md"><span class="q-title">Color Scheme</span><nightModeSwitch /></div>
+          <color-picker />
+          <div class="q-mt-md"><q-btn label="log scheme" color="primary" @click="getColorScheme" /></div>
+        </div>
+      </div>
 
-        <div class="col-xs-12 col-md-6">
-          <div class="bg-bg1 round-borders shadow-5 q-pa-md">
-            <div class="row justify-between q-mb-md">
-              <span class="q-title">Color Scheme</span>
-              <nightModeSwitch />
-            </div>
-            <color-picker />
-            <div class="q-mt-md">
-              <q-btn
-                label="log scheme"
-                color="primary"
-                @click="getColorScheme"
-              />
-            </div>
+      <div class="col-xs-12 col-md-6 ">
+        <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height">
+          <div class="q-title q-mb-md">Network</div>
+          <div class="q-mt-md row">
+            <network-switcher class="q-ma-xs" :enable_pin="false" />
+            <firehose class="q-ma-xs" />
           </div>
         </div>
+      </div>
 
-        <div class="col-xs-12 col-md-6">
-          <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height">
-            <div class="q-title q-mb-md">Network</div>
-            <div class="q-mt-md row">
-              <network-switcher class="q-ma-xs" :enable_pin="false" />
-              <firehose class="q-ma-xs" />
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="col-xs-12 q-mb-md " >
+      <!-- <div class="col-xs-12 q-mb-md " >
         <div class="bg-bg1 round-borders shadow-5 q-pa-md">
           <div class="q-title q-mb-md">Push Transactions</div>
           <div class="q-mt-md">
             <transaction-builder />
           </div>
         </div>
-        </div>-->
-      </div>
+      </div> -->
 
-      <debug-data
-        :data="[
-          {
-            getIsCustodian: getIsCustodian,
-            getActiveNetwork: getActiveNetwork,
-            getMemberStatus: getMemberStatus,
-            getAgreedTermsVersion: getAgreedTermsVersion,
-            getMemberTerms: getMemberTerms
-          }
-        ]"
-      />
     </div>
-    <!-- end wrapper -->
+
+
+
+    
+      
+
+    <debug-data :data="[{
+      'getIsCustodian': getIsCustodian,
+      'getActiveNetwork': getActiveNetwork,
+      'getMemberStatus': getMemberStatus,
+      'getAgreedTermsVersion': getAgreedTermsVersion,
+      'getMemberTerms': getMemberTerms
+      
+    }]" />
+</div> <!-- end wrapper -->
+
+    
   </q-page>
+  
 </template>
 
-<style></style>
+<style>
+
+</style>
 
 <script>
-import { mapGetters } from 'vuex';
+
+import ecc from 'eosjs-ecc';
+import {mapGetters} from 'vuex';
 import { colors } from 'quasar';
 
 import colorPicker from 'components/controls/color-picker';
@@ -108,19 +95,20 @@ import debugData from 'components/ui/debug-data';
 export default {
   name: 'test',
   components: {
-    nightModeSwitch,
-    colorPicker,
-    networkSwitcher,
-    firehose,
-    debugData
+      nightModeSwitch,
+      colorPicker,
+      networkSwitcher,
+      firehose,
+      debugData
+ 
   },
   data() {
     return {
-      scatter: null,
-      assettest: ''
-    };
+      scatter:null,
+      assettest:'',
+    }
   },
-  computed: {
+  computed:{
     ...mapGetters({
       getActiveNetwork: 'global/getActiveNetwork',
       getAgreedTermsVersion: 'user/getAgreedTermsVersion',
@@ -132,49 +120,54 @@ export default {
       getThemes: 'ui/getThemes',
       getEosApi: 'global/getEosApi'
       // getCustodians: 'dac/getCustodians',
-    })
+    }),
+    
   },
 
-  methods: {
-    logConfigFile() {
-      console.log(this.$configFile);
+  methods:{
+    logConfigFile(){
+      console.log(this.$configFile)
     },
-    logProfileCache() {
-      console.log(this.$profiles);
+    logProfileCache(){
+      console.log(this.$profiles)
     },
-    emptyProfileCache() {
+    emptyProfileCache(){
       this.$profiles.delete();
     },
-    switchNode() {
+    switchNode(){
+
       this.$store.commit('global/setNode', 'http://testerino.com');
     },
 
-    getColorScheme() {
+    getColorScheme(){
       let new_colors = {};
       Object.keys(this.getThemes[0].colors).forEach(c => {
         new_colors[c] = colors.getBrand(c);
       });
       let response = {
-        name: '',
-        isdark: this.getIsDark,
-        colors: new_colors
-      };
-      console.log(JSON.stringify(response));
+          "name": "",
+          "isdark": this.getIsDark,
+          "colors": new_colors
+      }
+      console.log(JSON.stringify(response) )
     }
+
   },
-  mounted() {
+  mounted(){
     // Object.keys(this.$store.state).forEach(e => {
     //   console.log(`key=${e}`)
     //   console.log(this.$store.state[e])
     // });
-    console.log(this.getEosApi);
+    console.log(this.getEosApi)
+
   },
   watch: {
-    // '$route': function(){
-    //             this.redeemid = this.$route.params.redeemid;
-    //             this.redeemtokens = this.$route.params.redeemtokens;
-    //             console.log(this.redeemid, this.redeemtokens)
-    //           }
-  }
-};
+  // '$route': function(){
+  //             this.redeemid = this.$route.params.redeemid;
+  //             this.redeemtokens = this.$route.params.redeemtokens;
+  //             console.log(this.redeemid, this.redeemtokens)
+  //           }
+  },
+
+}
 </script>
