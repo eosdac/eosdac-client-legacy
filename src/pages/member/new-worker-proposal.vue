@@ -119,7 +119,6 @@
 import { mapGetters } from "vuex";
 import debugData from "components/ui/debug-data";
 import MarkdownViewer from "components/ui/markdown-viewer";
-import assetInput from "components/controls/asset-input";
 import helpBtn from "components/controls/help-btn";
 import { required, minValue } from "vuelidate/lib/validators";
 const isEosName = accountname => {
@@ -131,7 +130,6 @@ export default {
   name: "newWorkerProposal",
 
   components: {
-    assetInput,
     helpBtn,
     MarkdownViewer,
     debugData

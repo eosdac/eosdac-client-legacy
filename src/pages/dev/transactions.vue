@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import transactionBuilder from "components/controls/transaction-builder";
 export default {
   name: "transactions",

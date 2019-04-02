@@ -1,5 +1,4 @@
-import { Notify } from "quasar";
-import { openURL } from "quasar";
+import { Notify, openURL } from "quasar";
 
 export async function loggedOutRoutine({ commit }) {
   commit("setIsLoaded", false);

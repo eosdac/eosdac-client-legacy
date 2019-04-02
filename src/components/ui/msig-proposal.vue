@@ -442,14 +442,12 @@
 
 <script>
 import Actionparser from "components/ui/action-parser";
-import profilePic from "components/ui/profile-pic";
 
 import { mapGetters } from "vuex";
 export default {
   name: "Msigproposal",
   components: {
-    Actionparser,
-    profilePic
+    Actionparser
   },
 
   props: {

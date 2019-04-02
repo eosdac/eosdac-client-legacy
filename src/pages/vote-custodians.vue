@@ -267,8 +267,6 @@
 
 <script>
 import Candidate from "components/ui/candidate";
-import VotingProgress from "components/ui/voting-progress";
-import periodTimer from "components/ui/period-timer";
 import displayCustodians from "components/ui/display-custodians";
 import debugData from "components/ui/debug-data";
 
@@ -280,10 +278,8 @@ export default {
   name: "Votecustodians",
   components: {
     Candidate,
-    VotingProgress,
     debugData,
-    displayCustodians,
-    periodTimer
+    displayCustodians
   },
   data() {
     return {

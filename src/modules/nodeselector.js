@@ -85,7 +85,6 @@ class NodeSelector {
   }
 
   _start_race() {
-    var self = this;
     console.log(`start race with ${this.nodelist.length} nodes...`);
     if (this.nodelist.length < 1) {
       console.log("There are no nodes left to race!");

@@ -1,7 +1,7 @@
 <template>
   <q-page class="relative-position" style="overflow-x: hidden; ">
     <div
-      class=" gradient-bg-primary q-px-md q-pt-md relative-position"
+      class="gradient-bg-primary q-px-md q-pt-md relative-position"
       style="min-height:260px"
     >
       <div class="row">
@@ -11,7 +11,7 @@
           </h4>
         </div>
       </div>
-      <div class="row  q-mt-md profile_header_top_row">
+      <div class="row q-mt-md profile_header_top_row">
         <div class="col-xs-12">
           <div class="text-text2 q-caption uppercase">
             {{ $t("profile.account_name") }}
@@ -83,7 +83,7 @@
               {{ $t("profile.gender") }}
             </div>
             <q-select
-              class=""
+              class
               color="white"
               :readonly="!is_edit"
               :hide-underline="!is_edit"
@@ -111,7 +111,7 @@
         style="min-height:265px"
       >
         <div class="col-md-8 col-xs-12 q-pa-md">
-          <div class="" style="height:100%">
+          <div class style="height:100%">
             <div class="q-title q-mb-md">{{ $t("profile.bio") }}</div>
             <MarkdownViewer
               :tags="[
@@ -240,7 +240,7 @@
           :dark="getIsDark"
           type="url"
           v-model="form.image"
-          @input=""
+          @input
           class="q-mt-md"
           :float-label="$t('profile.profile_picture_url')"
           placeholder="https://example.site/mypic.jpg"
@@ -261,13 +261,12 @@
 </template>
 
 <script>
-import { Notify } from "quasar";
+import { Notify, openURL } from "quasar";
 import SocialLinks from "components/ui/social-links";
 import TimeZone from "components/ui/time-zone";
 import ProfileTemplate from "../statics/profile.template.json";
 import MarkdownViewer from "components/ui/markdown-viewer";
 import debugData from "components/ui/debug-data";
-import { openURL } from "quasar";
 import { mapGetters } from "vuex";
 
 export default {
@@ -384,9 +383,7 @@ export default {
 
     async saveProfileSuccessCallback() {
       this.is_edit = false;
-      let newprofile = await this.$profiles.removeFromCache([
-        this.getAccountName
-      ]);
+      await this.$profiles.removeFromCache([this.getAccountName]);
 
       this.$store.commit("user/setProfilePicture", this.form.image);
     },
@@ -441,40 +438,43 @@ export default {
 </script>
 
 <style lang="stylus">
-@import '~variables'
+@import '~variables';
 
-.profile_header_bottom_row{
-  margin-left:170px;
-  margin-right:16px;
-  background:none
-}
-
-.profile_header_top_row{
-  margin-left:154px;
-  background:none
+.profile_header_bottom_row {
+  margin-left: 170px;
+  margin-right: 16px;
+  background: none;
 }
 
-.profile_image_inner_wrap{
-  overflow:hidden;
-  position:relative;
+.profile_header_top_row {
+  margin-left: 154px;
+  background: none;
 }
-.profile_image_outer_wrap{
-  position:absolute;
-  z-index:1;
-  height:140px;
-  width:140px;
-  top:70px;
-  transition: all .2s ease-in-out;
+
+.profile_image_inner_wrap {
+  overflow: hidden;
+  position: relative;
 }
-.profile_header_bottom_row .q-if-control{
-    display:none !important;
+
+.profile_image_outer_wrap {
+  position: absolute;
+  z-index: 1;
+  height: 140px;
+  width: 140px;
+  top: 70px;
+  transition: all 0.2s ease-in-out;
 }
-.hack_center{
-    position: absolute;
-    top: -9999px;
-    bottom: -9999px;
-    left: -9999px;
-    right: -9999px;
-    margin: auto;
+
+.profile_header_bottom_row .q-if-control {
+  display: none !important;
+}
+
+.hack_center {
+  position: absolute;
+  top: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  right: -9999px;
+  margin: auto;
 }
 </style>

@@ -1,7 +1,7 @@
 require("../assets/icon-fonts/eosdac-iconfont-v1-9/styles.css");
 require("../assets/icon-fonts/extended_material_icons/css/materialdesignicons.css");
 
-class configLoader {
+class ConfigLoader {
   constructor(networkname) {
     this.configFile = require(`../statics/config.${networkname}.json`);
     this.icon = require(`../statics/iconmap.json`);
@@ -80,7 +80,7 @@ class configLoader {
 
 export default ({ Vue, store }) => {
   let networkname = store.getters["global/getActiveNetworkName"];
-  let config = new configLoader(networkname);
+  let config = new ConfigLoader(networkname);
 
   if (
     store.getters["user/getSettingByName"]("debug_console_log") &&

@@ -10,10 +10,8 @@
 </template>
 
 <script>
-import { colors } from "quasar";
-import { mapGetters } from "vuex";
+import { colors, date } from "quasar";
 import lineChart from "components/ui/line-chart";
-import { date } from "quasar";
 
 export default {
   name: "balanceTimeline",

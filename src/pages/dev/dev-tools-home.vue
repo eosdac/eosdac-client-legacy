@@ -92,7 +92,6 @@
 <style></style>
 
 <script>
-import ecc from "eosjs-ecc";
 import { mapGetters } from "vuex";
 import { colors } from "quasar";
 

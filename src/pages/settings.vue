@@ -6,18 +6,18 @@
         Memberclient version: v{{getDapp_version}}
         Local Storage version: v{{getLocal_storage_version}}
         </div>
-      </div> -->
+      </div>-->
 
       <div
         v-for="(group, j) in groups"
-        class="col-xs-12  col-xl-6"
+        class="col-xs-12 col-xl-6"
         :key="`group_${j}`"
       >
         <div
-          class="bg-bg1 round-borders shadow-5 relative-position overflow-hidden full-height "
+          class="bg-bg1 round-borders shadow-5 relative-position overflow-hidden full-height"
         >
           <q-list no-border>
-            <q-list-header class=" q-headline capitalize">
+            <q-list-header class="q-headline capitalize">
               <q-icon class="text-text1" :name="group.icon" />
               <span class="text-text2 on-right">{{ group.name }}</span>
             </q-list-header>
@@ -32,12 +32,12 @@
                 <!-- setting bool -->
                 <q-item v-if="setting.type == 'boolean'">
                   <q-item-main>
-                    <q-item-tile class="text-text1" label>{{
-                      $t(`settings.${setting.name}_l`)
-                    }}</q-item-tile>
-                    <q-item-tile class="text-text2" sublabel>{{
-                      $t(`settings.${setting.name}_s`)
-                    }}</q-item-tile>
+                    <q-item-tile class="text-text1" label>
+                      {{ $t(`settings.${setting.name}_l`) }}
+                    </q-item-tile>
+                    <q-item-tile class="text-text2" sublabel>
+                      {{ $t(`settings.${setting.name}_s`) }}
+                    </q-item-tile>
                   </q-item-main>
                   <q-item-side right>
                     <q-toggle
@@ -53,9 +53,9 @@
                 <!--- setting number --->
                 <q-item v-if="setting.type == 'number'">
                   <q-item-main>
-                    <q-item-tile class="text-text1" label>{{
-                      $t(`settings.${setting.name}_l`)
-                    }}</q-item-tile>
+                    <q-item-tile class="text-text1" label>
+                      {{ $t(`settings.${setting.name}_l`) }}
+                    </q-item-tile>
                     <q-input
                       :dark="getIsDark"
                       type="number"
@@ -69,9 +69,9 @@
                 <div v-if="setting.type == 'component'">
                   <q-item v-if="setting.value == 'langselector'">
                     <q-item-main>
-                      <q-item-tile class="text-text1" label>{{
-                        $t(`settings.${setting.name}_l`)
-                      }}</q-item-tile>
+                      <q-item-tile class="text-text1" label>
+                        {{ $t(`settings.${setting.name}_l`) }}
+                      </q-item-tile>
                       <lang-selector :label="false" />
                     </q-item-main>
                   </q-item>
@@ -98,11 +98,10 @@
 </template>
 
 <style lang="stylus">
-@import '~variables'
+@import '~variables';
 </style>
 
 <script>
-import Vue from "vue";
 import { mapGetters } from "vuex";
 import langSelector from "components/controls/lang-selector";
 import debugData from "components/ui/debug-data";

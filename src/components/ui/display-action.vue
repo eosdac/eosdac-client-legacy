@@ -96,12 +96,8 @@
 
 <script>
 import { mapGetters } from "vuex";
-import actionMaker from "components/controls/action-maker";
 export default {
   name: "displayAction",
-  components: {
-    actionMaker
-  },
   props: {
     action: Object,
     closable: Boolean,

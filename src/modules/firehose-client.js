@@ -8,7 +8,7 @@ export class FirehoseClient {
     this.ready_cb = null;
     this.opened = false;
 
-    this.websocket = window.WebSocket || window.MozWebSocket;
+    this.Websocket = window.WebSocket || window.MozWebSocket;
 
     this.api = eosapi;
     this.connect();
@@ -25,7 +25,7 @@ export class FirehoseClient {
       console.log("already connected");
       return;
     }
-    const connection = new this.websocket(this.config.server);
+    const connection = new this.Websocket(this.config.server);
 
     connection.onopen = () => {
       if (this.ready_cb) {

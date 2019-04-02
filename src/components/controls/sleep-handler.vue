@@ -1,5 +1,3 @@
-<template> </template>
-
 <script>
 var SCHEDULE_AUTO_LOGOUT_TIMER = null;
 var DO_AUTO_LOGOUT_TIMER = null;

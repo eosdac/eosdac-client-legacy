@@ -352,9 +352,7 @@ export default {
 
       let actions = [registeraction];
 
-      if (true) {
-        actions.unshift(stakeaction);
-      }
+      actions.unshift(stakeaction);
 
       let result = await this.$store.dispatch("user/transact", {
         actions: actions

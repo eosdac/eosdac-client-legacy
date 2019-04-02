@@ -24,8 +24,7 @@ import flipClock from "components/ui/flip-clock";
 import { mapGetters } from "vuex";
 
 import { date } from "quasar";
-const today = new Date();
-const { addToDate, subtractFromDate } = date;
+const { addToDate } = date;
 
 export default {
   name: "periodTimer",

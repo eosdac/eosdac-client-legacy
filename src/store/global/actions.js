@@ -166,7 +166,7 @@ export async function switchNetwork(
   payload
 ) {
   if (state.active_network == payload.networkname) {
-    console.log(`already connected to ${networkname}`);
+    console.log(`already connected to ${payload.networkname}`);
     return true;
   }
 

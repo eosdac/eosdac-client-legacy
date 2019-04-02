@@ -40,6 +40,7 @@ module.exports = {
       'standard/no-callback-literal': 'off',
       'vue/require-prop-type-constructor': 'off',
       'vue/no-use-v-if-with-v-for': 'off',
+      'vue/valid-v-on': 'off',
       // Temp Rules End
   
       // allow async-await

@@ -6,7 +6,6 @@ import custom_messages from "src/extensions/i18n";
 
 let msg = nestedObjectAssign({}, messages, custom_messages);
 
-let i18n;
 export default ({ app, Vue, store }) => {
   Vue.use(VueI18n);
   let lang = "en-us";

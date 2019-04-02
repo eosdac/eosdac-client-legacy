@@ -77,7 +77,6 @@ export default {
       if (this.activeSlide > 0) this.activeSlide--;
     },
     parseActionData(actiondata) {
-      let keys = Object.keys(actiondata);
       let values = Object.values(actiondata);
       return values;
     },

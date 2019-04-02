@@ -19,7 +19,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { Dialog } from "quasar";
 import { Notify } from "quasar";
 
 export default {
@@ -97,10 +96,9 @@ export default {
 </script>
 
 <style lang="stylus">
-@import '~variables'
+@import '~variables';
 
-.modal-content{
+.modal-content {
   background-color: var(--q-color-warning);
-
 }
 </style>

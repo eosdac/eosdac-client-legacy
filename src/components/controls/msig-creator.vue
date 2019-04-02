@@ -450,7 +450,6 @@
 
 <script>
 const prettyHtml = require("json-pretty-html").default;
-import authDisplay from "components/ui/auth-display";
 import { mapGetters } from "vuex";
 import debugData from "components/ui/debug-data";
 import actionMaker from "components/controls/action-maker";
@@ -458,7 +457,7 @@ import displayAction from "components/ui/display-action";
 import { date } from "quasar";
 import draggable from "vuedraggable";
 const today = new Date();
-const { addToDate, subtractFromDate } = date;
+const { addToDate } = date;
 const msigTrx_template = {
   expiration: "",
   ref_block_num: 0,
@@ -478,7 +477,6 @@ export default {
     debugData,
     actionMaker,
     displayAction,
-    authDisplay,
     draggable
   },
   data() {
