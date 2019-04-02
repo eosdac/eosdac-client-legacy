@@ -325,16 +325,16 @@
           active-icon="remove_red_eye"
         >
           <div class="q-mb-md text-text2">
-            {{ $t("msig_creator.step4_desc") }}
+            {{ $t("msig_creator.step5_desc") }}
           </div>
           <div class="row justify-between">
             <div class="row">
               <q-item class="animate-pop">
                 <q-item-side icon="mdi-account-key-outline" color="text2" />
                 <q-item-main style="margin-left:-5px">
-                  <q-item-tile class="text-text1" label
-                    >Multisignature Account</q-item-tile
-                  >
+                  <q-item-tile class="text-text1" label>{{
+                    $t("msig_creator.multisignature_account")
+                  }}</q-item-tile>
                   <q-item-tile class="text-text2 q-caption" sublabel>{{
                     getSelectedAccount2.name
                   }}</q-item-tile>
@@ -384,7 +384,7 @@
 
           <div class="row justify-between  items-center q-mt-lg ">
             <q-btn
-              label="view full Msig"
+              :label="$t('msig_creator.view_full_msig')"
               icon="pageview"
               class="q-my-xs"
               color="primary"
@@ -415,7 +415,10 @@
         style="height:50px"
         class="bg-bg1 row items-center justify-between q-px-md text-text1"
       >
-        <span>Review Msig Transaction: {{ msig_name }}</span>
+        <span
+          >{{ $t("msig_creator.review_msig_transaction") }}:
+          {{ msig_name }}</span
+        >
         <q-btn
           icon="close"
           @click="
@@ -428,7 +431,7 @@
       </div>
       <div class="q-pa-md bg-bg2 text-text1 full-height ">
         <div>
-          For convenience the action data is shown in hex and plain text.
+          {{ $t("msig_creator.json_description") }}
         </div>
         <div v-html="review_msig_modal_content" class="overflow-hidden" />
       </div>

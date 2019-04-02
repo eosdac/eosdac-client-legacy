@@ -44,16 +44,6 @@
     "your_email": "Deine E-Mail",
     "your_language": "Deine Sprache"
   },
-  "initialize": {
-    "authentication_method": "Authentifizierungsmethode",
-    "connect_with_scatter": "Verbinde dich mit Scatter",
-    "identity_request_denied": "Identitätsanfrage wurde abgelehnt. Bitte versuchen Sie es erneut und akzeptieren Sie die Anfrage",
-    "import_private_keys": "Importiere privaten Schlüssel",
-    "loading_text": "Wird geladen...",
-    "scatter_is_locked": "Scatter ist gesperrt. Bitte entsperren, um fortzufahren",
-    "scatter_not_available": "Scatter ist nicht verfügbar. Wenn Sie Scatter installiert haben, aktualisieren Sie bitte.",
-    "waiting_for_scatter": "Warte auf Scatter ..."
-  },
   "lang_selector": {
     "choose_your_language": "Wähle deine Sprache",
     "languages": {

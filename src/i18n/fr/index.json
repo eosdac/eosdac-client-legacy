@@ -30,7 +30,6 @@
     "sorry_nothing_here": "Désolé, aucun contenu n'est disponible sur cette page..."
   },
   "index": {
-    "already_subscribed": "Déjà abonné !",
     "description_p1": "eosDAC est une communauté décentralisée et autonome, ce qui signifie qu'elle appartient et est gérée par les personnes qui détiennent des tokens, qui acceptent de respecter la constitution et qui se sont inscrit en tant que membre de la communauté.",
     "description_p2": "Une fois complété, ce client membre vous permettra de lire la constitution, de vous enregistrer en tant que membre, soumettre des propositions de travail, vous inscrire pour devenir candidat, voter pour les délégués, transférer des tokens, et plus. Si vous avez des questions, cliquez sur le lien ci-dessous.",
     "discord_description": "eosDAC se présente comme étant une communauté active et engagée, un outil qui sert à développer d'autres DACs. Discord est l'endroit où nous rassemblons nos compétences et coordonnons nos activités.",
@@ -47,7 +46,6 @@
     "submit_wp": "Propositions de travail",
     "subscribe": "s'abonner",
     "subscribe_newsletter": "S'abonner à notre newsletter",
-    "subscribed_successfully": "Abonné avec succès !",
     "valid_input_required": "Entrée valide requise",
     "visit_eosdac": "Visité notre site internet eosdac.io",
     "vote_cust": "Voter Délégués",
@@ -56,16 +54,6 @@
     "welcome_to_esodac_member_client": "Bienvenue au client membre d'eosDAC",
     "your_email": "Votre email",
     "your_language": "Votre langage"
-  },
-  "initialize": {
-    "authentication_method": "Méthode d'authentification",
-    "connect_with_scatter": "Se connecter avec Scatter",
-    "identity_request_denied": "La demande d'identification a été refusée. Veuillez réessayer et accepter la demande.",
-    "import_private_keys": "Importer des clés privées",
-    "loading_text": "Chargement en cours...",
-    "scatter_is_locked": "Scatter est verrouillé. Veuillez débloquer pour continuer",
-    "scatter_not_available": "Scatter n'est pas disponible. Si vous avez installé Scatter, veuillez rafraîchir Scatter.",
-    "waiting_for_scatter": "En attente d'une réponse de la part de Scatter..."
   },
   "lang_selector": {
     "choose_your_language": "Choisissez votre langue",

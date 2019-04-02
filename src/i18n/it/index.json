@@ -27,16 +27,6 @@
   "index": {
     "eosdac": "eosdac.io"
   },
-  "initialize": {
-    "authentication_method": "Metodo di autenticazione",
-    "connect_with_scatter": "Connettiti con Scatter",
-    "identity_request_denied": "La richiesta di identità è stata negata. Per favore riprova e accetta la richiesta",
-    "import_private_keys": "Importa chiavi private",
-    "loading_text": "Caricamento in corso...",
-    "scatter_is_locked": "Scatter è bloccato. Si prega di sbloccare per continuare",
-    "scatter_not_available": "Scatter non è disponibile. Se hai installato Scatter, aggiorna.",
-    "waiting_for_scatter": "In attesa di Scatter..."
-  },
   "lang_selector": {
     "choose_your_language": "Scegli la tua LINGUA",
     "languages": {

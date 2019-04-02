@@ -96,7 +96,6 @@
     "sorry_nothing_here": "抱歉，这里什么也没有......"
   },
   "index": {
-    "already_subscribed": "已经订阅！",
     "description_p1": "eosDAC 是一个去中心化自治社区，这意味着它由同意章程并注册成为会员的代币持有者共同拥有和运营。",
     "description_p2": "在开发完成后，这个会员客户端将可以让您阅读章程、注册成为会员、提交工作人员提案、注册成为候选托管人、转移代币等。如果您有任何疑问，请使用以下的链接联络我们。",
     "discord_description": "eosDAC 是一个活跃且忙碌的社区，旨在创造工具来推动其他 DAC 的实现。Discord 是我们展示技能并合作完成目标的地方。",
@@ -113,7 +112,6 @@
     "submit_wp": "工作人员提案",
     "subscribe": "订阅",
     "subscribe_newsletter": "订阅我们的新闻快报",
-    "subscribed_successfully": "订阅成功！",
     "valid_input_required": "需要输入有效内容",
     "visit_eosdac": "访问我们的网站 eosdac.io",
     "vote_cust": "选举托管人",
@@ -122,16 +120,6 @@
     "welcome_to_esodac_member_client": "欢迎来到 eosDAC 会员客户端",
     "your_email": "您的邮箱",
     "your_language": "您的语言"
-  },
-  "initialize": {
-    "authentication_method": "身份验证方式",
-    "connect_with_scatter": "与 Scatter 连接",
-    "identity_request_denied": "身份请求被拒绝。请再试一次并接受请求",
-    "import_private_keys": "导入私钥",
-    "loading_text": "正在加载……",
-    "scatter_is_locked": "Scatter 已锁定。请解锁来继续操作",
-    "scatter_not_available": "Scatter 不可用。如果您已安装了 Scatter，请刷新。",
-    "waiting_for_scatter": "正在等待 Scatter……"
   },
   "lang_selector": {
     "choose_your_language": "选择您的语言",
