@@ -1,21 +1,37 @@
 <template>
-<div>
-  <div v-if="!edit" v-html="convertedAndSanitizedHtml"  class="markdown-body q-body-ow" v-bind:class="{ overwritemd: dark }"></div>
-  <div v-else class="relative-position bg-bg2">
-    <medium-editor ref="markeditor" id="markeditor" class="markdown-body q-body-ow" v-bind:class="{ overwritemd: dark }" :text='editText' custom-tag='div' :options="options" v-on:edit='applyTextEdit' />
+  <div>
+    <div
+      v-if="!edit"
+      v-html="convertedAndSanitizedHtml"
+      class="markdown-body q-body-ow"
+      v-bind:class="{ overwritemd: dark }"
+    ></div>
+    <div v-else class="relative-position bg-bg2">
+      <medium-editor
+        ref="markeditor"
+        id="markeditor"
+        class="markdown-body q-body-ow"
+        v-bind:class="{ overwritemd: dark }"
+        :text="editText"
+        custom-tag="div"
+        :options="options"
+        v-on:edit="applyTextEdit"
+      />
+    </div>
+    <div v-if="edit" class="row justify-end q-caption q-py-sm" style="">
+      {{ $t("markdown_viewer.select_text_to_edit") }}
+    </div>
   </div>
-  <div v-if="edit" class="row justify-end q-caption q-py-sm" style="">{{ $t('markdown_viewer.select_text_to_edit') }}</div>
-</div>
 </template>
 
 <script>
-import sanitizeHtml from 'sanitize-html'
-import marked from 'marked'
-import TurndownService from 'turndown'
-const turndownService = new TurndownService()
+import sanitizeHtml from "sanitize-html";
+import marked from "marked";
+import TurndownService from "turndown";
+const turndownService = new TurndownService();
 
 export default {
-  name: 'MarkdownViewer',
+  name: "MarkdownViewer",
   props: {
     text: String,
     dark: Boolean,
@@ -25,106 +41,134 @@ export default {
   },
   methods: {
     applyTextEdit(operation) {
-      this.editText = operation.api.origElements.innerHTML
-      this.$emit('update', turndownService.turndown(this.editText))
+      this.editText = operation.api.origElements.innerHTML;
+      this.$emit("update", turndownService.turndown(this.editText));
     },
     buttonsToTags(buttons) {
-      let tags = []
+      let tags = [];
       for (let i = 0; i < buttons.length; i++) {
         switch (buttons[i]) {
-          case 'italic':
-            tags.push('i')
+          case "italic":
+            tags.push("i");
             break;
-          case 'bold':
-            tags.push('b')
-            tags.push('strong')
+          case "bold":
+            tags.push("b");
+            tags.push("strong");
             break;
-          case 'underline':
-            tags.push('u')
+          case "underline":
+            tags.push("u");
             break;
-          case 'strikethrough':
-            tags.push('del')
+          case "strikethrough":
+            tags.push("del");
             break;
-          case 'subscript':
-            tags.push('sub')
+          case "subscript":
+            tags.push("sub");
             break;
-          case 'superscript':
-            tags.push('sup')
+          case "superscript":
+            tags.push("sup");
             break;
-          case 'anchor':
-            tags.push('a')
+          case "anchor":
+            tags.push("a");
             break;
-          case 'image':
-            tags.push('img')
+          case "image":
+            tags.push("img");
             break;
-          case 'quote':
-            tags.push('blockquote')
+          case "quote":
+            tags.push("blockquote");
             break;
-          case 'orderedlist':
-            tags.push('ol')
-            tags.push('li')
+          case "orderedlist":
+            tags.push("ol");
+            tags.push("li");
             break;
-          case 'unorderedlist':
-            tags.push('ul')
-            tags.push('li')
+          case "unorderedlist":
+            tags.push("ul");
+            tags.push("li");
             break;
           default:
-            tags.push(buttons[i])
+            tags.push(buttons[i]);
         }
       }
-      tags.push('p')
-      tags.push('hr')
-      return tags
+      tags.push("p");
+      tags.push("hr");
+      return tags;
     }
   },
   data() {
     return {
-      editText: '',
+      editText: "",
       options: {
         toolbar: {
-          buttons: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'italic', 'bold', 'underline', 'strikethrough', 'subscript',
-            'superscript', 'anchor', 'image', 'quote', 'pre', 'orderedlist', 'unorderedlist', 'indent', 'outdent', 'justifyLeft',
-            'justifyCenter', 'justifyRight', 'justifyFull', 'removeFormat'
+          buttons: [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "italic",
+            "bold",
+            "underline",
+            "strikethrough",
+            "subscript",
+            "superscript",
+            "anchor",
+            "image",
+            "quote",
+            "pre",
+            "orderedlist",
+            "unorderedlist",
+            "indent",
+            "outdent",
+            "justifyLeft",
+            "justifyCenter",
+            "justifyRight",
+            "justifyFull",
+            "removeFormat"
           ]
         }
       }
-    }
+    };
   },
   computed: {
     convertedAndSanitizedHtml() {
-      return sanitizeHtml(marked(this.text, {
-        sanitize: true
-      }), {
-        allowedTags: this.buttonsToTags(this.options.toolbar.buttons)
-      })
+      return sanitizeHtml(
+        marked(this.text, {
+          sanitize: true
+        }),
+        {
+          allowedTags: this.buttonsToTags(this.options.toolbar.buttons)
+        }
+      );
     }
   },
   created() {
     if (this.tags && this.tags.length) {
-      let arr = this.options.toolbar.buttons
+      let arr = this.options.toolbar.buttons;
       if (this.blackList) {
         for (let i = 0; i < this.tags.length; i++) {
-          arr.splice(arr.indexOf(this.tags[i]), 1)
+          arr.splice(arr.indexOf(this.tags[i]), 1);
         }
-        this.options.toolbar.buttons = this.arr
+        this.options.toolbar.buttons = this.arr;
       } else {
-        this.options.toolbar.buttons = this.tags
+        this.options.toolbar.buttons = this.tags;
       }
     }
-
   },
   watch: {
     edit(val) {
       if (val) {
-        this.editText = sanitizeHtml(marked(this.text, {
-          sanitize: false
-        }), {
-          allowedTags: this.buttonsToTags(this.options.toolbar.buttons)
-        })
+        this.editText = sanitizeHtml(
+          marked(this.text, {
+            sanitize: false
+          }),
+          {
+            allowedTags: this.buttonsToTags(this.options.toolbar.buttons)
+          }
+        );
       }
     }
   }
-}
+};
 </script>
 
 <style lang="stylus">
@@ -143,7 +187,7 @@ export default {
   color: var(--q-color-text2) !important;
 }
 .overwritemd td, .overwritemd th {
-  background: var(--q-color-bg2) !important; 
+  background: var(--q-color-bg2) !important;
 }
 
 .q-body-ow {

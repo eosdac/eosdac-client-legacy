@@ -1,41 +1,46 @@
 <template>
-<div>
-  <q-toggle :dark="getIsDark"  v-model="mode" label="mode" :left-label="true" checked-icon="brightness_3" unchecked-icon="brightness_5" @input="handleMode" />
-</div>
+  <div>
+    <q-toggle
+      :dark="getIsDark"
+      v-model="mode"
+      label="mode"
+      :left-label="true"
+      checked-icon="brightness_3"
+      unchecked-icon="brightness_5"
+      @input="handleMode"
+    />
+  </div>
 </template>
 
 <script>
-
-import {mapGetters} from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'nightModeSwitch',
-  data () {
+  name: "nightModeSwitch",
+  data() {
     return {
       mode: true
-    }
+    };
   },
   computed: {
     ...mapGetters({
-      getIsDark: 'ui/getIsDark',
+      getIsDark: "ui/getIsDark"
     })
   },
-  mounted(){
-    this.mode = this.getIsDark
+  mounted() {
+    this.mode = this.getIsDark;
   },
-  methods:{
-    handleMode(v){
-      console.log('toggle val',v)
-      if(v){
-        this.$store.dispatch('ui/loadColorScheme', 'dark');
-      }
-      else{
-        this.$store.dispatch('ui/loadColorScheme', 'light');
+  methods: {
+    handleMode(v) {
+      console.log("toggle val", v);
+      if (v) {
+        this.$store.dispatch("ui/loadColorScheme", "dark");
+      } else {
+        this.$store.dispatch("ui/loadColorScheme", "light");
       }
     }
   }
-}
+};
 </script>
 
-<style>
-</style>
+<style></style>

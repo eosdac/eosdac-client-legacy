@@ -12,7 +12,7 @@ module.exports = function (ctx) {
       'idle-vue',
       'profile-cache',
       'medium-editor'
-      
+
 
     ],
     css: [
@@ -40,7 +40,7 @@ module.exports = function (ctx) {
       // analyze: true,
       // extractCSS: false,
       extendWebpack(cfg) {
-        cfg.resolve.extensions = [ ...cfg.resolve.extensions, '.json' ]
+        cfg.resolve.extensions = [...cfg.resolve.extensions, '.json']
 
         cfg.module.rules.push({
           test: /\.json$/i,
@@ -51,9 +51,19 @@ module.exports = function (ctx) {
         cfg.module.rules.push({
           resourceQuery: /blockType=i18n/,
           use: [
-            {loader: '@kazupon/vue-i18n-loader'},
+            { loader: '@kazupon/vue-i18n-loader' },
           ]
         })
+
+        cfg.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /node_modules/,
+          options: {
+            fix: true
+          }
+        });
 
         for (const rule of cfg.module.rules) {
           if (!rule.oneOf) continue
@@ -182,7 +192,7 @@ module.exports = function (ctx) {
     },
     electron: {
       // bundler: 'builder', // or 'packager'
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         // do something with Electron process Webpack cfg
       },
       packager: {
