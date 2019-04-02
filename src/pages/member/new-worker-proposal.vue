@@ -137,7 +137,10 @@ export default {
   data() {
     return {
       allowed_currencies: [
-        { symbol: "EOS", contract: "eosio.token" },
+        {
+          symbol: this.$configFile.get("systemtokensymbol"),
+          contract: this.$configFile.get("systemtokencontract")
+        },
         {
           symbol: this.$configFile.get("dactokensymbol"),
           contract: this.$configFile.get("tokencontract")
@@ -148,7 +151,7 @@ export default {
         summary: "",
         arbitrator: "",
         pay_amount: "",
-        symbol: "EOS"
+        symbol: this.$configFile.get("systemtokensymbol")
       }
     };
   },
