@@ -1,21 +1,15 @@
 {
-  "api": {
-    "connection_to_endpoint_failed": "Соединение с конечной точкой ненадежно или недоступно",
-    "connection_to_endpoint_failed_details": "Перейдите в «Настройки», чтобы настроить рабочий API конечной точки"
-  },
   "constitution": {
-    "loading_constitution": "Загрузка Конституции",
     "switch_contrast": "Переключение темы"
   },
   "default": {
-    "account_name": "Имя пользователя",
     "constitution": "Конституция",
     "constitution_has_been_updated": "Конституция обновлена. Пожалуйста, подпишите обновленную Конституцию, чтобы использовать Клиент участника.",
     "custodians": "Хранители",
-    "log_in": "Авторизоваться",
-    "log_out": "Выйти",
     "logged_in": "Вошли в систему",
     "logged_out": "Вышли из системы",
+    "login": "Авторизоваться",
+    "logout": "Выйти",
     "member_client": "Клиент участника",
     "member_status": "Статус участника",
     "menu": "Меню",

@@ -1,13 +1,4 @@
 {
-  "api": {
-    "connection_to_endpoint_failed": "엔드포인트 연결을 할 수 없거나 신뢰할 수 없습니다.",
-    "connection_to_endpoint_failed_details": "설정에서 작동 중인 엔드포인트 API를 설정하십시오."
-  },
-  "app": {
-    "meta_description": "해당 메타 태그로 파싱되는 멤버 클라이언트에 대한 설명입니다.",
-    "meta_keywords": "자율, 탈중화, 커뮤니티, 투표",
-    "title": "eosDAC 회원 클라이언트"
-  },
   "candidate": {
     "nominated_next": "다음 관리인단으로 출마",
     "pay": "지불",
@@ -21,11 +12,8 @@
   "constitution": {
     "direct_link": "링크",
     "hash": "해시",
-    "loading_constitution": "헌법 불러오는 중",
-    "please_login_to_sign": "서명하려면 로그인하십시오",
     "signed_message": "헌법에 서명하셨습니다!",
-    "switch_contrast": "색상 대조",
-    "verified_message": "다운로드한 헌법이 인증되었습니다."
+    "switch_contrast": "색상 대조"
   },
   "contract_errors": {
     "BURN_INVALID_QTY_": "유효하지 않은 수량",
@@ -91,15 +79,14 @@
     "VOTECUST_VOTING_IS_DISABLED": "현재는 투표를 할 수 없습니다."
   },
   "default": {
-    "account_name": "계정 이름",
     "constitution": "헌법",
     "constitution_has_been_updated": "헌법이 개정되었습니다. 회원 클라이언트를 사용하려면 업데이트된 헌법에 서명하십시오.",
     "credits": "크레딧",
     "custodians": "관리인",
-    "log_in": "로그인",
-    "log_out": "로그아웃",
     "logged_in": "로그인",
     "logged_out": "로그아웃됨",
+    "login": "로그인",
+    "logout": "로그아웃",
     "member_client": "회원 클라이언트",
     "member_status": "회원 상태",
     "menu": "메뉴",

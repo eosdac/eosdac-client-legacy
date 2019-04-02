@@ -90,7 +90,9 @@
           />
           <q-item-side v-if="getMemberStatus === false" />
           <q-item-main>
-            <q-item-tile class="text-text1" label>Member Status</q-item-tile>
+            <q-item-tile class="text-text1" label>{{
+              $t("default.member_status")
+            }}</q-item-tile>
             <q-item-tile v-if="getMemberStatus" class="text-text2" sublabel>{{
               getMemberStatus
             }}</q-item-tile>
@@ -99,7 +101,7 @@
                 color="primary"
                 to="/constitution"
                 dense
-                label="Signature Required"
+                :label="$t('menu.signature_required')"
               />
             </q-item-tile>
           </q-item-main>
@@ -114,7 +116,7 @@
         >
           <q-item-side :icon="$configFile.icon.refresh" color="info" />
           <q-item-main>
-            <q-item-tile label>Switch account</q-item-tile>
+            <q-item-tile label>{{ $t("menu.switch_account") }}</q-item-tile>
           </q-item-main>
         </q-item>
 
@@ -124,7 +126,7 @@
         >
           <q-item-side :icon="$configFile.icon.account" color="negative" />
           <q-item-main>
-            <q-item-tile label>Logout</q-item-tile>
+            <q-item-tile label>{{ $t("default.logout") }}</q-item-tile>
           </q-item-main>
         </q-item>
 
@@ -145,7 +147,7 @@
       text-color="text1"
       icon="lock"
       v-if="!getAccountName"
-      label="login"
+      :label="$t('default.login')"
       @click="$store.dispatch('global/login')"
     />
   </div>

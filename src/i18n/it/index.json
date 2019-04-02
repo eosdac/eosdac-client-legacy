@@ -1,21 +1,15 @@
 {
-  "api": {
-    "connection_to_endpoint_failed": "La connessione all'endpoint non è affidabile o non è disponibile",
-    "connection_to_endpoint_failed_details": "Vai su Impostazioni per configurare un'API Endpoint funzionante"
-  },
   "constitution": {
-    "loading_constitution": "Caricamento costituzione",
     "switch_contrast": "Cambia Contrasto"
   },
   "default": {
-    "account_name": "Nome utente",
     "constitution": "Costituzione",
     "constitution_has_been_updated": "La Costituzione è stata aggiornata. Si prega di firmare la Costituzione aggiornata per utilizzare il Cliente Membro.",
     "custodians": "custodi",
-    "log_in": "Accesso",
-    "log_out": "Disconnettersi",
     "logged_in": "Connesso",
     "logged_out": "Disconnesso",
+    "login": "Accesso",
+    "logout": "Disconnettersi",
     "member_client": "Membro Cliente",
     "member_status": "Stato Membro",
     "menu": "Menu",

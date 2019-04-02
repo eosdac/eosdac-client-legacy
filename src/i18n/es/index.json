@@ -1,21 +1,15 @@
 {
-  "api": {
-    "connection_to_endpoint_failed": "La conexión al endpoint no es confiable o no está disponible",
-    "connection_to_endpoint_failed_details": "Vaya a Configuración para configurar una API con un endpoint que funcione"
-  },
   "constitution": {
-    "loading_constitution": "Cargando constitución",
     "switch_contrast": "Cambiar Contraste"
   },
   "default": {
-    "account_name": "Nombre de cuenta",
     "constitution": "Constitución",
     "constitution_has_been_updated": "La Constitución ha sido actualizada. Firme la Constitución actualizada para usar el portal de Miembros.",
     "custodians": "Representantes",
-    "log_in": "Iniciar sesión",
-    "log_out": "Cerrar sesión",
     "logged_in": "Conectado",
     "logged_out": "Desconectado",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
     "member_client": "Miembro",
     "member_status": "Estado",
     "menu": "Menú",

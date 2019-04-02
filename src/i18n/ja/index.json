@@ -1,13 +1,4 @@
 {
-  "api": {
-    "connection_to_endpoint_failed": "エンドポイントへの接続が信頼できないかまたは利用できません。",
-    "connection_to_endpoint_failed_details": "設定から動作中のエンドポイントAPIを設定します。"
-  },
-  "app": {
-    "meta_description": "対応するメタタグに解析されたメンバークライアントの説明です",
-    "meta_keywords": "自律型、分散型、コミュニティ、投票",
-    "title": "eosDACメンバークライアント"
-  },
   "candidate": {
     "nominated_next": "次期カストディアンに指名されました",
     "pay": "支払い",
@@ -21,11 +12,8 @@
   "constitution": {
     "direct_link": "ダイレクトリンク",
     "hash": "ハッシュ",
-    "loading_constitution": "規約をロードしています",
-    "please_login_to_sign": "署名するにはログインしてください。",
     "signed_message": "規約に署名しました！",
-    "switch_contrast": "コントラストを切り替え",
-    "verified_message": "ダウンロードされた規約が検証されました！"
+    "switch_contrast": "コントラストを切り替え"
   },
   "contract_errors": {
     "BURN_INVALID_QTY_": "不正な数量です",
@@ -91,14 +79,13 @@
     "VOTECUST_VOTING_IS_DISABLED": "投票は現在停止中です。"
   },
   "default": {
-    "account_name": "アカウント名",
     "constitution": "規約",
     "constitution_has_been_updated": "規約が更新されました。 更新された規約に署名して、Member Clientを使用してください。",
     "custodians": "カストディアン",
-    "log_in": "ログイン",
-    "log_out": "ログアウト",
     "logged_in": "ログインしました",
     "logged_out": "ログアウトしました",
+    "login": "ログイン",
+    "logout": "ログアウト",
     "member_client": "メンバークライアント",
     "member_status": "メンバーステータス",
     "menu": "メニュー",

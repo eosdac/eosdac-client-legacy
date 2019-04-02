@@ -1,30 +1,19 @@
 {
-  "api": {
-    "connection_to_endpoint_failed": "La conncection au point final n'est pas fiable ou indisponible.",
-    "connection_to_endpoint_failed_details": "Aller dans la section Paramètres pour choisir un point final API différent."
-  },
-  "app": {
-    "meta_description": "Voici la description de notre client membre qui est analysé dans les tags correspondants",
-    "meta_keywords": "autonome, décentralisée, communauté, vote",
-    "title": "eosDAC Membre Client"
-  },
   "candidate": {
     "staked": "Investi",
     "votes": "Vote"
   },
   "constitution": {
-    "loading_constitution": "Chargement de la constitution",
     "switch_contrast": "Changer de Contraste"
   },
   "default": {
-    "account_name": "Nom du compte",
     "constitution": "Constitution",
     "constitution_has_been_updated": "La Constitution a été mise à jour. Veuillez signer la nouvelle constitution pour utiliser le client membre.",
     "custodians": "Voter pour les Délégués",
-    "log_in": "S'identifier",
-    "log_out": "Déconnexion",
     "logged_in": "Connecté",
     "logged_out": "Déconnecté",
+    "login": "S'identifier",
+    "logout": "Déconnexion",
     "member_client": "Client Membre",
     "member_status": "Statut du Membre",
     "menu": "Menu",

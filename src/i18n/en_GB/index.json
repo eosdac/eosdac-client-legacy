@@ -1,8 +1,4 @@
 {
-  "api": {
-    "connection_to_endpoint_failed": "Connection to endpoint is unreliable or unavailable",
-    "connection_to_endpoint_failed_details": "Go to Settings to setup a working API Endpoint"
-  },
   "candidate": {
     "staked": "Staked",
     "votes": "Votes"
@@ -10,11 +6,8 @@
   "constitution": {
     "direct_link": "Direct Link",
     "hash": "Hash",
-    "loading_constitution": "Loading constitution",
-    "please_login_to_sign": "Please login to sign.",
     "signed_message": "You have signed the constitution!",
-    "switch_contrast": "Switch Contrast",
-    "verified_message": "Downloaded constitution is verified!"
+    "switch_contrast": "Switch Contrast"
   },
   "contract_errors": {
     "BURN_INVALID_QTY_": "invalid quantity",
@@ -96,14 +89,13 @@
     "VOTEPROP_PROPOSAL_NOT_FOUND": "Proposal not found."
   },
   "default": {
-    "account_name": "Account Name",
     "constitution": "Constitution",
     "constitution_has_been_updated": "The Constitution has been updated. Please sign the updated Constitution to use the Member Client.",
     "custodians": "Vote For Custodians",
-    "log_in": "Log In",
-    "log_out": "Log Out",
     "logged_in": "Logged-In",
     "logged_out": "Logged-Out",
+    "login": "login",
+    "logout": "Logout",
     "member_client": "Member Client",
     "member_status": "Member Status",
     "menu": "Menu",
@@ -183,6 +175,10 @@
   },
   "markdown_viewer": {
     "select_text_to_edit": "Highlight the text you want to edit."
+  },
+  "menu": {
+    "signature_required": "Signature Required",
+    "switch_account": "Switch Account"
   },
   "multi_modal": {
     "register_as_dac_member": "REGISTER AS A DAC-MEMBER",

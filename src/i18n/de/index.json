@@ -1,20 +1,12 @@
 {
-  "api": {
-    "connection_to_endpoint_failed": "Die Verbing zum Endpoint ist unzuverlässig oder nicht verfügbar",
-    "connection_to_endpoint_failed_details": "Gehen Sie zu den Einstellungen um einen funktionierenden Endpunt einzustellen"
-  },
-  "constitution": {
-    "loading_constitution": "Lade Verfassung"
-  },
   "default": {
-    "account_name": "Kontoname",
     "constitution": "Verfassung",
     "constitution_has_been_updated": "The Verfassung wurde aktualisiert. Bitte unterschreiben Sie die Verfassung, um Mitglied zu bleiben.",
     "custodians": "Verwalter",
-    "log_in": "Einloggen",
-    "log_out": "Ausloggen",
     "logged_in": "Eingeloggt",
     "logged_out": "Abgemeldet",
+    "login": "Einloggen",
+    "logout": "Ausloggen",
     "member_client": "Member-Client",
     "member_status": "Mitgliedsstatus",
     "menu": "Menü",

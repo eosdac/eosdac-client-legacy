@@ -1,13 +1,4 @@
 {
-  "api": {
-    "connection_to_endpoint_failed": "Điểm kết nối không đáng tin hoặc không có sẵn",
-    "connection_to_endpoint_failed_details": "Vào Cài Đặt để thiết lập API Điểm Kết Nối đang hoạt động"
-  },
-  "app": {
-    "meta_description": "đây là mô tả công cụ thành viên của chúng tôi được phân tích cú pháp tương ứng với meta tags",
-    "meta_keywords": "tự trị, phi tập trung, cộng đồng, bỏ phiếu",
-    "title": "Công Cụ Thành Viên eosDAC"
-  },
   "candidate": {
     "staked": "Đã Đặt Cọc",
     "votes": "Số Phiếu"
@@ -15,11 +6,8 @@
   "constitution": {
     "direct_link": "Link Trực Tiếp",
     "hash": "Mã hash",
-    "loading_constitution": "Đang tải Hiến Pháp",
-    "please_login_to_sign": "Vui lòng đăng nhập để ký duyệt.",
     "signed_message": "Bạn đã ký duyệt hiến pháp!",
-    "switch_contrast": "Chuyển Chế Độ Tương Phản",
-    "verified_message": "Hiến pháp tải xuống đã được xác minh!"
+    "switch_contrast": "Chuyển Chế Độ Tương Phản"
   },
   "contract_errors": {
     "BURN_INVALID_QTY_": "số lượng không hợp lệ",
@@ -85,14 +73,13 @@
     "VOTECUST_VOTING_IS_DISABLED": "Chức năng bỏ phiếu hiện đang bị vô hiệu."
   },
   "default": {
-    "account_name": "Tên Tài Khoản",
     "constitution": "Hiến Pháp",
     "constitution_has_been_updated": "Hiến Pháp đã được cập nhật. Vui lòng ký duyệt Hiến Pháp mới để sử dụng Công Cụ Thành Viên.",
     "custodians": "Bỏ Phiếu Bầu Người Giám Hộ",
-    "log_in": "Đăng Nhập",
-    "log_out": "Đăng Xuất",
     "logged_in": "Đã Đăng Nhập",
     "logged_out": "Đã Đăng Xuất",
+    "login": "Đăng Nhập",
+    "logout": "Đăng Xuất",
     "member_client": "Công Cụ Thành Viên",
     "member_status": "Trạng Thái Thành Viên",
     "menu": "Danh Mục",

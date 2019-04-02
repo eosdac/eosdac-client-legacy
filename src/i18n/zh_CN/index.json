@@ -1,13 +1,4 @@
 {
-  "api": {
-    "connection_to_endpoint_failed": "与端点的连接不可靠或不可用",
-    "connection_to_endpoint_failed_details": "转到“设置”来设置有效的 API 端点"
-  },
-  "app": {
-    "meta_description": "这是将我们的会员客户端解析为相应 meta 标签的说明",
-    "meta_keywords": "自治, 去中心化, 社区, 投票",
-    "title": "eosDAC 会员客户端"
-  },
   "candidate": {
     "staked": "押注",
     "votes": "票数"
@@ -15,11 +6,8 @@
   "constitution": {
     "direct_link": "链接",
     "hash": "哈希值",
-    "loading_constitution": "加载章程",
-    "please_login_to_sign": "请登录来签署章程。",
     "signed_message": "您已经签署章程！",
-    "switch_contrast": "切换背景色",
-    "verified_message": "已验证下载的章程！"
+    "switch_contrast": "切换背景色"
   },
   "contract_errors": {
     "BURN_INVALID_QTY_": "无效的数量。",
@@ -85,14 +73,13 @@
     "VOTECUST_VOTING_IS_DISABLED": "目前无法投票。"
   },
   "default": {
-    "account_name": "账户名",
     "constitution": "章程",
     "constitution_has_been_updated": "章程已经更新。 请签署更新后的章程以使用会员客户端。",
     "custodians": "选举托管人",
-    "log_in": "登录",
-    "log_out": "登出",
     "logged_in": "已登录",
     "logged_out": "已登出",
+    "login": "登录",
+    "logout": "登出",
     "member_client": "会员客户端",
     "member_status": "会员状态",
     "menu": "菜单",
