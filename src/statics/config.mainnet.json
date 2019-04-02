@@ -1,4 +1,5 @@
 {
+    "DAC_name": "eosDAC",
     "contracts": {
         
         "token": {
