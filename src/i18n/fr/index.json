@@ -71,13 +71,22 @@
       "vietnamese": "Vietnamien"
     }
   },
+  "manage_candidateship": {
+    "amount_to_stake_placeholder": "quantité pour *stake* EOSDAC",
+    "locked_tokens": "tokens bloqués",
+    "page_description_active_custodian": "Vous êtes actuellement actif en tant que membre du conseil des Délégués d'eosDAC.",
+    "page_description_registered": "Merci pour vous êtes inscris en tant que candidat pour servir au conseil des Délégués d'eosDAC. Dans le cadre de votre conditature, certains de vos tokens ont été *stake*.",
+    "page_description_unregistered": "Cette page sert à s'inscrire en tant que candidat au conseil des délégués. Cette position s'accompagne de responsabilités qui sont également mentionées dans la constitution d'eosDAC. S'il-vous-plaît, inscrivez-vous seulement en tant que candidat si vous avez entièrement compris les responsabilités d'un membre du conseil des délégués d'eosDAC. Vous pouvez vous référer à la partie 5 pour plus d'information.",
+    "pay_description": "veuillez indiquer le montant que vous souhaitez recevoir en tant que Délégué pendant une période. Le montant maximum est {requested_pay}.",
+    "register": "Inscription",
+    "requested_custodian_pay_placeholder": "Demande de la rémunération en EOS",
+    "requestedpay": "Demande de rémunération",
+    "stake_amount": "Nombre de Stake ",
+    "stake_description": "Veuillez indiquer le nombre de token que vous souhaitez placer. Le nombre minimum est de {minimum_stake}.",
+    "unregister": "Non inscrit"
+  },
   "markdown_viewer": {
     "select_text_to_edit": "Surligné le texte que vous souhaitez éditer."
-  },
-  "multi_modal": {
-    "register_as_dac_member": "S'INSCRIRE EN TANT QUE MEMBRE DE LA DAC",
-    "registration": "Inscription",
-    "sign_in": "SE CONNECTER"
   },
   "nodeselector": {
     "automatic_connection": "Connexion automatique",
@@ -98,89 +107,24 @@
     "specify_your_own": "Spécifiez votre propre point final personnalisé en remplissant l'entrée avec une URL et cliquez sur le bouton Connexion."
   },
   "profile": {
-    "about_me": "À propos de moi",
     "account_name": "nom du compte",
     "bio": "Biographie",
     "cancel": "annulé",
     "download": "Télécharger",
     "edit": "Modifier",
-    "email_address": "Adresse e-mail",
     "familyName": "Nom de famille",
     "female": "Femme",
     "gender": "Genre",
     "givenName": "prénom",
-    "loading_text": "Chargement des donnés du profil...",
     "male": "Homme",
     "maxLinksmsg": "Désolé, le nombre maximum de liens authorisés est de {number_allowed_links}.",
-    "not_confirmed": "non confirmé",
     "other": "Autre",
-    "placeholder_short_bio": "Voici ma courte biographie ...",
     "profile": "Profil",
     "profile_picture_url": "Profil de l'image Url",
     "save": "sauvegarder",
     "social_link": "Lien social",
     "social_profile_link": "Lien du profil social",
-    "user_name": "Nom d'utilisateur",
     "website": "Site Internet"
-  },
-  "regcandidate": {
-    "amount_to_stake_placeholder": "quantité pour *stake* EOSDAC",
-    "loadconfig": "Chargement de la configuration du contrat",
-    "locked_tokens": "tokens bloqués",
-    "msg_reqpay_error": "Veuillez remplir le montant du paiement.",
-    "msg_stake_error": "Veuillez spécifier le montant de votre mise.",
-    "page_description_active_custodian": "Vous êtes actuellement actif en tant que membre du conseil des Délégués d'eosDAC.",
-    "page_description_registered": "Merci pour vous êtes inscris en tant que candidat pour servir au conseil des Délégués d'eosDAC. Dans le cadre de votre conditature, certains de vos tokens ont été *stake*.",
-    "page_description_unregistered": "Cette page sert à s'inscrire en tant que candidat au conseil des délégués. Cette position s'accompagne de responsabilités qui sont également mentionées dans la constitution d'eosDAC. S'il-vous-plaît, inscrivez-vous seulement en tant que candidat si vous avez entièrement compris les responsabilités d'un membre du conseil des délégués d'eosDAC. Vous pouvez vous référer à la partie 5 pour plus d'information.",
-    "pay_description": "veuillez indiquer le montant que vous souhaitez recevoir en tant que Délégué pendant une période. Le montant maximum est {requested_pay}.",
-    "profile_not_confirmed": "Vous avez soumis votre profil mais il n'est toujours pas confirmé sur la blockchain, attendez un cours instant s'il-vous-plaît et réessayez à nouveau.",
-    "profile_required": "Afin de pouvoir vous présenter comme candidat, vous devez d'abord avoir un profil.",
-    "register": "Inscription",
-    "register_as_candidate": "Inscrivez-vous en tant que Candidat",
-    "requested_custodian_pay_placeholder": "Demande de la rémunération en EOS",
-    "requestedpay": "Demande de rémunération",
-    "stake_amount": "Nombre de Stake ",
-    "stake_description": "Veuillez indiquer le nombre de token que vous souhaitez placer. Le nombre minimum est de {minimum_stake}.",
-    "unregister": "Non inscrit",
-    "unregister_as_candidate": "Non enregistré en tant que Candidat"
-  },
-  "register": {
-    "already_registered": "Vous êtes déjà inscrit en tant que membre eosDAC",
-    "checking_status": "Vérification du statut du membre...",
-    "close": "Fermer",
-    "congratulations_registered": "Toutes nos félicitations! Vous êtes maintenant inscrit en tant que membre eosDAC",
-    "constitution_hash": "Constitution Hash",
-    "could_not_retrieve_member_status": "Impossible de récupérer le statut du membre",
-    "fullscreen": "Plein écran",
-    "i_accept_the_constitution": "J'accepte la constitution",
-    "loading_latest_constitution": "Chargement de la dernière constitution...",
-    "must_sign_constitution": "Pour devenir membre de eosDAC, vous devez accepter et signer la Constitution",
-    "register": "Inscription",
-    "registration_sign_the_constitution": "Inscription - Signer la Constitution",
-    "try_again": "Réessayer",
-    "updated_constitution": "La constitution a été mise à jour. Veuillez signer la constitution pour continuer."
-  },
-  "scatter_signin": {
-    "choose_authentication_type": "Veuillez choisir un type d'authentification pour vous connecter au client membre eosDAC",
-    "choose_connection_type": "Choisissez le type de connexion",
-    "connection_type": "Type de connexion",
-    "identity_request_denied": "La demande d'identification a été refusée. Veuillez réessayer et accepter la demande",
-    "scatter_is_locked": "Scatter est verrouillé. Veuillez déverrouiller pour continuer",
-    "scatter_is_not_available": "Scatter n'est pas disponible. Si vous avez installé Scatter, actualisez ou accédez à Autorisations, supprimez l'autorisation pour ce site et réessayez.",
-    "scatter_is_outdated": "Scatter n'est plus à jour. Merci de mettre à jour Scatter et de réessayer",
-    "sign_in": "SE CONNECTER",
-    "waiting_for_scatter": "En attente d'une réponse de la part de Scatter..."
-  },
-  "scatter_tutorial": {
-    "if_you_are_unable_to_choose_an_identity": "Si vous ne pouvez pas choisir une identité, suivez les étapes ci-dessous",
-    "import_account": "1. Importation du compte",
-    "import_account_into_identity": "2. Importation du compte dans une identité",
-    "import_identity_instructions": "Accédez à votre section Identités. <br> Sur votre identité, cliquez sur l'icône en forme de crayon. <br> Dans Identité, accédez à la section \"Compte\". Choisissez maintenant votre compte importé dans la liste.<br> Sauvegarder votre identité en cliquant sur le bouton Enregistrer en haut à droite.",
-    "make_sure_active_key": "Assurez-vous d'être en possession de votre clé active pour votre compte importé dans Scatter.",
-    "permissions": "1. Aller à la section Permissions",
-    "revoke_identity": "3. Révoquer l'identité",
-    "select_domain": "2. Sélectionnez le domaine",
-    "unable_to_connect": "Si vous ne parvenez pas à vous connecter à Scatter, suivez les étapes ci-dessous pour réinitialiser vos autorisations."
   },
   "settings": {
     "API": "API",
@@ -202,31 +146,14 @@
     "user_preference": "Paramètres utilisateur"
   },
   "transaction": {
-    "action": "action",
-    "by_completing_agree": "En complétant cette transaction, j'accepte les conditions suivantes",
     "cancel": "Annuler",
-    "fields": "Champs",
-    "from": "De",
-    "loading_abi": "Chargement ABI en cours...",
-    "memo": "Note",
-    "pushing_transaction": "Transaction poussée...",
-    "quantity": "Quantité",
-    "send": "envoyer",
-    "to": "À",
     "transaction": "Transaction",
-    "transaction_successful": "Transaction réussie",
-    "view_in_explorer": "Afficher dans l'explorateur",
-    "warning_bandwidth": "Faible bande passante réseau. Votre allocation de bande passante réseau reste inférieure à 10%. La transaction peut échouer.",
-    "warning_cpu": "CPU faible. Il reste moins de 10% de l’allocation de votre processeur. La transaction peut échouer.",
-    "warning_ram": "Faible RAM. Il reste moins de 10% de votre allocation de mémoire vive. La transaction peut échouer.",
-    "warning_ricardian": "Le contrat *Ricardian* pour cette action n'a pu être trouvé. Êtes-vous sûr de vouloir exécuter cette transaction?"
+    "transaction_successful": "Transaction réussie"
   },
   "vote_custodians": {
     "candidate_list": "Liste des candidats",
-    "candidate_registration": "Candidate Registration",
     "description_main": "Le conseil de surveillance gère les opérations et les affaires du CAD, notamment la gouvernance et l'administration des actifs et des passifs du CAD. Les membres suivants du CAD ont confié à certains de leurs jetons de se présenter et de présenter des candidats pour un poste au sein du conseil de surveillance, qui dure sept jours. Tous les 7 jours, vos votes sont recalculés pour sélectionner ceux qui feront partie du conseil d'administration suivant. Le vote est important! S'il vous plaît voter souvent et rester engagé au sein du CAD pour savoir qui fournit de la valeur.",
     "description_side": "Vous pouvez voter pour un maximum de 5 candidats délégués à la fois. Veuillez sélectionner les candidats qui, selon vous, apporteront de la valeur au CAD.",
-    "loading_candidates": "candidats de chargement",
     "my_votes": "mon vote",
     "rows_per_page": "Lignes par page",
     "search": "recherche",
@@ -242,23 +169,5 @@
     "seconds": "secondes",
     "threshold_met": "Seuil de vote de 15% atteint. eosDAC est débloquée.",
     "update_in": "Mettre à jour dans"
-  },
-  "worker_proposals": {
-    "APPROVED": "APPROUVÉ",
-    "OPEN": "OUVRIR"
-  },
-  "wp_member_view": {
-    "approx_USD": "(Environ xxxx USD)",
-    "deadline": "Date limite",
-    "no": "Non",
-    "requested_payment": "Paiement demandé",
-    "submitted": "Soumis",
-    "time_left": "Temps restant",
-    "type": "Type",
-    "view_proposal": "Afficher la proposition",
-    "view_votes": "Voir les votes",
-    "votes": "Votes",
-    "worker_proposal_by": "Proposition du travailleur par",
-    "yes": "Oui"
   }
 }

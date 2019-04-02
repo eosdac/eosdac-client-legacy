@@ -145,14 +145,14 @@ export async function transact(
 
     if (getters["getSettingByName"]("notify_info_msg").value) {
       Notify.create({
-        message: `Please Login`,
+        message: this._vm.i18n.t("transaction.please_login"),
         timeout: 5000, // in milliseconds; 0 means no timeout
         type: "info",
-        detail: "You need to login before doing actions",
+        detail: this._vm.i18n.t("transaction.you_must_login"),
         position: "bottom-right", // 'top', 'left', 'bottom-left' etc.
         actions: [
           {
-            label: "login",
+            label: this._vm.i18n.t("default.login"),
             icon: "lock", // optional
             handler: () => {
               dispatch("global/login", null, { root: true });
@@ -208,7 +208,7 @@ export async function transact(
         // closeBtn: true, // or string as button message e.g. 'dismiss'
         actions: [
           {
-            label: "Explorer",
+            label: this._vm.i18n.t("transaction.explorer"),
             icon: "link", // optional
             handler: () => {
               openURL(
@@ -235,7 +235,7 @@ export async function transact(
 
     if (getters["getSettingByName"]("notify_error_msg").value) {
       Notify.create({
-        message: `Transaction Error`,
+        message: this._vm.i18n.t("transaction.error"),
         timeout: 7000, // in milliseconds; 0 means no timeout
         type: "negative",
         detail: this._vm.i18n.t(message),

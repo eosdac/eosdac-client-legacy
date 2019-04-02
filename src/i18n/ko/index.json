@@ -144,13 +144,24 @@
       "vietnamese": "베트남어"
     }
   },
+  "manage_candidateship": {
+    "amount_to_stake_placeholder": "스테이크할 EOSDAC량",
+    "locked_tokens": "락업된 토큰",
+    "page_description_active_custodian": "귀하는 현재 eosDAC 관리인단으로서 활동 중입니다.",
+    "page_description_registered": "관리인단 후보로 등록해주셔서 감사합니다. 관리인 후보 등록 과정의 일부로 귀하의 토큰은 스테이킹되었습니다.",
+    "page_description_unregistered": "이 페이지에서 관리인단 후보로 등록할 수 있습니다. 관리인은 eosDAC 헌법에 명시된 책임을 가집니다. eosDAC 헌법을 이해하지 못 하였거나 관리인단으로서의 책임을 다 할 수 없을 시에는 등록하지 마십시오. 등록 전 헌법 제 5항을 자세히 읽어보시기 바랍니다.",
+    "pay_description": "관리인 임기(1주일) 동안 받고 싶은 EOS 토큰 수를 입력해 주십시오. 요구할 수 있는 최대치는 {requested_pay}입니다.",
+    "register": "등록하기",
+    "requested_custodian_pay_placeholder": "요청한 EOS 보상",
+    "requestedpay": "요청한 보상",
+    "stake_amount": "스테이킹한 수량",
+    "stake_description": "스테이킹하려는 토큰 수를 정하십시오. 등록에 필요한 최소량은 {minimum_stake}입니다..",
+    "unregister": "등록 취소",
+    "unstake": "스테이크 해제",
+    "unstake_description": "주의: 스테이킹을 해제는 액션을 취한 후 토큰이 월렛에 다시 보일 때까지 60분의 지연이 발생합니다.  전송이 완료될 때까지 기다려주시기 바랍니다. 또한 관리인으로 선출된 경우에는 토큰이 며칠 동안 스마트 계약에 유지되며 현재 다음으로 설정됩니다 :\n\nPlease note, the unstaking action has a built in delay of 60 minutes from the time you unstake before you will see the funds back in your wallet. Please be patient for the transfer to complete. Also, if you were ever elected as a custodian, the funds will be held in a smart contract for a number of days, currently set to:"
+  },
   "markdown_viewer": {
     "select_text_to_edit": "편집하려는 부분을 선택하십시오."
-  },
-  "multi_modal": {
-    "register_as_dac_member": "DAC 회원으로 등록",
-    "registration": "등록",
-    "sign_in": "로그인"
   },
   "nodeselector": {
     "automatic_connection": "자동 연결",
@@ -172,92 +183,24 @@
     "specify_your_own": "사용자가 직접 특정 엔드포인트를 지정하고 싶을 경우 URL을 입력하고 연결 버튼을 누르십시오."
   },
   "profile": {
-    "about_me": "내 정보",
     "account_name": "계정명",
     "bio": "소개",
     "cancel": "취소",
     "download": "다운로드",
     "edit": "편집",
-    "email_address": "이메일 주소",
     "familyName": "성",
     "female": "여성",
     "gender": "성별",
     "givenName": "이름",
-    "loading_text": "프로필 데이터 불러오는 중...",
     "male": "남성",
     "maxLinksmsg": "죄송합니다. 링크는 최대 {number_allowed_links}개까지만 추가할 수 있습니다.",
-    "not_confirmed": "확인 대기 중",
     "other": "기타",
-    "placeholder_short_bio": "간략한 내 소개입니다...",
     "profile": "프로필",
     "profile_picture_url": "프로필 사진 URL",
     "save": "저장",
     "social_link": "소셜 미디어 링크",
     "social_profile_link": "소셜 프로필 링크",
-    "user_name": "사용자 이름",
     "website": "웹사이트"
-  },
-  "regcandidate": {
-    "amount_to_stake_placeholder": "스테이크할 EOSDAC량",
-    "loadconfig": "계약 구성 불러오는 중",
-    "locked_tokens": "락업된 토큰",
-    "msg_reqpay_error": "희망하는 지불 수량을 입력하십시오.",
-    "msg_stake_error": "스테이크할 수량을 정하십시오.",
-    "page_description_active_custodian": "귀하는 현재 eosDAC 관리인단으로서 활동 중입니다.",
-    "page_description_registered": "관리인단 후보로 등록해주셔서 감사합니다. 관리인 후보 등록 과정의 일부로 귀하의 토큰은 스테이킹되었습니다.",
-    "page_description_unregistered": "이 페이지에서 관리인단 후보로 등록할 수 있습니다. 관리인은 eosDAC 헌법에 명시된 책임을 가집니다. eosDAC 헌법을 이해하지 못 하였거나 관리인단으로서의 책임을 다 할 수 없을 시에는 등록하지 마십시오. 등록 전 헌법 제 5항을 자세히 읽어보시기 바랍니다.",
-    "pay_description": "관리인 임기(1주일) 동안 받고 싶은 EOS 토큰 수를 입력해 주십시오. 요구할 수 있는 최대치는 {requested_pay}입니다.",
-    "profile_not_confirmed": "제출한 프로필이 아직 블록체인 상에서 확인되지 않았습니다. 기다렸다가 다시 시도해주십시오.",
-    "profile_required": "관리인 후보로 등록하려면 프로필이 필요합니다.",
-    "register": "등록하기",
-    "register_as_candidate": "관리인으로 등록",
-    "requested_custodian_pay_placeholder": "요청한 EOS 보상",
-    "requestedpay": "요청한 보상",
-    "stake_amount": "스테이킹한 수량",
-    "stake_description": "스테이킹하려는 토큰 수를 정하십시오. 등록에 필요한 최소량은 {minimum_stake}입니다..",
-    "unregister": "등록 취소",
-    "unregister_as_candidate": "관리인 등록 취소",
-    "unstake": "스테이크 해제",
-    "unstake_description": "주의: 스테이킹을 해제는 액션을 취한 후 토큰이 월렛에 다시 보일 때까지 60분의 지연이 발생합니다.  전송이 완료될 때까지 기다려주시기 바랍니다. 또한 관리인으로 선출된 경우에는 토큰이 며칠 동안 스마트 계약에 유지되며 현재 다음으로 설정됩니다 :\n\nPlease note, the unstaking action has a built in delay of 60 minutes from the time you unstake before you will see the funds back in your wallet. Please be patient for the transfer to complete. Also, if you were ever elected as a custodian, the funds will be held in a smart contract for a number of days, currently set to:"
-  },
-  "register": {
-    "already_registered": "귀하는 이미 eosDAC 회원으로 등록되어 있습니다.",
-    "checking_status": "회원 상태 확인 중 ...",
-    "close": "닫기",
-    "congratulations_registered": "축하합니다! 이제 eosDAC 회원으로 등록되었습니다.",
-    "constitution_hash": "헌법 해시",
-    "could_not_retrieve_member_status": "회원 상태를 검색할 수 없습니다.",
-    "fullscreen": "전체 화면",
-    "i_accept_the_constitution": "나는 헌법에 동의합니다.",
-    "loading_latest_constitution": "최신 헌법 불러오는 중 ...",
-    "must_sign_constitution": "eosDAC 회원이 되려면 헌법에 동의하고 서명해야 합니다.",
-    "register": "등록",
-    "registration_sign_the_constitution": "등록 - 헌법 서명",
-    "try_again": "다시 시도하십시오.",
-    "updated_constitution": "헌법이 개정되었습니다. 계속하려면 헌법에 서명하십시오."
-  },
-  "scatter_signin": {
-    "choose_authentication_type": "eosDAC 회원 클라이언트에 로그인하려면 인증 유형을 선택하십시오.",
-    "choose_connection_type": "연결 유형 선택",
-    "connection_type": "연결 유형",
-    "identity_request_denied": "신원 인증 요청이 거부되었습니다. 다시 시도하고 요청을 수락하십시오.",
-    "login_with_scatter": "Scatter로 로그인",
-    "scatter_is_locked": "Scatter가 잠금 상태입니다. 계속하려면 해제하십시오.",
-    "scatter_is_not_available": "Scatter를 이용할 수 없습니다. Scatter를 이미 설치했다면 새로고침이나 권한 > 이 사이트의 권한 제거 후 다시 시도하십시오.",
-    "scatter_is_outdated": "Scatter가 최신 버전이 아닙니다. Scatter를 업데이트한 후 다시 시도하십시오",
-    "sign_in": "로그인",
-    "waiting_for_scatter": "Scatter 기다리는 중 ..."
-  },
-  "scatter_tutorial": {
-    "if_you_are_unable_to_choose_an_identity": "Scatter에서 신원을 선택할 수 없는 경우 다음 단계를 따르십시오.",
-    "import_account": "1. 계정 가져오기",
-    "import_account_into_identity": "2. 계정을 신원인증 ID로 가져오기",
-    "import_identity_instructions": "신원인증 ID를 선택하십시오.<br>신원 정보에서 연필 아이콘을 클릭하십시오.<br>신원 정보에서 \"계정\"섹션으로 이동하십시오. <br>목록에서 가져올 계정을 선택하십시오. 오른쪽 상단에있는 저장 버튼을 누르십시오.",
-    "make_sure_active_key": "Scatter로 가져온 계정의 Active 키를 가지고 있는지 확인하십시오.",
-    "permissions": "1. 메뉴에서 권한 선택",
-    "revoke_identity": "3. 신원을 취소하십시오",
-    "select_domain": "2. 도메인 선택",
-    "unable_to_connect": "Scatter에 연결할 수없는 경우 아래 단계에 따라 권한을 다시 설정하십시오."
   },
   "settings": {
     "API": "API",
@@ -282,33 +225,16 @@
     "user_preference": "사용자 설정"
   },
   "transaction": {
-    "action": "액션",
-    "by_completing_agree": "이 트랜잭션을 완료함으로써 다음 조건에 동의합니다.",
     "cancel": "취소",
     "error": "오류",
-    "fields": "필드",
-    "from": "보낸 계정",
-    "loading_abi": "ABI 로드 중 ...",
-    "memo": "메모",
-    "pushing_transaction": "트랜젝션 처리 중...",
-    "quantity": "수량",
-    "send": "보내다",
     "signature_rejected": "트랜잭션을 취소했습니다",
-    "to": "받는 계정",
     "transaction": "트랜잭션",
-    "transaction_successful": "트랜젝션 성공",
-    "view_in_explorer": "익스플로러에서 보기",
-    "warning_bandwidth": "낮은 네트워크 대역폭. 네트워크 대역폭 할당량이 10 % 미만입니다. 트랜젝션이 실패할 수 있습니다.",
-    "warning_cpu": "CPU가 적습니다. CPU 할당량이 10 % 미만입니다. 트랜젝션이 실패할 수 있습니다.",
-    "warning_ram": "RAM이 적습니다. RAM 할당량이 10 % 미만입니다. 트랜젝션이 실패할 수 있습니다.",
-    "warning_ricardian": "이 액션에 대한 리카르디안 계약을 찾을 수 없습니다. 이 트랜젝션을 실행하시겠습니까?"
+    "transaction_successful": "트랜젝션 성공"
   },
   "vote_custodians": {
     "candidate_list": "후보 목록",
-    "candidate_registration": "후보 등록하기",
     "description_main": "관리인단은 DAC의 운영 및 업무를 관리합니다. 여기에는 DAC의 자산 및 부채의 관리 및 관리가 포함됩니다 (이에 국한되지 않음). 자신의 토큰 중 일부를 스테이킹하여 7일간 지속되는 관리인단 후보로 출마한 eosDAC 회원은 다음과 같습니다. 귀하의 투표는 다음 관리인단을 선출하기 위해 7일마다 재계산됩니다. 투표가 중요합니다! 누가 eosDAC의 가치를 높이는지 제대로 판단하려면 eosDAC에 계속해서 참여하고 정기적으로 투표하십시오.",
     "description_side": "한 번에 최대 5명의 관리인 후보자에게 투표할 수 있습니다. DAC의 가치를 높일 수 있는 후보자를 선택하십시오.",
-    "loading_candidates": "후보 불러오는 중",
     "my_votes": "내 투표",
     "rows_per_page": "페이지 당 프로필 수",
     "search": "검색",
@@ -317,19 +243,6 @@
     "voting_disabled_title": "지금은 투표할 수 없습니다",
     "voting_progress": "투표 진행 중"
   },
-  "vote_eosdac": {
-    "added_to_list": "eosDAC BP가 귀하의 투표 목록에 추가되었습니다",
-    "confirm": "확인",
-    "please_delete": "{eosdac_bp}을 추가하려면 한 표를 제거하십시오.",
-    "remove_vote": "한 표를 제거하십시오.",
-    "thank_you": "투표해 주셔서 감사합니다!",
-    "thank_you_for": "{eosdac_bp}에 투표해 주셔서 감사합니다.",
-    "vote_decayed": "투표력이 약해지고 있습니다!",
-    "vote_for_eosdac": "eosDAC에 투표하세요",
-    "voted_with_proxy": "대리 투표로 투표하셨습니다",
-    "votes": "투표",
-    "voting_power": "투표력"
-  },
   "votingprogress": {
     "activated_at": "DAC은 15% 달성 시 활성화됩니다",
     "loading": "불러오는 중...",
@@ -337,23 +250,5 @@
     "seconds": "초",
     "threshold_met": "15% 최소 투표율이 넘었습니다. eosDAC이 해제되었습니다.",
     "update_in": "업데이트 시각"
-  },
-  "worker_proposals": {
-    "APPROVED": "승인됨",
-    "OPEN": "결정되지 않음"
-  },
-  "wp_member_view": {
-    "approx_USD": "(약 xxxx USD)",
-    "deadline": "마감 시간",
-    "no": "아니",
-    "requested_payment": "요청한 보상",
-    "submitted": "제출됨",
-    "time_left": "남은 시간",
-    "type": "유형",
-    "view_proposal": "제안 보기",
-    "view_votes": "투표 수 보기",
-    "votes": "투표 수",
-    "worker_proposal_by": "작업자 제안 작성자",
-    "yes": "예"
   }
 }

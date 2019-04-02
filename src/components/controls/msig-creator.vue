@@ -401,7 +401,7 @@
                 color="positive"
                 class="animate-pop"
                 @click="proposeMsig"
-                label="submit"
+                :label="$t('default.submit')"
               />
             </div>
           </div>

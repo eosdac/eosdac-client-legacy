@@ -63,13 +63,19 @@
       "vietnamese": "Vietnamita"
     }
   },
+  "manage_candidateship": {
+    "amount_to_stake_placeholder": "Cantidad para stake EOSDAC",
+    "page_description_active_custodian": "Actualmente está activo como Miembro del Consejo de Representantes de eosDAC.",
+    "page_description_registered": "Gracias por registrarse como candidato para servir en el Consejo de Representantes de eosDAC. Como parte de su registro de candidatura, algunos de sus tokens han sido stakeados.",
+    "page_description_unregistered": "Esta página es para registrarse como candidato para un puesto en el Consejo de Representantes. Este puesto viene con las responsabilidades descritas en la Constitución de eosDAC. Por favor, no se registre como Candidato a menos que entienda completamente y pueda cumplir con las responsabilidades de un miembro del Consejo de Representantes de eosDAC. Por favor revise la sección 5 de la constitución cuidadosamente antes de registrarse.",
+    "register": "Registrarse",
+    "requested_custodian_pay_placeholder": "Pago solicitado en EOS",
+    "requestedpay": "Pago solicitado",
+    "stake_amount": "Cantidad Stakeada",
+    "unregister": "No registrado"
+  },
   "markdown_viewer": {
     "select_text_to_edit": "Seleccione el texto que quiere editar"
-  },
-  "multi_modal": {
-    "register_as_dac_member": "REGÍSTRESE COMO MIEMBRO DE LA DAC",
-    "registration": "Registro",
-    "sign_in": "REGISTRARSE"
   },
   "nodeselector": {
     "automatic_connection": "Conexión automática",
@@ -90,84 +96,24 @@
     "specify_your_own": "Especifique su endpoint personalizado rellenando el campo con una url y haga clic en el botón de conexión."
   },
   "profile": {
-    "about_me": "Sobre mi",
     "account_name": "Nombre de la Cuenta",
     "bio": "Bio",
     "cancel": "cancelar",
     "download": "Descargar",
     "edit": "Editar",
-    "email_address": "Dirección de correo electrónico",
     "familyName": "Apellido",
     "female": "Mujer",
     "gender": "Género",
     "givenName": "Nombre",
-    "loading_text": "Cargando información del perfil...",
     "male": "Masculino",
     "maxLinksmsg": "Sorry, max {number_allowed_links} links allowed.",
-    "not_confirmed": "not confirmed",
     "other": "Otro",
-    "placeholder_short_bio": "Esta es mi biografía ...",
     "profile": "Perfil",
     "profile_picture_url": "URL de imagen de perfil",
     "save": "Guardar",
     "social_link": "Link social",
     "social_profile_link": "Enlace de perfil social",
-    "user_name": "Nombre de usuario",
     "website": "Sitio web"
-  },
-  "regcandidate": {
-    "amount_to_stake_placeholder": "Cantidad para stake EOSDAC",
-    "loadconfig": "Cargando configuración del contrato",
-    "page_description_active_custodian": "Actualmente está activo como Miembro del Consejo de Representantes de eosDAC.",
-    "page_description_registered": "Gracias por registrarse como candidato para servir en el Consejo de Representantes de eosDAC. Como parte de su registro de candidatura, algunos de sus tokens han sido stakeados.",
-    "page_description_unregistered": "Esta página es para registrarse como candidato para un puesto en el Consejo de Representantes. Este puesto viene con las responsabilidades descritas en la Constitución de eosDAC. Por favor, no se registre como Candidato a menos que entienda completamente y pueda cumplir con las responsabilidades de un miembro del Consejo de Representantes de eosDAC. Por favor revise la sección 5 de la constitución cuidadosamente antes de registrarse.",
-    "profile_not_confirmed": "Enviaste tu perfil pero aún no está confirmado en la blockchain. Espere y vuelve a intentarlo.",
-    "profile_required": "Para registrarse como Candidato necesita un perfil.",
-    "register": "Registrarse",
-    "register_as_candidate": "Registrarse como Candidato",
-    "requested_custodian_pay_placeholder": "Pago solicitado en EOS",
-    "requestedpay": "Pago solicitado",
-    "stake_amount": "Cantidad Stakeada",
-    "unregister": "No registrado",
-    "unregister_as_candidate": "No registrado como Candidato"
-  },
-  "register": {
-    "already_registered": "Ya estás registrado como Miembro de eosDAC.",
-    "checking_status": "Comprobando el estado del Miembro ...",
-    "close": "Cerrar",
-    "congratulations_registered": "¡Felicidades! Ya está registrado como Miembro de eosDAC.",
-    "constitution_hash": "Hash de constitución",
-    "could_not_retrieve_member_status": "No se pudo recuperar el estado del miembro",
-    "fullscreen": "Pantalla completa",
-    "i_accept_the_constitution": "Acepto la Constitución",
-    "loading_latest_constitution": "Cargando la última constitución ...",
-    "must_sign_constitution": "Para convertirse en miembro de eosDAC, debe aceptar y firmar la Constitución.",
-    "register": "Registro",
-    "registration_sign_the_constitution": "Registro - Firme la Constitución",
-    "try_again": "Inténtalo nuevamente",
-    "updated_constitution": "La constitución ha sido actualizada. Por favor firme la constitución para continuar."
-  },
-  "scatter_signin": {
-    "choose_authentication_type": "Elija un tipo de autenticación para iniciar sesión en el Portal de Miermbos eosDAC.",
-    "choose_connection_type": "Elija el tipo de conexión",
-    "connection_type": "Tipo de conección",
-    "identity_request_denied": "La solicitud de identidad fue denegada Por favor intente de nuevo y acepte la solicitud.",
-    "scatter_is_locked": "Scatter está bloqueado. Desbloquealo para continuar.",
-    "scatter_is_not_available": "Scatter no está disponible. Si tiene instalado Scatter, actualice o vaya a Permisos, asigne el permiso para este sitio y vuelva a intentarlo.",
-    "scatter_is_outdated": "Scatter esta desactualizado. Por favor actualize Scatter y vuelva a intentarlo.",
-    "sign_in": "REGISTRARSE",
-    "waiting_for_scatter": "Esperando a Scatter ..."
-  },
-  "scatter_tutorial": {
-    "if_you_are_unable_to_choose_an_identity": "Si no puede elegir una identidad, siga los pasos a continuación.",
-    "import_account": "1. Cuenta de importación",
-    "import_account_into_identity": "2. Importar cuenta en identidad",
-    "import_identity_instructions": "Vaya a la sección Identidades. <br> En su Identidad, haga clic en el ícono del lápiz. <br> Dentro de su Identidad, vaya a la sección \"Cuenta\". <br> Ahora elija su cuenta importada de la lista. <br> Guarde su Identidad con el botón Guardar en la esquina superior derecha.",
-    "make_sure_active_key": "Asegúrese de tener su clave activa para su cuenta importada en scatter.",
-    "permissions": "1. Ir a permisos",
-    "revoke_identity": "3. Revoca la identidad",
-    "select_domain": "2. Seleccione el dominio",
-    "unable_to_connect": "Si no puede conectarse a Scatter, siga los pasos a continuación para restablecer sus permisos."
   },
   "settings": {
     "API": "API",
@@ -189,31 +135,14 @@
     "user_preference": "Ajustes de usuario"
   },
   "transaction": {
-    "action": "Aceptar",
-    "by_completing_agree": "Al completar esta transacción, acepto los siguientes términos.",
     "cancel": "Cancelar",
-    "fields": "Campos",
-    "from": "De",
-    "loading_abi": "Cargando ABI ...",
-    "memo": "Memo",
-    "pushing_transaction": "Generando Transacción ...",
-    "quantity": "Cantidad",
-    "send": "enviar",
-    "to": "A",
     "transaction": "Transacción",
-    "transaction_successful": "Transacción exitosa",
-    "view_in_explorer": "Ver en el explorador",
-    "warning_bandwidth": "Bajo ancho de banda Su asignación de ancho de banda tiene menos del 10%. La transacción puede fallar",
-    "warning_cpu": "Bajo CPU Su asignación de CPU tiene menos del 10%. La transacción puede fallar",
-    "warning_ram": "Baja RAM. Su asignación de RAM tiene menos del 10%. La transacción puede fallar",
-    "warning_ricardian": "El contrato ricardiano para esta acción no pudo ser encontrado. ¿Estás seguro de que deseas ejecutar esta transacción?"
+    "transaction_successful": "Transacción exitosa"
   },
   "vote_custodians": {
     "candidate_list": "Lista de Candidatos",
-    "candidate_registration": "Candidate Registration",
     "description_main": "El Consejo de Representantes maneja las operaciones y asuntos del DAC, incluidos, entre otros, el gobierno y la administración de los activos y pasivos del DAC. Los siguientes miembros de la DAC otorgaron algunos de sus tokens para presentarse ellos mismos y los candidatos para un puesto en el Consejo de Representantes que duran 7 días. Cada 7 días, sus votos se vuelven a calcular para seleccionar quién formará parte del próximo Consejo de Representantes. ¡Votar es importante! Vota a menudo y mantente comprometido con la DAC para saber quién proporciona valor.",
     "description_side": "Puede votar por hasta 5 candidatos a Representante a la vez. Seleccione candidatos que crea que aportarán valor al DAC.",
-    "loading_candidates": "Cargando Candidatos",
     "my_votes": "mi voto",
     "rows_per_page": "Filas por página",
     "search": "búsqueda",
@@ -227,23 +156,5 @@
     "seconds": "segundos",
     "threshold_met": "Quorom del 15% registrado. eosDac se ha desbloqueado.",
     "update_in": "actualizar en"
-  },
-  "worker_proposals": {
-    "APPROVED": "APROBADO",
-    "OPEN": "ABIERTO"
-  },
-  "wp_member_view": {
-    "approx_USD": "(Aprox. Xxxx USD)",
-    "deadline": "Fecha límite",
-    "no": "No",
-    "requested_payment": "Pago solicitado",
-    "submitted": "Enviado",
-    "time_left": "Tiempo restante",
-    "type": "Tipo",
-    "view_proposal": "Ver propuesta",
-    "view_votes": "Ver Votos",
-    "votes": "Votos",
-    "worker_proposal_by": "Propuesta de Trabajo hecha por",
-    "yes": "Sí"
   }
 }

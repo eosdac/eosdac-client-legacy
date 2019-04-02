@@ -17,7 +17,7 @@
           </q-item-side>
           <q-item-main>
             <q-item-tile class="text-text1 q-display-1" label>{{
-              $t("regcandidate.candidate")
+              $t("manage_candidateship.candidate")
             }}</q-item-tile>
             <q-item-tile class="text-text2 q-title" sublabel>
               <div class="row items-center">
@@ -28,7 +28,7 @@
           </q-item-main>
         </q-item>
         <div class="q-mt-md">
-          {{ $t("regcandidate.page_description_registered") }}
+          {{ $t("manage_candidateship.page_description_registered") }}
         </div>
 
         <div class="row q-mt-md">
@@ -36,7 +36,7 @@
             <q-item-side left icon="icon-type-2" class="text-text2" />
             <q-item-main style="margin-left:-5px">
               <q-item-tile class="text-text1" label>{{
-                $t(`regcandidate.requestedpay`)
+                $t(`manage_candidateship.requestedpay`)
               }}</q-item-tile>
               <q-item-tile class="text-text2" sublabel>{{
                 $helper.assetToLocaleNumber(getIsCandidate.requestedpay)
@@ -47,7 +47,7 @@
             <q-item-side left icon="icon-dac-balance" class="text-text2" />
             <q-item-main style="margin-left:-5px">
               <q-item-tile class="text-text1" label>{{
-                $t(`regcandidate.locked_tokens`)
+                $t(`manage_candidateship.locked_tokens`)
               }}</q-item-tile>
               <q-item-tile class="text-text2" sublabel>{{
                 $helper.assetToLocaleNumber(getIsCandidate.locked_tokens)
@@ -58,7 +58,7 @@
             <q-item-side left icon="how_to_vote" class="text-text2" />
             <q-item-main style="margin-left:-5px">
               <q-item-tile class="text-text1" label>{{
-                $t(`regcandidate.total_votes`)
+                $t(`manage_candidateship.total_votes`)
               }}</q-item-tile>
               <q-item-tile class="text-text2" sublabel>{{
                 $helper.toLocaleNumber(getIsCandidate.total_votes / 10000)
@@ -71,7 +71,7 @@
             class="animate-pop"
             color="primary"
             @click="unRegisterAsCandidtate"
-            :label="$t('regcandidate.unregister')"
+            :label="$t('manage_candidateship.unregister')"
           />
         </div>
       </div>
@@ -89,7 +89,7 @@
           </q-item-side>
           <q-item-main>
             <q-item-tile class="text-text1 q-display-1" label>{{
-              $t("regcandidate.candidate")
+              $t("manage_candidateship.candidate")
             }}</q-item-tile>
             <q-item-tile class="text-text2 q-title" sublabel>
               <div class="row items-center">{{ getAccountName }}</div>
@@ -97,12 +97,14 @@
           </q-item-main>
         </q-item>
 
-        <span>{{ $t("regcandidate.page_description_unregistered") }}</span>
+        <span>{{
+          $t("manage_candidateship.page_description_unregistered")
+        }}</span>
         <div class="row gutter-md q-mt-md">
           <div class="col-xs-12 col-md-6">
             <div>
               <span>{{
-                $t("regcandidate.stake_description", {
+                $t("manage_candidateship.stake_description", {
                   minimum_stake: $helper.assetToLocaleNumber(
                     getCustodianConfig.lockupasset
                   )
@@ -123,9 +125,9 @@
                     :dark="getIsDark"
                     type="number"
                     v-model="inputs.stakeamount"
-                    :stack-label="$t('regcandidate.stake_amount')"
+                    :stack-label="$t('manage_candidateship.stake_amount')"
                     :placeholder="
-                      $t('regcandidate.amount_to_stake_placeholder', {
+                      $t('manage_candidateship.amount_to_stake_placeholder', {
                         token_symbol: $configFile.get('dactokensymbol')
                       })
                     "
@@ -137,7 +139,7 @@
           <div class="col-xs-12 col-md-6">
             <div>
               <span>{{
-                $t("regcandidate.pay_description", {
+                $t("manage_candidateship.pay_description", {
                   requested_pay: $helper.assetToLocaleNumber(
                     getCustodianConfig.requested_pay_max
                   )
@@ -159,11 +161,14 @@
                     type="number"
                     :max="20"
                     v-model="inputs.requestedpay"
-                    :stack-label="$t('regcandidate.requestedpay')"
+                    :stack-label="$t('manage_candidateship.requestedpay')"
                     :placeholder="
-                      $t('regcandidate.requested_custodian_pay_placeholder', {
-                        system_token: $configFile.get('systemtokensymbol')
-                      })
+                      $t(
+                        'manage_candidateship.requested_custodian_pay_placeholder',
+                        {
+                          system_token: $configFile.get('systemtokensymbol')
+                        }
+                      )
                     "
                   />
                 </q-item-main>
@@ -178,7 +183,7 @@
             class="animate-pop"
             color="primary"
             @click="registerAsCandidtate"
-            :label="$t('regcandidate.register')"
+            :label="$t('manage_candidateship.register')"
           />
         </div>
       </div>
@@ -193,7 +198,7 @@
         class=" bg-bg1 q-pa-md round-corners shadow-5 q-mt-md"
       >
         <span
-          >{{ $t("regcandidate.unstake_description")
+          >{{ $t("manage_candidateship.unstake_description")
           }}{{ lockup_release_time_delay_days }}</span
         >
 
@@ -218,11 +223,11 @@
             class="animate-pop"
             color="primary"
             @click="unstake"
-            :label="$t('regcandidate.unstake')"
+            :label="$t('manage_candidateship.unstake')"
           />
         </div>
       </div>
-      <!-- {{$t('regcandidate.page_description_active_custodian')}} -->
+      <!-- {{$t('manage_candidateship.page_description_active_custodian')}} -->
     </div>
 
     <div v-if="!getAccountName" class="animate-fade q-pa-md">

@@ -137,13 +137,23 @@
       "vietnamese": "越南文"
     }
   },
+  "manage_candidateship": {
+    "amount_to_stake_placeholder": "用于权益押注的 EOSDAC 数量",
+    "locked_tokens": "被锁的代币",
+    "page_description_active_custodian": "您目前是一名在任的 eosDAC 托管人董事会成员。",
+    "page_description_registered": "感谢您注册成为 eosDAC 托管人董事会的成员候选人。作为候选人注册的一部分，您的部分代币已被用于权益押注。",
+    "page_description_unregistered": "这一页面是用于注册成为候选人来争取在托管人董事会任职。该职位需要承担 eosDAC 章程中列举的种种责任。请在完全理解并有能力承担作为一名 eosDAC 托管人董事会成员所需承担职责的前提下注册成为候选人。请在注册前仔细阅读章程第 5 节的内容。",
+    "pay_description": "请填写您作为托管人希望在一届任期内获得的酬劳。最大数额为 {requested_pay}。",
+    "register": "注册",
+    "requested_custodian_pay_placeholder": "希望得到的酬劳（EOS）",
+    "requestedpay": "希望得到的酬劳",
+    "stake_amount": "权益押注数量",
+    "stake_description": "请指定您想要用于权益押注的代币数量。最低数额为 {minimum_stake}。",
+    "unregister": "注销",
+    "unstake": "解除押注"
+  },
   "markdown_viewer": {
     "select_text_to_edit": "选中您想要修改的文字。"
-  },
-  "multi_modal": {
-    "register_as_dac_member": "注册成为 DAC 会员",
-    "registration": "注册",
-    "sign_in": "登录"
   },
   "nodeselector": {
     "automatic_connection": "自动连接",
@@ -164,90 +174,24 @@
     "specify_your_own": "通过输入 URL 地址并单击连接按钮来指定您自己的自定义端点。"
   },
   "profile": {
-    "about_me": "关于我",
     "account_name": "账户名",
     "bio": "简介",
     "cancel": "取消",
     "download": "下载",
     "edit": "编辑",
-    "email_address": "电子邮箱",
     "familyName": "姓",
     "female": "女",
     "gender": "性别",
     "givenName": "名",
-    "loading_text": "正在载入个人资料……",
     "male": "男",
     "maxLinksmsg": "抱歉，最多只允许 {number_allowed_links} 个链接。",
-    "not_confirmed": "未确认",
     "other": "其他",
-    "placeholder_short_bio": "这是我的简介……",
     "profile": "个人资料",
     "profile_picture_url": "头像地址",
     "save": "保存",
     "social_link": "社交网络链接",
     "social_profile_link": "社交账号链接",
-    "user_name": "用户名",
     "website": "网站"
-  },
-  "regcandidate": {
-    "amount_to_stake_placeholder": "用于权益押注的 EOSDAC 数量",
-    "loadconfig": "正在载入合约配置",
-    "locked_tokens": "被锁的代币",
-    "msg_reqpay_error": "请填写希望获得的酬劳。",
-    "msg_stake_error": "请指定您想要用于权益押注的数量。",
-    "page_description_active_custodian": "您目前是一名在任的 eosDAC 托管人董事会成员。",
-    "page_description_registered": "感谢您注册成为 eosDAC 托管人董事会的成员候选人。作为候选人注册的一部分，您的部分代币已被用于权益押注。",
-    "page_description_unregistered": "这一页面是用于注册成为候选人来争取在托管人董事会任职。该职位需要承担 eosDAC 章程中列举的种种责任。请在完全理解并有能力承担作为一名 eosDAC 托管人董事会成员所需承担职责的前提下注册成为候选人。请在注册前仔细阅读章程第 5 节的内容。",
-    "pay_description": "请填写您作为托管人希望在一届任期内获得的酬劳。最大数额为 {requested_pay}。",
-    "profile_not_confirmed": "您已提交个人资料但它还未在区块链上确认，请稍后再试。",
-    "profile_required": "要注册成为候选人，您必须填写个人资料。",
-    "register": "注册",
-    "register_as_candidate": "注册成为候选人",
-    "requested_custodian_pay_placeholder": "希望得到的酬劳（EOS）",
-    "requestedpay": "希望得到的酬劳",
-    "stake_amount": "权益押注数量",
-    "stake_description": "请指定您想要用于权益押注的代币数量。最低数额为 {minimum_stake}。",
-    "unregister": "注销",
-    "unregister_as_candidate": "注销成为候选人",
-    "unstake": "解除押注"
-  },
-  "register": {
-    "already_registered": "您已经注册成为 eosDAC 会员。",
-    "checking_status": "正在检查会员状态......",
-    "close": "关闭",
-    "congratulations_registered": "恭喜！您现已注册成为 eosDAC 会员。",
-    "constitution_hash": "章程哈希值",
-    "could_not_retrieve_member_status": "无法获取会员状态",
-    "fullscreen": "全屏",
-    "i_accept_the_constitution": "我接受章程",
-    "loading_latest_constitution": "加载最新章程......",
-    "must_sign_constitution": "若要成为 eosDAC 的会员，你必须同意并签署章程。",
-    "register": "注册",
-    "registration_sign_the_constitution": "注册 - 签署章程",
-    "try_again": "再试一次",
-    "updated_constitution": "章程已经更新。请签署章程以继续操作。"
-  },
-  "scatter_signin": {
-    "choose_authentication_type": "请选择一种身份验证方式来登录 eosDAC 会员客户端。",
-    "choose_connection_type": "选择连接类型",
-    "connection_type": "连接类型",
-    "identity_request_denied": "身份请求被拒绝。请再试一次并接受请求。",
-    "scatter_is_locked": "Scatter 已锁定。请解锁以继续操作。",
-    "scatter_is_not_available": "Scatter 不可用。如果您安装了 Scatter，请刷新或转到“权限”，删除此站点的权限，然后重试。",
-    "scatter_is_outdated": "您使用的是旧版的 Scatter。请在更新您的 Scatter 之后重试。",
-    "sign_in": "登录",
-    "waiting_for_scatter": "正在等待 Scatter……"
-  },
-  "scatter_tutorial": {
-    "if_you_are_unable_to_choose_an_identity": "如果您无法选择身份，请按照以下步骤操作。",
-    "import_account": "1. 导入帐户",
-    "import_account_into_identity": "2. 将帐户导入“身份”",
-    "import_identity_instructions": "转到您的“身份”版面。<br>在您的“身份”上点击铅笔图标。<br>在您的“身份”版面中，转到“帐户”部分。<br>然后从列表中选择您导入的帐户。<br>使用右上角的“保存”按钮保存您的身份。",
-    "make_sure_active_key": "确保您帐户的 Active 密钥已导入 Scatter。",
-    "permissions": "1. 转到“权限”",
-    "revoke_identity": "3. 撤销身份",
-    "select_domain": "2. 选择域",
-    "unable_to_connect": "如果您无法连接到 Scatter，请按照以下步骤重置您的许可。"
   },
   "settings": {
     "API": "API",
@@ -272,32 +216,15 @@
     "user_preference": "用户设置"
   },
   "transaction": {
-    "action": "操作",
-    "by_completing_agree": "通过完成此交易，我同意以下条款。",
     "cancel": "取消",
     "error": "错误",
-    "fields": "字段",
-    "from": "发送人",
-    "loading_abi": "正在加载 ABI ...",
-    "memo": "备注",
-    "pushing_transaction": "正在推送交易......",
-    "quantity": "数额",
-    "send": "发送",
-    "to": "接收人",
     "transaction": "交易",
-    "transaction_successful": "交易成功",
-    "view_in_explorer": "在代币探测器中查看",
-    "warning_bandwidth": "网络带宽不足。您的网络带宽分配剩余不到 10％。交易可能会失败。",
-    "warning_cpu": "CPU 不足。您的 CPU 分配剩余不到 10％。交易可能会失败。",
-    "warning_ram": "RAM 不足。您的 RAM 分配剩余不到 10％。交易可能会失败。",
-    "warning_ricardian": "无法找到此操作的李嘉图合约。您确定要执行此交易吗？"
+    "transaction_successful": "交易成功"
   },
   "vote_custodians": {
     "candidate_list": "候选人名单",
-    "candidate_registration": "候选人注册",
     "description_main": "托管人董事会负责管理 DAC 的日常事务，包括但不限于管理 DAC 的资产和支出。以下 DAC 成员已经授予他们的部分代币来作为候选人进入托管人董事会，每个任期为 7 天。每隔 7 天，票数都将被重新计算来选出新的托管人董事会。投票相当重要！请经常来投票并参与到 DAC 事务中来了解谁在为 DAC 创造价值。",
     "description_side": "您一次最多可以投票给 5 名托管人候选人。 请选择您认为会为 DAC 带来价值的候选人。",
-    "loading_candidates": "正在载入候选人",
     "my_votes": "我的投票",
     "rows_per_page": "每页行数",
     "search": "搜索",
@@ -306,19 +233,6 @@
     "voting_disabled_title": "投票功能已禁用",
     "voting_progress": "选举进度"
   },
-  "vote_eosdac": {
-    "added_to_list": "我们的节点（BP）已加入您的投票列表中。",
-    "confirm": "确认",
-    "please_delete": "请删除一个投票选项并用 {eosdac_bp} 代替。",
-    "remove_vote": "请删除一个投票选项。",
-    "thank_you": "感谢您的投票！",
-    "thank_you_for": "感谢您为 {eosdac_bp} 投票。",
-    "vote_decayed": "您的投票权重已减少！",
-    "vote_for_eosdac": "为 eosDAC 投票",
-    "voted_with_proxy": "您已通过代理投票",
-    "votes": "投票",
-    "voting_power": "投票权值"
-  },
   "votingprogress": {
     "activated_at": "DAC 将在达到 15% 时激活",
     "loading": "正在载入……",
@@ -326,23 +240,5 @@
     "seconds": "秒",
     "threshold_met": "已达到 15% 的投票门槛。eosDAC 解锁。",
     "update_in": "更新倒数"
-  },
-  "worker_proposals": {
-    "APPROVED": "已批准",
-    "OPEN": "待定"
-  },
-  "wp_member_view": {
-    "approx_USD": "（约 xxxx 美元）",
-    "deadline": "截止日期",
-    "no": "否",
-    "requested_payment": "索要的酬劳",
-    "submitted": "已提交",
-    "time_left": "剩余时间",
-    "type": "类型",
-    "view_proposal": "查看提案",
-    "view_votes": "查看投票",
-    "votes": "投票",
-    "worker_proposal_by": "提案申请人",
-    "yes": "是"
   }
 }

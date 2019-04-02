@@ -143,13 +143,24 @@
       "vietnamese": "ベトナム語"
     }
   },
+  "manage_candidateship": {
+    "amount_to_stake_placeholder": "ステークしているEOSDACの総量",
+    "locked_tokens": "ロックされているトークン",
+    "page_description_active_custodian": "現在、カストディアンボードのアクティブメンバーです。",
+    "page_description_registered": "eosDACのカストディアン候補へのご登録ありがとうございます。候補登録の一環として、いくつかのトークンがステークされます。",
+    "page_description_unregistered": "このページは、カストディアンボードのメンバー候補への登録ページです。カストディアンボードのメンバーは、規約で概説されている責任を負います。カストディアンボードのメンバーとしての責任を理解し、それを全うできる場合にのみ、候補者登録をしてください。登録前に、規約のセクション5を入念に確認して下さい。",
+    "pay_description": "カストディアンとして受け取りたい一期分の数量を入力して下さい。要求できる数量は最大で {requested_pay} です。",
+    "register": "登録",
+    "requested_custodian_pay_placeholder": "希望報酬額(EOS)",
+    "requestedpay": "希望報酬額",
+    "stake_amount": "ステーク総量",
+    "stake_description": "ステークしたいトークンの数量を入力して下さい。指定できる数量は最小で {minimum_stake} です。",
+    "unregister": "登録解除",
+    "unstake": "ステークを解除",
+    "unstake_description": "ステークを解除してからウォレットに残高が反映されるまで、承認時間として60分の待ち時間が生じることにご注意下さい。ご不便をおかけしますが処理が完了するまでお待ち下さい。また、カストディアンとして選任された場合、残高は所定の日数、スマートコントラクトに保管されます。現在の保管日数："
+  },
   "markdown_viewer": {
     "select_text_to_edit": "編集したいテキストをハイライトする。"
-  },
-  "multi_modal": {
-    "register_as_dac_member": "DACメンバーとしての登録",
-    "registration": "登録",
-    "sign_in": "サインイン"
   },
   "nodeselector": {
     "automatic_connection": "自動接続",
@@ -171,92 +182,24 @@
     "specify_your_own": "URLを入力し、接続ボタンをクリックして、独自のカスタムエンドポイントを指定します。"
   },
   "profile": {
-    "about_me": "登録情報",
     "account_name": "アカウント名",
     "bio": "バイオグラフィー",
     "cancel": "キャンセル",
     "download": "ダウンロード",
     "edit": "編集",
-    "email_address": "メールアドレス",
     "familyName": "姓",
     "female": "女性",
     "gender": "性別",
     "givenName": "名",
-    "loading_text": "プロフィールデータを読み込んでいます...",
     "male": "男性",
     "maxLinksmsg": "すみません、登録できるリンクは最大で  {number_allowed_links} 個までです。",
-    "not_confirmed": "まだ承認されていません",
     "other": "その他",
-    "placeholder_short_bio": "これは私の簡単なプロフィールです...",
     "profile": "プロフィール",
     "profile_picture_url": "プロフィール写真のURL",
     "save": "保存",
     "social_link": "SNSリンク",
     "social_profile_link": "SNSプロフィールリンク",
-    "user_name": "ユーザー名",
     "website": "ウェブサイト"
-  },
-  "regcandidate": {
-    "amount_to_stake_placeholder": "ステークしているEOSDACの総量",
-    "loadconfig": "コントラクト設定を読み込んでいます",
-    "locked_tokens": "ロックされているトークン",
-    "msg_reqpay_error": "支払い数量を入力してください。",
-    "msg_stake_error": "ステーク数量を入力してください。",
-    "page_description_active_custodian": "現在、カストディアンボードのアクティブメンバーです。",
-    "page_description_registered": "eosDACのカストディアン候補へのご登録ありがとうございます。候補登録の一環として、いくつかのトークンがステークされます。",
-    "page_description_unregistered": "このページは、カストディアンボードのメンバー候補への登録ページです。カストディアンボードのメンバーは、規約で概説されている責任を負います。カストディアンボードのメンバーとしての責任を理解し、それを全うできる場合にのみ、候補者登録をしてください。登録前に、規約のセクション5を入念に確認して下さい。",
-    "pay_description": "カストディアンとして受け取りたい一期分の数量を入力して下さい。要求できる数量は最大で {requested_pay} です。",
-    "profile_not_confirmed": "プロフィールを送信しましたが、まだブロックチェーン上で承認されていません。少し時間を置いてから再度お試し下さい。",
-    "profile_required": "候補者として登録するにはプロフィールが必要です。",
-    "register": "登録",
-    "register_as_candidate": "候補者として登録",
-    "requested_custodian_pay_placeholder": "希望報酬額(EOS)",
-    "requestedpay": "希望報酬額",
-    "stake_amount": "ステーク総量",
-    "stake_description": "ステークしたいトークンの数量を入力して下さい。指定できる数量は最小で {minimum_stake} です。",
-    "unregister": "登録解除",
-    "unregister_as_candidate": "候補者としての登録を解除",
-    "unstake": "ステークを解除",
-    "unstake_description": "ステークを解除してからウォレットに残高が反映されるまで、承認時間として60分の待ち時間が生じることにご注意下さい。ご不便をおかけしますが処理が完了するまでお待ち下さい。また、カストディアンとして選任された場合、残高は所定の日数、スマートコントラクトに保管されます。現在の保管日数："
-  },
-  "register": {
-    "already_registered": "eosDACのメンバーとして登録済みです。",
-    "checking_status": "メンバーステータスを確認中...",
-    "close": "閉じる",
-    "congratulations_registered": "おめでとうございます！eosDACのメンバーとして登録されました。",
-    "constitution_hash": "規約のハッシュ",
-    "could_not_retrieve_member_status": "メンバーステータスを取得できませんでした",
-    "fullscreen": "全画面表示",
-    "i_accept_the_constitution": "規約を承認する",
-    "loading_latest_constitution": "最新の規約を読み込んでいます...",
-    "must_sign_constitution": "eosDACのメンバーになるためには、規約に同意し署名する必要があります。",
-    "register": "登録",
-    "registration_sign_the_constitution": "登録 - 規約に署名する",
-    "try_again": "再試行",
-    "updated_constitution": "規約が更新されました。続行するには規約に署名してください。"
-  },
-  "scatter_signin": {
-    "choose_authentication_type": "eosDACメンバークライアントにサインインする認証タイプを選択してください。",
-    "choose_connection_type": "接続タイプを選択",
-    "connection_type": "接続タイプ",
-    "identity_request_denied": "IDリクエストが拒否されました。もう一度お試しください。",
-    "login_with_scatter": "Scatterでログインしてください",
-    "scatter_is_locked": "Scatterがロックされています。続行するにはロックを解除してください。",
-    "scatter_is_not_available": "Scatterが利用できません。Scatterがインストールされている場合、更新するか、Permissionメニューから当サイトへのpermissionを削除して、もう一度お試しください。",
-    "scatter_is_outdated": "お使いのScatterのバージョンが古くなっています。Scatterをアップデートしてから再度お試し下さい。",
-    "sign_in": "サインイン",
-    "waiting_for_scatter": "Scatterを待機しています..."
-  },
-  "scatter_tutorial": {
-    "if_you_are_unable_to_choose_an_identity": "Identityを選択できない場合は、以下の手順を実行します。",
-    "import_account": "1.アカウントをインポートする",
-    "import_account_into_identity": "2.Identityにアカウントをインポート",
-    "import_identity_instructions": "Identityセクションに移動します。<br>鉛筆アイコンをクリックします。<br>Identity内の\"Account\"セクションに移動します。<b",
-    "make_sure_active_key": "Scatterにインポートされたアカウントのアクティブキーを持っていることを確認してください。",
-    "permissions": "1.Permissionsへ移動",
-    "revoke_identity": "3.Identityを無効にする",
-    "select_domain": "2.ドメインを選択",
-    "unable_to_connect": "Scatterに接続できない場合、以下の手順に従ってアクセス許可をリセットしてください。"
   },
   "settings": {
     "API": "API",
@@ -281,32 +224,15 @@
     "user_preference": "ユーザー設定"
   },
   "transaction": {
-    "action": "アクション",
-    "by_completing_agree": "この取引を完了することにより、私は以下の条件に同意します。",
     "cancel": "キャンセル",
     "error": "エラー",
-    "fields": "フィールド",
-    "from": "from",
-    "loading_abi": "ABIの読み込み中...",
-    "memo": "メモ",
-    "pushing_transaction": "トランザクションを送信しています...",
-    "quantity": "数量",
-    "send": "送信する",
-    "to": "to",
     "transaction": "トランザクション",
-    "transaction_successful": "成功した取引",
-    "view_in_explorer": "エクスプローラで表示",
-    "warning_bandwidth": "低ネットワーク帯域幅。ネットワーク帯域幅割り当てが10％未満しか残っていないため、トランザクションが失敗する可能性があります。",
-    "warning_cpu": "低CPU。CPU割り当てが10％未満しか残っていないため、トランザクションが失敗する可能性があります。",
-    "warning_ram": "低RAM。RAM割り当てが10％未満しか残っていないため、トランザクションが失敗する可能性があります。",
-    "warning_ricardian": "このアクションのリカードコントラクトが見つかりませんでした。トランザクションを実行しますか？"
+    "transaction_successful": "成功した取引"
   },
   "vote_custodians": {
     "candidate_list": "候補リスト",
-    "candidate_registration": "候補登録",
     "description_main": "カストディアン取締役会は、DACの資産および負債の統治および管理を含むがこれに限定されないDACの運営および業務を管理する。 次のDACメンバーは、7日間継続するカストディアン・ボード上の地位について、自分自身と候補者を提出するためにトークンの一部を権利確定している。 7日ごとに、あなたの投票は、次のカストディアンのボードに参加する人を選ぶために再計算されます。 投票は重要です！ 誰が価値を提供しているかを知るために、頻繁に投票してDACに参加してください。",
     "description_side": "あなたは一度に最大5つのカストディアンの候補者に投票することができます。 DACに価値をもたらすと思う候補者を選んでください。",
-    "loading_candidates": "ロード候補",
     "my_votes": "私の投票",
     "rows_per_page": "ページあたりの行数",
     "search": "検索",
@@ -315,19 +241,6 @@
     "voting_disabled_title": "現在投票はできません",
     "voting_progress": "投票進捗"
   },
-  "vote_eosdac": {
-    "added_to_list": "私達のブロックプロデューサーが投票リストに追加されました。",
-    "confirm": "確認",
-    "please_delete": "{eosdac_bp}と代替するために票を削除してください。",
-    "remove_vote": "現在選択している投票先の一つを外して下さい。",
-    "thank_you": "ご投票いただきありがとうございます！",
-    "thank_you_for": "{eosdac_bp}にご投票いただきありがとうございます！",
-    "vote_decayed": "投票のウェイトが低下しています！",
-    "vote_for_eosdac": "eosDACに投票",
-    "voted_with_proxy": "代理で投票しました",
-    "votes": "投票",
-    "voting_power": "投票パワー"
-  },
   "votingprogress": {
     "activated_at": "15%でDACがアクティベートされます",
     "loading": "読み込み中...",
@@ -335,23 +248,5 @@
     "seconds": "秒",
     "threshold_met": "投票の閾値(15%)に到達しました。eosDACがアンロックされます。",
     "update_in": "更新まで"
-  },
-  "worker_proposals": {
-    "APPROVED": "承認済み",
-    "OPEN": "オープン"
-  },
-  "wp_member_view": {
-    "approx_USD": "(約 xxxx USD)",
-    "deadline": "締切",
-    "no": "いいえ",
-    "requested_payment": "リクエストされた支払い",
-    "submitted": "提出済み",
-    "time_left": "残り時間",
-    "type": "タイプ",
-    "view_proposal": "プロポーザルの表示",
-    "view_votes": "投票を見る",
-    "votes": "投票",
-    "worker_proposal_by": "ワーカープロポーザル",
-    "yes": "はい"
   }
 }

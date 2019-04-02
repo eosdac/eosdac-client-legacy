@@ -46,11 +46,6 @@
   "markdown_viewer": {
     "select_text_to_edit": "Highlight the text you want to edit."
   },
-  "multi_modal": {
-    "register_as_dac_member": "REGISTRATI COME MEMBRO DEL DAC",
-    "registration": "Registrazione",
-    "sign_in": "REGISTRATI"
-  },
   "nodeselector": {
     "automatic_connection": "Connessione automatica",
     "choose_endpoint": "Scegli Endpoint dalla lista",
@@ -70,63 +65,22 @@
     "specify_your_own": "Specifica il tuo endpoint personalizzato compilando l'input con un url e fai clic sul pulsante Connetti."
   },
   "profile": {
-    "about_me": "A proposito di me",
     "bio": "Biografía",
     "cancel": "cancel",
     "download": "Scarica",
     "edit": "Modifica",
-    "email_address": "Indirizzo email",
     "familyName": "Cognome",
     "female": "Femmina",
     "gender": "Genere",
     "givenName": "Nome",
     "male": "Maschio",
     "other": "Altro",
-    "placeholder_short_bio": "Questa è la mia breve biografia ...",
     "profile": "Profilo",
     "profile_picture_url": "Immagine del profilo Url",
     "save": "Salvare",
     "social_link": "Collegamento sociale",
     "social_profile_link": "Link al profilo sociale",
-    "user_name": "Nome utente",
     "website": "Sito web"
-  },
-  "register": {
-    "already_registered": "Sei già registrato come membro eosDAC.",
-    "checking_status": "Verifica dello stato membro ...",
-    "close": "Vicino",
-    "congratulations_registered": "Congratulazioni! Ora sei registrato come membro eosDAC.",
-    "constitution_hash": "Constitution Hash",
-    "could_not_retrieve_member_status": "Impossibile recuperare lo stato del membro",
-    "fullscreen": "A schermo intero",
-    "i_accept_the_constitution": "Accetto la Costituzione",
-    "loading_latest_constitution": "Caricamento dell'ultima costituzione ...",
-    "must_sign_constitution": "Per diventare un membro di eosDAC devi concordare e firmare la Costituzione.",
-    "register": "Registrare",
-    "registration_sign_the_constitution": "Registrazione - Firma la Costituzione",
-    "try_again": "Riprova",
-    "updated_constitution": "La costituzione è stata aggiornata. Per favore firma la costituzione per continuare."
-  },
-  "scatter_signin": {
-    "choose_authentication_type": "Scegli un tipo di autenticazione per accedere a eosDAC Member Client.",
-    "choose_connection_type": "Scegli il tipo di connessione",
-    "connection_type": "Tipo di connessione",
-    "identity_request_denied": "La richiesta di identità è stata negata. Per favore riprova e accetta la richiesta.",
-    "scatter_is_locked": "Scatter è bloccato. Si prega di sbloccare per continuare.",
-    "scatter_is_not_available": "Scatter non è disponibile. Se hai installato Scatter, aggiorna o vai su Autorizzazioni, rimuovi l'autorizzazione per questo sito e riprova.",
-    "sign_in": "REGISTRATI",
-    "waiting_for_scatter": "In attesa di dispersione ..."
-  },
-  "scatter_tutorial": {
-    "if_you_are_unable_to_choose_an_identity": "Se non sei in grado di scegliere un'identità, procedi nel seguente modo.",
-    "import_account": "1. Importa account",
-    "import_account_into_identity": "2. Importa account in identità",
-    "import_identity_instructions": "Vai alla tua sezione Identità. <br> Sulla tua identità fai clic sull'icona a forma di matita. <br> All'interno della tua identità, vai alla sezione \"Account\". Ora scegli il tuo account importato dall'elenco. <br> Salva il tuo Identità con il pulsante Salva in alto a destra.",
-    "make_sure_active_key": "Assicurati di avere la chiave attiva per il tuo account importata in dispersione.",
-    "permissions": "1. Vai alle autorizzazioni",
-    "revoke_identity": "3. Revoca identità",
-    "select_domain": "2. Seleziona il Dominio",
-    "unable_to_connect": "Se non si è in grado di connettersi a Scatter, attenersi alla seguente procedura per reimpostare le autorizzazioni."
   },
   "settings": {
     "API": "API",
@@ -148,51 +102,16 @@
     "user_preference": "Impostazioni utente"
   },
   "transaction": {
-    "action": "Azione",
-    "by_completing_agree": "Completando questa transazione, accetto i seguenti termini.",
     "cancel": "Annulla",
-    "fields": "campi",
-    "from": "A partire dal",
-    "loading_abi": "Caricamento ABI ...",
-    "memo": "promemoria",
-    "pushing_transaction": "Spingendo la transazione ...",
-    "quantity": "Quantità",
-    "send": "inviare",
-    "to": "A",
     "transaction": "Transazione",
-    "transaction_successful": "Transazione avvenuta",
-    "view_in_explorer": "Visualizza in explorer",
-    "warning_bandwidth": "Banda di rete bassa. L'allocazione della larghezza di banda della rete è inferiore al 10%. La transazione potrebbe fallire.",
-    "warning_cpu": "CPU bassa. L'allocazione della CPU ha meno del 10% rimanente. La transazione potrebbe fallire.",
-    "warning_ram": "RAM bassa. L'allocazione della RAM ha meno del 10% rimanente. La transazione potrebbe fallire.",
-    "warning_ricardian": "Non è stato possibile trovare il contratto di ricardo per questa azione. Sei sicuro di voler eseguire questa transazione?"
+    "transaction_successful": "Transazione avvenuta"
   },
   "vote_custodians": {
-    "candidate_registration": "Candidate Registration",
     "description_main": "Il Consiglio di amministrazione custodisce le operazioni e gli affari del DAC, inclusi, a titolo esemplificativo ma non esaustivo, la governance e l'amministrazione delle attività e delle passività del DAC. I seguenti membri del DAC hanno acquisito parte dei loro token per presentare se stessi e i candidati per una posizione nel consiglio di amministrazione che dura 7 giorni. Ogni 7 giorni, i tuoi voti vengono ricalcolati per selezionare chi farà parte della prossima commissione di custodia. La votazione è importante! Per favore, vota spesso e resta coinvolto nel DAC per sapere chi sta fornendo valore.",
     "description_side": "Puoi votare fino a 5 candidati custodi alla volta. Si prega di selezionare i candidati che secondo voi porteranno valore al DAC.",
-    "loading_candidates": "i candidati di carico",
     "my_votes": "il mio voto",
     "rows_per_page": "Righe per pagina",
     "search": "ricerca",
     "submit_my_votes": "Presentare il mio voto"
-  },
-  "worker_proposals": {
-    "APPROVED": "APPROVATO",
-    "OPEN": "APERTO"
-  },
-  "wp_member_view": {
-    "approx_USD": "(Circa xxxx USD)",
-    "deadline": "Scadenza",
-    "no": "No",
-    "requested_payment": "Pagamento richiesto",
-    "submitted": "Inserito",
-    "time_left": "Tempo rimasto",
-    "type": "genere",
-    "view_proposal": "Visualizza proposta",
-    "view_votes": "Visualizza voti",
-    "votes": "voti",
-    "worker_proposal_by": "Proposta di lavoro di",
-    "yes": "sì"
   }
 }

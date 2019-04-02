@@ -26,7 +26,7 @@
               size="50px"
             />
             <div class=" text-white animate-fade" style="height:50px">
-              loading
+              {{ $t("transaction.loading") }}
             </div>
           </div>
 
@@ -39,16 +39,20 @@
               size="50px"
             />
             <div class=" text-white animate-fade" style="height:25px">
-              waiting for signature
+              {{ $t("transaction.waiting_for_signature") }}
             </div>
             <div
               v-if="getSettingByName('trx_delay').value"
               class="q-caption text-text2"
             >
               <q-icon name="mdi-alarm" style="margin-right:3px" />
-              <span
-                >delay {{ getSettingByName("trx_delay").value }} seconds</span
-              >
+              <span>
+                {{
+                  $t("transaction.transaction.delay_seconds", {
+                    trx_delay: getSettingByName("trx_delay").value
+                  })
+                }}
+              </span>
             </div>
           </div>
 
@@ -61,7 +65,7 @@
               size="70px"
             />
             <div class=" text-white animate-fade" style="height:50px">
-              Transaction success
+              {{ $t("transaction.transaction_successful") }}
             </div>
             <!-- <div v-if="getLastTransaction" class="text-white animate-pop q-body-1" style="height:50px">{{getLastTransaction.transaction_id}}</div> -->
           </div>
@@ -75,7 +79,7 @@
               size="70px"
             />
             <div class=" text-white animate-fade" style="height:50px">
-              Transaction cancelled
+              {{ $t("transaction.transaction_cancelled") }}
             </div>
           </div>
 
@@ -88,7 +92,7 @@
               size="70px"
             />
             <div class=" text-white animate-fade" style="height:50px">
-              Transaction cancelled
+              {{ $t("transaction.transaction_cancelled") }}
             </div>
           </div>
         </div>

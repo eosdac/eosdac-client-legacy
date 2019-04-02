@@ -101,6 +101,7 @@
     "register_as_candidate": "Register As Candidate",
     "settings": "Settings",
     "sign_the_constitution": "Sign the Constitution",
+    "submit": "Submit",
     "support": "Support & Feedback",
     "token_explorer": "Token Explorer",
     "unregister_as_candidate": "Unregister As Candidate",
@@ -153,6 +154,20 @@
       "vietnamese": "Vietnamese"
     }
   },
+  "manage_candidateship": {
+    "amount_to_stake_placeholder": "amount to stake EOSDAC",
+    "locked_tokens": "locked tokens",
+    "page_description_active_custodian": "You are currently active as an eosDAC custodian board member.",
+    "page_description_registered": "Thank you for registering as a candidate to serve on the eosDAC custodian board. As part of your candidacy registration, some of your tokens have been staked.",
+    "page_description_unregistered": "This page is for registering as a candidate for a position on the custodian board. This position comes with responsibiliies outlined in the eosDAC Constitution. Please, do not register as a candidate unless you fully understand and can meet the responsibilites of an eosDAC custodian board member. Please review section 5 of the constitution carefully before registering.",
+    "pay_description": "Please fill in The amount you want to receive for being a custodian during one period. The maximum amount is {requested_pay}.",
+    "register": "register",
+    "requested_custodian_pay_placeholder": "requested pay in EOS",
+    "requestedpay": "Requested Pay",
+    "stake_amount": "Stake Amount",
+    "stake_description": "Please specify the amount of tokens you want to stake. The minimum amount is {minimum_stake}.",
+    "unregister": "unregister"
+  },
   "markdown_viewer": {
     "select_text_to_edit": "Highlight the text you want to edit."
   },
@@ -166,11 +181,6 @@
     "review_msig_transaction": "Review Msig Transaction",
     "step5_desc": "Please review your msig carefully. You can jump back and forth to make changes.",
     "view_full_msig": "view full msig"
-  },
-  "multi_modal": {
-    "register_as_dac_member": "REGISTER AS A DAC-MEMBER",
-    "registration": "Registration",
-    "sign_in": "SIGN IN"
   },
   "nodeselector": {
     "automatic_connection": "Automatic Connection",
@@ -191,88 +201,24 @@
     "specify_your_own": "Specify your own custom endpoint by populating the input with an url and click the connect button."
   },
   "profile": {
-    "about_me": "About Me",
     "account_name": "account name",
     "bio": "Bio",
     "cancel": "cancel",
     "download": "Download",
     "edit": "Edit",
-    "email_address": "Email Address",
     "familyName": "Family Name",
     "female": "Female",
     "gender": "Gender",
     "givenName": "Name",
-    "loading_text": "Loading profile data...",
     "male": "Male",
     "maxLinksmsg": "Sorry, max {number_allowed_links} links allowed.",
-    "not_confirmed": "not confirmed",
     "other": "Other",
-    "placeholder_short_bio": "This is my short bio...",
     "profile": "Profile",
     "profile_picture_url": "Profile Picture Url",
     "save": "Save",
     "social_link": "Social Link",
     "social_profile_link": "Social profile link",
-    "user_name": "User Name",
     "website": "Website"
-  },
-  "regcandidate": {
-    "amount_to_stake_placeholder": "amount to stake EOSDAC",
-    "loadconfig": "Loading contract configuration",
-    "locked_tokens": "locked tokens",
-    "page_description_active_custodian": "You are currently active as an eosDAC custodian board member.",
-    "page_description_registered": "Thank you for registering as a candidate to serve on the eosDAC custodian board. As part of your candidacy registration, some of your tokens have been staked.",
-    "page_description_unregistered": "This page is for registering as a candidate for a position on the custodian board. This position comes with responsibiliies outlined in the eosDAC Constitution. Please, do not register as a candidate unless you fully understand and can meet the responsibilites of an eosDAC custodian board member. Please review section 5 of the constitution carefully before registering.",
-    "pay_description": "Please fill in The amount you want to receive for being a custodian during one period. The maximum amount is {requested_pay}.",
-    "profile_not_confirmed": "You submitted your profile but it is still unconfirmed on the blockchain, please wait and try again.",
-    "profile_required": "To register as a candidate you need a confirmed profile.",
-    "register": "register",
-    "register_as_candidate": "Register as Candidate",
-    "requested_custodian_pay_placeholder": "requested pay in EOS",
-    "requestedpay": "Requested Pay",
-    "stake_amount": "Stake Amount",
-    "stake_description": "Please specify the amount of tokens you want to stake. The minimum amount is {minimum_stake}.",
-    "unregister": "unregister",
-    "unregister_as_candidate": "Unregister as Candidate"
-  },
-  "register": {
-    "already_registered": "You are already registered as a eosDAC Member.",
-    "checking_status": "Checking member status...",
-    "close": "Close",
-    "congratulations_registered": "Congratulations! You are now registered as an eosDAC Member.",
-    "constitution_hash": "Constitution Hash",
-    "could_not_retrieve_member_status": "Could not retrieve member status",
-    "fullscreen": "Fullscreen",
-    "i_accept_the_constitution": "I accept the Constitution",
-    "loading_latest_constitution": "Loading latest constitution...",
-    "must_sign_constitution": "In order to become a Member of eosDAC you have to agree and sign the Constitution.",
-    "register": "Register",
-    "registration_sign_the_constitution": "Registration - Sign the Constitution",
-    "try_again": "Try Again",
-    "updated_constitution": "The constitution has been updated. Please sign the constitution to continue."
-  },
-  "scatter_signin": {
-    "choose_authentication_type": "Please choose an authentication type to sign into the eosDAC Member Client.",
-    "choose_connection_type": "Choose Connection Type",
-    "connection_type": "Connection Type",
-    "identity_request_denied": "Identity request was denied. Please try again and accept the request.",
-    "login_with_scatter": "Please login with Scatter",
-    "scatter_is_locked": "Scatter is locked. Please unlock to continue.",
-    "scatter_is_not_available": "Scatter is not available. If you have Scatter installed please refresh or go to Permissions, remove the permission for this site, and try again.",
-    "scatter_is_outdated": "Your Scatter is outdated. Please update your Scatter and try again.",
-    "sign_in": "SIGN IN",
-    "waiting_for_scatter": "Waiting for scatter..."
-  },
-  "scatter_tutorial": {
-    "if_you_are_unable_to_choose_an_identity": "If you are unable to choose an identity, follow the steps below.",
-    "import_account": "1. Import account",
-    "import_account_into_identity": "2. Import Account into Identity",
-    "import_identity_instructions": "Go to your Identities section.<br>On your Identity click on the pencil icon.<br>Inside your Identity, go to the \"Account\" section.<br>Now choose your imported account from the list.<br>Save your Identity with the Save button in the top right.",
-    "make_sure_active_key": "Make sure that you have your active key for your account imported into scatter.",
-    "permissions": "1. Go To Permissions",
-    "revoke_identity": "3. Revoke Identity",
-    "select_domain": "2. Select the Domain",
-    "unable_to_connect": "If you are unable to connect to Scatter, follow the steps below to reset your permissions."
   },
   "settings": {
     "API": "API",
@@ -296,31 +242,14 @@
     "user_preference": "User Settings"
   },
   "transaction": {
-    "action": "Action",
-    "by_completing_agree": "By completing this transaction, I agree to the following terms.",
     "cancel": "Cancel",
-    "fields": "Fields",
-    "from": "From",
-    "loading_abi": "Loading ABI...",
-    "memo": "Memo",
-    "pushing_transaction": "Pushing Transaction...",
-    "quantity": "Quantity",
-    "send": "send",
-    "to": "To",
     "transaction": "Transaction",
-    "transaction_successful": "Transaction Successful",
-    "view_in_explorer": "View in explorer",
-    "warning_bandwidth": "Low Network Bandwidth. Your network bandwidth allocation has less than 10% remaining. The Transaction might fail.",
-    "warning_cpu": "Low CPU. Your CPU allocation has less than 10% remaining. The Transaction might fail.",
-    "warning_ram": "Low RAM. Your RAM allocation has less than 10% remaining. The Transaction might fail.",
-    "warning_ricardian": "The ricardian contract for this action could not be found. Are you sure you want to execute this transaction?"
+    "transaction_successful": "Transaction Successful"
   },
   "vote_custodians": {
     "candidate_list": "Candidate List",
-    "candidate_registration": "Candidate Registration",
     "description_main": "The Custodian Board manages the operations and affairs of the DAC, including but not limited to the governance and administration of the assets and liabilities of the DAC. The following DAC members have vested some of their tokens to submit themselves and candidates for a position on the custodian board which last for 7 days. Every 7 days, your votes are recalculated to select who will be part of the next custodian board. Voting is important! Please vote often and stay engaged within the DAC to know who is providing value.",
     "description_side": "You can vote for up to 5 custodian candidates at a time. Please select candidates who you think will bring value to the DAC.",
-    "loading_candidates": "Loading candidates",
     "my_votes": "My Votes",
     "rows_per_page": "Rows Per Page",
     "search": "Search",
@@ -336,23 +265,5 @@
     "seconds": "seconds",
     "threshold_met": "Voting threshold of 15% met. eosDac is unlocked.",
     "update_in": "update in"
-  },
-  "worker_proposals": {
-    "APPROVED": "APPROVED",
-    "OPEN": "OPEN"
-  },
-  "wp_member_view": {
-    "approx_USD": "(Aprox. xxxx USD)",
-    "deadline": "Deadline",
-    "no": "No",
-    "requested_payment": "Requested Payment",
-    "submitted": "Submitted",
-    "time_left": "Time Left",
-    "type": "Type",
-    "view_proposal": "View Proposal",
-    "view_votes": "View Votes",
-    "votes": "Votes",
-    "worker_proposal_by": "Worker Proposal by",
-    "yes": "Yes"
   }
 }
