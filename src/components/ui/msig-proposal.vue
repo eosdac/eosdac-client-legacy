@@ -398,13 +398,21 @@
         <div class="q-pa-md">
           <div class="row justify-start q-mt-sm">
             <!-- <pre>{{provided_approvals}}</pre> -->
-            <q-chip
-              class="animate-fade q-mb-sm on-left relative-position"
-              color="bg1"
+            <div
+              class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
               v-for="(c, i) in provided_approvals"
-              :avatar="c.avatar.image"
               :key="i + 'p'"
             >
+              <profile-pic
+                :accountname="c.actor"
+                :scale="0.5"
+                :show_role="false"
+              />
+              <router-link class=" a2" :to="{ path: '/profile/' + c.actor }">
+                <div class="q-ma-none" style="min-width:100px; overflow:hidden">
+                  {{ c.actor }}
+                </div>
+              </router-link>
               <q-icon
                 class="absolute"
                 style="top:-3px; right:-5px"
@@ -412,26 +420,31 @@
                 name="icon-ui-6"
                 size="18px"
               />
-              <router-link class=" a2" :to="{ path: '/profile/' + c.actor }">
-                <div class="q-ma-none" style="min-width:100px; overflow:hidden">
-                  {{ c.actor }}
-                </div>
-              </router-link>
-            </q-chip>
-            <q-chip
-              class="animate-fade q-mb-sm on-left relative-position"
-              color="bg1"
+            </div>
+
+            <div
+              class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
               v-for="(c, i) in requested_approvals"
-              :avatar="c.avatar.image"
               :key="i + 'r'"
             >
-              <!-- <div class="center_background_image" style="border-radius:50%; width:50px;height:50px" v-bind:style="{ 'background-image': `url(${c.avatar.image})` }"></div> -->
+              <profile-pic
+                :accountname="c.actor"
+                :scale="0.5"
+                :show_role="false"
+              />
               <router-link class=" a2" :to="{ path: '/profile/' + c.actor }">
                 <div class="q-ma-none" style="min-width:100px; overflow:hidden">
                   {{ c.actor }}
                 </div>
               </router-link>
-            </q-chip>
+              <q-icon
+                class="absolute"
+                style="top:-3px; right:-5px"
+                color="positive"
+                name="icon-ui-6"
+                size="18px"
+              />
+            </div>
             <!-- <pre>{{getmsigIsSeenCache}}</pre> -->
           </div>
         </div>
@@ -443,12 +456,14 @@
 
 <script>
 import Actionparser from "components/ui/action-parser";
+import profilePic from "components/ui/profile-pic";
 
 import { mapGetters } from "vuex";
 export default {
   name: "Msigproposal",
   components: {
-    Actionparser
+    Actionparser,
+    profilePic
   },
 
   props: {
