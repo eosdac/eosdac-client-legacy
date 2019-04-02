@@ -1,3 +1,8 @@
+<template>
+  <!--  this needs to be fixed -->
+  <div style="display:none"></div>
+</template>
+
 <script>
 var SCHEDULE_AUTO_LOGOUT_TIMER = null;
 var DO_AUTO_LOGOUT_TIMER = null;

@@ -194,6 +194,7 @@
       }"
     >
       <q-collapsible
+        icon-toggle
         label="First"
         group="candidates"
         header-class="candidate_header"

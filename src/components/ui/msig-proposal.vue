@@ -219,6 +219,7 @@
       class="q-mb-md bg-bg1 round-borders shadow-5 animate-fade gt-xs"
     >
       <q-collapsible
+        icon-toggle
         label="First"
         group="msigproposals"
         header-class="msigproposal_header"
