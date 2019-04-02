@@ -125,7 +125,9 @@
                     v-model="inputs.stakeamount"
                     :stack-label="$t('regcandidate.stake_amount')"
                     :placeholder="
-                      $t('regcandidate.amount_to_stake_placeholder')
+                      $t('regcandidate.amount_to_stake_placeholder', {
+                        token_symbol: $configFile.get('dactokensymbol')
+                      })
                     "
                   />
                 </q-item-main>
@@ -159,7 +161,9 @@
                     v-model="inputs.requestedpay"
                     :stack-label="$t('regcandidate.requestedpay')"
                     :placeholder="
-                      $t('regcandidate.requested_custodian_pay_placeholder')
+                      $t('regcandidate.requested_custodian_pay_placeholder', {
+                        system_token: $configFile.get('systemtokensymbol')
+                      })
                     "
                   />
                 </q-item-main>

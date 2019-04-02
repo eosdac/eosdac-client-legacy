@@ -130,7 +130,11 @@
               >
             </div>
             <p class="text-text2 q-body-1">
-              {{ $t("vote_custodians.description_side") }}
+              {{
+                $t("vote_custodians.description_side", {
+                  maxvotes: getMaxVotes
+                })
+              }}
             </p>
 
             <q-card id="votebox" class="q-pa-lg q-mt-md bg-bg1 bg-logo">

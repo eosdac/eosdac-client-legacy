@@ -380,7 +380,7 @@
 
     <!-- modal for displaying approvals mobile+desktop -->
     <q-modal minimized v-model="approvals_modal">
-      <div class="bg-bg2 text-text1">
+      <div class="bg-bg2 text-text1 bg-logo">
         <!-- header -->
         <div
           style="height:50px"

@@ -21,9 +21,9 @@ class ConfigLoader {
       case "dactokensymbol":
         return this.configFile.contracts.token.symbol;
       case "systemtokensymbol":
-        return "EOS";
+        return this.configFile.contracts.system_token.symbol;
       case "systemtokencontract":
-        return "eosio.token";
+        return this.configFile.contracts.system_token.name;
       case "systemmsigcontract":
         return this.configFile.contracts.system_msig.name;
       case "dacmsigcontract":

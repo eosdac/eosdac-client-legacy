@@ -6,6 +6,10 @@
             "symbol": "EOSDAC",
             "totalSupply": 1000000000.0000
         },
+        "system_token": {
+            "name": "eosio.token",
+            "symbol": "EOS"
+        },
         "custodian": {
             "name": "daccustodian",
             "memo": "daccustodian",

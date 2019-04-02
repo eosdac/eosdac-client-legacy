@@ -284,7 +284,7 @@
     "website": "Website"
   },
   "regcandidate": {
-    "amount_to_stake_placeholder": "amount to stake EOSDAC",
+    "amount_to_stake_placeholder": "amount to stake {token_symbol}",
     "candidate": "Candidate",
     "loadconfig": "Loading contract configuration",
     "locked_tokens": "Locked Tokens",
@@ -298,7 +298,7 @@
     "profile_required": "To register as a candidate you need a confirmed profile.",
     "register": "register",
     "register_as_candidate": "Register as Candidate",
-    "requested_custodian_pay_placeholder": "requested pay in EOS",
+    "requested_custodian_pay_placeholder": "requested pay in {system_token}",
     "requestedpay": "Requested Pay",
     "stake_amount": "Stake Amount",
     "stake_description": "Please specify the amount of tokens you want to stake. The minimum amount is {minimum_stake}.",
@@ -433,7 +433,7 @@
     "candidate_registration": "Candidate Registration",
     "custodian_board": "Custodian Board",
     "description_main": "The Custodian Board manages the operations and affairs of the DAC, including but not limited to the governance and administration of the assets and liabilities of the DAC. The following DAC members have vested some of their tokens to submit themselves and candidates for a position on the custodian board which last for 7 days. Every 7 days, your votes are recalculated to select who will be part of the next custodian board. Voting is important! Please vote often and stay engaged within the DAC to know who is providing value.",
-    "description_side": "You can vote for up to 5 custodian candidates at a time. Please select candidates who you think will bring value to the DAC.",
+    "description_side": "You can vote for up to {maxvotes} custodian candidates at a time. Please select candidates who you think will bring value to the DAC.",
     "loading_candidates": "Loading candidates",
     "my_votes": "My Votes",
     "rows_per_page": "Rows Per Page",
