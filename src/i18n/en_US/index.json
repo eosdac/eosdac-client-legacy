@@ -122,7 +122,6 @@
     "sorry_nothing_here": "Sorry, nothing here..."
   },
   "index": {
-    "already_subscribed": "Already subscribed!",
     "description_p1": "eosDAC is a decentralized autonomous community which means it is owned and operated by the token holders who agree to the constitution and register as members of the community.",
     "description_p2": "When completed, this member client will allow you to read the constitution, register as a member, submit worker proposals, register as a custodian candidate, vote on custodians, transfer tokens, and more. If you have any questions, please reach out to us using the links below.",
     "discord_description": "eosDAC exists as an active, engaged community building tools to enable other DACs. Discord is where we bring our skills together and coordinate our activites.",
@@ -139,7 +138,6 @@
     "submit_wp": "Worker Proposals",
     "subscribe": "subscribe",
     "subscribe_newsletter": "Subscribe to our Newsletter",
-    "subscribed_successfully": "Subscribed successfully!",
     "valid_input_required": "Valid input required",
     "visit_eosdac": "Visit our Website eosdac.io",
     "vote_cust": "Vote Custodians",
@@ -148,16 +146,6 @@
     "welcome_to_esodac_member_client": "Welcome to the eosDAC Member Client",
     "your_email": "Your Email",
     "your_language": "Your Language"
-  },
-  "initialize": {
-    "authentication_method": "Authentication Method",
-    "connect_with_scatter": "Connect with Scatter",
-    "identity_request_denied": "Identity request was denied. Please try again and accept the request",
-    "import_private_keys": "Import private keys",
-    "loading_text": "loading...",
-    "scatter_is_locked": "Scatter is locked. Please unlock to continue",
-    "scatter_not_available": "Scatter is not available. If you have Scatter installed please refresh.",
-    "waiting_for_scatter": "Waiting for scatter..."
   },
   "lang_selector": {
     "choose_your_language": "Choose your Language",
@@ -188,12 +176,15 @@
     "back": "Back",
     "expiration": "Expiration",
     "id_name": "ID/name",
+    "json_description": "For convenience the action data is shown in hex and plain text.",
     "msig_delay": "Add a delay for executing the msig in seconds ",
+    "multisignature_account": "Multisignature Account",
     "new_id": "generate new id",
     "next": "Next",
     "no_actions": "No actions added yet.",
     "page_title": "Create Msig Transaction",
     "reset": "Reset after submit",
+    "review_msig_transaction": "Review Msig Transaction",
     "sort_notify": "Sort the actions by dragging.",
     "step1": "Select Action",
     "step1_desc": "Select an action or enable advanced mode.",
@@ -208,7 +199,8 @@
     "step5_desc": "Please review your msig carefully. You can jump back and forth to make changes.",
     "sum_placeholder": "Short info about the transaction",
     "summary": "Description",
-    "title": "title"
+    "title": "title",
+    "view_full_msig": "view full msig"
   },
   "multi_modal": {
     "register_as_dac_member": "REGISTER AS A DAC-MEMBER",

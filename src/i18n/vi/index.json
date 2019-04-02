@@ -96,7 +96,6 @@
     "sorry_nothing_here": "Xin lỗi, không có gì ở đây..."
   },
   "index": {
-    "already_subscribed": "Đã Đăng Ký!",
     "description_p1": "eosDAC là một cộng đồng tự trị phi tập trung, điều đó có nghĩa là nó được sở hữu và vận hành bởi những người sở hữu token, đồng ý với hiến pháp và đăng ký thành viên cộng đồng.",
     "description_p2": "Khi hoàn tất, bộ công cụ thành viên sẽ cho phép bạn đọc hiến pháp, đăng ký thành viên, nộp đề xuất công việc, đăng ký ứng viên người giám hộ, bầu ra người giám hộ, chuyển nhượng token và nhiều chức năng khác. Nếu bạn có bất kỳ câu hỏi gì, vui lòng liên hệ chúng tôi theo các đường link bên dưới.",
     "discord_description": "eosDAC là một cộng đồng năng động và tích cực xây dựng các công cụ để kích hoạt các DAC khác. Discord là nơi chúng tôi trao đổi, giới thiệu và hợp tác làm việc cùng nhau.",
@@ -113,7 +112,6 @@
     "submit_wp": "Đề Xuất Công Việc",
     "subscribe": "đăng ký",
     "subscribe_newsletter": "Đăng Ký Nhận Bảng Tin của chúng tôi.",
-    "subscribed_successfully": "Đã đăng ký thành công!",
     "valid_input_required": "Email không hợp lệ",
     "visit_eosdac": "Truy cập website của chúng tôi eosdac.io",
     "vote_cust": "Bầu Người Giám Hộ",
@@ -122,16 +120,6 @@
     "welcome_to_esodac_member_client": "Chào mừng đến với Công Cụ Thành Viên eosDAC",
     "your_email": "Email của bạn",
     "your_language": "Ngôn Ngữ của bạn"
-  },
-  "initialize": {
-    "authentication_method": "Cách Thức Xác Nhận",
-    "connect_with_scatter": "Kết nối với Scatter",
-    "identity_request_denied": "Không xác minh được. Vui lòng thử lại và chấp nhận yêu cầu",
-    "import_private_keys": "Nhập private keys",
-    "loading_text": "đang tải...",
-    "scatter_is_locked": "Scatter đang bị khóa. Vui lòng mở khóa để tiếp tục",
-    "scatter_not_available": "Scatter không có. Nếu bạn đã cài Scatter, vui lòng thử lại.",
-    "waiting_for_scatter": "Đang chờ Scatter..."
   },
   "lang_selector": {
     "choose_your_language": "Lựa chọn Ngôn Ngữ",
