@@ -45,7 +45,11 @@ export async function loggedInRoutine({ state, commit, dispatch }, account) {
   commit("setIsLoaded", true);
 
   api
-    .getBalance(accountname, "eosio.token", "EOS")
+    .getBalance(
+      accountname,
+      this._vm.$configFile.get("systemtokencontract"),
+      this._vm.$configFile.get("systemtokensymbol")
+    )
     .then(x => {
       commit("setSystemBalance", x);
     })
