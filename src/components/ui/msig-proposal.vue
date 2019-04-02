@@ -415,10 +415,10 @@
               </router-link>
               <q-icon
                 class="absolute"
-                style="top:-3px; right:-5px"
+                style="top:-5px; right:-10px"
                 color="positive"
-                name="icon-ui-6"
-                size="18px"
+                :name="$configFile.icon.check"
+                size="24px"
               />
             </div>
 
