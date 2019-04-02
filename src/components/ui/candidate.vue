@@ -12,26 +12,11 @@
       <q-chip class="q-ma-xs absolute-top-left" color="bg2">{{
         data.rank
       }}</q-chip>
-      <div class="row justify-center q-pt-md">
-        <div
-          class="profile_image animate-fade relative-position"
-          style="width: 100px; height:100px"
-          v-bind:style="{ 'background-image': 'url(' + profileImage + ')' }"
-        >
-          <div
-            v-if="is_custodian"
-            style="position:absolute;bottom:-5px;right:-5px"
-          >
-            <q-icon
-              size="36px"
-              color="warning"
-              :name="$configFile.icon.cust_symbol"
-            />
-          </div>
-        </div>
+      <div class="row justify-center q-pt-lg">
+        <profile-pic :accountname="data.candidate_name" :scale="1.5" />
       </div>
 
-      <div class="row justify-center">
+      <div class="row justify-center q-pt-md">
         <router-link
           class="q-headline"
           :to="{ path: '/profile/' + data.candidate_name }"
@@ -221,24 +206,7 @@
                 style="height:55px;width:55px;margin-top:0px;"
                 @click="$emit('clickunvotefor')"
               />
-              <div
-                class="profile_image float-left animate-fade relative-position"
-                style="width: 60px; height:60px"
-                v-bind:style="{
-                  'background-image': 'url(' + profileImage + ')'
-                }"
-              >
-                <div
-                  v-if="is_custodian"
-                  style="position:absolute;bottom:-5px;right:-5px"
-                >
-                  <q-icon
-                    size="24px"
-                    color="warning"
-                    :name="$configFile.icon.cust_symbol"
-                  />
-                </div>
-              </div>
+              <profile-pic :accountname="data.candidate_name" :scale="0.9" />
               <vote-animation :vote_delta="vote_delta" />
             </div>
           </q-item-side>
@@ -341,6 +309,7 @@
 <script>
 import { mapGetters } from "vuex";
 import SocialLinks from "components/ui/social-links";
+import profilePic from "components/ui/profile-pic";
 import voteAnimation from "components/ui/vote-animation";
 import MarkdownViewer from "components/ui/markdown-viewer";
 export default {
@@ -348,7 +317,8 @@ export default {
   components: {
     SocialLinks,
     MarkdownViewer,
-    voteAnimation
+    voteAnimation,
+    profilePic
   },
 
   props: {

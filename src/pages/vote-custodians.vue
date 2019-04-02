@@ -167,31 +167,11 @@
                     :key="i"
                   >
                     <q-item-side>
-                      <q-item-tile
-                        style="height:36px;width:36px;"
-                        class="q-mr-sm"
-                      >
-                        <div
-                          v-if="
-                            cand.profile && $helper.isUrl(cand.profile.image)
-                          "
-                          class="profile_image animate-fade"
-                          style="width: 36px; height:36px"
-                          v-bind:style="{
-                            'background-image':
-                              'url(' + cand.profile.image + ')'
-                          }"
-                        ></div>
-                        <div
-                          v-else
-                          class="profile_image"
-                          style="width: 36px; height:36px"
-                          v-bind:style="{
-                            'background-image': `url(${
-                              $profiles.default_avatar
-                            })`
-                          }"
-                        ></div>
+                      <q-item-tile class="">
+                        <profile-pic
+                          :accountname="cand.candidate_name"
+                          :scale="0.6"
+                        />
                       </q-item-tile>
                     </q-item-side>
                     <q-item-main>
@@ -267,6 +247,7 @@
 
 <script>
 import Candidate from "components/ui/candidate";
+import profilePic from "components/ui/profile-pic";
 import displayCustodians from "components/ui/display-custodians";
 import debugData from "components/ui/debug-data";
 
@@ -279,7 +260,8 @@ export default {
   components: {
     Candidate,
     debugData,
-    displayCustodians
+    displayCustodians,
+    profilePic
   },
   data() {
     return {
