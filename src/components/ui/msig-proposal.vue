@@ -437,13 +437,6 @@
                   {{ c.actor }}
                 </div>
               </router-link>
-              <q-icon
-                class="absolute"
-                style="top:-3px; right:-5px"
-                color="positive"
-                name="icon-ui-6"
-                size="18px"
-              />
             </div>
             <!-- <pre>{{getmsigIsSeenCache}}</pre> -->
           </div>
