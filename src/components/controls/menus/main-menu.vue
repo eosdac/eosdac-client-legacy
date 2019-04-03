@@ -13,19 +13,19 @@
 
     <q-item v-if="getAccountName" :to="`/profile/` + getAccountName">
       <q-item-side :icon="$configFile.icon.profile" color="text2" />
-      <q-item-main :label="$t('default.profile')" class="text-text1" />
+      <q-item-main :label="$t('menu.profile')" class="text-text1" />
     </q-item>
 
     <q-item to="/vote-custodians">
       <q-item-side :icon="$configFile.icon.vote" color="text2" />
       <q-item-main
         v-if="getAccountName"
-        :label="$t('default.custodians')"
+        :label="$t('menu.custodians')"
         class="text-text1"
       />
       <q-item-main
         v-else
-        :label="$t('default.view_custodians')"
+        :label="$t('menu.view_custodians')"
         class="text-text1"
       />
     </q-item>
@@ -36,7 +36,7 @@
     >
       <q-item-side :icon="$configFile.icon.cand_reg" color="text2" />
       <q-item-main
-        :label="$t('default.register_as_candidate')"
+        :label="$t('menu.register_as_candidate')"
         class="text-text1"
       />
     </q-item>
@@ -46,7 +46,7 @@
     >
       <q-item-side :icon="$configFile.icon.cand_reg" color="text2" />
       <q-item-main
-        :label="$t('default.unregister_as_candidate')"
+        :label="$t('menu.unregister_as_candidate')"
         class="text-text1"
       />
     </q-item>
@@ -55,24 +55,24 @@
 
     <q-item @click.native="openURL($configFile.get('external').dacexplorer)">
       <q-item-side :icon="$configFile.icon.explorer" color="text2" />
-      <q-item-main :label="$t('default.token_explorer')" class="text-text1" />
+      <q-item-main :label="$t('menu.token_explorer')" class="text-text1" />
       <q-item-side right icon="icon-transfer-out" color="text2" />
     </q-item>
 
     <q-item @click.native="openURL($configFile.get('external').discord)">
       <q-item-side :icon="$configFile.icon.support" color="text2" />
-      <q-item-main :label="$t('default.support')" class="text-text1" />
+      <q-item-main :label="$t('menu.support')" class="text-text1" />
       <q-item-side right icon="icon-transfer-out" color="text2" />
     </q-item>
 
     <q-item to="/settings">
       <q-item-side :icon="$configFile.icon.settings" color="text2" />
-      <q-item-main :label="$t('default.settings')" class="text-text1" />
+      <q-item-main :label="$t('menu.settings')" class="text-text1" />
     </q-item>
 
     <q-item to="/credits">
       <q-item-side :icon="$configFile.icon.credits" color="text2" />
-      <q-item-main :label="$t('default.credits')" class="text-text1" />
+      <q-item-main :label="$t('menu.credits')" class="text-text1" />
     </q-item>
 
     <q-item

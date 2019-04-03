@@ -75,19 +75,11 @@
   "default": {
     "constitution": "章程",
     "constitution_has_been_updated": "章程已经更新。 请签署更新后的章程以使用会员客户端。",
-    "custodians": "选举托管人",
     "login": "登录",
     "logout": "登出",
     "member_client": "会员客户端",
-    "member_status": "会员状态",
     "menu": "菜单",
-    "profile": "个人资料",
-    "register_as_candidate": "注册成为候选人",
-    "settings": "设置",
     "sign_the_constitution": "签署章程",
-    "support": "支持与反馈",
-    "token_explorer": "代币探测器",
-    "unregister_as_candidate": "注销成为候选人",
     "you_have_not_yet_registered": "您尚未注册成为会员。 请签署章程以使用会员客户端。",
     "your_token_balance": "您的 {tokenName} 余额"
   },
@@ -154,6 +146,16 @@
   },
   "markdown_viewer": {
     "select_text_to_edit": "选中您想要修改的文字。"
+  },
+  "menu": {
+    "custodians": "选举托管人",
+    "member_status": "会员状态",
+    "profile": "个人资料",
+    "register_as_candidate": "注册成为候选人",
+    "settings": "设置",
+    "support": "支持与反馈",
+    "token_explorer": "代币探测器",
+    "unregister_as_candidate": "注销成为候选人"
   },
   "nodeselector": {
     "automatic_connection": "自动连接",

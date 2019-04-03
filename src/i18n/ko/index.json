@@ -81,20 +81,11 @@
   "default": {
     "constitution": "헌법",
     "constitution_has_been_updated": "헌법이 개정되었습니다. 회원 클라이언트를 사용하려면 업데이트된 헌법에 서명하십시오.",
-    "credits": "크레딧",
-    "custodians": "관리인",
     "login": "로그인",
     "logout": "로그아웃",
     "member_client": "회원 클라이언트",
-    "member_status": "회원 상태",
     "menu": "메뉴",
-    "profile": "프로필",
-    "register_as_candidate": "관리인으로 등록하기",
-    "settings": "설정",
     "sign_the_constitution": "헌법에 서명하기",
-    "support": "문의 지원 및 피드백",
-    "token_explorer": "토큰 익스플로러",
-    "unregister_as_candidate": "관리인 등록 취소",
     "you_have_not_yet_registered": "귀하는 아직 회원 등록을 하지 않은 상태입니다. 회원 클라이언트를 이용하려면 헌법에 서명하십시오.",
     "your_token_balance": "{tokenName} 잔액"
   },
@@ -162,6 +153,17 @@
   },
   "markdown_viewer": {
     "select_text_to_edit": "편집하려는 부분을 선택하십시오."
+  },
+  "menu": {
+    "credits": "크레딧",
+    "custodians": "관리인",
+    "member_status": "회원 상태",
+    "profile": "프로필",
+    "register_as_candidate": "관리인으로 등록하기",
+    "settings": "설정",
+    "support": "문의 지원 및 피드백",
+    "token_explorer": "토큰 익스플로러",
+    "unregister_as_candidate": "관리인 등록 취소"
   },
   "nodeselector": {
     "automatic_connection": "자동 연결",

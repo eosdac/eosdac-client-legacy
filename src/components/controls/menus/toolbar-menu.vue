@@ -91,7 +91,7 @@
           <q-item-side v-if="getMemberStatus === false" />
           <q-item-main>
             <q-item-tile class="text-text1" label>{{
-              $t("default.member_status")
+              $t("menu.member_status")
             }}</q-item-tile>
             <q-item-tile v-if="getMemberStatus" class="text-text2" sublabel>{{
               getMemberStatus
@@ -135,7 +135,7 @@
         <q-item v-close-overlay to="/settings">
           <q-item-side :icon="$configFile.icon.settings" color="text2" />
           <q-item-main>
-            <q-item-tile label>{{ $t("default.settings") }}</q-item-tile>
+            <q-item-tile label>{{ $t("menu.settings") }}</q-item-tile>
           </q-item-main>
         </q-item>
       </q-list>

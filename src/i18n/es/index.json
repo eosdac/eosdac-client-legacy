@@ -5,17 +5,11 @@
   "default": {
     "constitution": "Constitución",
     "constitution_has_been_updated": "La Constitución ha sido actualizada. Firme la Constitución actualizada para usar el portal de Miembros.",
-    "custodians": "Representantes",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
     "member_client": "Miembro",
-    "member_status": "Estado",
     "menu": "Menú",
-    "profile": "Perfil",
-    "register_as_candidate": "Registrado como Candidato",
-    "settings": "Configuracion",
     "sign_the_constitution": "Firme la Constitución",
-    "unregister_as_candidate": "No registrado como Candidato",
     "you_have_not_yet_registered": "Aun no registrado como Miembro. Firme la Constitución para ser un miembro.",
     "your_token_balance": "Su saldo {tokenName}"
   },
@@ -76,6 +70,14 @@
   },
   "markdown_viewer": {
     "select_text_to_edit": "Seleccione el texto que quiere editar"
+  },
+  "menu": {
+    "custodians": "Representantes",
+    "member_status": "Estado",
+    "profile": "Perfil",
+    "register_as_candidate": "Registrado como Candidato",
+    "settings": "Configuracion",
+    "unregister_as_candidate": "No registrado como Candidato"
   },
   "nodeselector": {
     "automatic_connection": "Conexión automática",

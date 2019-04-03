@@ -91,20 +91,12 @@
   "default": {
     "constitution": "Constitution",
     "constitution_has_been_updated": "The Constitution has been updated. Please sign the updated Constitution to use the Member Client.",
-    "custodians": "Vote For Custodians",
     "login": "login",
     "logout": "Logout",
     "member_client": "Member Client",
-    "member_status": "Member Status",
     "menu": "Menu",
-    "profile": "Profile",
-    "register_as_candidate": "Register As Candidate",
-    "settings": "Settings",
     "sign_the_constitution": "Sign the Constitution",
     "submit": "Submit",
-    "support": "Support & Feedback",
-    "token_explorer": "Token Explorer",
-    "unregister_as_candidate": "Unregister As Candidate",
     "you_have_not_yet_registered": "You have not been registered as a Member yet. Please sign the constitution to use the Member Client.",
     "your_token_balance": "Your {tokenName} Balance"
   },
@@ -172,8 +164,16 @@
     "select_text_to_edit": "Highlight the text you want to edit."
   },
   "menu": {
+    "custodians": "Vote For Custodians",
+    "member_status": "Member Status",
+    "profile": "Profile",
+    "register_as_candidate": "Register As Candidate",
+    "settings": "Settings",
     "signature_required": "Signature Required",
-    "switch_account": "Switch Account"
+    "support": "Support & Feedback",
+    "switch_account": "Switch Account",
+    "token_explorer": "Token Explorer",
+    "unregister_as_candidate": "Unregister As Candidate"
   },
   "msig_creator": {
     "json_description": "For convenience the action data is shown in hex and plain text.",

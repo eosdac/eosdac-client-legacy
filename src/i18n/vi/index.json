@@ -75,19 +75,11 @@
   "default": {
     "constitution": "Hiến Pháp",
     "constitution_has_been_updated": "Hiến Pháp đã được cập nhật. Vui lòng ký duyệt Hiến Pháp mới để sử dụng Công Cụ Thành Viên.",
-    "custodians": "Bỏ Phiếu Bầu Người Giám Hộ",
     "login": "Đăng Nhập",
     "logout": "Đăng Xuất",
     "member_client": "Công Cụ Thành Viên",
-    "member_status": "Trạng Thái Thành Viên",
     "menu": "Danh Mục",
-    "profile": "Hồ Sơ",
-    "register_as_candidate": "Đăng Ký Ứng Viên",
-    "settings": "Cài Đặt",
     "sign_the_constitution": "Ký duyệt Hiến Pháp",
-    "support": "Hỗ Trợ & Phản Hồi",
-    "token_explorer": "Tra Cứu Token",
-    "unregister_as_candidate": "Hủy Đăng Ký Ứng Viên",
     "you_have_not_yet_registered": "Bạn chưa được đăng ký Thành Viên. Vui lòng ký duyệt hiến pháp để sử dụng Công Cụ Thành Viên.",
     "your_token_balance": "Số Dư {tokenName}"
   },
@@ -154,6 +146,16 @@
   },
   "markdown_viewer": {
     "select_text_to_edit": "Tô đậm nội dung bạn muốn thay đổi."
+  },
+  "menu": {
+    "custodians": "Bỏ Phiếu Bầu Người Giám Hộ",
+    "member_status": "Trạng Thái Thành Viên",
+    "profile": "Hồ Sơ",
+    "register_as_candidate": "Đăng Ký Ứng Viên",
+    "settings": "Cài Đặt",
+    "support": "Hỗ Trợ & Phản Hồi",
+    "token_explorer": "Tra Cứu Token",
+    "unregister_as_candidate": "Hủy Đăng Ký Ứng Viên"
   },
   "nodeselector": {
     "automatic_connection": "Tự Động Kết Nối",

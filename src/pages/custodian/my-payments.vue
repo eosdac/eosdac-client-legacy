@@ -44,7 +44,7 @@
       </div>
       <div class="text-text1 round-borders bg-bg1 q-pa-md">
         <span>{{
-          $t("regcandidate.pay_description", {
+          $t("manage_candidateship.pay_description", {
             requested_pay: $helper.assetToLocaleNumber(
               getCustodianConfig.requested_pay_max
             )
@@ -64,15 +64,21 @@
               v-model="new_requested_pay"
               @input="$v.new_requested_pay.$touch()"
               :error="$v.new_requested_pay.$error"
-              :stack-label="$t('regcandidate.requestedpay')"
+              :stack-label="$t('manage_candidateship.requestedpay')"
               :placeholder="
-                $t('regcandidate.requested_custodian_pay_placeholder')
+                $t('manage_candidateship.requested_custodian_pay_placeholder', {
+                  system_token: $configFile.get('systemtokensymbol')
+                })
               "
             />
           </q-item-main>
         </q-item>
         <div class="row justify-end q-mt-md">
-          <q-btn label="update" @click="updateRequestedPay" color="primary" />
+          <q-btn
+            :label="$t('default.update')"
+            @click="updateRequestedPay"
+            color="primary"
+          />
         </div>
       </div>
     </div>

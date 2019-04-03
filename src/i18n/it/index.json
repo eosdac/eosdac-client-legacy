@@ -5,18 +5,11 @@
   "default": {
     "constitution": "Costituzione",
     "constitution_has_been_updated": "La Costituzione è stata aggiornata. Si prega di firmare la Costituzione aggiornata per utilizzare il Cliente Membro.",
-    "custodians": "custodi",
     "login": "Accesso",
     "logout": "Disconnettersi",
     "member_client": "Membro Cliente",
-    "member_status": "Stato Membro",
     "menu": "Menu",
-    "profile": "Profilo",
-    "register_as_candidate": "Register As Candidate",
-    "settings": "impostazioni",
     "sign_the_constitution": "Firma la Costituzione",
-    "token_explorer": "Token Explorer",
-    "unregister_as_candidate": "Unregister As Candidate",
     "you_have_not_yet_registered": "Non sei ancora registrato come membro. Si prega di firmare la costituzione per utilizzare il Cliente Membro.",
     "your_token_balance": "Il tuo saldo di {tokenName}"
   },
@@ -45,6 +38,15 @@
   },
   "markdown_viewer": {
     "select_text_to_edit": "Highlight the text you want to edit."
+  },
+  "menu": {
+    "custodians": "custodi",
+    "member_status": "Stato Membro",
+    "profile": "Profilo",
+    "register_as_candidate": "Register As Candidate",
+    "settings": "impostazioni",
+    "token_explorer": "Token Explorer",
+    "unregister_as_candidate": "Unregister As Candidate"
   },
   "nodeselector": {
     "automatic_connection": "Connessione automatica",

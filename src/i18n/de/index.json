@@ -2,17 +2,11 @@
   "default": {
     "constitution": "Verfassung",
     "constitution_has_been_updated": "The Verfassung wurde aktualisiert. Bitte unterschreiben Sie die Verfassung, um Mitglied zu bleiben.",
-    "custodians": "Verwalter",
     "login": "Einloggen",
     "logout": "Ausloggen",
     "member_client": "Member-Client",
-    "member_status": "Mitgliedsstatus",
     "menu": "Menü",
-    "profile": "Profil",
-    "register_as_candidate": "Als Verwalter registrieren",
-    "settings": "Einstellungen",
     "sign_the_constitution": "Unterschreiben Sie die Verfassung",
-    "unregister_as_candidate": "Registrierung als Verwalter zurückziehen",
     "you_have_not_yet_registered": "Sie sind noch nicht als Mitglied registriert. Bitte unterschreiben Sie die Verfassung, um Mitglied zu werden.",
     "your_token_balance": "Dein {tokenName} Guthaben"
   },
@@ -62,6 +56,14 @@
   },
   "markdown_viewer": {
     "select_text_to_edit": "Markieren Sie den Text den Sie bearbeiten möchten."
+  },
+  "menu": {
+    "custodians": "Verwalter",
+    "member_status": "Mitgliedsstatus",
+    "profile": "Profil",
+    "register_as_candidate": "Als Verwalter registrieren",
+    "settings": "Einstellungen",
+    "unregister_as_candidate": "Registrierung als Verwalter zurückziehen"
   },
   "nodeselector": {
     "automatic_connection": "Automatische Verbindung",

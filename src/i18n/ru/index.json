@@ -5,19 +5,11 @@
   "default": {
     "constitution": "Конституция",
     "constitution_has_been_updated": "Конституция обновлена. Пожалуйста, подпишите обновленную Конституцию, чтобы использовать Клиент участника.",
-    "custodians": "Хранители",
     "login": "Авторизоваться",
     "logout": "Выйти",
     "member_client": "Клиент участника",
-    "member_status": "Статус участника",
     "menu": "Меню",
-    "profile": "Профиль",
-    "register_as_candidate": "Регистрация в качестве кандидата",
-    "settings": "Настройки",
     "sign_the_constitution": "Подпишите Конституцию",
-    "support": "Поддержка и обратная связь",
-    "token_explorer": "Обозреватель токенов",
-    "unregister_as_candidate": "Отмена регистрации в качестве кандидата",
     "you_have_not_yet_registered": "Вы еще не зарегистрированы в качестве Участника. Пожалуйста, подпишите Конституцию, чтобы использовать Клиент участника.",
     "your_token_balance": "Баланс {tokenName}"
   },
@@ -83,6 +75,16 @@
   },
   "markdown_viewer": {
     "select_text_to_edit": "Выделите текст, который хотите отредактировать."
+  },
+  "menu": {
+    "custodians": "Хранители",
+    "member_status": "Статус участника",
+    "profile": "Профиль",
+    "register_as_candidate": "Регистрация в качестве кандидата",
+    "settings": "Настройки",
+    "support": "Поддержка и обратная связь",
+    "token_explorer": "Обозреватель токенов",
+    "unregister_as_candidate": "Отмена регистрации в качестве кандидата"
   },
   "nodeselector": {
     "automatic_connection": "Автоматическое соединение",

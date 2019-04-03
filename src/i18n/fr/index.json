@@ -9,19 +9,11 @@
   "default": {
     "constitution": "Constitution",
     "constitution_has_been_updated": "La Constitution a été mise à jour. Veuillez signer la nouvelle constitution pour utiliser le client membre.",
-    "custodians": "Voter pour les Délégués",
     "login": "S'identifier",
     "logout": "Déconnexion",
     "member_client": "Client Membre",
-    "member_status": "Statut du Membre",
     "menu": "Menu",
-    "profile": "Profil",
-    "register_as_candidate": "Inscrit en tant que candidat",
-    "settings": "Paramètres",
     "sign_the_constitution": "Signature de la Constitution",
-    "support": "Soutien & Retours",
-    "token_explorer": "Token explorer",
-    "unregister_as_candidate": "Non enregistré en tant que Candidat",
     "you_have_not_yet_registered": "Vous n'avez pas encore été enregistré en tant que membre. Merci de signer la constitution pour utiliser le client membre.",
     "your_token_balance": "Votre solde de {tokenName}"
   },
@@ -87,6 +79,16 @@
   },
   "markdown_viewer": {
     "select_text_to_edit": "Surligné le texte que vous souhaitez éditer."
+  },
+  "menu": {
+    "custodians": "Voter pour les Délégués",
+    "member_status": "Statut du Membre",
+    "profile": "Profil",
+    "register_as_candidate": "Inscrit en tant que candidat",
+    "settings": "Paramètres",
+    "support": "Soutien & Retours",
+    "token_explorer": "Token explorer",
+    "unregister_as_candidate": "Non enregistré en tant que Candidat"
   },
   "nodeselector": {
     "automatic_connection": "Connexion automatique",

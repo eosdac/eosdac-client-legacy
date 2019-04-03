@@ -81,19 +81,11 @@
   "default": {
     "constitution": "規約",
     "constitution_has_been_updated": "規約が更新されました。 更新された規約に署名して、Member Clientを使用してください。",
-    "custodians": "カストディアン",
     "login": "ログイン",
     "logout": "ログアウト",
     "member_client": "メンバークライアント",
-    "member_status": "メンバーステータス",
     "menu": "メニュー",
-    "profile": "プロフィール",
-    "register_as_candidate": "候補者として登録する",
-    "settings": "設定",
     "sign_the_constitution": "規約に署名する",
-    "support": "サポート&フィードバック",
-    "token_explorer": "トークンエクスプローラー",
-    "unregister_as_candidate": "候補者としての登録を解除する",
     "you_have_not_yet_registered": "まだメンバーとして登録されていません。メンバークライアントを使用するためには規約に署名してください。",
     "your_token_balance": "{tokenName}残高"
   },
@@ -161,6 +153,16 @@
   },
   "markdown_viewer": {
     "select_text_to_edit": "編集したいテキストをハイライトする。"
+  },
+  "menu": {
+    "custodians": "カストディアン",
+    "member_status": "メンバーステータス",
+    "profile": "プロフィール",
+    "register_as_candidate": "候補者として登録する",
+    "settings": "設定",
+    "support": "サポート&フィードバック",
+    "token_explorer": "トークンエクスプローラー",
+    "unregister_as_candidate": "候補者としての登録を解除する"
   },
   "nodeselector": {
     "automatic_connection": "自動接続",
