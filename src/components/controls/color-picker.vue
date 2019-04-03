@@ -33,11 +33,6 @@ export default {
       colorvars: ["primary", "bg1", "bg2", "text1", "text2"],
       colorvar: "primary",
       color: "#C7044B"
-
-      // and the other types of models:
-      // modelHexa: '#F0FF1CBF',
-      // modelRgb: { r: 112, g: 204, b: 55 },
-      // color: { r: 138, g: 36, b: 138, a: 64 }
     };
   },
 
@@ -58,8 +53,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getIsDark: "ui/getIsDark",
-      getThemes: "ui/getThemes"
+      getIsDark: "ui/getIsDark"
     })
   },
   watch: {

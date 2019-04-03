@@ -38,9 +38,7 @@
 
         <div class="col-xs-12 col-md-6 ">
           <div class="bg-bg1 round-borders shadow-5 q-pa-md">
-            <div class="row justify-between q-mb-md">
-              <span class="q-title">Color Scheme</span><nightModeSwitch />
-            </div>
+            <div class="row justify-between q-mb-md"></div>
             <color-picker />
             <div class="q-mt-md row justify-between">
               <q-btn
@@ -48,7 +46,6 @@
                 color="primary"
                 @click="getColorScheme"
               />
-              <color-scheme-switch />
             </div>
           </div>
         </div>
@@ -93,13 +90,9 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { colors } from "quasar";
+// import { colors } from "quasar";
 
 import colorPicker from "components/controls/color-picker";
-
-import nightModeSwitch from "components/ui/nightmode-switch";
-
-import colorSchemeSwitch from "components/ui/color-scheme-switch";
 
 import networkSwitcher from "components/controls/network-switcher";
 
@@ -110,10 +103,8 @@ import debugData from "components/ui/debug-data";
 export default {
   name: "test",
   components: {
-    nightModeSwitch,
     colorPicker,
     networkSwitcher,
-    colorSchemeSwitch,
     firehose,
     debugData
   },
@@ -132,7 +123,6 @@ export default {
       getIsDark: "ui/getIsDark",
       getMemberTerms: "dac/getMemberTerms",
       getIsCustodian: "user/getIsCustodian",
-      getThemes: "ui/getThemes",
       getEosApi: "global/getEosApi"
       // getCustodians: 'dac/getCustodians',
     })
@@ -153,25 +143,23 @@ export default {
     },
 
     getColorScheme() {
-      let new_colors = {};
-      Object.keys(this.getThemes[0].colors).forEach(c => {
-        new_colors[c] = colors.getBrand(c);
-      });
-      let response = {
-        name: "xxxRenamexxx",
-        isdark: this.getIsDark,
-        colors: new_colors
-      };
-
-      let a = document.createElement("a");
-      let file = new Blob([JSON.stringify(response, null, 4)], {
-        type: "JSON"
-      });
-      a.href = URL.createObjectURL(file);
-      a.download = "custom_colors.json";
-      a.click();
-
-      console.log(JSON.stringify(response, null, 4));
+      // let new_colors = {};
+      // Object.keys(this.getThemes[0].colors).forEach(c => {
+      //   new_colors[c] = colors.getBrand(c);
+      // });
+      // let response = {
+      //   name: "xxxRenamexxx",
+      //   isdark: this.getIsDark,
+      //   colors: new_colors
+      // };
+      // let a = document.createElement("a");
+      // let file = new Blob([JSON.stringify(response, null, 4)], {
+      //   type: "JSON"
+      // });
+      // a.href = URL.createObjectURL(file);
+      // a.download = "custom_colors.json";
+      // a.click();
+      // console.log(JSON.stringify(response, null, 4));
     }
   },
   mounted() {

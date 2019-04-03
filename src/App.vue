@@ -75,7 +75,6 @@ export default {
       this.$store.commit("global/setNode", fastest.node);
     }
     this.loading = true;
-    this.$store.dispatch("ui/loadColorScheme");
     this.$store.dispatch("dac/initRoutine", this);
 
     // this.$root.$emit('helloc');
