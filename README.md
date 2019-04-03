@@ -26,10 +26,12 @@ Add custom pages, routes and vuex stores. It's recommended to extend and customi
 eosDAC the DAC is branded and customized with the following repo https://github.com/eosdac/memberclient_extension. Feel free to fork this repo to get started. In fact it's recommended to fork the repo if you plan to customize the memberclient.
 
 ```bash
+cd memberclient
 yarn add_extensions https://github.com/eosdac/memberclient_extension.git extensions
 ```
 If you want a tighter coupling between the main repo and your extensions repo you can create a git submodule.
 ```bash
+cd memberclient
 git submodule add https://github.com/your_repo/your_extension.git src/extensions
 ```
 
