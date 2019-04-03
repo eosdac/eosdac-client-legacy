@@ -374,7 +374,7 @@ export default {
 }
 
 .selected_candidate{
-  border:2px solid $positive;
+  border:2px solid var(--q-color-positive);
   transition : border 400ms ease;
 }
 
