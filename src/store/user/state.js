@@ -1,3 +1,10 @@
+let settings;
+try {
+  settings = require("../../extensions/statics/config/settings.json");
+} catch (e) {
+  settings = [];
+}
+
 export default {
   //
   isIdle: null,
@@ -14,5 +21,5 @@ export default {
   dacVotes: null,
   msigIsSeenCache: [],
 
-  settings: require("../../statics/settings.json")
+  settings: settings
 };
