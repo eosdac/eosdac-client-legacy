@@ -3,8 +3,8 @@ require("../assets/icon-fonts/extended_material_icons/css/materialdesignicons.cs
 
 class ConfigLoader {
   constructor(networkname) {
-    this.configFile = require(`../statics/config.${networkname}.json`);
-    this.icon = require(`../statics/iconmap.json`);
+    this.configFile = require(`../extensions/statics/config/config.${networkname}.json`);
+    this.icon = require(`../extensions/statics/config/iconmap.json`);
     // store.commit('global/setConfig', this.configFile);
   }
 

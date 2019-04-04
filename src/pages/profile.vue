@@ -264,7 +264,7 @@
 import { Notify, openURL } from "quasar";
 import SocialLinks from "components/ui/social-links";
 import TimeZone from "components/ui/time-zone";
-import ProfileTemplate from "../statics/profile.template.json";
+import ProfileTemplate from "../extensions/statics/config/profile.template.json";
 import MarkdownViewer from "components/ui/markdown-viewer";
 import debugData from "components/ui/debug-data";
 import { mapGetters } from "vuex";

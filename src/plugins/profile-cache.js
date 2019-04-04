@@ -1,5 +1,5 @@
 import axios from "axios";
-let profile_template = require("../statics/profile.template.json");
+let profile_template = require("../extensions/statics/config/profile.template.json");
 class ProfileCache {
   constructor(config) {
     console.log("profile cache initiated");

@@ -1,6 +1,6 @@
 export default {
   //
-  networks: require("../../statics/networks.json"),
+  networks: require("../../extensions/statics/config/networks.json"),
   dapp_version: null,
   local_storage_version: null,
   active_network: process.env.DEFAULT_NETWORK || "mainnet",

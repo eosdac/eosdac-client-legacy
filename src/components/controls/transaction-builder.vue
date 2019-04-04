@@ -221,7 +221,7 @@ export default {
     return {
       drag: false,
       selected_template: "",
-      trx_templates: require("../../statics/transaction.templates.json"),
+      trx_templates: require("../../extensions/statics/config/transaction.templates.json"),
       raw_action_object: "",
       actions: [],
       view_actions_modal: false,

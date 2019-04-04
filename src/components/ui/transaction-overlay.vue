@@ -25,7 +25,7 @@
               class="animate-bounce animate-fade"
               size="50px"
             />
-            <div class=" text-white animate-fade" style="height:50px">
+            <div class=" text-text1 animate-fade" style="height:50px">
               {{ $t("transaction.loading") }}
             </div>
           </div>
@@ -38,7 +38,7 @@
               class="animate-bounce animate-fade"
               size="50px"
             />
-            <div class=" text-white animate-fade" style="height:25px">
+            <div class=" text-text1 animate-fade" style="height:25px">
               {{ $t("transaction.waiting_for_signature") }}
             </div>
             <div
@@ -64,10 +64,9 @@
               class="animate-scale"
               size="70px"
             />
-            <div class=" text-white animate-fade" style="height:50px">
+            <div class=" text-text1 animate-fade" style="height:50px">
               {{ $t("transaction.transaction_successful") }}
             </div>
-            <!-- <div v-if="getLastTransaction" class="text-white animate-pop q-body-1" style="height:50px">{{getLastTransaction.transaction_id}}</div> -->
           </div>
 
           <div v-if="getShowTransactionOverlay == 'cancelled'">
@@ -78,7 +77,7 @@
               class="animate-scale"
               size="70px"
             />
-            <div class=" text-white animate-fade" style="height:50px">
+            <div class=" text-text1 animate-fade" style="height:50px">
               {{ $t("transaction.transaction_cancelled") }}
             </div>
           </div>
@@ -91,7 +90,7 @@
               class="animate-scale"
               size="70px"
             />
-            <div class=" text-white animate-fade" style="height:50px">
+            <div class=" text-text1 animate-fade" style="height:50px">
               {{ $t("transaction.transaction_cancelled") }}
             </div>
           </div>
