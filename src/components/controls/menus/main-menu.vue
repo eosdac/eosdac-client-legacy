@@ -73,7 +73,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { openURL } from "quasar";
 import custodianMenu from "./custodian-menu";
 import memberMenu from "./member-menu";
 import devMenu from "./dev-menu";
@@ -96,9 +95,6 @@ export default {
       getIsCustodian: "user/getIsCustodian",
       getIsCandidate: "user/getIsCandidate"
     })
-  },
-  methods: {
-    openURL
   }
 };
 </script>
