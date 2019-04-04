@@ -31,7 +31,6 @@ let routes = [
         path: "profile/:accountname",
         component: () => import("pages/profile")
       },
-      { path: "credits", component: () => import("pages/credits.vue") },
       {
         path: "manage-candidateship",
         component: () => import("pages/manage-candidateship.vue")
