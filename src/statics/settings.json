@@ -40,7 +40,8 @@
       "name": "notify_error_msg",
       "type": "boolean",
       "value": true,
-      "group": "notify"
+      "group": "notify",
+      "disabled": true
     },
 
     { 

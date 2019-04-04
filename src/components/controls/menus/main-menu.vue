@@ -1,16 +1,5 @@
 <template>
   <q-list no-border link inset-delimiter>
-    <custodian-menu />
-    <member-menu />
-
-    <q-item to="/constitution">
-      <q-item-side :icon="$configFile.icon.constitution" color="text2" />
-      <q-item-main
-        :label="$t('default.sign_the_constitution')"
-        class="text-text1"
-      />
-    </q-item>
-
     <q-item v-if="getAccountName" :to="`/profile/` + getAccountName">
       <q-item-side :icon="$configFile.icon.profile" color="text2" />
       <q-item-main :label="$t('menu.profile')" class="text-text1" />
@@ -50,6 +39,23 @@
         class="text-text1"
       />
     </q-item>
+
+    <q-item to="/constitution">
+      <q-item-side :icon="$configFile.icon.constitution" color="text2" />
+      <q-item-main
+        v-if="getAccountName"
+        :label="$t('default.sign_the_constitution')"
+        class="text-text1"
+      />
+      <q-item-main
+        v-else
+        :label="$t('default.read_the_constitution')"
+        class="text-text1"
+      />
+    </q-item>
+
+    <custodian-menu />
+    <member-menu />
 
     <menu-extension />
 

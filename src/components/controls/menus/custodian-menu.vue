@@ -56,7 +56,12 @@
     <q-collapsible v-else group="main-menu-sub" class="animate-fade">
       <template slot="header">
         <q-item-side :icon="$configFile.icon.dactoken" color="text2" />
-        <q-item-main :label="$t('menu.dac_activity')" class="text-text1" />
+        <q-item-main
+          :label="
+            $t('menu.dac_activity', { dacname: $configFile.get('dacname') })
+          "
+          class="text-text1"
+        />
       </template>
       <div class="bg-bg1">
         <q-item class="q-pl-lg animate-fade" link to="/custodian/review-msigs">
