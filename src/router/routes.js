@@ -34,8 +34,7 @@ let routes = [
       {
         path: "manage-candidateship",
         component: () => import("pages/manage-candidateship.vue")
-      },
-      { path: "verify/:token", component: () => import("pages/verify-token") }
+      }
     ]
   },
 
