@@ -156,24 +156,6 @@
     "step5_desc": "Please review your msig carefully. You can jump back and forth to make changes.",
     "view_full_msig": "view full msig"
   },
-  "nodeselector": {
-    "automatic_connection": "Automatic Connection",
-    "choose_endpoint": "Choose Endpoint from List",
-    "click_connect_below": "Click <b>Connect</b> below to automatically connect to the fastest endpoint to your location selected from the top EOS block producers.",
-    "connect": "Connect",
-    "connecting": "Connecting...",
-    "custom_endpoint": "Custom Endpoint",
-    "endpoint_set": "Endpoint set successfully",
-    "error_chain_id": "The chain ID returned by the endpoint is incorrect.",
-    "error_could_not_connect_to_endpoint": "Could not connect to endpoint.",
-    "error_endpoint_connection_timed_out": "Connection to endpoint timed out.",
-    "error_invalid_url": "The URL seems to be invalid.",
-    "gathering_endpoints": "Gathering endpoints...",
-    "manual_connection": "Manual Connection",
-    "select_endpoint": "Select Endpoint from List",
-    "select_the_endpoint_you_would_like": "Select the endpoint you would like to use and click <b>Connect</b>. Endpoints from the top block producers have been provided for you, but you can also specify your own custom endpoint by populating the input with a url, and pressing <b>Connect</b>.",
-    "specify_your_own": "Specify your own custom endpoint by populating the input with an url and click the connect button."
-  },
   "profile": {
     "account_name": "account name",
     "bio": "Bio",

@@ -131,24 +131,7 @@
     "token_explorer": "代币探测器",
     "unregister_as_candidate": "注销成为候选人"
   },
-  "nodeselector": {
-    "automatic_connection": "自动连接",
-    "choose_endpoint": "从列表中选择端点",
-    "click_connect_below": "点击下面的<b>连接</ b>，自动连接到从顶级 EOS 区块生产者中选择的最快端点。",
-    "connect": "连接",
-    "connecting": "正在连接……",
-    "custom_endpoint": "自定义端点",
-    "endpoint_set": "端点设置成功",
-    "error_chain_id": "端点返回的链 ID 不正确。",
-    "error_could_not_connect_to_endpoint": "无法连接到端点。",
-    "error_endpoint_connection_timed_out": "连接到端点超时。",
-    "error_invalid_url": "URL 地址似乎无效。",
-    "gathering_endpoints": "正在收集端点……",
-    "manual_connection": "手动连接",
-    "select_endpoint": "从列表中选择端点",
-    "select_the_endpoint_you_would_like": "选择您要使用的端点，然后点击<b>连接</b>。来自顶级区块生产者的端点已经提供给您，但您也可以通过输入 URL 地址来指定自定义端点，然后按<b>连接</b>。",
-    "specify_your_own": "通过输入 URL 地址并单击连接按钮来指定您自己的自定义端点。"
-  },
+
   "profile": {
     "account_name": "账户名",
     "bio": "简介",

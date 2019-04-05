@@ -140,25 +140,6 @@
     "token_explorer": "토큰 익스플로러",
     "unregister_as_candidate": "관리인 등록 취소"
   },
-  "nodeselector": {
-    "automatic_connection": "자동 연결",
-    "choose_endpoint": "엔드포인트 선택",
-    "click_connect_below": "아래의 <b>연결</b>을 클릭하면 EOS 블록 프로듀서 중 귀하의 위치로부터 가장 빠른 엔드포인트에 자동으로 연결됩니다.",
-    "connect": "연결",
-    "connecting": "연결 중 ...",
-    "custom_endpoint": "사용자 지정 엔드포인트",
-    "default_node": "기본 노드",
-    "endpoint_set": "엔드포인트 설정 완료",
-    "error_chain_id": "엔드포인트가 보낸 체인 ID가 올바르지 않습니다.",
-    "error_could_not_connect_to_endpoint": "엔드포인트에 연결할 수 없습니다.",
-    "error_endpoint_connection_timed_out": "엔드포인트 연결 시간이 초과되었습니다.",
-    "error_invalid_url": "URL이 유효하지 않은 것 같습니다.",
-    "gathering_endpoints": "엔드포인트 수집 중...",
-    "manual_connection": "수동 연결",
-    "select_endpoint": "목록에서 엔드포인트 선택",
-    "select_the_endpoint_you_would_like": "사용할 엔드포인트를 선택하고 <b>연결</b>을 클릭하십시오. 상위 블록 프로듀서의 엔드포인트가 제공되었습니다. 직접 특정 엔드포인트를 지정하고 싶을 경우 URL을 입력하고 <b>연결</b>을 누르십시오.",
-    "specify_your_own": "사용자가 직접 특정 엔드포인트를 지정하고 싶을 경우 URL을 입력하고 연결 버튼을 누르십시오."
-  },
   "profile": {
     "account_name": "계정명",
     "bio": "소개",

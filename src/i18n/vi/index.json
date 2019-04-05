@@ -131,24 +131,6 @@
     "token_explorer": "Tra Cứu Token",
     "unregister_as_candidate": "Hủy Đăng Ký Ứng Viên"
   },
-  "nodeselector": {
-    "automatic_connection": "Tự Động Kết Nối",
-    "choose_endpoint": "Chọn Điểm Kết Nối Trong Danh Sách",
-    "click_connect_below": "Ấn Kết Nối bên dưới để tự động kết nối vào điểm kết nối nhanh nhất theo vị trí của bạn từ các nhà sản xuất block EOS hàng đầu.",
-    "connect": "Kết Nối",
-    "connecting": "Đang kết nối...",
-    "custom_endpoint": "Tùy Chọn Điểm Kết Nối",
-    "endpoint_set": "Cài đặt điểm kết nối thành công",
-    "error_chain_id": "ID chuỗi từ điểm kết nối không chính xác.",
-    "error_could_not_connect_to_endpoint": "Không thể kết nối.",
-    "error_endpoint_connection_timed_out": "Hết thời gian kết nối.",
-    "error_invalid_url": "URL không hợp lệ.",
-    "gathering_endpoints": "Đang thu thập các điểm kết nối...",
-    "manual_connection": "Kết Nối Thủ Công",
-    "select_endpoint": "Lựa Chọn Điểm Kết Nối từ Danh Sách",
-    "select_the_endpoint_you_would_like": "Chọn điểm kết nối bạn muốn dùng và ấn Kết Nối. Các điểm kết nối của các nhà sản xuất block hàng đầu được liệt kê cho bạn, tuy nhiên bạn có thể tự chỉ định điểm kết nối của riêng mình bằng cách nhập vào url, và ấn Kết Nối.",
-    "specify_your_own": "Chỉ định điểm kết nối của riêng bạn bằng cách nhập url và ấn nút kết nối."
-  },
   "profile": {
     "account_name": "tên tài khoản",
     "bio": "Tiểu Sử",

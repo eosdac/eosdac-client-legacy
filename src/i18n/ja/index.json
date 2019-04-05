@@ -138,25 +138,6 @@
     "token_explorer": "トークンエクスプローラー",
     "unregister_as_candidate": "候補者としての登録を解除する"
   },
-  "nodeselector": {
-    "automatic_connection": "自動接続",
-    "choose_endpoint": "リストからエンドポイントを選択",
-    "click_connect_below": "下記の <b>接続する</b> をクリックすると、上位のEOSブロックプロデューサーから選択したロケーションに最速のエンドポイントを自動接続します。",
-    "connect": "接続する",
-    "connecting": "接続中...",
-    "custom_endpoint": "カスタムエンドポイント",
-    "default_node": "デフォルトノード",
-    "endpoint_set": "エンドポイントが正常に設定されました",
-    "error_chain_id": "エンドポイントによって返されたチェーンIDが正しくありません。",
-    "error_could_not_connect_to_endpoint": "エンドポイントに接続できませんでした。",
-    "error_endpoint_connection_timed_out": "エンドポイントへの接続がタイムアウトしました。",
-    "error_invalid_url": "無効なURLのようです。",
-    "gathering_endpoints": "エンドポイントを収集しています...",
-    "manual_connection": "手動接続",
-    "select_endpoint": "リストからエンドポイントを選択",
-    "select_the_endpoint_you_would_like": "使用するエンドポイントを選択し、<b>接続</ ",
-    "specify_your_own": "URLを入力し、接続ボタンをクリックして、独自のカスタムエンドポイントを指定します。"
-  },
   "profile": {
     "account_name": "アカウント名",
     "bio": "バイオグラフィー",

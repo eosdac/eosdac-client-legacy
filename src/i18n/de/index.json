@@ -41,24 +41,6 @@
     "settings": "Einstellungen",
     "unregister_as_candidate": "Registrierung als Verwalter zurückziehen"
   },
-  "nodeselector": {
-    "automatic_connection": "Automatische Verbindung",
-    "choose_endpoint": "Wählen Sie einen Endpunkt aus der Liste",
-    "click_connect_below": "Klicken Sie unten auf <b> Verbinden </ b>, um automatisch eine Verbindung zum schnellsten Endpunkt zu Ihrem Standort herzustellen.",
-    "connect": "Verbinden",
-    "connecting": "Verbinde ...",
-    "custom_endpoint": "Benutzerdefinierter Endpunkt",
-    "endpoint_set": "Endpunkt wurde erfolgreich festgelegt",
-    "error_chain_id": "Die vom Endpunkt zurückgegebene Chain-ID ist falsch.",
-    "error_could_not_connect_to_endpoint": "Verbindung zum Endpunkt konnte nicht hergestellt werden.",
-    "error_endpoint_connection_timed_out": "Die Verbindung zum Endpunkt ist abgelaufen.",
-    "error_invalid_url": "Die URL scheint ungültig zu sein.",
-    "gathering_endpoints": "Lade Endpunkte ...",
-    "manual_connection": "Manuelle Verbindung",
-    "select_endpoint": "Wählen Sie einen Endpunkt aus der Liste",
-    "select_the_endpoint_you_would_like": "Wählen Sie den Endpunkt aus, den Sie verwenden möchten, und klicken Sie auf <b> Verbinden </ b>. Endpoints von den Top-Block-Herstellern wurden für Sie bereitgestellt, Sie können jedoch auch Ihren eigenen benutzerdefinierten Endpunkt angeben, indem Sie die Eingabe mit einer URL füllen und <b> Verbinden </ b> drücken.",
-    "specify_your_own": "Geben Sie Ihren eigenen benutzerdefinierten Endpunkt an, indem Sie die Eingabe mit einer URL füllen und auf die Schaltfläche Verbinden klicken."
-  },
   "profile": {
     "cancel": "Abbrechen",
     "download": "Herunterladen",

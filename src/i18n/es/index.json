@@ -55,24 +55,6 @@
     "settings": "Configuracion",
     "unregister_as_candidate": "No registrado como Candidato"
   },
-  "nodeselector": {
-    "automatic_connection": "Conexión automática",
-    "choose_endpoint": "Elegir endpoint",
-    "click_connect_below": "Haga clic en <b> Conectar </ b> para conectarse automáticamente al endpoint más rápido según la ubicación seleccionada entre los productores de bloques EOS.",
-    "connect": "Conectar",
-    "connecting": "Conectando ...",
-    "custom_endpoint": "Endpoint personalizado",
-    "endpoint_set": "Endpoint establecido con éxito",
-    "error_chain_id": "La ID devuelta por el endpoint es incorrecta.",
-    "error_could_not_connect_to_endpoint": "No se pudo conectar al endpoint.",
-    "error_endpoint_connection_timed_out": "La conexión al endpoint se agotó.",
-    "error_invalid_url": "La URL parece ser inválida.",
-    "gathering_endpoints": "Buscando endpoints ...",
-    "manual_connection": "Conexión manual",
-    "select_endpoint": "Seleccionar un endpoint de la lista",
-    "select_the_endpoint_you_would_like": "Seleccione el endpoint que le gustaría usar y haga clic en <b> Conectar </ b>. Se mostraron los endpoints de los principales productores de bloques, pero también puede especificar un endpoint personalizado completando el campo con una url y presionando <b> Conectar </ b>.",
-    "specify_your_own": "Especifique su endpoint personalizado rellenando el campo con una url y haga clic en el botón de conexión."
-  },
   "profile": {
     "account_name": "Nombre de la Cuenta",
     "bio": "Bio",

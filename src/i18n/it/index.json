@@ -45,24 +45,6 @@
     "token_explorer": "Token Explorer",
     "unregister_as_candidate": "Unregister As Candidate"
   },
-  "nodeselector": {
-    "automatic_connection": "Connessione automatica",
-    "choose_endpoint": "Scegli Endpoint dalla lista",
-    "click_connect_below": "Fai clic su <b> Connetti </ b> qui sotto per collegarti automaticamente all'endpoint più veloce alla tua posizione selezionata tra i principali produttori di blocchi EOS.",
-    "connect": "Collegare",
-    "connecting": "Connessione in corso ...",
-    "custom_endpoint": "Endpoint personalizzato",
-    "endpoint_set": "Endpoint impostato correttamente",
-    "error_chain_id": "L'ID catena restituito dall'endpoint non è corretto.",
-    "error_could_not_connect_to_endpoint": "Impossibile connettersi all'endpoint.",
-    "error_endpoint_connection_timed_out": "Connessione all'endpoint scaduta.",
-    "error_invalid_url": "L'URL sembra non essere valido.",
-    "gathering_endpoints": "Raccolta degli endpoint ...",
-    "manual_connection": "Connessione manuale",
-    "select_endpoint": "Seleziona Endpoint dall'elenco",
-    "select_the_endpoint_you_would_like": "Seleziona l'endpoint che desideri utilizzare e fai clic su <b>Connetti</b>. Gli endpoint dei principali produttori di blocchi sono stati forniti per te, ma puoi anche specificare il tuo endpoint personalizzato compilando l'input con un URL e premendo <b>Connetti</b>.",
-    "specify_your_own": "Specifica il tuo endpoint personalizzato compilando l'input con un url e fai clic sul pulsante Connetti."
-  },
   "profile": {
     "bio": "Biografía",
     "cancel": "cancel",

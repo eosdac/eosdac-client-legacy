@@ -64,24 +64,6 @@
     "token_explorer": "Token explorer",
     "unregister_as_candidate": "Non enregistré en tant que Candidat"
   },
-  "nodeselector": {
-    "automatic_connection": "Connexion automatique",
-    "choose_endpoint": "Choisir un point final dans la liste",
-    "click_connect_below": "Cliquez sur <b>Connexion</b> ci-dessous pour vous connecter automatiquement au point final le plus rapide par rapport à votre emplacement et sélectionné parmi les meilleurs producteurs de blocs EOS.",
-    "connect": "Connexion",
-    "connecting": "En cours de connexion...",
-    "custom_endpoint": "Point final personalisé",
-    "endpoint_set": "Point final définit avec succès",
-    "error_chain_id": "L'identifiant de chaîne renvoyé par le point final est incorrect.",
-    "error_could_not_connect_to_endpoint": "Impossible de se connecter au point final.",
-    "error_endpoint_connection_timed_out": "La connexion au point final a expiré.",
-    "error_invalid_url": "L'URL est incorrecte.",
-    "gathering_endpoints": "Rassemblement des points finals en cours...",
-    "manual_connection": "Connexion manuelle",
-    "select_endpoint": "Sélectionner un point final dans la liste",
-    "select_the_endpoint_you_would_like": "Sélectionnez le point final que vous souhaitez utiliser et cliquez sur <b>Connexion</b>. Les points finals vous sont fournis par les meilleurs producteurs de blocs, cependant vous pouvez également spécifier votre propre point final personnalisé en renseignant l'entrée avec une URL et en appuyant sur <b> Connexion</b>.",
-    "specify_your_own": "Spécifiez votre propre point final personnalisé en remplissant l'entrée avec une URL et cliquez sur le bouton Connexion."
-  },
   "profile": {
     "account_name": "nom du compte",
     "bio": "Biographie",
