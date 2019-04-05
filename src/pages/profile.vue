@@ -13,7 +13,7 @@
       </div>
       <div class="row q-mt-md profile_header_top_row">
         <div class="col-xs-12">
-          <div class="text-text2 q-caption uppercase">
+          <div class=" q-caption uppercase">
             {{ $t("profile.account_name") }}
           </div>
           <div class="q-display-1 text-weight-thin uppercase">
@@ -55,7 +55,7 @@
       >
         <div class="row profile_header_bottom_row">
           <div class="col-md-2 col-xs-6 q-pr-sm">
-            <div class="text-text2 q-caption uppercase">
+            <div class=" q-caption uppercase">
               {{ $t("profile.givenName") }}
             </div>
             <q-input
@@ -67,7 +67,7 @@
             />
           </div>
           <div class="col-md-2 col-xs-6 q-pr-sm">
-            <div class="text-text2 q-caption uppercase">
+            <div class=" q-caption uppercase">
               {{ $t("profile.familyName") }}
             </div>
             <q-input
@@ -79,7 +79,7 @@
             />
           </div>
           <div class="col-md-2 col-xs-6 q-pr-sm">
-            <div class="text-text2 q-caption uppercase">
+            <div class=" q-caption uppercase">
               {{ $t("profile.gender") }}
             </div>
             <q-select
@@ -97,7 +97,7 @@
             />
           </div>
           <div class="col-md-2 col-xs-6">
-            <div class="text-text2 q-caption uppercase">Type</div>
+            <div class=" q-caption uppercase">Type</div>
             <div>Member</div>
           </div>
         </div>
