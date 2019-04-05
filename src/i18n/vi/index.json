@@ -87,32 +87,6 @@
     "go_back": "Quay trở lại",
     "sorry_nothing_here": "Xin lỗi, không có gì ở đây..."
   },
-  "index": {
-    "description_p1": "eosDAC là một cộng đồng tự trị phi tập trung, điều đó có nghĩa là nó được sở hữu và vận hành bởi những người sở hữu token, đồng ý với hiến pháp và đăng ký thành viên cộng đồng.",
-    "description_p2": "Khi hoàn tất, bộ công cụ thành viên sẽ cho phép bạn đọc hiến pháp, đăng ký thành viên, nộp đề xuất công việc, đăng ký ứng viên người giám hộ, bầu ra người giám hộ, chuyển nhượng token và nhiều chức năng khác. Nếu bạn có bất kỳ câu hỏi gì, vui lòng liên hệ chúng tôi theo các đường link bên dưới.",
-    "discord_description": "eosDAC là một cộng đồng năng động và tích cực xây dựng các công cụ để kích hoạt các DAC khác. Discord là nơi chúng tôi trao đổi, giới thiệu và hợp tác làm việc cùng nhau.",
-    "eosdac": "eosdac.io/vi",
-    "error_occured": "Có lỗi xảy ra!",
-    "join_discord": "Tham gia Cộng Đồng của chúng tôi trên Discord",
-    "key_features": "Chức Năng Chính",
-    "open_discord": "mở discord",
-    "read_constitution": "Hiến Pháp",
-    "reg_as_cust_cand": "Đăng Ký Ứng Viên",
-    "reg_as_member": "Đăng Ký Thành Viên",
-    "signin": "đăng nhập bằng Scatter",
-    "signout": "đăng xuất",
-    "submit_wp": "Đề Xuất Công Việc",
-    "subscribe": "đăng ký",
-    "subscribe_newsletter": "Đăng Ký Nhận Bảng Tin của chúng tôi.",
-    "valid_input_required": "Email không hợp lệ",
-    "visit_eosdac": "Truy cập website của chúng tôi eosdac.io",
-    "vote_cust": "Bầu Người Giám Hộ",
-    "wallet": "Ví",
-    "website_description": "Tất cả thông tin bạn muốn biết về eosDAC đều có thể tìm thấy trên website của chúng tôi tại eosdac.io. Truy cập ngay và tìm hiểu về cộng đồng vận hành nhà sản xuất block EOS.",
-    "welcome_to_esodac_member_client": "Chào mừng đến với Công Cụ Thành Viên eosDAC",
-    "your_email": "Email của bạn",
-    "your_language": "Ngôn Ngữ của bạn"
-  },
   "lang_selector": {
     "choose_your_language": "Lựa chọn Ngôn Ngữ",
     "languages": {
@@ -132,9 +106,9 @@
   "manage_candidateship": {
     "amount_to_stake_placeholder": "số lượng đặt cọc EOSDAC",
     "locked_tokens": "token bị khóa",
-    "page_description_active_custodian": "Bạn đang là một thành viên hội đồng giám hộ eosDAC.",
-    "page_description_registered": "Cám ơn bạn đã đăng ký ứng viên để phục vụ trong hội đồng giám hộ eosDAC. Như một phần để tham gia vào việc đăng ký ứng cử, một lượng token của bạn đã được đặt cọc.",
-    "page_description_unregistered": "Trang này được dùng cho việc đăng ký ứng viên cho một vị trí trong hội đồng giám hộ. Vị trí này đi kèm với những trách nhiệm được nêu trong Hiến Pháp eosDAC. Xin vui lòng không đăng ký ứng viên trừ khi bạn hoàn toàn hiểu rõ và có thể đáp ứng các trách nhiệm của một thành viên hội đồng giám hộ eosDAC. Vui lòng xem lại cẩn thận mục 5 trong hiến pháp trước khi đăng ký.",
+    "page_description_active_custodian": "Bạn đang là một thành viên hội đồng giám hộ {dacname}.",
+    "page_description_registered": "Cám ơn bạn đã đăng ký ứng viên để phục vụ trong hội đồng giám hộ {dacname}. Như một phần để tham gia vào việc đăng ký ứng cử, một lượng token của bạn đã được đặt cọc.",
+    "page_description_unregistered": "Trang này được dùng cho việc đăng ký ứng viên cho một vị trí trong hội đồng giám hộ. Vị trí này đi kèm với những trách nhiệm được nêu trong Hiến Pháp {dacname}. Xin vui lòng không đăng ký ứng viên trừ khi bạn hoàn toàn hiểu rõ và có thể đáp ứng các trách nhiệm của một thành viên hội đồng giám hộ {dacname}. Vui lòng xem lại cẩn thận mục 5 trong hiến pháp trước khi đăng ký.",
     "pay_description": "Vui lòng điền vào số lượng bạn muốn nhận được khi làm người giám hộ trong một nhiệm kỳ. Mức Lương tối đa là {requested_pay}.",
     "register": "đăng ký",
     "requested_custodian_pay_placeholder": "yêu cầu thanh toán bằng EOS",
@@ -200,8 +174,8 @@
     "API_endpoint": "API Điểm Kết Nối",
     "NOT_REGISTERED": "CHƯA ĐĂNG KÝ",
     "REGISTERED": "ĐÃ ĐĂNG KÝ",
-    "click_below_to_unregister_membership": "Ấn vào nút bên dưới để hủy tư cách thành viên eosDAC",
-    "click_register_now": "Ấn \"Đăng Ký Ngay\" để trở thành thành viên eosDAC.",
+    "click_below_to_unregister_membership": "Ấn vào nút bên dưới để hủy tư cách thành viên {dacname}",
+    "click_register_now": "Ấn \"Đăng Ký Ngay\" để trở thành thành viên {dacname}.",
     "current_connection": "Kết Nối Hiện Tại",
     "current_language": "Ngôn Ngữ Hiện Tại",
     "current_status": "Trạng Thái Hiện Tại",
@@ -240,7 +214,7 @@
     "loading": "đang tải...",
     "refresh": "Làm mới lại",
     "seconds": "giây",
-    "threshold_met": "Ngưỡng phiếu bầu đã đạt 15%. eosDAC đã mở.",
+    "threshold_met": "Ngưỡng phiếu bầu đã đạt 15%. {dacname} đã mở.",
     "update_in": "cập nhật"
   }
 }

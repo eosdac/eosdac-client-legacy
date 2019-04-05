@@ -21,32 +21,6 @@
     "go_back": "Retour",
     "sorry_nothing_here": "Désolé, aucun contenu n'est disponible sur cette page..."
   },
-  "index": {
-    "description_p1": "eosDAC est une communauté décentralisée et autonome, ce qui signifie qu'elle appartient et est gérée par les personnes qui détiennent des tokens, qui acceptent de respecter la constitution et qui se sont inscrit en tant que membre de la communauté.",
-    "description_p2": "Une fois complété, ce client membre vous permettra de lire la constitution, de vous enregistrer en tant que membre, soumettre des propositions de travail, vous inscrire pour devenir candidat, voter pour les délégués, transférer des tokens, et plus. Si vous avez des questions, cliquez sur le lien ci-dessous.",
-    "discord_description": "eosDAC se présente comme étant une communauté active et engagée, un outil qui sert à développer d'autres DACs. Discord est l'endroit où nous rassemblons nos compétences et coordonnons nos activités.",
-    "eosdac": "eosdac.io",
-    "error_occured": "Quelque chose ne n'est pas bien passé !",
-    "join_discord": "Rejoingé notre communauté sur Discord",
-    "key_features": "Key Features",
-    "open_discord": "ouvrir discord",
-    "read_constitution": "Constitution",
-    "reg_as_cust_cand": "Inscription Candidat",
-    "reg_as_member": "Adhésion",
-    "signin": "S'identifié avec Scatter",
-    "signout": "Déconnexion",
-    "submit_wp": "Propositions de travail",
-    "subscribe": "s'abonner",
-    "subscribe_newsletter": "S'abonner à notre newsletter",
-    "valid_input_required": "Entrée valide requise",
-    "visit_eosdac": "Visité notre site internet eosdac.io",
-    "vote_cust": "Voter Délégués",
-    "wallet": "Portefeuille",
-    "website_description": "Tout ce que vous souhaitez savoir au sujet d'eosDAC est libre d'accès sur notre site internet eosdac.io. Visité le lien aujourd'hui et vous en apprendrez plus sur la communauté qui gère le block producer EOS.",
-    "welcome_to_esodac_member_client": "Bienvenue au client membre d'eosDAC",
-    "your_email": "Votre email",
-    "your_language": "Votre langage"
-  },
   "lang_selector": {
     "choose_your_language": "Choisissez votre langue",
     "languages": {
@@ -66,9 +40,9 @@
   "manage_candidateship": {
     "amount_to_stake_placeholder": "quantité pour *stake* EOSDAC",
     "locked_tokens": "tokens bloqués",
-    "page_description_active_custodian": "Vous êtes actuellement actif en tant que membre du conseil des Délégués d'eosDAC.",
-    "page_description_registered": "Merci pour vous êtes inscris en tant que candidat pour servir au conseil des Délégués d'eosDAC. Dans le cadre de votre conditature, certains de vos tokens ont été *stake*.",
-    "page_description_unregistered": "Cette page sert à s'inscrire en tant que candidat au conseil des délégués. Cette position s'accompagne de responsabilités qui sont également mentionées dans la constitution d'eosDAC. S'il-vous-plaît, inscrivez-vous seulement en tant que candidat si vous avez entièrement compris les responsabilités d'un membre du conseil des délégués d'eosDAC. Vous pouvez vous référer à la partie 5 pour plus d'information.",
+    "page_description_active_custodian": "Vous êtes actuellement actif en tant que membre du conseil des Délégués d'{dacname}.",
+    "page_description_registered": "Merci pour vous êtes inscris en tant que candidat pour servir au conseil des Délégués d'{dacname}. Dans le cadre de votre conditature, certains de vos tokens ont été *stake*.",
+    "page_description_unregistered": "Cette page sert à s'inscrire en tant que candidat au conseil des délégués. Cette position s'accompagne de responsabilités qui sont également mentionées dans la constitution d'{dacname}. S'il-vous-plaît, inscrivez-vous seulement en tant que candidat si vous avez entièrement compris les responsabilités d'un membre du conseil des délégués d'{dacname}. Vous pouvez vous référer à la partie 5 pour plus d'information.",
     "pay_description": "veuillez indiquer le montant que vous souhaitez recevoir en tant que Délégué pendant une période. Le montant maximum est {requested_pay}.",
     "register": "Inscription",
     "requested_custodian_pay_placeholder": "Demande de la rémunération en EOS",
@@ -133,8 +107,8 @@
     "API_endpoint": "point final API",
     "NOT_REGISTERED": "NON ENREGISTRÉ",
     "REGISTERED": "INSCRIT",
-    "click_below_to_unregister_membership": "Cliquez sur le bouton ci-dessous pour annuler votre inscription à eosDAC",
-    "click_register_now": "Cliquez sur \"S'inscrire maintenant\" pour devenir membre d'eosDAC.",
+    "click_below_to_unregister_membership": "Cliquez sur le bouton ci-dessous pour annuler votre inscription à {dacname}",
+    "click_register_now": "Cliquez sur \"S'inscrire maintenant\" pour devenir membre d'{dacname}.",
     "current_connection": "Connexion actuelle",
     "current_language": "Langue courante",
     "current_status": "Statut actuel",
@@ -169,7 +143,7 @@
     "loading": "Chargement...",
     "refresh": "Rafraîchir",
     "seconds": "secondes",
-    "threshold_met": "Seuil de vote de 15% atteint. eosDAC est débloquée.",
+    "threshold_met": "Seuil de vote de 15% atteint. {dacname} est débloquée.",
     "update_in": "Mettre à jour dans"
   }
 }

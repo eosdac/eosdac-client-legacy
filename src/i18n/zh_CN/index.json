@@ -87,32 +87,6 @@
     "go_back": "返回",
     "sorry_nothing_here": "抱歉，这里什么也没有......"
   },
-  "index": {
-    "description_p1": "eosDAC 是一个去中心化自治社区，这意味着它由同意章程并注册成为会员的代币持有者共同拥有和运营。",
-    "description_p2": "在开发完成后，这个会员客户端将可以让您阅读章程、注册成为会员、提交工作人员提案、注册成为候选托管人、转移代币等。如果您有任何疑问，请使用以下的链接联络我们。",
-    "discord_description": "eosDAC 是一个活跃且忙碌的社区，旨在创造工具来推动其他 DAC 的实现。Discord 是我们展示技能并合作完成目标的地方。",
-    "eosdac": "eosdac.io",
-    "error_occured": "出现问题！",
-    "join_discord": "加入我们的 Discord 社区",
-    "key_features": "主要功能",
-    "open_discord": "打开 Discord",
-    "read_constitution": "章程",
-    "reg_as_cust_cand": "候选人注册",
-    "reg_as_member": "会员身份",
-    "signin": "使用 Scatter 登录",
-    "signout": "登出",
-    "submit_wp": "工作人员提案",
-    "subscribe": "订阅",
-    "subscribe_newsletter": "订阅我们的新闻快报",
-    "valid_input_required": "需要输入有效内容",
-    "visit_eosdac": "访问我们的网站 eosdac.io",
-    "vote_cust": "选举托管人",
-    "wallet": "钱包",
-    "website_description": "您可以在我们的官网 eosdac.io 上找到所有您想知道的信息。现在访问，来对这个社区共有的 EOS 区块生产者有更多了解。",
-    "welcome_to_esodac_member_client": "欢迎来到 eosDAC 会员客户端",
-    "your_email": "您的邮箱",
-    "your_language": "您的语言"
-  },
   "lang_selector": {
     "choose_your_language": "选择您的语言",
     "languages": {
@@ -132,9 +106,9 @@
   "manage_candidateship": {
     "amount_to_stake_placeholder": "用于权益押注的 EOSDAC 数量",
     "locked_tokens": "被锁的代币",
-    "page_description_active_custodian": "您目前是一名在任的 eosDAC 托管人董事会成员。",
-    "page_description_registered": "感谢您注册成为 eosDAC 托管人董事会的成员候选人。作为候选人注册的一部分，您的部分代币已被用于权益押注。",
-    "page_description_unregistered": "这一页面是用于注册成为候选人来争取在托管人董事会任职。该职位需要承担 eosDAC 章程中列举的种种责任。请在完全理解并有能力承担作为一名 eosDAC 托管人董事会成员所需承担职责的前提下注册成为候选人。请在注册前仔细阅读章程第 5 节的内容。",
+    "page_description_active_custodian": "您目前是一名在任的 {dacname} 托管人董事会成员。",
+    "page_description_registered": "感谢您注册成为 {dacname} 托管人董事会的成员候选人。作为候选人注册的一部分，您的部分代币已被用于权益押注。",
+    "page_description_unregistered": "这一页面是用于注册成为候选人来争取在托管人董事会任职。该职位需要承担 {dacname} 章程中列举的种种责任。请在完全理解并有能力承担作为一名 {dacname} 托管人董事会成员所需承担职责的前提下注册成为候选人。请在注册前仔细阅读章程第 5 节的内容。",
     "pay_description": "请填写您作为托管人希望在一届任期内获得的酬劳。最大数额为 {requested_pay}。",
     "register": "注册",
     "requested_custodian_pay_placeholder": "希望得到的酬劳（EOS）",
@@ -200,8 +174,8 @@
     "API_endpoint": "API 端点",
     "NOT_REGISTERED": "未注册",
     "REGISTERED": "已注册",
-    "click_below_to_unregister_membership": "点击下面的按钮注销您的 eosDAC 会员资格",
-    "click_register_now": "点击“立即注册”成为 eosDAC 的会员。",
+    "click_below_to_unregister_membership": "点击下面的按钮注销您的 {dacname} 会员资格",
+    "click_register_now": "点击“立即注册”成为 {dacname} 的会员。",
     "current_connection": "当前连接",
     "current_language": "当前语言",
     "current_status": "当前状态",
@@ -240,7 +214,7 @@
     "loading": "正在载入……",
     "refresh": "刷新",
     "seconds": "秒",
-    "threshold_met": "已达到 15% 的投票门槛。eosDAC 解锁。",
+    "threshold_met": "已达到 15% 的投票门槛。{dacname} 解锁。",
     "update_in": "更新倒数"
   }
 }

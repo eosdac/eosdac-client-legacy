@@ -93,32 +93,6 @@
     "go_back": "戻る",
     "sorry_nothing_here": "申し訳ありません、リクエストが見つかりませんでした"
   },
-  "index": {
-    "description_p1": "eosDACは、規約に合意し、コミュニティのメンバーとして登録されたトークン保有者によって運営される分散自立コミュニティです。",
-    "description_p2": "完了したら、メンバークライアントを使用して、規約の確認、ワーカープロポーザルの提出、カストディアン候補としての登録、カストディアンへの投票、トークンの転送などができるようになります。質問がある場合は、以下のリンクからご連絡下さい。",
-    "discord_description": "eosDACは、他のDACsを実現するためのツールを精力的に開発するコミュニティです。活動は主にDiscord上で行われています。",
-    "eosdac": "eosdac.io",
-    "error_occured": "問題が起こりました。",
-    "join_discord": "DiscordのeosDACコミュニティに是非参加して下さい",
-    "key_features": "主要な機能",
-    "open_discord": "Discordを開く",
-    "read_constitution": "規約",
-    "reg_as_cust_cand": "候補者登録",
-    "reg_as_member": "メンバーシップ",
-    "signin": "Scatterでログイン",
-    "signout": "ログアウト",
-    "submit_wp": "ワーカープロポーザル",
-    "subscribe": "購読",
-    "subscribe_newsletter": "ニュースレターを購読",
-    "valid_input_required": "正しい入力が必要です",
-    "visit_eosdac": "ウェブサイト(eosdac.io)を見る",
-    "vote_cust": "カストディアンへの投票",
-    "wallet": "ウォレット",
-    "website_description": "eosDACに関するあらゆる情報はeosDACのウェブサイト(eosdac.io)で確認できます。是非ウェブサイトから、EOSのブロックプロデューサーを運営しているeosDACコミュニティの詳細を確認してみて下さい。",
-    "welcome_to_esodac_member_client": "eosDACメンバークライアントへようこそ",
-    "your_email": "メールアドレス",
-    "your_language": "言語"
-  },
   "lang_selector": {
     "choose_your_language": "言語を選択",
     "languages": {
@@ -139,7 +113,7 @@
     "amount_to_stake_placeholder": "ステークしているEOSDACの総量",
     "locked_tokens": "ロックされているトークン",
     "page_description_active_custodian": "現在、カストディアンボードのアクティブメンバーです。",
-    "page_description_registered": "eosDACのカストディアン候補へのご登録ありがとうございます。候補登録の一環として、いくつかのトークンがステークされます。",
+    "page_description_registered": "{dacname}のカストディアン候補へのご登録ありがとうございます。候補登録の一環として、いくつかのトークンがステークされます。",
     "page_description_unregistered": "このページは、カストディアンボードのメンバー候補への登録ページです。カストディアンボードのメンバーは、規約で概説されている責任を負います。カストディアンボードのメンバーとしての責任を理解し、それを全うできる場合にのみ、候補者登録をしてください。登録前に、規約のセクション5を入念に確認して下さい。",
     "pay_description": "カストディアンとして受け取りたい一期分の数量を入力して下さい。要求できる数量は最大で {requested_pay} です。",
     "register": "登録",
@@ -208,8 +182,8 @@
     "API_endpoint": "APIエンドポイント",
     "NOT_REGISTERED": "未登録",
     "REGISTERED": "登録済み",
-    "click_below_to_unregister_membership": "eosDACのメンバー登録を解除するには、下のボタンをクリックしてください",
-    "click_register_now": "eosDACのメンバーになるには、\"登録する\"をクリックしてください。",
+    "click_below_to_unregister_membership": "{dacname}のメンバー登録を解除するには、下のボタンをクリックしてください",
+    "click_register_now": "{dacname}のメンバーになるには、\"登録する\"をクリックしてください。",
     "current_connection": "現在のコネクション",
     "current_language": "現在の言語",
     "current_status": "現在のステータス",
@@ -248,7 +222,7 @@
     "loading": "読み込み中...",
     "refresh": "更新",
     "seconds": "秒",
-    "threshold_met": "投票の閾値(15%)に到達しました。eosDACがアンロックされます。",
+    "threshold_met": "投票の閾値(15%)に到達しました。{dacname}がアンロックされます。",
     "update_in": "更新まで"
   }
 }

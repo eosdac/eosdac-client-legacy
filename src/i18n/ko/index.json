@@ -93,32 +93,6 @@
     "go_back": "돌아가기",
     "sorry_nothing_here": "죄송합니다. 표시할 내용이 없습니다."
   },
-  "index": {
-    "description_p1": "eosDAC은 탈중앙화된 자율 커뮤니티로서 eosDAC 헌법에 동의하고 정회원 등록을 한 토큰 홀더가 소유하고 운영합니다.",
-    "description_p2": "완성된 회원 클라이언트 기능: eosDAC 헌법 읽기, 회원 등록, 작업자 제안 제출, 관리인 후보 등록, 관리인 투표, 토큰 전송 등. 문의 사항은 하단의 링크를 통해 연락주십시오.",
-    "discord_description": "eosDAC은 다른 DAC들의 출범을 도와주는 툴을 개발하기 위해 적극적이고 활발하게 활동하는 커뮤니티로서 존재합니다. Discord에서 여러분의 재능과 능력을 증명하고 eosDAC 활동을 함께 해나갈 수 있습니다.",
-    "eosdac": "eosdac.io/ko",
-    "error_occured": "오류가 발생했습니다!",
-    "join_discord": "Discord 커뮤니티 가입하기",
-    "key_features": "중요 기능",
-    "open_discord": "Discord 열기",
-    "read_constitution": "헌법",
-    "reg_as_cust_cand": "관리인 후보 등록",
-    "reg_as_member": "멤버십",
-    "signin": "Scatter로 로그인",
-    "signout": "로그아웃",
-    "submit_wp": "작업자 제안",
-    "subscribe": "구독하기",
-    "subscribe_newsletter": "eosDAC 뉴스레터 구독",
-    "valid_input_required": "입력하신 내용이 유효하지 않습니다",
-    "visit_eosdac": "eosdac.io 웹사이트 방문",
-    "vote_cust": "관리인 투표",
-    "wallet": "지갑",
-    "website_description": "eosDAC에 대해 알고 싶다면 웹사이트 eosdac.io에 모든 것이 올라와 있습니다. 지금 방문하시고 커뮤니티가 운영하는 EOS 블록 프로듀서에 대해 알아보세요.",
-    "welcome_to_esodac_member_client": "eosDAC 회원 클라이언트에 오신 것을 환영합니다",
-    "your_email": "내 이메일",
-    "your_language": "내 언어"
-  },
   "lang_selector": {
     "choose_your_language": "언어 선택",
     "languages": {
@@ -138,9 +112,9 @@
   "manage_candidateship": {
     "amount_to_stake_placeholder": "스테이크할 EOSDAC량",
     "locked_tokens": "락업된 토큰",
-    "page_description_active_custodian": "귀하는 현재 eosDAC 관리인단으로서 활동 중입니다.",
+    "page_description_active_custodian": "귀하는 현재 {dacname} 관리인단으로서 활동 중입니다.",
     "page_description_registered": "관리인단 후보로 등록해주셔서 감사합니다. 관리인 후보 등록 과정의 일부로 귀하의 토큰은 스테이킹되었습니다.",
-    "page_description_unregistered": "이 페이지에서 관리인단 후보로 등록할 수 있습니다. 관리인은 eosDAC 헌법에 명시된 책임을 가집니다. eosDAC 헌법을 이해하지 못 하였거나 관리인단으로서의 책임을 다 할 수 없을 시에는 등록하지 마십시오. 등록 전 헌법 제 5항을 자세히 읽어보시기 바랍니다.",
+    "page_description_unregistered": "이 페이지에서 관리인단 후보로 등록할 수 있습니다. 관리인은 {dacname} 헌법에 명시된 책임을 가집니다. {dacname} 헌법을 이해하지 못 하였거나 관리인단으로서의 책임을 다 할 수 없을 시에는 등록하지 마십시오. 등록 전 헌법 제 5항을 자세히 읽어보시기 바랍니다.",
     "pay_description": "관리인 임기(1주일) 동안 받고 싶은 EOS 토큰 수를 입력해 주십시오. 요구할 수 있는 최대치는 {requested_pay}입니다.",
     "register": "등록하기",
     "requested_custodian_pay_placeholder": "요청한 EOS 보상",
@@ -209,8 +183,8 @@
     "API_endpoint": "API 엔드포인트",
     "NOT_REGISTERED": "미등록",
     "REGISTERED": "등록됨",
-    "click_below_to_unregister_membership": "eosDAC 회원 가입을 취소하려면 아래 버튼을 클릭하십시오.",
-    "click_register_now": "eosDAC의 회원이 되려면 \"지금 등록\"을 클릭하십시오.",
+    "click_below_to_unregister_membership": "{dacname} 회원 가입을 취소하려면 아래 버튼을 클릭하십시오.",
+    "click_register_now": "{dacname}의 회원이 되려면 \"지금 등록\"을 클릭하십시오.",
     "current_connection": "현재 연결 상태",
     "current_language": "현재 언어",
     "current_status": "현재 상태",
@@ -235,7 +209,7 @@
   },
   "vote_custodians": {
     "candidate_list": "후보 목록",
-    "description_main": "관리인단은 DAC의 운영 및 업무를 관리합니다. 여기에는 DAC의 자산 및 부채의 관리 및 관리가 포함됩니다 (이에 국한되지 않음). 자신의 토큰 중 일부를 스테이킹하여 7일간 지속되는 관리인단 후보로 출마한 eosDAC 회원은 다음과 같습니다. 귀하의 투표는 다음 관리인단을 선출하기 위해 7일마다 재계산됩니다. 투표가 중요합니다! 누가 eosDAC의 가치를 높이는지 제대로 판단하려면 eosDAC에 계속해서 참여하고 정기적으로 투표하십시오.",
+    "description_main": "관리인단은 DAC의 운영 및 업무를 관리합니다. 여기에는 DAC의 자산 및 부채의 관리 및 관리가 포함됩니다 (이에 국한되지 않음). 자신의 토큰 중 일부를 스테이킹하여 7일간 지속되는 관리인단 후보로 출마한 {dacname} 회원은 다음과 같습니다. 귀하의 투표는 다음 관리인단을 선출하기 위해 7일마다 재계산됩니다. 투표가 중요합니다! 누가 {dacname}의 가치를 높이는지 제대로 판단하려면 {dacname}에 계속해서 참여하고 정기적으로 투표하십시오.",
     "description_side": "한 번에 최대 5명의 관리인 후보자에게 투표할 수 있습니다. DAC의 가치를 높일 수 있는 후보자를 선택하십시오.",
     "my_votes": "내 투표",
     "rows_per_page": "페이지 당 프로필 수",
@@ -250,7 +224,7 @@
     "loading": "불러오는 중...",
     "refresh": "새로고침",
     "seconds": "초",
-    "threshold_met": "15% 최소 투표율이 넘었습니다. eosDAC이 해제되었습니다.",
+    "threshold_met": "15% 최소 투표율이 넘었습니다. {dacname}이 해제되었습니다.",
     "update_in": "업데이트 시각"
   }
 }
