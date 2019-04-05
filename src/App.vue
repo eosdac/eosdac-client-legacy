@@ -103,6 +103,10 @@ export default {
           name: "twitter:description",
           content: this.$t("meta.description")
         },
+        twitter_player: {
+          name: "twitter:player",
+          content: this.$t("meta.video_url")
+        },
         og_title: {
           name: "og:title",
           content: this.$t("meta.title")

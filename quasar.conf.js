@@ -40,6 +40,12 @@ module.exports = function (ctx) {
       // analyze: true,
       // extractCSS: false,
       extendWebpack(cfg) {
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias,
+          // Add your own alias like this
+          extensions: path.resolve(__dirname, './src/extensions'),
+        }
+
         cfg.resolve.extensions = [...cfg.resolve.extensions, '.json']
 
         cfg.module.rules.push({
