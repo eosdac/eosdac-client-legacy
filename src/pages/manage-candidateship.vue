@@ -28,7 +28,11 @@
           </q-item-main>
         </q-item>
         <div class="q-mt-md">
-          {{ $t("manage_candidateship.page_description_registered") }}
+          {{
+            $t("manage_candidateship.page_description_registered", {
+              dacname: $configFile.get("dacname")
+            })
+          }}
         </div>
 
         <div class="row q-mt-md">
@@ -98,7 +102,9 @@
         </q-item>
 
         <span>{{
-          $t("manage_candidateship.page_description_unregistered")
+          $t("manage_candidateship.page_description_unregistered", {
+            dacname: $configFile.get("dacname")
+          })
         }}</span>
         <div class="row gutter-md q-mt-md">
           <div class="col-xs-12 col-md-6">
@@ -227,7 +233,7 @@
           />
         </div>
       </div>
-      <!-- {{$t('manage_candidateship.page_description_active_custodian')}} -->
+      <!-- {{$t('manage_candidateship.page_description_active_custodian', {dacname: $configFile.get('dacname')})}} -->
     </div>
 
     <div v-if="!getAccountName" class="animate-fade q-pa-md">

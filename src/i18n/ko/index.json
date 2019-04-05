@@ -109,6 +109,7 @@
       "vietnamese": "베트남어"
     }
   },
+
   "manage_candidateship": {
     "amount_to_stake_placeholder": "스테이크할 EOSDAC량",
     "locked_tokens": "락업된 토큰",
@@ -183,11 +184,6 @@
     "API_endpoint": "API 엔드포인트",
     "NOT_REGISTERED": "미등록",
     "REGISTERED": "등록됨",
-    "click_below_to_unregister_membership": "{dacname} 회원 가입을 취소하려면 아래 버튼을 클릭하십시오.",
-    "click_register_now": "{dacname}의 회원이 되려면 \"지금 등록\"을 클릭하십시오.",
-    "current_connection": "현재 연결 상태",
-    "current_language": "현재 언어",
-    "current_status": "현재 상태",
     "language_preference": "언어 환경 설정",
     "member_status": "회원 상태",
     "off": "오프",
@@ -210,7 +206,7 @@
   "vote_custodians": {
     "candidate_list": "후보 목록",
     "description_main": "관리인단은 DAC의 운영 및 업무를 관리합니다. 여기에는 DAC의 자산 및 부채의 관리 및 관리가 포함됩니다 (이에 국한되지 않음). 자신의 토큰 중 일부를 스테이킹하여 7일간 지속되는 관리인단 후보로 출마한 {dacname} 회원은 다음과 같습니다. 귀하의 투표는 다음 관리인단을 선출하기 위해 7일마다 재계산됩니다. 투표가 중요합니다! 누가 {dacname}의 가치를 높이는지 제대로 판단하려면 {dacname}에 계속해서 참여하고 정기적으로 투표하십시오.",
-    "description_side": "한 번에 최대 5명의 관리인 후보자에게 투표할 수 있습니다. DAC의 가치를 높일 수 있는 후보자를 선택하십시오.",
+    "description_side": "한 번에 최대 {maxvotes}명의 관리인 후보자에게 투표할 수 있습니다. DAC의 가치를 높일 수 있는 후보자를 선택하십시오.",
     "my_votes": "내 투표",
     "rows_per_page": "페이지 당 프로필 수",
     "search": "검색",

@@ -22,7 +22,11 @@
               <span class="text-text2">- {{ custodians.length }}</span>
             </div>
             <p class="text-text2 q-body-1">
-              {{ $t("vote_custodians.description_main") }}
+              {{
+                $t("vote_custodians.description_main", {
+                  dacname: $configFile.get("dacname")
+                })
+              }}
             </p>
 
             <div
@@ -132,7 +136,8 @@
             <p class="text-text2 q-body-1">
               {{
                 $t("vote_custodians.description_side", {
-                  maxvotes: getMaxVotes
+                  maxvotes: getMaxVotes,
+                  dacname: $configFile.get("dacname")
                 })
               }}
             </p>

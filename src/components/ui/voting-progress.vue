@@ -34,7 +34,7 @@
     </div>
 
     <div v-if="met_initial_votes_threshold && !loading">
-      {{ $t("votingprogress.threshold_met") }}
+      {{ $t("votingprogress.threshold_met", {dacname: $configFile.get("dacname") } ) }}
       <!-- <custodiansDisplay /> -->
     </div>
   </span>
