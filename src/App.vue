@@ -81,6 +81,19 @@ export default {
     await this.$store.dispatch("global/connectScatter");
     this.loading = false;
     this.checkVersionChange();
+  },
+
+  meta() {
+    return {
+      title: this.$t("meta.title"),
+      meta: {
+        description: {
+          name: "description",
+          content: this.$t("meta.description")
+        },
+        keywords: { name: "keywords", content: this.$t("meta.keywords") }
+      }
+    };
   }
 };
 </script>
