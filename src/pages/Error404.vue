@@ -4,12 +4,7 @@
       <p>
         <img
           v-if="getIsDark"
-          src="../extensions/branding/images/logo/logo-notext-light.svg"
-          style="width:30vw;max-width:150px;"
-        />
-        <img
-          v-else
-          src="../extensions/branding/images/logo/logo-notext-dark.svg"
+          src="../extensions/branding/images/logo/logo-notext.svg"
           style="width:30vw;max-width:150px;"
         />
       </p>

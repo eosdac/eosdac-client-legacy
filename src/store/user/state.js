@@ -1,9 +1,10 @@
-let settings;
-try {
-  settings = require("../../extensions/statics/config/settings.json");
-} catch (e) {
-  settings = [];
-}
+let settings = require("../../statics/settings.json");
+// let extended_settings;
+// try {
+//   extended_settings = require("../../extensions/statics/config/settings.json");
+// } catch (e) {
+//   extended_settings = [];
+// }
 
 export default {
   //

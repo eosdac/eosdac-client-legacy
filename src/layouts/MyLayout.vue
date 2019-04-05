@@ -20,34 +20,18 @@
         </q-btn>
 
         <q-toolbar-title>
-          <span v-if="getIsDark">
+          <span>
             <img
               class="cursor-pointer gt-xs"
               @click="$router.push('/')"
-              src="../extensions/branding/images/logo/logo-main-light.svg"
+              src="../extensions/branding/images/logo/logo-main.svg"
               style="height:48px;"
               :title="$t('default.member_client')"
             />
             <img
               class="cursor-pointer lt-sm"
               @click="$router.push('/')"
-              src="../extensions/branding/images/logo/logo-notext-light.svg"
-              style="height:48px;"
-              :title="$t('default.member_client')"
-            />
-          </span>
-          <span v-if="!getIsDark">
-            <img
-              class="cursor-pointer gt-xs"
-              @click="$router.push('/')"
-              src="../extensions/branding/images/logo/logo-main-dark.svg"
-              style="height:48px;"
-              :title="$t('default.member_client')"
-            />
-            <img
-              class="cursor-pointer lt-sm"
-              @click="$router.push('/')"
-              src="../extensions/branding/images/logo/logo-notext-dark.svg"
+              src="../extensions/branding/images/logo/logo-notext.svg"
               style="height:48px;"
               :title="$t('default.member_client')"
             />
