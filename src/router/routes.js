@@ -103,11 +103,20 @@ let routes = [
   }
 ];
 
-//extend the default routes
+//extend the default routes and overwrite when same paths
 routes_extension.forEach(re => {
   let existing_path = routes.find(r => r.path.trim() == re.path.trim());
   if (existing_path) {
-    existing_path.children = existing_path.children.concat(re.children);
+    re.children.forEach(rep => {
+      let i = existing_path.children.findIndex(
+        ep => ep.path.trim() == rep.path.trim()
+      );
+      if (i === -1) {
+        existing_path.children.push(rep);
+      } else {
+        existing_path.children[i] = rep;
+      }
+    });
   } else {
     routes.push(re);
   }
