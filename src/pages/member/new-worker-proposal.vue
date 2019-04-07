@@ -8,14 +8,40 @@
         Please fill in the form to explain your worker proposal. There need to
         be more text here to guide the potential worker.
       </div>
-      <q-input
-        type="text"
-        stack-label="Title"
-        color="primary-light"
-        :dark="getIsDark"
-        v-model="wp_data.title"
-        :error="$v.wp_data.title.$error"
-      />
+      <div class="row gutter-md">
+        <div class="col-xs-12 col-lg-8">
+          <div>
+            <q-field helper="Helper" :count="10">
+              <q-input
+                type="text"
+                stack-label="Title"
+                color="primary-light"
+                :dark="getIsDark"
+                v-model="wp_data.title"
+                :error="$v.wp_data.title.$error"
+              />
+            </q-field>
+          </div>
+        </div>
+        <div class="col-xs-12 col-lg-4">
+          <div>
+            <q-field helper="Please select a category">
+              <q-select
+                color="primary-light"
+                v-model="wp_data.category"
+                :dark="getIsDark"
+                stack-label="Category"
+                :options="[
+                  { value: '0', label: '0' },
+                  { value: '1', label: '1' },
+                  { value: '2', label: '2' },
+                  { value: '3', label: '3' }
+                ]"
+              />
+            </q-field>
+          </div>
+        </div>
+      </div>
       <!-- <div class="text-negative q-caption" v-if="!$v.wp_data.title.required">Field is required.</div> -->
       <div class="row gutters-sm q-my-md">
         <div class="col-xs-12 col-lg-6">
@@ -151,6 +177,7 @@ export default {
         summary: "",
         arbitrator: "",
         pay_amount: "",
+        category: "",
         symbol: this.$configFile.get("systemtokensymbol")
       }
     };
@@ -193,7 +220,7 @@ export default {
             pay_amount: extended_asset,
             content_hash: "00000000000000000000000000000000",
             id: this.$helper.randomIntFromInterval(1, 999999999999999999),
-            category: 1,
+            category: this.wp_data.category,
             dac_scope: "dacauthority" //WARNING HARDCODED NEED TO FETCH FROM CONFIG XXXXXXXXXXXXXXXXXXXXX
           }
         }
