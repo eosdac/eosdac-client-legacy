@@ -10,55 +10,53 @@
       </div>
       <div class="row gutter-md">
         <div class="col-xs-12 col-lg-8">
-          <div>
-            <q-field helper="Helper" :count="10">
-              <q-input
-                type="text"
-                stack-label="Title"
-                color="primary-light"
-                :dark="getIsDark"
-                v-model="wp_data.title"
-                :error="$v.wp_data.title.$error"
-              />
-            </q-field>
-          </div>
+          <q-field
+            :error="$v.wp_data.title.$error"
+            error-label="A title is required"
+          >
+            <q-input
+              type="text"
+              stack-label="Title"
+              color="primary-light"
+              :dark="getIsDark"
+              v-model="wp_data.title"
+            />
+          </q-field>
         </div>
         <div class="col-xs-12 col-lg-4">
-          <div>
-            <q-field helper="Please select a category">
-              <q-select
-                color="primary-light"
-                v-model="wp_data.category"
-                :dark="getIsDark"
-                stack-label="Category"
-                :options="[
-                  { value: '0', label: '0' },
-                  { value: '1', label: '1' },
-                  { value: '2', label: '2' },
-                  { value: '3', label: '3' }
-                ]"
-              />
-            </q-field>
-          </div>
+          <q-field
+            :error="$v.wp_data.category.$error"
+            error-label="Please select a category"
+          >
+            <q-select
+              color="primary-light"
+              v-model="wp_data.category"
+              :dark="getIsDark"
+              stack-label="Category"
+              :options="[
+                { value: '0', label: '0' },
+                { value: '1', label: '1' },
+                { value: '2', label: '2' },
+                { value: '3', label: '3' }
+              ]"
+            />
+          </q-field>
         </div>
-      </div>
-      <!-- <div class="text-negative q-caption" v-if="!$v.wp_data.title.required">Field is required.</div> -->
-      <div class="row gutters-sm q-my-md">
         <div class="col-xs-12 col-lg-6">
-          <!-- <asset-input v-model="wp_data.pay_amount" label="Pay Amount" :maw="100" :min="0" icon="icon-type-2" /> -->
-          <q-item>
-            <q-item-side left icon="icon-ui-19" class="text-text2" />
-            <q-item-main>
+          <q-field
+            :error="$v.wp_data.pay_amount.$error"
+            error-label="Please enter a valid pay amount"
+            icon="icon-ui-19"
+          >
+            <div class="row no-wrap">
               <q-input
+                class="full-width"
                 type="number"
                 stack-label="Pay Amount"
                 color="primary-light"
                 :dark="getIsDark"
                 v-model="wp_data.pay_amount"
-                :error="$v.wp_data.pay_amount.$error"
               />
-            </q-item-main>
-            <q-item-side left>
               <q-select
                 stack-label="&nbsp"
                 hide-underline
@@ -71,35 +69,35 @@
                   })
                 "
               />
-            </q-item-side>
-          </q-item>
+            </div>
+          </q-field>
         </div>
-
         <div class="col-xs-12 col-lg-6">
-          <div>
-            <q-item>
-              <q-item-side left icon="mdi-teach" class="text-text2" />
-              <q-item-main>
-                <q-input
-                  type="text"
-                  stack-label="Arbitrator"
-                  color="primary-light"
-                  :dark="getIsDark"
-                  v-model="wp_data.arbitrator"
-                  :error="$v.wp_data.arbitrator.$error"
-                />
-              </q-item-main>
-              <q-item-side left>
-                <help-btn
-                  title="Arbitrator"
-                  content="An arbitrator is a crazy person..."
-                />
-              </q-item-side>
-            </q-item>
-          </div>
+          <q-field
+            :error="$v.wp_data.arbitrator.$error"
+            error-label="Fill in a valid accountname"
+            icon="mdi-teach"
+          >
+            <div class="row no-wrap">
+              <q-input
+                class="full-width"
+                type="text"
+                stack-label="Arbitrator"
+                color="primary-light"
+                :dark="getIsDark"
+                v-model="wp_data.arbitrator"
+              />
+
+              <help-btn
+                title="Arbitrator"
+                content="An arbitrator is a crazy person..."
+              />
+            </div>
+          </q-field>
         </div>
       </div>
-      <div class="q-caption q-mb-xs">Description</div>
+
+      <div class="q-caption q-mb-xs q-mt-md">Description</div>
       <MarkdownViewer
         :tags="[
           'h1',
@@ -242,7 +240,8 @@ export default {
       pay_amount: {
         required,
         minValue: minValue(0)
-      }
+      },
+      category: { required }
     }
   }
 };
