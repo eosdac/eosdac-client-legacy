@@ -4,7 +4,7 @@
       <!-- is already a candidate UNREGISTER-->
       <div
         v-if="getIsCandidate && getIsCandidate.is_active"
-        class=" bg-logo bg-bg1 q-pa-md round-corners shadow-5 relative-position overflow-hidden"
+        class=" bg-logo bg-bg1 q-pa-md round-borders shadow-5 relative-position overflow-hidden"
       >
         <!-- <div class="" style="bottom:-50%;right:-80%;"></div> -->
         <q-item class="no-padding">
@@ -82,7 +82,7 @@
       <!-- end already a candidate -->
 
       <!-- Not a candidate REGISTER -->
-      <div v-else class="bg-bg1 bg-logo q-pa-md round-corners shadow-5">
+      <div v-else class="bg-bg1 bg-logo q-pa-md round-borders shadow-5">
         <q-item class="no-padding q-mb-md">
           <q-item-side left>
             <div
@@ -201,7 +201,7 @@
             !getIsCandidate.is_active &&
             parseFloat(getIsCandidate.locked_tokens)
         "
-        class=" bg-bg1 q-pa-md round-corners shadow-5 q-mt-md"
+        class=" bg-bg1 q-pa-md round-borders shadow-5 q-mt-md"
       >
         <span
           >{{ $t("manage_candidateship.unstake_description")
