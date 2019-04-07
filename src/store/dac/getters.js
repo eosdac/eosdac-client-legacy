@@ -46,3 +46,7 @@ export function getCandidates(state) {
 export function getCustodianState(state) {
   return state.custodianState;
 }
+
+export function getWpCategories(state) {
+  return state.wpCategories;
+}

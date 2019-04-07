@@ -33,12 +33,7 @@
               v-model="wp_data.category"
               :dark="getIsDark"
               stack-label="Category"
-              :options="[
-                { value: '0', label: '0' },
-                { value: '1', label: '1' },
-                { value: '2', label: '2' },
-                { value: '3', label: '3' }
-              ]"
+              :options="getWpCategories"
             />
           </q-field>
         </div>
@@ -184,7 +179,8 @@ export default {
     ...mapGetters({
       getAccountName: "user/getAccountName",
       getIsDark: "ui/getIsDark",
-      getSettingByName: "user/getSettingByName"
+      getSettingByName: "user/getSettingByName",
+      getWpCategories: "dac/getWpCategories"
     })
   },
   methods: {
