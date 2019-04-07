@@ -33,7 +33,7 @@
               v-model="wp_data.category"
               :dark="getIsDark"
               stack-label="Category"
-              :options="getWpCategories"
+              :options="getWpCategoriesOptions"
             />
           </q-field>
         </div>
@@ -181,7 +181,13 @@ export default {
       getIsDark: "ui/getIsDark",
       getSettingByName: "user/getSettingByName",
       getWpCategories: "dac/getWpCategories"
-    })
+    }),
+    getWpCategoriesOptions: function() {
+      return this.getWpCategories.map(wpc => {
+        wpc.label = this.$t(`wp_categories.${wpc.label}`);
+        return wpc;
+      });
+    }
   },
   methods: {
     updateText(val) {

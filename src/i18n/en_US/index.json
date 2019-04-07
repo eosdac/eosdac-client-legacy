@@ -304,5 +304,17 @@
     "seconds": "seconds",
     "threshold_met": "Voting threshold of 15% met. eosDac is unlocked.",
     "update_in": "update in"
+  },
+  "wp_categories": {
+    "cat_0": "General",
+    "cat_1": "Block Production",
+    "cat_2": "B2B",
+    "cat_3": "Content Creation",
+    "cat_4": "Community Engagement",
+    "cat_5": "Tech and Development",
+    "cat_6": "Legal and governance",
+    "cat_7": "Operations",
+    "cat_8": "Translations",
+    "cat_9": "Custodians"
   }
 }
