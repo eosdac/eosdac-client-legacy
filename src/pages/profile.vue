@@ -31,11 +31,11 @@
           color="primary"
           icon="icon-plus"
           style="position:absolute;bottom:0;right:7px;z-index:2"
-          @click="visible = true"
+          @click="profile_pic_modal = true"
         />
         <div class="fit profile_image_inner_wrap">
           <div
-            v-if="loaded"
+            v-if="img_loaded"
             class="profile_image relative-position animate-fade"
             style="height:140px; width:140px;"
             v-bind:style="{ 'background-image': `url(${setImgSrc})` }"
@@ -43,7 +43,7 @@
           <q-spinner-oval
             color="white"
             class="hack_center"
-            v-if="!loaded"
+            v-if="!img_loaded"
             size="139px"
           />
         </div>
@@ -218,12 +218,12 @@
         </div>
       </div>
     </div>
-    <div v-if="rawprofiledata" class="q-pa-md q-my-md text-text2">
+    <div v-if="form.timezone != ''" class="q-pa-md q-my-md text-text2">
       <TimeZone :offset="Number(form.timezone)" />
     </div>
 
     <q-modal
-      v-model="visible"
+      v-model="profile_pic_modal"
       minimized
       @hide="handleModalClose"
       :content-css="{ width: '80vw' }"
@@ -233,14 +233,13 @@
         class="bg-bg1 row items-center justify-between q-px-md text-text1"
       >
         <span>{{ $t("profile.profile_picture_url") }} (https)</span>
-        <q-btn icon="close" @click="visible = false" flat dense />
+        <q-btn icon="close" @click="profile_pic_modal = false" flat dense />
       </div>
       <div class="q-pa-md bg-bg2 text-text1">
         <q-input
           :dark="getIsDark"
           type="url"
           v-model="form.image"
-          @input
           class="q-mt-md"
           :float-label="$t('profile.profile_picture_url')"
           placeholder="https://example.site/mypic.jpg"
@@ -281,11 +280,9 @@ export default {
       account_name: "",
       is_edit: false,
       allow_edit: false,
-      profile_is_loading: false,
-      rawprofiledata: false,
-      visible: false,
+      profile_pic_modal: false,
 
-      loaded: true,
+      img_loaded: true,
       form: ProfileTemplate,
       maxLinksmsg: ""
     };
@@ -323,24 +320,20 @@ export default {
     },
     //init profile page
     initProfile() {
-      this.profile_is_loading = true;
       this.account_name = this.$route.params.accountname;
       //load profile
       this.getProfileData();
-      // this.profile_is_loading = false;
     },
 
     async getProfileData() {
       let p = await this.$profiles.getProfiles([this.account_name]);
       if (p && p.length && this.validateProfile(p[0].profile)) {
-        this.rawprofiledata = p[0];
         //todo validate profile
         this.form = p[0].profile;
         this.allow_edit = this.account_name === this.getAccountName;
       } else {
         this.allow_edit = this.account_name === this.getAccountName;
       }
-      this.profile_is_loading = false;
     },
 
     validateProfile(profile) {
@@ -408,7 +401,7 @@ export default {
 
     handleModalClose() {
       setTimeout(() => {
-        if (!this.loaded) {
+        if (!this.img_loaded) {
           this.form.image = "";
         }
       }, 300);
