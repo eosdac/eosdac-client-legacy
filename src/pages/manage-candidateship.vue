@@ -265,26 +265,12 @@ export default {
   },
   data() {
     return {
-      hasprofile: false,
-      profile_is_irrevirsible: false,
-
       inputs: {
         stakeamount: null,
         requestedpay: null
       },
-
-      requested_pay_max: 0,
-
-      minStakeAmount: "",
-
-      userMsg: ""
+      requested_pay_max: 0
     };
-  },
-  created() {
-    // this.init()
-    // this.checkMemberRoles();
-    // this.getProfileData();
-    // this.getContractConfig();
   },
 
   computed: {
@@ -418,9 +404,7 @@ export default {
         this.$store.dispatch("user/fetchIsCandidate");
         this.$store.dispatch("user/fetchBalances");
       }
-    },
-
-    async init() {}
+    }
   }
 };
 </script>
