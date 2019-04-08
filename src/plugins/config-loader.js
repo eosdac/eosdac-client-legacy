@@ -16,6 +16,8 @@ class ConfigLoader {
         return this.configFile.api.default_eos_node;
       case "tokencontract":
         return this.configFile.contracts.token.name;
+      case "tokendecimals":
+        return this.configFile.contracts.token.decimals;
       case "custodianmemo":
         return this.configFile.contracts.custodian.memo;
       case "custodiancontract":
@@ -24,6 +26,8 @@ class ConfigLoader {
         return this.configFile.contracts.token.symbol;
       case "systemtokensymbol":
         return this.configFile.contracts.system_token.symbol;
+      case "systemtokendecimals":
+        return this.configFile.contracts.system_token.decimals;
       case "systemtokencontract":
         return this.configFile.contracts.system_token.name;
       case "systemmsigcontract":

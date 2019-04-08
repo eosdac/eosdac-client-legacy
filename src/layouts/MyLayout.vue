@@ -50,6 +50,15 @@
       ref="leftdrawer"
     >
       <main-menu />
+      <div
+        class="absolute-bottom text-text2 q-pa-md cursor-pointer"
+        @click="openURL('https://eosdac.io')"
+      >
+        <div class="row items-center justify-end">
+          <img style="width:20px" src="statics/images/eosdac_logo_notext.svg" />
+          <span class="q-ml-sm q-caption">Powered by eosDAC</span>
+        </div>
+      </div>
     </q-layout-drawer>
 
     <q-page-container class="bg-bg2 text-text1 relative-position">

@@ -118,7 +118,12 @@ export default {
         return total + this.$helper.assetToNumber(p.quantity);
       }, 0);
 
-      return this.$helper.toLocaleNumber(total) + " EOS";
+      return (
+        this.$helper.toLocaleNumber(
+          total,
+          this.$configFile.get("systemtokendecimals")
+        ) + " EOS"
+      );
     },
     verifyAndGetRequestedPay() {
       if (this.new_requested_pay >= 0) {

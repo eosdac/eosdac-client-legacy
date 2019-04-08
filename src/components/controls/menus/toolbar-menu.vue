@@ -14,7 +14,13 @@
               })
             }}</q-item-tile>
             <q-item-tile class="text-text1 q-caption" sublabel
-              ><xspan :value="$helper.toLocaleNumber(getDacBalance)"
+              ><xspan
+                :value="
+                  $helper.toLocaleNumber(
+                    getDacBalance,
+                    $configFile.get('tokendecimals')
+                  )
+                "
             /></q-item-tile>
           </q-item-main>
         </q-item>
@@ -28,7 +34,14 @@
               })
             }}</q-item-tile>
             <q-item-tile class="text-text1 q-caption" sublabel>
-              <xspan :value="$helper.toLocaleNumber(getSystemBalance)" />
+              <xspan
+                :value="
+                  $helper.toLocaleNumber(
+                    getSystemBalance,
+                    $configFile.get('systemtokendecimals')
+                  )
+                "
+              />
               <q-icon
                 :name="$configFile.icon.liquid"
                 color="text2"
