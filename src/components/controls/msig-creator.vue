@@ -25,17 +25,6 @@
 
           <div>
             <div class="row bg-bg2 q-pa-md ">
-              <!-- @click="actionfilter=false; handleSelection(i)" -->
-              <!-- <q-btn-dropdown :disable="allow_advanced" dark v-for="(n,i) in controlled_accounts" :icon="n.selected ?'check':''" split :key="`b${i}`" color="bg1" class="q-ma-xs" :label="n.name" > 
-              <q-list  link class="bg-dark"  >
-                <q-item v-for="(la, j) in n.linkedAuths" :key="`la${j}`" @click.native=" actionfilter=j; handleSelection(i)">
-                  <q-item-main>
-                    <q-item-tile class="text-text1 q-body-1" label>{{`${la.contract} > ${la.action}`}}</q-item-tile>
-                    <q-item-tile class="text-text2 q-caption" sublabel>{{`@${la.permission}`}}</q-item-tile>
-                  </q-item-main>
-                </q-item>
-              </q-list>
-            </q-btn-dropdown> -->
               <div
                 v-for="(n, i) in controlled_accounts"
                 :key="`si${i}`"
@@ -296,7 +285,6 @@
                   :stack-label="$t('msig_creator.msig_delay')"
                 />
                 <!-- <div class="text-text1">Add/remove requested authorizations</div> -->
-                <!-- <auth-display class="text-text1 bg-bg2" v-model="msig_requested"  /> -->
               </div>
             </div>
           </div>
@@ -408,7 +396,7 @@
         </q-step>
       </q-stepper>
     </div>
-    <!-- {{msig_requested}} -->
+
     <!-- review msig modal -->
     <q-modal maximized v-model="review_msig_modal">
       <div
@@ -487,7 +475,6 @@ export default {
       customAction: false,
       actionfilter: false,
       reset_form_after_success: true,
-      msig_requested: [{ actor: "boiboiboiboi", permission: "active" }],
       msig_delay: 0,
       msig_name: "",
       msig_title: "",
