@@ -1,6 +1,8 @@
 // Configuration for your app
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = function (ctx) {
+  
   return {
     // app plugins (/src/plugins)
     plugins: [
@@ -30,8 +32,7 @@ module.exports = function (ctx) {
     ],
     supportIE: false,
     build: {
-      assetsPublicPath: '/',
-      assetsSubDirectory: 'extensions/branding',
+
       env: {
         DEFAULT_NETWORK: JSON.stringify(process.env.DEFAULT_NETWORK)
       },
@@ -42,20 +43,21 @@ module.exports = function (ctx) {
       // analyze: true,
       // extractCSS: false,
       extendWebpack(cfg) {
+
         cfg.resolve.extensions = [...cfg.resolve.extensions, ...['.json']]
 
         cfg.module.rules.push({
           test: /\.json$/i,
           type: 'javascript/auto',
           loader: 'json-loader',
-        })
+        });
 
         cfg.module.rules.push({
           resourceQuery: /blockType=i18n/,
           use: [
             { loader: '@kazupon/vue-i18n-loader' },
           ]
-        })
+        });
 
         cfg.module.rules.push({
           enforce: 'pre',
@@ -66,6 +68,14 @@ module.exports = function (ctx) {
             fix: true
           }
         });
+
+        cfg.plugins.push( 
+          new CopyWebpackPlugin([
+              { context: `${__dirname}/src/extensions/branding/images/icons`,from:'*.*', to:'branding/images/icons', toType: 'dir'},
+              { context: `${__dirname}/src/extensions/branding/images/social_share_preview`,from:'*.*', to:'branding/images/social_share_preview', toType: 'dir'}
+            ]
+           ) 
+        );
 
         for (const rule of cfg.module.rules) {
           if (!rule.oneOf) continue
