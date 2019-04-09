@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = function (ctx) {
   
   return {
+    htmlVariables: { host: 'http://members-dev.eosdac.io' },
     // app plugins (/src/plugins)
     plugins: [
       'config-loader',
