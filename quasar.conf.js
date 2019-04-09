@@ -30,6 +30,8 @@ module.exports = function (ctx) {
     ],
     supportIE: false,
     build: {
+      assetsPublicPath: '/',
+      assetsSubDirectory: 'extensions/branding',
       env: {
         DEFAULT_NETWORK: JSON.stringify(process.env.DEFAULT_NETWORK)
       },
