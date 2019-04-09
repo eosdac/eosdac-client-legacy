@@ -128,7 +128,9 @@ export default {
     verifyAndGetRequestedPay() {
       if (this.new_requested_pay >= 0) {
         return this.$helper.numberToAsset(
-          this.new_requested_pay.toFixed(4),
+          this.new_requested_pay.toFixed(
+            this.$configFile.get("systemtokendecimals")
+          ),
           this.$configFile.get("systemtokensymbol")
         );
       }

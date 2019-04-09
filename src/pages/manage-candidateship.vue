@@ -296,7 +296,9 @@ export default {
           this.assetToNumber(this.getCustodianConfig.requested_pay_max)
       ) {
         return this.numberToAsset(
-          this.inputs.requestedpay.toFixed(4),
+          this.inputs.requestedpay.toFixed(
+            this.$configFile.get("systemtokendecimals")
+          ),
           this.$configFile.get("systemtokensymbol")
         );
       } else {
