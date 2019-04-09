@@ -86,36 +86,6 @@ export default {
   meta() {
     return {
       title: this.$t("meta.title"),
-      meta: {
-        description: {
-          name: "description",
-          content: this.$t("meta.description")
-        },
-        keywords: {
-          name: "keywords",
-          content: this.$t("meta.keywords")
-        },
-        twitter_title: {
-          name: "twitter:title",
-          content: this.$t("meta.title")
-        },
-        twitter_description: {
-          name: "twitter:description",
-          content: this.$t("meta.description")
-        },
-        twitter_player: {
-          name: "twitter:player",
-          content: this.$t("meta.video_url")
-        },
-        og_title: {
-          name: "og:title",
-          content: this.$t("meta.title")
-        },
-        og_description: {
-          name: "og:description",
-          content: this.$t("meta.description")
-        }
-      },
       noscript: {
         default: this.$t("meta.noscript")
       }
