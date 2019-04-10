@@ -4,7 +4,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = function (ctx) {
   
   return {
-    htmlVariables: { host: 'http://members-dev.eosdac.io' },
+    htmlVariables: { 
+      host: 'http://members-dev.eosdac.io',
+      description: 'Come to the eosDAC Member Client to register and interact with the DAC-enabling Decentralized Autonomous Community.' 
+    },
     // app plugins (/src/plugins)
     plugins: [
       'config-loader',
