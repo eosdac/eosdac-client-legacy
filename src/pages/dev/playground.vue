@@ -1,19 +1,19 @@
 <template>
-  <q-page padding>
+  <q-page class="q-pa-md">
     <vote-delegation />
-    <abi-viewer />
+    <!-- <abi-viewer /> -->
   </q-page>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import abiViewer from "components/controls/abi-viewer";
+// import abiViewer from "components/controls/abi-viewer";
 import voteDelegation from "components/controls/vote-delegation";
 
 export default {
   name: "playground",
   components: {
-    abiViewer,
+    // abiViewer,
     voteDelegation
   },
   data() {

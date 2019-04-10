@@ -1,5 +1,5 @@
 import axios from "axios";
-let profile_template = require("../extensions/statics/config/profile.template.json");
+
 class ProfileCache {
   constructor(config) {
     console.log("profile cache initiated");
@@ -63,12 +63,7 @@ class ProfileCache {
       .get(`${url}/profile?account=${accountnames.join(",")}`)
       .then(r => {
         console.log("fetched new profiles", r.data.results.length);
-        let p = r.data.results.map(p => {
-          if (p.profile.description == undefined) {
-            p.profile = profile_template;
-          }
-          return p;
-        });
+        let p = r.data.results;
         this.cache = this.cache.concat(p);
         return p;
       })
@@ -80,7 +75,11 @@ class ProfileCache {
 
   inCache(accountname) {
     let profile = this.cache.find(p => p.account == accountname);
-    return profile || false;
+    if (profile) {
+      return profile;
+    } else {
+      return false;
+    }
   }
 
   removeFromCache(accountnames) {

@@ -1,6 +1,6 @@
 <template>
-  <q-item class="memberselector">
-    <q-item-side left>
+  <q-item class="memberselector no-padding">
+    <q-item-side left style="height:40px">
       <img
         v-if="getSelectedAvatarSrc"
         class="imgx animate-fade"
@@ -10,6 +10,8 @@
     <q-item-main>
       <q-select
         dark
+        dense
+        :placeholder="placeholder"
         color="primary-light"
         :value="selected"
         :options="getOptions"
@@ -29,6 +31,10 @@ export default {
       default: () => {
         return [];
       }
+    },
+    placeholder: {
+      type: String,
+      default: ""
     }
   },
   data() {
@@ -61,15 +67,23 @@ export default {
   },
   methods: {
     async getAvatars() {
-      this.profiles = await this.$profiles.getProfiles([this.accountnames]);
+      if (this.accountnames.length) {
+        this.profiles = await this.$profiles.getProfiles(this.accountnames);
+      }
     },
     updateSelected(v) {
       this.selected = v;
+      this.$emit("change", this.selected);
       this.$emit("input", this.selected);
     }
   },
-  mounted() {
-    this.getAvatars();
+  async mounted() {
+    await this.getAvatars();
+  },
+  watch: {
+    accountnames: function() {
+      this.getAvatars();
+    }
   }
 };
 </script>
