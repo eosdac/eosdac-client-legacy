@@ -7,8 +7,9 @@
       <q-select
         dark
         color="primary-light"
-        v-model="selected"
+        :value="selected"
         :options="getOptions"
+        @change="updateSelected"
       ></q-select>
     </q-item-main>
   </q-item>
@@ -18,22 +19,23 @@
 export default {
   name: "memberSelect",
   props: {
+    value: String,
     accountnames: {
       type: Array,
       default: () => {
-        return ["piecesnbitss", "evilmikehere", "testtesttest"];
+        return [];
       }
     }
   },
   data() {
     return {
-      selected: "",
+      selected: this.value,
       profiles: []
     };
   },
   computed: {
     getOptions() {
-      if (this.profiles.length) {
+      if (this.profiles.length && this.accountnames.length) {
         return this.accountnames.map(ac => {
           return {
             label: ac,
@@ -56,7 +58,10 @@ export default {
   methods: {
     async getAvatars() {
       this.profiles = await this.$profiles.getProfiles([this.accountnames]);
-      console.log(this.profiles);
+    },
+    updateSelected(v) {
+      this.selected = v;
+      this.$emit("input", this.selected);
     }
   },
   mounted() {

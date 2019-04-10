@@ -1,6 +1,10 @@
 <template>
   <q-page padding>
-    <member-select />
+    {{ test }}
+    <member-select
+      v-model="test"
+      :accountnames="['piecesnbitss', 'evilmikehere', 'testtesttest']"
+    />
     <abi-viewer />
   </q-page>
 </template>
@@ -19,7 +23,8 @@ export default {
   data() {
     return {
       abi: "",
-      wasm: ""
+      wasm: "",
+      test: "evilmikehere"
     };
   },
   computed: {
