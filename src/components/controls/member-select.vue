@@ -1,7 +1,11 @@
 <template>
   <q-item class="memberselector">
     <q-item-side left>
-      <img class="imgx" :src="getSelectedAvatarSrc" />
+      <img
+        v-if="getSelectedAvatarSrc"
+        class="imgx animate-fade"
+        :src="getSelectedAvatarSrc"
+      />
     </q-item-side>
     <q-item-main>
       <q-select

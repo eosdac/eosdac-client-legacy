@@ -341,7 +341,7 @@ export default {
         } else if (input.type == "bool") {
           value = value === "true";
         } else if (input.type == "name" || input.type == "account_name") {
-          if (!this.$helper.isAccountname(value)) {
+          if (!this.$helper.isAccountname(value) && value != "") {
             process_error = `${input.name}: invalid accountname`;
           }
         } else if (input.type == "asset") {

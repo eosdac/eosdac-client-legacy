@@ -1,10 +1,6 @@
 <template>
   <q-page padding>
-    {{ test }}
-    <member-select
-      v-model="test"
-      :accountnames="['piecesnbitss', 'evilmikehere', 'testtesttest']"
-    />
+    <vote-delegation />
     <abi-viewer />
   </q-page>
 </template>
@@ -12,19 +8,19 @@
 <script>
 import { mapGetters } from "vuex";
 import abiViewer from "components/controls/abi-viewer";
-import memberSelect from "components/controls/member-select";
+import voteDelegation from "components/controls/vote-delegation";
 
 export default {
-  name: "playyard",
+  name: "playground",
   components: {
     abiViewer,
-    memberSelect
+    voteDelegation
   },
   data() {
     return {
       abi: "",
       wasm: "",
-      test: "evilmikehere"
+      test: ""
     };
   },
   computed: {
