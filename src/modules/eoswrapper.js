@@ -275,4 +275,23 @@ export class EosWrapper {
     let res = await this.eos.get_currency_stats(contract, symbol);
     return res;
   }
+
+  async getCatDelegations(accountname) {
+    let catvotes = await this.eos.get_table_rows({
+      json: true,
+      code: this.configobj.get("wpcontract"),
+      scope: this.configobj.get("authaccountname"),
+      table: "catvotes",
+      lower_bound: accountname,
+      upper_bound: accountname,
+      index_position: 2,
+      key_type: "name",
+      limit: -1
+    });
+    if (!catvotes.rows.length) {
+      return [];
+    } else {
+      return catvotes.rows;
+    }
+  }
 }

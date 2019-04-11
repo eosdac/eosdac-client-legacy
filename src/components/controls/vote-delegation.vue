@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="getAccountName"
+    v-if="getAccountName && wpcats.length"
     class="relative-position bg-bg1 q-pa-md round-borders shadow-5"
   >
     <div class="row gutter-sm ">
@@ -11,6 +11,17 @@
       >
         <q-item class=" bg-bg2 q-pa-md round-borders full-height">
           <q-item-main>
+            <q-icon
+              v-if="
+                getAccountName &&
+                  cat.delegatee &&
+                  getAccountName != cat.delegatee
+              "
+              :name="$configFile.icon.check"
+              size="24px"
+              color="positive"
+              class="q-pa-sm absolute-top-right"
+            />
             <q-item-tile class="text-text1" label>{{
               $t(`wp_categories.${cat.label}`)
             }}</q-item-tile>
@@ -66,9 +77,25 @@ export default {
     }
   },
   methods: {
-    setWpCats() {
+    async setWpCats() {
+      let mycatvotes = await this.$store.dispatch(
+        "user/fetchCatDelegations",
+        this.getAccountName
+      );
+      console.log("my catvotes", mycatvotes);
+
       this.wpcats = JSON.parse(JSON.stringify(wpcats)).map(wpc => {
-        wpc.delegatee = this.getAccountName;
+        let checkdelegation = mycatvotes.find(
+          cv => cv.category_id == wpc.value
+        );
+        console.log("ddd", checkdelegation);
+        if (checkdelegation) {
+          wpc.delegatee = checkdelegation.delegatee;
+        } else {
+          wpc.delegatee = this.getAccountName;
+        }
+
+        console.log(wpc.delegatee);
         return wpc;
       });
     },
@@ -125,9 +152,15 @@ export default {
     }
   },
 
-  created() {
-    console.log(this.getCustodians);
-    this.setWpCats();
+  mounted() {
+    if (this.getAccountName) {
+      this.setWpCats();
+    }
+  },
+  watch: {
+    getAccountName: function() {
+      this.setWpCats();
+    }
   }
 };
 </script>

@@ -118,6 +118,16 @@ export async function fetchPendingPay(
   return res;
 }
 
+export async function fetchCatDelegations(
+  { state, dispatch },
+  accountname = false
+) {
+  const accountN = accountname || state.accountName;
+  const api = await dispatch("global/getEosApi", false, { root: true });
+  let res = await api.getCatDelegations(accountN);
+  return res;
+}
+
 export async function transact(
   { state, rootState, commit, dispatch, getters },
   payload
