@@ -1,47 +1,48 @@
 <template>
-  <div
-    v-if="getAccountName && wpcats.length"
-    class="relative-position bg-bg1 q-pa-md round-borders shadow-5"
-  >
-    <div class="row gutter-sm ">
-      <div
-        class="col-xs-12 col-md-6 col-xl-4"
-        v-for="(cat, i) in wpcats"
-        :key="`wpcat${i}`"
-      >
-        <q-item class=" bg-bg2 q-pa-md round-borders full-height">
-          <q-item-main>
-            <q-icon
-              v-if="
-                getAccountName &&
-                  cat.delegatee &&
-                  getAccountName != cat.delegatee
-              "
-              :name="$configFile.icon.check"
-              size="24px"
-              color="positive"
-              class="q-pa-sm absolute-top-right"
-            />
-            <q-item-tile class="text-text1" label>{{
-              $t(`wp_categories.${cat.label}`)
-            }}</q-item-tile>
-            <div class="q-caption text-text2 q-my-xs">
-              {{ $t(`wp_categories.${cat.desc}`) }}
-            </div>
-            <member-select
-              itsme="UNDELEGATE"
-              @change="handleCatDelegation(cat.value, $event)"
-              v-model="cat.delegatee"
-              :accountnames="getCustNames"
-              placeholder="Select to Delegate"
-            />
-          </q-item-main>
-        </q-item>
+  <div v-if="getAccountName && wpcats.length">
+    <div class="bg-bg1 round-borders shadow-5 q-pa-md q-mb-md">
+      My Category Delegations
+    </div>
+    <div class="relative-position bg-bg1 q-pa-md round-borders shadow-5">
+      <div class="row gutter-sm ">
+        <div
+          class="col-xs-12 col-md-6 col-xl-4"
+          v-for="(cat, i) in wpcats"
+          :key="`wpcat${i}`"
+        >
+          <q-item
+            class=" bg-bg2 q-pa-md round-borders full-height animate-pop "
+          >
+            <q-item-main>
+              <q-icon
+                v-if="
+                  getAccountName &&
+                    cat.delegatee &&
+                    getAccountName != cat.delegatee
+                "
+                :name="$configFile.icon.check"
+                size="24px"
+                color="positive"
+                class="q-pa-sm absolute-top-right"
+              />
+              <q-item-tile class="text-text1" label>{{
+                $t(`wp_categories.${cat.label}`)
+              }}</q-item-tile>
+              <div class="q-caption text-text2 q-my-xs">
+                {{ $t(`wp_categories.${cat.desc}`) }}
+              </div>
+              <member-select
+                itsme="UNDELEGATE"
+                @change="handleCatDelegation(cat.value, $event)"
+                v-model="cat.delegatee"
+                :accountnames="getCustNames"
+                placeholder="Select to Delegate"
+              />
+            </q-item-main>
+          </q-item>
+        </div>
       </div>
     </div>
-    <!-- <div class="row justify-end q-mt-md">
-      <q-btn label="test" color="primary" @click="delegateVotes" />
-    </div> -->
   </div>
 </template>
 

@@ -1,17 +1,18 @@
 <template>
   <q-item class="memberselector no-padding">
     <q-item-side left style="height:40px">
-      <img
-        v-if="getSelectedAvatarSrc"
-        class="imgx animate-fade"
+      <profile-pic
+        style="margin-top:-10px; margin-left:-8px"
+        :border="false"
+        :show_role="false"
         :class="{ itsmeclass: checkItsMe }"
-        :src="getSelectedAvatarSrc"
+        :accountname="selected"
+        :scale="0.69"
       />
     </q-item-side>
     <q-item-main>
       <q-select
-        dark
-        dense
+        :dark="getIsDark"
         :placeholder="placeholder"
         color="primary-light"
         :value="selected"
@@ -24,8 +25,12 @@
 
 <script>
 import { mapGetters } from "vuex";
+import profilePic from "components/ui/profile-pic";
 export default {
   name: "memberSelect",
+  components: {
+    profilePic
+  },
   props: {
     value: String,
     accountnames: {
@@ -51,7 +56,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getAccountName: "user/getAccountName"
+      getAccountName: "user/getAccountName",
+      getIsDark: "ui/getIsDark"
     }),
     checkItsMe() {
       if (this.itsme) {
@@ -76,12 +82,6 @@ export default {
         });
       }
       return [];
-    },
-    getSelectedAvatarSrc() {
-      let sel = this.getOptions.find(p => p.value == this.selected);
-      if (sel) {
-        return sel.image;
-      }
     }
   },
   methods: {
@@ -111,9 +111,9 @@ export default {
 };
 </script>
 
-<style>
-.q-item-image,
-.imgx {
+<style lang="stylus">
+ @import '~variables'
+.q-item-image{
   min-height: 40px;
   height: 40px;
   min-width: 40px;

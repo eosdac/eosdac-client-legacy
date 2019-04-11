@@ -35,6 +35,10 @@ export default {
     show_role: {
       type: Boolean,
       default: true
+    },
+    border: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -50,10 +54,14 @@ export default {
       getCustodians: "dac/getCustodians"
     }),
     style() {
-      return {
+      let style = {
         transform: `scale(${this.scale})`,
         "background-image": `url(${this.profilePic})`
       };
+      if (this.border) {
+        style["border"] = "2px solid var(--q-color-text2)";
+      }
+      return style;
     },
     preloaderStyle() {
       return {
