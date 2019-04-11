@@ -75,6 +75,7 @@ module.exports = function (ctx) {
 
         cfg.plugins.push( 
           new CopyWebpackPlugin([
+              { context: `${__dirname}/src/extensions/branding/images/`,from:'*.*', to:'branding/images', toType: 'dir'},
               { context: `${__dirname}/src/extensions/branding/images/icons`,from:'*.*', to:'branding/images/icons', toType: 'dir'},
               { context: `${__dirname}/src/extensions/branding/images/social_share_preview`,from:'*.*', to:'branding/images/social_share_preview', toType: 'dir'}
             ]

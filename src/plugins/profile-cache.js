@@ -5,7 +5,7 @@ class ProfileCache {
     console.log("profile cache initiated");
     this.config = config;
     this.cache = [];
-    this.default_avatar = "../extensions/branding/images/default-avatar.png";
+    this.default_avatar = "./branding/images/default-avatar.png";
     let cache_life = 1000 * 60 * 60;
 
     if (cache_life) {
