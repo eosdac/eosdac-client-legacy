@@ -3,18 +3,22 @@
     v-if="getAccountName"
     class="relative-position bg-bg1 q-pa-md round-borders shadow-5"
   >
-    <div class="row gutter-md ">
+    <div class="row gutter-sm ">
       <div
-        class="col-xs-12 col-lg-6"
+        class="col-xs-12 col-md-6 col-xl-4"
         v-for="(cat, i) in wpcats"
         :key="`wpcat${i}`"
       >
-        <q-item class="no-padding">
+        <q-item class=" bg-bg2 q-pa-md round-borders full-height">
           <q-item-main>
-            <q-item-tile class="text-text2" label>{{
+            <q-item-tile class="text-text1" label>{{
               $t(`wp_categories.${cat.label}`)
             }}</q-item-tile>
+            <div class="q-caption text-text2 q-my-xs">
+              {{ $t(`wp_categories.${cat.desc}`) }}
+            </div>
             <member-select
+              itsme="UNDELEGATE"
               @change="handleCatDelegation(cat.value, $event)"
               v-model="cat.delegatee"
               :accountnames="getCustNames"
@@ -84,7 +88,7 @@ export default {
         data: {
           custodian: this.getAccountName,
           category: cat_id,
-          dalegatee_custodian: delegatee,
+          dalegatee_custodian: delegatee.new,
           dac_scope: "dacauthority"
         }
       };
@@ -105,7 +109,7 @@ export default {
         }
       };
 
-      if (this.getAccountName === delegatee) {
+      if (this.getAccountName === delegatee.new) {
         actions.push(undelegate);
       } else {
         actions.push(delegate);
@@ -115,6 +119,8 @@ export default {
         actions: actions
       });
       if (result) {
+      } else {
+        this.wpcats.find(w => w.value == cat_id).delegatee = delegatee.old;
       }
     }
   },

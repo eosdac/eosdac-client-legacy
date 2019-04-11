@@ -4,6 +4,7 @@
       <img
         v-if="getSelectedAvatarSrc"
         class="imgx animate-fade"
+        :class="{ itsmeclass: checkItsMe }"
         :src="getSelectedAvatarSrc"
       />
     </q-item-side>
@@ -22,6 +23,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "memberSelect",
   props: {
@@ -35,6 +37,10 @@ export default {
     placeholder: {
       type: String,
       default: ""
+    },
+    itsme: {
+      type: String,
+      default: ""
     }
   },
   data() {
@@ -44,11 +50,24 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      getAccountName: "user/getAccountName"
+    }),
+    checkItsMe() {
+      if (this.itsme) {
+        return this.getAccountName === this.selected;
+      } else {
+        return false;
+      }
+    },
     getOptions() {
       if (this.profiles.length && this.accountnames.length) {
         return this.accountnames.map(ac => {
+          let sublabel =
+            this.itsme && this.getAccountName == ac ? this.itsme : "";
           return {
             label: ac,
+            sublabel: sublabel,
             value: ac,
             image:
               this.profiles.find(p => p.account == ac).profile.image ||
@@ -72,8 +91,9 @@ export default {
       }
     },
     updateSelected(v) {
+      let old = this.selected;
       this.selected = v;
-      this.$emit("change", this.selected);
+      this.$emit("change", { new: this.selected, old: old });
       this.$emit("input", this.selected);
     }
   },
@@ -83,6 +103,9 @@ export default {
   watch: {
     accountnames: function() {
       this.getAvatars();
+    },
+    value: function(v) {
+      this.selected = v;
     }
   }
 };
@@ -97,5 +120,8 @@ export default {
   width: 40px;
   border-radius: 50%;
   object-fit: cover;
+}
+.itsmeclass {
+  filter: grayscale(90%);
 }
 </style>

@@ -315,6 +315,17 @@
     "cat_6": "Legal and Governance",
     "cat_7": "Operations",
     "cat_8": "Translations",
-    "cat_9": "Custodians"
+    "cat_9": "Custodians",
+  
+    "cat_0_desc": "This is a short description about General",
+    "cat_1_desc": "This is a also short description about Block Production",
+    "cat_2_desc": "This is a short description about B2B",
+    "cat_3_desc": "This is a too short description about Content Creation",
+    "cat_4_desc": "This is a short description about Community Engagement",
+    "cat_5_desc": "Short description about Tech and Development",
+    "cat_6_desc": "This is a short description about Legal and Governance",
+    "cat_7_desc": "This is a short description about Operations",
+    "cat_8_desc": "This is a short description about Translations",
+    "cat_9_desc": "This is a short description about Custodians"
   }
 }
