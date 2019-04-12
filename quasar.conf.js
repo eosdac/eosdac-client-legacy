@@ -1,12 +1,13 @@
 // Configuration for your app
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const build_config = require('./src/extensions/statics/config/build.config.json');
 
 module.exports = function (ctx) {
   
   return {
     htmlVariables: { 
-      host: 'http://members-dev.eosdac.io',
-      description: 'Come to the eosDAC Member Client to register and interact with the DAC-enabling Decentralized Autonomous Community.' 
+      host: build_config.host_no_backslash,
+      description: build_config.meta_description 
     },
     // app plugins (/src/plugins)
     plugins: [
@@ -18,8 +19,6 @@ module.exports = function (ctx) {
       'idle-vue',
       'profile-cache',
       'medium-editor'
-
-
     ],
     css: [
       'app.styl',
