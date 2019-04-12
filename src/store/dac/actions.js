@@ -38,7 +38,13 @@ export async function fetchCustodians({ state, commit, dispatch }) {
 export async function fetchActiveCandidates({ state, commit, dispatch }) {
   const api = await dispatch("global/getEosApi", false, { root: true });
 
-  let candidates = (await api.getCandidates()).filter(c => c.is_active);
+  let candidates = await api.getCandidates();
+
+  if (candidates) {
+    candidates = candidates.filter(c => c.is_active);
+  } else {
+    return [];
+  }
 
   candidates.sort(function(a, b) {
     let t = b.total_votes - a.total_votes;

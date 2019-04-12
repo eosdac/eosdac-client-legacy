@@ -44,7 +44,7 @@ export class EosWrapper {
       })
       .catch(e => false);
 
-    if (res && res.rows[0].sender === accountname) {
+    if (res && res.rows[0] && res.rows[0].sender === accountname) {
       return res.rows[0].agreedtermsversion;
     } else {
       return false;
@@ -125,7 +125,7 @@ export class EosWrapper {
       })
       .catch(e => false);
 
-    if (res && res.rows[0].voter === accountname) {
+    if (res && res.rows[0] && res.rows[0].voter === accountname) {
       return res.rows[0].candidates;
     } else {
       return false;
@@ -167,7 +167,7 @@ export class EosWrapper {
       })
       .catch(e => false);
 
-    if (res && res.rows[0].candidate_name === accountname) {
+    if (res && res.rows[0] && res.rows[0].candidate_name === accountname) {
       return res.rows[0];
     } else {
       return false;
