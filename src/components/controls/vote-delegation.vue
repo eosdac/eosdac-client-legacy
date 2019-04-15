@@ -89,14 +89,12 @@ export default {
         let checkdelegation = mycatvotes.find(
           cv => cv.category_id == wpc.value
         );
-        console.log("ddd", checkdelegation);
         if (checkdelegation) {
           wpc.delegatee = checkdelegation.delegatee;
         } else {
           wpc.delegatee = this.getAccountName;
         }
 
-        console.log(wpc.delegatee);
         return wpc;
       });
     },
