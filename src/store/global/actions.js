@@ -18,48 +18,64 @@ export async function connectScatter(
 ) {
   let network = await state.networks.find(n => n.name == state.active_network);
 
-  ScatterJS.scatter.connect("testapp", { network }).then(async connected => {
-    if (!connected) {
-      console.error("Could not connect to Scatter.");
+  ScatterJS.scatter
+    .connect(this._vm.$configFile.get("dacname"), { network })
+    .then(async connected => {
+      if (!connected) {
+        console.error("Could not connect to Scatter.");
 
-      commit("user/setAccountName", false, { root: true });
+        commit("user/setAccountName", false, { root: true });
 
-      if (rootGetters["user/getSettingByName"]("notify_error_msg").value) {
-        Notify.create({
-          message: `Signature provider not found`,
-          timeout: 2000,
-          type: "negative",
-          position: "bottom-right"
-        });
+        if (rootGetters["user/getSettingByName"]("notify_error_msg").value) {
+          Notify.create({
+            message: `Signature provider not found`,
+            timeout: 2000,
+            type: "negative",
+            position: "bottom-right"
+          });
+        }
+
+        return;
       }
 
-      return;
-    }
+      console.log("scatter connected");
 
-    console.log("scatter connected");
-    commit("setScatter", ScatterJS.scatter);
+      let token = {
+        token: {
+          symbol: this._vm.$configFile.get("systemtokensymbol"),
+          contract: this._vm.$configFile.get("systemtokencontract")
+        }
+      };
+      let networkwithtoken = Object.assign({}, network, token);
+      await ScatterJS.scatter
+        .suggestNetwork(networkwithtoken)
+        .then(res => console.log("suggestnetwork", res, networkwithtoken));
 
-    if (ScatterJS.scatter.identity) {
-      //logged in
-      console.log("logged in");
-      dispatch("user/loggedInRoutine", state.scatter.identity, { root: true });
+      commit("setScatter", ScatterJS.scatter);
 
-      if (rootGetters["user/getSettingByName"]("notify_info_msg").value) {
-        Notify.create({
-          message: `Welcome back ${state.scatter.identity.accounts[0].name}`,
-          timeout: 2000,
-          type: "info",
-          position: "bottom-right"
+      if (ScatterJS.scatter.identity) {
+        //logged in
+        console.log("logged in");
+        dispatch("user/loggedInRoutine", state.scatter.identity, {
+          root: true
         });
-      }
-    } else {
-      //scatter connected but not logged in
-      console.log("please log in.");
-      if (trigger_login && state.scatter !== null) await dispatch("login");
-    }
 
-    ScatterJS = null;
-  });
+        if (rootGetters["user/getSettingByName"]("notify_info_msg").value) {
+          Notify.create({
+            message: `Welcome back ${state.scatter.identity.accounts[0].name}`,
+            timeout: 2000,
+            type: "info",
+            position: "bottom-right"
+          });
+        }
+      } else {
+        //scatter connected but not logged in
+        console.log("please log in.");
+        if (trigger_login && state.scatter !== null) await dispatch("login");
+      }
+
+      ScatterJS = null;
+    });
 }
 
 export async function login({ state, dispatch, rootGetters, commit }) {
