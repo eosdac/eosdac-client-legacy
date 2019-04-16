@@ -3,7 +3,9 @@
     <div class="bg-bg1 round-borders shadow-5 q-pa-md q-mb-md">
       My Category Delegations
     </div>
-    <div class="relative-position bg-bg1 q-pa-md round-borders shadow-5">
+    <div
+      class="relative-position bg-bg1 bg-logo q-pa-md round-borders shadow-5"
+    >
       <div class="row gutter-sm ">
         <div
           class="col-xs-12 col-md-6 col-xl-4"
@@ -115,7 +117,7 @@ export default {
           custodian: this.getAccountName,
           category: cat_id,
           dalegatee_custodian: delegatee.new,
-          dac_scope: "dacauthority"
+          dac_scope: this.$configFile.get("authaccount")
         }
       };
       let undelegate = {
@@ -131,7 +133,7 @@ export default {
         data: {
           custodian: this.getAccountName,
           category: cat_id,
-          dac_scope: "dacauthority"
+          dac_scope: this.$configFile.get("authaccount")
         }
       };
 

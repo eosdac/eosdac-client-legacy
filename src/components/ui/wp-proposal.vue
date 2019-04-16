@@ -324,7 +324,7 @@ export default {
             custodian: this.getAccountName,
             proposal_id: Number(this.wp.key),
             dalegatee_custodian: "piecesnbitss", //xxxx
-            dac_scope: "dacauthority" //xxx
+            dac_scope: this.$configFile.get("authaccount") //xxx
           }
         }
       ];
@@ -359,7 +359,7 @@ export default {
             custodian: this.getAccountName,
             proposal_id: Number(this.wp.key),
             vote: map[votetype],
-            dac_scope: "dacauthority" //xxx
+            dac_scope: this.$configFile.get("authaccount") //xxx
           }
         }
       ];
@@ -398,7 +398,7 @@ export default {
           ],
           data: {
             proposal_id: Number(this.wp.key),
-            dac_scope: "dacauthority" //xxx
+            dac_scope: this.$configFile.get("authaccount") //xxx
           }
         }
       ];
@@ -419,7 +419,7 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             proposal_id: Number(this.wp.key),
-            dac_scope: "dacauthority" //xxx
+            dac_scope: this.$configFile.get("authaccount") //xxx
           }
         }
       ];
@@ -439,7 +439,7 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             proposal_id: Number(this.wp.key),
-            dac_scope: "dacauthority" //xxx
+            dac_scope: this.$configFile.get("authaccount") //xxx
           }
         }
       ];
@@ -461,7 +461,7 @@ export default {
           data: {
             arbitrator: this.getAccountName,
             proposal_id: Number(this.wp.key),
-            dac_scope: "dacauthority" //xxx
+            dac_scope: this.$configFile.get("authaccount") //xxx
           }
         }
       ];
@@ -482,7 +482,7 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             proposal_id: Number(this.wp.key),
-            dac_scope: "dacauthority" //xxx
+            dac_scope: this.$configFile.get("authaccount") //xxx
           }
         }
       ];
