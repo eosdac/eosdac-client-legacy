@@ -81,7 +81,7 @@ export async function fetchApprovalsFromProposal({ dispatch }, payload) {
 export async function fetchControlledAccounts({ dispatch }) {
   const api = await dispatch("global/getEosApi", false, { root: true });
   let ctrl = await api.getControlledAccounts(
-    this._vm.$configFile.get("authaccount")
+    this._vm.$configFile.get("authaccountname")
   );
   console.log(ctrl);
 }

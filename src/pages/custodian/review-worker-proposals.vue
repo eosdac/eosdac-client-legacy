@@ -140,7 +140,7 @@ export default {
       let skip = (this.pagination.page - 1) * this.pagination.items_per_page;
       //make request
       this.fetchWps({
-        state: map[this.active_tab],
+        status: map[this.active_tab],
         skip: skip,
         limit: this.pagination.items_per_page
       });

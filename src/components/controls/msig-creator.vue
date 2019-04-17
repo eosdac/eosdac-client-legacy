@@ -611,7 +611,7 @@ export default {
         name: "proposed",
         authorization: [
           { actor: this.getAccountName, permission: this.getAuth },
-          { actor: this.$configFile.get("authaccount"), permission: "one" }
+          { actor: this.$configFile.get("authaccountname"), permission: "one" }
         ],
         data: {
           proposer: this.getAccountName,

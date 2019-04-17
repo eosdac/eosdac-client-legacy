@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="wp.key && show"
+    v-if="wp.id && show"
     style="min-height:100%"
     class=" q-pa-md column no-wrap justify-between bg-bg1 round-borders shadow-5 bg-logo animate-fade"
   >
@@ -34,7 +34,7 @@
         <q-item>
           <q-item-main>
             <q-item-tile label>Status</q-item-tile>
-            <q-item-tile sublabel>{{ wp.state }}</q-item-tile>
+            <q-item-tile sublabel>{{ wp.status }}</q-item-tile>
           </q-item-main>
         </q-item>
 
@@ -67,7 +67,7 @@
       </div>
 
       <div class="q-mt-sm q-title text-weight-thin capitalize">
-        WP{{ wp.key }}: {{ wp.title }}
+        {{ wp.title }}
       </div>
       <q-scroll-area
         class="bg-bg2  q-mt-sm round-borders text-weight-light text-text2"
@@ -101,12 +101,15 @@
         />
       </q-scroll-area>
 
-      <div v-if="expanded" class="row justify-end q-mt-xs items-center">
+      <div
+        v-if="expanded"
+        class="row justify-between q-mt-xs items-center q-body-1"
+      >
+        <span class="text-text2">ID {{ wp.id }}</span>
         <a
           target="_blank"
-          :href="$configFile.get('explorer') + `/transaction/${wp.txid}`"
-          class="q-body-1"
-          >xxxxxxxxxxxxxx</a
+          :href="$configFile.get('explorer') + `/transaction/${wp.trx_id}`"
+          >{{ $helper.truncate(wp.trx_id, 10) }}</a
         >
       </div>
     </div>
@@ -251,6 +254,8 @@ export default {
     getVotes() {
       if (this.wp.votes) {
         return this.wp.votes;
+      } else {
+        return [];
       }
     },
     getIsCreator() {
@@ -270,6 +275,7 @@ export default {
     },
     //when wp state is 0
     proposal_threshold_met() {
+      if (!this.wp.votes) return false;
       const approved_votes = this.wp.votes.filter(wpv => wpv.vote == 1).length;
       if (
         this.getWpConfig.proposal_threshold !== null &&
@@ -294,11 +300,11 @@ export default {
     },
     getExpiryPercent() {
       let expiration_seconds;
-      if (this.wp.state === 0) {
-        expiration_seconds = this.getWpConfig.approval_expiry;
+      if (this.wp.status === 0) {
+        expiration_seconds = Number(this.getWpConfig.approval_expiry);
       }
-      if (this.wp.state === 2) {
-        expiration_seconds = this.getWpConfig.claim_expiry;
+      if (this.wp.status === 2) {
+        expiration_seconds = Number(this.getWpConfig.claim_expiry);
       }
       const expiration_days = expiration_seconds / 60 / 60 / 24;
       //todo calculate relative expiration based on NOW and expiration
@@ -322,9 +328,9 @@ export default {
           ],
           data: {
             custodian: this.getAccountName,
-            proposal_id: Number(this.wp.key),
+            proposal_id: Number(this.wp.id),
             dalegatee_custodian: "piecesnbitss", //xxxx
-            dac_scope: this.$configFile.get("authaccount") //xxx
+            dac_scope: this.$configFile.get("authaccountname") //xxx
           }
         }
       ];
@@ -357,9 +363,9 @@ export default {
           ],
           data: {
             custodian: this.getAccountName,
-            proposal_id: Number(this.wp.key),
+            proposal_id: Number(this.wp.id),
             vote: map[votetype],
-            dac_scope: this.$configFile.get("authaccount") //xxx
+            dac_scope: this.$configFile.get("authaccountname") //xxx
           }
         }
       ];
@@ -374,7 +380,7 @@ export default {
           vote.vote = map[votetype];
         } else {
           this.wp.votes.push({
-            proposal_id: Number(this.wp.key),
+            proposal_id: Number(this.wp.id),
             voter: this.getAccountName,
             vote: map[votetype],
             comment_hash: ""
@@ -397,8 +403,8 @@ export default {
             }
           ],
           data: {
-            proposal_id: Number(this.wp.key),
-            dac_scope: this.$configFile.get("authaccount") //xxx
+            proposal_id: Number(this.wp.id),
+            dac_scope: this.$configFile.get("authaccountname") //xxx
           }
         }
       ];
@@ -418,8 +424,8 @@ export default {
           name: "startwork",
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
-            proposal_id: Number(this.wp.key),
-            dac_scope: this.$configFile.get("authaccount") //xxx
+            proposal_id: Number(this.wp.id),
+            dac_scope: this.$configFile.get("authaccountname") //xxx
           }
         }
       ];
@@ -438,8 +444,8 @@ export default {
           name: "completework",
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
-            proposal_id: Number(this.wp.key),
-            dac_scope: this.$configFile.get("authaccount") //xxx
+            proposal_id: Number(this.wp.id),
+            dac_scope: this.$configFile.get("authaccountname") //xxx
           }
         }
       ];
@@ -460,8 +466,8 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             arbitrator: this.getAccountName,
-            proposal_id: Number(this.wp.key),
-            dac_scope: this.$configFile.get("authaccount") //xxx
+            proposal_id: Number(this.wp.id),
+            dac_scope: this.$configFile.get("authaccountname") //xxx
           }
         }
       ];
@@ -481,8 +487,8 @@ export default {
           name: "finalize",
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
-            proposal_id: Number(this.wp.key),
-            dac_scope: this.$configFile.get("authaccount") //xxx
+            proposal_id: Number(this.wp.id),
+            dac_scope: this.$configFile.get("authaccountname") //xxx
           }
         }
       ];
