@@ -134,7 +134,7 @@
         </div>
 
         <div v-if="!read_only && getAccountName" class="row animate-pop">
-          <div v-if="wp.state == 0">
+          <div v-if="wp.status == 0">
             <q-btn
               v-if="getVoterStatus == 2 || getVoterStatus == 0"
               class="on-right"
@@ -150,7 +150,7 @@
               @click="voteprop('voteDeny')"
             />
           </div>
-          <div v-else-if="wp.state == 2">
+          <div v-else-if="wp.status == 2">
             <q-btn
               class="on-right"
               color="positive"
@@ -172,7 +172,7 @@
               @click="arbApprove()"
             />
           </div>
-          <div v-else-if="wp.state == 1">
+          <div v-else-if="wp.status == 1">
             Work is being executed
           </div>
           <div v-if="getIsCreator">
@@ -192,7 +192,7 @@
               @click="startWork()"
             />
             <q-btn
-              v-if="wp.state == 1"
+              v-if="wp.status == 1"
               class="on-right"
               flat
               color="info"
