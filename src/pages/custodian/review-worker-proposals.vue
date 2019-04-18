@@ -1,5 +1,12 @@
 <template>
   <q-page class="q-pa-md">
+    <div class="row justify-end q-mb-md">
+      <q-btn
+        color="primary"
+        label="my delegations"
+        @click="delegate_modal = true"
+      />
+    </div>
     <q-tabs class="q-mb-md" @select="setActiveTab">
       <q-tab slot="title" name="state_0" label="pending approval" default />
       <q-tab slot="title" name="state_1" label="work in progress" />
@@ -86,19 +93,40 @@
         </q-carousel-slide>
       </q-carousel>
     </q-modal>
+
+    <q-modal maximized v-model="delegate_modal">
+      <div
+        style="height:50px"
+        class="bg-bg1 row items-center justify-between q-px-md text-text1"
+      >
+        <span>Delegate</span>
+        <q-btn
+          icon="close"
+          @click="delegate_modal = false"
+          dense
+          class="no-shadow"
+        />
+      </div>
+      <div class="q-pa-md bg-bg2 text-text1 full-height">
+        <vote-delegation />
+      </div>
+    </q-modal>
   </q-page>
 </template>
 
 <script>
 import wpProposal from "components/ui/wp-proposal";
+import voteDelegation from "components/controls/vote-delegation";
 import { mapGetters } from "vuex";
 export default {
   name: "ReviewWP",
   components: {
-    wpProposal
+    wpProposal,
+    voteDelegation
   },
   data() {
     return {
+      delegate_modal: false,
       expanded_modal: false,
       expanded_modal_index: 0,
       wps: [],

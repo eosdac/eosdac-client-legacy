@@ -66,8 +66,13 @@
         />
       </div>
 
-      <div class="q-mt-sm q-title text-weight-thin capitalize">
-        {{ wp.title }}
+      <div class="q-mt-sm q-title text-weight-thin">
+        <span class="capitalize">{{ wp.title }}</span>
+        <span class="q-caption on-right"
+          >({{
+            $t(`wp_categories.${getCategoryNameFromId(wp.category)}`)
+          }})</span
+        >
       </div>
       <q-scroll-area
         class="bg-bg2  q-mt-sm round-borders text-weight-light text-text2"
@@ -210,6 +215,10 @@
 import { mapGetters } from "vuex";
 import profilePic from "components/ui/profile-pic";
 import MarkdownViewer from "components/ui/markdown-viewer";
+import wpcats from "../../extensions/statics/config/wp_categories.json";
+
+import { date } from "quasar";
+const { addToDate } = date;
 
 export default {
   name: "wpProposal",
@@ -308,11 +317,18 @@ export default {
       }
       const expiration_days = expiration_seconds / 60 / 60 / 24;
       //todo calculate relative expiration based on NOW and expiration
-      return expiration_days;
+      let expirationdate = addToDate(new Date(this.wp.block_timestamp), {
+        days: expiration_days
+      });
+      return expirationdate;
     }
   },
 
   methods: {
+    getCategoryNameFromId(id) {
+      let wpc = wpcats.find(wpc => wpc.value == id);
+      return wpc.label;
+    },
     async delegatevote() {
       let actions = [
         {

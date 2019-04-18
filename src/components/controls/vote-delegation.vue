@@ -1,8 +1,8 @@
 <template>
   <div v-if="getAccountName && wpcats.length">
-    <div class="bg-bg1 round-borders shadow-5 q-pa-md q-mb-md">
+    <!-- <div class="bg-bg1 round-borders shadow-5 q-pa-md q-mb-md">
       My Category Delegations
-    </div>
+    </div> -->
     <div
       class="relative-position bg-bg1 bg-logo q-pa-md round-borders shadow-5"
     >

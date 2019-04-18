@@ -99,6 +99,6 @@ export default {
 @import '~variables';
 
 .modal-content {
-  background-color: var(--q-color-warning);
+  // background-color: var(--q-color-warning);
 }
 </style>
