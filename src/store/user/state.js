@@ -22,5 +22,6 @@ export default {
   dacVotes: null,
   msigIsSeenCache: [],
 
-  settings: settings
+  settings: settings,
+  catDelegations: null
 };

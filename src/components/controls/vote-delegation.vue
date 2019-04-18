@@ -67,7 +67,8 @@ export default {
       getCustodians: "dac/getCustodians",
       getAccountName: "user/getAccountName",
       getIsDark: "ui/getIsDark",
-      getAuth: "user/getAuth"
+      getAuth: "user/getAuth",
+      getCatDelegations: "user/getCatDelegations"
     }),
     getCustNames() {
       if (this.getCustodians) {
@@ -80,12 +81,18 @@ export default {
     }
   },
   methods: {
-    async setWpCats() {
-      let mycatvotes = await this.$store.dispatch(
-        "user/fetchCatDelegations",
-        this.getAccountName
-      );
-      console.log("my catvotes", mycatvotes);
+    async setWpCats(force_reload = false) {
+      let mycatvotes;
+      if (!this.getCatDelegations || force_reload) {
+        mycatvotes = await this.$store.dispatch(
+          "user/fetchCatDelegations",
+          this.getAccountName
+        );
+        console.log("my catvotes", mycatvotes);
+      } else {
+        mycatvotes = this.getCatDelegations;
+        console.log("my stored catvotes", mycatvotes);
+      }
 
       this.wpcats = JSON.parse(JSON.stringify(wpcats)).map(wpc => {
         let checkdelegation = mycatvotes.find(
@@ -155,12 +162,12 @@ export default {
 
   mounted() {
     if (this.getAccountName) {
-      this.setWpCats();
+      this.setWpCats(true);
     }
   },
   watch: {
     getAccountName: function() {
-      this.setWpCats();
+      this.setWpCats(true);
     }
   }
 };

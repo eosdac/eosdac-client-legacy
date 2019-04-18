@@ -47,6 +47,10 @@ export function setDacVotes(state, payload) {
   state.dacVotes = payload;
 }
 
+export function setCatDelegations(state, payload) {
+  state.catDelegations = payload;
+}
+
 export const setMsigIsSeenCache = (state, payload) => {
   let mode = payload.mode;
   let msig_id = payload.msig_id;

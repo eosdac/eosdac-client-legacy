@@ -120,6 +120,14 @@
     </div>
 
     <div class="q-mt-md full-width">
+      {{ getVotes }}
+      <div v-if="IsCatDelegated">
+        this category is proxied to {{ IsCatDelegated }}
+      </div>
+      <div v-if="IsPropDelegated">
+        this prop is proxied to {{ IsPropDelegated }}
+      </div>
+
       <div class="row justify-between items-center">
         <div class="row">
           <div
@@ -251,8 +259,27 @@ export default {
       getAccountName: "user/getAccountName",
       getWpConfig: "dac/getWpConfig",
       getIsDark: "ui/getIsDark",
-      getAuth: "user/getAuth"
+      getAuth: "user/getAuth",
+      getCatDelegations: "user/getCatDelegations"
     }),
+    IsCatDelegated() {
+      if (this.getCatDelegations) {
+        let t = this.getCatDelegations.find(
+          cd => cd.category_id == this.wp.category
+        );
+        return t ? t.delegatee : false;
+      } else {
+        return false;
+      }
+    },
+    IsPropDelegated() {
+      let myvote = this.wp.votes.find(v => v.voter == this.getAccountName);
+      if (myvote && myvote.delegatee) {
+        return myvote.delegatee;
+      } else {
+        return false;
+      }
+    },
     scroll_area_style() {
       if (this.expanded) {
         return { height: "400px", width: "100%" };
@@ -262,7 +289,10 @@ export default {
     },
     getVotes() {
       if (this.wp.votes) {
-        return this.wp.votes;
+        return this.wp.votes.map(wpv => {
+          wpv.weight = 1;
+          return wpv;
+        });
       } else {
         return [];
       }

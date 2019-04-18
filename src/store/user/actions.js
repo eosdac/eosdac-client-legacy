@@ -119,12 +119,13 @@ export async function fetchPendingPay(
 }
 
 export async function fetchCatDelegations(
-  { state, dispatch },
+  { state, dispatch, commit },
   accountname = false
 ) {
   const accountN = accountname || state.accountName;
   const api = await dispatch("global/getEosApi", false, { root: true });
   let res = await api.getCatDelegations(accountN);
+  commit("setCatDelegations", res);
   return res;
 }
 

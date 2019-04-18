@@ -74,6 +74,10 @@ export function getDacVotes(state) {
   return state.dacVotes;
 }
 
+export function getCatDelegations(state) {
+  return state.catDelegations;
+}
+
 export function getIsCustodian(state, getters, rootState) {
   const admins = ["piecesnbitss", "pramodeosdac"];
   if (rootState.dac.custodians && getters.getAccountName) {
