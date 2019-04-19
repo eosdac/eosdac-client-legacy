@@ -58,9 +58,21 @@
 
       <div class="q-my-md">
         <div class="q-caption q-mb-xs text-text2">Expiration</div>
-        {{ getExpiryPercent }}
+        <countdown
+          v-if="getExpiry.millisleft"
+          :time="Number(getExpiry.millisleft)"
+        >
+          <template slot-scope="props">
+            <div class="q-caption text-weight-thin q-mb-xs">
+              <span v-if="props.days">{{ props.days }} days, </span>
+              <span v-if="props.hours">{{ props.hours }} hours, </span>
+              <span v-if="props.minutes">{{ props.minutes }} minutes, </span>
+              <span>{{ props.seconds }} seconds</span>
+            </div>
+          </template>
+        </countdown>
         <q-progress
-          :percentage="getExpiryPercent"
+          :percentage="getExpiry.percent"
           color="primary-light"
           style="height: 4px"
         />
@@ -224,15 +236,14 @@ import { mapGetters } from "vuex";
 import profilePic from "components/ui/profile-pic";
 import MarkdownViewer from "components/ui/markdown-viewer";
 import wpcats from "../../extensions/statics/config/wp_categories.json";
-
-// import { date } from "quasar";
-// const { addToDate } = date;
+import countdown from "@chenfengyuan/vue-countdown";
 
 export default {
   name: "wpProposal",
   components: {
     profilePic,
-    MarkdownViewer
+    MarkdownViewer,
+    countdown
   },
   props: {
     array_index: null,
@@ -337,7 +348,8 @@ export default {
         return false;
       }
     },
-    getExpiryPercent() {
+
+    getExpiry() {
       let expiration_millis;
       if (this.wp.status === 0) {
         expiration_millis = Number(this.getWpConfig.approval_expiry) * 1000;
@@ -351,7 +363,11 @@ export default {
       //todo calculate relative expiration based on NOW and expiration
 
       let perc = 100 - ((current - start) / (end - start)) * 100;
-      return perc <= 0 ? 0 : perc;
+      let msleft = end - current;
+      return {
+        percent: perc <= 0 ? 0 : perc,
+        millisleft: msleft <= 0 ? 0 : msleft
+      };
     }
   },
 

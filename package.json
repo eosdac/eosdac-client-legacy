@@ -13,6 +13,7 @@
     "add_extensions": "git -C ./src clone"
   },
   "dependencies": {
+    "@chenfengyuan/vue-countdown": "^1.1.2",
     "axios": "^0.18.0",
     "chart.js": "^2.8.0",
     "connect": "^3.6.6",
