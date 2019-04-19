@@ -60,7 +60,7 @@
         <div class="q-caption q-mb-xs text-text2">Expiration</div>
         {{ getExpiryPercent }}
         <q-progress
-          :percentage="wp_expiration"
+          :percentage="getExpiryPercent"
           color="primary-light"
           style="height: 4px"
         />
@@ -225,8 +225,8 @@ import profilePic from "components/ui/profile-pic";
 import MarkdownViewer from "components/ui/markdown-viewer";
 import wpcats from "../../extensions/statics/config/wp_categories.json";
 
-import { date } from "quasar";
-const { addToDate } = date;
+// import { date } from "quasar";
+// const { addToDate } = date;
 
 export default {
   name: "wpProposal",
@@ -251,7 +251,7 @@ export default {
   data() {
     return {
       show: true,
-      wp_expiration: this.$helper.randomIntFromInterval(10, 100)
+      wp_expiration: 100
     };
   },
   computed: {
@@ -338,19 +338,19 @@ export default {
       }
     },
     getExpiryPercent() {
-      let expiration_seconds;
+      let expiration_millis;
       if (this.wp.status === 0) {
-        expiration_seconds = Number(this.getWpConfig.approval_expiry);
+        expiration_millis = Number(this.getWpConfig.approval_expiry) * 1000;
       }
       if (this.wp.status === 2) {
-        expiration_seconds = Number(this.getWpConfig.claim_expiry);
+        expiration_millis = Number(this.getWpConfig.claim_expiry) * 1000;
       }
-      const expiration_days = expiration_seconds / 60 / 60 / 24;
+      let start = new Date(this.wp.block_timestamp).getTime();
+      let end = start + expiration_millis;
+      let current = new Date().getTime();
       //todo calculate relative expiration based on NOW and expiration
-      let expirationdate = addToDate(new Date(this.wp.block_timestamp), {
-        days: expiration_days
-      });
-      return expirationdate;
+
+      return ((current - start) / (end - start)) * 100;
     }
   },
 
