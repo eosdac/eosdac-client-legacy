@@ -350,7 +350,8 @@ export default {
       let current = new Date().getTime();
       //todo calculate relative expiration based on NOW and expiration
 
-      return ((current - start) / (end - start)) * 100;
+      let perc = 100 - ((current - start) / (end - start)) * 100;
+      return perc <= 0 ? 0 : perc;
     }
   },
 
