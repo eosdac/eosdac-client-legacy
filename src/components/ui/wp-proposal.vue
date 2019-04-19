@@ -5,6 +5,33 @@
     class=" q-pa-md column no-wrap justify-between bg-bg1 round-borders shadow-5 bg-logo animate-fade"
   >
     <div class="full-width">
+      <div class="q-mb-md q-title relative-position">
+        <div class="q-py-sm" style="border-bottom:1px solid grey">
+          <span class="capitalize">{{ wp.title }}</span>
+          <span class="q-caption on-right text-weight-thin"
+            >({{
+              $t(`wp_categories.${getCategoryNameFromId(wp.category)}`)
+            }})</span
+          >
+        </div>
+        <q-btn
+          v-if="!expanded"
+          dense
+          class="absolute-top-right text-text2"
+          icon="fullscreen"
+          flat
+          @click="$emit('wp_expand', array_index)"
+        />
+        <q-btn
+          v-if="expanded"
+          dense
+          class="absolute-top-right text-text2"
+          icon="fullscreen_exit"
+          flat
+          @click="$emit('wp_compress')"
+        />
+      </div>
+
       <div class="row relative-position">
         <profile-pic :accountname="wp.proposer" />
         <q-item>
@@ -37,23 +64,6 @@
             <q-item-tile sublabel>{{ wp.status }}</q-item-tile>
           </q-item-main>
         </q-item>
-
-        <q-btn
-          v-if="!expanded"
-          dense
-          class="absolute-top-right text-text2"
-          icon="fullscreen"
-          flat
-          @click="$emit('wp_expand', array_index)"
-        />
-        <q-btn
-          v-if="expanded"
-          dense
-          class="absolute-top-right text-text2"
-          icon="fullscreen_exit"
-          flat
-          @click="$emit('wp_compress')"
-        />
       </div>
 
       <div class="q-my-md">
@@ -78,14 +88,6 @@
         />
       </div>
 
-      <div class="q-mt-sm q-title text-weight-thin">
-        <span class="capitalize">{{ wp.title }}</span>
-        <span class="q-caption on-right"
-          >({{
-            $t(`wp_categories.${getCategoryNameFromId(wp.category)}`)
-          }})</span
-        >
-      </div>
       <q-scroll-area
         class="bg-bg2  q-mt-sm round-borders text-weight-light text-text2"
         :style="scroll_area_style"
