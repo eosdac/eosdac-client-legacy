@@ -56,6 +56,7 @@
     <div class="row gutter-sm">
       <div class="col-xs-12 col-xl-6" v-for="(wp, i) in wps" :key="`wp${i}`">
         <wp-proposal
+          :read_only="!getIsCustodian"
           :wp="wp"
           :array_index="i"
           @wp_expand="

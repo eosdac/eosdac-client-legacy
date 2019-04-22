@@ -6,7 +6,7 @@
   >
     <div class="full-width">
       <div class="q-mb-md q-title relative-position">
-        <div class="q-py-sm" style="border-bottom:1px solid grey">
+        <div class="q-py-sm proposal-title-line">
           <span class="capitalize">{{ wp.title }}</span>
           <span class="q-caption on-right text-weight-thin"
             >({{
@@ -67,13 +67,13 @@
       </div>
 
       <div class="q-my-md">
-        <div class="q-caption q-mb-xs text-text2">Expiration</div>
+        <div class="q-caption q-mb-xs text-text2">Time Left</div>
         <countdown
           v-if="getExpiry.millisleft"
           :time="Number(getExpiry.millisleft)"
         >
           <template slot-scope="props">
-            <div class="q-caption text-weight-thin q-mb-xs">
+            <div class="q-caption text-weight-light q-mb-xs">
               <span v-if="props.days">{{ props.days }} days, </span>
               <span v-if="props.hours">{{ props.hours }} hours, </span>
               <span v-if="props.minutes">{{ props.minutes }} minutes, </span>
@@ -81,6 +81,9 @@
             </div>
           </template>
         </countdown>
+        <div v-else class="q-caption text-weight-light q-mb-xs text-negative">
+          expired
+        </div>
         <q-progress
           :percentage="getExpiry.percent"
           color="primary-light"
@@ -302,8 +305,17 @@ export default {
     },
     getVotes() {
       if (this.wp.votes) {
+        let delegated_votes =
+          this.wp.votes.filter(delv => delv.vote === 0) || [];
         return this.wp.votes.map(wpv => {
           wpv.weight = 1;
+          if (wpv.vote != 0) {
+            //check if voter has delegations assigned and adjust voteweight
+            let temp = delegated_votes.filter(dv => dv.delegatee == wpv.voter);
+            if (temp && temp.length) {
+              wpv.weight += temp.length;
+            }
+          }
           return wpv;
         });
       } else {
@@ -328,10 +340,10 @@ export default {
     //when wp state is 0
     proposal_threshold_met() {
       if (!this.wp.votes) return false;
-      const approved_votes = this.wp.votes.filter(wpv => wpv.vote == 1).length;
+      const approved_votes = this.wp.votes.filter(wpv => wpv.vote == 1);
       if (
         this.getWpConfig.proposal_threshold !== null &&
-        this.getWpConfig.proposal_threshold <= approved_votes
+        this.getWpConfig.proposal_threshold <= approved_votes.length
       ) {
         return true;
       } else {
@@ -586,4 +598,10 @@ export default {
 // eg. double(approved_count) / double(approved_count + deny_count) * 100.0
 </script>
 
-<style></style>
+<style lang="stylus">
+ @import '~variables'
+
+.proposal-title-line{
+  border-bottom: 1px solid var(--q-color-text2)
+}
+</style>

@@ -29,12 +29,11 @@ export async function loggedInRoutine({ state, commit, dispatch }, account) {
 
   //requests for setting up the logged in user
   let requests = [
-    // api.getAccount(accountname),
     api.getBalance(accountname),
     api.getAgreedTermsVersion(accountname),
     api.isCandidate(accountname)
   ];
-
+  console.log(JSON.stringify(await api.getAccount(accountname)));
   let [balance, termsversion, isCandidate] = await Promise.all(requests);
   console.log("is canddate:", isCandidate);
   commit("setDacBalance", balance);
