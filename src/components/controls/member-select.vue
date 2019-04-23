@@ -1,6 +1,6 @@
 <template>
   <q-item class="memberselector no-padding">
-    <q-item-side left style="height:40px">
+    <q-item-side left v-if="show_selected" style="height:40px">
       <profile-pic
         style="margin-top:-10px; margin-left:-8px"
         :border="false"
@@ -46,6 +46,10 @@ export default {
     itsme: {
       type: String,
       default: ""
+    },
+    show_selected: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

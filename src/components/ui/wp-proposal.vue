@@ -137,33 +137,27 @@
     </div>
 
     <div class="q-mt-md full-width">
-      {{ getVotes }}
-      <div v-if="IsCatDelegated">
-        this category is proxied to {{ IsCatDelegated }}
-      </div>
-      <div v-if="IsPropDelegated">
-        this prop is proxied to {{ IsPropDelegated }}
-      </div>
-
       <div class="row justify-between items-center">
         <div class="row">
-          <div
-            v-for="(vote, i) in getVotes.filter(v => v.vote == 1)"
-            :key="`v1${i}`"
-            class="bg-positive"
+          <q-item
+            @click.native="expand_votes_modal = true"
+            class="cursor-pointer"
           >
-            <div><profile-pic :accountname="vote.voter" :scale="0.7" /></div>
-          </div>
-          <div
-            v-for="(vote, i) in getVotes.filter(v => v.vote == 2)"
-            :key="`v2${i}`"
-            class="bg-negative"
-          >
-            <div><profile-pic :accountname="vote.voter" :scale="0.7" /></div>
-          </div>
+            <q-item-main>
+              <q-item-tile class="q-caption text-text2">Votes</q-item-tile>
+              <q-item-tile class="q-title">1/7</q-item-tile>
+            </q-item-main>
+          </q-item>
         </div>
 
         <div v-if="!read_only && getAccountName" class="row animate-pop">
+          <member-select
+            :show_selected="false"
+            @change="delegatevote($event)"
+            :value="IsPropDelegated || ''"
+            :accountnames="getCustNames"
+            placeholder="Select to Delegate"
+          />
           <div v-if="wp.status == 0">
             <q-btn
               v-if="getVoterStatus == 2 || getVoterStatus == 0"
@@ -233,6 +227,75 @@
         </div>
       </div>
     </div>
+
+    <q-modal minimized v-model="expand_votes_modal">
+      <div class="bg-bg2 text-text1 bg-logo">
+        <!-- header -->
+        <div
+          style="height:50px"
+          class="bg-bg1 row items-center justify-between q-px-md"
+        >
+          <span>Approvals </span>
+          <q-btn icon="close" @click="expand_votes_modal = false" flat dense />
+        </div>
+        <!-- content -->
+        <div class="q-pa-md">
+          <div class="row justify-start q-mt-sm">
+            <!-- <pre>{{provided_approvals}}</pre> -->
+            <div
+              class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
+              v-for="(vote, i) in getVotes.filter(v => v.vote == 1)"
+              :key="i + 'p'"
+            >
+              <profile-pic
+                :accountname="vote.voter"
+                :scale="0.5"
+                :show_role="false"
+              />
+              <router-link class=" a2" :to="{ path: '/profile/' + vote.voter }">
+                <div class="q-ma-none" style="min-width:100px; overflow:hidden">
+                  {{ vote.voter }}
+                </div>
+              </router-link>
+              <span v-if="vote.weight > 1">({{ vote.weight }})</span>
+              <q-icon
+                class="absolute"
+                style="top:-5px; right:-10px"
+                color="positive"
+                :name="$configFile.icon.check"
+                size="24px"
+              />
+            </div>
+
+            <div
+              class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
+              v-for="(vote, i) in getVotes.filter(v => v.vote == 2)"
+              :key="i + 'r'"
+            >
+              <profile-pic
+                :accountname="vote.voter"
+                :scale="0.5"
+                :show_role="false"
+              />
+              <router-link class=" a2" :to="{ path: '/profile/' + vote.voter }">
+                <div class="q-ma-none" style="min-width:100px; overflow:hidden">
+                  {{ vote.voter }}
+                </div>
+              </router-link>
+              <span v-if="vote.weight > 1">({{ vote.weight }})</span>
+              <q-icon
+                class="absolute"
+                style="top:-5px; right:-10px"
+                color="negative"
+                name="clear"
+                size="24px"
+              />
+            </div>
+            <!-- <pre>{{getmsigIsSeenCache}}</pre> -->
+          </div>
+        </div>
+      </div>
+    </q-modal>
   </div>
 </template>
 
@@ -240,6 +303,7 @@
 import { mapGetters } from "vuex";
 import profilePic from "components/ui/profile-pic";
 import MarkdownViewer from "components/ui/markdown-viewer";
+import memberSelect from "components/controls/member-select";
 import wpcats from "../../extensions/statics/config/wp_categories.json";
 import countdown from "@chenfengyuan/vue-countdown";
 
@@ -247,6 +311,7 @@ export default {
   name: "wpProposal",
   components: {
     profilePic,
+    memberSelect,
     MarkdownViewer,
     countdown
   },
@@ -267,7 +332,8 @@ export default {
   data() {
     return {
       show: true,
-      wp_expiration: 100
+      wp_expiration: 100,
+      expand_votes_modal: false
     };
   },
   computed: {
@@ -276,6 +342,7 @@ export default {
       getWpConfig: "dac/getWpConfig",
       getIsDark: "ui/getIsDark",
       getAuth: "user/getAuth",
+      getCustodians: "dac/getCustodians",
       getCatDelegations: "user/getCatDelegations"
     }),
     IsCatDelegated() {
@@ -338,15 +405,35 @@ export default {
       }
     },
     //when wp state is 0
+    // proposal_threshold_met() {
+    //   if (!this.wp.votes) return false;
+    //   const approved_votes = this.wp.votes.filter(wpv => wpv.vote == 1);
+    //   if (
+    //     this.getWpConfig.proposal_threshold !== null &&
+    //     this.getWpConfig.proposal_threshold <= approved_votes.length
+    //   ) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // },
     proposal_threshold_met() {
-      if (!this.wp.votes) return false;
-      const approved_votes = this.wp.votes.filter(wpv => wpv.vote == 1);
+      if (!this.getVotes.length) return false;
+      // const approved_votes = this.getVotes.filter(wpv => wpv.vote == 1);
+      let voteweights = this.getVotes.reduce((total, v) => {
+        if (v.vote == 1) {
+          total += v.weight;
+        }
+        return total;
+      }, 0);
       if (
         this.getWpConfig.proposal_threshold !== null &&
-        this.getWpConfig.proposal_threshold <= approved_votes.length
+        this.getWpConfig.proposal_threshold <= voteweights
       ) {
+        console.log(`${voteweights}/${this.getWpConfig.proposal_threshold}`);
         return true;
       } else {
+        console.log(`${voteweights}/${this.getWpConfig.proposal_threshold}`);
         return false;
       }
     },
@@ -382,6 +469,17 @@ export default {
         percent: perc <= 0 ? 0 : perc,
         millisleft: msleft <= 0 ? 0 : msleft
       };
+    },
+    getCustNames() {
+      if (this.getCustodians) {
+        return this.getCustodians
+          .map(c => {
+            return c.cust_name;
+          })
+          .filter(c => c != this.getAccountName);
+      } else {
+        return [];
+      }
     }
   },
 
@@ -390,7 +488,7 @@ export default {
       let wpc = wpcats.find(wpc => wpc.value == id);
       return wpc.label;
     },
-    async delegatevote() {
+    async delegatevote(delegatee) {
       let actions = [
         {
           account: this.$configFile.get("wpcontract"),
@@ -406,7 +504,7 @@ export default {
           data: {
             custodian: this.getAccountName,
             proposal_id: Number(this.wp.id),
-            dalegatee_custodian: "piecesnbitss", //xxxx
+            dalegatee_custodian: delegatee.new, //xxxx
             dac_scope: this.$configFile.get("authaccountname") //xxx
           }
         }
@@ -415,6 +513,21 @@ export default {
         actions: actions
       });
       if (result) {
+        let vote = this.wp.votes.find(v => v.voter == this.getAccountName);
+
+        if (vote) {
+          vote.vote = 0;
+          vote.delegatee = delegatee.new;
+        } else {
+          this.wp.votes.push({
+            proposal_id: Number(this.wp.id),
+            voter: this.getAccountName,
+            delegatee: delegatee.new,
+            vote: 0,
+            comment_hash: ""
+          });
+        }
+
         console.log(result);
       }
     },
@@ -455,10 +568,12 @@ export default {
 
         if (vote) {
           vote.vote = map[votetype];
+          vote.delegatee = "";
         } else {
           this.wp.votes.push({
             proposal_id: Number(this.wp.id),
             voter: this.getAccountName,
+            delegatee: "",
             vote: map[votetype],
             comment_hash: ""
           });
