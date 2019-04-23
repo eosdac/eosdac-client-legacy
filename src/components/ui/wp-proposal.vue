@@ -32,7 +32,7 @@
         />
       </div>
 
-      <div class="row relative-position">
+      <div class="row items-center relative-position">
         <profile-pic :accountname="wp.proposer" />
         <q-item>
           <q-item-main>
@@ -58,12 +58,12 @@
             <q-item-tile sublabel>date</q-item-tile>
           </q-item-main>
         </q-item>
-        <q-item>
+        <!-- <q-item>
           <q-item-main>
             <q-item-tile label>Status</q-item-tile>
             <q-item-tile sublabel>{{ wp.status }}</q-item-tile>
           </q-item-main>
-        </q-item>
+        </q-item> -->
       </div>
 
       <div class="q-my-md">
@@ -141,11 +141,13 @@
         <div class="row">
           <q-item
             @click.native="expand_votes_modal = true"
-            class="cursor-pointer"
+            class="cursor-pointer no-padding"
           >
             <q-item-main>
-              <q-item-tile class="q-caption text-text2">Votes</q-item-tile>
-              <q-item-tile class="q-title">1/7</q-item-tile>
+              <q-item-tile class="q-caption">Approval Threshold</q-item-tile>
+              <q-item-tile class="q-title">{{
+                proposal_threshold_met.score
+              }}</q-item-tile>
             </q-item-main>
           </q-item>
         </div>
@@ -157,6 +159,8 @@
             :value="IsPropDelegated || ''"
             :accountnames="getCustNames"
             placeholder="Select to Delegate"
+            :underline="false"
+            label="Delegation"
           />
           <div v-if="wp.status == 0">
             <q-btn
@@ -208,7 +212,7 @@
               @click="cancelProp()"
             />
             <q-btn
-              v-if="proposal_threshold_met"
+              v-if="proposal_threshold_met.met"
               class="on-right"
               flat
               color="info"
@@ -235,7 +239,7 @@
           style="height:50px"
           class="bg-bg1 row items-center justify-between q-px-md"
         >
-          <span>Approvals </span>
+          <span>Votes</span>
           <q-btn icon="close" @click="expand_votes_modal = false" flat dense />
         </div>
         <!-- content -->
@@ -257,7 +261,12 @@
                   {{ vote.voter }}
                 </div>
               </router-link>
-              <span v-if="vote.weight > 1">({{ vote.weight }})</span>
+              <q-chip
+                v-if="vote.weight > 1"
+                color="bg2"
+                :title="`voteweight ${vote.weight}`"
+                >{{ vote.weight }}</q-chip
+              >
               <q-icon
                 class="absolute"
                 style="top:-5px; right:-10px"
@@ -282,7 +291,12 @@
                   {{ vote.voter }}
                 </div>
               </router-link>
-              <span v-if="vote.weight > 1">({{ vote.weight }})</span>
+              <q-chip
+                v-if="vote.weight > 1"
+                color="bg2"
+                :title="`voteweight ${vote.weight}`"
+                >{{ vote.weight }}</q-chip
+              >
               <q-icon
                 class="absolute"
                 style="top:-5px; right:-10px"
@@ -404,22 +418,10 @@ export default {
         return myvote.vote;
       }
     },
-    //when wp state is 0
-    // proposal_threshold_met() {
-    //   if (!this.wp.votes) return false;
-    //   const approved_votes = this.wp.votes.filter(wpv => wpv.vote == 1);
-    //   if (
-    //     this.getWpConfig.proposal_threshold !== null &&
-    //     this.getWpConfig.proposal_threshold <= approved_votes.length
-    //   ) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // },
+
     proposal_threshold_met() {
-      if (!this.getVotes.length) return false;
-      // const approved_votes = this.getVotes.filter(wpv => wpv.vote == 1);
+      if (!this.getVotes.length) return { met: false };
+
       let voteweights = this.getVotes.reduce((total, v) => {
         if (v.vote == 1) {
           total += v.weight;
@@ -430,11 +432,15 @@ export default {
         this.getWpConfig.proposal_threshold !== null &&
         this.getWpConfig.proposal_threshold <= voteweights
       ) {
-        console.log(`${voteweights}/${this.getWpConfig.proposal_threshold}`);
-        return true;
+        return {
+          met: true,
+          score: `${voteweights}/${this.getWpConfig.proposal_threshold}`
+        };
       } else {
-        console.log(`${voteweights}/${this.getWpConfig.proposal_threshold}`);
-        return false;
+        return {
+          met: false,
+          score: `${voteweights}/${this.getWpConfig.proposal_threshold}`
+        };
       }
     },
     //when wp state is 2

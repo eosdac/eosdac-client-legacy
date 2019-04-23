@@ -15,9 +15,11 @@
         :dark="getIsDark"
         :placeholder="placeholder"
         color="primary-light"
+        :stack-label="label"
         :value="selected"
         :options="getOptions"
         @change="updateSelected"
+        :hide-underline="!underline"
       ></q-select>
     </q-item-main>
   </q-item>
@@ -50,6 +52,14 @@ export default {
     show_selected: {
       type: Boolean,
       default: true
+    },
+    underline: {
+      type: Boolean,
+      default: true
+    },
+    label: {
+      type: String,
+      default: ""
     }
   },
   data() {
