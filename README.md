@@ -65,6 +65,8 @@ $ deploy.sh v0.3.1
 
 That will build v0.3.1 and copy the results to the dist/deploy folder.
 
+If you want to build and run specifically for the jungle tesnet, you can run `DEFAULT_NETWORK=jungle quasar build` 
+
 ![image](https://user-images.githubusercontent.com/44613132/55268765-5b787c80-528d-11e9-8d6c-24f75526888b.png)
 
 ![image](https://user-images.githubusercontent.com/44613132/55268803-aa261680-528d-11e9-97bb-8d492bc5b3f1.png)
