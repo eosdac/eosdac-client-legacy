@@ -69,22 +69,26 @@ let routes = [
         component: () => import("pages/custodian/create-msigs"),
         beforeEnter: Guards.custodianCheck
       },
+      /*
       {
         path: "review-worker-proposals",
         component: () => import("pages/custodian/review-worker-proposals")
       },
+      */
       {
         path: "my-payments",
         component: () => import("pages/custodian/my-payments"),
         beforeEnter: Guards.custodianCheck
       },
+      /*
       {
         path: "dac-financials",
         component: () => import("pages/custodian/dac-financials")
       }
+      */
     ]
+/*
   },
-
   {
     path: "/member",
     component: () => import("layouts/MyLayout.vue"),
@@ -100,6 +104,7 @@ let routes = [
       }
     ],
     beforeEnter: Guards.memberCheck
+*/
   }
 ];
 
