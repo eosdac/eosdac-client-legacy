@@ -55,7 +55,7 @@
     </q-item>
 
     <custodian-menu />
-    <member-menu />
+    <!--<member-menu />-->
 
     <menu-extension />
 
