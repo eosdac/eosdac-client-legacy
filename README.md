@@ -15,24 +15,24 @@ You want to be able to read javascript code and have a basic understanding of fr
 [yarn](https://yarnpkg.com) is required to install
 
 ```bash
-$ git clone https://github.com/eosdac/memberclient.git
-$ cd memberclient
+$ git clone https://github.com/eosdac/eosdac-client.git
+$ cd eosdac-client
 $ yarn
 ```
 
-## Extend memberclient
-Add custom pages, routes and vuex stores. It's recommended to extend and customize the memberclient in the extensions folder so you can pull in future updates without losing your customizations. The eosDAC branded extension repo will already contain a mandatatory home screen (eosDAC) and a custom example page with dedicated vuex store. You'll also find a component to extend the main menu. In production you might want to manage the contents of the extention folder as a git submodule. The command below will simply clone the remote repo in the src/extensions folder.
+## Extend eosdac-client
+Add custom pages, routes and vuex stores. It's recommended to extend and customize the eosDAC client in the extensions folder so you can pull in future updates without losing your customizations. The eosDAC branded extension repo will already contain a mandatatory home screen (eosDAC) and a custom example page with dedicated vuex store. You'll also find a component to extend the main menu. In production you might want to manage the contents of the extention folder as a git submodule. The command below will simply clone the remote repo in the src/extensions folder.
 
-eosDAC the DAC is branded and customized with the following repo https://github.com/eosdac/memberclient_extension. Feel free to fork this repo to get started. In fact it's recommended to fork the repo if you plan to customize the memberclient.
+eosDAC the DAC is branded and customized with the following repo https://github.com/eosdac/eosdac-client-extension. Feel free to fork this repo to get started. In fact it's recommended to fork the repo if you plan to customize the eosDAC client.
 
 ```bash
-cd memberclient
-yarn add_extensions https://github.com/eosdac/memberclient_extension.git extensions
+cd eosdac-client
+yarn add_extensions https://github.com/eosdac/eosdac-client-extension.git extensions
 ```
 If you want a tighter coupling between the main repo and your extensions repo you can create a git submodule.
 ```bash
-cd memberclient
-git submodule add https://github.com/your_repo/your_extension.git src/extensions
+cd eosdac-client
+git submodule add https://github.com/your_repo/your_dac-client-extension.git src/extensions
 ```
 
 ## Add or change language strings
