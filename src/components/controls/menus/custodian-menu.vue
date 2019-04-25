@@ -22,7 +22,6 @@
             class="text-text1 text-weight-light"
           />
         </q-item>
-
         <q-item
           class="q-pl-lg animate-fade"
           link
