@@ -1,4 +1,4 @@
-# eosDAC Memberclient
+# eosDAC Client
 
 ![image](https://user-images.githubusercontent.com/44613132/55268864-1dc82380-528e-11e9-9715-454457b8506e.png)
 
