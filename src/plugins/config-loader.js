@@ -1,103 +1,101 @@
-require('../assets/icon-fonts/eosdac-iconfont-v1-9/styles.css')
-require('../assets/icon-fonts/extended_material_icons/css/materialdesignicons.css')
+require("../assets/icon-fonts/eosdac-iconfont-v1-9/styles.css");
+require("../assets/icon-fonts/extended_material_icons/css/materialdesignicons.css");
 
-
-class configLoader {
-
-  constructor( networkname){
-
-    this.configFile = require(`../statics/config.${networkname}.json`);
-    this.icon = require(`../statics/iconmap.json`);
+class ConfigLoader {
+  constructor(networkname) {
+    this.configFile = require(`../extensions/statics/config/config.${networkname}.json`);
+    this.icon = require(`../extensions/statics/config/iconmap.json`);
     // store.commit('global/setConfig', this.configFile);
-    
   }
 
-
-  get(configquery){
-
+  get(configquery) {
     switch (configquery) {
-      case 'defaultnode':
+      case "dacname":
+        return this.configFile.DAC_name;
+      case "defaultnode":
         return this.configFile.api.default_eos_node;
-      case 'tokencontract':
+      case "tokencontract":
         return this.configFile.contracts.token.name;
-      case 'custodianmemo':
+      case "tokendecimals":
+        return this.configFile.contracts.token.decimals;
+      case "custodianmemo":
         return this.configFile.contracts.custodian.memo;
-      case 'custodiancontract':
+      case "custodiancontract":
         return this.configFile.contracts.custodian.name;
-      case 'dactokensymbol':
+      case "dactokensymbol":
         return this.configFile.contracts.token.symbol;
-      case 'systemtokensymbol':
-        return 'EOS';
-      case 'systemtokencontract':
-        return 'eosio.token';
-      case 'systemmsigcontract':
+      case "systemtokensymbol":
+        return this.configFile.contracts.system_token.symbol;
+      case "systemtokendecimals":
+        return this.configFile.contracts.system_token.decimals;
+      case "systemtokencontract":
+        return this.configFile.contracts.system_token.name;
+      case "systemmsigcontract":
         return this.configFile.contracts.system_msig.name;
-      case 'dacmsigcontract':
+      case "dacmsigcontract":
         return this.configFile.contracts.dac_msig.name;
-      case 'botcontract':
+      case "botcontract":
         return this.configFile.contracts.bot.name;
-      case 'explorer':
+      case "explorer":
         return this.configFile.external.explorer;
-      case 'memberclientapi':
+      case "memberclientapi":
         return this.configFile.api.memberclient;
-      case 'memberclientstateapi':
+      case "memberclientstateapi":
         return this.configFile.api.memberclient_state_api;
-      case 'bpnodeapi':
+      case "bpnodeapi":
         return this.configFile.api.bpnodes;
-      case 'firehoseapi':
+      case "firehoseapi":
         return this.configFile.api.firehose;
-      case 'external':
+      case "external":
         return this.configFile.external;
-      case 'authaccount':
+      case "authaccount":
         return this.configFile.authAccount;
-      case 'authaccountname':
+      case "authaccountname":
         return this.configFile.authAccount.name;
-      case 'wpcontract':
+      case "wpcontract":
         return this.configFile.contracts.wpproposal.name;
-      case 'bpaccount':
+      case "bpaccount":
         return this.configFile.bpAccount.name;
-      case 'treasuryaccount':
+      case "treasuryaccount":
         return this.configFile.treasuryAccount.name;
       default:
-        return `***${configquery} not yet subscribed in config-loader***`
+        return `***${configquery} not yet subscribed in config-loader***`;
     }
   }
-  
-  setConfig(conf){
+
+  setConfig(conf) {
     this.configFile = conf;
   }
 
-  disable_ConsoleLog(){
-    if(this.consoleLogBackup === undefined){
+  disable_ConsoleLog() {
+    if (this.consoleLogBackup === undefined) {
       // alert('cl disabled')
       this.consoleLogBackup = window.console.log;
-      window['console']['log'] = function(){};
+      window["console"]["log"] = function() {};
     }
   }
 
-  enable_ConsoleLog(){
-    if(this.consoleLogBackup){
+  enable_ConsoleLog() {
+    if (this.consoleLogBackup) {
       // alert('cl enable')
-      window['console']['log'] = this.consoleLogBackup;
+      window["console"]["log"] = this.consoleLogBackup;
       this.consoleLogBackup = undefined;
     }
   }
-
 }
 
-export default ({
-  Vue,
-  store
-}) => {
+export default ({ Vue, store }) => {
+  let networkname = store.getters["global/getActiveNetworkName"];
+  let config = new ConfigLoader(networkname);
 
-  let networkname = store.getters['global/getActiveNetworkName'];
-  let config = new configLoader(networkname);
-  
-  if(store.getters['user/getSettingByName']('debug_console_log') && !store.getters['user/getSettingByName']('debug_console_log').value) {
+  if (
+    store.getters["user/getSettingByName"]("debug_console_log") &&
+    !store.getters["user/getSettingByName"]("debug_console_log").value
+  ) {
     config.disable_ConsoleLog();
   }
-  store.commit('global/setNode', config.get('defaultnode') );
+  store.commit("global/setNode", config.get("defaultnode"));
   Vue.prototype.$configFile = config;
-}
+};
 
 // export {configFile}

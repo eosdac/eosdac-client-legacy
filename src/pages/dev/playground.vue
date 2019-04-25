@@ -1,40 +1,35 @@
 <template>
-  <q-page padding>
-    <abi-viewer />
+  <q-page class="q-pa-md">
+    <vote-delegation />
+    <!-- <abi-viewer /> -->
   </q-page>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
-import abiViewer from 'components/controls/abi-viewer'
+import { mapGetters } from "vuex";
+// import abiViewer from "components/controls/abi-viewer";
+import voteDelegation from "components/controls/vote-delegation";
 
 export default {
-  name: 'playyard',
-  components:{
-    abiViewer
+  name: "playground",
+  components: {
+    // abiViewer,
+    voteDelegation
   },
-  data () {
+  data() {
     return {
-      abi:'',
-      wasm:''
-    }
+      abi: "",
+      wasm: "",
+      test: ""
+    };
   },
-  computed:{
+  computed: {
     ...mapGetters({
       // getEosApi: 'global/getEosApi'
     })
-
   },
-  methods:{
-
-
-  }
-}
+  methods: {}
+};
 </script>
 
-<style>
-
-
-
-
-</style>
+<style></style>

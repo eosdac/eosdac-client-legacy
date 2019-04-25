@@ -1,55 +1,50 @@
-import VueI18n from 'vue-i18n'
-import messages from 'src/i18n'
-let i18n;
-export default ({
-  app,
-  Vue,
-  store,
-  router
-}) => {
+import nestedObjectAssign from "nested-object-assign";
+import VueI18n from "vue-i18n";
 
+import messages from "src/i18n";
+import custom_messages from "src/extensions/i18n";
+
+let msg = nestedObjectAssign({}, messages, custom_messages);
+
+export default ({ app, Vue, store }) => {
   Vue.use(VueI18n);
-  let lang = 'en-us';
+  let lang = "en-us";
 
-  if (store.getters['user/getLanguage']) {
-    lang = store.getters['user/getLanguage'];
-  } 
-  else {
-
-    if (typeof(messages[browserLocale()]) === 'undefined') {
-      lang = 'en-us';
-    } 
-    else {
+  if (store.getters["user/getLanguage"]) {
+    lang = store.getters["user/getLanguage"];
+  } else {
+    if (typeof msg[browserLocale()] === "undefined") {
+      lang = "en-us";
+    } else {
       lang = browserLocale();
     }
-
   }
 
-  store.commit('user/setLanguage', lang);
+  store.commit("user/setLanguage", lang);
 
   app.i18n = new VueI18n({
     silentTranslationWarn: true,
     locale: lang,
-    fallbackLocale: 'en-us',
+    fallbackLocale: "en-us",
     messages: {
-      'de': messages['de'],
-      'en-gb': messages['en-gb'],
-      'en-us': messages['en-us'],
-      'es': messages['es'],
-      'fr': messages['fr'],
-      'it': messages['it'],
-      'ja': messages['ja'],
-      'ko': messages['ko'],
-      'ru': messages['ru'],
-      'vi': messages['vi'],
-      'zh-hans': messages['zh-hans'],
+      de: msg["de"],
+      "en-gb": msg["en-gb"],
+      "en-us": msg["en-us"],
+      es: msg["es"],
+      fr: msg["fr"],
+      it: msg["it"],
+      ja: msg["ja"],
+      ko: msg["ko"],
+      ru: msg["ru"],
+      vi: msg["vi"],
+      "zh-hans": msg["zh-hans"]
     }
   });
   Vue.prototype.i18n = app.i18n;
-}
+};
 
 function browserLocale() {
-  let lang
+  let lang;
   if (navigator.languages && navigator.languages.length) {
     // latest versions of Chrome and Firefox set this correctly
     lang = navigator.languages[0];
