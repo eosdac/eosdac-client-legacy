@@ -156,7 +156,7 @@
           <member-select
             :show_selected="false"
             @change="delegatevote($event)"
-            :value="IsPropDelegated || ''"
+            :value="MyDirectDelegation || ''"
             :accountnames="getCustNames"
             placeholder="Select to Delegate"
             :underline="false"
@@ -245,7 +245,6 @@
         <!-- content -->
         <div class="q-pa-md">
           <div class="row justify-start q-mt-sm">
-            <!-- <pre>{{provided_approvals}}</pre> -->
             <div
               class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
               v-for="(vote, i) in getVotes.filter(v => v.vote == 1)"
@@ -359,24 +358,34 @@ export default {
       getCustodians: "dac/getCustodians",
       getCatDelegations: "user/getCatDelegations"
     }),
-    IsCatDelegated() {
-      if (this.getCatDelegations) {
-        let t = this.getCatDelegations.find(
-          cd => cd.category_id == this.wp.category
-        );
-        return t ? t.delegatee : false;
+
+    getVotes() {
+      if (this.wp.votes && this.wp.votes.length) {
+        return this.wp.votes;
       } else {
-        return false;
+        return [];
       }
     },
-    IsPropDelegated() {
-      let myvote = this.wp.votes.find(v => v.voter == this.getAccountName);
-      if (myvote && myvote.delegatee) {
-        return myvote.delegatee;
-      } else {
-        return false;
+
+    MyDirectDelegation() {
+      if (!this.getVotes.length) return false;
+      let my_direct_delegatee = false;
+
+      for (let i = 0; i < this.getVotes.length; i++) {
+        let vote = this.getVotes[i];
+        if (vote.delegates) {
+          let check = vote.delegates.find(
+            d => d.voter == this.getAccountName && d.delegate_type == "direct"
+          );
+          if (check) {
+            my_direct_delegatee = vote.voter;
+            break;
+          }
+        }
       }
+      return my_direct_delegatee;
     },
+
     scroll_area_style() {
       if (this.expanded) {
         return { height: "400px", width: "100%" };
@@ -384,25 +393,7 @@ export default {
         return { height: "200px", width: "100%" };
       }
     },
-    getVotes() {
-      if (this.wp.votes) {
-        let delegated_votes =
-          this.wp.votes.filter(delv => delv.vote === 0) || [];
-        return this.wp.votes.map(wpv => {
-          wpv.weight = 1;
-          if (wpv.vote != 0) {
-            //check if voter has delegations assigned and adjust voteweight
-            let temp = delegated_votes.filter(dv => dv.delegatee == wpv.voter);
-            if (temp && temp.length) {
-              wpv.weight += temp.length;
-            }
-          }
-          return wpv;
-        });
-      } else {
-        return [];
-      }
-    },
+
     getIsCreator() {
       return this.getAccountName === this.wp.proposer;
     },
@@ -411,7 +402,7 @@ export default {
     },
     //get vote type of logged in user
     getVoterStatus() {
-      let myvote = this.wp.votes.find(v => v.voter == this.getAccountName);
+      let myvote = this.getVotes.find(v => v.voter == this.getAccountName);
       if (!myvote) {
         return 0;
       } else {
@@ -420,40 +411,11 @@ export default {
     },
 
     proposal_threshold_met() {
-      if (!this.getVotes.length) return { met: false };
-
-      let voteweights = this.getVotes.reduce((total, v) => {
-        if (v.vote == 1) {
-          total += v.weight;
-        }
-        return total;
-      }, 0);
-      if (
-        this.getWpConfig.proposal_threshold !== null &&
-        this.getWpConfig.proposal_threshold <= voteweights
-      ) {
-        return {
-          met: true,
-          score: `${voteweights}/${this.getWpConfig.proposal_threshold}`
-        };
-      } else {
-        return {
-          met: false,
-          score: `${voteweights}/${this.getWpConfig.proposal_threshold}`
-        };
-      }
+      return false;
     },
     //when wp state is 2
     claim_threshold_met() {
-      const approved_claim = this.wp.votes.filter(wpv => wpv.vote == 3).length;
-      if (
-        this.getWpConfig.claim_threshold !== null &&
-        this.getWpConfig.claim_threshold <= approved_claim
-      ) {
-        return true;
-      } else {
-        return false;
-      }
+      return false;
     },
 
     getExpiry() {
@@ -519,22 +481,20 @@ export default {
         actions: actions
       });
       if (result) {
-        let vote = this.wp.votes.find(v => v.voter == this.getAccountName);
-
-        if (vote) {
-          vote.vote = 0;
-          vote.delegatee = delegatee.new;
-        } else {
-          this.wp.votes.push({
-            proposal_id: Number(this.wp.id),
-            voter: this.getAccountName,
-            delegatee: delegatee.new,
-            vote: 0,
-            comment_hash: ""
-          });
-        }
-
-        console.log(result);
+        // let vote = this.wp.votes.find(v => v.voter == this.getAccountName);
+        // if (vote) {
+        //   vote.vote = 0;
+        //   vote.delegatee = delegatee.new;
+        // } else {
+        //   this.wp.votes.push({
+        //     proposal_id: Number(this.wp.id),
+        //     voter: this.getAccountName,
+        //     delegatee: delegatee.new,
+        //     vote: 0,
+        //     comment_hash: ""
+        //   });
+        // }
+        // console.log(result);
       }
     },
 
@@ -570,22 +530,20 @@ export default {
         actions: actions
       });
       if (result) {
-        let vote = this.wp.votes.find(v => v.voter == this.getAccountName);
-
-        if (vote) {
-          vote.vote = map[votetype];
-          vote.delegatee = "";
-        } else {
-          this.wp.votes.push({
-            proposal_id: Number(this.wp.id),
-            voter: this.getAccountName,
-            delegatee: "",
-            vote: map[votetype],
-            comment_hash: ""
-          });
-        }
-
-        console.log(result);
+        // let vote = this.wp.votes.find(v => v.voter == this.getAccountName);
+        // if (vote) {
+        //   vote.vote = map[votetype];
+        //   vote.delegatee = "";
+        // } else {
+        //   this.wp.votes.push({
+        //     proposal_id: Number(this.wp.id),
+        //     voter: this.getAccountName,
+        //     delegatee: "",
+        //     vote: map[votetype],
+        //     comment_hash: ""
+        //   });
+        // }
+        // console.log(result);
       }
     },
     async cancelProp() {

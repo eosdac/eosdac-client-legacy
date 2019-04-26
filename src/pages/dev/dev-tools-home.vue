@@ -90,7 +90,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-// import { colors } from "quasar";
+import { colors } from "quasar";
 
 import colorPicker from "components/controls/color-picker";
 
@@ -143,38 +143,23 @@ export default {
     },
 
     getColorScheme() {
-      // let new_colors = {};
-      // Object.keys(this.getThemes[0].colors).forEach(c => {
-      //   new_colors[c] = colors.getBrand(c);
-      // });
-      // let response = {
-      //   name: "xxxRenamexxx",
-      //   isdark: this.getIsDark,
-      //   colors: new_colors
-      // };
-      // let a = document.createElement("a");
-      // let file = new Blob([JSON.stringify(response, null, 4)], {
-      //   type: "JSON"
-      // });
-      // a.href = URL.createObjectURL(file);
-      // a.download = "custom_colors.json";
-      // a.click();
-      // console.log(JSON.stringify(response, null, 4));
+      let colornames = ["primary", "bg1", "bg2", "text1", "text2"];
+      let new_colors =
+        "//add this file in the extensions/branding/colors folder\n\n";
+
+      colornames.forEach(c => {
+        new_colors += `$${c} = ${colors.getBrand(c)}\n`;
+      });
+
+      let a = document.createElement("a");
+      let file = new Blob([new_colors], {
+        type: "text/plain;charset=utf-8"
+      });
+      a.href = URL.createObjectURL(file);
+      a.download = "new.colors.style";
+      a.click();
+      console.log(new_colors);
     }
-  },
-  mounted() {
-    // Object.keys(this.$store.state).forEach(e => {
-    //   console.log(`key=${e}`)
-    //   console.log(this.$store.state[e])
-    // });
-    console.log(this.getEosApi);
-  },
-  watch: {
-    // '$route': function(){
-    //             this.redeemid = this.$route.params.redeemid;
-    //             this.redeemtokens = this.$route.params.redeemtokens;
-    //             console.log(this.redeemid, this.redeemtokens)
-    //           }
   }
 };
 </script>
