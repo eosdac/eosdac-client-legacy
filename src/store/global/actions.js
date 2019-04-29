@@ -9,7 +9,7 @@ import { Api, JsonRpc } from "eosjs";
 const { TextDecoder, TextEncoder } = require("text-encoding");
 import { EosWrapper } from "../../modules/eoswrapper.js";
 
-ScatterJS.plugins(new ScatterEOS(), new ScatterLynx());
+ScatterJS.plugins(new ScatterEOS(), new ScatterLynx({ Api, JsonRpc }));
 //
 
 export async function connectScatter(
