@@ -153,6 +153,7 @@
         </div>
 
         <div v-if="!read_only && getAccountName" class="row animate-pop">
+          {{ getVotes }}
           <member-select
             :show_selected="false"
             @change="delegatevote($event)"
