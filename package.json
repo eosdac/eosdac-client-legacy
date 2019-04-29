@@ -1,7 +1,7 @@
 {
   "name": "eosdacmemberclient",
   "version": "0.4.0",
-  "local_storage_version": "0.1",
+  "local_storage_version": "0.2",
   "description": "Toolkit GUI for eosDAC",
   "productName": "eosDAC Member Client",
   "cordovaId": "org.cordova.quasar.app",
