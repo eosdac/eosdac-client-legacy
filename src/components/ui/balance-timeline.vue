@@ -1,6 +1,11 @@
 <template>
   <div>
-    <div class="capitalize">{{ getLatestBalance }}</div>
+    <div class="capitalize q-title">
+      {{ account }} <span class="text-text2">({{ getLatestBalance }})</span>
+    </div>
+    <div v-if="description != ''" class="text-text2 q-my-md">
+      {{ description }}
+    </div>
     <line-chart
       ref="linechart"
       :chartData="chartData"
@@ -38,6 +43,10 @@ export default {
     end_block: {
       type: Number,
       default: 0
+    },
+    description: {
+      type: String,
+      default: ""
     }
   },
   data() {
