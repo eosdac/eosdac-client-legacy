@@ -87,7 +87,7 @@ export default {
   name: "MainMenu",
   components: {
     custodianMenu,
-//    memberMenu,
+    //    memberMenu,
     devMenu,
     menuExtension
   },

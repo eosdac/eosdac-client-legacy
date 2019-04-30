@@ -80,14 +80,12 @@ let routes = [
         component: () => import("pages/custodian/my-payments"),
         beforeEnter: Guards.custodianCheck
       },
-      /*
       {
         path: "dac-financials",
         component: () => import("pages/custodian/dac-financials")
       }
-      */
     ]
-/*
+    /*
   },
   {
     path: "/member",
