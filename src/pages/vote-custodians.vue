@@ -3,7 +3,7 @@
     <div class="q-pa-md">
       <!-- padding wrapper -->
       <!-- <period-timer style="transform: scale(0.5)" /> -->
-
+      {{ oldvotes }}
       <div class="q-display-1 q-mb-md ">
         {{ $t("vote_custodians.custodian_board") }}
       </div>
@@ -420,6 +420,7 @@ export default {
       if (result) {
         this.votesdidchange = false;
         this.sortCandidatesByVotes();
+        this.oldvotes = votes;
         this.$store.dispatch("user/fetchDacVotes");
         // $refs.votebar.initProgressbar();
       }
