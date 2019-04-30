@@ -10,9 +10,6 @@
 import { Notify } from "quasar";
 import NodeSelector from "./modules/nodeselector.js";
 import sleepHandler from "components/controls/sleep-handler";
-// var VConsole = require("vconsole");
-// var vConsole = new VConsole();
-// console.log(vConsole);
 
 export default {
   name: "App",
