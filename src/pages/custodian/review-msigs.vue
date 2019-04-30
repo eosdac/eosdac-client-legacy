@@ -1,7 +1,9 @@
 <template>
   <q-page class="text-text2 q-pa-md">
     <div class="row relative-position justify-start q-mb-md">
-      <h4 class="q-display-1 q-my-none">Review Proposals</h4>
+      <h4 class="q-display-1 q-my-none">
+        Review Proposals <span v-if="total">({{ total }})</span>
+      </h4>
     </div>
 
     <q-tabs class="q-mb-md" @select="setActiveTab">
@@ -84,6 +86,7 @@ export default {
       proposals: [],
       createmsig_modal: false,
       active_tab: "",
+      total: false,
       pagination: {
         page: 1,
         max: 1,
@@ -127,7 +130,8 @@ export default {
       //todo: loading animation
       this.proposals = [];
       let p = await this.$store.dispatch("dac/fetchMsigProposals", query);
-      console.log(p);
+      console.log("msigs", p);
+      this.total = p.count;
       this.pagination.max = Math.ceil(p.count / this.pagination.items_per_page);
       this.proposals = p.results;
     },

@@ -3007,7 +3007,7 @@ entities@^1.1.1, entities@~1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
 
-eosjs-ecc@4.0.4, eosjs-ecc@^4.0.1, eosjs-ecc@^4.0.4:
+eosjs-ecc@4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/eosjs-ecc/-/eosjs-ecc-4.0.4.tgz#431450f30a6f73088ff5d7ba1ebdfe967a5ca4ab"
   dependencies:
@@ -3019,14 +3019,6 @@ eosjs-ecc@4.0.4, eosjs-ecc@^4.0.1, eosjs-ecc@^4.0.4:
     create-hmac "^1.1.6"
     ecurve "^1.0.5"
     randombytes "^2.0.5"
-
-eosjs@20.0.0-beta3:
-  version "20.0.0-beta3"
-  resolved "https://registry.yarnpkg.com/eosjs/-/eosjs-20.0.0-beta3.tgz#b5a078d4627ad63343bae6897ea5952d2d4fd26d"
-  dependencies:
-    babel-runtime "^6.26.0"
-    eosjs-ecc "^4.0.1"
-    text-encoding "^0.6.4"
 
 eosjs@^20.0.0:
   version "20.0.0"
@@ -6919,9 +6911,9 @@ sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-scatterjs-core@^2.7.16:
-  version "2.7.16"
-  resolved "https://registry.yarnpkg.com/scatterjs-core/-/scatterjs-core-2.7.16.tgz#b262b743888ab2329a434ce0bcce2e7727a720c3"
+scatterjs-core@^2.7.17:
+  version "2.7.17"
+  resolved "https://registry.yarnpkg.com/scatterjs-core/-/scatterjs-core-2.7.17.tgz#f889e9d3bf1ba2003fc0411ad838fbfe42ed11fb"
   dependencies:
     create-hash "^1.2.0"
     es6-promise "^4.2.4"
@@ -6933,12 +6925,9 @@ scatterjs-plugin-eosjs2@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/scatterjs-plugin-eosjs2/-/scatterjs-plugin-eosjs2-1.5.0.tgz#4e8e08859c82af7b9c0b275ea57c9739a373cc18"
 
-scatterjs-plugin-lynx@^1.5.3:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/scatterjs-plugin-lynx/-/scatterjs-plugin-lynx-1.5.3.tgz#f247f44cbd40a8db861b0d95010346711034e9a3"
-  dependencies:
-    eosjs "20.0.0-beta3"
-    eosjs-ecc "^4.0.4"
+scatterjs-plugin-lynx@1.6.6:
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/scatterjs-plugin-lynx/-/scatterjs-plugin-lynx-1.6.6.tgz#6227cf469bb1556bb1f4f50ad7ebd8d55c928654"
 
 schema-utils@^0.4.4, schema-utils@^0.4.5:
   version "0.4.7"
@@ -7520,10 +7509,6 @@ text-encoding@0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/text-encoding/-/text-encoding-0.7.0.tgz#f895e836e45990624086601798ea98e8f36ee643"
 
-text-encoding@^0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/text-encoding/-/text-encoding-0.6.4.tgz#e399a982257a276dae428bb92845cb71bdc26d19"
-
 text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
@@ -7894,6 +7879,10 @@ validate-npm-package-license@^3.0.1:
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
+
+vconsole@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/vconsole/-/vconsole-3.3.0.tgz#42629c07fb3b6a72733d2bbc417ee3e84b2bc76e"
 
 vendors@^1.0.0:
   version "1.0.2"

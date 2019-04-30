@@ -9,8 +9,20 @@ import { Api, JsonRpc } from "eosjs";
 const { TextDecoder, TextEncoder } = require("text-encoding");
 import { EosWrapper } from "../../modules/eoswrapper.js";
 
-ScatterJS.plugins(new ScatterEOS(), new ScatterLynx());
-//
+//mobile debugging
+// var VConsole = require("vconsole");
+// var vConsole = new VConsole();
+// console.log(vConsole);
+
+ScatterJS.plugins(
+  new ScatterEOS(),
+  new ScatterLynx({
+    Api,
+    JsonRpc,
+    textDecoder: new TextDecoder(),
+    textEncoder: new TextEncoder()
+  })
+);
 
 export async function connectScatter(
   { state, commit, dispatch, rootGetters },
@@ -40,16 +52,20 @@ export async function connectScatter(
 
       console.log("scatter connected");
 
-      let token = {
-        token: {
-          symbol: this._vm.$configFile.get("systemtokensymbol"),
-          contract: this._vm.$configFile.get("systemtokencontract")
-        }
-      };
-      let networkwithtoken = Object.assign({}, network, token);
-      await ScatterJS.scatter
-        .suggestNetwork(networkwithtoken)
-        .then(res => console.log("suggestnetwork", res, networkwithtoken));
+      //eoslynx doesn't support suggest network... need to handle this
+      console.log("Signature Provider", ScatterJS.wallet);
+      if (ScatterJS.wallet != "Lynx") {
+        let token = {
+          token: {
+            symbol: this._vm.$configFile.get("systemtokensymbol"),
+            contract: this._vm.$configFile.get("systemtokencontract")
+          }
+        };
+        let networkwithtoken = Object.assign({}, network, token);
+        await ScatterJS.scatter
+          .suggestNetwork(networkwithtoken)
+          .then(res => console.log("suggestnetwork", res, networkwithtoken));
+      }
 
       commit("setScatter", ScatterJS.scatter);
 

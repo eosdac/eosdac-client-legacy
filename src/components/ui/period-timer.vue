@@ -48,7 +48,7 @@ export default {
       ) {
         let end = addToDate(
           new Date(this.getCustodianState.lastperiodtime * 1000),
-          { days: this.getCustodianConfig.periodlength / 60 / 60 / 24 }
+          { seconds: this.getCustodianConfig.periodlength }
         );
         return date.formatDate(end, "YYYY-MM-DD HH:mm:ss");
       }
