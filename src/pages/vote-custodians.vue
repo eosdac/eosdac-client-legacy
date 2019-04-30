@@ -3,7 +3,7 @@
     <div class="q-pa-md">
       <!-- padding wrapper -->
       <!-- <period-timer style="transform: scale(0.5)" /> -->
-      {{ oldvotes }}
+      <!-- {{ oldvotes }} -->
       <div class="q-display-1 q-mb-md ">
         {{ $t("vote_custodians.custodian_board") }}
       </div>
