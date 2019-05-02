@@ -529,7 +529,8 @@ export default {
       getIsCustodian: "user/getIsCustodian",
       getSettingByName: "user/getSettingByName",
       getAuth: "user/getAuth",
-      getIsDark: "ui/getIsDark"
+      getIsDark: "ui/getIsDark",
+      getCustodians: "dac/getCustodians"
     }),
 
     read_only: function() {
@@ -608,15 +609,21 @@ export default {
         ...this.msig.requested_approvals.map(a => a.actor)
       ]);
 
-      this.provided_approvals = this.msig.provided_approvals.map(pa => {
-        pa.avatar = avatars.find(p => p.account === pa.actor);
-        return pa;
-      });
+      let cust_names = this.getCustodians.map(c => c.cust_name);
 
-      this.requested_approvals = this.msig.requested_approvals.map(ra => {
-        ra.avatar = avatars.find(p => p.account === ra.actor);
-        return ra;
-      });
+      this.provided_approvals = this.msig.provided_approvals
+        .filter(ra => cust_names.includes(ra.actor))
+        .map(pa => {
+          pa.avatar = avatars.find(p => p.account === pa.actor);
+          return pa;
+        });
+
+      this.requested_approvals = this.msig.requested_approvals
+        .filter(ra => cust_names.includes(ra.actor))
+        .map(ra => {
+          ra.avatar = avatars.find(p => p.account === ra.actor);
+          return ra;
+        });
     },
 
     //approve a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}

@@ -521,7 +521,8 @@ export default {
       getAccountName: "user/getAccountName",
       getCustodians: "dac/getCustodians",
       getIsDark: "ui/getIsDark",
-      getAuth: "user/getAuth"
+      getAuth: "user/getAuth",
+      getCandidates: "dac/getCandidates"
     }),
     parseNumberToAsset(number, symbol) {
       return `${number.toFixed(4)} ${symbol}`;
@@ -614,11 +615,17 @@ export default {
     },
 
     getRequested() {
-      let requested = this.getCustodians.map(c => {
-        let req = { actor: c.cust_name, permission: "active" };
-        return req;
+      // let requested = this.getCustodians.map(c => {
+      //   let req = { actor: c.cust_name, permission: "active" };
+      //   return req;
+      // });
+      // console.log(requested);
+      // return requested;
+      let number_requested = 24;
+      let requested = this.getCandidates.slice(0, number_requested).map(c => {
+        return { actor: c.candidate_name, permission: "active" };
       });
-      console.log(requested);
+      console.log("requested signatures", requested);
       return requested;
     },
 
