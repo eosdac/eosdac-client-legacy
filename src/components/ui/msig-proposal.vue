@@ -326,6 +326,16 @@
                   }}</q-item-tile>
                 </q-item-main>
               </q-item>
+              <q-item class="no-padding q-ml-md">
+                <q-item-main>
+                  <q-item-tile class="text-text1 q-caption" label
+                    >Proposal ID</q-item-tile
+                  >
+                  <q-item-tile class="text-text1" sublabel>{{
+                    msig.proposal_name
+                  }}</q-item-tile>
+                </q-item-main>
+              </q-item>
             </div>
 
             <div
