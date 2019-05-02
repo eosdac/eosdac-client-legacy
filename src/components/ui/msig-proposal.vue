@@ -457,7 +457,7 @@
               <profile-pic
                 :accountname="c.actor"
                 :scale="0.5"
-                :show_role="false"
+                :show_role="true"
               />
               <router-link class=" a2" :to="{ path: '/profile/' + c.actor }">
                 <div class="q-ma-none" style="min-width:100px; overflow:hidden">
@@ -481,7 +481,7 @@
               <profile-pic
                 :accountname="c.actor"
                 :scale="0.5"
-                :show_role="false"
+                :show_role="true"
               />
               <router-link class=" a2" :to="{ path: '/profile/' + c.actor }">
                 <div class="q-ma-none" style="min-width:100px; overflow:hidden">
@@ -546,11 +546,21 @@ export default {
     read_only: function() {
       return !this.getIsCustodian;
     },
+    getCustodianApprovals() {
+      let cust_names = this.getCustodians.map(c => c.cust_name);
+      let custodian_approvals = this.provided_approvals.filter(pa =>
+        cust_names.includes(pa.actor)
+      );
+      return custodian_approvals;
+    },
 
     isExecutable: function() {
       if (this.provided_approvals) {
-        return this.provided_approvals.length >= this.msig.threshold;
-        // return this.provided_approvals.length > 0;
+        let cust_names = this.getCustodians.map(c => c.cust_name);
+        let custodian_approvals = this.provided_approvals.filter(pa =>
+          cust_names.includes(pa.actor)
+        );
+        return custodian_approvals.length >= this.msig.threshold;
       } else {
         return false;
       }
@@ -619,17 +629,17 @@ export default {
         ...this.msig.requested_approvals.map(a => a.actor)
       ]);
 
-      let cust_names = this.getCustodians.map(c => c.cust_name);
+      // let cust_names = this.getCustodians.map(c => c.cust_name);
 
       this.provided_approvals = this.msig.provided_approvals
-        .filter(ra => cust_names.includes(ra.actor))
+        // .filter(ra => cust_names.includes(ra.actor))
         .map(pa => {
           pa.avatar = avatars.find(p => p.account === pa.actor);
           return pa;
         });
 
       this.requested_approvals = this.msig.requested_approvals
-        .filter(ra => cust_names.includes(ra.actor))
+        // .filter(ra => cust_names.includes(ra.actor))
         .map(ra => {
           ra.avatar = avatars.find(p => p.account === ra.actor);
           return ra;

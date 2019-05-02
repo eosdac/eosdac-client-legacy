@@ -4,6 +4,7 @@ export default {
   memberTerms: null,
   custodians: null,
   candidates: null,
+  dacAdmins: null,
   custodianConfig: {
     lockupasset: null,
     maxvotes: null,

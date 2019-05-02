@@ -19,6 +19,10 @@ export function getLatestMemberTerm(state) {
   return state.memberTerms.slice(-1)[0];
 }
 
+export function getDacAdmins(state) {
+  return state.dacAdmins;
+}
+
 export function getlatestTermsUrl(state) {
   return state.latestTermsUrl;
 }
