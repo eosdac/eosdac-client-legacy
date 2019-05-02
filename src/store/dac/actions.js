@@ -77,9 +77,9 @@ export async function fetchDacAdmins({ commit, dispatch }) {
   const api = await dispatch("global/getEosApi", false, { root: true });
   let res = await api.getAccount(this._vm.$configFile.get("authaccountname"));
   if (res && res.permissions) {
-    let admins = res.permissions
-      .find(p => p.perm_name == "admin")
-      .required_auth.accounts.map(a => a.permission.actor);
+    let admins = res.permissions.find(p => p.perm_name == "admin");
+    if (!admins) return;
+    admins = admins.required_auth.accounts.map(a => a.permission.actor);
 
     if (admins && admins.length) {
       console.log("Dac Admins", admins);
