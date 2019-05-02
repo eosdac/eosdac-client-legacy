@@ -221,15 +221,38 @@
               </div>
             </div>
             <div class="col-xs-12">
-              <div class="full-height">
-                <q-input
+              <div class="full-height text-text1">
+                <div class="q-mb-xs  q-caption">
+                  {{ $t("msig_creator.summary") }}
+                </div>
+                <MarkdownViewer
+                  :tags="[
+                    'h1',
+                    'h2',
+                    'h3',
+                    'italic',
+                    'bold',
+                    'underline',
+                    'strikethrough',
+                    'subscript',
+                    'superscript',
+                    'anchor',
+                    'orderedlist',
+                    'unorderedlist'
+                  ]"
+                  :edit="true"
+                  :dark="getIsDark"
+                  :text="msig_description"
+                  v-on:update="updateText"
+                />
+                <!-- <q-input
                   type="textarea"
                   :max-height="200"
                   :dark="getIsDark"
                   v-model="msig_description"
                   :stack-label="$t('msig_creator.summary')"
                   :placeholder="$t('msig_creator.sum_placeholder')"
-                />
+                /> -->
               </div>
             </div>
           </div>
@@ -447,6 +470,7 @@ import actionMaker from "components/controls/action-maker";
 import displayAction from "components/ui/display-action";
 import { date } from "quasar";
 import draggable from "vuedraggable";
+import MarkdownViewer from "components/ui/markdown-viewer";
 const today = new Date();
 const { addToDate } = date;
 const msigTrx_template = {
@@ -468,7 +492,8 @@ export default {
     debugData,
     actionMaker,
     displayAction,
-    draggable
+    draggable,
+    MarkdownViewer
   },
   data() {
     return {
@@ -529,6 +554,9 @@ export default {
   },
 
   methods: {
+    updateText(val) {
+      this.msig_description = val;
+    },
     handleSelection(index) {
       this.allow_advanced = false;
       this.controlled_accounts = this.controlled_accounts.map(ca => {

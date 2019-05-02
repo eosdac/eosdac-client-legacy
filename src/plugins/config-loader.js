@@ -1,11 +1,36 @@
 require("../assets/icon-fonts/eosdac-iconfont-v1-9/styles.css");
 require("../assets/icon-fonts/extended_material_icons/css/materialdesignicons.css");
 
+function styledConsoleLog() {
+  let argArray = [];
+  if (arguments.length) {
+    const startTagRe = /<span\s+style=(['"])([^'"]*)\1\s*>/gi;
+    const endTagRe = /<\/span>/gi;
+    let reResultArray;
+    argArray.push(
+      arguments[0].replace(startTagRe, "%c").replace(endTagRe, "%c")
+    );
+    while ((reResultArray = startTagRe.exec(arguments[0]))) {
+      argArray.push(reResultArray[2]);
+      argArray.push("");
+    }
+    for (var j = 1; j < arguments.length; j++) {
+      argArray.push(arguments[j]);
+    }
+  }
+  console.log.apply(console, argArray);
+}
+
 class ConfigLoader {
   constructor(networkname) {
     this.configFile = require(`../extensions/statics/config/config.${networkname}.json`);
     this.icon = require(`../extensions/statics/config/iconmap.json`);
-    // store.commit('global/setConfig', this.configFile);
+
+    styledConsoleLog(
+      `<span style="color:white;background-color:hsl(268, 87%, 53%); font-size:21px; padding:5px;">Welcome To the ${this.get(
+        "dacname"
+      )} Member Client </span><span style="color:black; font-size:12px;">Pasting code in the console can be dangerous </span>`
+    );
   }
 
   get(configquery) {
@@ -97,5 +122,3 @@ export default ({ Vue, store }) => {
   store.commit("global/setNode", config.get("defaultnode"));
   Vue.prototype.$configFile = config;
 };
-
-// export {configFile}

@@ -153,8 +153,25 @@
               </div>
 
               <div class="q-mb-xs">
-                <div>Description:</div>
-                <div class="text-text2">{{ msig.description }}</div>
+                <div>Description</div>
+                <MarkdownViewer
+                  :tags="[
+                    'h1',
+                    'h2',
+                    'h3',
+                    'italic',
+                    'bold',
+                    'underline',
+                    'strikethrough',
+                    'subscript',
+                    'superscript',
+                    'anchor',
+                    'orderedlist',
+                    'unorderedlist'
+                  ]"
+                  :dark="getIsDark"
+                  :text="msig.description"
+                />
               </div>
               <div>
                 <div>
@@ -255,7 +272,6 @@
           </q-item-side>
           <q-item-main>
             <div class="q-ml-lg">
-              <!-- <div class="q-title q-mb-xs"><span class="text-text1">{{msig.proposal_name}}:</span> {{msig.title}}</div> -->
               <div class="q-body-3 q-mb-xs text-text1 capitalize">
                 {{ msig.title }}
               </div>
@@ -266,10 +282,10 @@
                     {{ msig.proposer }}
                   </router-link>
                 </div>
-                <div>
+                <div class="q-mt-xs">
                   <span class="text-text2"
                     >Submitted on:&nbsp;<span class="text-text1">{{
-                      new Date(msig.block_timestamp).toDateString()
+                      new Date(msig.block_timestamp).toUTCString()
                     }}</span></span
                   >
                 </div>
@@ -299,31 +315,56 @@
 
         <div class="q-px-md q-pb-md">
           <div style="border-top: 1px solid grey">
-            <div class="q-mt-md text-text1">Description</div>
-            <div class=" q-mb-md">{{ msig.description }}</div>
-            <div class="q-mt-md text-text1">Expiration</div>
-            <div class=" q-mb-md">
-              {{ new Date(msig.trx.expiration).toString() }}
+            <div class="row q-mt-md">
+              <q-item class="no-padding">
+                <q-item-main>
+                  <q-item-tile class="text-text1 q-caption" label
+                    >Expiration</q-item-tile
+                  >
+                  <q-item-tile class="text-text1" sublabel>{{
+                    new Date(msig.trx.expiration).toUTCString()
+                  }}</q-item-tile>
+                </q-item-main>
+              </q-item>
             </div>
-            <div class="q-mt-md text-text1">
-              Actions
-              <span class="text-text2">({{ msig.trx.actions.length }})</span>
+
+            <div
+              class="row justify-between q-mt-md q-mb-sm text-text1 q-caption"
+            >
+              <span>Description</span>
+              <div>
+                <span>trx: </span>
+                <a
+                  target="_blank"
+                  :href="
+                    $configFile.get('explorer') + `/transaction/${msig.trxid}`
+                  "
+                  class="q-body-1"
+                  >{{ msig.trxid.substring(0, 8) }}</a
+                >
+              </div>
             </div>
-            <div class="q-mb-md">
-              {{ msig.trx.actions.map(a => a.name).join(", ") }}
-            </div>
-            <div style="text-align:right">
-              <span>trx: </span>
-              <a
-                target="_blank"
-                :href="
-                  $configFile.get('explorer') + `/transaction/${msig.trxid}`
-                "
-                class="q-body-1"
-                >{{ msig.trxid.substring(0, 8) }}</a
-              >
-            </div>
-            <div class="bg-dark q-mb-md">
+            <MarkdownViewer
+              :tags="[
+                'h1',
+                'h2',
+                'h3',
+                'italic',
+                'bold',
+                'underline',
+                'strikethrough',
+                'subscript',
+                'superscript',
+                'anchor',
+                'orderedlist',
+                'unorderedlist'
+              ]"
+              :dark="getIsDark"
+              :text="msig.description"
+              class="bg-bg2"
+            />
+
+            <div class="bg-dark q-my-md">
               <Actionparser
                 @seenAllActions="disable_approve = false"
                 :actions="msig.trx.actions"
@@ -450,13 +491,15 @@
 <script>
 import Actionparser from "components/ui/action-parser";
 import profilePic from "components/ui/profile-pic";
+import MarkdownViewer from "components/ui/markdown-viewer";
 
 import { mapGetters } from "vuex";
 export default {
   name: "Msigproposal",
   components: {
     Actionparser,
-    profilePic
+    profilePic,
+    MarkdownViewer
   },
 
   props: {
@@ -485,7 +528,8 @@ export default {
       getMsigIsSeenCache: "user/getMsigIsSeenCache",
       getIsCustodian: "user/getIsCustodian",
       getSettingByName: "user/getSettingByName",
-      getAuth: "user/getAuth"
+      getAuth: "user/getAuth",
+      getIsDark: "ui/getIsDark"
     }),
 
     read_only: function() {
