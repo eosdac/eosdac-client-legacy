@@ -184,8 +184,10 @@
         </div>
 
         <div class="row justify-end q-mt-md">
+          {{ verifyAndGetRequestedPay }} {{ verifyAndGetStakeAmount }}
+          {{ checkAlreadyStaked }} {{ allowRegister }}
           <q-btn
-            :disabled="!verifyAndGetRequestedPay || !verifyAndGetStakeAmount"
+            :disabled="!allowRegister"
             class="animate-pop"
             color="primary"
             @click="registerAsCandidtate"
@@ -320,6 +322,25 @@ export default {
         console.log("stake out of range");
         return false;
       }
+    },
+    checkAlreadyStaked() {
+      if (
+        this.getIsCandidate &&
+        this.assetToNumber(this.getIsCandidate.locked_tokens)
+      ) {
+        return (
+          this.assetToNumber(this.getIsCandidate.locked_tokens) >=
+          this.assetToNumber(this.getCustodianConfig.lockupasset)
+        );
+      } else {
+        return false;
+      }
+    },
+    allowRegister() {
+      return (
+        this.verifyAndGetRequestedPay &&
+        (this.verifyAndGetStakeAmount || this.checkAlreadyStaked)
+      );
     }
   },
 
@@ -355,7 +376,9 @@ export default {
 
       let actions = [registeraction];
 
-      actions.unshift(stakeaction);
+      if (!this.checkAlreadyStaked) {
+        actions.unshift(stakeaction);
+      }
 
       let result = await this.$store.dispatch("user/transact", {
         actions: actions
