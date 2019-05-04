@@ -12,6 +12,7 @@
   "constitution": {
     "direct_link": "Direct Link",
     "hash": "Hash",
+    "not_signed_message": "You aren't a member of {dacname} until you have agreed to the constitution",
     "signed_message": "You have signed the constitution!",
     "switch_contrast": "Switch Contrast"
   },
