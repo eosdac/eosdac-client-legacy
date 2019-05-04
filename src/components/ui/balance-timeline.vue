@@ -113,7 +113,7 @@ export default {
           {
             label: `${query.account} ${query.symbol}`,
             data: res.results.map(p => p.balance.split(" ")[0]),
-
+            lineTension: 0,
             backgroundColor: this.getGradient(),
             borderColor: colors.getBrand("primary"),
             pointBackgroundColor: "none",
