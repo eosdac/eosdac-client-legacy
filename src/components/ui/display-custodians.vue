@@ -2,8 +2,9 @@
   <div class="row justify-between " v-if="custodians.length">
     <div
       class="column items-center q-pa-sm animate-fade"
-      v-for="custodian in custodians"
-      :key="custodian.cust_name"
+      v-for="(custodian, i) in custodians"
+      :key="`cust_${i}`"
+      @mouseover="showing = true"
     >
       <profile-pic
         :accountname="custodian.cust_name"
@@ -16,6 +17,10 @@
       >
         <div class="q-ma-none">{{ custodian.cust_name }}</div>
       </router-link>
+      <q-tooltip v-model="custodian.tooltip" class="bg-bg2">
+        <div>Votes: {{ custodian.total_votes / 10000 }}</div>
+        <div>Pay: {{ custodian.requestedpay }}</div>
+      </q-tooltip>
     </div>
   </div>
 </template>
@@ -36,7 +41,8 @@ export default {
 
   data() {
     return {
-      custodians: []
+      custodians: [],
+      showing: false
     };
   },
 
@@ -54,7 +60,10 @@ export default {
       } else {
         custodians = this.getCustodians;
       }
-      this.custodians = custodians;
+      this.custodians = custodians.map(c => {
+        c.tooltip = false;
+        return c;
+      });
     }
   },
 
