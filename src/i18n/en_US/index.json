@@ -13,8 +13,10 @@
     "direct_link": "Direct Link",
     "hash": "Hash",
     "not_signed_message": "You aren't a member of {dacname} until you have agreed to the constitution",
+    "sign": "sign",
     "signed_message": "You have signed the constitution!",
-    "switch_contrast": "Switch Contrast"
+    "switch_contrast": "Switch Contrast",
+    "unsign": "unsign"
   },
   "contract_errors": {
     "BURN_INVALID_QTY_": "invalid quantity",

@@ -97,7 +97,7 @@
                 class="on-right"
                 @click="signConstitution()"
                 color="primary"
-                label="Sign"
+                :label="$t('constitution.sign')"
               />
               <div
                 v-if="!needSignature"
@@ -110,7 +110,7 @@
                 class="on-right"
                 @click="unRegister()"
                 color="primary"
-                label="unsign"
+                :label="$t('constitution.unsign')"
               />
             </div>
           </div>
