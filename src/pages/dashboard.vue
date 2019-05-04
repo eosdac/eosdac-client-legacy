@@ -31,18 +31,17 @@
                 <div class="row justify-start items-center">
                   <span class="q-headline text-text1 q-mr-sm">My Votes</span>
                   <q-btn
-                    v-if="getDacVotes"
                     class="animate-pop"
                     dense
                     size="sm"
                     color="bg2"
                     to="/vote-custodians"
-                    label="change votes"
+                    :label="getDacVotes ? 'change votes' : 'vote'"
                   />
                 </div>
               </q-item-tile>
               <q-item-tile>
-                <div class="row">
+                <div v-if="getDacVotes" class="row">
                   <div
                     v-for="(vote, i) in getDacVotes"
                     class="column"
@@ -55,6 +54,9 @@
                     />
                   </div>
                 </div>
+                <div v-else class="text-text2">
+                  You have not voted yet.
+                </div>
               </q-item-tile>
             </q-item-main>
           </q-item>
@@ -62,7 +64,7 @@
       </div>
       <!-- box profile -->
 
-      <div class="col-xs-12 col-md-6 col-xl-4">
+      <div v-if="getIsCustodian" class="col-xs-12 col-md-6 col-xl-4">
         <div
           class="bg-bg1 round-borders shadow-5 q-pa-md bg-logo dashboard-box full-height"
         >
@@ -173,7 +175,8 @@ export default {
       getDacVotes: "user/getDacVotes",
       getLocal_storage_version: "global/getLocal_storage_version",
       getDapp_version: "global/getDapp_version",
-      getActiveNetworkName: "global/getActiveNetworkName"
+      getActiveNetworkName: "global/getActiveNetworkName",
+      getIsCustodian: "user/getIsCustodian"
     })
   },
   data() {
