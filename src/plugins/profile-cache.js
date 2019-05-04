@@ -58,9 +58,15 @@ class ProfileCache {
 
   async fetchProfiles(accountnames) {
     let url = this.config.get("memberclientstateapi").replace(/\/+$/, "");
-
-    return axios
-      .get(`${url}/profile?account=${accountnames.join(",")}`)
+    // let dacname = "eosdac"; //this.config.get("dacname");
+    let params = { account: accountnames.join(",") };
+    const header = { "X-DAC-Name": this.config.get("dacname").toLowerCase() };
+    return axios({
+      method: "get",
+      url: `${url}/profile`,
+      params: params,
+      headers: header
+    })
       .then(r => {
         console.log("fetched new profiles", r.data.results.length);
         let p = r.data.results;
@@ -68,7 +74,7 @@ class ProfileCache {
         return p;
       })
       .catch(e => {
-        console.log("could not load profile file");
+        console.log("error during api request.", e);
         return false;
       });
   }

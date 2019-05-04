@@ -120,8 +120,16 @@ export async function fetchWpConfig({ commit, dispatch, state }) {
 
 export async function fetchWorkerProposals({}, payload = {}) {
   let url = this._vm.$configFile.get("memberclientstateapi");
-  return this._vm.$axios
-    .get(url + "/proposals", { params: payload })
+  const header = {
+    "X-DAC-Name": this._vm.$configFile.get("dacname").toLowerCase()
+  };
+  return this._vm
+    .$axios({
+      method: "get",
+      url: `${url}/proposals`,
+      params: payload,
+      headers: header
+    })
     .then(r => {
       // console.log(r.data)
       return r.data;
@@ -135,8 +143,16 @@ export async function fetchWorkerProposals({}, payload = {}) {
 export async function fetchMsigProposals({}, payload = {}) {
   // {status: 1, limit:0, skip: 1}
   let url = this._vm.$configFile.get("memberclientstateapi");
-  return this._vm.$axios
-    .get(url + "/msig_proposals", { params: payload })
+  const header = {
+    "X-DAC-Name": this._vm.$configFile.get("dacname").toLowerCase()
+  };
+  return this._vm
+    .$axios({
+      method: "get",
+      url: `${url}/msig_proposals`,
+      params: payload,
+      headers: header
+    })
     .then(r => {
       // console.log(r.data)
       return r.data;
@@ -150,8 +166,16 @@ export async function fetchMsigProposals({}, payload = {}) {
 export async function fetchTokenTimeLine({}, payload = {}) {
   // {account: 'piecesnbitss', contract:'kasdactokens', symbol:'KASDAC', start_block:10000000, end_block:17000000}
   let url = this._vm.$configFile.get("memberclientstateapi");
-  return this._vm.$axios
-    .get(url + "/balance_timeline", { params: payload })
+  const header = {
+    "X-DAC-Name": this._vm.$configFile.get("dacname").toLowerCase()
+  };
+  return this._vm
+    .$axios({
+      method: "get",
+      url: `${url}/balance_timeline`,
+      params: payload,
+      headers: header
+    })
     .then(r => {
       // console.log(r.data)
       return r.data;
