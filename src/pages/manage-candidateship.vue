@@ -184,8 +184,6 @@
         </div>
 
         <div class="row justify-end q-mt-md">
-          {{ verifyAndGetRequestedPay }} {{ verifyAndGetStakeAmount }}
-          {{ checkAlreadyStaked }} {{ allowRegister }}
           <q-btn
             :disabled="!allowRegister"
             class="animate-pop"
