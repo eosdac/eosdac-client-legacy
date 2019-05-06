@@ -46,11 +46,14 @@ export default {
         this.getCustodianConfig.periodlength &&
         this.getCustodianState.lastperiodtime
       ) {
+        // let lastperiodtime = this.getCustodianState.lastperiodtime;
         let lastperiodtime = this.getCustodianState.lastperiodtime;
         if (Number.isInteger(lastperiodtime)) {
-          lastperiodtime = lastperiodtime * 1000;
+          lastperiodtime = new Date(lastperiodtime * 1000);
+        } else {
+          lastperiodtime = new Date(lastperiodtime);
         }
-        let end = addToDate(new Date(lastperiodtime), {
+        let end = addToDate(lastperiodtime, {
           seconds: this.getCustodianConfig.periodlength
         });
         return date.formatDate(end, "YYYY-MM-DD HH:mm:ss");
