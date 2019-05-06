@@ -125,8 +125,7 @@
         <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height bg-logo">
           <period-timer />
           <div class="text-text2 q-mt-md">
-            A new custodian board will be elected every 7 days when the timer
-            expires.
+            A new custodian board will be elected when the timer expires.
           </div>
         </div>
       </div>
