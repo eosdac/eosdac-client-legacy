@@ -97,8 +97,4 @@ export default {
 
 <style lang="stylus">
 @import '~variables';
-
-.modal-content {
-  // background-color: var(--q-color-warning);
-}
 </style>

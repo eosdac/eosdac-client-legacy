@@ -221,15 +221,38 @@
               </div>
             </div>
             <div class="col-xs-12">
-              <div class="full-height">
-                <q-input
+              <div class="full-height text-text1">
+                <div class="q-mb-xs  q-caption">
+                  {{ $t("msig_creator.summary") }}
+                </div>
+                <MarkdownViewer
+                  :tags="[
+                    'h1',
+                    'h2',
+                    'h3',
+                    'italic',
+                    'bold',
+                    'underline',
+                    'strikethrough',
+                    'subscript',
+                    'superscript',
+                    'anchor',
+                    'orderedlist',
+                    'unorderedlist'
+                  ]"
+                  :edit="true"
+                  :dark="getIsDark"
+                  :text="msig_description"
+                  v-on:update="updateText"
+                />
+                <!-- <q-input
                   type="textarea"
                   :max-height="200"
                   :dark="getIsDark"
                   v-model="msig_description"
                   :stack-label="$t('msig_creator.summary')"
                   :placeholder="$t('msig_creator.sum_placeholder')"
-                />
+                /> -->
               </div>
             </div>
           </div>
@@ -447,6 +470,7 @@ import actionMaker from "components/controls/action-maker";
 import displayAction from "components/ui/display-action";
 import { date } from "quasar";
 import draggable from "vuedraggable";
+import MarkdownViewer from "components/ui/markdown-viewer";
 const today = new Date();
 const { addToDate } = date;
 const msigTrx_template = {
@@ -468,7 +492,8 @@ export default {
     debugData,
     actionMaker,
     displayAction,
-    draggable
+    draggable,
+    MarkdownViewer
   },
   data() {
     return {
@@ -496,7 +521,9 @@ export default {
       getAccountName: "user/getAccountName",
       getCustodians: "dac/getCustodians",
       getIsDark: "ui/getIsDark",
-      getAuth: "user/getAuth"
+      getAuth: "user/getAuth",
+      getCandidates: "dac/getCandidates",
+      getCustodianConfig: "dac/getCustodianConfig"
     }),
     parseNumberToAsset(number, symbol) {
       return `${number.toFixed(4)} ${symbol}`;
@@ -529,6 +556,9 @@ export default {
   },
 
   methods: {
+    updateText(val) {
+      this.msig_description = val;
+    },
     handleSelection(index) {
       this.allow_advanced = false;
       this.controlled_accounts = this.controlled_accounts.map(ca => {
@@ -586,11 +616,11 @@ export default {
     },
 
     getRequested() {
-      let requested = this.getCustodians.map(c => {
-        let req = { actor: c.cust_name, permission: "active" };
-        return req;
+      let number_requested = this.getCustodianConfig.numelected * 2;
+      let requested = this.getCandidates.slice(0, number_requested).map(c => {
+        return { actor: c.candidate_name, permission: "active" };
       });
-      console.log(requested);
+      console.log("requested signatures", requested);
       return requested;
     },
 

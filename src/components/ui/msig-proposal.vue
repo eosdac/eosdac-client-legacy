@@ -153,8 +153,25 @@
               </div>
 
               <div class="q-mb-xs">
-                <div>Description:</div>
-                <div class="text-text2">{{ msig.description }}</div>
+                <div>Description</div>
+                <MarkdownViewer
+                  :tags="[
+                    'h1',
+                    'h2',
+                    'h3',
+                    'italic',
+                    'bold',
+                    'underline',
+                    'strikethrough',
+                    'subscript',
+                    'superscript',
+                    'anchor',
+                    'orderedlist',
+                    'unorderedlist'
+                  ]"
+                  :dark="getIsDark"
+                  :text="msig.description"
+                />
               </div>
               <div>
                 <div>
@@ -255,7 +272,6 @@
           </q-item-side>
           <q-item-main>
             <div class="q-ml-lg">
-              <!-- <div class="q-title q-mb-xs"><span class="text-text1">{{msig.proposal_name}}:</span> {{msig.title}}</div> -->
               <div class="q-body-3 q-mb-xs text-text1 capitalize">
                 {{ msig.title }}
               </div>
@@ -266,10 +282,10 @@
                     {{ msig.proposer }}
                   </router-link>
                 </div>
-                <div>
+                <div class="q-mt-xs">
                   <span class="text-text2"
                     >Submitted on:&nbsp;<span class="text-text1">{{
-                      new Date(msig.block_timestamp).toDateString()
+                      new Date(msig.block_timestamp).toUTCString()
                     }}</span></span
                   >
                 </div>
@@ -299,31 +315,66 @@
 
         <div class="q-px-md q-pb-md">
           <div style="border-top: 1px solid grey">
-            <div class="q-mt-md text-text1">Description</div>
-            <div class=" q-mb-md">{{ msig.description }}</div>
-            <div class="q-mt-md text-text1">Expiration</div>
-            <div class=" q-mb-md">
-              {{ new Date(msig.trx.expiration).toString() }}
+            <div class="row q-mt-md">
+              <q-item class="no-padding">
+                <q-item-main>
+                  <q-item-tile class="text-text1 q-caption" label
+                    >Expiration</q-item-tile
+                  >
+                  <q-item-tile class="text-text1" sublabel>{{
+                    new Date(msig.trx.expiration).toUTCString()
+                  }}</q-item-tile>
+                </q-item-main>
+              </q-item>
+              <q-item class="no-padding q-ml-md">
+                <q-item-main>
+                  <q-item-tile class="text-text1 q-caption" label
+                    >Proposal ID</q-item-tile
+                  >
+                  <q-item-tile class="text-text1" sublabel>{{
+                    msig.proposal_name
+                  }}</q-item-tile>
+                </q-item-main>
+              </q-item>
             </div>
-            <div class="q-mt-md text-text1">
-              Actions
-              <span class="text-text2">({{ msig.trx.actions.length }})</span>
+
+            <div
+              class="row justify-between q-mt-md q-mb-sm text-text1 q-caption"
+            >
+              <span>Description</span>
+              <div>
+                <span>trx: </span>
+                <a
+                  target="_blank"
+                  :href="
+                    $configFile.get('explorer') + `/transaction/${msig.trxid}`
+                  "
+                  class="q-body-1"
+                  >{{ msig.trxid.substring(0, 8) }}</a
+                >
+              </div>
             </div>
-            <div class="q-mb-md">
-              {{ msig.trx.actions.map(a => a.name).join(", ") }}
-            </div>
-            <div style="text-align:right">
-              <span>trx: </span>
-              <a
-                target="_blank"
-                :href="
-                  $configFile.get('explorer') + `/transaction/${msig.trxid}`
-                "
-                class="q-body-1"
-                >{{ msig.trxid.substring(0, 8) }}</a
-              >
-            </div>
-            <div class="bg-dark q-mb-md">
+            <MarkdownViewer
+              :tags="[
+                'h1',
+                'h2',
+                'h3',
+                'italic',
+                'bold',
+                'underline',
+                'strikethrough',
+                'subscript',
+                'superscript',
+                'anchor',
+                'orderedlist',
+                'unorderedlist'
+              ]"
+              :dark="getIsDark"
+              :text="msig.description"
+              class="bg-bg2"
+            />
+
+            <div class="bg-dark q-my-md">
               <Actionparser
                 @seenAllActions="disable_approve = false"
                 :actions="msig.trx.actions"
@@ -406,7 +457,7 @@
               <profile-pic
                 :accountname="c.actor"
                 :scale="0.5"
-                :show_role="false"
+                :show_role="true"
               />
               <router-link class=" a2" :to="{ path: '/profile/' + c.actor }">
                 <div class="q-ma-none" style="min-width:100px; overflow:hidden">
@@ -430,7 +481,7 @@
               <profile-pic
                 :accountname="c.actor"
                 :scale="0.5"
-                :show_role="false"
+                :show_role="true"
               />
               <router-link class=" a2" :to="{ path: '/profile/' + c.actor }">
                 <div class="q-ma-none" style="min-width:100px; overflow:hidden">
@@ -450,13 +501,15 @@
 <script>
 import Actionparser from "components/ui/action-parser";
 import profilePic from "components/ui/profile-pic";
+import MarkdownViewer from "components/ui/markdown-viewer";
 
 import { mapGetters } from "vuex";
 export default {
   name: "Msigproposal",
   components: {
     Actionparser,
-    profilePic
+    profilePic,
+    MarkdownViewer
   },
 
   props: {
@@ -485,17 +538,29 @@ export default {
       getMsigIsSeenCache: "user/getMsigIsSeenCache",
       getIsCustodian: "user/getIsCustodian",
       getSettingByName: "user/getSettingByName",
-      getAuth: "user/getAuth"
+      getAuth: "user/getAuth",
+      getIsDark: "ui/getIsDark",
+      getCustodians: "dac/getCustodians"
     }),
 
     read_only: function() {
       return !this.getIsCustodian;
     },
+    getCustodianApprovals() {
+      let cust_names = this.getCustodians.map(c => c.cust_name);
+      let custodian_approvals = this.provided_approvals.filter(pa =>
+        cust_names.includes(pa.actor)
+      );
+      return custodian_approvals;
+    },
 
     isExecutable: function() {
       if (this.provided_approvals) {
-        return this.provided_approvals.length >= this.msig.threshold;
-        // return this.provided_approvals.length > 0;
+        let cust_names = this.getCustodians.map(c => c.cust_name);
+        let custodian_approvals = this.provided_approvals.filter(pa =>
+          cust_names.includes(pa.actor)
+        );
+        return custodian_approvals.length >= this.msig.threshold;
       } else {
         return false;
       }
@@ -564,15 +629,21 @@ export default {
         ...this.msig.requested_approvals.map(a => a.actor)
       ]);
 
-      this.provided_approvals = this.msig.provided_approvals.map(pa => {
-        pa.avatar = avatars.find(p => p.account === pa.actor);
-        return pa;
-      });
+      // let cust_names = this.getCustodians.map(c => c.cust_name);
 
-      this.requested_approvals = this.msig.requested_approvals.map(ra => {
-        ra.avatar = avatars.find(p => p.account === ra.actor);
-        return ra;
-      });
+      this.provided_approvals = this.msig.provided_approvals
+        // .filter(ra => cust_names.includes(ra.actor))
+        .map(pa => {
+          pa.avatar = avatars.find(p => p.account === pa.actor);
+          return pa;
+        });
+
+      this.requested_approvals = this.msig.requested_approvals
+        // .filter(ra => cust_names.includes(ra.actor))
+        .map(ra => {
+          ra.avatar = avatars.find(p => p.account === ra.actor);
+          return ra;
+        });
     },
 
     //approve a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}

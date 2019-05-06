@@ -15,6 +15,10 @@ export function setCustodians(state, payload) {
   state.custodians = payload;
 }
 
+export function setDacAdmins(state, payload) {
+  state.dacAdmins = payload;
+}
+
 export function setCustodianConfig(state, payload) {
   state.custodianConfig = payload;
 }

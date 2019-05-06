@@ -85,11 +85,19 @@
 
             <!-- <q-item-side left>dd</q-item-side> -->
             <div class="row justify-end items-center">
+              <div v-if="needSignature" class="text-negative q-caption q-my-sm">
+                {{
+                  $t("constitution.not_signed_message", {
+                    dacname: $configFile.get("dacname")
+                  })
+                }}
+              </div>
               <q-btn
                 v-if="needSignature"
+                class="on-right"
                 @click="signConstitution()"
                 color="primary"
-                label="register"
+                :label="$t('constitution.sign')"
               />
               <div
                 v-if="!needSignature"
@@ -102,7 +110,7 @@
                 class="on-right"
                 @click="unRegister()"
                 color="primary"
-                label="unregister"
+                :label="$t('constitution.unsign')"
               />
             </div>
           </div>
