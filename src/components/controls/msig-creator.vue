@@ -522,7 +522,8 @@ export default {
       getCustodians: "dac/getCustodians",
       getIsDark: "ui/getIsDark",
       getAuth: "user/getAuth",
-      getCandidates: "dac/getCandidates"
+      getCandidates: "dac/getCandidates",
+      getCustodianConfig: "dac/getCustodianConfig"
     }),
     parseNumberToAsset(number, symbol) {
       return `${number.toFixed(4)} ${symbol}`;
@@ -615,7 +616,7 @@ export default {
     },
 
     getRequested() {
-      let number_requested = 24;
+      let number_requested = this.getCustodianConfig.numelected * 2;
       let requested = this.getCandidates.slice(0, number_requested).map(c => {
         return { actor: c.candidate_name, permission: "active" };
       });
