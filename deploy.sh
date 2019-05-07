@@ -31,6 +31,8 @@ if [[ "$2" == "true" ]]
     LOCAL_DEV=true
 fi
 
+rm -f deploy-complete
+
 git checkout .
 git checkout master
 if ! git pull
@@ -59,8 +61,20 @@ else
      exit 1
   fi
 
-  rm dist/deploy/* -rf; cp -r dist/spa-mat/* dist/deploy/;
+  mv dist/deploy dist/deploy-old && mv dist/spa-mat dist/deploy && touch deploy-complete
 
-  echo "Deploy Complete."
-  echo "Please test and verify using the correct domain such as members-dev.eosdac.io, members-staging.eosdac.io, or members.eosdac.io"
+  if [ -f deploy-complete ]; then
+    rm -rf dist/deploy-old
+    echo "Deploy Complete."
+    echo "Please test and verify using the correct domain such as members-dev.eosdac.io, members-staging.eosdac.io, or members.eosdac.io"
+  else
+     echo "======= ERROR: ======="
+     echo "Deploy folder move failed."
+     echo "NOT DEPLOYED"
+     echo "======================"
+     rm -rf dist/deploy && mv dist/deploy-old dist/deploy
+     exit 1
+  fi
+
+
 fi
