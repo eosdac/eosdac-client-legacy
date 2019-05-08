@@ -140,10 +140,7 @@ import debugData from "components/ui/debug-data";
 import MarkdownViewer from "components/ui/markdown-viewer";
 import helpBtn from "components/controls/help-btn";
 import { required, minValue } from "vuelidate/lib/validators";
-const isEosName = accountname => {
-  const re = /^[a-z1-5.]{1,12}$/;
-  return re.test(accountname);
-};
+import { isEosName } from "../../modules/validators.js";
 
 export default {
   name: "newWorkerProposal",

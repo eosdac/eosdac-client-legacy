@@ -1,8 +1,9 @@
 <template>
-  <div class="column gutter-sm">
-    <div class="col-xs-12 col-lg-4">
+  <div class="row gutter-sm">
+    <div class="col-xs-12 col-lg-6">
       <div class="bg-bg1 round-borders shadow-5 q-pa-md">
         <q-field
+          :error="$v.from.$error"
           error-label="Please enter a valid pay amount"
           icon="mdi-account-outline"
         >
@@ -42,10 +43,10 @@
       </div>
     </div>
 
-    <div class="col-xs-12 col-lg-4">
+    <div class="col-xs-12 col-lg-6">
       <div class="bg-bg1 round-borders shadow-5 q-pa-md">
         <q-field
-          :error="true"
+          :error="$v.to.$error"
           error-label="Please enter a valid accountname"
           icon="mdi-account-outline"
         >
@@ -54,15 +55,17 @@
       </div>
     </div>
 
-    <div class="col-xs-12 col-lg-2">
+    <div class="col-xs-12 col-lg-6">
       <div class="bg-bg1 round-borders shadow-5 q-pa-md">
         <q-field
+          :error="$v.quantity.$error"
           error-label="Please enter a valid pay amount"
           icon="icon-ui-19"
         >
           <div class="row no-wrap items-end">
             <q-input
               class="full-width"
+              type="number"
               stack-label="QUANTITY"
               v-model="quantity"
               :dark="getIsDark"
@@ -73,10 +76,11 @@
       </div>
     </div>
 
-    <div class="col-xs-12 col-lg-2">
+    <div class="col-xs-12 col-lg-6">
       <div class="bg-bg1 round-borders shadow-5 q-pa-md">
         <q-field
-          error-label="Please enter a valid pay amount"
+          :error="$v.memo.$error"
+          error-label="Memo can't be longer then 255 chars."
           icon="mdi-android-messages"
         >
           <q-input stack-label="MEMO" v-model="memo" :dark="getIsDark" />
@@ -84,9 +88,9 @@
       </div>
     </div>
 
-    <div class="col-xs-12 col-lg-2">
+    <div class="col-xs-12">
       <div class="row justify-end">
-        <q-btn color="primary" label="send" />
+        <q-btn color="primary" label="send" @click="$v.$touch()" />
       </div>
     </div>
   </div>
@@ -96,6 +100,9 @@
 import balanceTimeline from "components/ui/balance-timeline";
 import xspan from "components/ui/xspan";
 import { mapGetters } from "vuex";
+
+import { required, maxLength } from "vuelidate/lib/validators";
+import { isEosName } from "../../modules/validators.js";
 export default {
   name: "msigTransfer",
   components: {
@@ -105,8 +112,8 @@ export default {
   data() {
     return {
       from: "eosdacserval",
-      to: "piecesnbitss",
-      quantity: "1.0000",
+      to: "",
+      quantity: "",
       memo: "this is the memo",
 
       from_balance: null,
@@ -135,6 +142,21 @@ export default {
   },
   mounted() {
     console.log("xxxxxxxxxxxxxxx", this.$refs.balance.$refs.linechart);
+  },
+  validations: {
+    // wp_data: {
+    //   arbitrator: { required, isEosName },
+    //   title: { required },
+    //   pay_amount: {
+    //     required,
+    //     minValue: minValue(0)
+    //   },
+    //   category: { required }
+    // }
+    from: { required, isEosName },
+    to: { required, isEosName },
+    quantity: { required },
+    memo: { maxLength: maxLength(255) }
   }
 };
 </script>
