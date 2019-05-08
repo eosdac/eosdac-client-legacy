@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="capitalize q-title">
+    <div v-show="show_balance" class="capitalize q-title">
       {{ account }} <span class="text-text2">({{ getLatestBalance }})</span>
     </div>
     <div v-if="description != ''" class="text-text2 q-my-md">
@@ -47,6 +47,10 @@ export default {
     description: {
       type: String,
       default: ""
+    },
+    show_balance: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -88,11 +92,27 @@ export default {
     getLatestBalance() {
       if (this.chartData) {
         let vals = this.chartData.datasets[0].data;
-        return `${vals[vals.length - 1]} ${this.symbol}`;
+        let balance = `${vals[vals.length - 1]} ${this.symbol}`;
+        this.$emit("onbalance", balance);
+        return balance;
       }
     }
   },
   methods: {
+    async init() {
+      let { head_block_num, head_block_time } = await this.$store.dispatch(
+        "global/testEndpoint"
+      );
+      this.refblock = head_block_num;
+      this.refdate = new Date(head_block_time);
+      this.getTokenTimeLine({
+        account: this.account,
+        contract: this.contract,
+        symbol: this.symbol,
+        start_block: 0,
+        end_block: this.end_block
+      });
+    },
     getGradient() {
       let { r, g, b } = colors.hexToRgb(colors.getBrand("primary"));
       // console.log(r,g,b)
@@ -132,18 +152,24 @@ export default {
     }
   },
   async mounted() {
-    let { head_block_num, head_block_time } = await this.$store.dispatch(
-      "global/testEndpoint"
-    );
-    this.refblock = head_block_num;
-    this.refdate = new Date(head_block_time);
-    this.getTokenTimeLine({
-      account: this.account,
-      contract: this.contract,
-      symbol: this.symbol,
-      start_block: 0,
-      end_block: this.end_block
-    });
+    this.init();
+    // let { head_block_num, head_block_time } = await this.$store.dispatch(
+    //   "global/testEndpoint"
+    // );
+    // this.refblock = head_block_num;
+    // this.refdate = new Date(head_block_time);
+    // this.getTokenTimeLine({
+    //   account: this.account,
+    //   contract: this.contract,
+    //   symbol: this.symbol,
+    //   start_block: 0,
+    //   end_block: this.end_block
+    // });
+  },
+  watch: {
+    account: function() {
+      this.init();
+    }
   }
   //
 };

@@ -14,8 +14,13 @@ export default {
       default: null
     }
   },
+  methods: {
+    render() {
+      this.renderChart(this.chartData, this.options);
+    }
+  },
   mounted() {
-    this.renderChart(this.chartData, this.options);
+    this.render();
   }
 };
 </script>
