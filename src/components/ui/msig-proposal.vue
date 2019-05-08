@@ -89,7 +89,7 @@
 
       <!-- mobile details modal -->
       <q-modal maximized v-model="mobile_details_modal">
-        <div class="text-text1 bg-bg2 full-height">
+        <div class="text-text1 bg-bg2">
           <!-- header -->
           <div
             style="height:50px"

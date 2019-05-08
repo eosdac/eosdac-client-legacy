@@ -46,7 +46,7 @@ export default {
         this.getCustodianConfig.periodlength &&
         this.getCustodianState.lastperiodtime
       ) {
-        // let lastperiodtime = "2019-05-06T18:34:46";
+        // let lastperiodtime = "2019-05-06T18:42:26";
         let lastperiodtime = this.getCustodianState.lastperiodtime;
         if (Number.isInteger(lastperiodtime)) {
           lastperiodtime = new Date(lastperiodtime * 1000);
