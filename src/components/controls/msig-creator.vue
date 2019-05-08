@@ -152,6 +152,7 @@
           </div>
           <div v-else class="text-text1">
             <action-maker
+              :msigmode="true"
               @actiondata="addAction"
               :prefill="{ from: getAccountName }"
             />

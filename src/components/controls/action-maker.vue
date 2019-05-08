@@ -68,7 +68,16 @@
             this.name || custom_mode.action_name
           }}</span>
         </div>
-        <auth-display v-model="authorization" :auth="getAuth" />
+        <auth-display
+          v-if="msigmode"
+          v-model="authorization"
+          :auth="getAuth"
+          :defaultAuth="{
+            actor: custom_mode.account,
+            permission: 'active'
+          }"
+        />
+        <auth-display v-else v-model="authorization" :auth="getAuth" />
       </div>
       <div class="row gutter-md">
         <div
@@ -244,6 +253,10 @@ export default {
       default: function() {
         return [];
       }
+    },
+    msigmode: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
