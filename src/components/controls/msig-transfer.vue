@@ -91,7 +91,7 @@
 
     <div class="col-xs-12">
       <div class="row justify-end">
-        <q-btn color="primary" label="send" @click="$v.$touch()" />
+        <q-btn color="primary" label="send" @click="proposeMsig" />
       </div>
     </div>
   </div>
@@ -119,21 +119,23 @@ export default {
 
       from_balance: null,
       from_permissions: null,
-      symbol: "EOS"
+      symbol: "EOS",
+      contract: "eosio.token"
     };
   },
   computed: {
     ...mapGetters({
       getIsDark: "ui/getIsDark",
       getAccountName: "user/getAccountName",
-      getAccount: "user/getAccount"
+      getAccount: "user/getAccount",
+      getEosApi: "global/getEosApi"
     }),
     getPermission: function() {
       if (!this.from_permissions) return null;
       const hasXfer = !!this.from_permissions.find(
         fp => fp.perm_name == "xfer"
       );
-      return hasXfer ? `${this.from}@xfer` : `${this.from}@active`;
+      return hasXfer ? `xfer` : `active`;
     }
   },
   methods: {
@@ -154,6 +156,29 @@ export default {
       this.from_permissions = (await this.$store.dispatch("dac/fetchAccount", {
         accountname: this.from
       })).permissions;
+    },
+    async proposeMsig() {
+      let action = {
+        account: this.contract,
+        name: "transfer",
+        data: {
+          from: this.from,
+          to: this.to,
+          quantity: this.quantity + ` ${this.symbol}`,
+          memo: this.memo
+        },
+        authorization: [
+          {
+            actor: this.from,
+            permission: this.getPermission
+          }
+        ]
+      };
+
+      let res = await this.$store.dispatch("user/proposeMsig", {
+        actions: [action]
+      });
+      console.log(res);
     }
   },
   async mounted() {

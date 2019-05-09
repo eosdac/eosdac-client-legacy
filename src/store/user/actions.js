@@ -128,6 +128,24 @@ export async function fetchCatDelegations(
   return res;
 }
 
+export async function proposeMsig(
+  { state, rootState, commit, dispatch, getters },
+  payload
+) {
+  //WIP
+  const api = await dispatch("global/getEosApi", false, { root: true });
+  //serialize action data
+  for (let i = 0; i < payload.actions.length; i++) {
+    let action = payload.actions[i];
+    let hexdata = await api.serializeActionData(action);
+    action.data = hexdata;
+  }
+  console.log(payload.actions);
+  //make msig trx object
+
+  //transact
+}
+
 export async function transact(
   { state, rootState, commit, dispatch, getters },
   payload
