@@ -54,6 +54,10 @@ export default {
       type: Boolean,
       default: true
     },
+    legend: {
+      type: Boolean,
+      default: true
+    },
     responsive: {
       type: Boolean,
       default: true
@@ -75,7 +79,9 @@ export default {
       chartOptions: {
         responsive: this.responsive,
         maintainAspectRatio: false,
-
+        legend: {
+          display: this.legend
+        },
         scales: {
           xAxes: [
             {

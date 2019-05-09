@@ -1,6 +1,13 @@
 <template>
   <div>
-    <q-btn round flat color="info" icon="mdi-help-circle" class="animate-pop">
+    <q-btn
+      round
+      flat
+      :size="size"
+      :color="color"
+      icon="mdi-help-circle"
+      class="animate-pop"
+    >
       <q-popover class="bg-bg1">
         <div class="text-text1 q-pa-sm">
           <div class="q-mb-sm text-text2" v-if="title">{{ title }}</div>
@@ -22,6 +29,14 @@ export default {
     title: {
       type: String,
       default: ""
+    },
+    color: {
+      type: String,
+      default: "info"
+    },
+    size: {
+      type: String,
+      default: "md"
     }
   },
   data() {

@@ -24,7 +24,7 @@
             <q-chip color="primary" small class="q-mr-sm">
               <xspan :value="from_balance" />
             </q-chip>
-            <xspan :value="getPermission" />
+            <!-- <xspan :value="getPermission" /> -->
             <q-item-main label="" />
             <q-item-side right>
               <q-icon name="mdi-chart-line" color="text1" size="24px" />
@@ -39,6 +39,7 @@
               :contract="this.$configFile.get('systemtokencontract')"
               :symbol="this.$configFile.get('systemtokensymbol')"
               :show_balance="false"
+              :legend="false"
               @onbalance="from_balance = $event"
             />
           </div>
@@ -74,6 +75,7 @@
             <q-input
               class="full-width"
               type="number"
+              :decimals="decimals"
               stack-label="QUANTITY"
               v-model="quantity"
               :dark="getIsDark"
@@ -102,11 +104,39 @@
         <q-btn color="primary" label="send" @click="proposeMsig" />
       </div>
     </div>
+
+    <div class="col-xs-12 col-lg-3">
+      <div class="bg-bg1 round-borders shadow-5 overflow-hidden">
+        <div class="bg-primary q-pa-sm row justify-between items-center">
+          <span class="uppercase">{{ from }}</span>
+          <xspan class="q-caption" :value="from_balance" />
+          <help-btn
+            content="this is the content"
+            title="Title"
+            color="text1"
+            size="sm"
+          />
+        </div>
+        <div class="q-pa-md">
+          <balance-timeline
+            :responsive="true"
+            :height="200"
+            ref="balance"
+            :account="from"
+            :contract="this.$configFile.get('systemtokencontract')"
+            :symbol="this.$configFile.get('systemtokensymbol')"
+            :show_balance="false"
+            :legend="false"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import balanceTimeline from "components/ui/balance-timeline";
+import helpBtn from "components/controls/help-btn";
 import xspan from "components/ui/xspan";
 import { mapGetters } from "vuex";
 
@@ -116,11 +146,12 @@ export default {
   name: "msigTransfer",
   components: {
     balanceTimeline,
-    xspan
+    xspan,
+    helpBtn
   },
   data() {
     return {
-      from: "eosdacserval",
+      from: "eosdacdoshhq",
       to: "",
       quantity: "",
       memo: "this is the memo",
@@ -131,7 +162,8 @@ export default {
       from_balance: null,
       from_permissions: null,
       symbol: "EOS",
-      contract: "eosio.token"
+      contract: "eosio.token",
+      decimals: 4
     };
   },
   computed: {
