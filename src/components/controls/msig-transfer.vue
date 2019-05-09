@@ -32,6 +32,8 @@
           </template>
           <div>
             <balance-timeline
+              :responsive="true"
+              :height="200"
               ref="balance"
               :account="from"
               :contract="this.$configFile.get('systemtokencontract')"
@@ -51,7 +53,12 @@
           error-label="Please enter a valid accountname"
           icon="mdi-account-outline"
         >
-          <q-input stack-label="TO" v-model="to" :dark="getIsDark" />
+          <q-input
+            stack-label="TO"
+            v-model="to"
+            :dark="getIsDark"
+            @input="$v.to.$touch()"
+          />
         </q-field>
       </div>
     </div>
@@ -70,6 +77,7 @@
               stack-label="QUANTITY"
               v-model="quantity"
               :dark="getIsDark"
+              @input="$v.quantity.$touch()"
             />
             <div class="on-right">{{ symbol }}</div>
           </div>

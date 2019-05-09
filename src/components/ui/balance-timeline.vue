@@ -10,6 +10,8 @@
       ref="linechart"
       :chartData="chartData"
       :options="chartOptions"
+      :width="width"
+      :height="height"
     />
   </div>
 </template>
@@ -51,6 +53,18 @@ export default {
     show_balance: {
       type: Boolean,
       default: true
+    },
+    responsive: {
+      type: Boolean,
+      default: true
+    },
+    width: {
+      type: Number,
+      default: 300
+    },
+    height: {
+      type: Number,
+      default: 300
     }
   },
   data() {
@@ -59,8 +73,9 @@ export default {
       refdate: null,
       chartData: null,
       chartOptions: {
-        responsive: true,
+        responsive: this.responsive,
         maintainAspectRatio: false,
+
         scales: {
           xAxes: [
             {
@@ -80,7 +95,8 @@ export default {
           yAxes: [
             {
               gridLines: {
-                color: "rgba(0, 0, 0, 0)"
+                color: "rgba(0, 0, 0, 0)",
+                zeroLineColor: "#3E3E3E"
               }
             }
           ]
