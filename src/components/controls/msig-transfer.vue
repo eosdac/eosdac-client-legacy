@@ -102,7 +102,7 @@ import balanceTimeline from "components/ui/balance-timeline";
 import xspan from "components/ui/xspan";
 import { mapGetters } from "vuex";
 
-import { required, maxLength } from "vuelidate/lib/validators";
+import { required, maxLength, maxValue } from "vuelidate/lib/validators";
 import { isEosName } from "../../modules/validators.js";
 export default {
   name: "msigTransfer",
@@ -162,6 +162,10 @@ export default {
     },
     async proposeMsig() {
       this.$v.$touch();
+      if (this.$v.$error) {
+        this.$q.notify("Please review fields again.");
+        return;
+      }
       let action = {
         account: this.contract,
         name: "transfer",
@@ -193,20 +197,16 @@ export default {
     this.setFromPermissions();
   },
 
-  validations: {
-    // wp_data: {
-    //   arbitrator: { required, isEosName },
-    //   title: { required },
-    //   pay_amount: {
-    //     required,
-    //     minValue: minValue(0)
-    //   },
-    //   category: { required }
-    // }
-    from: { required, isEosName },
-    to: { required, isEosName },
-    quantity: { required },
-    memo: { maxLength: maxLength(255) }
+  validations() {
+    return {
+      from: { required, isEosName },
+      to: { required, isEosName },
+      quantity: {
+        required,
+        maxValue: maxValue(this.$helper.assetToNumber(this.from_balance))
+      },
+      memo: { maxLength: maxLength(255) }
+    };
   }
 };
 </script>
