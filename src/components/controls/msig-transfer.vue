@@ -24,6 +24,7 @@
             <q-chip color="primary" small class="q-mr-sm">
               <xspan :value="from_balance" />
             </q-chip>
+            <xspan :value="getPermission" />
             <q-item-main label="" />
             <q-item-side right>
               <q-icon name="mdi-chart-line" color="text1" size="24px" />
@@ -117,6 +118,7 @@ export default {
       memo: "this is the memo",
 
       from_balance: null,
+      from_permissions: null,
       symbol: "EOS"
     };
   },
@@ -125,7 +127,14 @@ export default {
       getIsDark: "ui/getIsDark",
       getAccountName: "user/getAccountName",
       getAccount: "user/getAccount"
-    })
+    }),
+    getPermission: function() {
+      if (!this.from_permissions) return null;
+      const hasXfer = !!this.from_permissions.find(
+        fp => fp.perm_name == "xfer"
+      );
+      return hasXfer ? `${this.from}@xfer` : `${this.from}@active`;
+    }
   },
   methods: {
     renderChart() {
@@ -133,16 +142,24 @@ export default {
         this.$refs.balance.$refs.linechart.render();
       }, 100);
     },
-    handleFromChange(v) {
+    async handleFromChange(v) {
       console.log(v);
       if (v == this.from) return;
       this.from_balance = null;
       this.from = v;
+      this.setFromPermissions();
+    },
+    async setFromPermissions() {
+      this.from_permissions = null;
+      this.from_permissions = (await this.$store.dispatch("dac/fetchAccount", {
+        accountname: this.from
+      })).permissions;
     }
   },
-  mounted() {
-    console.log("xxxxxxxxxxxxxxx", this.$refs.balance.$refs.linechart);
+  async mounted() {
+    this.setFromPermissions();
   },
+
   validations: {
     // wp_data: {
     //   arbitrator: { required, isEosName },

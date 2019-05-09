@@ -88,6 +88,14 @@ export async function fetchDacAdmins({ commit, dispatch }) {
   }
 }
 
+export async function fetchAccount({ commit, dispatch }, payload) {
+  const api = await dispatch("global/getEosApi", false, { root: true });
+  let res = await api.getAccount(payload.accountname);
+  if (res && res.account_name) {
+    return res;
+  }
+}
+
 export async function fetchApprovalsFromProposal({ dispatch }, payload) {
   const api = await dispatch("global/getEosApi", false, { root: true });
   let res = await api.getApprovalsFromProposal(payload);

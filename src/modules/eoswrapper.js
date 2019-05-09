@@ -1,4 +1,5 @@
-// const {TextDecoder, TextEncoder} = require('text-encoding');
+const { TextDecoder, TextEncoder } = require("text-encoding");
+const { Serialize } = require("eosjs");
 
 export class EosWrapper {
   constructor(eosApi, config) {
@@ -292,6 +293,27 @@ export class EosWrapper {
       return [];
     } else {
       return catvotes.rows;
+    }
+  }
+
+  async serializeActionData(action) {
+    try {
+      let account = action.account;
+      let name = action.name;
+      let data = action.data;
+      const contract = await this.eosapi.getContract(account);
+      let hex = Serialize.serializeActionData(
+        contract,
+        account,
+        name,
+        data,
+        new TextEncoder(),
+        new TextDecoder()
+      );
+      return hex;
+    } catch (e) {
+      console.log(e);
+      return false;
     }
   }
 }
