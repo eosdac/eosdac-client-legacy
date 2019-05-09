@@ -163,6 +163,7 @@ export default {
     async proposeMsig() {
       this.$v.$touch();
       if (this.$v.$error) {
+        console.log(this.$v);
         this.$q.notify("Please review fields again.");
         return;
       }
