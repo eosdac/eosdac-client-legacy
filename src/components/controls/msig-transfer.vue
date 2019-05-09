@@ -117,6 +117,9 @@ export default {
       quantity: "",
       memo: "this is the memo",
 
+      title: "this is a custom title",
+      description: "this is a custom description",
+
       from_balance: null,
       from_permissions: null,
       symbol: "EOS",
@@ -177,7 +180,9 @@ export default {
       };
 
       let res = await this.$store.dispatch("user/proposeMsig", {
-        actions: [action]
+        actions: [action],
+        title: this.title,
+        description: this.description
       });
       if (res) {
         console.log(res);
