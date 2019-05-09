@@ -158,6 +158,7 @@ export default {
       })).permissions;
     },
     async proposeMsig() {
+      this.$v.$touch();
       let action = {
         account: this.contract,
         name: "transfer",
