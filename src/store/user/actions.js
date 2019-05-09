@@ -261,6 +261,16 @@ export async function proposeMsig(
   { state, rootState, commit, dispatch, getters },
   payload
 ) {
+  //payload example
+  // {
+  //   actions: [], //required
+  //   requested: [],
+  //   proposal_name: "aname",
+  //   expiration: "2019-08-10T19:14:14",
+  //   title: "a title",
+  //   description: "a description"
+  // }
+
   const api = await dispatch("global/getEosApi", false, { root: true });
   //proposalname
   let proposal_name = payload.proposal_name || this._vm.$helper.randomName();
