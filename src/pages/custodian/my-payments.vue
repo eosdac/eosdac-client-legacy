@@ -151,13 +151,13 @@ export default {
         actions: actions
       });
       if (result) {
-        this.getClaimPay();
+        setTimeout(this.getClaimPay(), 500);
       }
     },
 
     async claimAll() {
       const contract = this.$configFile.get("custodiancontract");
-      let actions = this.pendingpay.map(pp => {
+      let actions = this.pendingpay.slice(0, 10).map(pp => {
         return {
           account: contract,
           name: "claimpay",
@@ -170,7 +170,7 @@ export default {
         actions: actions
       });
       if (result) {
-        this.getClaimPay();
+        setTimeout(this.getClaimPay(), 500);
       }
     },
 
