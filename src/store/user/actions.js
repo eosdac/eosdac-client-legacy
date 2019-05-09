@@ -128,76 +128,6 @@ export async function fetchCatDelegations(
   return res;
 }
 
-export async function proposeMsig(
-  { state, rootState, commit, dispatch, getters },
-  payload
-) {
-  //defaults
-  let exp = new Date();
-  exp.setDate(exp.getDate() + 7);
-  let [expiration] = exp.toISOString().split(".");
-  console.log(getters["getAuth"]);
-  let requested = rootState.dac.candidates
-    .slice(0, rootState.dac.custodianConfig.numelected * 2)
-    .map(c => {
-      return { actor: c.candidate_name, permission: "active" };
-    });
-
-  let msigTrx_template = {
-    expiration: payload.expiration || expiration,
-    ref_block_num: 0,
-    ref_block_prefix: 0,
-    max_net_usage_words: 0,
-    max_cpu_usage_ms: 0,
-    delay_sec: 0,
-    actions: [],
-    context_free_actions: [],
-    transaction_extensions: [],
-    signatures: [],
-    context_free_data: []
-  };
-  const api = await dispatch("global/getEosApi", false, { root: true });
-  //serialize action data
-  for (let i = 0; i < payload.actions.length; i++) {
-    let action = payload.actions[i];
-    let hexdata = await api.serializeActionData(action);
-    action.data = hexdata;
-    msigTrx_template.actions.push(action);
-  }
-  console.log(msigTrx_template);
-  //transact
-  let proposal_name = payload.proposal_name || this._vm.$helper.randomName();
-  let propose = {
-    account: this._vm.$configFile.get("systemmsigcontract"),
-    name: "propose",
-    data: {
-      proposer: state.accountName,
-      proposal_name: proposal_name,
-      requested: payload.requested || requested,
-      trx: msigTrx_template
-    }
-  };
-
-  let proposed = {
-    account: this._vm.$configFile.get("dacmsigcontract"),
-    name: "proposed",
-    authorization: [
-      { actor: state.accountName, permission: getters["getAuth"] },
-      { actor: this._vm.$configFile.get("authaccountname"), permission: "one" }
-    ],
-    data: {
-      proposer: state.accountName,
-      proposal_name: proposal_name,
-      metadata: JSON.stringify({
-        title: payload.title || "Default Msig title",
-        description: payload.description || "default msig description"
-      })
-    }
-  };
-  let res = await dispatch("transact", { actions: [propose, proposed] });
-  return res;
-}
-
 export async function transact(
   { state, rootState, commit, dispatch, getters },
   payload
@@ -325,6 +255,79 @@ export async function transact(
     }
     return false;
   }
+}
+
+export async function proposeMsig(
+  { state, rootState, commit, dispatch, getters },
+  payload
+) {
+  const api = await dispatch("global/getEosApi", false, { root: true });
+  //proposalname
+  let proposal_name = payload.proposal_name || this._vm.$helper.randomName();
+  //expiration
+  let exp = new Date();
+  exp.setDate(exp.getDate() + 7);
+  let [expiration] = exp.toISOString().split(".");
+  //requested
+  let requested = rootState.dac.candidates
+    .slice(0, rootState.dac.custodianConfig.numelected * 2)
+    .map(c => {
+      return { actor: c.candidate_name, permission: "active" };
+    });
+  //msig trx template
+  let msigTrx_template = {
+    expiration: payload.expiration || expiration,
+    ref_block_num: 0,
+    ref_block_prefix: 0,
+    max_net_usage_words: 0,
+    max_cpu_usage_ms: 0,
+    delay_sec: 0,
+    actions: [],
+    context_free_actions: [],
+    transaction_extensions: [],
+    signatures: [],
+    context_free_data: []
+  };
+
+  //serialize action data and add to template
+  for (let i = 0; i < payload.actions.length; i++) {
+    let action = payload.actions[i];
+    let hexdata = await api.serializeActionData(action);
+    action.data = hexdata;
+    msigTrx_template.actions.push(action);
+  }
+
+  //do the transaction
+  let propose = {
+    account: this._vm.$configFile.get("systemmsigcontract"),
+    name: "propose",
+    data: {
+      proposer: state.accountName,
+      proposal_name: proposal_name,
+      requested: payload.requested || requested,
+      trx: msigTrx_template
+    }
+  };
+
+  let proposed = {
+    account: this._vm.$configFile.get("dacmsigcontract"),
+    name: "proposed",
+    authorization: [
+      { actor: state.accountName, permission: getters["getAuth"] },
+      { actor: this._vm.$configFile.get("authaccountname"), permission: "one" }
+    ],
+    data: {
+      proposer: state.accountName,
+      proposal_name: proposal_name,
+      metadata: JSON.stringify({
+        title: payload.title || "Default Msig title",
+        description: payload.description || "default msig description"
+      })
+    }
+  };
+
+  let msig_actions = [propose, proposed];
+  return dispatch("transact", { actions: msig_actions });
 }
 
 function parseError(err) {

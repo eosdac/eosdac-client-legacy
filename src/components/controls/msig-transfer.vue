@@ -179,7 +179,9 @@ export default {
       let res = await this.$store.dispatch("user/proposeMsig", {
         actions: [action]
       });
-      console.log(res);
+      if (res) {
+        console.log(res);
+      }
     }
   },
   async mounted() {
