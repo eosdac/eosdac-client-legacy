@@ -45,7 +45,10 @@
 
       <div class="col-xs-12 col-lg-6">
         <div class="bg-bg1 round-borders shadow-5 overflow-hidden">
-          <div class="bg-primary q-pa-sm row justify-between items-center">
+          <div
+            class="bg-primary q-pa-sm row justify-between items-center"
+            style="height:50px"
+          >
             <span class="uppercase">Transfer</span>
             <help-btn
               content="jqh q shkq sdk dk qskdh qskd"
@@ -62,15 +65,41 @@
 
       <div class="col-xs-12 col-lg-6">
         <div class="bg-bg1 round-borders shadow-5 overflow-hidden">
-          <div class="bg-primary q-pa-sm row justify-between items-center">
+          <div
+            class="bg-primary q-pa-sm row justify-between items-center"
+            style="height:50px"
+          >
             <q-icon name="mdi-inbox-arrow-down" color="text2" size="24px" />
             <span class="uppercase">trx qeue ({{ trx_qeue.length }})</span>
-            <help-btn
-              content="jqh q shkq sdk dk qskdh qskd"
-              title="account.account"
-              color="text1"
-              size="sm"
-            />
+            <q-btn flat round dense icon="more_vert">
+              <q-popover class="bg-bg2 text-text1" style="width:150px">
+                <q-list dense highlight>
+                  <q-item class="cursor-pointer q-caption">
+                    <label for="myInput" class="cursor-pointer full-width">
+                      Load From File
+                    </label>
+                    <input
+                      id="myInput"
+                      type="file"
+                      style="display:none"
+                      ref="inputFile"
+                      accept=".json,application/json"
+                      @input="handleFileInput()"
+                    />
+                  </q-item>
+                  <q-item class="cursor-pointer q-caption" v-close-overlay>
+                    <q-item-main>Download Executed</q-item-main>
+                  </q-item>
+                  <q-item
+                    class="cursor-pointer q-caption"
+                    v-close-overlay
+                    @click.native="trx_qeue = []"
+                  >
+                    <q-item-main>Clear All</q-item-main>
+                  </q-item>
+                </q-list>
+              </q-popover>
+            </q-btn>
           </div>
           <div>
             <q-scroll-area
@@ -100,7 +129,12 @@
                   </q-item-side>
                   <q-item-main>
                     <q-item-tile class="q-body-1 q-py-xs">
-                      {{ trx.from }} > {{ trx.to }} {{ trx.quantity }}
+                      <span>{{ trx.from }}</span>
+                      <span class="text-weight-thin"> > </span>
+                      <span>{{ trx.to }}</span>
+                      <span class="text-weight-thin on-right q-caption">{{
+                        trx.quantity
+                      }}</span>
                     </q-item-tile>
                   </q-item-main>
                   <q-item-side right>
@@ -181,38 +215,7 @@ export default {
         }
       ],
 
-      trx_qeue: [
-        {
-          status: 0,
-          from: "eosdacdoshhq",
-          to: "piecesnbitss",
-          quantity: "1.0000 EOS",
-          memo: "this is the memo of the transaction",
-          title: "Payment for wp #999",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
-        },
-        {
-          status: 0,
-          from: "eosdacdoshhq",
-          to: "evilmikehere",
-          quantity: "10000.0000 EOS",
-          memo: "this is the memo of the transaction",
-          title: "Payment for wp #789",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
-        },
-        {
-          status: 0,
-          from: "eosdacdoshhq",
-          to: "lukedactest1",
-          quantity: "9999.0000 EOS",
-          memo: "this is the memo of the transaction",
-          title: "Payment for wp #781",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
-        }
-      ]
+      trx_qeue: []
     };
   },
 
@@ -234,6 +237,26 @@ export default {
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
       };
       this.trx_qeue.push(trx);
+    },
+    async handleFileInput() {
+      let file = this.$refs.inputFile.files[0];
+      console.log(file);
+      // this.filename = file.name;
+      // this.filesize = `${(file.size / 1024).toFixed(2)}KB`;
+      let content = await new Promise((resolve, reject) => {
+        var fr = new FileReader();
+        fr.onload = function(result) {
+          return resolve(fr.result);
+        };
+        fr.readAsText(file, `utf8`);
+      });
+      content = JSON.parse(content);
+      for (let i = 0; i < content.length; i++) {
+        let trxdata = content[i];
+        trxdata.status = 0;
+        this.trx_qeue.push(trxdata);
+      }
+      document.getElementById("myInput").value = "";
     },
     async getPermissions() {
       for (let i = 0; i < this.financialaccounts.length; i++) {
