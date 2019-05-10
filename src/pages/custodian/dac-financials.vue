@@ -75,20 +75,26 @@
               <q-popover class="bg-bg2 text-text1" style="width:150px">
                 <q-list dense highlight>
                   <q-item class="cursor-pointer q-caption">
-                    <label for="myInput" class="cursor-pointer full-width">
-                      Load From File
-                    </label>
-                    <input
-                      id="myInput"
-                      type="file"
-                      style="display:none"
-                      ref="inputFile"
-                      accept=".json,application/json"
-                      @input="handleFileInput()"
-                    />
+                    <q-item-main>
+                      <label for="myInput" class="cursor-pointer full-width">
+                        Load From File
+                      </label>
+                      <input
+                        id="myInput"
+                        type="file"
+                        style="display:none"
+                        ref="inputFile"
+                        accept=".json,application/json"
+                        @input="handleFileInput()"
+                      />
+                    </q-item-main>
                   </q-item>
-                  <q-item class="cursor-pointer q-caption" v-close-overlay>
-                    <q-item-main>Download Executed</q-item-main>
+                  <q-item
+                    class="cursor-pointer q-caption"
+                    v-close-overlay
+                    @click.native="downloadReport"
+                  >
+                    <q-item-main>Download Report</q-item-main>
                   </q-item>
                   <q-item
                     class="cursor-pointer q-caption"
@@ -96,6 +102,14 @@
                     @click.native="trx_qeue = []"
                   >
                     <q-item-main>Clear All</q-item-main>
+                  </q-item>
+                  <q-item
+                    v-if="trx_qeue.length > 1"
+                    class="cursor-pointer q-caption"
+                    v-close-overlay
+                    @click.native="proposeAll"
+                  >
+                    <q-item-main>Exec All</q-item-main>
                   </q-item>
                 </q-list>
               </q-popover>
@@ -107,7 +121,13 @@
               :thumb-style="getThumbStyle()"
               :delay="1500"
             >
-              <q-list dense highlight no-border>
+              <q-list dense no-border highlight dark class="q-pa-xs">
+                <div
+                  v-if="trx_qeue.length == 0"
+                  class="text-weight-thin text-center q-body-1 q-mt-md"
+                >
+                  No transactions in the qeue
+                </div>
                 <q-item v-for="(trx, i) in trx_qeue" :key="`trx${i}`">
                   <q-item-side left>
                     <q-btn
@@ -271,6 +291,14 @@ export default {
         finacc.permissions = account_permissions;
       }
     },
+    async proposeAll() {
+      for (let i = 0; i < this.trx_qeue.length; i++) {
+        //only propose if not proposed yet
+        if (this.trx_qeue[i].status == 0) {
+          await this.proposeTransfer(i);
+        }
+      }
+    },
     async proposeTransfer(trx_index) {
       let trx_data = this.trx_qeue[trx_index];
 
@@ -311,6 +339,7 @@ export default {
       if (res) {
         console.log(res);
         trx_data.status = 2;
+        trx_data.trx_id = res.transaction_id;
       } else {
         trx_data.status = 0;
       }
@@ -323,6 +352,15 @@ export default {
         width: "5px",
         opacity: 1
       };
+    },
+    downloadReport() {
+      let a = document.createElement("a");
+      let file = new Blob([JSON.stringify(this.trx_qeue, null, 4)], {
+        type: "text/plain;charset=utf-8"
+      });
+      a.href = URL.createObjectURL(file);
+      a.download = "msig_report.json";
+      a.click();
     }
   },
   mounted() {
