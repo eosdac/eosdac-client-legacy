@@ -19,31 +19,6 @@
             @change="handleFromChange"
           />
         </q-field>
-        <q-collapsible header-class="no-padding" @show="renderChart">
-          <template slot="header">
-            <q-chip color="primary" small class="q-mr-sm">
-              <xspan :value="from_balance" />
-            </q-chip>
-            <!-- <xspan :value="getPermission" /> -->
-            <q-item-main label="" />
-            <q-item-side right>
-              <q-icon name="mdi-chart-line" color="text1" size="24px" />
-            </q-item-side>
-          </template>
-          <div>
-            <balance-timeline
-              :responsive="true"
-              :height="200"
-              ref="balance"
-              :account="from"
-              :contract="this.$configFile.get('systemtokencontract')"
-              :symbol="this.$configFile.get('systemtokensymbol')"
-              :show_balance="false"
-              :legend="false"
-              @onbalance="from_balance = $event"
-            />
-          </div>
-        </q-collapsible>
       </div>
     </div>
 
@@ -104,51 +79,20 @@
         <q-btn color="primary" label="send" @click="proposeMsig" />
       </div>
     </div>
-
-    <div class="col-xs-12 col-lg-3">
-      <div class="bg-bg1 round-borders shadow-5 overflow-hidden">
-        <div class="bg-primary q-pa-sm row justify-between items-center">
-          <span class="uppercase">{{ from }}</span>
-          <xspan class="q-caption" :value="from_balance" />
-          <help-btn
-            content="this is the content"
-            title="Title"
-            color="text1"
-            size="sm"
-          />
-        </div>
-        <div class="q-pa-md">
-          <balance-timeline
-            :responsive="true"
-            :height="200"
-            ref="balance"
-            :account="from"
-            :contract="this.$configFile.get('systemtokencontract')"
-            :symbol="this.$configFile.get('systemtokensymbol')"
-            :show_balance="false"
-            :legend="false"
-          />
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-import balanceTimeline from "components/ui/balance-timeline";
-import helpBtn from "components/controls/help-btn";
-import xspan from "components/ui/xspan";
+// import balanceTimeline from "components/ui/balance-timeline";
+// import helpBtn from "components/controls/help-btn";
+// import xspan from "components/ui/xspan";
 import { mapGetters } from "vuex";
 
 import { required, maxLength, maxValue } from "vuelidate/lib/validators";
 import { isEosName } from "../../modules/validators.js";
 export default {
   name: "msigTransfer",
-  components: {
-    balanceTimeline,
-    xspan,
-    helpBtn
-  },
+  components: {},
   data() {
     return {
       from: "eosdacdoshhq",
