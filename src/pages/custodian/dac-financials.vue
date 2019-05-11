@@ -136,7 +136,7 @@
                       flat
                       dense
                       color="negative"
-                      @click="trx_qeue.splice(i, 1)"
+                      @click="removeFromQeue(i)"
                     />
                     <q-spinner v-if="trx.status == 1" color="primary-light" />
                     <q-btn
@@ -251,6 +251,9 @@ export default {
       el.status = 0;
       this.trx_qeue.push(el);
     },
+    removeFromQeue(qeue_index) {
+      this.trx_qeue.splice(qeue_index, 1);
+    },
     async handleFileInput() {
       let file = this.$refs.inputFile.files[0];
       console.log(file);
@@ -265,12 +268,11 @@ export default {
       });
       content = JSON.parse(content);
       for (let i = 0; i < content.length; i++) {
-        let trxdata = content[i];
-        trxdata.status = 0;
-        this.trx_qeue.push(trxdata);
+        this.addToQeue(content[i]);
       }
       document.getElementById("myInput").value = "";
     },
+
     async getPermissions() {
       for (let i = 0; i < this.financialaccounts.length; i++) {
         let finacc = this.financialaccounts[i];
@@ -284,6 +286,7 @@ export default {
         finacc.permissions = account_permissions;
       }
     },
+
     async proposeAll() {
       for (let i = 0; i < this.trx_qeue.length; i++) {
         //only propose if not proposed yet
@@ -337,6 +340,7 @@ export default {
         trx_data.status = 0;
       }
     },
+
     getThumbStyle() {
       return {
         right: "0px",
@@ -347,6 +351,7 @@ export default {
       };
     },
     downloadReport() {
+      if (this.trx_qeue.length == 0) return;
       let data = JSON.parse(JSON.stringify(this.trx_qeue));
       data.forEach(d => {
         delete d.status;
