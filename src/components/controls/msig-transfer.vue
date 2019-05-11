@@ -154,7 +154,6 @@ export default {
     processInputs() {
       this.$v.$touch();
       if (this.$v.$error) {
-        console.log("errorrrrrrrrrrrr");
         return;
       }
       let formdata = JSON.parse(JSON.stringify(this.form));
@@ -163,6 +162,24 @@ export default {
         " " +
         this.symbol;
       this.$emit("onsubmit", formdata);
+      this.clearForm();
+    },
+    clearForm() {
+      this.form = {
+        from: "",
+        to: "",
+        quantity: "",
+        memo: "",
+        title: "",
+        description: ""
+      };
+      this.$v.$reset();
+    },
+    setFormFieldsEdit(data) {
+      //make clone
+      let cloned = JSON.parse(JSON.stringify(data));
+      cloned.quantity = cloned.quantity.split(" ")[0]; //remove the symbol
+      this.form = cloned;
     }
   },
 

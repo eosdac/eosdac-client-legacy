@@ -58,7 +58,10 @@
             />
           </div>
           <div class="q-pa-md">
-            <msig-transfer @onsubmit="addToQeue($event)" />
+            <msig-transfer
+              @onsubmit="addToQeue($event)"
+              ref="msigTransferForm"
+            />
           </div>
         </div>
       </div>
@@ -159,12 +162,17 @@
                   </q-item-main>
                   <q-item-side right>
                     <q-btn
-                      label="view"
+                      v-if="trx.status == 0"
+                      label="edit"
                       size="sm"
                       dense
                       flat
                       color="info"
                       class="q-mr-xs"
+                      @click="
+                        $refs.msigTransferForm.setFormFieldsEdit(trx);
+                        removeFromQeue(i);
+                      "
                     />
                     <q-btn
                       v-if="trx.status == 0"
@@ -248,7 +256,9 @@ export default {
   },
   methods: {
     addToQeue(el) {
-      el.status = 0;
+      if (el.status === undefined) {
+        el.status = 0;
+      }
       this.trx_qeue.push(el);
     },
     removeFromQeue(qeue_index) {
@@ -268,7 +278,8 @@ export default {
       });
       content = JSON.parse(content);
       for (let i = 0; i < content.length; i++) {
-        this.addToQeue(content[i]);
+        let entry = content[i];
+        this.addToQeue(entry);
       }
       document.getElementById("myInput").value = "";
     },
