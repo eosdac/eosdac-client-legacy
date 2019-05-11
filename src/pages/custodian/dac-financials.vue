@@ -30,7 +30,7 @@
           <div class="q-pa-md">
             <balance-timeline
               :responsive="true"
-              :height="200"
+              :height="230"
               ref="balance"
               :account="account.account"
               :contract="account.contract"
@@ -58,7 +58,7 @@
             />
           </div>
           <div class="q-pa-md">
-            <q-btn label="add" dense color="primary" @click="addToQeue" />
+            <msig-transfer @onsubmit="addToQeue($event)" />
           </div>
         </div>
       </div>
@@ -94,7 +94,7 @@
                     v-close-overlay
                     @click.native="downloadReport"
                   >
-                    <q-item-main>Download Report</q-item-main>
+                    <q-item-main>Download Qeue</q-item-main>
                   </q-item>
                   <q-item
                     class="cursor-pointer q-caption"
@@ -117,7 +117,7 @@
           </div>
           <div>
             <q-scroll-area
-              style="height: 300px; padding-bottom:8px"
+              style="height: 445px; padding-bottom:8px"
               :thumb-style="getThumbStyle()"
               :delay="1500"
             >
@@ -192,11 +192,13 @@ import { mapGetters } from "vuex";
 import balanceTimeline from "components/ui/balance-timeline";
 import helpBtn from "components/controls/help-btn";
 import xspan from "components/ui/xspan";
+import msigTransfer from "components/controls/msig-transfer";
 import { colors } from "quasar";
 export default {
   name: "dacFinancials",
   components: {
     balanceTimeline,
+    msigTransfer,
     helpBtn,
     xspan
   },
@@ -245,18 +247,9 @@ export default {
     })
   },
   methods: {
-    addToQeue() {
-      let trx = {
-        status: 0,
-        from: "eosdacdoshhq",
-        to: "lukedactest1",
-        quantity: "9999.0000 EOS",
-        memo: "this is the memo of the transaction",
-        title: "Payment for wp #781",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
-      };
-      this.trx_qeue.push(trx);
+    addToQeue(el) {
+      el.status = 0;
+      this.trx_qeue.push(el);
     },
     async handleFileInput() {
       let file = this.$refs.inputFile.files[0];
@@ -354,8 +347,13 @@ export default {
       };
     },
     downloadReport() {
+      let data = JSON.parse(JSON.stringify(this.trx_qeue));
+      data.forEach(d => {
+        delete d.status;
+      });
+
       let a = document.createElement("a");
-      let file = new Blob([JSON.stringify(this.trx_qeue, null, 4)], {
+      let file = new Blob([JSON.stringify(data, null, 4)], {
         type: "text/plain;charset=utf-8"
       });
       a.href = URL.createObjectURL(file);
