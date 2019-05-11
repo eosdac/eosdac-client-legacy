@@ -124,7 +124,7 @@
               :thumb-style="getThumbStyle()"
               :delay="1500"
             >
-              <q-list dense no-border highlight dark class="q-pa-xs">
+              <q-list dense no-border separator highlight dark class="q-pa-xs">
                 <div
                   v-if="trx_qeue.length == 0"
                   class="text-weight-thin text-center q-body-1 q-mt-md"
@@ -158,7 +158,8 @@
                     />
                   </q-item-side>
                   <q-item-main>
-                    <q-item-tile class="q-body-1 q-py-xs">
+                    <q-item-tile label>{{ trx.title }}</q-item-tile>
+                    <q-item-tile sublabel class="q-body-1 q-py-xs">
                       <span>{{ trx.from }}</span>
                       <span class="text-weight-thin"> > </span>
                       <span>{{ trx.to }}</span>
