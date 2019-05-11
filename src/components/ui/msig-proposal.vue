@@ -413,6 +413,13 @@
                   @click="executeProposal(msig.proposer, msig.proposal_name)"
                 />
               </span>
+              <span v-if="!read_only && msig.status === 3">
+                <q-btn
+                  color="positive"
+                  label="resubmit"
+                  @click="resubmit(msig)"
+                />
+              </span>
               <span>
                 <q-checkbox
                   color="primary-light"
@@ -854,6 +861,14 @@ export default {
           msig_id: this.msig.trxid
         });
       }
+    },
+    async resubmit(msig) {
+      let clone = JSON.parse(JSON.stringify(msig));
+      await this.$store.dispatch("user/proposeMsig", {
+        actions: clone.trx.actions,
+        title: `Resubmit: ${clone.title}`,
+        description: clone.description
+      });
     }
   },
 
