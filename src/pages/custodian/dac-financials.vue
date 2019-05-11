@@ -149,6 +149,13 @@
                       dense
                       color="positive"
                     />
+                    <q-btn
+                      v-if="trx.status == 3"
+                      icon="edit"
+                      flat
+                      dense
+                      color="text1"
+                    />
                   </q-item-side>
                   <q-item-main>
                     <q-item-tile class="q-body-1 q-py-xs">
@@ -169,10 +176,7 @@
                       flat
                       color="info"
                       class="q-mr-xs"
-                      @click="
-                        $refs.msigTransferForm.setFormFieldsEdit(trx);
-                        removeFromQeue(i);
-                      "
+                      @click="editQeueItem(i)"
                     />
                     <q-btn
                       v-if="trx.status == 0"
@@ -182,6 +186,14 @@
                       dense
                       color="positive"
                       @click="proposeTransfer(i)"
+                    />
+                    <q-btn
+                      v-if="trx.status == 2"
+                      label="view"
+                      size="sm"
+                      flat
+                      dense
+                      color="positive"
                     />
                   </q-item-side>
                 </q-item>
@@ -255,14 +267,32 @@ export default {
     })
   },
   methods: {
+    //status 0 = waiting for exec; 1 = sending; 2 = success; 3 = edit;
     addToQeue(el) {
       if (el.status === undefined) {
         el.status = 0;
       }
-      this.trx_qeue.push(el);
+
+      let f = this.trx_qeue.findIndex(qi => qi.status == 3);
+      console.log("edit item index", f);
+      if (f != -1) {
+        el.status = 0;
+        this.$set(this.trx_qeue, f, el);
+      } else {
+        this.trx_qeue.push(el);
+      }
     },
     removeFromQeue(qeue_index) {
       this.trx_qeue.splice(qeue_index, 1);
+    },
+    editQeueItem(qeue_index) {
+      //check if there is already an item being edited
+      let check = this.trx_qeue.find(qi => qi.status == 3);
+      if (check) check.status = 0;
+
+      let qeue_item = this.trx_qeue[qeue_index];
+      qeue_item.status = 3;
+      this.$refs.msigTransferForm.setFormFieldsEdit(qeue_item);
     },
     async handleFileInput() {
       let file = this.$refs.inputFile.files[0];
@@ -361,6 +391,7 @@ export default {
         opacity: 1
       };
     },
+
     downloadReport() {
       if (this.trx_qeue.length == 0) return;
       let data = JSON.parse(JSON.stringify(this.trx_qeue));

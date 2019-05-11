@@ -4,7 +4,7 @@
       <div>
         <q-field
           :error="$v.form.title.$error"
-          error-label="Title can't be longer then 230 chars"
+          error-label="Title is required and can't be longer then 230 chars"
         >
           <q-input
             stack-label="title"
@@ -20,7 +20,7 @@
       <div>
         <q-field
           :error="$v.form.description.$error"
-          error-label="Description can't be longer then 900 chars"
+          error-label="Description is required and can't be longer then 900 chars"
         >
           <q-input
             class="no-padding"
@@ -49,7 +49,6 @@
               { value: 'eosdacdoshhq', label: 'eosdacdoshhq' },
               { value: 'eosdacserval', label: 'eosdacserval' }
             ]"
-            @change=""
           />
         </q-field>
       </div>
@@ -127,6 +126,16 @@ import { isEosName } from "../../modules/validators.js";
 export default {
   name: "msigTransfer",
   components: {},
+  props: {
+    symbol: {
+      type: String,
+      default: "EOS"
+    },
+    decimals: {
+      type: Number,
+      default: 4
+    }
+  },
   data() {
     return {
       form: {
@@ -136,10 +145,7 @@ export default {
         memo: "",
         title: "",
         description: ""
-      },
-
-      symbol: "EOS",
-      decimals: 4
+      }
     };
   },
   computed: {
@@ -174,9 +180,11 @@ export default {
         description: ""
       };
       this.$v.$reset();
+      this.edit_flag = false;
     },
     setFormFieldsEdit(data) {
       //make clone
+
       let cloned = JSON.parse(JSON.stringify(data));
       cloned.quantity = cloned.quantity.split(" ")[0]; //remove the symbol
       this.form = cloned;
@@ -193,8 +201,8 @@ export default {
           // maxValue: maxValue(this.$helper.assetToNumber(this.from_balance))
         },
         memo: { maxLength: maxLength(255) },
-        title: { maxLength: maxLength(230) },
-        description: { maxLength: maxLength(900) }
+        title: { required, maxLength: maxLength(230) },
+        description: { required, maxLength: maxLength(900) }
       }
     };
   }
