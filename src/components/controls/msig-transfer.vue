@@ -23,6 +23,7 @@
           error-label="Description can't be longer then 900 chars"
         >
           <q-input
+            class="no-padding"
             stack-label="description"
             v-model="form.description"
             :dark="getIsDark"
@@ -39,7 +40,7 @@
           error-label="Select a from account"
         >
           <q-select
-            size="xs"
+            class="no-padding"
             v-model="form.from"
             stack-label="from"
             color="primary-light"
@@ -61,6 +62,7 @@
           error-label="Please enter a valid accountname"
         >
           <q-input
+            class="no-padding"
             stack-label="to"
             v-model="form.to"
             :dark="getIsDark"
@@ -78,7 +80,7 @@
         >
           <div class="row no-wrap items-end">
             <q-input
-              class="full-width"
+              class="full-width no-padding"
               type="number"
               :decimals="decimals"
               stack-label="quantity"
@@ -99,7 +101,12 @@
           :error="$v.form.memo.$error"
           error-label="Memo can't be longer then 255 chars."
         >
-          <q-input stack-label="memo" v-model="form.memo" :dark="getIsDark" />
+          <q-input
+            stack-label="memo"
+            v-model="form.memo"
+            :dark="getIsDark"
+            class="no-padding"
+          />
         </q-field>
       </div>
     </div>
