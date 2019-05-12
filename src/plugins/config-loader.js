@@ -63,8 +63,6 @@ class ConfigLoader {
         return this.configFile.contracts.bot.name;
       case "explorer":
         return this.configFile.external.explorer;
-      case "memberclientapi":
-        return this.configFile.api.memberclient;
       case "memberclientstateapi":
         return this.configFile.api.memberclient_state_api;
       case "bpnodeapi":
@@ -74,9 +72,16 @@ class ConfigLoader {
       case "external":
         return this.configFile.external;
       case "authaccount":
-        return this.configFile.authAccount;
+        // backwards compatibility
+        if (!this.configFile.contracts.auth) {
+          return this.configFile.authAccount;
+        }
+        return this.configFile.contracts.auth;
       case "authaccountname":
-        return this.configFile.authAccount.name;
+        if (!this.configFile.contracts.auth) {
+          return this.configFile.authAccount.name;
+        }
+        return this.configFile.contracts.auth.name;
       case "wpcontract":
         return this.configFile.contracts.wpproposal.name;
       case "bpaccount":
@@ -84,7 +89,10 @@ class ConfigLoader {
       case "extraaccounts":
         return this.configFile.extraAccounts;
       case "treasuryaccount":
-        return this.configFile.treasuryAccount.name;
+        if (!this.configFile.contracts.treasury) {
+          return this.configFile.treasuryAccount.name;
+        }
+        return this.configFile.contracts.treasury.name;
       default:
         return `***${configquery} not yet subscribed in config-loader***`;
     }
