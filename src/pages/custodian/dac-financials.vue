@@ -4,7 +4,7 @@
       The following EOS accounts represent value flow over time within the DAC
       and can be useful for budgeting and decision making.
     </p>
-    <div class="row gutter-sm">
+    <div class="row gutter-sm q-mb-md">
       <div
         v-for="(account, i) in financialaccounts"
         class="col-xs-12 col-sm-6 col-lg-4"
