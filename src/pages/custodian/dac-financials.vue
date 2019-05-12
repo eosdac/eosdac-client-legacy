@@ -176,7 +176,7 @@
                   </q-item-main>
                   <q-item-side right>
                     <q-btn
-                      v-if="trx.status == 0"
+                      v-if="trx.status == 0 || trx.status == 3"
                       label="edit"
                       size="sm"
                       dense
@@ -184,15 +184,18 @@
                       color="info"
                       class="q-mr-xs"
                       @click="editQeueItem(i)"
+                      :disabled="trx.status == 3"
+                      :loading="trx.status == 3"
                     />
                     <q-btn
-                      v-if="trx.status == 0"
+                      v-if="trx.status == 0 || trx.status == 3"
                       label="send"
                       size="sm"
                       flat
                       dense
                       color="positive"
                       @click="proposeTransfer(i)"
+                      :disabled="trx.status == 3"
                     />
                     <q-btn
                       v-if="trx.status == 2"
