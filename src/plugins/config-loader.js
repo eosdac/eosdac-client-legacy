@@ -81,6 +81,8 @@ class ConfigLoader {
         return this.configFile.contracts.wpproposal.name;
       case "bpaccount":
         return this.configFile.bpAccount.name;
+      case "extraaccounts":
+        return this.configFile.extraAccounts;
       case "treasuryaccount":
         return this.configFile.treasuryAccount.name;
       default:
