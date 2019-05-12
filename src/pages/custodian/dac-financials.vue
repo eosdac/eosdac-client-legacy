@@ -42,7 +42,9 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="row gutter-sm">
       <div class="col-xs-12 col-lg-6">
         <div class="bg-bg1 round-borders shadow-5 overflow-hidden">
           <div
