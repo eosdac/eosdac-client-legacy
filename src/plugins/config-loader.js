@@ -36,7 +36,7 @@ class ConfigLoader {
   get(configquery) {
     switch (configquery) {
       case "dacname":
-        return this.configFile.DAC_name;
+        return this.configFile.dacName;
       case "defaultnode":
         return this.configFile.api.default_eos_node;
       case "tokencontract":

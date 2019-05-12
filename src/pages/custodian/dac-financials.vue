@@ -228,39 +228,37 @@ export default {
     xspan
   },
   data() {
+    const financialaccounts = [
+      {
+        account: this.$configFile.get("treasuryaccount"),
+        permissions: [],
+        contract: this.$configFile.get("systemtokencontract"),
+        symbol: this.$configFile.get("systemtokensymbol"),
+        balance: null,
+        selected: false,
+        description:
+          "The DAC owner account where DAC funds are secured and controlled by a multisig permission system of elected custodians."
+      }
+    ];
+
+    const extraaccounts = this.$configFile.get("extraaccounts");
+    if (extraaccounts && extraaccounts.length) {
+      extraaccounts.forEach(extra => {
+        financialaccounts.push({
+          account: extra.name,
+          permissions: [],
+          contract:
+            extra.contract || this.$configFile.get("systemtokencontract"),
+          symbol: extra.symbol || this.$configFile.get("systemtokensymbol"),
+          balance: null,
+          selected: false,
+          description: extra.description
+        });
+      });
+    }
+
     return {
-      financialaccounts: [
-        {
-          account: this.$configFile.get("bpaccount"),
-          permissions: [],
-          contract: this.$configFile.get("systemtokencontract"),
-          symbol: this.$configFile.get("systemtokensymbol"),
-          balance: null,
-          selected: false,
-          description:
-            "The EOS Mainnet block producer account for eosDAC which receives Block Producer rewards."
-        },
-        {
-          account: this.$configFile.get("treasuryaccount"),
-          permissions: [],
-          contract: this.$configFile.get("systemtokencontract"),
-          symbol: this.$configFile.get("systemtokensymbol"),
-          balance: null,
-          selected: false,
-          description:
-            "The DAC owner account where DAC funds are secured and controlled by a 12-account multisig permission system of elected custodians."
-        },
-        {
-          account: "dacocoiogmbh",
-          permissions: [],
-          contract: this.$configFile.get("systemtokencontract"),
-          symbol: this.$configFile.get("systemtokensymbol"),
-          balance: null,
-          selected: false,
-          description:
-            "The current eosDAC service provider account which manages payroll, employment contracts, and real-world interactions on behalf of the DAC."
-        }
-      ],
+      financialaccounts,
 
       trx_qeue: []
     };
