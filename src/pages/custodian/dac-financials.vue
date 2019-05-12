@@ -131,7 +131,11 @@
                 >
                   No transactions in the qeue
                 </div>
-                <q-item v-for="(trx, i) in trx_qeue" :key="`trx${i}`">
+                <q-item
+                  v-for="(trx, i) in trx_qeue"
+                  :key="`trx${i}`"
+                  class="animate-pop"
+                >
                   <q-item-side left>
                     <q-btn
                       v-if="trx.status == 0"
