@@ -339,7 +339,7 @@ export default {
       let from_permissions = this.permissions_map.find(
         pm => pm.account == accountname
       );
-      if (from_permissions) return from_permissions;
+      if (from_permissions) return from_permissions.permissions;
 
       let account_permissions = (await this.$store.dispatch(
         "dac/fetchAccount",
