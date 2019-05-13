@@ -45,10 +45,11 @@
             stack-label="from"
             color="primary-light"
             :dark="getIsDark"
-            :options="[
-              { value: 'eosdacdoshhq', label: 'eosdacdoshhq' },
-              { value: 'eosdacserval', label: 'eosdacserval' }
-            ]"
+            :options="
+              from_accounts.map(fa => {
+                return { value: fa, label: fa };
+              })
+            "
           />
         </q-field>
       </div>
@@ -142,6 +143,12 @@ export default {
     decimals: {
       type: Number,
       default: 4
+    },
+    from_accounts: {
+      type: Array,
+      default: () => {
+        return [];
+      }
     }
   },
   data() {

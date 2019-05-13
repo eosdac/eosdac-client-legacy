@@ -63,6 +63,7 @@
             <msig-transfer
               @onsubmit="addToQeue($event)"
               ref="msigTransferForm"
+              :from_accounts="financialaccounts.map(fa => fa.account)"
             />
           </div>
         </div>
