@@ -144,7 +144,8 @@ module.exports = function (ctx) {
         'QStep',
         'QStepperNavigation',
         'QDatetimePicker',
-        'QTooltip'
+        'QTooltip',
+        'QAutocomplete'
       ],
       directives: [
         'Ripple',

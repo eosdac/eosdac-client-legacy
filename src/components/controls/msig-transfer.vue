@@ -63,10 +63,18 @@
           <q-input
             class="no-padding"
             stack-label="to"
-            v-model="form.to"
+            v-model.trim="form.to"
             :dark="getIsDark"
             @input="$v.form.to.$touch()"
-          />
+          >
+            <q-autocomplete
+              dark
+              @search="getAccountSuggestions"
+              :min-characters="4"
+              :delay="0"
+              :max-results="7"
+            />
+          </q-input>
         </q-field>
       </div>
     </div>
@@ -188,6 +196,20 @@ export default {
       let cloned = JSON.parse(JSON.stringify(data));
       cloned.quantity = cloned.quantity.split(" ")[0]; //remove the symbol
       this.form = cloned;
+    },
+    async getAccountSuggestions(terms, done) {
+      let accounts = await this.getEosApi.eos.get_table_rows({
+        json: true,
+        code: "eosio",
+        scope: "eosio",
+        table: "voters",
+        lower_bound: terms,
+        limit: 7
+      });
+      accounts = accounts.rows.map(a => {
+        return { label: a.owner, value: a.owner, icon: "person" };
+      });
+      done(accounts);
     }
   },
 
