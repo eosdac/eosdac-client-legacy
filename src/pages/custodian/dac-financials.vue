@@ -1,5 +1,6 @@
 <template>
   <q-page class="q-pa-md">
+    {{ permissions_map }}
     <p class="text-text2">
       The following EOS accounts represent value flow over time within the DAC
       and can be useful for budgeting and decision making.
@@ -82,7 +83,7 @@
                   <q-item class="cursor-pointer q-caption">
                     <q-item-main>
                       <label for="myInput" class="cursor-pointer full-width">
-                        Load From File
+                        Import File
                       </label>
                       <input
                         id="myInput"
@@ -99,7 +100,7 @@
                     v-close-overlay
                     @click.native="downloadReport"
                   >
-                    <q-item-main>Download Qeue</q-item-main>
+                    <q-item-main>Export Qeue</q-item-main>
                   </q-item>
                   <q-item
                     class="cursor-pointer q-caption"
@@ -126,7 +127,14 @@
               :thumb-style="getThumbStyle()"
               :delay="1500"
             >
-              <q-list dense no-border separator highlight dark class="q-pa-xs">
+              <q-list
+                dense
+                no-border
+                separator
+                highlight
+                :dark="getIsDark"
+                class="q-pa-xs"
+              >
                 <div
                   v-if="trx_qeue.length == 0"
                   class="text-weight-thin text-center q-body-1 q-mt-md"
@@ -241,7 +249,6 @@ export default {
       financialaccounts: [
         {
           account: this.$configFile.get("bpaccount"),
-          permissions: [],
           contract: this.$configFile.get("systemtokencontract"),
           symbol: this.$configFile.get("systemtokensymbol"),
           balance: null,
@@ -251,7 +258,7 @@ export default {
         },
         {
           account: this.$configFile.get("treasuryaccount"),
-          permissions: [],
+
           contract: this.$configFile.get("systemtokencontract"),
           symbol: this.$configFile.get("systemtokensymbol"),
           balance: null,
@@ -261,7 +268,6 @@ export default {
         },
         {
           account: "dacocoiogmbh",
-          permissions: [],
           contract: this.$configFile.get("systemtokencontract"),
           symbol: this.$configFile.get("systemtokensymbol"),
           balance: null,
@@ -270,6 +276,7 @@ export default {
             "The current eosDAC service provider account which manages payroll, employment contracts, and real-world interactions on behalf of the DAC."
         }
       ],
+      permissions_map: [],
 
       trx_qeue: []
     };
@@ -277,7 +284,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      // getEosApi: 'global/getEosApi'
+      getIsDark: "ui/getIsDark"
     })
   },
   methods: {
@@ -328,17 +335,24 @@ export default {
       document.getElementById("myInput").value = "";
     },
 
-    async getPermissions() {
-      for (let i = 0; i < this.financialaccounts.length; i++) {
-        let finacc = this.financialaccounts[i];
+    async getPermissions(accountname) {
+      let from_permissions = this.permissions_map.find(
+        pm => pm.account == accountname
+      );
+      if (from_permissions) return from_permissions;
 
-        let account_permissions = (await this.$store.dispatch(
-          "dac/fetchAccount",
-          {
-            accountname: finacc.account
-          }
-        )).permissions;
-        finacc.permissions = account_permissions;
+      let account_permissions = (await this.$store.dispatch(
+        "dac/fetchAccount",
+        {
+          accountname: accountname
+        }
+      )).permissions;
+      if (account_permissions) {
+        this.permissions_map.push({
+          account: accountname,
+          permissions: account_permissions
+        });
+        return account_permissions;
       }
     },
 
@@ -352,20 +366,20 @@ export default {
       }
       this.$store.commit("ui/setEnableTransactionOverlay", true);
     },
+
     async proposeTransfer(trx_index) {
       let trx_data = this.trx_qeue[trx_index];
 
       //set status to the sending state 1
       trx_data.status = 1;
 
-      let from_account = this.financialaccounts.find(
-        fa => fa.account == trx_data.from
-      );
+      let permission = "active"; //default to active
+      let from_permissions = await this.getPermissions(trx_data.from);
 
-      const hasXfer = !!from_account.permissions.find(
-        fp => fp.perm_name == "xfer"
-      );
-      const permission = hasXfer ? `xfer` : `active`;
+      if (from_permissions) {
+        const hasXfer = !!from_permissions.find(fp => fp.perm_name == "xfer");
+        permission = hasXfer ? `xfer` : `active`;
+      }
 
       let action = {
         account: "eosio.token",
@@ -424,9 +438,7 @@ export default {
       a.click();
     }
   },
-  mounted() {
-    this.getPermissions();
-  }
+  mounted() {}
 };
 </script>
 

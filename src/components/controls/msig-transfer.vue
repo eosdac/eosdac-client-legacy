@@ -68,7 +68,7 @@
             @input="$v.form.to.$touch()"
           >
             <q-autocomplete
-              dark
+              :dark="getIsDark"
               @search="getAccountSuggestions"
               :min-characters="4"
               :delay="0"
