@@ -205,6 +205,10 @@
                       dense
                       color="positive"
                     />
+                    <span class="animate-pop" v-if="trx.status == 1">
+                      <q-spinner color="primary-light" />
+                      <span class="q-caption text-text2 q-ml-sm">signing</span>
+                    </span>
                   </q-item-side>
                 </q-item>
               </q-list>
@@ -339,12 +343,14 @@ export default {
     },
 
     async proposeAll() {
+      this.$store.commit("ui/setEnableTransactionOverlay", false);
       for (let i = 0; i < this.trx_qeue.length; i++) {
         //only propose if not proposed yet
         if (this.trx_qeue[i].status == 0) {
           await this.proposeTransfer(i);
         }
       }
+      this.$store.commit("ui/setEnableTransactionOverlay", true);
     },
     async proposeTransfer(trx_index) {
       let trx_data = this.trx_qeue[trx_index];
