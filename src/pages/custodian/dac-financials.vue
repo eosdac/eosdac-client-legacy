@@ -1,6 +1,5 @@
 <template>
   <q-page class="q-pa-md">
-    {{ permissions_map }}
     <p class="text-text2">
       The following EOS accounts represent value flow over time within the DAC
       and can be useful for budgeting and decision making.
@@ -251,29 +250,29 @@ export default {
           account: this.$configFile.get("bpaccount"),
           contract: this.$configFile.get("systemtokencontract"),
           symbol: this.$configFile.get("systemtokensymbol"),
-          balance: null,
-          selected: false,
           description:
-            "The EOS Mainnet block producer account for eosDAC which receives Block Producer rewards."
+            "The EOS Mainnet block producer account for eosDAC which receives Block Producer rewards.",
+          balance: null,
+          selected: false
         },
         {
           account: this.$configFile.get("treasuryaccount"),
 
           contract: this.$configFile.get("systemtokencontract"),
           symbol: this.$configFile.get("systemtokensymbol"),
-          balance: null,
-          selected: false,
           description:
-            "The DAC owner account where DAC funds are secured and controlled by a 12-account multisig permission system of elected custodians."
+            "The DAC owner account where DAC funds are secured and controlled by a 12-account multisig permission system of elected custodians.",
+          balance: null,
+          selected: false
         },
         {
           account: "dacocoiogmbh",
           contract: this.$configFile.get("systemtokencontract"),
           symbol: this.$configFile.get("systemtokensymbol"),
-          balance: null,
-          selected: false,
           description:
-            "The current eosDAC service provider account which manages payroll, employment contracts, and real-world interactions on behalf of the DAC."
+            "The current eosDAC service provider account which manages payroll, employment contracts, and real-world interactions on behalf of the DAC.",
+          balance: null,
+          selected: false
         }
       ],
       permissions_map: [],
@@ -407,7 +406,10 @@ export default {
         console.log(res);
         trx_data.status = 2;
         trx_data.trx_id = res.transaction_id;
+        trx_data.proposal_name = res.proposal_name;
+        trx_data.block_time = res.processed.block_time;
       } else {
+        console.log(res);
         trx_data.status = 0;
       }
     },

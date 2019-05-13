@@ -337,7 +337,11 @@ export async function proposeMsig(
   };
 
   let msig_actions = [propose, proposed];
-  return dispatch("transact", { actions: msig_actions });
+  let res = await dispatch("transact", { actions: msig_actions });
+  if (res) {
+    res.proposal_name = proposal_name;
+  }
+  return res;
 }
 
 function parseError(err) {
