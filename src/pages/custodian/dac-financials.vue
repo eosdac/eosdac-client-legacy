@@ -177,9 +177,9 @@
                       <span>{{ trx.from }}</span>
                       <span class="text-weight-thin"> > </span>
                       <span>{{ trx.to }}</span>
-                      <span class="text-weight-thin on-right q-caption">{{
-                        trx.quantity
-                      }}</span>
+                      <span class="text-weight-thin on-right q-caption">
+                        {{ `${trx.asset.amount} ${trx.asset.symbol}` }}
+                      </span>
                     </q-item-tile>
                   </q-item-main>
                   <q-item-side right>
@@ -382,12 +382,17 @@ export default {
       }
 
       let action = {
-        account: "eosio.token",
+        account: trx_data.asset.contract,
         name: "transfer",
         data: {
           from: trx_data.from,
           to: trx_data.to,
-          quantity: trx_data.quantity,
+          quantity:
+            parseFloat(trx_data.asset.amount).toFixed(
+              trx_data.asset.precision
+            ) +
+            " " +
+            trx_data.asset.symbol,
           memo: trx_data.memo
         },
         authorization: [

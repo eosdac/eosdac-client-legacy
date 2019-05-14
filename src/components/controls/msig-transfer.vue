@@ -83,20 +83,20 @@
     <div class="col-xs-12 col-lg-6">
       <div>
         <q-field
-          :error="$v.form.quantity.$error"
+          :error="$v.form.asset.amount.$error"
           error-label="Please enter a valid pay amount"
         >
           <div class="row no-wrap items-end">
             <q-input
               class="full-width no-padding"
               type="number"
-              :decimals="decimals"
+              :decimals="form.asset.precision"
               stack-label="Quantity"
-              v-model="form.quantity"
+              v-model="form.asset.amount"
               :dark="getIsDark"
-              @input="$v.form.quantity.$touch()"
+              @input="$v.form.asset.amount.$touch()"
             />
-            <div class="q-ml-xs">{{ symbol }}</div>
+            <div class="q-ml-xs">{{ form.asset.symbol }}</div>
           </div>
         </q-field>
       </div>
@@ -156,7 +156,12 @@ export default {
       form: {
         from: "",
         to: "",
-        quantity: "",
+        asset: {
+          symbol: "EOS",
+          precision: 4,
+          contract: "eosio.token",
+          amount: ""
+        },
         memo: "",
         title: "",
         description: ""
@@ -178,10 +183,9 @@ export default {
         return;
       }
       let formdata = JSON.parse(JSON.stringify(this.form));
-      formdata.quantity =
-        parseFloat(formdata.quantity).toFixed(this.decimals) +
-        " " +
-        this.symbol;
+      formdata.asset.amount = parseFloat(formdata.asset.amount).toFixed(
+        formdata.asset.precision
+      );
       this.$emit("onsubmit", formdata);
       this.clearForm();
     },
@@ -189,7 +193,12 @@ export default {
       this.form = {
         from: "",
         to: "",
-        quantity: "",
+        asset: {
+          symbol: "EOS",
+          precision: 4,
+          contract: "eosio.token",
+          amount: ""
+        },
         memo: "",
         title: "",
         description: ""
@@ -201,7 +210,6 @@ export default {
       //make clone
 
       let cloned = JSON.parse(JSON.stringify(data));
-      cloned.quantity = cloned.quantity.split(" ")[0]; //remove the symbol
       this.form = cloned;
     },
     async getAccountSuggestions(terms, done) {
@@ -225,9 +233,9 @@ export default {
       form: {
         from: { required, isEosName },
         to: { required, isEosName },
-        quantity: {
-          required
-          // maxValue: maxValue(this.$helper.assetToNumber(this.from_balance))
+        asset: {
+          amount: { required },
+          symbol: { required }
         },
         memo: { maxLength: maxLength(255) },
         title: { required, maxLength: maxLength(230) },
