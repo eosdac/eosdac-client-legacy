@@ -39,7 +39,7 @@
           :error="$v.form.from.$error"
           error-label="Select a from account"
         >
-          <q-select
+          <!-- <q-select
             class="no-padding"
             v-model="form.from"
             stack-label="From"
@@ -50,7 +50,24 @@
                 return { value: fa, label: fa };
               })
             "
-          />
+          /> -->
+          <q-input
+            class="no-padding"
+            v-model="form.from"
+            stack-label="From"
+            :dark="getIsDark"
+            color="primary-light"
+          >
+            <q-autocomplete
+              :min-characters="0"
+              :static-data="{
+                field: 'value',
+                list: from_accounts.map(fa => {
+                  return { value: fa, label: fa };
+                })
+              }"
+            />
+          </q-input>
         </q-field>
       </div>
     </div>
@@ -70,7 +87,7 @@
           >
             <q-autocomplete
               :dark="getIsDark"
-              @search="getAccountSuggestions"
+              @search="suggestAccounts_to"
               :min-characters="3"
               :delay="0"
               :max-results="7"
@@ -96,7 +113,32 @@
               :dark="getIsDark"
               @input="$v.form.asset.amount.$touch()"
             />
-            <div class="q-ml-xs">{{ form.asset.symbol }}</div>
+
+            <q-select
+              v-if="!tokens_loading"
+              class="no-padding q-ml-xs animate-fade"
+              hide-underline
+              filter
+              autofocus-filter
+              :value="selected_token"
+              color="primary-light"
+              :dark="getIsDark"
+              placeholder="token"
+              :options="
+                tokens.map(t => {
+                  return {
+                    value: t,
+                    label: t.symbol,
+                    sublabel: t.contract,
+                    stamp: `${t.precision}`,
+                    rightTextColor: 'blue'
+                  };
+                })
+              "
+              @change="handleTokenSelection"
+            />
+
+            <q-spinner v-if="tokens_loading" color="primary-light" />
           </div>
         </q-field>
       </div>
@@ -165,7 +207,10 @@ export default {
         memo: "",
         title: "",
         description: ""
-      }
+      },
+      selected_token: "",
+      tokens: [],
+      tokens_loading: false
     };
   },
   computed: {
@@ -174,7 +219,10 @@ export default {
       getAccountName: "user/getAccountName",
       getAccount: "user/getAccount",
       getEosApi: "global/getEosApi"
-    })
+    }),
+    getSelectedToken() {
+      return this.selected_token;
+    }
   },
   methods: {
     processInputs() {
@@ -208,11 +256,11 @@ export default {
     },
     setFormFieldsEdit(data) {
       //make clone
-
       let cloned = JSON.parse(JSON.stringify(data));
       this.form = cloned;
     },
-    async getAccountSuggestions(terms, done) {
+
+    async suggestAccounts_to(terms, done) {
       let accounts = await this.getEosApi.eos.get_table_rows({
         json: true,
         code: "eosio",
@@ -225,6 +273,43 @@ export default {
         return { label: a.owner, value: a.owner, icon: "person" };
       });
       done(accounts);
+    },
+
+    async setTokens() {
+      if (!this.form.from) return;
+      this.tokens_loading = true;
+      let tokens = await this.$axios.get(
+        `${this.$configFile.get("hyperionapi")}/get_tokens?account=${
+          this.form.from
+        }`
+      );
+      if (!tokens || !tokens.data.tokens.length) {
+        tokens.data.tokens.push(JSON.parse(JSON.stringify(this.form.asset)));
+      }
+
+      this.tokens = tokens.data.tokens.map(t => {
+        delete t.amount;
+        return t;
+      });
+
+      this.selected_token = this.tokens.find(
+        t =>
+          t.symbol == this.form.asset.symbol &&
+          t.contract == this.form.asset.contract
+      );
+      this.tokens_loading = false;
+    },
+    handleTokenSelection(v) {
+      this.selected_token = v;
+      Object.assign(this.form.asset, v);
+    }
+  },
+  mounted() {
+    this.setTokens();
+  },
+  watch: {
+    "form.from": function() {
+      this.setTokens();
     }
   },
 

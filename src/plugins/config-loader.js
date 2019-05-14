@@ -65,6 +65,8 @@ class ConfigLoader {
         return this.configFile.external.explorer;
       case "memberclientstateapi":
         return this.configFile.api.memberclient_state_api;
+      case "hyperionapi":
+        return this.configFile.api.hyperion;
       case "bpnodeapi":
         return this.configFile.api.bpnodes;
       case "firehoseapi":

@@ -103,6 +103,9 @@ export default {
               gridLines: {
                 color: "rgba(0, 0, 0, 0)",
                 zeroLineColor: "#3E3E3E"
+              },
+              ticks: {
+                display: true
               }
             }
           ]

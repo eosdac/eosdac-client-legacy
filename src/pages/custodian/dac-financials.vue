@@ -330,6 +330,10 @@ export default {
       content = JSON.parse(content);
       for (let i = 0; i < content.length; i++) {
         let entry = content[i];
+        //be sure precision is correct
+        entry.asset.amount = parseFloat(entry.asset.amount).toFixed(
+          entry.asset.precision
+        );
         this.addToQeue(entry);
       }
       document.getElementById("myInput").value = "";
