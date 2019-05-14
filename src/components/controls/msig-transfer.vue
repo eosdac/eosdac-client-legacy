@@ -7,7 +7,7 @@
           error-label="Title is required and can't be longer then 230 chars"
         >
           <q-input
-            stack-label="title"
+            stack-label="Title"
             v-model="form.title"
             :dark="getIsDark"
             @input="$v.form.title.$touch()"
@@ -24,7 +24,7 @@
         >
           <q-input
             class="no-padding"
-            stack-label="description"
+            stack-label="Description"
             v-model="form.description"
             :dark="getIsDark"
             @input="$v.form.description.$touch()"
@@ -42,7 +42,7 @@
           <q-select
             class="no-padding"
             v-model="form.from"
-            stack-label="from"
+            stack-label="From"
             color="primary-light"
             :dark="getIsDark"
             :options="
@@ -63,7 +63,7 @@
         >
           <q-input
             class="no-padding"
-            stack-label="to"
+            stack-label="To"
             v-model.trim="form.to"
             :dark="getIsDark"
             @input="$v.form.to.$touch()"
@@ -71,7 +71,7 @@
             <q-autocomplete
               :dark="getIsDark"
               @search="getAccountSuggestions"
-              :min-characters="4"
+              :min-characters="3"
               :delay="0"
               :max-results="7"
             />
@@ -91,7 +91,7 @@
               class="full-width no-padding"
               type="number"
               :decimals="decimals"
-              stack-label="quantity"
+              stack-label="Quantity"
               v-model="form.quantity"
               :dark="getIsDark"
               @input="$v.form.quantity.$touch()"
@@ -110,7 +110,7 @@
           error-label="Memo can't be longer then 255 chars."
         >
           <q-input
-            stack-label="memo"
+            stack-label="Memo"
             v-model="form.memo"
             :dark="getIsDark"
             class="no-padding"

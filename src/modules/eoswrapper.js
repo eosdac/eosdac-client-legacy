@@ -133,14 +133,14 @@ export class EosWrapper {
     }
   }
 
-  async getCustodians() {
+  async getCustodians(number_custodians_config = 12) {
     let res = await this.eos
       .get_table_rows({
         json: true,
         code: this.configobj.get("custodiancontract"),
         scope: this.configobj.get("custodiancontract"),
         table: "custodians",
-        limit: 12
+        limit: number_custodians_config
       })
       .catch(e => false);
 

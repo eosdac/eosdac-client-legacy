@@ -2,17 +2,17 @@ export async function initRoutine({ state, commit, dispatch }, vm) {
   commit("setIsLoaded", false);
   const api = await dispatch("global/getEosApi", false, { root: true });
 
+  let custodianconfig = await api.getContractConfig("custodian");
   //requests to get dac info, doesn't require user to be logged in
   let requests = [
     api.getMemberTerms(),
-    api.getCustodians(),
-    api.getContractConfig("custodian")
+    api.getCustodians(custodianconfig.numelected)
   ];
 
-  let [memberterms, custodians, custconfig] = await Promise.all(requests);
+  let [memberterms, custodians] = await Promise.all(requests);
   commit("setMemberTerms", memberterms);
   commit("setCustodians", custodians);
-  commit("setCustodianConfig", custconfig);
+  commit("setCustodianConfig", custodianconfig);
   commit("setIsLoaded", true);
   //load in background
   dispatch("fetchActiveCandidates");
