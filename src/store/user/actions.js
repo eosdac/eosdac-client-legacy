@@ -318,13 +318,16 @@ export async function proposeMsig(
       trx: msigTrx_template
     }
   };
-
+  //handle the correct permission for the proposed action
+  let PERM = rootState.dac.dacAdmins.includes(state.accountName)
+    ? "admin"
+    : "one";
   let proposed = {
     account: this._vm.$configFile.get("dacmsigcontract"),
     name: "proposed",
     authorization: [
       { actor: state.accountName, permission: getters["getAuth"] },
-      { actor: this._vm.$configFile.get("authaccountname"), permission: "one" }
+      { actor: this._vm.$configFile.get("authaccountname"), permission: PERM }
     ],
     data: {
       proposer: state.accountName,
