@@ -327,13 +327,23 @@ export default {
         };
         fr.readAsText(file, `utf8`);
       });
-      content = JSON.parse(content);
+
+      try {
+        content = JSON.parse(content);
+      } catch (e) {
+        alert("Malformed import file !!", e);
+        return;
+      }
+
       for (let i = 0; i < content.length; i++) {
         let entry = content[i];
         //be sure precision is correct
         entry.asset.amount = parseFloat(entry.asset.amount).toFixed(
           entry.asset.precision
         );
+        if (entry.trx_id != undefined && entry.trx_id != "") {
+          entry.status = 2; //if trxid is present set status to executed
+        }
         this.addToQeue(entry);
       }
       document.getElementById("myInput").value = "";
