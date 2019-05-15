@@ -547,7 +547,8 @@ export default {
       getSettingByName: "user/getSettingByName",
       getAuth: "user/getAuth",
       getIsDark: "ui/getIsDark",
-      getCustodians: "dac/getCustodians"
+      getCustodians: "dac/getCustodians",
+      getAuthAccountPermLevel: "dac/getAuthAccountPermLevel"
     }),
 
     read_only: function() {
@@ -782,7 +783,7 @@ export default {
             { actor: this.getAccountName, permission: this.getAuth },
             {
               actor: this.$configFile.get("authaccountname"),
-              permission: "one"
+              permission: this.getAuthAccountPermLevel //can be one or admin depending of the logged in user
             }
           ],
           data: {

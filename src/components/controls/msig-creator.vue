@@ -524,7 +524,8 @@ export default {
       getIsDark: "ui/getIsDark",
       getAuth: "user/getAuth",
       getCandidates: "dac/getCandidates",
-      getCustodianConfig: "dac/getCustodianConfig"
+      getCustodianConfig: "dac/getCustodianConfig",
+      getAuthAccountPermLevel: "dac/getAuthAccountPermLevel"
     }),
     parseNumberToAsset(number, symbol) {
       return `${number.toFixed(4)} ${symbol}`;
@@ -642,7 +643,10 @@ export default {
         name: "proposed",
         authorization: [
           { actor: this.getAccountName, permission: this.getAuth },
-          { actor: this.$configFile.get("authaccountname"), permission: "one" }
+          {
+            actor: this.$configFile.get("authaccountname"),
+            permission: this.getAuthAccountPermLevel
+          }
         ],
         data: {
           proposer: this.getAccountName,

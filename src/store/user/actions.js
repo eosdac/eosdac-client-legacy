@@ -258,7 +258,7 @@ export async function transact(
 }
 
 export async function proposeMsig(
-  { state, rootState, commit, dispatch, getters },
+  { state, rootState, commit, dispatch, getters, rootGetters },
   payload
 ) {
   //payload example
@@ -318,10 +318,9 @@ export async function proposeMsig(
       trx: msigTrx_template
     }
   };
-  //handle the correct permission for the proposed action
-  let PERM = rootState.dac.dacAdmins.includes(state.accountName)
-    ? "admin"
-    : "one";
+  //handle the correct permission for the "proposed" action
+  let PERM = rootGetters["dac/getAuthAccountPermLevel"];
+
   let proposed = {
     account: this._vm.$configFile.get("dacmsigcontract"),
     name: "proposed",
