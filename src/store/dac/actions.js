@@ -148,8 +148,13 @@ export async function fetchWorkerProposals({}, payload = {}) {
     });
 }
 
+var call;
 export async function fetchMsigProposals({}, payload = {}) {
   // {status: 1, limit:0, skip: 1}
+  if (call) {
+    call.cancel();
+  }
+  call = this._vm.$axios.CancelToken.source();
   let url = this._vm.$configFile.get("memberclientstateapi");
   const header = {
     "X-DAC-Name": this._vm.$configFile.get("dacscope").toLowerCase()
@@ -159,7 +164,8 @@ export async function fetchMsigProposals({}, payload = {}) {
       method: "get",
       url: `${url}/msig_proposals`,
       params: payload,
-      headers: header
+      headers: header,
+      cancelToken: call.token
     })
     .then(r => {
       // console.log(r.data)
@@ -167,7 +173,7 @@ export async function fetchMsigProposals({}, payload = {}) {
     })
     .catch(e => {
       console.log("could not load worker proposals from api");
-      return [];
+      // return [];
     });
 }
 

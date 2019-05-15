@@ -54,7 +54,7 @@
       </div>
     </div>
 
-    <div v-if="proposals.length" style="min-height:200px">
+    <div v-if="proposals && proposals.length" style="min-height:200px">
       <Msigproposal
         v-for="(msig, index) in proposals"
         :key="index"
@@ -131,9 +131,13 @@ export default {
       this.proposals = [];
       let p = await this.$store.dispatch("dac/fetchMsigProposals", query);
       console.log("msigs", p);
-      this.total = p.count;
-      this.pagination.max = Math.ceil(p.count / this.pagination.items_per_page);
-      this.proposals = p.results;
+      if (p) {
+        this.total = p.count;
+        this.pagination.max = Math.ceil(
+          p.count / this.pagination.items_per_page
+        );
+        this.proposals = p.results;
+      }
     },
 
     getProposalsWithDelay() {
