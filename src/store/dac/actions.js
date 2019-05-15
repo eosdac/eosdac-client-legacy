@@ -129,7 +129,7 @@ export async function fetchWpConfig({ commit, dispatch, state }) {
 export async function fetchWorkerProposals({}, payload = {}) {
   let url = this._vm.$configFile.get("memberclientstateapi");
   const header = {
-    "X-DAC-Name": this._vm.$configFile.get("dacname").toLowerCase()
+    "X-DAC-Name": this._vm.$configFile.get("dacscope").toLowerCase()
   };
   return this._vm
     .$axios({
@@ -152,7 +152,7 @@ export async function fetchMsigProposals({}, payload = {}) {
   // {status: 1, limit:0, skip: 1}
   let url = this._vm.$configFile.get("memberclientstateapi");
   const header = {
-    "X-DAC-Name": this._vm.$configFile.get("dacname").toLowerCase()
+    "X-DAC-Name": this._vm.$configFile.get("dacscope").toLowerCase()
   };
   return this._vm
     .$axios({
@@ -175,7 +175,7 @@ export async function fetchTokenTimeLine({}, payload = {}) {
   // {account: 'piecesnbitss', contract:'kasdactokens', symbol:'KASDAC', start_block:10000000, end_block:17000000}
   let url = this._vm.$configFile.get("memberclientstateapi");
   const header = {
-    "X-DAC-Name": this._vm.$configFile.get("dacname").toLowerCase()
+    "X-DAC-Name": this._vm.$configFile.get("dacscope").toLowerCase()
   };
   return this._vm
     .$axios({

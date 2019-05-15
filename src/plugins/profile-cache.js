@@ -60,7 +60,7 @@ class ProfileCache {
     let url = this.config.get("memberclientstateapi").replace(/\/+$/, "");
     // let dacname = "eosdac"; //this.config.get("dacname");
     let params = { account: accountnames.join(",") };
-    const header = { "X-DAC-Name": this.config.get("dacname").toLowerCase() };
+    const header = { "X-DAC-Name": this.config.get("dacscope").toLowerCase() };
     return axios({
       method: "get",
       url: `${url}/profile`,
