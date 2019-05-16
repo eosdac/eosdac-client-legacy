@@ -93,17 +93,20 @@ export class EosWrapper {
 
   async getContractConfig(payload) {
     let contract;
+    let scope;
     let table = "config";
     if (payload == "custodian") {
       contract = this.configobj.get("custodiancontract");
+      scope = contract;
     } else if (payload == "wp") {
       contract = this.configobj.get("wpcontract");
+      scope = this.configobj.get("dacscope");
     }
     let res = await this.eos
       .get_table_rows({
         json: true,
         code: contract,
-        scope: contract,
+        scope: scope,
         table: table
       })
       .catch(e => false);
@@ -281,7 +284,7 @@ export class EosWrapper {
     let catvotes = await this.eos.get_table_rows({
       json: true,
       code: this.configobj.get("wpcontract"),
-      scope: this.configobj.get("authaccountname"),
+      scope: this.configobj.get("dacscope"),
       table: "catvotes",
       lower_bound: accountname,
       upper_bound: accountname,
