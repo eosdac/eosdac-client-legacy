@@ -148,6 +148,7 @@ export async function fetchWorkerProposals({}, payload = {}) {
     });
 }
 
+//canceltoken to fix glitch when multiple requests are made fast
 var call;
 export async function fetchMsigProposals({}, payload = {}) {
   // {status: 1, limit:0, skip: 1}

@@ -97,3 +97,7 @@ export function getIsCustodian(state, getters, rootState) {
 export function getMsigIsSeenCache(state) {
   return state.msigIsSeenCache;
 }
+
+export function getMsigTransferQeue(state) {
+  return state.msigTransferQeue;
+}

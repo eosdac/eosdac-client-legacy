@@ -105,7 +105,7 @@
                   <q-item
                     class="cursor-pointer q-caption"
                     v-close-overlay
-                    @click.native="trx_qeue = []"
+                    @click.native="clearQeue"
                   >
                     <q-item-main>Clear All</q-item-main>
                   </q-item>
@@ -278,13 +278,14 @@ export default {
       ],
       permissions_map: [],
 
-      trx_qeue: []
+      trx_qeue: this.$store.state.user.msigTransferQeue
     };
   },
 
   computed: {
     ...mapGetters({
-      getIsDark: "ui/getIsDark"
+      getIsDark: "ui/getIsDark",
+      getMsigTransferQeue: "user/getMsigTransferQeue"
     })
   },
   methods: {
@@ -293,18 +294,19 @@ export default {
       if (el.status === undefined) {
         el.status = 0;
       }
-
-      let f = this.trx_qeue.findIndex(qi => qi.status == 3);
-      console.log("edit item index", f);
-      if (f != -1) {
-        el.status = 0;
-        this.$set(this.trx_qeue, f, el);
-      } else {
-        this.trx_qeue.push(el);
-      }
+      this.$store.commit("user/setMsigTransferQeue", {
+        mode: "add",
+        qeue_entry: el
+      });
     },
     removeFromQeue(qeue_index) {
-      this.trx_qeue.splice(qeue_index, 1);
+      this.$store.commit("user/setMsigTransferQeue", {
+        mode: "remove",
+        qeue_entry: qeue_index
+      });
+    },
+    clearQeue() {
+      this.$store.commit("user/setMsigTransferQeue", { mode: "clear" });
     },
     editQeueItem(qeue_index) {
       //check if there is already an item being edited
