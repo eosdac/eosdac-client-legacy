@@ -123,7 +123,7 @@ export default {
         data: {
           custodian: this.getAccountName,
           category: cat_id,
-          dalegatee_custodian: delegatee.new,
+          delegatee_custodian: delegatee.new,
           dac_scope: this.$configFile.get("dacscope")
         }
       };
