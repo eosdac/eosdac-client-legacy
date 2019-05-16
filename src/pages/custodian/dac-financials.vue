@@ -144,7 +144,7 @@
                 <q-item
                   v-for="(trx, i) in trx_qeue"
                   :key="`trx${i}`"
-                  class="animate-pop"
+                  class="animate-fade"
                 >
                   <q-item-side left>
                     <q-btn
