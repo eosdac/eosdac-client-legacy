@@ -473,7 +473,7 @@ export default {
           data: {
             custodian: this.getAccountName,
             proposal_id: Number(this.wp.id),
-            dalegatee_custodian: delegatee.new, //xxxx
+            delegatee_custodian: delegatee.new, //xxxx
             dac_scope: this.$configFile.get("dacscope") //xxx
           }
         }
