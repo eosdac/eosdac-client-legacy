@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="getSettingByName('debug_data_structure').value"
+    v-if="getSettingByName('debug_data_structure').value || show"
     class="debug_data_structure bg-bg1 q-pa-md q-mt-md round-borders shadow-5 animate-fade"
   >
     <div class="text-text1 q-mb-md">Data Structures</div>
@@ -26,7 +26,11 @@ export default {
     };
   },
   props: {
-    data: Array
+    data: Array,
+    show: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     ...mapGetters({

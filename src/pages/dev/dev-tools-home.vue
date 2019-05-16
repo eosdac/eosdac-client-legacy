@@ -28,7 +28,7 @@
             <div class="row">
               <q-btn
                 class="q-ma-xs"
-                label="log config"
+                label="show configfile"
                 color="primary"
                 @click="logConfigFile"
               />
@@ -72,6 +72,19 @@
           }
         ]"
       />
+
+      <q-modal maximized v-model="showConfigModal">
+        <div
+          style="height:50px"
+          class="bg-bg1 row items-center justify-between q-px-md text-text1"
+        >
+          <span>Config</span>
+          <q-btn icon="close" @click="showConfigModal = false" flat dense />
+        </div>
+        <div class="q-pa-md bg-bg2 text-text1">
+          <debug-data :data="[$configFile.configFile]" show />
+        </div>
+      </q-modal>
     </div>
     <!-- end wrapper -->
   </q-page>
@@ -100,7 +113,8 @@ export default {
   data() {
     return {
       scatter: null,
-      assettest: ""
+      assettest: "",
+      showConfigModal: false
     };
   },
   computed: {
@@ -119,7 +133,8 @@ export default {
 
   methods: {
     logConfigFile() {
-      console.log(this.$configFile);
+      console.log(this.$configFile.configFile);
+      this.showConfigModal = true;
     },
     logProfileCache() {
       console.log(this.$profiles);
