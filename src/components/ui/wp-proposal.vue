@@ -474,7 +474,7 @@ export default {
             custodian: this.getAccountName,
             proposal_id: Number(this.wp.id),
             dalegatee_custodian: delegatee.new, //xxxx
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope") //xxx
           }
         }
       ];
@@ -522,7 +522,7 @@ export default {
             custodian: this.getAccountName,
             proposal_id: Number(this.wp.id),
             vote: map[votetype],
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope") //xxx
           }
         }
       ];
@@ -561,7 +561,7 @@ export default {
           ],
           data: {
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope") //xxx
           }
         }
       ];
@@ -582,7 +582,7 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope") //xxx
           }
         }
       ];
@@ -602,7 +602,7 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope") //xxx
           }
         }
       ];
@@ -624,7 +624,7 @@ export default {
           data: {
             arbitrator: this.getAccountName,
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope") //xxx
           }
         }
       ];
@@ -645,7 +645,7 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope") //xxx
           }
         }
       ];
