@@ -224,6 +224,21 @@
                 label="execute"
               />
             </div>
+            <span v-if="!read_only && msig.status === 3">
+              <q-btn
+                v-if="isCreator"
+                class="full-width q-mb-md"
+                color="negative"
+                label="cancel"
+                @click="cancelProposal(msig.proposer, msig.proposal_name)"
+              />
+              <q-btn
+                class="full-width"
+                color="positive"
+                label="resubmit"
+                @click="resubmit(msig)"
+              />
+            </span>
           </div>
         </div>
       </q-modal>
@@ -414,6 +429,13 @@
                 />
               </span>
               <span v-if="!read_only && msig.status === 3">
+                <q-btn
+                  v-if="isCreator"
+                  class="on-left"
+                  color="negative"
+                  label="cancel"
+                  @click="cancelProposal(msig.proposer, msig.proposal_name)"
+                />
                 <q-btn
                   color="positive"
                   label="resubmit"
