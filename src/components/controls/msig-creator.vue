@@ -651,6 +651,7 @@ export default {
         data: {
           proposer: this.getAccountName,
           proposal_name: this.msig_name,
+          dac_scope: this.$configFile.get("dacscope"),
           metadata: JSON.stringify({
             title: this.msig_title,
             description: this.msig_description

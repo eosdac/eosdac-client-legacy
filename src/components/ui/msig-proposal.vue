@@ -701,7 +701,8 @@ export default {
           data: {
             proposer: proposer,
             proposal_name: proposal_name,
-            approver: this.getAccountName
+            approver: this.getAccountName,
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -738,7 +739,8 @@ export default {
           data: {
             proposer: proposer,
             proposal_name: proposal_name,
-            unapprover: this.getAccountName
+            unapprover: this.getAccountName,
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -774,7 +776,8 @@ export default {
           data: {
             proposer: proposer,
             proposal_name: proposal_name,
-            executer: this.getAccountName
+            executer: this.getAccountName,
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -811,7 +814,8 @@ export default {
           data: {
             proposer: proposer,
             proposal_name: proposal_name,
-            canceler: this.getAccountName
+            canceler: this.getAccountName,
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];

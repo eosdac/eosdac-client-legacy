@@ -38,7 +38,7 @@ class ConfigLoader {
       case "dacname":
         return this.configFile.dacName;
       case "dacscope":
-        return this.configFile.dacScope;
+        return this.configFile.dacScope || "";
       case "defaultnode":
         return this.configFile.api.default_eos_node;
       case "tokencontract":
