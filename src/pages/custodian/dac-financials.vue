@@ -59,25 +59,30 @@
               size="sm"
             />
           </div>
-          <div class="q-pa-md">
-            <msig-transfer
-              @onsubmit="addToQeue($event)"
-              ref="msigTransferForm"
-              :from_accounts="financialaccounts.map(fa => fa.account)"
-            />
+          <div class="relative-position">
+            <div class="cust_only_overlay" v-if="!getIsCustodian">
+              custodians only
+            </div>
+            <div class="q-pa-md">
+              <msig-transfer
+                @onsubmit="addToQeue($event)"
+                ref="msigTransferForm"
+                :from_accounts="financialaccounts.map(fa => fa.account)"
+              />
+            </div>
           </div>
         </div>
       </div>
 
       <div class="col-xs-12 col-lg-6">
-        <div class="bg-bg1 round-borders shadow-5 overflow-hidden">
+        <div class="bg-bg1 round-borders shadow-5 overflow-hidden ">
           <div
             class="bg-primary q-pa-sm row justify-between items-center"
             style="height:50px"
           >
             <q-icon name="mdi-inbox-arrow-down" color="text2" size="24px" />
             <span class="uppercase">trx qeue ({{ trx_qeue.length }})</span>
-            <q-btn flat round dense icon="more_vert">
+            <q-btn flat round dense icon="more_vert" :disable="!getIsCustodian">
               <q-popover class="bg-bg2 text-text1" style="width:150px">
                 <q-list dense highlight>
                   <q-item class="cursor-pointer q-caption">
@@ -121,7 +126,10 @@
               </q-popover>
             </q-btn>
           </div>
-          <div>
+          <div class="relative-position">
+            <div class="cust_only_overlay" v-if="!getIsCustodian">
+              custodians only
+            </div>
             <q-scroll-area
               style="height: 350px; padding-bottom:8px"
               :thumb-style="getThumbStyle()"
@@ -285,7 +293,8 @@ export default {
   computed: {
     ...mapGetters({
       getIsDark: "ui/getIsDark",
-      getMsigTransferQeue: "user/getMsigTransferQeue"
+      getMsigTransferQeue: "user/getMsigTransferQeue",
+      getIsCustodian: "user/getIsCustodian"
     })
   },
   methods: {
@@ -466,4 +475,17 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.cust_only_overlay {
+  background-color: var(--q-color-bg1);
+  opacity: 0.9;
+  font-size: 18px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
