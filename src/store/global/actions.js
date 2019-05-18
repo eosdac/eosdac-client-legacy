@@ -239,7 +239,6 @@ export async function testEndpoint({ state }, endpointurl = false) {
       n => n.name == state.active_network
     );
     endpointurl = `${Network.fromJson(network).fullhost()}/v1/chain/get_info`;
-    // endpointurl = `${Network.fromJson(network).fullhost()}/v1/chadddddin/get_info` ;
   }
   let timeout = 3000;
   console.log("testing", endpointurl);

@@ -36,7 +36,7 @@
         <div class="fit profile_image_inner_wrap">
           <div
             v-if="img_loaded"
-            class="profile_image relative-position animate-fade"
+            class="profile_image profile_image_border relative-position animate-fade"
             style="height:140px; width:140px;"
             v-bind:style="{ 'background-image': `url(${setImgSrc})` }"
           ></div>
@@ -447,6 +447,10 @@ export default {
 .profile_image_inner_wrap {
   overflow: hidden;
   position: relative;
+}
+
+.profile_image_border{
+  border: 2px solid var(--q-color-text2);
 }
 
 .profile_image_outer_wrap {
