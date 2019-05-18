@@ -4,7 +4,58 @@
       The following EOS accounts represent value flow over time within the DAC
       and can be useful for budgeting and decision making.
     </p>
-    <div class="row gutter-sm q-mb-md">
+
+    <q-carousel class="text-white " arrows>
+      <q-carousel-slide
+        class="no-padding"
+        v-for="(chunk, si) in $helper.chunkArray(financialaccounts, 3)"
+        :key="`ssc${si}`"
+      >
+        <div class="row gutter-sm q-mb-md">
+          <div
+            v-for="(account, i) in chunk"
+            class="col-xs-12 col-sm-6 col-lg-4"
+            :key="`fc${i}`"
+          >
+            <div
+              class="bg-bg1 round-borders shadow-5 overflow-hidden full-height"
+            >
+              <div
+                v-bind:class="{
+                  'bg-primary': !account.selected,
+                  'bg-primary-light': account.selected
+                }"
+                class="q-pa-sm row justify-between items-center"
+              >
+                <span class="uppercase">{{ account.account }}</span>
+                <xspan class="q-caption" :value="account.balance" />
+                <help-btn
+                  :content="account.description"
+                  :title="account.account"
+                  color="text1"
+                  size="sm"
+                />
+              </div>
+              <div class="q-pa-md">
+                <balance-timeline
+                  :responsive="true"
+                  :height="230"
+                  ref="balance"
+                  :account="account.account"
+                  :contract="account.contract"
+                  :symbol="account.symbol"
+                  :show_balance="false"
+                  :legend="false"
+                  @onbalance="account.balance = $event"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-carousel-slide>
+    </q-carousel>
+
+    <!-- <div class="row gutter-sm q-mb-md">
       <div
         v-for="(account, i) in financialaccounts"
         class="col-xs-12 col-sm-6 col-lg-4"
@@ -42,7 +93,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="row gutter-sm">
       <div class="col-xs-12 col-lg-6">
@@ -51,7 +102,12 @@
             class="bg-primary q-pa-sm row justify-between items-center"
             style="height:50px"
           >
-            <span class="uppercase">Transfer</span>
+            <q-icon
+              :name="$configFile.icon.dactoken"
+              color="text2"
+              size="24px"
+            />
+            <span>Propose Transfer</span>
             <help-btn
               content="jqh q shkq sdk dk qskdh qskd"
               title="account.account"
@@ -80,8 +136,12 @@
             class="bg-primary q-pa-sm row justify-between items-center"
             style="height:50px"
           >
-            <q-icon name="mdi-inbox-arrow-down" color="text2" size="24px" />
-            <span class="uppercase">trx qeue ({{ trx_qeue.length }})</span>
+            <q-icon
+              :name="$configFile.icon.dactoken"
+              color="text2"
+              size="24px"
+            />
+            <span>Trx Qeue ({{ trx_qeue.length }})</span>
             <q-btn flat round dense icon="more_vert" :disable="!getIsCustodian">
               <q-popover
                 class="bg-bg2 text-text1"
