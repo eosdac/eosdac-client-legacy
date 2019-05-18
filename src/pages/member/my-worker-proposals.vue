@@ -14,7 +14,7 @@ export default {
       getAccountName: "user/getAccountName",
       getIsDark: "ui/getIsDark",
       getSettingByName: "user/getSettingByName",
-      getEosApi: "global/getEosApi"
+      getDacApi: "global/getDacApi"
     })
   },
   data() {
@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     async test() {
-      let wps = await this.getEosApi.getWps({
+      let wps = await this.getDacApi.getWps({
         account: this.getAccountName,
         dac_scope: this.$configFile.get("dacscope")
       });

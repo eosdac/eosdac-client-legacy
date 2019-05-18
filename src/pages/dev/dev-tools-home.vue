@@ -126,7 +126,7 @@ export default {
       getIsDark: "ui/getIsDark",
       getMemberTerms: "dac/getMemberTerms",
       getIsCustodian: "user/getIsCustodian",
-      getEosApi: "global/getEosApi"
+      getDacApi: "global/getDacApi"
       // getCustodians: 'dac/getCustodians',
     })
   },

@@ -148,7 +148,7 @@ export async function switchAccount({ state, dispatch }) {
   await dispatch("login");
 }
 
-export async function getEosApi({ state, commit }, rebuild = false) {
+export async function getDacApi({ state, commit }, rebuild = false) {
   if (state.eosApi && !rebuild) {
     // console.log('got eos api from store');
     return state.eosApi;
@@ -164,7 +164,7 @@ export async function getEosApi({ state, commit }, rebuild = false) {
     textDecoder: new TextDecoder(),
     textEncoder: new TextEncoder()
   });
-  commit("setEosApi", new DacApi(api, this._vm.$configFile));
+  commit("setDacApi", new DacApi(api, this._vm.$configFile));
   return state.eosApi;
 }
 

@@ -2,7 +2,7 @@ export function setScatter(state, payload) {
   state.scatter = payload;
 }
 
-export function setEosApi(state, payload) {
+export function setDacApi(state, payload) {
   state.eosApi = payload;
 }
 

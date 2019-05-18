@@ -1,6 +1,6 @@
 export async function initRoutine({ state, commit, dispatch }, vm) {
   commit("setIsLoaded", false);
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
 
   let custodianconfig = await api.getContractConfig("custodian");
   //requests to get dac info, doesn't require user to be logged in
@@ -22,7 +22,7 @@ export async function initRoutine({ state, commit, dispatch }, vm) {
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 export async function fetchCustodians({ state, commit, dispatch }) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
 
   let requests = [api.getCustodians()];
 
@@ -37,7 +37,7 @@ export async function fetchCustodians({ state, commit, dispatch }) {
 }
 
 export async function fetchActiveCandidates({ state, commit, dispatch }) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
 
   let candidates = await api.getCandidates();
 
@@ -74,7 +74,7 @@ export async function fetchActiveCandidates({ state, commit, dispatch }) {
 }
 
 export async function fetchDacAdmins({ commit, dispatch }) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let res = await api.getAccount(this._vm.$configFile.get("authaccountname"));
   if (res && res.permissions) {
     let admins = res.permissions.find(p => p.perm_name == "admin");
@@ -89,7 +89,7 @@ export async function fetchDacAdmins({ commit, dispatch }) {
 }
 
 export async function fetchAccount({ commit, dispatch }, payload) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let res = await api.getAccount(payload.accountname);
   if (res && res.account_name) {
     return res;
@@ -97,13 +97,13 @@ export async function fetchAccount({ commit, dispatch }, payload) {
 }
 
 export async function fetchApprovalsFromProposal({ dispatch }, payload) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let res = await api.getApprovalsFromProposal(payload);
   return res;
 }
 
 export async function fetchControlledAccounts({ dispatch }) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let ctrl = await api.getControlledAccounts(
     this._vm.$configFile.get("authaccountname")
   );
@@ -111,7 +111,7 @@ export async function fetchControlledAccounts({ dispatch }) {
 }
 
 export async function fetchCustodianContractState({ commit, dispatch, state }) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let xstate = await api.getCustodianContractState();
   if (xstate) {
     commit("setCustodianState", xstate);
@@ -119,7 +119,7 @@ export async function fetchCustodianContractState({ commit, dispatch, state }) {
 }
 
 export async function fetchWpConfig({ commit, dispatch, state }) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let conf = await api.getContractConfig("wp");
   if (conf) {
     commit("setWpConfig", conf);

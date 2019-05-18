@@ -7,7 +7,7 @@ export async function loggedOutRoutine({ commit }) {
   commit("setAccountName", null);
   commit("setDacBalance", null);
   commit("setAgreedTermsVersion", null);
-  commit("global/setEosApi", null, { root: true });
+  commit("global/setDacApi", null, { root: true });
   commit("global/setScatter", null, { root: true });
   commit("global/setEosScatter", null, { root: true });
   commit("setProfilePicture", null);
@@ -25,7 +25,7 @@ export async function loggedInRoutine({ state, commit, dispatch }, account) {
     commit("setProfilePicture", a[0].image);
   });
 
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
 
   //requests for setting up the logged in user
   let requests = [
@@ -64,7 +64,7 @@ export async function fetchIsCandidate(
   accountname = false
 ) {
   const accountN = accountname || state.accountName;
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let isCandidate = await api.isCandidate(accountN);
   if (!accountname) {
     commit("setIsCandidate", isCandidate);
@@ -78,7 +78,7 @@ export async function fetchDacVotes(
   accountname = false
 ) {
   const accountN = accountname || state.accountName;
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let votes = await api.getVotes(accountN);
   if (!accountname) {
     commit("setDacVotes", votes);
@@ -93,7 +93,7 @@ export async function fetchBalances(
   accountname = false
 ) {
   const accountN = accountname || state.accountName;
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let requests = [
     api.getBalance(accountN),
     api.getBalance(accountN, "eosio.token", "EOS")
@@ -112,7 +112,7 @@ export async function fetchPendingPay(
   accountname = false
 ) {
   const accountN = accountname || state.accountName;
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let res = await api.getPendingPay(accountN);
   return res;
 }
@@ -122,7 +122,7 @@ export async function fetchCatDelegations(
   accountname = false
 ) {
   const accountN = accountname || state.accountName;
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let res = await api.getCatDelegations(accountN);
   commit("setCatDelegations", res);
   return res;
@@ -271,7 +271,7 @@ export async function proposeMsig(
   //   description: "a description"
   // }
 
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   //proposalname
   let proposal_name = payload.proposal_name || this._vm.$helper.randomName();
   //expiration

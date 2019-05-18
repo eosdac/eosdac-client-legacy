@@ -219,7 +219,7 @@ export default {
       getIsDark: "ui/getIsDark",
       getAccountName: "user/getAccountName",
       getAccount: "user/getAccount",
-      getEosApi: "global/getEosApi"
+      getDacApi: "global/getDacApi"
     }),
     getSelectedToken() {
       return this.selected_token;
@@ -262,7 +262,7 @@ export default {
     },
 
     async suggestAccounts_to(terms, done) {
-      let accounts = await this.getEosApi.eos.get_table_rows({
+      let accounts = await this.getDacApi.eos.get_table_rows({
         json: true,
         code: "eosio",
         scope: "eosio",

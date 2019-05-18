@@ -2,7 +2,7 @@ export function getScatter(state) {
   return state.scatter;
 }
 
-export function getEosApi(state) {
+export function getDacApi(state) {
   return state.eosApi;
 }
 

@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      // getEosApi: 'global/getEosApi'
+      // getDacApi: 'global/getDacApi'
     })
   },
   methods: {}

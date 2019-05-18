@@ -279,7 +279,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getEosApi: "global/getEosApi",
+      getDacApi: "global/getDacApi",
       getIsDark: "ui/getIsDark",
       getAccountName: "user/getAccountName",
       getAccount: "user/getAccount"
@@ -298,11 +298,11 @@ export default {
   methods: {
     prettyHtml,
     async getAbi(contract) {
-      if (!this.getEosApi) return;
+      if (!this.getDacApi) return;
       this.abi_load_error = "";
       this.isLoading = true;
 
-      let abi = await this.getEosApi.eos.get_abi(contract).catch(e => {
+      let abi = await this.getDacApi.eos.get_abi(contract).catch(e => {
         console.log(e);
       });
 
@@ -407,7 +407,7 @@ export default {
         let account = action.account;
         let name = action.name;
         let data = action.data;
-        const contract = await this.getEosApi.eosapi.getContract(account);
+        const contract = await this.getDacApi.eosapi.getContract(account);
         let hex = Serialize.serializeActionData(
           contract,
           account,
