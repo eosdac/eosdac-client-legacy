@@ -1,7 +1,7 @@
 const { TextDecoder, TextEncoder } = require("text-encoding");
 const { Serialize } = require("eosjs");
 
-export class EosWrapper {
+export class DacApi {
   constructor(eosApi, config) {
     this.eosapi = eosApi;
     this.eos = eosApi.rpc;

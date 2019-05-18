@@ -127,6 +127,7 @@
               :options="
                 tokens.map(t => {
                   return {
+                    image: t.logo || '',
                     value: t,
                     label: t.symbol,
                     sublabel: t.contract,
@@ -279,18 +280,17 @@ export default {
       if (!this.form.from) return;
       this.tokens_loading = true;
       let tokens = await this.$axios.get(
-        `${this.$configFile.get("hyperionapi")}/get_tokens?account=${
+        `${this.$configFile.get("memberclientstateapi")}/tokens_owned?account=${
           this.form.from
         }`
       );
-      if (!tokens || !tokens.data.tokens.length) {
-        tokens.data.tokens.push(JSON.parse(JSON.stringify(this.form.asset)));
+      console.log(tokens);
+
+      if (!tokens || !tokens.data.results.length) {
+        tokens.data.results.push(JSON.parse(JSON.stringify(this.form.asset)));
       }
 
-      this.tokens = tokens.data.tokens.map(t => {
-        delete t.amount;
-        return t;
-      });
+      this.tokens = tokens.data.results;
 
       this.selected_token = this.tokens.find(
         t =>
@@ -331,4 +331,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.q-item-image {
+  min-height: 40px;
+  height: 40px;
+  min-width: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+</style>

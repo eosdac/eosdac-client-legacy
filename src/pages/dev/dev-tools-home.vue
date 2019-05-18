@@ -160,7 +160,7 @@ export default {
         type: "text/plain;charset=utf-8"
       });
       a.href = URL.createObjectURL(file);
-      a.download = "new.colors.style";
+      a.download = "new.colors.styl";
       a.click();
       console.log(new_colors);
     }

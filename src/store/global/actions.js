@@ -7,7 +7,7 @@ import axios from "axios";
 
 import { Api, JsonRpc } from "eosjs";
 const { TextDecoder, TextEncoder } = require("text-encoding");
-import { EosWrapper } from "../../modules/eoswrapper.js";
+import { DacApi } from "../../modules/dacapi.js";
 
 //mobile debugging
 // var VConsole = require("vconsole");
@@ -164,7 +164,7 @@ export async function getEosApi({ state, commit }, rebuild = false) {
     textDecoder: new TextDecoder(),
     textEncoder: new TextEncoder()
   });
-  commit("setEosApi", new EosWrapper(api, this._vm.$configFile));
+  commit("setEosApi", new DacApi(api, this._vm.$configFile));
   return state.eosApi;
 }
 
