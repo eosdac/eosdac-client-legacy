@@ -83,7 +83,11 @@
             <q-icon name="mdi-inbox-arrow-down" color="text2" size="24px" />
             <span class="uppercase">trx qeue ({{ trx_qeue.length }})</span>
             <q-btn flat round dense icon="more_vert" :disable="!getIsCustodian">
-              <q-popover class="bg-bg2 text-text1" style="width:150px">
+              <q-popover
+                class="bg-bg2 text-text1"
+                style="width:150px"
+                v-if="getIsCustodian"
+              >
                 <q-list dense highlight>
                   <q-item class="cursor-pointer q-caption">
                     <q-item-main>
