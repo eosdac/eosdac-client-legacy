@@ -38,7 +38,7 @@ class ConfigLoader {
       case "dacname":
         return this.configFile.dacName;
       case "dacscope":
-        return this.configFile.dacScope || "";
+        return this.configFile.dacScope.toLowerCase() || "";
       case "defaultnode":
         return this.configFile.api.default_eos_node;
       case "tokencontract":
@@ -64,17 +64,15 @@ class ConfigLoader {
       case "botcontract":
         return this.configFile.contracts.bot.name;
       case "explorer":
-        return this.configFile.external.explorer;
+        return this.configFile.external.explorer.replace(/\/+$/, "");
       case "memberclientstateapi":
-        return this.configFile.api.memberclient_state_api;
-      case "hyperionapi":
-        return this.configFile.api.hyperion;
+        return this.configFile.api.memberclient_state_api.replace(/\/+$/, "");
       case "bpnodeapi":
         return this.configFile.api.bpnodes;
       case "firehoseapi":
         return this.configFile.api.firehose;
-      case "external":
-        return this.configFile.external;
+      // case "external":
+      //   return this.configFile.external;
       case "authaccount":
         // backwards compatibility
         if (!this.configFile.contracts.auth) {
