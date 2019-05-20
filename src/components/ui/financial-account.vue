@@ -7,6 +7,7 @@
     >
       <q-select
         v-if="tokens"
+        :disable="tokens.length < 2"
         class="no-padding q-ml-xs animate-fade"
         hide-underline
         filter
