@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-show="show_balance" class="capitalize q-title">
-      {{ account }} <span class="text-text2">({{ getLatestBalance }})</span>
+      {{ account }} <span class="text-text2">({{ balance }})</span>
     </div>
     <div v-if="description != ''" class="text-text2 q-my-md">
       {{ description }}
@@ -77,6 +77,7 @@ export default {
       refblock: null,
       refdate: null,
       chartData: null,
+      balance: null,
       chartOptions: {
         responsive: this.responsive,
         maintainAspectRatio: false,
@@ -118,15 +119,7 @@ export default {
   computed: {
     ...mapGetters({
       getNodeInfo: "global/getNodeInfo"
-    }),
-    getLatestBalance() {
-      if (this.chartData) {
-        let vals = this.chartData.datasets[0].data;
-        let balance = `${vals[vals.length - 1]} ${this.symbol}`;
-        this.$emit("onbalance", balance);
-        return balance;
-      }
-    }
+    })
   },
   methods: {
     async init() {
@@ -174,6 +167,10 @@ export default {
           }
         ]
       };
+      let vals = this.chartData.datasets[0].data;
+      let balance = `${vals[vals.length - 1]} ${this.symbol}`;
+      this.balance = balance;
+      this.$emit("onbalance", balance);
     },
     numToTime(blocknum) {
       let diff = (this.refblock - blocknum) * 2; //seconds

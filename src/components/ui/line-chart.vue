@@ -16,7 +16,9 @@ export default {
   },
   methods: {
     render() {
-      this.renderChart(this.chartData, this.options);
+      if (this.chartData) {
+        this.renderChart(this.chartData, this.options);
+      }
     }
   },
   mounted() {

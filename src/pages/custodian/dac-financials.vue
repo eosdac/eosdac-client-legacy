@@ -20,6 +20,8 @@
             <financial-account
               :accountname="account.account"
               :description="account.description"
+              :default_contract="account.contract"
+              :default_symbol="account.symbol"
             />
           </div>
         </div>
@@ -259,7 +261,6 @@ export default {
         },
         {
           account: this.$configFile.get("treasuryaccount"),
-
           contract: this.$configFile.get("systemtokencontract"),
           symbol: this.$configFile.get("systemtokensymbol"),
           description:
@@ -269,8 +270,8 @@ export default {
         },
         {
           account: "dacocoiogmbh",
-          contract: this.$configFile.get("systemtokencontract"),
-          symbol: this.$configFile.get("systemtokensymbol"),
+          contract: this.$configFile.get("tokencontract"),
+          symbol: this.$configFile.get("dactokensymbol"),
           description:
             "The current eosDAC service provider account which manages payroll, employment contracts, and real-world interactions on behalf of the DAC.",
           balance: null,

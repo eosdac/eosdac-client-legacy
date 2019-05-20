@@ -1,5 +1,6 @@
 <template>
   <div class="bg-bg1 round-borders shadow-5 overflow-hidden full-height">
+    <!-- {{ selected_token }} -->
     <div
       class="q-pa-sm row justify-between items-center bg-primary"
       style="height:50px"
@@ -14,6 +15,7 @@
       />
     </div>
     <q-select
+      v-if="tokens"
       class="no-padding q-ml-xs animate-fade"
       hide-underline
       filter
@@ -23,6 +25,7 @@
       :dark="getIsDark"
       placeholder="token"
       :options="tokens"
+      @input="handleTokenSelection"
     />
     <div class="q-pa-md">
       <balance-timeline
@@ -55,9 +58,15 @@ export default {
   },
   props: {
     accountname: "",
-    default_symbol: "",
-    defaut_contract: "",
-    description: ""
+    description: "",
+    default_symbol: {
+      type: String,
+      default: "EOS"
+    },
+    default_contract: {
+      type: String,
+      default: "eosio.token"
+    }
   },
   data() {
     return {
@@ -74,12 +83,18 @@ export default {
   methods: {
     async setTokens() {
       if (!this.accountname) return;
-      let tokens = await this.$axios.get(
-        `${this.$configFile.get("memberclientstateapi")}/tokens_owned?account=${
-          this.accountname
-        }`
-      );
-      if (tokens.data.results) {
+      let tokens = {};
+      try {
+        tokens = await this.$axios.get(
+          `${this.$configFile.get(
+            "memberclientstateapi"
+          )}/tokens_owned?account=${this.accountname}`
+        );
+      } catch (e) {
+        console.log(e);
+      }
+
+      if (tokens.data && tokens.data.results) {
         tokens = tokens.data.results.map(t => {
           return {
             image: t.logo || "",
@@ -90,13 +105,25 @@ export default {
             rightTextColor: "blue"
           };
         });
-
-        this.selected_token = tokens.find(
-          t => t.value.symbol == "EOS" && t.value.contract == "eosio.token"
-        ).value;
-        console.log(this.selected_token);
         this.tokens = tokens;
+      } else {
+        this.tokens.push({
+          value: {
+            contract: this.default_contract,
+            symbol: this.default_symbol
+          },
+          label: this.default_symbol
+        });
       }
+
+      this.selected_token = this.tokens.find(
+        t =>
+          t.value.symbol == this.default_symbol &&
+          t.value.contract == this.default_contract
+      ).value;
+    },
+    handleTokenSelection(v) {
+      this.balance = null;
     }
   },
   mounted() {
