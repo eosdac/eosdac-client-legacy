@@ -28,10 +28,10 @@
                 class="q-pa-sm absolute-top-right"
               />
               <q-item-tile class="text-text1" label>{{
-                $t(`wp_categories.${cat.label}`)
+                $t(`${cat.label}`)
               }}</q-item-tile>
               <div class="q-caption text-text2 q-my-xs">
-                {{ $t(`wp_categories.${cat.desc}`) }}
+                {{ $t(`${cat.desc}`) }}
               </div>
               <member-select
                 itsme="UNDELEGATE"

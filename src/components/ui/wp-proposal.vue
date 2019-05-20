@@ -9,9 +9,7 @@
         <div class="q-py-sm proposal-title-line">
           <span class="capitalize">{{ wp.title }}</span>
           <span class="q-caption on-right text-weight-thin"
-            >({{
-              $t(`wp_categories.${getCategoryNameFromId(wp.category)}`)
-            }})</span
+            >({{ $t(`${getCategoryNameFromId(wp.category)}`) }})</span
           >
         </div>
         <q-btn
