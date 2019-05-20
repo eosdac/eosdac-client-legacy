@@ -8,7 +8,10 @@
     <q-carousel class="text-white " arrows>
       <q-carousel-slide
         class="no-padding"
-        v-for="(chunk, si) in $helper.chunkArray(financialaccounts, 3)"
+        v-for="(chunk, si) in $helper.chunkArray(
+          financialaccounts,
+          getChunkSize()
+        )"
         :key="`ssc${si}`"
       >
         <div class="row gutter-sm q-mb-md">
@@ -184,7 +187,7 @@
                       <span>{{ trx.to }}</span>
                       <q-chip
                         dense
-                        color="primary"
+                        color="bg2"
                         class="text-weight-thin on-right q-caption"
                       >
                         <span>{{ `${trx.asset.amount}` }}</span>
@@ -277,10 +280,18 @@ export default {
         },
         {
           account: "dacocoiogmbh",
-          contract: this.$configFile.get("tokencontract"),
-          symbol: this.$configFile.get("dactokensymbol"),
+          contract: this.$configFile.get("systemtokencontract"),
+          symbol: this.$configFile.get("systemtokensymbol"),
           description:
             "The current eosDAC service provider account which manages payroll, employment contracts, and real-world interactions on behalf of the DAC.",
+          balance: null,
+          selected: false
+        },
+        {
+          account: this.$configFile.get("custodiancontract"),
+          contract: this.$configFile.get("tokencontract"),
+          symbol: this.$configFile.get("dactokensymbol"),
+          description: "custodian contract description",
           balance: null,
           selected: false
         }
@@ -454,6 +465,18 @@ export default {
         width: "5px",
         opacity: 1
       };
+    },
+
+    getChunkSize() {
+      //col-xs-12 col-sm-6 col-lg-4
+      let size = 1;
+      if (this.$q.screen.gt.xs) {
+        size = 2;
+      }
+      if (this.$q.screen.gt.sm) {
+        size = 3;
+      }
+      return size;
     },
 
     downloadReport() {

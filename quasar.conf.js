@@ -6,7 +6,7 @@ module.exports = function (ctx) {
   
   return {
     htmlVariables: { 
-      host: build_config.host_no_backslash
+      host: build_config.host_no_backslash,
       meta_description: build_config.meta_description 
     },
     // app plugins (/src/plugins)
@@ -156,7 +156,8 @@ module.exports = function (ctx) {
       plugins: [
         'Notify',
         'Dialog',
-        'Meta'
+        'Meta',
+        'Screen'
       ],
       // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
       i18n: 'en-us' // Quasar language
