@@ -42,8 +42,8 @@
             />
             <span>Propose Transfer</span>
             <help-btn
-              content="jqh q shkq sdk dk qskdh qskd"
-              title="account.account"
+              content="Fill in the form to propose a transfer from one of the DAC accounts. The transfers will be submitted to the blockchain as multisignature proposals. The custodians need to vote before the transfer can be executed."
+              title="Propose Transfer"
               color="text1"
               size="sm"
             />
@@ -182,9 +182,16 @@
                       <span>{{ trx.from }}</span>
                       <span class="text-weight-thin"> > </span>
                       <span>{{ trx.to }}</span>
-                      <span class="text-weight-thin on-right q-caption">
-                        {{ `${trx.asset.amount} ${trx.asset.symbol}` }}
-                      </span>
+                      <q-chip
+                        dense
+                        color="primary"
+                        class="text-weight-thin on-right q-caption"
+                      >
+                        <span>{{ `${trx.asset.amount}` }}</span>
+                        <span class="text-weight-bold">
+                          {{ trx.asset.symbol }}
+                        </span>
+                      </q-chip>
                     </q-item-tile>
                   </q-item-main>
                   <q-item-side right>

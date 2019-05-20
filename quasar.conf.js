@@ -6,8 +6,8 @@ module.exports = function (ctx) {
   
   return {
     htmlVariables: { 
-      host: build_config.host_no_backslash,
-      description: build_config.meta_description 
+      host: build_config.host_no_backslash
+      meta_description: build_config.meta_description 
     },
     // app plugins (/src/plugins)
     plugins: [

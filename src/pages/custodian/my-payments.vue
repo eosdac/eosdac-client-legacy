@@ -42,7 +42,7 @@
           >(current pay: {{ getIsCandidate.requestedpay }})</span
         >
       </div>
-      <div class="text-text1 round-borders bg-bg1 q-pa-md">
+      <div class="text-text1 round-borders bg-bg1 shadow-4 q-pa-md">
         <span>{{
           $t("manage_candidateship.pay_description", {
             requested_pay: $helper.assetToLocaleNumber(

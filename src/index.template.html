@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <title><%= htmlWebpackPlugin.options.meta_title %></title>
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="<%= htmlWebpackPlugin.options.description %>">
@@ -16,8 +17,8 @@
     <meta name="twitter:image" content="<%= htmlWebpackPlugin.options.host %>/branding/images/social_share_preview/mockup-social-media-client-twitter-1024x512.png">
 
     <!-- Open Graph general (Facebook, Pinterest & Google+) -->
-    <meta property="og:title" content="eosDAC Member Client">
-    <meta property="og:description" content="<%= htmlWebpackPlugin.options.description %>">
+    <meta property="og:title" content="<%= htmlWebpackPlugin.options.meta_title %>">
+    <meta property="og:description" content="<%= htmlWebpackPlugin.options.meta_description %>">
     <meta property="og:image" content="<%= htmlWebpackPlugin.options.host %>/branding/images/social_share_preview/mockup-social-media-client-facebook-1200x630.png">
     <meta property="og:type" content="website">
 
