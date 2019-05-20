@@ -65,7 +65,10 @@
       v-else
       class="text-text2 bg-bg1 q-pa-md round-borders shadow-4 capitalize"
     >
-      No Multisignature proposals available
+      <span v-if="msigs_loading" class="row items-center">
+        <q-spinner class="on-left" color="primary-light" />Loading
+      </span>
+      <span v-else>No Multisignature proposals available</span>
     </div>
 
     <div
@@ -132,7 +135,8 @@ export default {
         max: 1,
         items_per_page: 8
       },
-      filter: ""
+      filter: "",
+      msigs_loading: false
     };
   },
 
@@ -167,7 +171,7 @@ export default {
     },
 
     async getProposals(query) {
-      //todo: loading animation
+      this.msigs_loading = true;
       this.proposals = [];
       let p = await this.$store.dispatch("dac/fetchMsigProposals", query);
       console.log("msigs", p);
@@ -178,6 +182,7 @@ export default {
         );
         this.proposals = p.results;
       }
+      this.msigs_loading = false;
     },
 
     getProposalsWithDelay() {
