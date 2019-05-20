@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="getSettingByName('debug_data_structure').value || show"
-    class="debug_data_structure bg-bg1 q-pa-md q-mt-md round-borders shadow-5 animate-fade"
+    class="debug_data_structure bg-bg1 q-pa-md q-mt-md round-borders shadow-4 animate-fade"
   >
     <div class="text-text1 q-mb-md">Data Structures</div>
     <!-- <span v-if="copied_to_clipboard_msg !=null" class="q-pa-sm animate-fade q-caption text-dimwhite" >{{copied_to_clipboard_msg}}</span>

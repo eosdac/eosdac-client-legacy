@@ -14,7 +14,7 @@
     </q-tabs>
 
     <div
-      class="row bg-bg1 q-pa-md q-mb-md shadow-5 round-borders justify-between"
+      class="row bg-bg1 q-pa-md q-mb-md shadow-4 round-borders justify-between"
       v-if="true"
     >
       <q-search

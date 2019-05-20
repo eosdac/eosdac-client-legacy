@@ -107,7 +107,7 @@
 
     <div class="q-px-md">
       <div
-        class="row q-mt-md gutters-md bg-bg1 round-borders shadow-5"
+        class="row q-mt-md gutters-md bg-bg1 round-borders shadow-4"
         style="min-height:265px"
       >
         <div class="col-md-8 col-xs-12 q-pa-md">

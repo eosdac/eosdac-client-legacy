@@ -8,7 +8,7 @@
     </div>
 
     <div class="row">
-      <div class="bg-bg1 round-borders shadow-5 col-xs-12 col-md-6">
+      <div class="bg-bg1 round-borders shadow-4 col-xs-12 col-md-6">
         <div v-if="pendingpay.length" class="animate-fade">
           <q-item v-for="(pay, i) in pendingpay" :key="`pay_id_${i}`">
             <q-item-side left>{{ pay.key }}</q-item-side>

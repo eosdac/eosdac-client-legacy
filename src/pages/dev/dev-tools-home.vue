@@ -3,7 +3,7 @@
     <div class="q-pa-md">
       <div class="row gutter-sm">
         <div class="col-xs-12 col-md-6">
-          <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="bg-bg1 round-borders shadow-4 q-pa-md">
             <div class="q-title q-mb-md">Profile Cache</div>
             <div class="row">
               <q-btn
@@ -23,7 +23,7 @@
         </div>
 
         <div class="col-xs-12 col-md-6">
-          <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="bg-bg1 round-borders shadow-4 q-pa-md">
             <div class="q-title q-mb-md">Config File</div>
             <div class="row">
               <q-btn
@@ -37,7 +37,7 @@
         </div>
 
         <div class="col-xs-12 col-md-6 ">
-          <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="bg-bg1 round-borders shadow-4 q-pa-md">
             <div class="row justify-between q-mb-md"></div>
             <color-picker />
             <div class="q-mt-md row justify-between">
@@ -51,7 +51,7 @@
         </div>
 
         <div class="col-xs-12 col-md-6 ">
-          <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height">
+          <div class="bg-bg1 round-borders shadow-4 q-pa-md full-height">
             <div class="q-title q-mb-md">Network</div>
             <div class="q-mt-md row">
               <network-switcher class="q-ma-xs" :enable_pin="false" />

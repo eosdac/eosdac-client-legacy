@@ -2,7 +2,7 @@
   <q-page class="q-pa-md">
     <!-- content -->
 
-    <div class="bg-bg1 round-borders shadow-5 q-pa-md bg-logo">
+    <div class="bg-bg1 round-borders shadow-4 q-pa-md bg-logo">
       <div class="text-text1 q-title q-mb-md">Submit Worker Proposal</div>
       <div class="q-mb-md text-text2">
         Please fill in the form to explain your worker proposal. There need to

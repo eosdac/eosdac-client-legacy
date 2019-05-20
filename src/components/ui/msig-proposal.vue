@@ -4,7 +4,7 @@
     <!--small screens mobile-->
     <div
       v-if="!isHidden"
-      class="q-mb-md bg-bg1 round-borders shadow-5 animate-fade lt-sm"
+      class="q-mb-md bg-bg1 round-borders shadow-4 animate-fade lt-sm"
     >
       <div class="row justify-center q-pa-md relative-position">
         <q-chip
@@ -248,7 +248,7 @@
     <!--big screens desktop-->
     <div
       v-if="!isHidden"
-      class="q-mb-md bg-bg1 round-borders shadow-5 animate-fade gt-xs"
+      class="q-mb-md bg-bg1 round-borders shadow-4 animate-fade gt-xs"
     >
       <q-collapsible
         icon-toggle

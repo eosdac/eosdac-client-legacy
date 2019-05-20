@@ -2,7 +2,7 @@
   <div
     v-if="wp.id && show"
     style="min-height:100%"
-    class=" q-pa-md column no-wrap justify-between bg-bg1 round-borders shadow-5 bg-logo animate-fade"
+    class=" q-pa-md column no-wrap justify-between bg-bg1 round-borders shadow-4 bg-logo animate-fade"
   >
     <div class="full-width">
       <div class="q-mb-md q-title relative-position">

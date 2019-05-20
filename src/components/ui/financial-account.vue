@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-bg1 round-borders shadow-5 overflow-hidden full-height ">
+  <div class="bg-bg1 round-borders shadow-4 overflow-hidden full-height ">
     <!-- {{ selected_token }} -->
     <div
       class="q-pa-sm row justify-between items-center bg-primary "
@@ -33,7 +33,7 @@
         :value="balance"
       />
       <balance-timeline
-        class="q-mt-xs"
+        class="q-mt-sm"
         :responsive="true"
         :height="230"
         ref="balance"

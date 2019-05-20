@@ -15,7 +15,7 @@
     </q-tabs>
 
     <div
-      class="row bg-bg1 q-pa-md q-mb-md shadow-5 round-borders justify-between"
+      class="row bg-bg1 q-pa-md q-mb-md shadow-4 round-borders justify-between"
       v-if="true"
     >
       <q-search
@@ -63,7 +63,7 @@
     </div>
     <div
       v-else
-      class="text-text2 bg-bg1 q-pa-md round-borders shadow-5 capitalize"
+      class="text-text2 bg-bg1 q-pa-md round-borders shadow-4 capitalize"
     >
       No Multisignature proposals available
     </div>

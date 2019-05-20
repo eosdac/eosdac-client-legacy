@@ -6,7 +6,7 @@
       v-bind:class="{
         selected_candidate: data.selected,
         unselected_candidate: !data.selected,
-        'shadow-5': !data.selected
+        'shadow-4': !data.selected
       }"
     >
       <q-chip class="q-ma-xs absolute-top-left" color="bg2">{{
@@ -175,7 +175,7 @@
       v-bind:class="{
         selected_candidate: data.selected,
         unselected_candidate: !data.selected,
-        'shadow-5': !data.selected
+        'shadow-4': !data.selected
       }"
     >
       <q-collapsible

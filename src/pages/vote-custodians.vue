@@ -8,7 +8,7 @@
         {{ $t("vote_custodians.custodian_board") }}
       </div>
 
-      <div class="bg-bg1 shadow-5 round-borders q-pa-md q-mb-md">
+      <div class="bg-bg1 shadow-4 round-borders q-pa-md q-mb-md">
         <display-custodians />
       </div>
 
@@ -31,7 +31,7 @@
 
             <div
               v-if="!loading"
-              class="row bg-bg1 q-pa-md q-mb-md shadow-5 round-borders justify-between animate-fade"
+              class="row bg-bg1 q-pa-md q-mb-md shadow-4 round-borders justify-between animate-fade"
             >
               <q-search
                 :dark="getIsDark"
@@ -83,7 +83,7 @@
 
             <div
               v-if="!loading"
-              class="row bg-bg1 q-pa-md q-mb-md shadow-5 round-borders justify-between animate-fade"
+              class="row bg-bg1 q-pa-md q-mb-md shadow-4 round-borders justify-between animate-fade"
             >
               <q-search
                 :dark="getIsDark"

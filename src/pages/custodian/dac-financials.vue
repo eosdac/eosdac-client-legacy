@@ -30,7 +30,7 @@
 
     <div class="row gutter-sm">
       <div class="col-xs-12 col-lg-6">
-        <div class="bg-bg1 round-borders shadow-5 overflow-hidden">
+        <div class="bg-bg1 round-borders shadow-4 overflow-hidden">
           <div
             class="bg-primary q-pa-sm row justify-between items-center"
             style="height:50px"
@@ -64,7 +64,7 @@
       </div>
 
       <div class="col-xs-12 col-lg-6">
-        <div class="bg-bg1 round-borders shadow-5 overflow-hidden ">
+        <div class="bg-bg1 round-borders shadow-4 overflow-hidden bg-logo">
           <div
             class="bg-primary q-pa-sm row justify-between items-center"
             style="height:50px"

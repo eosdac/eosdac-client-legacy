@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <div class="q-pa-md round-borders shadow-5 bg-bg1 bg-logo">
+    <div class="q-pa-md round-borders shadow-4 bg-bg1 bg-logo">
       <transaction-builder />
     </div>
   </q-page>

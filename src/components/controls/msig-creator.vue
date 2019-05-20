@@ -5,7 +5,7 @@
         {{ $t("msig_creator.page_title") }}
       </h4>
     </div>
-    <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+    <div class="bg-bg1 round-borders shadow-4 q-pa-md">
       <q-stepper
         color="primary-light"
         class="bg-bg1 bg-logo"
