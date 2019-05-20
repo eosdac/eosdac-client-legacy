@@ -220,7 +220,7 @@ export default {
     -webkit-transition: background-color .2s ease-in, color .2s ease-in;
             transition: background-color .2s ease-in, color .2s ease-in; }
     .medium-editor-toolbar li button:hover {
-      background-color: #000;
+      background-color: var(--q-color-dark);
       color: #a2d7c7; }
   .medium-editor-toolbar li .medium-editor-button-first {
 
@@ -231,7 +231,7 @@ export default {
 
     padding-right: 24px; }
   .medium-editor-toolbar li .medium-editor-button-active {
-    background-color: #000;
+    background-color: var(--q-color-bg1);
     color: #a2d7c7;
 
    }
@@ -270,8 +270,8 @@ export default {
     margin-right: 16px; }
 
 .medium-editor-toolbar-anchor-preview {
-  background: #000;
-
+  background: var(--q-color-bg1);
+  border-radius: $generic-border-radius;
   padding: 5px 12px; }
 
 .medium-editor-anchor-preview a {
