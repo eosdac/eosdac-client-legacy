@@ -237,12 +237,12 @@ export default {
    }
 
 .medium-editor-toolbar-form {
-  background: #000;
-  border-radius: 50px;
+  background: var(--q-color-bg2);
+
   color: #ccc;
   overflow: hidden; }
   .medium-editor-toolbar-form .medium-editor-toolbar-input {
-    background: #000;
+    background: var(--q-color-bg2);
     box-sizing: border-box;
     color: #ccc;
     height: 40px;

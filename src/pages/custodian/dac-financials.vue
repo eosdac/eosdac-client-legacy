@@ -53,6 +53,7 @@
           </div>
           <div class="relative-position">
             <div class="cust_only_overlay" v-if="!getIsCustodian">
+              <q-icon name="lock" class="q-mr-xs text-text2" />
               custodians only
             </div>
             <div class="q-pa-md">
@@ -84,10 +85,14 @@
                 style="width:150px"
                 v-if="getIsCustodian"
               >
-                <q-list dense highlight>
-                  <q-item class="cursor-pointer q-caption">
+                <q-list highlight>
+                  <q-item class="cursor-pointer q-body-1">
                     <q-item-main>
-                      <label for="myInput" class="cursor-pointer full-width">
+                      <label
+                        style="display:block"
+                        for="myInput"
+                        class="cursor-pointer full-width"
+                      >
                         Import File
                       </label>
                       <input
@@ -101,14 +106,14 @@
                     </q-item-main>
                   </q-item>
                   <q-item
-                    class="cursor-pointer q-caption"
+                    class="cursor-pointer q-body-1"
                     v-close-overlay
                     @click.native="downloadReport"
                   >
                     <q-item-main>Export Qeue</q-item-main>
                   </q-item>
                   <q-item
-                    class="cursor-pointer q-caption"
+                    class="cursor-pointer q-body-1"
                     v-close-overlay
                     @click.native="clearQeue"
                   >
@@ -116,7 +121,7 @@
                   </q-item>
                   <q-item
                     v-if="trx_qeue.length > 1"
-                    class="cursor-pointer q-caption"
+                    class="cursor-pointer q-body-1"
                     v-close-overlay
                     @click.native="proposeAll"
                   >
@@ -128,8 +133,10 @@
           </div>
           <div class="relative-position">
             <div class="cust_only_overlay" v-if="!getIsCustodian">
+              <q-icon name="lock" class="q-mr-xs text-text2" />
               custodians only
             </div>
+
             <q-scroll-area
               style="height: 350px; padding-bottom:8px"
               :thumb-style="getThumbStyle()"
