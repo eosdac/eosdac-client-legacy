@@ -106,7 +106,8 @@ export default {
                 zeroLineColor: "#3E3E3E"
               },
               ticks: {
-                display: true
+                display: true,
+                beginAtZero: true
               }
             }
           ]
