@@ -6,7 +6,7 @@
       class="markdown-body q-body-ow"
       v-bind:class="{ overwritemd: dark }"
     ></div>
-    <div v-else class="relative-position bg-bg2">
+    <div v-else class="relative-position bg-bg2 round-borders">
       <medium-editor
         ref="markeditor"
         id="markeditor"
@@ -18,7 +18,11 @@
         v-on:edit="applyTextEdit"
       />
     </div>
-    <div v-if="edit" class="row justify-end q-caption q-py-sm" style="">
+    <div
+      v-if="edit"
+      class="row justify-end q-caption q-py-sm text-text2"
+      style=""
+    >
       {{ $t("markdown_viewer.select_text_to_edit") }}
     </div>
   </div>
