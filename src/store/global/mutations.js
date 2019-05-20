@@ -1,3 +1,6 @@
+export function setNodeInfo(state, payload) {
+  state.nodeInfo = payload;
+}
 export function setScatter(state, payload) {
   state.scatter = payload;
 }

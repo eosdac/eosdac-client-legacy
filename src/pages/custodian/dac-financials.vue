@@ -17,83 +17,14 @@
             class="col-xs-12 col-sm-6 col-lg-4"
             :key="`fc${i}`"
           >
-            <div
-              class="bg-bg1 round-borders shadow-5 overflow-hidden full-height"
-            >
-              <div
-                v-bind:class="{
-                  'bg-primary': !account.selected,
-                  'bg-primary-light': account.selected
-                }"
-                class="q-pa-sm row justify-between items-center"
-              >
-                <span class="uppercase">{{ account.account }}</span>
-                <xspan class="q-caption" :value="account.balance" />
-                <help-btn
-                  :content="account.description"
-                  :title="account.account"
-                  color="text1"
-                  size="sm"
-                />
-              </div>
-              <div class="q-pa-md">
-                <balance-timeline
-                  :responsive="true"
-                  :height="230"
-                  ref="balance"
-                  :account="account.account"
-                  :contract="account.contract"
-                  :symbol="account.symbol"
-                  :show_balance="false"
-                  :legend="false"
-                  @onbalance="account.balance = $event"
-                />
-              </div>
-            </div>
+            <financial-account
+              :accountname="account.account"
+              :description="account.description"
+            />
           </div>
         </div>
       </q-carousel-slide>
     </q-carousel>
-
-    <!-- <div class="row gutter-sm q-mb-md">
-      <div
-        v-for="(account, i) in financialaccounts"
-        class="col-xs-12 col-sm-6 col-lg-4"
-        :key="`fc${i}`"
-      >
-        <div class="bg-bg1 round-borders shadow-5 overflow-hidden full-height">
-          <div
-            v-bind:class="{
-              'bg-primary': !account.selected,
-              'bg-primary-light': account.selected
-            }"
-            class="q-pa-sm row justify-between items-center"
-          >
-            <span class="uppercase">{{ account.account }}</span>
-            <xspan class="q-caption" :value="account.balance" />
-            <help-btn
-              :content="account.description"
-              :title="account.account"
-              color="text1"
-              size="sm"
-            />
-          </div>
-          <div class="q-pa-md">
-            <balance-timeline
-              :responsive="true"
-              :height="230"
-              ref="balance"
-              :account="account.account"
-              :contract="account.contract"
-              :symbol="account.symbol"
-              :show_balance="false"
-              :legend="false"
-              @onbalance="account.balance = $event"
-            />
-          </div>
-        </div>
-      </div>
-    </div> -->
 
     <div class="row gutter-sm">
       <div class="col-xs-12 col-lg-6">
@@ -303,18 +234,16 @@
 
 <script>
 import { mapGetters } from "vuex";
-import balanceTimeline from "components/ui/balance-timeline";
+import financialAccount from "components/ui/financial-account";
 import helpBtn from "components/controls/help-btn";
-import xspan from "components/ui/xspan";
 import msigTransfer from "components/controls/msig-transfer";
 import { colors } from "quasar";
 export default {
   name: "dacFinancials",
   components: {
-    balanceTimeline,
     msigTransfer,
     helpBtn,
-    xspan
+    financialAccount
   },
   data() {
     return {

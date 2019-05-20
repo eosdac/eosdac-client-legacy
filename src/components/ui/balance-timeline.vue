@@ -19,6 +19,7 @@
 <script>
 import { colors, date } from "quasar";
 import lineChart from "components/ui/line-chart";
+import { mapGetters } from "vuex";
 
 export default {
   name: "balanceTimeline",
@@ -114,6 +115,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      getNodeInfo: "global/getNodeInfo"
+    }),
     getLatestBalance() {
       if (this.chartData) {
         let vals = this.chartData.datasets[0].data;
@@ -125,18 +129,19 @@ export default {
   },
   methods: {
     async init() {
-      let { head_block_num, head_block_time } = await this.$store.dispatch(
-        "global/testEndpoint"
-      );
+      let { head_block_num, head_block_time } =
+        this.getNodeInfo || (await this.$store.dispatch("global/testEndpoint"));
       this.refblock = head_block_num;
       this.refdate = new Date(head_block_time);
-      this.getTokenTimeLine({
-        account: this.account,
-        contract: this.contract,
-        symbol: this.symbol,
-        start_block: 0,
-        end_block: this.end_block
-      });
+      if (this.account && this.contract && this.symbol) {
+        this.getTokenTimeLine({
+          account: this.account,
+          contract: this.contract,
+          symbol: this.symbol,
+          start_block: 0,
+          end_block: this.end_block
+        });
+      }
     },
     getGradient() {
       let { r, g, b } = colors.hexToRgb(colors.getBrand("primary"));
@@ -193,6 +198,9 @@ export default {
   },
   watch: {
     account: function() {
+      this.init();
+    },
+    symbol: function() {
       this.init();
     }
   }

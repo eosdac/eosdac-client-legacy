@@ -1,3 +1,6 @@
+export function getNodeInfo(state, payload) {
+  return state.nodeInfo;
+}
 export function getScatter(state) {
   return state.scatter;
 }

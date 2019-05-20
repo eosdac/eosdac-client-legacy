@@ -233,7 +233,7 @@ export async function switchNetwork(
   await dispatch("connectScatter", true);
 }
 
-export async function testEndpoint({ state }, endpointurl = false) {
+export async function testEndpoint({ state, commit }, endpointurl = false) {
   if (!endpointurl) {
     let network = await state.networks.find(
       n => n.name == state.active_network
@@ -252,6 +252,7 @@ export async function testEndpoint({ state }, endpointurl = false) {
   })
     .then(res => {
       console.log(res.data);
+      commit("setNodeInfo", res.data);
       return res.data;
     })
     .catch(error => {
