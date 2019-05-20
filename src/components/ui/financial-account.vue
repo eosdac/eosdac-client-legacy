@@ -1,12 +1,24 @@
 <template>
-  <div class="bg-bg1 round-borders shadow-5 overflow-hidden full-height">
+  <div class="bg-bg1 round-borders shadow-5 overflow-hidden full-height ">
     <!-- {{ selected_token }} -->
     <div
-      class="q-pa-sm row justify-between items-center bg-primary"
+      class="q-pa-sm row justify-between items-center bg-primary "
       style="height:50px"
     >
-      <span class="uppercase">{{ accountname }}</span>
-      <xspan class="q-caption" :value="balance" />
+      <q-select
+        v-if="tokens"
+        class="no-padding q-ml-xs animate-fade"
+        hide-underline
+        filter
+        autofocus-filter
+        v-model="selected_token"
+        color="primary-light"
+        :dark="getIsDark"
+        placeholder="token"
+        :options="tokens"
+        @input="handleTokenSelection"
+      />
+      <span class="">{{ accountname }}</span>
       <help-btn
         :content="description"
         :title="accountname"
@@ -14,21 +26,14 @@
         size="sm"
       />
     </div>
-    <q-select
-      v-if="tokens"
-      class="no-padding q-ml-xs animate-fade"
-      hide-underline
-      filter
-      autofocus-filter
-      v-model="selected_token"
-      color="primary-light"
-      :dark="getIsDark"
-      placeholder="token"
-      :options="tokens"
-      @input="handleTokenSelection"
-    />
-    <div class="q-pa-md">
+
+    <div class="q-pa-md relative-position">
+      <xspan
+        class="q-caption absolute-right q-mr-md q-mt-sm text-text2"
+        :value="balance"
+      />
       <balance-timeline
+        class="q-mt-xs"
         :responsive="true"
         :height="230"
         ref="balance"
