@@ -138,6 +138,9 @@ export default {
       }
     },
     getGradient() {
+      if (!this.$refs.linechart && !this.$refs.linechart.$refs) {
+        return;
+      }
       let { r, g, b } = colors.hexToRgb(colors.getBrand("primary"));
       // console.log(r,g,b)
       let gradient = this.$refs.linechart.$refs.canvas
@@ -193,5 +196,3 @@ export default {
   //
 };
 </script>
-
-<style></style>

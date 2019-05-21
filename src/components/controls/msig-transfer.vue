@@ -3,6 +3,7 @@
     <div class="col-xs-12">
       <div>
         <q-field
+          class="q-mb-sm"
           :error="$v.form.title.$error"
           error-label="Title is required and can't be longer then 230 chars"
         >
@@ -19,11 +20,34 @@
     <div class="col-xs-12">
       <div>
         <q-field
+          class="q-mb-sm"
           :error="$v.form.description.$error"
           error-label="Description is required and can't be longer then 900 chars"
         >
+          <!-- <MarkdownViewer
+            :tags="[
+              'h1',
+              'h2',
+              'h3',
+              'italic',
+              'bold',
+              'underline',
+              'strikethrough',
+              'subscript',
+              'superscript',
+              'anchor',
+              'orderedlist',
+              'unorderedlist'
+            ]"
+            :edit="true"
+            :dark="getIsDark"
+            :text="form.description"
+            v-on:update="updateFormDescription"
+          /> -->
+
           <q-input
             class="no-padding"
+            type="textarea"
             stack-label="Description"
             v-model="form.description"
             :dark="getIsDark"
@@ -36,6 +60,7 @@
     <div class="col-xs-12 col-lg-6">
       <div>
         <q-field
+          class="q-mb-sm"
           :error="$v.form.from.$error"
           error-label="Select a from account"
         >
@@ -75,6 +100,7 @@
     <div class="col-xs-12 col-lg-6">
       <div>
         <q-field
+          class="q-mb-sm"
           :error="$v.form.to.$error"
           error-label="Please enter a valid accountname"
         >
@@ -100,6 +126,7 @@
     <div class="col-xs-12 col-lg-6">
       <div>
         <q-field
+          class="q-mb-sm"
           :error="$v.form.asset.amount.$error"
           error-label="Please enter a valid pay amount"
         >
@@ -148,7 +175,7 @@
     <div class="col-xs-12 col-lg-6">
       <div>
         <q-field
-          class="no-padding"
+          class="no-padding q-mb-sm"
           :error="$v.form.memo.$error"
           error-label="Memo can't be longer then 255 chars."
         >
@@ -172,12 +199,14 @@
 
 <script>
 import { mapGetters } from "vuex";
-
+// import MarkdownViewer from "components/ui/markdown-viewer";
 import { required, maxLength } from "vuelidate/lib/validators";
 import { isEosName } from "../../modules/validators.js";
 export default {
   name: "msigTransfer",
-  components: {},
+  components: {
+    // MarkdownViewer
+  },
   props: {
     symbol: {
       type: String,
@@ -226,6 +255,9 @@ export default {
     }
   },
   methods: {
+    updateFormDescription(val) {
+      this.form.description = val;
+    },
     processInputs() {
       this.$v.$touch();
       if (this.$v.$error) {

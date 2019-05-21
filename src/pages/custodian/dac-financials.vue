@@ -138,7 +138,7 @@
             </div>
 
             <q-scroll-area
-              style="height: 350px; padding-bottom:8px"
+              style="height: 380px; padding-bottom:8px"
               :thumb-style="getThumbStyle()"
               :delay="1500"
             >
