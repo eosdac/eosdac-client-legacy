@@ -276,7 +276,7 @@ export async function proposeMsig(
   let proposal_name = payload.proposal_name || this._vm.$helper.randomName();
   //expiration
   let exp = new Date();
-  exp.setDate(exp.getDate() + 7);
+  exp.setDate(exp.getDate() + 10);
   let [expiration] = exp.toISOString().split(".");
   //requested
   let requested = rootState.dac.candidates

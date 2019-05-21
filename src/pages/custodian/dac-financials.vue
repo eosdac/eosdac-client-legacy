@@ -247,6 +247,34 @@
         </div>
       </div>
       <!-- end trx qeue -->
+
+      <!-- <div class="col-xs-12 col-lg-6">
+        <div class="bg-bg1 round-borders shadow-4 overflow-hidden">
+          <div
+            class="bg-primary q-pa-sm row justify-between items-center"
+            style="height:50px"
+          >
+            <q-icon
+              :name="$configFile.icon.dactoken"
+              color="text2"
+              size="24px"
+            />
+            <span>Open Payments</span>
+            <help-btn
+              content="Fill in the form to propose a transfer from one of the DAC accounts. The transfers will be submitted to the blockchain as multisignature proposals. The custodians need to vote before the transfer can be executed."
+              title="Propose Transfer"
+              color="text1"
+              size="sm"
+            />
+          </div>
+          <div class="relative-position">
+            <div class="q-pa-md">
+              <custodian-payments />
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- end open payments -->
     </div>
   </q-page>
 </template>
@@ -256,6 +284,7 @@ import { mapGetters } from "vuex";
 import financialAccount from "components/ui/financial-account";
 import helpBtn from "components/controls/help-btn";
 import msigTransfer from "components/controls/msig-transfer";
+// import custodianPayments from "components/controls/custodian-payments";
 import { colors } from "quasar";
 export default {
   name: "dacFinancials",
@@ -263,6 +292,7 @@ export default {
     msigTransfer,
     helpBtn,
     financialAccount
+    // custodianPayments
   },
   data() {
     return {
