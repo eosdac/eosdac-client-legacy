@@ -2,7 +2,8 @@
   <q-page class="q-pa-md">
     <!-- <vote-delegation /> -->
     <!-- <abi-viewer /> -->
-    <msig-transfer />
+    <!-- <msig-transfer /> -->
+    <contract-settings />
   </q-page>
 </template>
 
@@ -10,14 +11,16 @@
 import { mapGetters } from "vuex";
 // import abiViewer from "components/controls/abi-viewer";
 // import voteDelegation from "components/controls/vote-delegation";
-import msigTransfer from "components/controls/msig-transfer";
+import contractSettings from "components/controls/contract-settings";
+// import msigTransfer from "components/controls/msig-transfer";
 
 export default {
   name: "playground",
   components: {
     // abiViewer,
     // voteDelegation,
-    msigTransfer
+    // msigTransfer,
+    contractSettings
   },
   data() {
     return {
