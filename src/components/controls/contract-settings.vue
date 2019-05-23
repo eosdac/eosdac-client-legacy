@@ -67,32 +67,11 @@ export default {
       }
     },
     async updateConfig() {
-      let new_config = this.contract_config.reduce((result, item) => {
-        switch (item.type) {
-          case "bool":
-            if (
-              item.value == 0 ||
-              item.value == false ||
-              item.value == "false"
-            ) {
-              item.value = false;
-            } else {
-              item.value = true;
-            }
-            break;
-
-          default:
-            break;
-        }
-        result[item.name] = item.value;
-        return result;
-      }, {});
-      console.log(new_config);
       let action = {
         account: this.contract,
         name: "updateconfig",
         data: {
-          newconfig: new_config
+          newconfig: this.parseConfig()
         },
         authorization: [
           {
@@ -108,6 +87,29 @@ export default {
         description: "this is the description of the action"
       });
       console.log(res);
+    },
+    parseConfig() {
+      let new_config = this.contract_config.reduce((result, item) => {
+        switch (item.type) {
+          case "bool":
+            if (
+              item.value === 0 ||
+              item.value === false ||
+              item.value === "false"
+            ) {
+              item.value = false;
+            } else {
+              item.value = true;
+            }
+            break;
+
+          default:
+            break;
+        }
+        result[item.name] = item.value;
+        return result;
+      }, {});
+      return new_config;
     }
   },
   mounted() {
