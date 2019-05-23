@@ -425,11 +425,10 @@ export default {
       if (this.wp.status === 2) {
         expiration_millis = Number(this.getWpConfig.claim_expiry) * 1000;
       }
-      let start = new Date(this.wp.block_timestamp).getTime();
+      let start = Date.parse(this.wp.block_timestamp);
       let end = start + expiration_millis;
       let current = new Date().getTime();
-      //todo calculate relative expiration based on NOW and expiration
-
+      //calculate relative expiration based on NOW and expiration
       let perc = 100 - ((current - start) / (end - start)) * 100;
       let msleft = end - current;
       return {

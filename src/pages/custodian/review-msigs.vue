@@ -54,7 +54,7 @@
       </div>
     </div>
 
-    <div v-if="proposals && proposals.length" style="min-height:200px">
+    <div v-if="proposals && proposals.length">
       <Msigproposal
         v-for="(msig, index) in proposals"
         :key="index"
@@ -63,7 +63,7 @@
     </div>
     <div
       v-else
-      class="text-text2 bg-bg1 q-pa-md round-borders shadow-4 capitalize"
+      class="text-text2 bg-bg1 bg-logo q-pa-md round-borders shadow-4 capitalize"
     >
       <span v-if="msigs_loading" class="row items-center">
         <q-spinner class="on-left" color="primary-light" />Loading
@@ -214,9 +214,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.msigproposal_header {
-  height: 80px;
-}
-</style>
