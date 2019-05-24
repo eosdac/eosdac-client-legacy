@@ -3,7 +3,17 @@
     <!-- <vote-delegation /> -->
     <!-- <abi-viewer /> -->
     <!-- <msig-transfer /> -->
-    <contract-settings />
+    <div class="q-pa-md round-borders bg-bg1 bg-logo shadow-4">
+      <q-select
+        class="q-mb-md"
+        stack-label="Select contract"
+        color="primary-light"
+        dark
+        v-model="selected_contract"
+        :options="getContractOptions()"
+      />
+      <contract-settings :contract="selected_contract" />
+    </div>
   </q-page>
 </template>
 
@@ -20,13 +30,15 @@ export default {
     // abiViewer,
     // voteDelegation,
     // msigTransfer,
+
     contractSettings
   },
   data() {
     return {
       abi: "",
       wasm: "",
-      test: ""
+      test: "",
+      selected_contract: ""
     };
   },
   computed: {
@@ -34,6 +46,16 @@ export default {
       // getDacApi: 'global/getDacApi'
     })
   },
-  methods: {}
+  methods: {
+    getContractOptions() {
+      let contracts = [
+        this.$configFile.get("custodiancontract"),
+        this.$configFile.get("wpcontract")
+      ];
+      return contracts.map(c => {
+        return { value: c, label: c };
+      });
+    }
+  }
 };
 </script>

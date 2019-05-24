@@ -1,19 +1,28 @@
 <template>
-  <div class="row gutter-md">
+  <div class="row gutter-sm">
     <div
       v-for="(config_item, key) in contract_config"
       :key="key"
-      class="col-xs-12 col-md-6"
+      class="col-xs-12 col-sm-6 col-md-4 animate-fade"
     >
+      <q-item-tile class="row items-center">
+        <div>{{ config_item.name }}</div>
+        <help-btn
+          content="Fill in the form to propose a transfer from one of the DAC accounts. The transfers will be submitted to the blockchain as multisignature proposals. The custodians need to vote before the transfer can be executed."
+          title="Propose Transfer"
+          color="primary-light"
+          size="sm"
+        />
+      </q-item-tile>
+
       <q-input
         :dark="getIsDark"
-        :stack-label="config_item.name"
         v-model="config_item.value"
         :placeholder="config_item.type"
         color="primary-light"
       />
     </div>
-    <div class="col-xs-12">
+    <div class="col-xs-12 row justify-end">
       <q-btn label="update" @click="updateConfig" color="primary" />
     </div>
   </div>
@@ -21,8 +30,12 @@
 
 <script>
 import { mapGetters } from "vuex";
+import helpBtn from "components/controls/help-btn";
 export default {
   name: "contractSettings",
+  components: {
+    helpBtn
+  },
   props: {
     contract: {
       type: String,
@@ -37,6 +50,7 @@ export default {
   computed: {
     ...mapGetters({
       getCustodianConfig: "dac/getCustodianConfig",
+      getWpConfig: "dac/getWpConfig",
       getIsDark: "ui/getIsDark",
       getDacApi: "global/getDacApi"
     })
@@ -44,12 +58,20 @@ export default {
   methods: {
     async init() {
       let abi = await this.getAbi(this.contract);
-      let config_struct = abi.structs.find(s => s.name == "contr_config")
-        .fields;
+      if (abi == undefined) return;
 
-      for (let conf in this.getCustodianConfig) {
+      let config_struct = abi.structs.find(
+        s => s.name == "contr_config" || s.name == "config"
+      ).fields;
+
+      let current_config =
+        this.contract == "dacproposals"
+          ? this.getWpConfig
+          : this.getCustodianConfig;
+      console.log(current_config);
+      for (let conf in current_config) {
         let item = config_struct.find(cs => cs.name == conf);
-        item.value = this.getCustodianConfig[conf];
+        item.value = current_config[conf];
       }
       this.contract_config = config_struct;
     },
@@ -67,12 +89,19 @@ export default {
       }
     },
     async updateConfig() {
+      let data =
+        this.contract == "dacproposals"
+          ? {
+              new_config: this.parseConfig(),
+              dac_scope: this.$configFile.get("dacscope")
+            }
+          : { newconfig: this.parseConfig() };
       let action = {
         account: this.contract,
         name: "updateconfig",
-        data: {
-          newconfig: this.parseConfig()
-        },
+        // data: {
+        //   newconfig: this.parseConfig()
+        // },
         authorization: [
           {
             actor: this.contract,
@@ -80,6 +109,7 @@ export default {
           }
         ]
       };
+      action.data = data;
 
       let res = await this.$store.dispatch("user/proposeMsig", {
         actions: [action],
@@ -88,6 +118,7 @@ export default {
       });
       console.log(res);
     },
+
     parseConfig() {
       let new_config = this.contract_config.reduce((result, item) => {
         switch (item.type) {
@@ -112,9 +143,15 @@ export default {
       return new_config;
     }
   },
+
   mounted() {
     console.log("init");
     this.init();
+  },
+  watch: {
+    contract: function() {
+      this.init();
+    }
   }
 };
 </script>
