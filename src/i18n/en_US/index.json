@@ -331,5 +331,39 @@
     "cat_7_desc": "This is a short description about Operations",
     "cat_8_desc": "This is a short description about Translations",
     "cat_9_desc": "This is a short description about Custodians"
+  },
+
+  "conf_cust_contr": {
+    "auth_threshold_high_title": "Vote threshold high",
+    "auth_threshold_low_title": "Vote threshold low",
+    "auth_threshold_mid_title": "Vote threshold mid",
+    "authaccount_title": "Authority account",
+    "initial_vote_quorum_percent_title": "Initial vote quorum (%)",
+    "lockup_release_time_delay_title": "Unstake delay",
+    "lockupasset_title": "Candidate stake amount",
+    "maxvotes_title": "Maximum number of votes",
+    "numelected_title": "Number of custodians",
+    "periodlength_title": "Period length",
+    "requested_pay_max_title": "Maximum requested pay",
+    "serviceprovider_title": "Service provider",
+    "should_pay_via_service_provider_title": "Pay via service provider",
+    "tokenholder_title": "Token holder account",
+    "vote_quorum_percent_title": "Vote quorum (%)",
+
+    "auth_threshold_high_desc": "How many custodians are required to approve highest level actions?",
+    "auth_threshold_low_desc": "How many custodians are required to approve lowest level actions?",
+    "auth_threshold_mid_desc": "How many custodians are required to approve mid level actions?",
+    "authaccount_desc": "The DAC account that manages all permissions.",
+    "initial_vote_quorum_percent_desc": "What percentage of tokens are needed for a quorum to initially launch the DAC?",
+    "lockup_release_time_delay_desc": "How much time before locked up stake can be released back to the candidate using the unstake action?",
+    "lockupasset_desc": "How many tokens does a member need to lock up in order to register as a custodian candidate? This ensure candidates have skin in the game to protect the value of the $TOKENSYBMOL token which secures the DAC.",
+    "maxvotes_desc": "How many votes does each member get when voting for custodians?",
+    "numelected_desc": "How many custodians will be elected to the custodian board?",
+    "periodlength_desc": "How long will each custodian period be in seconds?",    
+    "requested_pay_max_desc": "What is the maximum amount of tokens a custodian can request as a candidate?",
+    "serviceprovider_desc": "The account that xxxxxxxxxxxxxxx",
+    "should_pay_via_service_provider_desc": "Do payments need to pass via the service provider?",
+    "tokenholder_desc": "The DAC account that holds the tokens.",
+    "vote_quorum_percent_desc": "Amount of token value in votes required to trigger the allow a new set of custodians to be set after the initial threshold has been achieved."
   }
 }
