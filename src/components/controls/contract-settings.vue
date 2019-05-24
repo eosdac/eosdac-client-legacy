@@ -57,6 +57,14 @@ export default {
   },
   methods: {
     async init() {
+      if (this.contract == "") return;
+      if (
+        this.contract == this.$configFile.get("wpcontract") &&
+        this.getWpConfig.authority_account === null
+      ) {
+        await this.$store.dispatch("dac/fetchWpConfig");
+      }
+
       let abi = await this.getAbi(this.contract);
       if (abi == undefined) return;
 
