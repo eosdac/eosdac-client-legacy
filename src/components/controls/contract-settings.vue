@@ -5,7 +5,7 @@
       :key="key"
       class="col-xs-12 col-sm-6 col-md-4 animate-fade"
     >
-      <q-item-tile class="row items-center">
+      <q-item-tile class="row items-center no-wrap">
         <div>{{ config_item.name }}</div>
         <help-btn
           content="Fill in the form to propose a transfer from one of the DAC accounts. The transfers will be submitted to the blockchain as multisignature proposals. The custodians need to vote before the transfer can be executed."
