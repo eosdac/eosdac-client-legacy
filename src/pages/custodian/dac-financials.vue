@@ -43,10 +43,10 @@
               color="text2"
               size="24px"
             />
-            <span>Propose Transfer</span>
+            <span>{{ $t("dac_financials.propose_transfer") }}</span>
             <help-btn
-              content="Fill in the form to propose a transfer from one of the DAC accounts. The transfers will be submitted to the blockchain as multisignature proposals. The custodians need to vote before the transfer can be executed."
-              title="Propose Transfer"
+              :content="$t('dac_financials.propose_transfer_help')"
+              :title="$t('dac_financials.propose_transfer')"
               color="text1"
               size="sm"
             />
@@ -54,7 +54,7 @@
           <div class="relative-position">
             <div class="cust_only_overlay" v-if="!getIsCustodian">
               <q-icon name="lock" class="q-mr-xs text-text2" />
-              custodians only
+              {{ $t("dac_financials.cust_only") }}
             </div>
             <div class="q-pa-md">
               <msig-transfer
@@ -78,7 +78,9 @@
               color="text2"
               size="24px"
             />
-            <span>Trx Qeue ({{ trx_qeue.length }})</span>
+            <span>{{
+              `${$t("dac_financials.trx_que")} (${trx_qeue.length})`
+            }}</span>
             <q-btn flat round dense icon="more_vert" :disable="!getIsCustodian">
               <q-popover
                 class="bg-bg2 text-text1"
@@ -93,7 +95,7 @@
                         for="myInput"
                         class="cursor-pointer full-width"
                       >
-                        Import File
+                        {{ $t("dac_financials.import_file") }}
                       </label>
                       <input
                         id="myInput"
@@ -110,14 +112,14 @@
                     v-close-overlay
                     @click.native="downloadReport"
                   >
-                    <q-item-main>Export Qeue</q-item-main>
+                    <q-item-main>{{ $t("dac_financials.export") }}</q-item-main>
                   </q-item>
                   <q-item
                     class="cursor-pointer q-body-1"
                     v-close-overlay
                     @click.native="clearQeue"
                   >
-                    <q-item-main>Clear All</q-item-main>
+                    <q-item-main>{{ $t("dac_financials.clear") }}</q-item-main>
                   </q-item>
                   <q-item
                     v-if="trx_qeue.length > 1"
@@ -125,7 +127,7 @@
                     v-close-overlay
                     @click.native="proposeAll"
                   >
-                    <q-item-main>Exec All</q-item-main>
+                    <q-item-main>{{ $t("dac_financials.exec") }}</q-item-main>
                   </q-item>
                 </q-list>
               </q-popover>
@@ -134,7 +136,7 @@
           <div class="relative-position">
             <div class="cust_only_overlay" v-if="!getIsCustodian">
               <q-icon name="lock" class="q-mr-xs text-text2" />
-              custodians only
+              {{ $t("dac_financials.cust_only") }}
             </div>
 
             <q-scroll-area
@@ -154,7 +156,7 @@
                   v-if="trx_qeue.length == 0"
                   class="text-weight-thin text-center q-body-1 q-mt-md"
                 >
-                  No transactions in the qeue
+                  {{ $t("dac_financials.empty_qeue") }}
                 </div>
                 <q-item
                   v-for="(trx, i) in trx_qeue"
@@ -207,7 +209,7 @@
                   <q-item-side right>
                     <q-btn
                       v-if="trx.status == 0 || trx.status == 3"
-                      label="edit"
+                      :label="$t('dac_financials.edit')"
                       size="sm"
                       dense
                       flat
@@ -219,7 +221,7 @@
                     />
                     <q-btn
                       v-if="trx.status == 0 || trx.status == 3"
-                      label="send"
+                      :label="$t('dac_financials.send')"
                       size="sm"
                       flat
                       dense
@@ -229,7 +231,7 @@
                     />
                     <q-btn
                       v-if="trx.status == 2"
-                      label="view"
+                      :label="$t('dac_financials.view')"
                       size="sm"
                       flat
                       dense
@@ -237,7 +239,9 @@
                     />
                     <span class="animate-pop" v-if="trx.status == 1">
                       <q-spinner color="primary-light" />
-                      <span class="q-caption text-text2 q-ml-sm">signing</span>
+                      <span class="q-caption text-text2 q-ml-sm">{{
+                        $t("dac_financials.signing")
+                      }}</span>
                     </span>
                   </q-item-side>
                 </q-item>

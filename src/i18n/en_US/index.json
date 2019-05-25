@@ -97,6 +97,21 @@
     "VOTEPROP_INVALID_VOTE": "Invalid vote for the current proposal state.",
     "VOTEPROP_PROPOSAL_NOT_FOUND": "Proposal not found."
   },
+  "dac_financials":{
+    "clear": "Clear All",
+    "edit": "edit",
+    "empty_qeue": "No transactions in the qeue",
+    "exec": "Exec All",
+    "export": "Export Qeue",
+    "import_file": "Import File",
+    "propose_transfer": "Propose Transfer",
+    "propose_transfer_help": "Fill in the form to propose a transfer from one of the DAC accounts. The transfers will be submitted to the blockchain as multisignature proposals. The custodians need to vote before the transfer can be executed.",
+    "cust_only": "custodians only",
+    "send": "send",
+    "signing": "signing",
+    "trx_que": "Trx Qeue",
+    "view": "view"
+  },
   "default": {
     "constitution": "Constitution",
     "constitution_has_been_updated": "The Constitution has been updated. Please sign the updated Constitution to use the Member Client.",
