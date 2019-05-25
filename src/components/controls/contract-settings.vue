@@ -25,7 +25,20 @@
       />
     </div>
     <div class="col-xs-12 row justify-end">
-      <q-btn label="update" @click="updateConfig" color="primary" />
+      <q-btn
+        flat
+        :disable="contract == ''"
+        color="primary-light"
+        label="export"
+        class="on-left"
+        @click="exportFile"
+      />
+      <q-btn
+        :disable="contract == ''"
+        label="update"
+        @click="updateConfig"
+        color="primary"
+      />
     </div>
   </div>
 </template>
@@ -33,6 +46,7 @@
 <script>
 import { mapGetters } from "vuex";
 import helpBtn from "components/controls/help-btn";
+import { saveAs } from "file-saver";
 export default {
   name: "contractSettings",
   components: {
@@ -151,6 +165,12 @@ export default {
         return result;
       }, {});
       return new_config;
+    },
+    exportFile() {
+      let blob = new Blob([JSON.stringify(this.parseConfig(), null, 4)], {
+        type: "text/plain;charset=utf-8"
+      });
+      saveAs(blob, `${this.contract}.config.json`);
     }
   },
 
