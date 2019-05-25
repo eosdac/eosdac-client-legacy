@@ -361,7 +361,7 @@
     "numelected_desc": "How many custodians will be elected to the custodian board?",
     "periodlength_desc": "How long will each custodian period be in seconds?",    
     "requested_pay_max_desc": "What is the maximum amount of tokens a custodian can request as a candidate?",
-    "serviceprovider_desc": "The account that xxxxxxxxxxxxxxx",
+    "serviceprovider_desc": "The optional account that will be used for legal contracts as a traditionally recognized entity acting as a service provider for the DAC.",
     "should_pay_via_service_provider_desc": "Do payments need to pass via the service provider?",
     "tokenholder_desc": "The DAC account that holds the tokens.",
     "vote_quorum_percent_desc": "Amount of token value in votes required to trigger the allow a new set of custodians to be set after the initial threshold has been achieved."

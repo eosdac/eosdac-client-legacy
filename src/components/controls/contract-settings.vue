@@ -6,7 +6,9 @@
       class="col-xs-12 col-sm-6 col-md-4 animate-fade"
     >
       <q-item-tile class="row items-center no-wrap">
-        <div>{{ $t(`conf_cust_contr.${config_item.name}_title`) }}</div>
+        <div class="text-text2">
+          {{ $t(`conf_cust_contr.${config_item.name}_title`) }}
+        </div>
         <help-btn
           :content="$t(`conf_cust_contr.${config_item.name}_desc`)"
           :title="$t(`conf_cust_contr.${config_item.name}_title`)"
