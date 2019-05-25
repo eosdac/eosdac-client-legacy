@@ -5,24 +5,26 @@
       :key="key"
       class="col-xs-12 col-sm-6 col-md-4 animate-fade"
     >
-      <q-item-tile class="row items-center no-wrap">
-        <div class="text-text2">
-          {{ $t(`conf_cust_contr.${config_item.name}_title`) }}
-        </div>
-        <help-btn
-          :content="$t(`conf_cust_contr.${config_item.name}_desc`)"
-          :title="$t(`conf_cust_contr.${config_item.name}_title`)"
-          color="primary-light"
-          size="sm"
-        />
-      </q-item-tile>
+      <div class="bg-bg2 q-pa-md round-borders">
+        <q-item-tile class="row items-center no-wrap">
+          <div class="text-text2">
+            {{ $t(`conf_cust_contr.${config_item.name}_title`) }}
+          </div>
+          <help-btn
+            :content="$t(`conf_cust_contr.${config_item.name}_desc`)"
+            :title="$t(`conf_cust_contr.${config_item.name}_title`)"
+            color="text1"
+            size="sm"
+          />
+        </q-item-tile>
 
-      <q-input
-        :dark="getIsDark"
-        v-model="config_item.value"
-        :placeholder="config_item.type"
-        color="primary-light"
-      />
+        <q-input
+          :dark="getIsDark"
+          v-model="config_item.value"
+          :placeholder="config_item.type"
+          color="primary-light"
+        />
+      </div>
     </div>
     <div class="col-xs-12 row justify-end">
       <q-btn
