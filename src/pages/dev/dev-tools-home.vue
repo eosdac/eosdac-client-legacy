@@ -93,14 +93,11 @@
 <script>
 import { mapGetters } from "vuex";
 import { colors } from "quasar";
-
 import colorPicker from "components/controls/color-picker";
-
 import networkSwitcher from "components/controls/network-switcher";
-
 import firehose from "components/controls/firehose";
-
 import debugData from "components/ui/debug-data";
+import { saveAs } from "file-saver";
 
 export default {
   name: "test",
@@ -155,13 +152,10 @@ export default {
         new_colors += `$${c} = ${colors.getBrand(c)}\n`;
       });
 
-      let a = document.createElement("a");
-      let file = new Blob([new_colors], {
+      let blob = new Blob([new_colors], {
         type: "text/plain;charset=utf-8"
       });
-      a.href = URL.createObjectURL(file);
-      a.download = "new.colors.styl";
-      a.click();
+      saveAs(blob, "new.colors.styl");
       console.log(new_colors);
     }
   }

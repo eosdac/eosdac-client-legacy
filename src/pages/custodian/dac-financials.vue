@@ -284,6 +284,7 @@ import { mapGetters } from "vuex";
 import financialAccount from "components/ui/financial-account";
 import helpBtn from "components/controls/help-btn";
 import msigTransfer from "components/controls/msig-transfer";
+import { saveAs } from "file-saver";
 // import custodianPayments from "components/controls/custodian-payments";
 import { colors } from "quasar";
 export default {
@@ -522,14 +523,10 @@ export default {
       data.forEach(d => {
         delete d.status;
       });
-
-      let a = document.createElement("a");
-      let file = new Blob([JSON.stringify(data, null, 4)], {
+      let blob = new Blob([JSON.stringify(data, null, 4)], {
         type: "text/plain;charset=utf-8"
       });
-      a.href = URL.createObjectURL(file);
-      a.download = "msig_report.json";
-      a.click();
+      saveAs(blob, "msig_report.json");
     }
   },
   mounted() {}
