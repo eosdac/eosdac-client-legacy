@@ -3,7 +3,7 @@
     <div
       v-for="(config_item, key) in contract_config"
       :key="key"
-      class="col-xs-12 col-sm-6 col-md-4 animate-fade"
+      class="col-xs-12 col-sm-6 col-md-4 col-lg-3 animate-fade"
     >
       <div class="bg-bg2 q-pa-md round-borders">
         <q-item-tile class="row items-center justify-between no-wrap">

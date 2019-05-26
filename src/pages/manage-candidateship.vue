@@ -10,8 +10,8 @@
         <q-item class="no-padding">
           <q-item-side left>
             <div
-              style="width:80px;height:80px"
-              class="profile_image animate-pop"
+              style="width:80px;height:80px;"
+              class="profile_image animate-pop profile_image_border"
               v-bind:style="{ 'background-image': `url(${getProfilePicture})` }"
             ></div>
           </q-item-side>
@@ -87,7 +87,7 @@
           <q-item-side left>
             <div
               style="width:80px;height:80px"
-              class="profile_image animate-pop"
+              class="profile_image animate-pop profile_image_border"
               v-bind:style="{ 'background-image': `url(${getProfilePicture})` }"
             ></div>
           </q-item-side>
@@ -433,6 +433,10 @@ export default {
 </script>
 
 <style lang="stylus">
+.profile_image_border{
+  border: 2px solid var(--q-color-text2);
+}
+
 .animate_rotate_ease {
   animation: rotate 4s ease-in-out infinite;
 }
