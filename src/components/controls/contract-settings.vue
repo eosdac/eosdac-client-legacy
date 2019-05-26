@@ -6,7 +6,7 @@
       class="col-xs-12 col-sm-6 col-md-4 animate-fade"
     >
       <div class="bg-bg2 q-pa-md round-borders">
-        <q-item-tile class="row items-center no-wrap">
+        <q-item-tile class="row items-center justify-between no-wrap">
           <div class="text-text2">
             {{ $t(`conf_cust_contr.${config_item.name}_title`) }}
           </div>
@@ -19,6 +19,7 @@
         </q-item-tile>
 
         <q-input
+          class="q-mb-sm"
           :dark="getIsDark"
           v-model="config_item.value"
           :placeholder="config_item.type"
