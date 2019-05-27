@@ -236,6 +236,7 @@
                       flat
                       dense
                       color="positive"
+                      @click="viewTrx(trx.trx_id)"
                     />
                     <span class="animate-pop" v-if="trx.status == 1">
                       <q-spinner color="primary-light" />
@@ -290,7 +291,7 @@ import helpBtn from "components/controls/help-btn";
 import msigTransfer from "components/controls/msig-transfer";
 import { saveAs } from "file-saver";
 // import custodianPayments from "components/controls/custodian-payments";
-import { colors } from "quasar";
+import { colors, openURL } from "quasar";
 export default {
   name: "dacFinancials",
   components: {
@@ -352,6 +353,7 @@ export default {
     })
   },
   methods: {
+    openURL,
     //status 0 = waiting for exec; 1 = sending; 2 = success; 3 = edit;
     addToQeue(el) {
       if (el.status === undefined) {
@@ -531,6 +533,9 @@ export default {
         type: "text/plain;charset=utf-8"
       });
       saveAs(blob, "msig_report.json");
+    },
+    viewTrx(trx_id) {
+      openURL(`${this.$configFile.get("explorer")}/transaction/${trx_id}`);
     }
   },
   mounted() {}
