@@ -29,7 +29,7 @@ export async function connectScatter(
   trigger_login = false
 ) {
   let network = await state.networks.find(n => n.name == state.active_network);
-
+  commit("setChainId", network.chainId);
   ScatterJS.scatter
     .connect(this._vm.$configFile.get("dacname"), { network })
     .then(async connected => {
@@ -219,6 +219,7 @@ export async function switchNetwork(
       position: "bottom-right" // 'top', 'left', 'bottom-left' etc.
     });
   }
+
   commit("setActiveNetwork", payload.networkname);
   await dispatch("loadConfig", payload);
   await dispatch("logout");

@@ -14,6 +14,7 @@
       />
       <contract-settings :contract="selected_contract" />
     </div>
+    <app-manifest />
   </q-page>
 </template>
 
@@ -22,6 +23,7 @@ import { mapGetters } from "vuex";
 // import abiViewer from "components/controls/abi-viewer";
 // import voteDelegation from "components/controls/vote-delegation";
 import contractSettings from "components/controls/contract-settings";
+import appManifest from "components/controls/app-manifest";
 // import msigTransfer from "components/controls/msig-transfer";
 
 export default {
@@ -30,7 +32,7 @@ export default {
     // abiViewer,
     // voteDelegation,
     // msigTransfer,
-
+    appManifest,
     contractSettings
   },
   data() {

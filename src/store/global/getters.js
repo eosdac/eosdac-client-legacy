@@ -28,3 +28,7 @@ export function getDapp_version(state) {
 export function getLocal_storage_version(state) {
   return state.local_storage_version;
 }
+
+export function getChainId(state) {
+  return state.chainId;
+}

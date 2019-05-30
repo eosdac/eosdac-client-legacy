@@ -380,5 +380,17 @@
     "should_pay_via_service_provider_desc": "Do payments need to pass via the service provider?",
     "tokenholder_desc": "The DAC account that holds the tokens.",
     "vote_quorum_percent_desc": "Amount of token value in votes required to trigger the allow a new set of custodians to be set after the initial threshold has been achieved."
+  },
+
+  "conf_wp_contr":{
+    "proposal_threshold_title": "",
+    "finalize_threshold_title": "",
+    "escrow_expiry_title": "",
+    "approval_expiry_title": "",
+
+    "proposal_threshold_desc": "",
+    "finalize_threshold_desc": "",
+    "escrow_expiry_desc": "",
+    "approval_expiry_desc": ""
   }
 }

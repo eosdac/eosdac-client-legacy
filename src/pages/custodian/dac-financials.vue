@@ -537,8 +537,7 @@ export default {
     viewTrx(trx_id) {
       openURL(`${this.$configFile.get("explorer")}/transaction/${trx_id}`);
     }
-  },
-  mounted() {}
+  }
 };
 </script>
 

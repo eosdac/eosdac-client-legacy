@@ -17,6 +17,10 @@ export function setActiveNetwork(state, payload) {
   state.active_network = payload;
 }
 
+export function setChainId(state, payload) {
+  state.chainId = payload;
+}
+
 export function setDapp_version(state, payload) {
   state.dapp_version = payload;
 }

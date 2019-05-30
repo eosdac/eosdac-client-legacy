@@ -95,7 +95,7 @@ export default {
         this.contract == "dacproposals"
           ? this.getWpConfig
           : this.getCustodianConfig;
-      console.log(current_config);
+
       for (let conf in current_config) {
         let item = config_struct.find(cs => cs.name == conf);
         item.value = current_config[conf];
