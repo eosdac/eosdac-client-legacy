@@ -181,7 +181,7 @@ export default {
     }),
     getWpCategoriesOptions: function() {
       return this.getWpCategories.map(wpc => {
-        wpc.label = this.$t(`wp_categories.${wpc.label}`);
+        wpc.label = this.$t(wpc.label);
         return wpc;
       });
     }
