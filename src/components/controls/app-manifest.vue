@@ -1,6 +1,11 @@
 <template>
   <div>
     <q-input
+      stack-label="Spec Version"
+      v-model="spec_version"
+      :dark="getIsDark"
+    />
+    <q-input
       stack-label="Account"
       v-model="manifest.account"
       :dark="getIsDark"
@@ -44,7 +49,11 @@
       </div>
     </div>
     <q-btn label="load Actions" @click="loadContractActions" color="primary" />
-    <q-btn label="export" @click="exportFile" color="primary" />
+    <q-btn
+      label="export"
+      @click="exportFile(parse_chain_manifests_json(), 'chain-manifests.json')"
+      color="primary"
+    />
   </div>
 </template>
 
@@ -63,6 +72,8 @@ export default {
         "dacmultisigs"
       ],
       contract_actions: {},
+
+      spec_version: "0.0.1",
       chainId: this.$store.getters["global/getChainId"],
       manifest: {
         account: "",
@@ -76,7 +87,8 @@ export default {
   computed: {
     ...mapGetters({
       getDacApi: "global/getDacApi",
-      getIsDark: "ui/getIsDark"
+      getIsDark: "ui/getIsDark",
+      getActiveNetwork: "global/getActiveNetwork"
     })
   },
   methods: {
@@ -110,7 +122,36 @@ export default {
         action => (action.selected = !action.selected)
       );
     },
-    parseManifest() {
+    parse_app_metadata_json() {
+      //example
+      return {
+        spec_version: "0.7.0",
+        name: "eosDAC Memberclient",
+        shortname: "eosDAC",
+        scope: "/",
+        apphome: "/",
+        icon:
+          "https://members.eosdac.io/branding/images/icons/icon-256x256.png#SHA256HASH",
+        // appIdentifiers: ["io.landeos.registry"],
+        description:
+          "Come to the eosDAC Member Client to register and interact with the DAC-enabling Decentralized Autonomous Community.",
+        sslfingerprint:
+          "E1 3F 0E 03 2D 05 3C D2 81 FB 57 02 42 51 D0 44 32 08 35 58 8C 73 C4 44 83 4D CA 3E 71 15 16 20",
+        chains: [
+          {
+            chainId: this.chainId,
+            chainName: "Property Chain",
+            icon: "/propertyChain.png#SHA256HASH"
+          },
+          {
+            chainId: "EOSIO2222",
+            chainName: "Other Chain",
+            icon: "/otherChain.png#SHA256HASH"
+          }
+        ]
+      };
+    },
+    parse_chain_manifests_json() {
       let temp = [];
       for (let ctr in this.contract_actions) {
         let selected_actions = this.contract_actions[ctr].filter(
@@ -134,13 +175,21 @@ export default {
         }
         return t;
       });
-      return this.manifest;
+      return {
+        spec_version: this.spec_version,
+        manifests: [
+          {
+            chainId: this.chainId,
+            manifest: this.manifest
+          }
+        ]
+      };
     },
-    exportFile() {
-      let blob = new Blob([JSON.stringify(this.parseManifest(), null, 4)], {
+    exportFile(content, filename) {
+      let blob = new Blob([JSON.stringify(content, null, 4)], {
         type: "text/plain;charset=utf-8"
       });
-      saveAs(blob, `chain-manifests.json`);
+      saveAs(blob, filename);
     }
   }
 };
