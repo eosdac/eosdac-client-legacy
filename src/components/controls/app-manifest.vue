@@ -49,6 +49,7 @@
 </template>
 
 <script>
+// const SHA256 = require("crypto-js/sha256");
 import { mapGetters } from "vuex";
 import { saveAs } from "file-saver";
 export default {
