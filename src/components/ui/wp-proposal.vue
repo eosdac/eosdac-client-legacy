@@ -354,8 +354,7 @@ export default {
       getWpConfig: "dac/getWpConfig",
       getIsDark: "ui/getIsDark",
       getAuth: "user/getAuth",
-      getCustodians: "dac/getCustodians",
-      getCatDelegations: "user/getCatDelegations"
+      getCustodians: "dac/getCustodians"
     }),
 
     getVotes() {

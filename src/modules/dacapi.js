@@ -285,7 +285,7 @@ export class DacApi {
       json: true,
       code: this.configobj.get("wpcontract"),
       scope: this.configobj.get("dacscope"),
-      table: "catvotes",
+      table: "propvotes",
       lower_bound: accountname,
       upper_bound: accountname,
       index_position: 2,

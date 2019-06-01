@@ -3,6 +3,7 @@
     <!-- <div class="bg-bg1 round-borders shadow-4 q-pa-md q-mb-md">
       My Category Delegations
     </div> -->
+    <!-- {{ getCatDelegations }} -->
     <div
       class="relative-position bg-bg1 bg-logo q-pa-md round-borders shadow-4"
     >
