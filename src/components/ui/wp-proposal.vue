@@ -144,14 +144,13 @@
             <q-item-main>
               <q-item-tile class="q-caption">Approval Threshold</q-item-tile>
               <q-item-tile class="q-title">{{
-                proposal_threshold_met.score
+                proposal_threshold_met
               }}</q-item-tile>
             </q-item-main>
           </q-item>
         </div>
 
         <div v-if="!read_only && getAccountName" class="row animate-pop">
-          {{ getVotes }}
           <member-select
             :show_selected="false"
             @change="delegatevote($event)"
@@ -254,7 +253,7 @@
                 :scale="0.5"
                 :show_role="false"
               />
-              <router-link class=" a2" :to="{ path: '/profile/' + vote.voter }">
+              <router-link class="a2" :to="{ path: '/profile/' + vote.voter }">
                 <div class="q-ma-none" style="min-width:100px; overflow:hidden">
                   {{ vote.voter }}
                 </div>
@@ -305,6 +304,7 @@
             </div>
             <!-- <pre>{{getmsigIsSeenCache}}</pre> -->
           </div>
+          <pre>{{ getVotes }}</pre>
         </div>
       </div>
     </q-modal>
@@ -409,7 +409,7 @@ export default {
     },
 
     proposal_threshold_met() {
-      return false;
+      return true;
     },
     //when wp state is 2
     claim_threshold_met() {
@@ -527,20 +527,20 @@ export default {
         actions: actions
       });
       if (result) {
-        // let vote = this.wp.votes.find(v => v.voter == this.getAccountName);
-        // if (vote) {
-        //   vote.vote = map[votetype];
-        //   vote.delegatee = "";
-        // } else {
-        //   this.wp.votes.push({
-        //     proposal_id: Number(this.wp.id),
-        //     voter: this.getAccountName,
-        //     delegatee: "",
-        //     vote: map[votetype],
-        //     comment_hash: ""
-        //   });
-        // }
-        // console.log(result);
+        let vote = this.wp.votes.find(v => v.voter == this.getAccountName);
+        if (vote) {
+          vote.vote = map[votetype];
+          vote.delegatee = null;
+        } else {
+          this.wp.votes.push({
+            proposal_id: Number(this.wp.id),
+            voter: this.getAccountName,
+            delegatee: null,
+            vote: map[votetype],
+            comment_hash: ""
+          });
+        }
+        console.log(result);
       }
     },
     async cancelProp() {
