@@ -66,6 +66,7 @@
 
       <div class="q-mb-md" v-if="wp.status == 0 || wp.status == 2">
         <div class="q-caption q-mb-xs text-text2">Time Left</div>
+        <!-- {{ getExpiry }} -->
         <countdown
           v-if="getExpiry.millisleft"
           :time="Number(getExpiry.millisleft)"
@@ -142,10 +143,10 @@
             class="cursor-pointer no-padding"
           >
             <q-item-main>
-              <q-item-tile class="q-caption">Approval Threshold</q-item-tile>
-              <q-item-tile class="q-title">{{
-                proposal_threshold_met
-              }}</q-item-tile>
+              <q-item-tile class="q-caption">Vote Threshold</q-item-tile>
+              <q-item-tile class="q-title">
+                thresholdscore todo
+              </q-item-tile>
             </q-item-main>
           </q-item>
         </div>
@@ -408,28 +409,26 @@ export default {
       }
     },
 
-    proposal_threshold_met() {
-      return true;
-    },
-    //when wp state is 2
-    claim_threshold_met() {
-      return false;
-    },
-
     getExpiry() {
       let expiration_millis;
+      let start;
       if (this.wp.status === 0) {
         expiration_millis = Number(this.getWpConfig.approval_expiry) * 1000;
+        start = Date.parse(this.wp.propose_timestamp);
+        console.log("state 0", expiration_millis, start);
       }
       if (this.wp.status === 2) {
-        expiration_millis = Number(this.getWpConfig.claim_expiry) * 1000;
+        expiration_millis = Number(this.getWpConfig.escrow_expiry) * 1000;
+        start = Date.parse(this.wp.work_complete_timestamp);
+        console.log("state 2", expiration_millis, start);
       }
-      let start = Date.parse(this.wp.block_timestamp);
+
       let end = start + expiration_millis;
       let current = new Date().getTime();
       //calculate relative expiration based on NOW and expiration
       let perc = 100 - ((current - start) / (end - start)) * 100;
       let msleft = end - current;
+
       return {
         percent: perc <= 0 ? 0 : perc,
         millisleft: msleft <= 0 ? 0 : msleft
