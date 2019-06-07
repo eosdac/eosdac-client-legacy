@@ -69,7 +69,9 @@ export default {
         "dacelections",
         "eosiomsigold",
         "kasdactokens",
-        "dacmultisigs"
+        "dacmultisigs",
+        "dacproposals",
+        "piecesnbitss"
       ],
       contract_actions: {},
 
@@ -77,9 +79,9 @@ export default {
       chainId: this.$store.getters["global/getChainId"],
       manifest: {
         account: "",
-        domain: "https://members.eosdac.io",
+        domain: "https://dev-members.eosdac.io",
         appmeta:
-          "https://members.eosdac.io/app-metadata.json#SHA256HASHxxxxxxxxxxxxxxxxxxxxxxx",
+          "https://dev-members.eosdac.io/app-metadata.json#SHA256HASHxxxxxxxxxxxxxxxxxxxxxxx",
         whitelist: []
       }
     };

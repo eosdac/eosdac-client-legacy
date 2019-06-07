@@ -308,35 +308,27 @@ export default {
           contract: this.$configFile.get("systemtokencontract"),
           symbol: this.$configFile.get("systemtokensymbol"),
           description:
-            "The EOS Mainnet block producer account for eosDAC which receives Block Producer rewards.",
-          balance: null,
-          selected: false
+            "The EOS Mainnet block producer account for eosDAC which receives Block Producer rewards."
         },
         {
           account: this.$configFile.get("treasuryaccount"),
           contract: this.$configFile.get("systemtokencontract"),
           symbol: this.$configFile.get("systemtokensymbol"),
           description:
-            "The DAC owner account where DAC funds are secured and controlled by a 12-account multisig permission system of elected custodians.",
-          balance: null,
-          selected: false
+            "The DAC owner account where DAC funds are secured and controlled by a 12-account multisig permission system of elected custodians."
         },
         {
           account: "dacocoiogmbh",
           contract: this.$configFile.get("systemtokencontract"),
           symbol: this.$configFile.get("systemtokensymbol"),
           description:
-            "The current eosDAC service provider account which manages payroll, employment contracts, and real-world interactions on behalf of the DAC.",
-          balance: null,
-          selected: false
+            "The current eosDAC service provider account which manages payroll, employment contracts, and real-world interactions on behalf of the DAC."
         },
         {
           account: this.$configFile.get("custodiancontract"),
           contract: this.$configFile.get("tokencontract"),
           symbol: this.$configFile.get("dactokensymbol"),
-          description: "custodian contract description",
-          balance: null,
-          selected: false
+          description: "custodian contract description"
         }
       ],
       permissions_map: [],

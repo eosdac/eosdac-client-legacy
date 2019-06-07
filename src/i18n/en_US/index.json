@@ -65,6 +65,7 @@
     "NOMINATECAND_INSUFFICIENT_FUNDS_TO_STAKE": "Insufficient funds have been staked.",
     "NOMINATECAND_PAY_LIMIT_EXCEEDED": "Requested pay limit for a candidate was exceeded.",
     "NOMINATECAND_STAKING_FUNDS_INCOMPLETE": "A registering candidate must transfer sufficient tokens to the contract for staking.",
+    "PROPOSAL_EXPIRED": "The worker proposal is expired.",
     "REMOVECANDIDATE_NOT_CURRENT_CANDIDATE": "Candidate is not already registered.",
     "REMOVECUSTODIAN_NOT_CURRENT_CUSTODIAN": "The entered account name is not for a current custodian.",
     "STARTWORK_INSUFFICIENT_VOTES": "Insufficient votes on worker proposal.",
