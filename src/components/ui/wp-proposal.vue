@@ -69,7 +69,7 @@
         v-if="wp.status == 0 || wp.status == 2 || wp.status == 5"
       >
         <div class="q-caption q-mb-xs text-text2">Time Left</div>
-        <!-- {{ getExpiry }} -->
+        {{ getExpiry }}
         <countdown
           v-if="getExpiry.millisleft"
           :time="Number(getExpiry.millisleft)"
@@ -148,7 +148,7 @@
             <q-item-main>
               <q-item-tile class="q-caption">Vote Threshold</q-item-tile>
               <q-item-tile class="q-title">
-                thresholdscore todo
+                {{ getVotingScore }}
               </q-item-tile>
             </q-item-main>
           </q-item>
@@ -456,10 +456,12 @@ export default {
       if (this.wp.status === 0) {
         expiration_millis = Number(this.getWpConfig.approval_expiry) * 1000;
         start = Date.parse(this.wp.propose_timestamp);
+        console.log("state 0", expiration_millis, start);
       }
       if (this.wp.status === 2) {
         expiration_millis = Number(this.getWpConfig.escrow_expiry) * 1000;
         start = Date.parse(this.wp.work_complete_timestamp);
+        console.log("state 0", expiration_millis, start);
       }
 
       let end = start + expiration_millis;
@@ -477,6 +479,26 @@ export default {
         percent: perc <= 0 ? 0 : perc,
         millisleft: msleft <= 0 ? 0 : msleft
       };
+    },
+    getVotingScore() {
+      let score = { score: 0, threshold: null };
+      if (
+        this.wp.status === 0 ||
+        this.wp.status === 3 ||
+        this.wp.status === 1
+      ) {
+        score.threshold = this.getWpConfig.proposal_threshold;
+        this.getVotes.forEach(v => {
+          if (v.vote === 1) score.score += v.weight;
+        });
+      }
+      if (this.wp.status === 2 || this.wp.status === 4) {
+        score.threshold = this.getWpConfig.finalize_threshold;
+        this.getVotes.forEach(v => {
+          if (v.vote === 3) score.score += v.weight;
+        });
+      }
+      return `${score.score}/${score.threshold}`;
     },
     getCustNames() {
       if (this.getCustodians) {
