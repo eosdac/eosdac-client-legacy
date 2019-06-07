@@ -164,6 +164,7 @@
             placeholder="Select to Delegate"
             :underline="false"
             label="Delegation"
+            ref="directDelSelect"
           />
           <div v-if="wp.status == 0">
             <q-btn
@@ -231,6 +232,7 @@
             @click="cancelProp()"
           />
         </div>
+        <q-btn label="reload dev" @click="actionCallBack(wp.id)" />
       </div>
     </div>
 
@@ -306,7 +308,6 @@
                 size="24px"
               />
             </div>
-            <!-- <pre>{{getmsigIsSeenCache}}</pre> -->
           </div>
           <pre>{{ getVotes }}</pre>
         </div>
@@ -375,7 +376,7 @@ export default {
 
       for (let i = 0; i < this.getVotes.length; i++) {
         let vote = this.getVotes[i];
-        if (vote.delegates) {
+        if (vote.delegates && vote.delegates.length) {
           let check = vote.delegates.find(
             d => d.voter == this.getAccountName && d.delegate_type == "direct"
           );
@@ -408,7 +409,11 @@ export default {
       if (!myvote) {
         return 0;
       } else {
-        return myvote.vote;
+        if (myvote.vote === null) {
+          return 0;
+        } else {
+          return myvote.vote;
+        }
       }
     },
 
@@ -418,12 +423,10 @@ export default {
       if (this.wp.status === 0) {
         expiration_millis = Number(this.getWpConfig.approval_expiry) * 1000;
         start = Date.parse(this.wp.propose_timestamp);
-        console.log("state 0", expiration_millis, start);
       }
       if (this.wp.status === 2) {
         expiration_millis = Number(this.getWpConfig.escrow_expiry) * 1000;
         start = Date.parse(this.wp.work_complete_timestamp);
-        console.log("state 2", expiration_millis, start);
       }
 
       let end = start + expiration_millis;
@@ -431,6 +434,11 @@ export default {
       //calculate relative expiration based on NOW and expiration
       let perc = 100 - ((current - start) / (end - start)) * 100;
       let msleft = end - current;
+
+      if (this.wp.status === 5) {
+        perc = 0;
+        msleft = 0;
+      }
 
       return {
         percent: perc <= 0 ? 0 : perc,
@@ -456,6 +464,7 @@ export default {
       return wpc.label;
     },
     async delegatevote(delegatee) {
+      console.log(delegatee);
       let actions = [
         {
           account: this.$configFile.get("wpcontract"),
@@ -480,21 +489,34 @@ export default {
         actions: actions
       });
       if (result) {
-        // let vote = this.wp.votes.find(v => v.voter == this.getAccountName);
-        // if (vote) {
-        //   vote.vote = 0;
-        //   vote.delegatee = delegatee.new;
-        // } else {
-        //   this.wp.votes.push({
-        //     proposal_id: Number(this.wp.id),
-        //     voter: this.getAccountName,
-        //     delegatee: delegatee.new,
-        //     vote: 0,
-        //     comment_hash: ""
-        //   });
-        // }
+        this.actionCallBack(this.wp.id);
+        //check if delegatee has voted
+        // let vote = this.wp.votes.find(v => v.voter == delegatee.new);
+        // if (!vote) return;
+
+        // let deltemplate = {
+        //   voter: this.getAccountName,
+        //   delegate_type: "direct"
+        // };
+        // vote.delegates.push(deltemplate);
+        // // if (!vote.delegates.find(vd => vd.voter == this.getAccountName)) {
+        // //   vote.delegates.push(deltemplate);
+        // // }
         // console.log(result);
+      } else {
+        this.$refs.directDelSelect.selected = delegatee.old;
       }
+    },
+    async actionCallBack(id) {
+      setTimeout(async () => {
+        let res = await this.$store.dispatch("dac/fetchWorkerProposals", {
+          id: id
+        });
+        if (res) {
+          this.wp.votes = res.results[0].votes;
+        }
+        console.log(res);
+      }, 2000);
     },
 
     async voteprop(votetype) {
@@ -529,20 +551,22 @@ export default {
         actions: actions
       });
       if (result) {
-        let vote = this.wp.votes.find(v => v.voter == this.getAccountName);
-        if (vote) {
-          vote.vote = map[votetype];
-          vote.delegatee = null;
-        } else {
-          this.wp.votes.push({
-            proposal_id: Number(this.wp.id),
-            voter: this.getAccountName,
-            delegatee: null,
-            vote: map[votetype],
-            comment_hash: ""
-          });
-        }
-        console.log(result);
+        await this.actionCallBack(this.wp.id);
+        this.$refs.directDelSelect.selected = "";
+        // let vote = this.wp.votes.find(v => v.voter == this.getAccountName);
+        // if (vote) {
+        //   vote.vote = map[votetype];
+        //   vote.delegatee = null;
+        // } else {
+        //   this.wp.votes.push({
+        //     proposal_id: Number(this.wp.id),
+        //     voter: this.getAccountName,
+        //     delegatee: null,
+        //     vote: map[votetype],
+        //     comment_hash: ""
+        //   });
+        // }
+        // console.log(result);
       }
     },
     async cancelProp() {
@@ -590,7 +614,6 @@ export default {
       });
       if (result) {
         this.show = false;
-        console.log("error", result);
       }
     },
     async completeWork() {
@@ -610,6 +633,7 @@ export default {
         actions: actions
       });
       if (result) {
+        this.show = false;
         console.log(result);
       }
     },
