@@ -64,7 +64,10 @@
         </q-item>
       </div>
 
-      <div class="q-mb-md" v-if="wp.status == 0 || wp.status == 2">
+      <div
+        class="q-mb-md"
+        v-if="wp.status == 0 || wp.status == 2 || wp.status == 5"
+      >
         <div class="q-caption q-mb-xs text-text2">Time Left</div>
         <!-- {{ getExpiry }} -->
         <countdown

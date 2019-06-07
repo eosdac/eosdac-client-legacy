@@ -18,6 +18,7 @@
       <q-tab slot="title" name="state_0" label="pending approval" default />
       <q-tab slot="title" name="state_1" label="work in progress" />
       <q-tab slot="title" name="state_2" label="Pending claim" />
+      <q-tab slot="title" name="state_5" label="Expired" />
     </q-tabs>
 
     <div
@@ -171,7 +172,14 @@ export default {
     },
     managePagination() {
       //map tab to number for making the request
-      const map = { state_0: 0, state_1: 1, state_2: 2 };
+      const map = {
+        state_0: 0,
+        state_1: 1,
+        state_2: 2,
+        state_3: 3,
+        state_4: 4,
+        state_5: 5
+      };
       //calculate skip
       let skip = (this.pagination.page - 1) * this.pagination.items_per_page;
       //make request
