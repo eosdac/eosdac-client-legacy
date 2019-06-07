@@ -185,9 +185,7 @@ export async function getEosScatter({ state, commit }, rebuild = false) {
 
 export async function loadConfig({ Vue, state, commit }, payload) {
   console.log(`loading new config file ${payload.networkname}`);
-  const config = require(`../../extensions/statics/config/config.${
-    payload.networkname
-  }.json`);
+  const config = require(`../../extensions/statics/config/config.${payload.networkname}.json`);
 
   if (payload.vm) {
     //setting new config in the plugin
