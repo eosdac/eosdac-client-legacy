@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="wp.id && show"
+    v-if="show"
     style="min-height:100%"
     class=" q-pa-md column no-wrap justify-between bg-bg1 round-borders shadow-4 bg-logo animate-fade"
   >
@@ -30,7 +30,7 @@
         />
       </div>
 
-      <div class="row items-center relative-position">
+      <div class="row items-center relative-position q-mb-md">
         <profile-pic :accountname="wp.proposer" />
         <q-item>
           <q-item-main>
@@ -56,15 +56,15 @@
             <q-item-tile sublabel>date</q-item-tile>
           </q-item-main>
         </q-item>
-        <!-- <q-item>
+        <q-item>
           <q-item-main>
-            <q-item-tile label>Status</q-item-tile>
+            <q-item-tile label>Status (dev)</q-item-tile>
             <q-item-tile sublabel>{{ wp.status }}</q-item-tile>
           </q-item-main>
-        </q-item> -->
+        </q-item>
       </div>
 
-      <div class="q-my-md">
+      <div class="q-mb-md" v-if="wp.status == 0 || wp.status == 2">
         <div class="q-caption q-mb-xs text-text2">Time Left</div>
         <countdown
           v-if="getExpiry.millisleft"
@@ -152,6 +152,7 @@
 
         <div v-if="!read_only && getAccountName" class="row animate-pop">
           <member-select
+            v-if="wp.status == 0 || wp.status == 2"
             :show_selected="false"
             @change="delegatevote($event)"
             :value="MyDirectDelegation || ''"
@@ -198,34 +199,33 @@
               @click="arbApprove()"
             />
           </div>
+
           <div v-else-if="wp.status == 1">
-            Work is being executed
+            Work is in progress
           </div>
-          <div v-if="getIsCreator">
-            <q-btn
-              class="on-right"
-              flat
-              color="negative"
-              label="cancel"
-              @click="cancelProp()"
-            />
-            <q-btn
-              v-if="proposal_threshold_met.met"
-              class="on-right"
-              flat
-              color="info"
-              label="Start work"
-              @click="startWork()"
-            />
-            <q-btn
-              v-if="wp.status == 1"
-              class="on-right"
-              flat
-              color="info"
-              label="complete work"
-              @click="completeWork()"
-            />
-          </div>
+        </div>
+        <div v-if="getIsCreator">
+          <q-btn
+            v-if="wp.status == 3"
+            class="on-right"
+            color="info"
+            label="Start work"
+            @click="startWork()"
+          />
+          <q-btn
+            v-if="wp.status == 1"
+            class="on-right"
+            color="info"
+            label="Complete work"
+            @click="completeWork()"
+          />
+          <q-btn
+            class="on-right"
+            flat
+            color="negative"
+            label="Cancel"
+            @click="cancelProp()"
+          />
         </div>
       </div>
     </div>
@@ -587,7 +587,8 @@ export default {
         actions: actions
       });
       if (result) {
-        console.log(result);
+        this.show = false;
+        console.log("error", result);
       }
     },
     async completeWork() {
@@ -656,7 +657,12 @@ export default {
   }
 };
 
-//  wp status: pending_approval == 0, work_in_progress == 1 after approved when a worker is working on the WP, and pending_claim == 2
+// ProposalStatePending_approval = 0,
+// ProposalStateWork_in_progress = 1,
+// ProposalStatePending_finalize = 2,
+// ProposalStateHas_enough_approvals_votes = 3,
+// ProposalStateHas_enough_finalize_votes = 4,
+// ProposalStateExpired = 5 -->
 
 // enum VoteType {
 //             none = 0,

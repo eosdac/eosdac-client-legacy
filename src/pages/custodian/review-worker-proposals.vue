@@ -7,6 +7,13 @@
         @click="delegate_modal = true"
       />
     </div>
+
+    <!-- // ProposalStatePending_approval = 0,
+      // ProposalStateWork_in_progress = 1,
+      // ProposalStatePending_finalize = 2,
+      // ProposalStateHas_enough_approvals_votes = 3,
+      // ProposalStateHas_enough_finalize_votes = 4,
+      // ProposalStateExpired = 5 -->
     <q-tabs class="q-mb-md" @select="setActiveTab">
       <q-tab slot="title" name="state_0" label="pending approval" default />
       <q-tab slot="title" name="state_1" label="work in progress" />
