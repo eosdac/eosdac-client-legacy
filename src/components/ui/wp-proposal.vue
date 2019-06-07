@@ -382,10 +382,14 @@ export default {
           this.wp.status === 1 ||
           this.wp.status === 3
         ) {
-          return this.wp.votes.filter(v => v.vote == 1 || v.vote == 2);
+          return this.wp.votes.filter(
+            v => v.vote == 1 || v.vote == 2 || v.vote === null
+          );
         }
         if (this.wp.status === 2 || this.wp.status === 4) {
-          return this.wp.votes.filter(v => v.vote == 3 || v.vote == 4);
+          return this.wp.votes.filter(
+            v => v.vote == 3 || v.vote == 4 || v.vote === null
+          );
         }
       } else {
         return [];
