@@ -140,7 +140,7 @@
 
     <div class="q-mt-md full-width">
       <div class="row justify-between items-center">
-        <div class="row">
+        <div class="row" v-show="wp.status !== 5">
           <q-item
             @click.native="expand_votes_modal = true"
             class="cursor-pointer no-padding"
@@ -154,7 +154,7 @@
           </q-item>
         </div>
 
-        <div v-if="!read_only && getAccountName" class="row animate-pop">
+        <div v-if="!read_only && getAccountName" class="row">
           <member-select
             v-if="wp.status == 0 || wp.status == 2"
             :show_selected="false"
@@ -169,14 +169,14 @@
           <div v-if="wp.status == 0">
             <q-btn
               v-if="getVoterStatus == 2 || getVoterStatus == 0"
-              class="on-right"
+              class="on-right animate-pop"
               color="positive"
               label="Approve"
               @click="voteprop('voteApprove')"
             />
             <q-btn
               v-if="getVoterStatus == 1 || getVoterStatus == 0"
-              class="on-right"
+              class="on-right animate-pop"
               color="negative"
               label="Deny"
               @click="voteprop('voteDeny')"
@@ -184,20 +184,22 @@
           </div>
           <div v-else-if="wp.status == 2">
             <q-btn
-              class="on-right"
+              v-if="getVoterStatus == 4 || getVoterStatus == 0"
+              class="on-right animate-pop"
               color="positive"
               label="Approve Claim"
               @click="voteprop('claimApprove')"
             />
             <q-btn
-              class="on-right"
+              v-if="getVoterStatus == 3 || getVoterStatus == 0"
+              class="on-right animate-pop"
               color="negative"
               label="Deny Claim"
               @click="voteprop('claimDeny')"
             />
             <q-btn
               v-if="getIsArbitrator"
-              class="on-right"
+              class="on-right animate-pop"
               flat
               color="positive"
               label="arb approve"
@@ -212,27 +214,34 @@
         <div v-if="getIsCreator">
           <q-btn
             v-if="wp.status == 3"
-            class="on-right"
+            class="on-right animate-pop"
             color="info"
             label="Start work"
             @click="startWork()"
           />
           <q-btn
             v-if="wp.status == 1"
-            class="on-right"
+            class="on-right animate-pop"
             color="info"
             label="Complete work"
             @click="completeWork()"
           />
           <q-btn
-            class="on-right"
+            v-if="wp.status == 4"
+            class="on-right animate-pop"
+            color="info"
+            label="claim"
+            @click="finalize()"
+          />
+          <q-btn
+            class="on-right animate-pop"
             flat
             color="negative"
             label="Cancel"
             @click="cancelProp()"
           />
         </div>
-        <q-btn label="reload dev" @click="actionCallBack(wp.id)" />
+        <!-- <q-btn label="reload dev" @click="actionCallBack(wp.id)" /> -->
       </div>
     </div>
 
@@ -247,11 +256,13 @@
           <q-btn icon="close" @click="expand_votes_modal = false" flat dense />
         </div>
         <!-- content -->
-        <div class="q-pa-md">
+        <div class="q-pa-md" v-if="wp.status !== 5">
           <div class="row justify-start q-mt-sm">
             <div
               class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
-              v-for="(vote, i) in getVotes.filter(v => v.vote == 1)"
+              v-for="(vote, i) in getVotes.filter(
+                v => v.vote === 1 || v.vote === 3
+              )"
               :key="i + 'p'"
             >
               <profile-pic
@@ -281,7 +292,9 @@
 
             <div
               class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
-              v-for="(vote, i) in getVotes.filter(v => v.vote == 2)"
+              v-for="(vote, i) in getVotes.filter(
+                v => v.vote === 2 || v.vote === 4
+              )"
               :key="i + 'r'"
             >
               <profile-pic
@@ -364,7 +377,16 @@ export default {
 
     getVotes() {
       if (this.wp.votes && this.wp.votes.length) {
-        return this.wp.votes;
+        if (
+          this.wp.status === 0 ||
+          this.wp.status === 1 ||
+          this.wp.status === 3
+        ) {
+          return this.wp.votes.filter(v => v.vote == 1 || v.vote == 2);
+        }
+        if (this.wp.status === 2 || this.wp.status === 4) {
+          return this.wp.votes.filter(v => v.vote == 3 || v.vote == 4);
+        }
       } else {
         return [];
       }
@@ -675,6 +697,14 @@ export default {
           data: {
             proposal_id: Number(this.wp.id),
             dac_scope: this.$configFile.get("dacscope")
+          }
+        },
+        {
+          account: this.$configFile.get("escrowcontract"),
+          name: "claimext",
+          // authorization: [ {actor: this.getAccountName, permission: 'active'}],
+          data: {
+            ext_key: Number(this.wp.id)
           }
         }
       ];

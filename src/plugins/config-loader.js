@@ -49,6 +49,8 @@ class ConfigLoader {
         return this.configFile.contracts.custodian.memo;
       case "custodiancontract":
         return this.configFile.contracts.custodian.name;
+      case "escrowcontract":
+        return this.configFile.contracts.escrow.name;
       case "dactokensymbol":
         return this.configFile.contracts.token.symbol;
       case "systemtokensymbol":
