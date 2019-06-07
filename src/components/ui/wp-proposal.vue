@@ -372,8 +372,15 @@ export default {
 
     MyDirectDelegation() {
       if (!this.getVotes.length) return false;
-      let my_direct_delegatee = false;
 
+      let myvote = this.getVotes.find(
+        v => v.voter == this.getAccountName && v.vote === null
+      );
+      if (myvote) {
+        return myvote.delegatee;
+      }
+
+      let my_direct_delegatee = false;
       for (let i = 0; i < this.getVotes.length; i++) {
         let vote = this.getVotes[i];
         if (vote.delegates && vote.delegates.length) {
@@ -508,15 +515,14 @@ export default {
       }
     },
     async actionCallBack(id) {
-      setTimeout(async () => {
-        let res = await this.$store.dispatch("dac/fetchWorkerProposals", {
-          id: id
-        });
-        if (res) {
-          this.wp.votes = res.results[0].votes;
-        }
-        console.log(res);
-      }, 2000);
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      let res = await this.$store.dispatch("dac/fetchWorkerProposals", {
+        id: id
+      });
+      if (res) {
+        this.wp.votes = res.results[0].votes;
+      }
+      console.log(res);
     },
 
     async voteprop(votetype) {
