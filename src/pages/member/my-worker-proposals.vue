@@ -1,17 +1,16 @@
 <template>
   <q-page class="q-pa-md">
-    <!-- // ProposalStatePending_approval = 0,
-      // ProposalStateWork_in_progress = 1,
-      // ProposalStatePending_finalize = 2,
-      // ProposalStateHas_enough_approvals_votes = 3,
-      // ProposalStateHas_enough_finalize_votes = 4,
-      // ProposalStateExpired = 5 -->
     <q-tabs class="q-mb-md" @select="setActiveTab">
-      <q-tab slot="title" name="state_0" label="pending approval 0" default />
-      <q-tab slot="title" name="state_3" label="Approved 3" />
-      <q-tab slot="title" name="state_1" label="work in progress 1" />
-      <q-tab slot="title" name="state_2" label="Pending claim 2" />
-      <q-tab slot="title" name="state_4" label="claimable 4" />
+      <q-tab
+        slot="title"
+        name="pending_approval"
+        label="pending approval 0"
+        default
+      />
+      <q-tab slot="title" name="approved" label="Approved 3" />
+      <q-tab slot="title" name="work_in_progress" label="work in progress 1" />
+      <q-tab slot="title" name="pending_claim" label="Pending claim 2" />
+      <q-tab slot="title" name="claimable" label="claimable 4" />
     </q-tabs>
 
     <div
@@ -101,6 +100,8 @@
 <script>
 import wpProposal from "components/ui/wp-proposal";
 import { mapGetters } from "vuex";
+const stateEnum = require("../../modules/wp_state_enum.js");
+
 export default {
   name: "ReviewWP",
   components: {
@@ -144,25 +145,10 @@ export default {
       this.active_tab = tab;
     },
     managePagination() {
-      // ProposalStatePending_approval = 0,
-      // ProposalStateWork_in_progress = 1,
-      // ProposalStatePending_finalize = 2,
-      // ProposalStateHas_enough_approvals_votes = 3,
-      // ProposalStateHas_enough_finalize_votes = 4,
-      // ProposalStateExpired = 5 -->
-      //map tab to number for making the request
-      const map = {
-        state_0: 0,
-        state_1: 1,
-        state_2: 2,
-        state_3: 3,
-        state_4: 4
-      };
-      //calculate skip
       let skip = (this.pagination.page - 1) * this.pagination.items_per_page;
       //make request
       this.fetchWps({
-        status: map[this.active_tab],
+        status: stateEnum[this.active_tab],
         skip: skip,
         limit: this.pagination.items_per_page,
         proposer: this.getAccountName

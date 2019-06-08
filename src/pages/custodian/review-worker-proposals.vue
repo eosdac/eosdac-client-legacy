@@ -8,17 +8,16 @@
       />
     </div>
 
-    <!-- // ProposalStatePending_approval = 0,
-      // ProposalStateWork_in_progress = 1,
-      // ProposalStatePending_finalize = 2,
-      // ProposalStateHas_enough_approvals_votes = 3,
-      // ProposalStateHas_enough_finalize_votes = 4,
-      // ProposalStateExpired = 5 -->
     <q-tabs class="q-mb-md" @select="setActiveTab">
-      <q-tab slot="title" name="state_0" label="pending approval" default />
-      <q-tab slot="title" name="state_1" label="work in progress" />
-      <q-tab slot="title" name="state_2" label="Pending claim" />
-      <q-tab slot="title" name="state_5" label="Expired" />
+      <q-tab
+        slot="title"
+        name="pending_approval"
+        label="pending approval"
+        default
+      />
+      <q-tab slot="title" name="work_in_progress" label="work in progress" />
+      <q-tab slot="title" name="pending_claim" label="Pending claim" />
+      <q-tab slot="title" name="expired" label="Expired" />
     </q-tabs>
 
     <div
@@ -128,6 +127,8 @@
 import wpProposal from "components/ui/wp-proposal";
 import voteDelegation from "components/controls/vote-delegation";
 import { mapGetters } from "vuex";
+const stateEnum = require("../../modules/wp_state_enum.js");
+
 export default {
   name: "ReviewWP",
   components: {
@@ -172,20 +173,11 @@ export default {
       this.active_tab = tab;
     },
     managePagination() {
-      //map tab to number for making the request
-      const map = {
-        state_0: 0,
-        state_1: 1,
-        state_2: 2,
-        state_3: 3,
-        state_4: 4,
-        state_5: 5
-      };
       //calculate skip
       let skip = (this.pagination.page - 1) * this.pagination.items_per_page;
       //make request
       this.fetchWps({
-        status: map[this.active_tab],
+        status: stateEnum[this.active_tab],
         skip: skip,
         limit: this.pagination.items_per_page
       });
