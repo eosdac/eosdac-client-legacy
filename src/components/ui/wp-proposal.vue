@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="show"
     style="min-height:100%"
     class=" q-pa-md column no-wrap justify-between bg-bg1 round-borders shadow-4 bg-logo animate-fade"
   >
@@ -361,7 +360,6 @@ export default {
   },
   data() {
     return {
-      show: true,
       wp_expiration: 100,
       expand_votes_modal: false
     };
@@ -460,7 +458,7 @@ export default {
       }
       if (this.wp.status === 2) {
         expiration_millis = Number(this.getWpConfig.escrow_expiry) * 1000;
-        start = Date.parse(this.wp.work_complete_timestamp);
+        start = Date.parse(this.wp.complete_work_timestamp);
         console.log("state 0", expiration_millis, start);
       }
 
@@ -646,7 +644,7 @@ export default {
         actions: actions
       });
       if (result) {
-        this.show = false;
+        this.$emit("delete");
         console.log(result);
       }
     },
@@ -667,7 +665,7 @@ export default {
         actions: actions
       });
       if (result) {
-        this.show = false;
+        this.$emit("delete");
       }
     },
     async completeWork() {
@@ -687,7 +685,7 @@ export default {
         actions: actions
       });
       if (result) {
-        this.show = false;
+        this.$emit("delete");
         console.log(result);
       }
     },

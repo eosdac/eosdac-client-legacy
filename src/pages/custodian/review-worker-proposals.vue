@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <div class="row gutter-sm">
+    <div class="row gutter-sm justify-start">
       <div class="col-xs-12 col-xl-6" v-for="(wp, i) in wps" :key="`wp${i}`">
         <wp-proposal
           :read_only="!getIsCustodian"
@@ -71,6 +71,7 @@
             expanded_modal_index = Number($event);
             expanded_modal = true;
           "
+          @delete="wps.splice(i, 1)"
         />
       </div>
     </div>
