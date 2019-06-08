@@ -697,11 +697,19 @@ export default {
         {
           account: this.$configFile.get("wpcontract"),
           name: "arbapprove",
-          // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             arbitrator: this.getAccountName,
             proposal_id: Number(this.wp.id),
             dac_scope: this.$configFile.get("dacscope")
+          }
+        },
+        {
+          account: this.$configFile.get("escrowcontract"),
+          name: "approveext",
+
+          data: {
+            ext_key: Number(this.wp.id),
+            approver: this.getAccountName
           }
         }
       ];

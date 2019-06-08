@@ -95,7 +95,7 @@ export default {
           this.loaded = true;
           preloaderImg = null;
         }
-      }, 3000);
+      }, 6000);
     }
   },
   mounted() {
