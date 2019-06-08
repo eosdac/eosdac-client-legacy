@@ -17,7 +17,9 @@
       />
       <q-tab slot="title" name="work_in_progress" label="work in progress" />
       <q-tab slot="title" name="pending_claim" label="Pending claim" />
+      <q-tab slot="title" name="claimed" label="claimed" />
       <q-tab slot="title" name="expired" label="Expired" />
+      <q-tab slot="title" name="cancelled" label="cancelled" />
     </q-tabs>
 
     <div

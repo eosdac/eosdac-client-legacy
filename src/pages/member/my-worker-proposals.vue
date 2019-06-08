@@ -11,6 +11,8 @@
       <q-tab slot="title" name="work_in_progress" label="work in progress 1" />
       <q-tab slot="title" name="pending_claim" label="Pending claim 2" />
       <q-tab slot="title" name="claimable" label="claimable 4" />
+      <q-tab slot="title" name="claimed" label="claimed 101" />
+      <q-tab slot="title" name="cancelled" label="cancelled 100" />
     </q-tabs>
 
     <div
@@ -63,6 +65,7 @@
             expanded_modal_index = Number($event);
             expanded_modal = true;
           "
+          @delete="wps.splice(i, 1)"
         />
       </div>
     </div>

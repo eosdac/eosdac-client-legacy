@@ -68,7 +68,7 @@
         v-if="wp.status == 0 || wp.status == 2 || wp.status == 5"
       >
         <div class="q-caption q-mb-xs text-text2">Time Left</div>
-        <!-- {{ getExpiry }} -->
+        {{ getExpiry }}
         <countdown
           v-if="getExpiry.millisleft"
           :time="Number(getExpiry.millisleft)"
@@ -139,7 +139,7 @@
 
     <div class="q-mt-md full-width">
       <div class="row justify-between items-center">
-        <div class="row" v-show="wp.status !== 5">
+        <div class="row" v-show="wp.status !== 5 && wp.status !== 100">
           <q-item
             @click.native="expand_votes_modal = true"
             class="cursor-pointer no-padding"
@@ -255,7 +255,7 @@
           <q-btn icon="close" @click="expand_votes_modal = false" flat dense />
         </div>
         <!-- content -->
-        <div class="q-pa-md" v-if="wp.status !== 5">
+        <div class="q-pa-md" v-if="wp.status !== 5 && wp.status !== 100">
           <div class="row justify-start q-mt-sm">
             <div
               class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
@@ -384,7 +384,11 @@ export default {
             v => v.vote == 1 || v.vote == 2 || v.vote === null
           );
         }
-        if (this.wp.status === 2 || this.wp.status === 4) {
+        if (
+          this.wp.status === 2 ||
+          this.wp.status === 4 ||
+          this.wp.status === 101
+        ) {
           return this.wp.votes.filter(
             v => v.vote == 3 || v.vote == 4 || v.vote === null
           );
@@ -490,7 +494,11 @@ export default {
           if (v.vote === 1) score.score += v.weight;
         });
       }
-      if (this.wp.status === 2 || this.wp.status === 4) {
+      if (
+        this.wp.status === 2 ||
+        this.wp.status === 4 ||
+        this.wp.status === 101
+      ) {
         score.threshold = this.getWpConfig.finalize_threshold;
         this.getVotes.forEach(v => {
           if (v.vote === 3) score.score += v.weight;
