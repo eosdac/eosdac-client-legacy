@@ -492,7 +492,9 @@
                 <div class="q-ma-none" style="min-width:100px; overflow:hidden">
                   {{ c.actor }}
                 </div>
+                <div class="q-caption text-text2">@{{ c.permission }}</div>
               </router-link>
+
               <q-icon
                 class="absolute"
                 style="top:-5px; right:-10px"
@@ -516,6 +518,7 @@
                 <div class="q-ma-none" style="min-width:100px; overflow:hidden">
                   {{ c.actor }}
                 </div>
+                <div class="q-caption text-text2">@{{ c.permission }}</div>
               </router-link>
             </div>
             <!-- <pre>{{getmsigIsSeenCache}}</pre> -->
