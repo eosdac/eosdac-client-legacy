@@ -279,11 +279,24 @@ export async function proposeMsig(
   let exp = new Date();
   exp.setDate(exp.getDate() + 10);
   let [expiration] = exp.toISOString().split(".");
+
   //requested
+  //-fetch the candidate permissions from the table
+
+  let custom_cand_permissions = await api.getCandidatePermissions();
+  console.log("custom cand permissions", custom_cand_permissions);
+
   let requested = rootState.dac.candidates
     .slice(0, rootState.dac.custodianConfig.numelected * 2)
     .map(c => {
-      return { actor: c.candidate_name, permission: "active" };
+      let permission = "active"; //default
+      let custom = custom_cand_permissions.find(
+        ccp => ccp.cand == c.candidate_name
+      );
+      if (custom) {
+        permission = custom.permission;
+      }
+      return { actor: c.candidate_name, permission: permission };
     });
   //msig trx template
   let msigTrx_template = {

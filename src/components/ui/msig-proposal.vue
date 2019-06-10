@@ -514,7 +514,7 @@
                 :scale="0.5"
                 :show_role="true"
               />
-              <router-link class=" a2" :to="{ path: '/profile/' + c.actor }">
+              <router-link class="a2" :to="{ path: '/profile/' + c.actor }">
                 <div class="q-ma-none" style="min-width:100px; overflow:hidden">
                   {{ c.actor }}
                 </div>

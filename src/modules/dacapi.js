@@ -202,7 +202,7 @@ export class DacApi {
         json: true,
         code: this.configobj.get("custodiancontract"),
         scope: this.configobj.get("custodiancontract"),
-        table: "candperm",
+        table: "candperms",
         limit: -1
       })
       .catch(e => false);
@@ -210,7 +210,7 @@ export class DacApi {
     if (res && res.rows[0]) {
       return res.rows;
     } else {
-      return false;
+      return [];
     }
   }
 
