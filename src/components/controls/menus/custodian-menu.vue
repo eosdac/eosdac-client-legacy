@@ -37,6 +37,9 @@
             :label="$t('menu.vote_worker_proposals')"
             class="text-text1 text-weight-light"
           />
+          <!-- <q-item-side right>
+            <q-chip round dense color="negative" class="shadow-2">7</q-chip>
+          </q-item-side> -->
         </q-item>
 
         <q-item class="q-pl-lg animate-fade" link to="/custodian/my-payments">

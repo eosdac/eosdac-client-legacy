@@ -204,9 +204,9 @@ export default {
       //make request
       if (this.active_tab == "inbox") {
         this.fetchWpsInbox({
-          account: this.getAccountName
-          // skip: skip,
-          // limit: this.pagination.items_per_page
+          account: this.getAccountName,
+          skip: skip,
+          limit: this.pagination.items_per_page
         });
       } else {
         this.fetchWps({
