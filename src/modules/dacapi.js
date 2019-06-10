@@ -196,6 +196,24 @@ export class DacApi {
     }
   }
 
+  async getCandidatePermissions() {
+    let res = await this.eos
+      .get_table_rows({
+        json: true,
+        code: this.configobj.get("custodiancontract"),
+        scope: this.configobj.get("custodiancontract"),
+        table: "candperm",
+        limit: -1
+      })
+      .catch(e => false);
+
+    if (res && res.rows[0]) {
+      return res.rows;
+    } else {
+      return false;
+    }
+  }
+
   async getApprovalsFromProposal(payload) {
     try {
       let approvals = (await this.eos.get_table_rows({
