@@ -148,6 +148,28 @@ export async function fetchWorkerProposals({}, payload = {}) {
     });
 }
 
+export async function fetchWorkerProposalsInbox({}, payload = {}) {
+  let url = this._vm.$configFile.get("memberclientstateapi");
+  const header = {
+    "X-DAC-Name": this._vm.$configFile.get("dacscope")
+  };
+  return this._vm
+    .$axios({
+      method: "get",
+      url: `${url}/proposals_inbox`,
+      params: payload,
+      headers: header
+    })
+    .then(r => {
+      // console.log(r.data)
+      return r.data;
+    })
+    .catch(e => {
+      console.log("could not load worker proposals from api");
+      return [];
+    });
+}
+
 //canceltoken to fix glitch when multiple requests are made fast
 var call;
 export async function fetchMsigProposals({}, payload = {}) {

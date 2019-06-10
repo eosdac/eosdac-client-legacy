@@ -9,12 +9,8 @@
     </div>
 
     <q-tabs class="q-mb-md" @select="setActiveTab">
-      <q-tab
-        slot="title"
-        name="pending_approval"
-        label="pending approval"
-        default
-      />
+      <q-tab slot="title" name="inbox" label="inbox" default />
+      <q-tab slot="title" name="pending_approval" label="pending approval" />
       <q-tab slot="title" name="work_in_progress" label="work in progress" />
       <q-tab slot="title" name="pending_claim" label="Pending claim" />
       <q-tab slot="title" name="claimed" label="claimed" />
@@ -131,6 +127,8 @@ import voteDelegation from "components/controls/vote-delegation";
 import { mapGetters } from "vuex";
 const stateEnum = require("../../modules/wp_state_enum.js");
 
+//https://api-jungle.eosdac.io/v1/eosdac/proposals_inbox?account=evilmikehere
+
 export default {
   name: "ReviewWP",
   components: {
@@ -156,12 +154,27 @@ export default {
     ...mapGetters({
       getWpConfig: "dac/getWpConfig",
       getIsCustodian: "user/getIsCustodian",
-      getIsDark: "ui/getIsDark"
+      getIsDark: "ui/getIsDark",
+      getAccountName: "user/getAccountName"
     })
   },
   methods: {
     async fetchWps(query) {
       let res = await this.$store.dispatch("dac/fetchWorkerProposals", query);
+      console.log(res);
+      if (res.results) {
+        this.wps = res.results;
+        this.pagination.max = Math.ceil(
+          res.count / this.pagination.items_per_page
+        );
+      }
+    },
+    async fetchWpsInbox(query) {
+      //{account:'evilmikehere'}
+      let res = await this.$store.dispatch(
+        "dac/fetchWorkerProposalsInbox",
+        query
+      );
       console.log(res);
       if (res.results) {
         this.wps = res.results;
@@ -178,11 +191,19 @@ export default {
       //calculate skip
       let skip = (this.pagination.page - 1) * this.pagination.items_per_page;
       //make request
-      this.fetchWps({
-        status: stateEnum[this.active_tab],
-        skip: skip,
-        limit: this.pagination.items_per_page
-      });
+      if (this.active_tab == "inbox") {
+        this.fetchWpsInbox({
+          account: this.getAccountName
+          // skip: skip,
+          // limit: this.pagination.items_per_page
+        });
+      } else {
+        this.fetchWps({
+          status: stateEnum[this.active_tab],
+          skip: skip,
+          limit: this.pagination.items_per_page
+        });
+      }
     }
   },
 
