@@ -9,8 +9,19 @@
     </div>
 
     <q-tabs class="q-mb-md" @select="setActiveTab">
-      <q-tab slot="title" name="inbox" label="inbox" default />
-      <q-tab slot="title" name="pending_approval" label="pending approval" />
+      <q-tab
+        v-if="getIsCustodian"
+        slot="title"
+        name="inbox"
+        label="inbox"
+        default
+      />
+      <q-tab
+        slot="title"
+        name="pending_approval"
+        label="pending approval"
+        :default="!getIsCustodian"
+      />
       <q-tab slot="title" name="work_in_progress" label="work in progress" />
       <q-tab slot="title" name="pending_claim" label="Pending claim" />
       <q-tab slot="title" name="claimed" label="claimed" />
