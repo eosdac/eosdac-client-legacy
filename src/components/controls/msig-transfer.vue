@@ -240,7 +240,19 @@ export default {
       },
       selected_token: "",
       tokens: [],
-      tokens_loading: false
+      tokens_loading: false,
+      default_assets: [
+        {
+          symbol: this.$configFile.get("systemtokensymbol"),
+          precision: 4,
+          contract: this.$configFile.get("systemtokencontract")
+        },
+        {
+          symbol: this.$configFile.get("dactokensymbol"),
+          precision: 4,
+          contract: this.$configFile.get("tokencontract")
+        }
+      ]
     };
   },
   computed: {
@@ -323,10 +335,9 @@ export default {
         console.log(e);
         tokens = [];
       }
-      console.log(tokens);
 
       if (!tokens.length) {
-        tokens.push(JSON.parse(JSON.stringify(this.form.asset)));
+        tokens = JSON.parse(JSON.stringify(this.default_assets));
       }
 
       this.tokens = tokens;
