@@ -78,7 +78,7 @@
         </draggable>
         <span class="text-negative text-weight-light" v-if="!actions.length"
           >No actions added yet. You can add multiple actions to the
-          transaction. Drag/Drop to chage order.</span
+          transaction. Drag/Drop to change order.</span
         >
       </div>
 
@@ -109,11 +109,11 @@
           name="tab-2"
           class="text-text1  tb-builder-pane-height no-padding"
         >
-          <div class="q-pa-md">
+          <div class="q-pa-md bg-bg2">
             <q-btn label="load" @click="loadCustPermissions" />
             <div class="row">
               <div
-                class="row items-center relative-position bg-bg2 round-borders q-pr-md q-ma-sm"
+                class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
                 v-for="(c, i) in msig_requested_signatures"
                 :key="i + 'r'"
               >
@@ -142,7 +142,7 @@
           <q-datetime-picker
             minimal
             :dark="getIsDark"
-            class="bg-bg2"
+            class="bg-bg2 no-border"
             color="positive"
             v-model="msig_expiration"
             :min="mindate"
@@ -152,7 +152,7 @@
         </q-tab-pane>
       </q-tabs>
 
-      <div class="row">
+      <div class="row q-mt-md">
         <q-item class="animate-pop no-padding">
           <q-item-main>
             <q-item-tile class="text-text1 q-body1" label
@@ -306,5 +306,6 @@ export default {
 
 .tb-builder-pane-height{
   min-height: 420px;
+  background-color: var(--q-color-bg2)
 }
 </style>

@@ -2,7 +2,7 @@
   <div>
     <!-- no props set = custom_mode -->
     <div v-if="account == '' && name == ''">
-      <div class="q-mb-sm">
+      <div>
         <q-item>
           <q-item-main>
             <q-input
@@ -15,7 +15,22 @@
                 data_fields = [];
                 custom_mode_parse_actions(custom_mode.account);
               "
-            />
+            >
+              <q-autocomplete
+                :min-characters="0"
+                :static-data="{
+                  field: 'value',
+                  list: Object.keys($configFile.configFile.contracts)
+                    .sort()
+                    .map(fa => {
+                      return {
+                        value: $configFile.configFile.contracts[fa].name,
+                        label: $configFile.configFile.contracts[fa].name
+                      };
+                    })
+                }"
+              />
+            </q-input>
           </q-item-main>
           <q-item-side right>
             <q-btn
@@ -33,7 +48,7 @@
 
       <div v-if="custom_mode.abi.actions" class="row q-mb-md bg-bg2 q-pa-xs">
         <q-btn
-          size="10px"
+          size="12px"
           :icon="$configFile.icon.action"
           v-for="(action, i) in custom_mode.abi.actions"
           :label="action.name"
@@ -57,8 +72,8 @@
       v-if="data_fields.length"
       class=" animate-fade bg-bg2 q-pa-md q-mt-md round-borders"
     >
-      <div class="row justify-between q-mb-md">
-        <div class="q-py-sm q-title ">
+      <div class="row justify-between items-center q-mb-md">
+        <div class="q-pa-sm q-title bg-bg1 round-borders">
           <q-icon :name="$configFile.icon.action" class="q-mr-xs" size="24px" />
           <span class="text-text1">{{
             this.account || custom_mode.account
