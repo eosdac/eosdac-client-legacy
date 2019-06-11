@@ -311,18 +311,25 @@ export default {
     async setTokens() {
       if (!this.form.from) return;
       this.tokens_loading = true;
-      let tokens = await this.$axios.get(
-        `${this.$configFile.get("memberclientstateapi")}/tokens_owned?account=${
-          this.form.from
-        }`
-      );
+      let tokens;
+      try {
+        tokens = await this.$axios.get(
+          `${this.$configFile.get(
+            "memberclientstateapi"
+          )}/tokens_owned?account=${this.form.from}`
+        );
+        tokens = tokens.data.results;
+      } catch (e) {
+        console.log(e);
+        tokens = [];
+      }
       console.log(tokens);
 
-      if (!tokens || !tokens.data.results.length) {
-        tokens.data.results.push(JSON.parse(JSON.stringify(this.form.asset)));
+      if (!tokens.length) {
+        tokens.push(JSON.parse(JSON.stringify(this.form.asset)));
       }
 
-      this.tokens = tokens.data.results;
+      this.tokens = tokens;
 
       this.selected_token = this.tokens.find(
         t =>
