@@ -6,10 +6,10 @@
           <q-item class="animate-pop">
             <q-item-side icon="timer" color="text2" />
             <q-item-main style="margin-left:-5px">
-              <q-item-tile class="text-text1 q-body1" label
+              <q-item-tile class="text-text1 q-title" label
                 >Trx Delay</q-item-tile
               >
-              <q-item-tile class="text-text2" sublabel
+              <q-item-tile class="text-text2 q-caption" sublabel
                 >{{ getSettingByName("trx_delay").value }} seconds</q-item-tile
               >
             </q-item-main>
@@ -17,10 +17,10 @@
           <q-item class="animate-pop">
             <q-item-side :icon="$configFile.icon.action" color="text2" />
             <q-item-main style="margin-left:-5px">
-              <q-item-tile class="text-text1 q-body1" label
+              <q-item-tile class="text-text1 q-title" label
                 >Actions</q-item-tile
               >
-              <q-item-tile class="text-text2" sublabel>{{
+              <q-item-tile class="text-text2 q-caption" sublabel>{{
                 actions.length
               }}</q-item-tile>
             </q-item-main>
@@ -37,20 +37,11 @@
             @click="view_actions_modal = true"
           />
           <q-btn
-            v-if="!msigMode"
             :disabled="!actions.length"
             color="positive"
-            class="animate-fade"
+            class="animate-pop"
             @click="pushTransaction"
             label="Push TRX"
-          />
-          <q-btn
-            v-if="msigMode"
-            :disabled="!actions.length"
-            color="positive"
-            class="animate-fade"
-            @click="proposeMsig"
-            label="push msig"
           />
         </div>
       </div>
@@ -77,112 +68,121 @@
           />
         </draggable>
         <span class="text-negative text-weight-light" v-if="!actions.length"
-          >No actions added yet. You can add multiple actions to the
-          transaction. Drag/Drop to chage order.</span
+          >No actions added yet.</span
         >
       </div>
 
       <q-tabs :dark="getIsDark" color="primary" swipeable>
-        <q-tab slot="title" name="tab-1" :label="`Add Action`" default />
+        <q-tab
+          default
+          slot="title"
+          name="tab-1"
+          :label="`send ${this.$configFile.get('systemtokensymbol')}`"
+        />
         <q-tab
           slot="title"
           name="tab-2"
-          :label="`Requested Signatures`"
-          v-if="msigMode"
+          :label="`send ${this.$configFile.get('dactokensymbol')}`"
         />
-        <q-tab
-          slot="title"
-          name="tab-3"
-          :label="`Expirartion`"
-          v-if="msigMode"
-        />
+        <q-tab slot="title" name="tab-3" :label="`Custom`" />
+        <q-tab slot="title" name="tab-4" :label="`Advanced`" />
+        <q-tab slot="title" name="tab-5" :label="`Load Trx`" />
+        <!-- Targets -->
         <q-tab-pane
           name="tab-1"
           class="text-text1  tb-builder-pane-height no-padding"
         >
+          <action-maker
+            :account="$configFile.get('systemtokencontract')"
+            :prefill="{ from: getAccountName }"
+            name="transfer"
+            @actiondata="addAction"
+          />
+        </q-tab-pane>
+        <q-tab-pane
+          name="tab-2"
+          class="text-text1  tb-builder-pane-height no-padding"
+        >
+          <action-maker
+            :account="$configFile.get('tokencontract')"
+            name="transfer"
+            :prefill="{ from: getAccountName }"
+            @actiondata="addAction"
+          />
+        </q-tab-pane>
+        <q-tab-pane
+          name="tab-3"
+          class="text-text1  tb-builder-pane-height no-padding"
+        >
+          <!-- <action-maker account="dacelections" name="updateconfig" @actiondata="addAction"/> -->
           <action-maker
             @actiondata="addAction"
             :prefill="{ from: getAccountName }"
           />
         </q-tab-pane>
         <q-tab-pane
-          name="tab-2"
+          name="tab-4"
           class="text-text1  tb-builder-pane-height no-padding"
         >
-          <div class="q-pa-md">
-            <q-btn label="load" @click="loadCustPermissions" />
-            <div class="row">
-              <div
-                class="row items-center relative-position bg-bg2 round-borders q-pr-md q-ma-sm"
-                v-for="(c, i) in msig_requested_signatures"
-                :key="i + 'r'"
-              >
-                <profile-pic
-                  :accountname="c.actor"
-                  :scale="0.5"
-                  :show_role="true"
-                />
-                <router-link class="a2" :to="{ path: '/profile/' + c.actor }">
-                  <div
-                    class="q-ma-none"
-                    style="min-width:100px; overflow:hidden"
-                  >
-                    {{ c.actor }}
-                  </div>
-                  <div class="q-caption text-text2">@{{ c.permission }}</div>
-                </router-link>
-              </div>
-            </div>
+          <div class="text-text2 q-my-md">
+            Add a raw json action object to the transaction
           </div>
-        </q-tab-pane>
-        <q-tab-pane
-          name="tab-3"
-          class="text-text1  tb-builder-pane-height no-padding"
-        >
-          <q-datetime-picker
-            minimal
+          <q-input
             :dark="getIsDark"
-            class="bg-bg2"
-            color="positive"
-            v-model="msig_expiration"
-            :min="mindate"
-            :max="maxdate"
-            type="date"
+            rows="7"
+            color="primary-light"
+            type="textarea"
+            v-model="raw_action_object"
+          />
+          <q-btn
+            label="add"
+            color="primary"
+            :disabled="raw_action_object == ''"
+            class="q-mt-md"
+            @click="addAction(JSON.parse(raw_action_object))"
           />
         </q-tab-pane>
-      </q-tabs>
 
-      <div class="row">
-        <q-item class="animate-pop no-padding">
-          <q-item-main>
-            <q-item-tile class="text-text1 q-body1" label
-              >Msig-mode</q-item-tile
-            >
-            <q-item-tile sublabel>
-              <q-toggle
-                :dark="getIsDark"
-                color="primary-light"
-                v-model="msigMode"
-                :left-label="true"
-              />
-            </q-item-tile>
-          </q-item-main>
-        </q-item>
-        <q-item class="animate-pop no-padding on-right">
-          <q-item-main>
-            <q-item-tile class="text-text1 q-body1" label
-              >Broadcast</q-item-tile
-            >
-            <q-item-tile sublabel>
-              <q-toggle
-                :dark="getIsDark"
-                color="primary-light"
-                v-model="broadcast"
-              />
-            </q-item-tile>
-          </q-item-main>
-        </q-item>
-      </div>
+        <q-tab-pane
+          name="tab-5"
+          class="text-text1  tb-builder-pane-height no-padding"
+        >
+          <div class="row">
+            <q-select
+              stack-label="Select Transaction"
+              class="q-my-md"
+              :dark="getIsDark"
+              color="primary-light"
+              v-model="selected_template"
+              :options="
+                trx_templates.map(t => {
+                  return { label: t.name, value: t.name };
+                })
+              "
+            />
+          </div>
+          <div
+            v-for="(action, i) in getSelectedTemplate.actions"
+            :key="`at${i}`"
+          >
+            <action-maker
+              :account="action.contract"
+              :name="action.action"
+              :prefill="action.prefill"
+              :auth="action.auth"
+              @actiondata="addAction"
+            />
+          </div>
+        </q-tab-pane>
+      </q-tabs>
+      <q-toggle
+        class="q-mt-md"
+        :dark="getIsDark"
+        color="primary-light"
+        v-model="broadcast"
+        label="broadcast"
+        :left-label="true"
+      />
     </div>
 
     <!-- review modal -->
@@ -206,37 +206,26 @@ const prettyHtml = require("json-pretty-html").default;
 import { mapGetters } from "vuex";
 import actionMaker from "components/controls/action-maker";
 import displayAction from "components/ui/display-action";
-import profilePic from "components/ui/profile-pic";
 
 import draggable from "vuedraggable";
-import { date } from "quasar";
-const today = new Date();
-const { addToDate } = date;
 
 export default {
   name: "transactionBuilder",
   components: {
     actionMaker,
     displayAction,
-    draggable,
-    profilePic
+    draggable
   },
 
   data() {
     return {
       drag: false,
-
+      selected_template: "",
+      trx_templates: require("../../extensions/statics/config/transaction.templates.json"),
+      raw_action_object: "",
       actions: [],
       view_actions_modal: false,
-      broadcast: true,
-      msigMode: false,
-
-      msig_requested_signatures: [],
-      msig_expiration: new Date(
-        new Date().getTime() + 3 * 24 * 60 * 60 * 1000
-      ).toISOString(),
-      mindate: today,
-      maxdate: addToDate(today, { days: 14 })
+      broadcast: true
     };
   },
 
@@ -245,10 +234,39 @@ export default {
       getAccountName: "user/getAccountName",
       getIsDark: "ui/getIsDark",
       getSettingByName: "user/getSettingByName",
-      getAuthString: "user/getAuthString",
-      getCustodianPermissions: "dac/getCustodianPermissions"
+      getAuthString: "user/getAuthString"
     }),
 
+    getSelectedTemplate() {
+      let selected = this.trx_templates.find(
+        t => t.name == this.selected_template
+      );
+      if (selected) {
+        selected.actions.map(a => {
+          if (a.prefill) {
+            Object.keys(a.prefill).forEach(key => {
+              if (String(a.prefill[key]).startsWith("$")) {
+                a.prefill[key] = this.$store.getters[a.prefill[key].substr(1)];
+              }
+            });
+          }
+          if (a.auth && !a.processed) {
+            a.auth = a.auth.map(a => {
+              if (a.startsWith("$")) {
+                a = this.$store.getters[a.substr(1)];
+              }
+              let [actor, permission] = a.split("@");
+              return { actor: actor, permission: permission };
+            });
+          }
+          a.processed = true;
+          return a;
+        });
+        return selected;
+      } else {
+        return [];
+      }
+    },
     parseNumberToAsset(number, symbol) {
       return `${number.toFixed(4)} ${symbol}`;
     },
@@ -280,31 +298,45 @@ export default {
     },
 
     async proposeMsig() {
-      let msigOptions = {
+      let result = await this.$store.dispatch("user/proposeMsig", {
         actions: this.actions,
-        expiration: this.msig_expiration.split(".")[0]
-      };
-      console.log(msigOptions);
-      let result = await this.$store.dispatch("user/proposeMsig", msigOptions);
+        options: { broadcast: this.broadcast }
+      });
       if (result) {
         console.log("transaction callback", result);
         this.actions = [];
         // this.latest_trx_id = result.transaction_id
       }
-    },
-    async loadCustPermissions() {
-      this.msig_requested_signatures =
-        this.getCustodianPermissions ||
-        (await this.$store.dispatch("dac/fetchCustodianPermissions"));
     }
   }
 };
 </script>
 
-<style lang="stylus">
-@import '~variables'
-
-.tb-builder-pane-height{
+<style>
+.q-stepper-title {
+  color: white;
+}
+.tb-builder-pane-height {
   min-height: 420px;
+}
+
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.no-move {
+  transition: transform 0s;
+}
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
+}
+.list-group {
+  min-height: 20px;
+}
+.list-group-item {
+  cursor: move;
+}
+.list-group-item i {
+  cursor: pointer;
 }
 </style>
