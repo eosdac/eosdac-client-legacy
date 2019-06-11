@@ -818,7 +818,7 @@ export default {
             proposer: proposer,
             proposal_name: proposal_name,
             canceler: this.getAccountName,
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];

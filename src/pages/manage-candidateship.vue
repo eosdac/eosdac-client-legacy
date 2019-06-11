@@ -360,15 +360,16 @@ export default {
           from: this.getAccountName,
           to: this.$configFile.get("custodiancontract"),
           quantity: this.verifyAndGetStakeAmount,
-          memo: this.$configFile.get("custodianmemo")
+          memo: this.$configFile.get("dacscope")
         }
       };
       let registeraction = {
         account: this.$configFile.get("custodiancontract"),
-        name: "nominatecand",
+        name: "nominatecane",
         data: {
           cand: this.getAccountName,
-          requestedpay: this.verifyAndGetRequestedPay
+          requestedpay: this.verifyAndGetRequestedPay,
+          dac_id: this.$configFile.get("dacscope")
         }
       };
 
@@ -393,9 +394,10 @@ export default {
       let actions = [
         {
           account: this.$configFile.get("custodiancontract"),
-          name: "withdrawcand",
+          name: "withdrawcane",
           data: {
-            cand: this.getAccountName
+            cand: this.getAccountName,
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -414,9 +416,10 @@ export default {
       let actions = [
         {
           account: this.$configFile.get("custodiancontract"),
-          name: "unstake",
+          name: "unstakee",
           data: {
-            cand: this.getAccountName
+            cand: this.getAccountName,
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];

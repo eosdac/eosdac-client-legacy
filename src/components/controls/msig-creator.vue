@@ -640,7 +640,7 @@ export default {
 
       let proposed = {
         account: this.$configFile.get("dacmsigcontract"),
-        name: "proposed",
+        name: "proposede",
         authorization: [
           { actor: this.getAccountName, permission: this.getAuth },
           {
@@ -655,7 +655,8 @@ export default {
           metadata: JSON.stringify({
             title: this.msig_title,
             description: this.msig_description
-          })
+          }),
+          dac_id: this.$configFile.get("dacscope")
         }
       };
 
