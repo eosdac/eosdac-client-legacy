@@ -126,6 +126,32 @@ export async function fetchWpConfig({ commit, dispatch, state }) {
   }
 }
 
+export async function fetchCustodianPermissions({
+  commit,
+  dispatch,
+  state,
+  rootState
+}) {
+  const api = await dispatch("global/getDacApi", false, { root: true });
+  let custom_cand_permissions = await api.getCandidatePermissions();
+  console.log("custom cand permissions", custom_cand_permissions);
+
+  let requested = rootState.dac.candidates
+    .slice(0, rootState.dac.custodianConfig.numelected * 2)
+    .map(c => {
+      let permission = "active"; //default
+      let custom = custom_cand_permissions.find(
+        ccp => ccp.cand == c.candidate_name
+      );
+      if (custom) {
+        permission = custom.permission;
+      }
+      return { actor: c.candidate_name, permission: permission };
+    });
+  commit("setCustodianPermissions", requested);
+  return requested;
+}
+
 export async function fetchWorkerProposals({}, payload = {}) {
   let url = this._vm.$configFile.get("memberclientstateapi");
   const header = {
