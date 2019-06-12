@@ -12,8 +12,7 @@
               stack-label="Contract"
               placeholder="input a contract name"
               @keyup.enter.native="
-                data_fields = [];
-                custom_mode_parse_actions(custom_mode.account);
+                custom_mode_parse_actions(custom_mode.account)
               "
             >
               <q-autocomplete
