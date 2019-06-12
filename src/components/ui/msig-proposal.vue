@@ -693,7 +693,7 @@ export default {
         },
         {
           account: this.dacmsig,
-          name: "approved",
+          name: "approvede",
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
@@ -705,7 +705,7 @@ export default {
             proposer: proposer,
             proposal_name: proposal_name,
             approver: this.getAccountName,
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -731,7 +731,7 @@ export default {
         },
         {
           account: this.dacmsig,
-          name: "unapproved",
+          name: "unapprovede",
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
@@ -743,7 +743,7 @@ export default {
             proposer: proposer,
             proposal_name: proposal_name,
             unapprover: this.getAccountName,
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -768,7 +768,7 @@ export default {
         },
         {
           account: this.dacmsig,
-          name: "executed",
+          name: "executede",
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
@@ -780,7 +780,7 @@ export default {
             proposer: proposer,
             proposal_name: proposal_name,
             executer: this.getAccountName,
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
