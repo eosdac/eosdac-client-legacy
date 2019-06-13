@@ -82,7 +82,12 @@
         >
       </div>
 
-      <q-tabs :dark="getIsDark" color="primary" swipeable>
+      <q-tabs
+        :dark="getIsDark"
+        color="primary"
+        swipeable
+        ref="trx_builder_tabs"
+      >
         <q-tab slot="title" name="tab-1" :label="`Add Action`" default />
         <q-tab
           slot="title"
@@ -100,43 +105,7 @@
             :prefill="{ from: getAccountName }"
           />
         </q-tab-pane>
-        <!-- <q-tab-pane
-          name="tab-2"
-          class="text-text1  tb-builder-pane-height no-padding"
-        >
-          <div class="q-pa-md bg-bg2">
-            <q-btn label="load" @click="loadCustPermissions" />
-            <div>
-              By default the msig will be sent as a DAC msig. This means that
-              the requested signatures are populated with the top
-              {{ getCustodianConfig.numelected * 2 }} candidate accounts.
-              Sending a msig in the name of the DAC doesn't require you to
-              change the requested signatures.
-            </div>
-            <div class="row">
-              <div
-                class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
-                v-for="(c, i) in msig_requested_signatures"
-                :key="i + 'r'"
-              >
-                <profile-pic
-                  :accountname="c.actor"
-                  :scale="0.5"
-                  :show_role="true"
-                />
-                <router-link class="a2" :to="{ path: '/profile/' + c.actor }">
-                  <div
-                    class="q-ma-none"
-                    style="min-width:100px; overflow:hidden"
-                  >
-                    {{ c.actor }}
-                  </div>
-                  <div class="q-caption text-text2">@{{ c.permission }}</div>
-                </router-link>
-              </div>
-            </div>
-          </div>
-        </q-tab-pane> -->
+
         <q-tab-pane
           keep-alive
           name="tab-2"
@@ -290,6 +259,12 @@
                     color="primary-light"
                     v-model="is_personal_msig"
                   />
+                  <span
+                    v-if="is_personal_msig"
+                    class="on-right animate-fade q-caption text-positive"
+                  >
+                    personal msig!
+                  </span>
                 </div>
               </div>
             </div>
@@ -313,7 +288,7 @@
             </q-item-tile>
           </q-item-main>
         </q-item>
-        <q-item class="animate-pop no-padding on-right">
+        <!-- <q-item class="animate-pop no-padding on-right">
           <q-item-main>
             <q-item-tile class="text-text1 q-body1" label
               >Broadcast</q-item-tile
@@ -326,7 +301,7 @@
               />
             </q-item-tile>
           </q-item-main>
-        </q-item>
+        </q-item> -->
       </div>
     </div>
 
@@ -479,6 +454,14 @@ export default {
       }
       this.msig_requested_signatures.push({ actor: actor, permission: perm });
       this.new_requested_signature = "";
+    }
+  },
+  watch: {
+    msigMode: function(newv, oldv) {
+      if (newv == false) {
+        console.log(this.$refs.trx_builder_tabs);
+        this.$refs.trx_builder_tabs.selectTab("tab-1");
+      }
     }
   }
 };
