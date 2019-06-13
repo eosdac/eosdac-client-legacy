@@ -144,6 +144,9 @@
                       icon="add"
                       color="primary"
                       @click="addRequestedSignature(new_requested_signature)"
+                      @keyup.enter.native="
+                        addRequestedSignature(new_requested_signature)
+                      "
                     />
                   </div>
                 </div>
