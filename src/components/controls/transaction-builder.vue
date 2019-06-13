@@ -107,6 +107,13 @@
         >
           <div class="q-pa-md bg-bg2">
             <q-btn label="load" @click="loadCustPermissions" />
+            <div>
+              By default the msig will be sent as a DAC msig. This means that
+              the requested signatures are populated with the top
+              {{ getCustodianConfig.numelected * 2 }} candidate accounts.
+              Sending a msig in the name of the DAC doesn't require you to
+              change the requested signatures.
+            </div>
             <div class="row">
               <div
                 class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
@@ -132,16 +139,56 @@
           </div>
         </q-tab-pane>
         <q-tab-pane
+          keep-alive
           name="tab-3"
           class="text-text1  tb-builder-pane-height no-padding"
         >
           <div class="row gutter-sm q-pa-md">
-            <div class="col-xs-12 col-md-6">
-              <div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+              <div class="bg-bg1 q-pa-md round-borders full-height">
+                <span class="text-text2"
+                  >Add a Title and Description to your proposal.</span
+                >
+                <q-input
+                  :dark="getIsDark"
+                  stack-label="Title"
+                  v-model="msig_title"
+                  class="q-mb-md"
+                />
+                <div class="q-caption q-mb-sm">Description</div>
+                <MarkdownViewer
+                  :tags="[
+                    'h1',
+                    'h2',
+                    'h3',
+                    'italic',
+                    'bold',
+                    'underline',
+                    'strikethrough',
+                    'subscript',
+                    'superscript',
+                    'anchor',
+                    'orderedlist',
+                    'unorderedlist'
+                  ]"
+                  :edit="true"
+                  :dark="getIsDark"
+                  :text="msig_description"
+                  v-on:update="updateText"
+                />
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+              <div class="bg-bg1 q-pa-md round-borders">
+                <span class="text-text2"
+                  >Set a date when the msig proposal should expire. The msig
+                  transaction wll not be executable after this date even if
+                  enough signatures are collected.</span
+                >
                 <q-datetime-picker
                   minimal
                   :dark="getIsDark"
-                  class="bg-bg2 no-border"
+                  class="no-border q-mt-sm"
                   color="positive"
                   v-model="msig_expiration"
                   :min="mindate"
@@ -150,17 +197,36 @@
                 />
               </div>
             </div>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-md-6 col-lg-4">
               <div>
-                <q-input
-                  :min="0"
-                  :step="1"
-                  :dark="getIsDark"
-                  stack-label="Delay (sec)"
-                  type="number"
-                  v-model="msig_delay"
-                  color="primary-light"
-                />
+                <div class="bg-bg1 q-pa-md round-borders q-mb-md">
+                  <span class="text-text2"
+                    >Add an execution delay to the msig transaction. When the
+                    proposal receives enough votes it will be executed with the
+                    set delay.</span
+                  >
+                  <q-input
+                    :min="0"
+                    :step="1"
+                    :dark="getIsDark"
+                    stack-label="Delay (sec)"
+                    type="number"
+                    v-model="msig_delay"
+                    color="primary-light"
+                  />
+                </div>
+                <div class="bg-bg1 q-pa-md round-borders">
+                  <div class="text-text2 q-mb-sm">
+                    By default the msig will be sent in the name of the DAC and
+                    shown to the custodians for voting. By enabling personal
+                    mode you can sent msigs outside the scope of the DAC.
+                  </div>
+                  <q-toggle
+                    :dark="getIsDark"
+                    color="primary-light"
+                    v-model="is_personal_msig"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -222,6 +288,7 @@ import { mapGetters } from "vuex";
 import actionMaker from "components/controls/action-maker";
 import displayAction from "components/ui/display-action";
 import profilePic from "components/ui/profile-pic";
+import MarkdownViewer from "components/ui/markdown-viewer";
 
 import draggable from "vuedraggable";
 import { date } from "quasar";
@@ -234,7 +301,8 @@ export default {
     actionMaker,
     displayAction,
     draggable,
-    profilePic
+    profilePic,
+    MarkdownViewer
   },
 
   data() {
@@ -246,6 +314,9 @@ export default {
       broadcast: true,
       msigMode: false,
 
+      is_personal_msig: false,
+      msig_title: "",
+      msig_description: "",
       msig_requested_signatures: [],
       msig_delay: 0,
       msig_expiration: new Date(
@@ -262,7 +333,8 @@ export default {
       getIsDark: "ui/getIsDark",
       getSettingByName: "user/getSettingByName",
       getAuthString: "user/getAuthString",
-      getCustodianPermissions: "dac/getCustodianPermissions"
+      getCustodianPermissions: "dac/getCustodianPermissions",
+      getCustodianConfig: "dac/getCustodianConfig"
     }),
 
     parseNumberToAsset(number, symbol) {
@@ -275,6 +347,9 @@ export default {
 
   methods: {
     prettyHtml,
+    updateText(val) {
+      this.msig_description = val;
+    },
     addAction(data) {
       this.actions.push(data);
     },
@@ -299,10 +374,16 @@ export default {
       let msigOptions = {
         actions: this.actions,
         expiration: this.msig_expiration.split(".")[0],
-        delay_sec: this.msig_delay
+        delay_sec: this.msig_delay,
+        title: this.msig_title,
+        description: this.msig_description,
+        is_personal_msig: this.is_personal_msig
       };
       console.log(msigOptions);
-      let result = await this.$store.dispatch("user/proposeMsig", msigOptions);
+      let result = await this.$store.dispatch(
+        "user/proposeMsig",
+        JSON.parse(JSON.stringify(msigOptions))
+      );
       if (result) {
         console.log("transaction callback", result);
         this.actions = [];

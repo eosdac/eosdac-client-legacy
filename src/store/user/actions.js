@@ -272,6 +272,7 @@ export async function proposeMsig(
   //   delay_sec: 0,
   //   title: "a title",
   //   description: "a description"
+  //   is_personal_msig: false
   // }
 
   const api = await dispatch("global/getDacApi", false, { root: true });
@@ -344,7 +345,10 @@ export async function proposeMsig(
     }
   };
 
-  let msig_actions = [propose, proposed];
+  let msig_actions = [propose];
+  if (!payload.is_personal_msig) {
+    msig_actions.push(proposed);
+  }
   let res = await dispatch("transact", { actions: msig_actions });
   if (res) {
     res.proposal_name = proposal_name;
