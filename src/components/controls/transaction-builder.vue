@@ -180,7 +180,7 @@
             <div v-if="!is_personal_msig" class="col-xs-12 col-md-6 col-lg-4">
               <div class="bg-bg1 q-pa-md round-borders full-height">
                 <span class="text-text2"
-                  >Add a Title and Description to your proposal.</span
+                  >Add a Title and Description to your DAC proposal.</span
                 >
                 <q-input
                   :dark="getIsDark"
