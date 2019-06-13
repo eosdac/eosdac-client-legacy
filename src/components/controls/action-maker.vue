@@ -18,6 +18,7 @@
             >
               <q-autocomplete
                 :min-characters="0"
+                @selected="custom_mode_parse_actions(custom_mode.account)"
                 :static-data="{
                   field: 'value',
                   list: Object.keys($configFile.configFile.contracts)
