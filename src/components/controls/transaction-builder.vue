@@ -221,7 +221,7 @@
                 <q-datetime-picker
                   minimal
                   :dark="getIsDark"
-                  class="no-border q-mt-sm"
+                  class="no-border q-mt-sm round-borders"
                   color="positive"
                   v-model="msig_expiration"
                   :min="mindate"
