@@ -250,9 +250,9 @@
                 </div>
                 <div class="bg-bg1 q-pa-md round-borders">
                   <div class="text-text2 q-mb-sm">
-                    By default the msig will be sent in the name of the DAC and
+                    By default the msig will be send in the name of the DAC and
                     shown to the custodians for voting. By enabling personal
-                    mode you can sent msigs outside the scope of the DAC.
+                    mode you can send msigs outside the scope of the DAC.
                   </div>
                   <q-toggle
                     :dark="getIsDark"
