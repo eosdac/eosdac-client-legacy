@@ -90,12 +90,7 @@
           :label="`Requested Signatures`"
           v-if="msigMode"
         />
-        <q-tab
-          slot="title"
-          name="tab-3"
-          :label="`Expirartion`"
-          v-if="msigMode"
-        />
+        <q-tab slot="title" name="tab-3" :label="`Options`" v-if="msigMode" />
         <q-tab-pane
           name="tab-1"
           class="text-text1  tb-builder-pane-height no-padding"
@@ -139,16 +134,35 @@
           name="tab-3"
           class="text-text1  tb-builder-pane-height no-padding"
         >
-          <q-datetime-picker
-            minimal
-            :dark="getIsDark"
-            class="bg-bg2 no-border"
-            color="positive"
-            v-model="msig_expiration"
-            :min="mindate"
-            :max="maxdate"
-            type="date"
-          />
+          <div class="row gutter-sm q-pa-md">
+            <div class="col-xs-12 col-md-6">
+              <div>
+                <q-datetime-picker
+                  minimal
+                  :dark="getIsDark"
+                  class="bg-bg2 no-border"
+                  color="positive"
+                  v-model="msig_expiration"
+                  :min="mindate"
+                  :max="maxdate"
+                  type="date"
+                />
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div>
+                <q-input
+                  :min="0"
+                  :step="1"
+                  :dark="getIsDark"
+                  stack-label="Delay (sec)"
+                  type="number"
+                  v-model="msig_delay"
+                  color="primary-light"
+                />
+              </div>
+            </div>
+          </div>
         </q-tab-pane>
       </q-tabs>
 
@@ -232,6 +246,7 @@ export default {
       msigMode: false,
 
       msig_requested_signatures: [],
+      msig_delay: 0,
       msig_expiration: new Date(
         new Date().getTime() + 3 * 24 * 60 * 60 * 1000
       ).toISOString(),
@@ -282,7 +297,8 @@ export default {
     async proposeMsig() {
       let msigOptions = {
         actions: this.actions,
-        expiration: this.msig_expiration.split(".")[0]
+        expiration: this.msig_expiration.split(".")[0],
+        delay_sec: this.msig_delay
       };
       console.log(msigOptions);
       let result = await this.$store.dispatch("user/proposeMsig", msigOptions);

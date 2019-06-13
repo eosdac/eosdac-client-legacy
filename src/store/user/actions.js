@@ -269,6 +269,7 @@ export async function proposeMsig(
   //   requested: [],
   //   proposal_name: "aname",
   //   expiration: "2019-08-10T19:14:14",
+  //   delay_sec: 0,
   //   title: "a title",
   //   description: "a description"
   // }
@@ -295,7 +296,7 @@ export async function proposeMsig(
     ref_block_prefix: 0,
     max_net_usage_words: 0,
     max_cpu_usage_ms: 0,
-    delay_sec: 0,
+    delay_sec: payload.delay_sec || 0,
     actions: [],
     context_free_actions: [],
     transaction_extensions: [],
