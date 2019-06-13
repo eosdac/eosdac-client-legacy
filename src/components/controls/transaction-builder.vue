@@ -87,10 +87,9 @@
         <q-tab
           slot="title"
           name="tab-2"
-          :label="`Requested Signatures`"
+          :label="`Msig Options`"
           v-if="msigMode"
         />
-        <q-tab slot="title" name="tab-3" :label="`Options`" v-if="msigMode" />
         <q-tab-pane
           keep-alive
           name="tab-1"
@@ -101,7 +100,7 @@
             :prefill="{ from: getAccountName }"
           />
         </q-tab-pane>
-        <q-tab-pane
+        <!-- <q-tab-pane
           name="tab-2"
           class="text-text1  tb-builder-pane-height no-padding"
         >
@@ -137,14 +136,79 @@
               </div>
             </div>
           </div>
-        </q-tab-pane>
+        </q-tab-pane> -->
         <q-tab-pane
           keep-alive
-          name="tab-3"
+          name="tab-2"
           class="text-text1  tb-builder-pane-height no-padding"
         >
           <div class="row gutter-sm q-pa-md">
-            <div class="col-xs-12 col-md-6 col-lg-4">
+            <div v-if="is_personal_msig" class="col-xs-12 col-md-6 col-lg-4">
+              <div class="bg-bg1 q-pa-md round-borders full-height">
+                <div class="text-text2">
+                  Add a proposal name and requested signatures to your personal
+                  msig.
+                </div>
+
+                <q-input
+                  :dark="getIsDark"
+                  stack-label="Proposal Name"
+                  v-model="msig_proposal_name"
+                  class="q-mb-lg"
+                />
+                <div
+                  class="row justify-between items-center q-pa-xs"
+                  style="border-bottom:1px solid grey"
+                >
+                  <div class="q-body1">Requested Signatures</div>
+                  <div class="no-wrap row items-center">
+                    <q-input
+                      v-model="new_requested_signature"
+                      class="bg-bg2 q-pa-xs q-mr-xs round-borders"
+                      hide-underline
+                      placeholder="actor@permission"
+                      :dark="getIsDark"
+                    />
+                    <q-btn
+                      round
+                      dense
+                      icon="add"
+                      color="primary"
+                      @click="addRequestedSignature(new_requested_signature)"
+                    />
+                  </div>
+                </div>
+                <div class="row bg-dark">
+                  <div
+                    class="q-py-md q-ml-md text-negative"
+                    v-if="!msig_requested_signatures.length"
+                  >
+                    No signatures added yet
+                  </div>
+                  <div
+                    v-for="(req, i) in msig_requested_signatures"
+                    :key="`rs${i}`"
+                    class="row items-center bg-bg2 round-borders q-ma-sm q-pl-xs"
+                  >
+                    <q-icon
+                      name="mdi-shield-account"
+                      class=" text-text2 on-left"
+                      size="16px"
+                    />
+                    <div>{{ `${req.actor}@${req.permission}` }}</div>
+                    <q-btn
+                      icon="close"
+                      flat
+                      dense
+                      color="negative"
+                      class="on-right"
+                      @click="msig_requested_signatures.splice(i, 1)"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-if="!is_personal_msig" class="col-xs-12 col-md-6 col-lg-4">
               <div class="bg-bg1 q-pa-md round-borders full-height">
                 <span class="text-text2"
                   >Add a Title and Description to your proposal.</span
@@ -287,7 +351,7 @@ const prettyHtml = require("json-pretty-html").default;
 import { mapGetters } from "vuex";
 import actionMaker from "components/controls/action-maker";
 import displayAction from "components/ui/display-action";
-import profilePic from "components/ui/profile-pic";
+
 import MarkdownViewer from "components/ui/markdown-viewer";
 
 import draggable from "vuedraggable";
@@ -301,13 +365,14 @@ export default {
     actionMaker,
     displayAction,
     draggable,
-    profilePic,
+
     MarkdownViewer
   },
 
   data() {
     return {
       drag: false,
+      new_requested_signature: "",
 
       actions: [],
       view_actions_modal: false,
@@ -315,9 +380,12 @@ export default {
       msigMode: false,
 
       is_personal_msig: false,
+      msig_proposal_name: "",
+      msig_requested_signatures: [],
+
       msig_title: "",
       msig_description: "",
-      msig_requested_signatures: [],
+
       msig_delay: 0,
       msig_expiration: new Date(
         new Date().getTime() + 3 * 24 * 60 * 60 * 1000
@@ -379,6 +447,10 @@ export default {
         description: this.msig_description,
         is_personal_msig: this.is_personal_msig
       };
+      if (this.is_personal_msig) {
+        msigOptions.proposal_name = this.msig_proposal_name;
+        msigOptions.requested = this.msig_requested_signatures;
+      }
       console.log(msigOptions);
       let result = await this.$store.dispatch(
         "user/proposeMsig",
@@ -394,6 +466,19 @@ export default {
       this.msig_requested_signatures =
         this.getCustodianPermissions ||
         (await this.$store.dispatch("dac/fetchCustodianPermissions"));
+    },
+
+    addRequestedSignature(authstring) {
+      if (authstring == "") {
+        return;
+      }
+      let [actor, perm] = authstring.split("@");
+      if (!actor || !perm) {
+        this.new_auth = "";
+        return;
+      }
+      this.msig_requested_signatures.push({ actor: actor, permission: perm });
+      this.new_requested_signature = "";
     }
   }
 };
