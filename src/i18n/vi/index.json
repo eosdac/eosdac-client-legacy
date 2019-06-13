@@ -104,7 +104,7 @@
     }
   },
   "manage_candidateship": {
-    "amount_to_stake_placeholder": "số lượng đặt cọc EOSDAC",
+    "amount_to_stake_placeholder": "số lượng đặt cọc {token_symbol}",
     "locked_tokens": "token bị khóa",
     "page_description_active_custodian": "Bạn đang là một thành viên hội đồng giám hộ {dacname}.",
     "page_description_registered": "Cám ơn bạn đã đăng ký ứng viên để phục vụ trong hội đồng giám hộ {dacname}. Như một phần để tham gia vào việc đăng ký ứng cử, một lượng token của bạn đã được đặt cọc.",
