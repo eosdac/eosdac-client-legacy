@@ -92,6 +92,7 @@
         />
         <q-tab slot="title" name="tab-3" :label="`Options`" v-if="msigMode" />
         <q-tab-pane
+          keep-alive
           name="tab-1"
           class="text-text1  tb-builder-pane-height no-padding"
         >
