@@ -250,9 +250,10 @@
                 </div>
                 <div class="bg-bg1 q-pa-md round-borders">
                   <div class="text-text2 q-mb-sm">
-                    By default the msig will be send in the name of the DAC and
-                    shown to the custodians for voting. By enabling personal
-                    mode you can send msigs outside the scope of the DAC.
+                    The msig will be send in the name of the DAC and shown to
+                    the {{ getCustodianConfig.numelected }} custodians for
+                    voting. By enabling personal mode you can send msigs outside
+                    the scope of the DAC.
                   </div>
                   <q-toggle
                     :dark="getIsDark"
@@ -452,8 +453,14 @@ export default {
         this.new_auth = "";
         return;
       }
-      this.msig_requested_signatures.push({ actor: actor, permission: perm });
-      this.new_requested_signature = "";
+      let already_added = this.msig_requested_signatures.find(
+        mrs => mrs.actor == actor && mrs.permission == perm
+      );
+
+      if (!already_added) {
+        this.msig_requested_signatures.push({ actor: actor, permission: perm });
+        this.new_requested_signature = "";
+      }
     }
   },
   watch: {
