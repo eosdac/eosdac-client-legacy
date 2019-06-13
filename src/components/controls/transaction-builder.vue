@@ -367,10 +367,10 @@ export default {
 
       msig_delay: 0,
       msig_expiration: new Date(
-        new Date().getTime() + 3 * 24 * 60 * 60 * 1000
+        new Date().getTime() + 21 * 24 * 60 * 60 * 1000
       ).toISOString(),
       mindate: today,
-      maxdate: addToDate(today, { days: 14 })
+      maxdate: addToDate(today, { days: 30 })
     };
   },
 
