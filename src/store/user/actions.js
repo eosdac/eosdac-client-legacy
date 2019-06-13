@@ -327,7 +327,7 @@ export async function proposeMsig(
 
   let proposed = {
     account: this._vm.$configFile.get("dacmsigcontract"),
-    name: "proposed",
+    name: "proposede",
     authorization: [
       { actor: state.accountName, permission: getters["getAuth"] },
       { actor: this._vm.$configFile.get("authaccountname"), permission: PERM }
@@ -335,7 +335,7 @@ export async function proposeMsig(
     data: {
       proposer: state.accountName,
       proposal_name: proposal_name,
-      dac_scope: this._vm.$configFile.get("dacscope"),
+      dac_id: this._vm.$configFile.get("dacscope"),
       metadata: JSON.stringify({
         title: payload.title || "Default Msig title",
         description: payload.description || "default msig description"
