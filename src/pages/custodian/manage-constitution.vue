@@ -97,6 +97,30 @@ export default {
       } catch (err) {
         throw err;
       }
+    },
+
+    async updateConstitution() {
+      let action = {
+        account: this.$configFile.get("tokencontract"),
+        name: "newmemterms",
+        data: {
+          terms: "dsfsfsfsdf",
+          hash: "sdfsfsfsdf"
+        },
+        hex: "0A647366736673667364660A73646673667366736466",
+        authorization: [
+          {
+            actor: "kasdactokens",
+            permission: "active"
+          }
+        ]
+      };
+      let res = await this.$store.dispatch("user/proposeMsig", {
+        actions: [action],
+        title: `Update constitution`,
+        description: "Update the current constitution"
+      });
+      console.log(res);
     }
   },
 
