@@ -83,6 +83,7 @@
       </div>
 
       <q-tabs
+        class="topbar"
         :dark="getIsDark"
         color="primary"
         swipeable

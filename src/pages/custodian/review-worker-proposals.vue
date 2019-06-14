@@ -8,7 +8,7 @@
       />
     </div>
 
-    <q-tabs class="q-mb-md" @select="setActiveTab">
+    <q-tabs class="q-mb-md topbar" @select="setActiveTab">
       <q-tab
         v-if="getIsCustodian"
         slot="title"

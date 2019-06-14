@@ -72,7 +72,7 @@
         >
       </div>
 
-      <q-tabs :dark="getIsDark" color="primary" swipeable>
+      <q-tabs :dark="getIsDark" color="primary" class="topbar" swipeable>
         <q-tab
           default
           slot="title"

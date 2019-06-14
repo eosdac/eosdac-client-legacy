@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <q-tabs class="q-mb-md" @select="setActiveTab">
+    <q-tabs class="q-mb-md topbar" @select="setActiveTab">
       <q-tab
         slot="title"
         name="pending_approval"
