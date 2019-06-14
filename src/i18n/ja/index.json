@@ -110,7 +110,7 @@
     }
   },
   "manage_candidateship": {
-    "amount_to_stake_placeholder": "ステークしているEOSDACの総量",
+    "amount_to_stake_placeholder": "ステークしている{token_symbol}の総量",
     "locked_tokens": "ロックされているトークン",
     "page_description_active_custodian": "現在、カストディアンボードのアクティブメンバーです。",
     "page_description_registered": "{dacname}のカストディアン候補へのご登録ありがとうございます。候補登録の一環として、いくつかのトークンがステークされます。",

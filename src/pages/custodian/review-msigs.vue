@@ -6,7 +6,7 @@
       </h4>
     </div>
 
-    <q-tabs class="q-mb-md" @select="setActiveTab">
+    <q-tabs class="q-mb-md topbar" @select="setActiveTab">
       <!-- Tabs - notice slot="title" -->
       <q-tab default slot="title" name="open" label="open" />
       <q-tab slot="title" name="executed" label="executed" />

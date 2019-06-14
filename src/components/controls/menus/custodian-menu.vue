@@ -13,10 +13,10 @@
         <q-item
           class="q-pl-lg animate-fade"
           link
-          to="/custodian/dac-financials"
+          to="/custodian/dac-management"
         >
           <q-item-main
-            :label="$t('menu.manage_financials')"
+            label="Manage DAC"
             class="text-text1 text-weight-light"
           />
         </q-item>

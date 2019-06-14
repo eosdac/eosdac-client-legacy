@@ -27,7 +27,7 @@
         />
       </div>
     </div>
-    <div class="col-xs-12 row justify-end">
+    <div class="col-xs-12 row justify-end" v-if="contract_config.length">
       <q-btn
         flat
         :disable="contract == ''"
@@ -178,7 +178,6 @@ export default {
   },
 
   mounted() {
-    console.log("init");
     this.init();
   },
   watch: {

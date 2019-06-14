@@ -8,7 +8,7 @@
       />
     </div>
 
-    <q-tabs class="q-mb-md" @select="setActiveTab">
+    <q-tabs class="q-mb-md topbar" @select="setActiveTab">
       <q-tab
         v-if="getIsCustodian"
         slot="title"
@@ -69,7 +69,7 @@
       </div>
     </div>
 
-    <div class="row gutter-sm justify-start">
+    <div v-if="wps.length" class="row gutter-sm justify-start">
       <div class="col-xs-12 col-xl-6" v-for="(wp, i) in wps" :key="`wp${i}`">
         <wp-proposal
           :read_only="!getIsCustodian"
@@ -82,6 +82,15 @@
           @delete="wps.splice(i, 1)"
         />
       </div>
+    </div>
+    <div
+      v-else
+      class="text-text2 bg-bg1 bg-logo q-pa-md round-borders shadow-4 capitalize"
+    >
+      <span v-if="loading" class="row items-center">
+        <q-spinner class="on-left" color="primary-light" />Loading
+      </span>
+      <span v-else>No proposals available</span>
     </div>
 
     <q-modal maximized v-model="expanded_modal">
@@ -148,6 +157,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       delegate_modal: false,
       expanded_modal: false,
       expanded_modal_index: 0,
@@ -171,6 +181,7 @@ export default {
   },
   methods: {
     async fetchWps(query) {
+      this.loading = true;
       let res = await this.$store.dispatch("dac/fetchWorkerProposals", query);
       console.log(res);
       if (res.results) {
@@ -179,6 +190,7 @@ export default {
           res.count / this.pagination.items_per_page
         );
       }
+      this.loading = false;
     },
     async fetchWpsInbox(query) {
       //{account:'evilmikehere'}

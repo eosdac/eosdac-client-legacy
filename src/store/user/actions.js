@@ -269,8 +269,10 @@ export async function proposeMsig(
   //   requested: [],
   //   proposal_name: "aname",
   //   expiration: "2019-08-10T19:14:14",
+  //   delay_sec: 0,
   //   title: "a title",
   //   description: "a description"
+  //   is_personal_msig: false
   // }
 
   const api = await dispatch("global/getDacApi", false, { root: true });
@@ -278,7 +280,7 @@ export async function proposeMsig(
   let proposal_name = payload.proposal_name || this._vm.$helper.randomName();
   //expiration
   let exp = new Date();
-  exp.setDate(exp.getDate() + 10);
+  exp.setDate(exp.getDate() + 30);
   let [expiration] = exp.toISOString().split(".");
 
   //requested
@@ -295,7 +297,7 @@ export async function proposeMsig(
     ref_block_prefix: 0,
     max_net_usage_words: 0,
     max_cpu_usage_ms: 0,
-    delay_sec: 0,
+    delay_sec: payload.delay_sec || 0,
     actions: [],
     context_free_actions: [],
     transaction_extensions: [],
@@ -335,7 +337,7 @@ export async function proposeMsig(
     data: {
       proposer: state.accountName,
       proposal_name: proposal_name,
-      dac_scope: this._vm.$configFile.get("dacscope"),
+      dac_id: this._vm.$configFile.get("dacscope"),
       metadata: JSON.stringify({
         title: payload.title || "Default Msig title",
         description: payload.description || "default msig description"
@@ -344,7 +346,10 @@ export async function proposeMsig(
     }
   };
 
-  let msig_actions = [propose, proposed];
+  let msig_actions = [propose];
+  if (!payload.is_personal_msig) {
+    msig_actions.push(proposed);
+  }
   let res = await dispatch("transact", { actions: msig_actions });
   if (res) {
     res.proposal_name = proposal_name;
