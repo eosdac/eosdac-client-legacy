@@ -89,6 +89,10 @@ let routes = [
           {
             path: "configuration",
             component: () => import("pages/custodian/contracts-config")
+          },
+          {
+            path: "constitution",
+            component: () => import("pages/custodian/manage-constitution")
           }
         ]
       }

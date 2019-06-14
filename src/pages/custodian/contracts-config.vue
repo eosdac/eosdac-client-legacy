@@ -1,6 +1,9 @@
 <template>
   <q-page class="q-pa-md">
-    <div class="q-pa-md round-borders bg-bg1 bg-logo shadow-4">
+    <div
+      class="q-pa-md round-borders bg-bg1 bg-logo shadow-4 row"
+      style="min-height:200px"
+    >
       <q-select
         class="q-mb-md"
         stack-label="Select contract"
@@ -25,7 +28,7 @@ export default {
   },
   data() {
     return {
-      selected_contract: ""
+      selected_contract: this.$configFile.get("custodiancontract")
     };
   },
   computed: {

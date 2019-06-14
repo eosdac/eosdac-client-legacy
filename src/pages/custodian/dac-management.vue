@@ -9,6 +9,12 @@
       />
       <q-route-tab
         default
+        label="constitution"
+        to="/custodian/dac-management/constitution"
+        slot="title"
+      />
+      <q-route-tab
+        default
         label="configuration"
         to="/custodian/dac-management/configuration"
         slot="title"
