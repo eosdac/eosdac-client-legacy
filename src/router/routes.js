@@ -82,6 +82,7 @@ let routes = [
         path: "dac-management",
         component: () => import("pages/custodian/dac-management"),
         children: [
+          { path: "", redirect: "financials" },
           {
             path: "financials",
             component: () => import("pages/custodian/dac-financials")
