@@ -94,6 +94,10 @@ let routes = [
           {
             path: "constitution",
             component: () => import("pages/custodian/manage-constitution")
+          },
+          {
+            path: "advanced",
+            component: () => import("pages/custodian/advanced")
           }
         ]
       }

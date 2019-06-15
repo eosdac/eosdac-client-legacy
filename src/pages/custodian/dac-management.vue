@@ -19,6 +19,12 @@
         to="/custodian/dac-management/configuration"
         slot="title"
       />
+      <q-route-tab
+        default
+        label="advanced"
+        to="/custodian/dac-management/advanced"
+        slot="title"
+      />
       <router-view />
     </q-tabs>
   </q-page>

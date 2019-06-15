@@ -7,7 +7,10 @@
       :dark="getIsDark"
       :options="getParsedMemberTerms"
       placeholder="Select Version"
-      @input="md5_constitution = ''"
+      @input="
+        md5_constitution = '';
+        parsed_constitution = '';
+      "
     />
     <div class="row items-center no-wrap">
       <q-input
