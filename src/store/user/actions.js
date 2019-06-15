@@ -341,8 +341,7 @@ export async function proposeMsig(
       metadata: JSON.stringify({
         title: payload.title || "Default Msig title",
         description: payload.description || "default msig description"
-      }),
-      dac_id: this._vm.$configFile.get("dacscope")
+      })
     }
   };
 
