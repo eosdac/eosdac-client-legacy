@@ -104,6 +104,8 @@ export default {
           this.new_constitution_url
         );
         if (!getCt) {
+          this.md5_constitution = "";
+          this.isloading = false;
           return;
         }
         this.raw_constitution = getCt;
@@ -122,8 +124,13 @@ export default {
     },
 
     async loadConstitutionFromUrl(url) {
+      let options = {
+        method: "GET",
+        url: url,
+        timeout: 3000
+      };
       try {
-        let constitution = await this.$axios.get(url);
+        let constitution = await this.$axios(options);
         return constitution.data;
       } catch (err) {
         return false;
