@@ -127,7 +127,7 @@ export default {
       let options = {
         method: "GET",
         url: url,
-        timeout: 3000
+        timeout: 5000
       };
       try {
         let constitution = await this.$axios(options);
@@ -157,7 +157,7 @@ export default {
       let res = await this.$store.dispatch("user/proposeMsig", {
         actions: [action],
         title: `Update constitution`,
-        description: `Update the constitution with ${this.new_constitution_url} hash: ${this.md5_constitution}`
+        description: `Update the constitution with ${this.new_constitution_url} \nhash: ${this.md5_constitution}`
       });
       console.log(res);
     }
