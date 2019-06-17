@@ -88,8 +88,6 @@ class ConfigLoader {
         return this.configFile.contracts.auth.name;
       case "wpcontract":
         return this.configFile.contracts.wpproposal.name;
-      case "bpaccount":
-        return this.configFile.bpAccount.name;
       case "treasuryaccount":
         if (!this.configFile.contracts.treasury) {
           return this.configFile.treasuryAccount.name;
