@@ -332,7 +332,7 @@ export async function proposeMsig(
     name: "proposede",
     authorization: [
       { actor: state.accountName, permission: getters["getAuth"] },
-      { actor: this._vm.$configFile.get("authaccountname"), permission: PERM }
+      { actor: this._vm.$configFile.get("authaccount"), permission: PERM }
     ],
     data: {
       proposer: state.accountName,

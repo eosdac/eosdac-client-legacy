@@ -73,26 +73,12 @@ class ConfigLoader {
         return this.configFile.api.bpnodes;
       case "firehoseapi":
         return this.configFile.api.firehose;
-      // case "external":
-      //   return this.configFile.external;
       case "authaccount":
-        // backwards compatibility
-        if (!this.configFile.contracts.auth) {
-          return this.configFile.authAccount;
-        }
-        return this.configFile.contracts.auth;
-      case "authaccountname":
-        if (!this.configFile.contracts.auth) {
-          return this.configFile.authAccount.name;
-        }
-        return this.configFile.contracts.auth.name;
+        return this.configFile.accounts.authAccount.name;
       case "wpcontract":
         return this.configFile.contracts.wpproposal.name;
       case "treasuryaccount":
-        if (!this.configFile.contracts.treasury) {
-          return this.configFile.treasuryAccount.name;
-        }
-        return this.configFile.contracts.treasury.name;
+        return this.configFile.accounts.treasuryAccount.name;
       default:
         return `***${configquery} not yet subscribed in config-loader***`;
     }

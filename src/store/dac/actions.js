@@ -75,7 +75,7 @@ export async function fetchActiveCandidates({ state, commit, dispatch }) {
 
 export async function fetchDacAdmins({ commit, dispatch }) {
   const api = await dispatch("global/getDacApi", false, { root: true });
-  let res = await api.getAccount(this._vm.$configFile.get("authaccountname"));
+  let res = await api.getAccount(this._vm.$configFile.get("authaccount"));
   if (res && res.permissions) {
     let admins = res.permissions.find(p => p.perm_name == "admin");
     if (!admins) return;
@@ -105,7 +105,7 @@ export async function fetchApprovalsFromProposal({ dispatch }, payload) {
 export async function fetchControlledAccounts({ dispatch }) {
   const api = await dispatch("global/getDacApi", false, { root: true });
   let ctrl = await api.getControlledAccounts(
-    this._vm.$configFile.get("authaccountname")
+    this._vm.$configFile.get("authaccount")
   );
   console.log(ctrl);
 }
