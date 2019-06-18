@@ -147,15 +147,19 @@
           </div>
         </div>
         <div class="col-xs-12">
-          <div
-            class="q-pa-md round-borders bg-bg1 shadow-4"
-            v-if="parsed_constitution != ''"
-          >
-            <div><xspan :value="md5_constitution" /></div>
-            <div
-              class="markdown-body animate-fade bg-text1 q-pa-md"
-              v-html="parsed_constitution"
-            ></div>
+          <div class="q-pa-md round-borders bg-bg1 shadow-4">
+            <div v-if="parsed_constitution != ''">
+              <div class="row q-pb-md justify-end">
+                <xspan :value="md5_constitution" />
+              </div>
+              <div
+                class="markdown-body animate-fade bg-text1 q-pa-md"
+                v-html="parsed_constitution"
+              />
+            </div>
+            <div v-else>
+              No constitution selected
+            </div>
           </div>
         </div>
       </div>
@@ -209,7 +213,10 @@ export default {
       this.parsed_constitution = "";
       this.md5_constitution = null;
       this.raw_constitution = false;
-      if (!url) return;
+      if (!url) {
+        this.md5_constitution = "";
+        return;
+      }
       this.isloading = true;
       try {
         let getCt = await this.loadConstitutionFromUrl(url);
