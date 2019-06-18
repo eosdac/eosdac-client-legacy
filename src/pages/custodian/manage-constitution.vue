@@ -3,8 +3,25 @@
     <div class="">
       <div class="row gutter-sm">
         <div class="col-xs-12 col-md-5 ">
-          <div class="q-pa-md round-borders bg-bg1 shadow-4">
-            <div>Constitution History</div>
+          <div class="round-borders bg-bg1 shadow-4 overflow-hidden">
+            <div
+              class="bg-primary q-pa-sm row justify-between items-center"
+              style="height:50px"
+            >
+              <q-icon
+                :name="$configFile.icon.dactoken"
+                color="text2"
+                size="24px"
+              />
+              <span>Constitution History</span>
+              <help-btn
+                :content="`dsdfsdfsdfsdf`"
+                :title="`sdqdqsdqsdsd`"
+                color="text1"
+                size="sm"
+              />
+            </div>
+
             <q-scroll-area
               style="width: 100%; height: 250px;"
               :thumb-style="{
@@ -63,10 +80,26 @@
         </div>
         <div class="col-xs-12 col-md-7">
           <div
-            class="q-pa-md round-borders bg-bg1 bg-logo shadow-4 full-height column justify-between"
+            class="round-borders bg-bg1 bg-logo shadow-4  full-height overflow-hidden"
           >
-            <div>
-              <div>New Constitution</div>
+            <div
+              class="bg-primary q-pa-sm row justify-between items-center"
+              style="height:50px"
+            >
+              <q-icon
+                :name="$configFile.icon.dactoken"
+                color="text2"
+                size="24px"
+              />
+              <span>New Constitution</span>
+              <help-btn
+                :content="`dsdfsdfsdfsdf`"
+                :title="`sdqdqsdqsdsd`"
+                color="text1"
+                size="sm"
+              />
+            </div>
+            <div class="q-pa-md column justify-between " style="height:250px">
               <div class="row items-center no-wrap">
                 <q-input
                   class="full-width "
@@ -90,22 +123,22 @@
                   />
                 </div>
               </div>
-            </div>
-            <div
-              class="row no-wrap items-center"
-              v-if="getIsNewConstitution === true"
-            >
-              <div>
-                <q-btn
-                  label="Update"
-                  @click="updateConstitution"
-                  color="primary"
-                />
-              </div>
-              <div class="q-caption text-positive q-pa-sm">
-                New constitution detected. Please review the constitution and
-                verify the md5 hash before updating. The constitution change
-                will be put up for voting via msig.
+              <div
+                class="row no-wrap items-center"
+                v-if="getIsNewConstitution === true"
+              >
+                <div>
+                  <q-btn
+                    label="Update"
+                    @click="updateConstitution"
+                    color="primary"
+                  />
+                </div>
+                <div class="q-caption text-positive q-pa-sm">
+                  New constitution detected. Please review the constitution and
+                  verify the md5 hash before updating. The constitution change
+                  will be put up for voting via msig.
+                </div>
               </div>
             </div>
           </div>
@@ -129,13 +162,15 @@
 
 <script>
 const CryptoJS = require("crypto-js");
+import helpBtn from "components/controls/help-btn";
 import marked from "marked";
 import xspan from "components/ui/xspan";
 
 import { mapGetters } from "vuex";
 export default {
   components: {
-    xspan
+    xspan,
+    helpBtn
   },
   data() {
     return {
