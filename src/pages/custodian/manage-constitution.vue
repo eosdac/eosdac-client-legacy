@@ -158,12 +158,12 @@
               />
             </div>
             <div
-              v-if="parsed_constitution == '' && !isloading"
+              v-if="!isloading && parsed_constitution == ''"
               class="animate-fade"
             >
               No constitution selected
             </div>
-            <div v-else>loading...</div>
+            <div v-if="isloading" class="animate-fade">loading...</div>
           </div>
         </div>
       </div>
