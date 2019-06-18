@@ -62,37 +62,52 @@
           </div>
         </div>
         <div class="col-xs-12 col-md-7">
-          <div class="q-pa-md round-borders bg-bg1 shadow-4">
-            <div>New Constitution</div>
-            <div class="row items-center no-wrap">
-              <q-input
-                class="full-width "
-                :dark="getIsDark"
-                color="primary-light"
-                v-model="new_constitution_url"
-                stack-label="Constitution URL"
-                placeholder="Input URL to Constitution"
-                @input="
-                  md5_constitution = '';
-                  parsed_constitution = '';
-                "
-              />
-              <div>
-                <q-btn
-                  label="load"
-                  @click="setConstitution(new_constitution_url)"
-                  color="primary"
-                  :loading="isloading"
-                  class="on-right"
+          <div
+            class="q-pa-md round-borders bg-bg1 bg-logo shadow-4 full-height column justify-between"
+          >
+            <div>
+              <div>New Constitution</div>
+              <div class="row items-center no-wrap">
+                <q-input
+                  class="full-width "
+                  :dark="getIsDark"
+                  color="primary-light"
+                  v-model="new_constitution_url"
+                  stack-label="Constitution URL"
+                  placeholder="Input URL to Constitution"
+                  @input="
+                    md5_constitution = '';
+                    parsed_constitution = '';
+                  "
                 />
+                <div>
+                  <q-btn
+                    label="load"
+                    @click="setConstitution(new_constitution_url)"
+                    color="primary"
+                    :loading="isloading"
+                    class="on-right"
+                  />
+                </div>
               </div>
             </div>
-            <q-btn
+            <div
+              class="row no-wrap items-center"
               v-if="getIsNewConstitution === true"
-              label="Update constitution"
-              @click="updateConstitution"
-              color="primary"
-            />
+            >
+              <div>
+                <q-btn
+                  label="Update"
+                  @click="updateConstitution"
+                  color="primary"
+                />
+              </div>
+              <div class="q-caption text-positive q-pa-sm">
+                New constitution detected. Please review the constitution and
+                verify the md5 hash before updating. The constitution change
+                will be put up for voting via msig.
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-xs-12">
