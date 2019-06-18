@@ -144,14 +144,7 @@
               :thumb-style="getThumbStyle()"
               :delay="1500"
             >
-              <q-list
-                dense
-                no-border
-                separator
-                highlight
-                :dark="getIsDark"
-                class="q-pa-xs"
-              >
+              <q-list dense no-border separator highlight :dark="getIsDark">
                 <div
                   v-if="trx_qeue.length == 0"
                   class="text-weight-thin text-center q-body-1 q-mt-md"

@@ -1,5 +1,8 @@
 <template>
   <q-page class="q-pa-md">
+    <p class="text-text2">
+      Review the constitution history and propose constitution updates.
+    </p>
     <div class="">
       <div class="row gutter-sm">
         <div class="col-xs-12 col-md-5 ">
