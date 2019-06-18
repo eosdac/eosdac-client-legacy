@@ -1,49 +1,114 @@
 <template>
   <q-page class="q-pa-md">
-    <q-select
-      v-model="new_constitution_url"
-      stack-label="Constitution History"
-      color="primary-light"
-      :dark="getIsDark"
-      :options="getParsedMemberTerms"
-      placeholder="Select Version"
-      @input="
-        md5_constitution = '';
-        parsed_constitution = '';
-      "
-    />
-    <div class="row items-center no-wrap">
-      <q-input
-        class="full-width "
-        :dark="getIsDark"
-        color="primary-light"
-        v-model="new_constitution_url"
-        stack-label="Constitution URL"
-        placeholder="Input URL to Constitution"
-        @input="md5_constitution = ''"
-      />
-      <div>
-        <q-btn
-          label="load"
-          @click="getConstitution"
-          color="primary"
-          :loading="isloading"
-        />
+    <div class="">
+      <div class="row gutter-sm">
+        <div class="col-xs-12 col-md-5 ">
+          <div class="q-pa-md round-borders bg-bg1 shadow-4">
+            <div>Constitution History</div>
+            <q-scroll-area
+              style="width: 100%; height: 250px;"
+              :thumb-style="{
+                right: '0px',
+                borderRadius: '2px',
+                background: '#7c41ba',
+                width: '10px',
+                opacity: 0.8
+              }"
+            >
+              <q-list no-border separator highlight :dark="getIsDark">
+                <q-item v-for="(mt, i) in getParsedMemberTerms" :key="`mt${i}`">
+                  <q-item-side left :icon="$configFile.icon.constitution" />
+                  <q-item-main>
+                    <q-item-tile label>
+                      <div class="overflow-hidden">
+                        <span>Version {{ mt.version }} </span>
+                        <span class="q-caption text-text2">{{ mt.hash }}</span>
+                      </div>
+                    </q-item-tile>
+                    <q-item-tile sublabel>
+                      <div
+                        style="white-space: nowrap;"
+                        class=" overflow-hidden"
+                      >
+                        <a
+                          class="a2 q-caption"
+                          target="_blank"
+                          :href="mt.terms"
+                          >{{ mt.terms }}</a
+                        >
+                      </div>
+                    </q-item-tile>
+                  </q-item-main>
+                  <q-item-side right style="min-width:65px">
+                    <q-btn
+                      v-if="mt.hash != md5_constitution"
+                      color="primary-light"
+                      flat
+                      size="sm"
+                      label="load"
+                      @click="setConstitution(mt.terms)"
+                    />
+                    <q-icon
+                      v-else
+                      name="check"
+                      size="24px"
+                      color="positive"
+                      class="animate-fade"
+                    />
+                  </q-item-side>
+                </q-item>
+              </q-list>
+            </q-scroll-area>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-7">
+          <div class="q-pa-md round-borders bg-bg1 shadow-4">
+            <div>New Constitution</div>
+            <div class="row items-center no-wrap">
+              <q-input
+                class="full-width "
+                :dark="getIsDark"
+                color="primary-light"
+                v-model="new_constitution_url"
+                stack-label="Constitution URL"
+                placeholder="Input URL to Constitution"
+                @input="
+                  md5_constitution = '';
+                  parsed_constitution = '';
+                "
+              />
+              <div>
+                <q-btn
+                  label="load"
+                  @click="setConstitution(new_constitution_url)"
+                  color="primary"
+                  :loading="isloading"
+                  class="on-right"
+                />
+              </div>
+            </div>
+            <q-btn
+              v-if="getIsNewConstitution === true"
+              label="Update constitution"
+              @click="updateConstitution"
+              color="primary"
+            />
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div
+            class="q-pa-md round-borders bg-bg1 shadow-4"
+            v-if="parsed_constitution != ''"
+          >
+            <div><xspan :value="md5_constitution" /></div>
+            <div
+              class="markdown-body animate-fade bg-text1 q-pa-md"
+              v-html="parsed_constitution"
+            ></div>
+          </div>
+        </div>
       </div>
     </div>
-    <div><xspan :value="md5_constitution" /></div>
-
-    <q-btn
-      v-if="getIsNewConstitution === true"
-      label="Update constitution"
-      @click="updateConstitution"
-      color="primary"
-    />
-    <div
-      v-if="parsed_constitution != ''"
-      class="markdown-body animate-fade bg-text1 q-pa-md"
-      v-html="parsed_constitution"
-    ></div>
   </q-page>
 </template>
 
@@ -80,29 +145,21 @@ export default {
     },
     getParsedMemberTerms() {
       if (!this.getMemberTerms) return [];
-      return this.getMemberTerms
-        .map(mt => {
-          return {
-            value: mt.terms,
-            label: `version ${mt.version}`,
-            sublabel: mt.hash
-          };
-        })
-        .reverse();
+      let clone = JSON.parse(JSON.stringify(this.getMemberTerms));
+      return clone.reverse();
+      // return [...clone, ...clone, ...clone, ...clone, ...clone];
     }
   },
 
   methods: {
-    async getConstitution() {
-      if (!this.new_constitution_url) return;
-      this.isloading = true;
+    async setConstitution(url) {
       this.parsed_constitution = "";
       this.md5_constitution = null;
       this.raw_constitution = false;
+      if (!url) return;
+      this.isloading = true;
       try {
-        let getCt = await this.loadConstitutionFromUrl(
-          this.new_constitution_url
-        );
+        let getCt = await this.loadConstitutionFromUrl(url);
         if (!getCt) {
           this.md5_constitution = "";
           this.isloading = false;
