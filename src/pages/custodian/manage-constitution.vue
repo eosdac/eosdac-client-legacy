@@ -17,12 +17,18 @@
                 size="24px"
               />
               <span>Constitution History</span>
-              <help-btn
-                :content="`dsdfsdfsdfsdf`"
-                :title="`sdqdqsdqsdsd`"
-                color="text1"
-                size="sm"
-              />
+              <q-btn
+                @click="
+                  constitution_version_descending = !constitution_version_descending
+                "
+                flat
+              >
+                <q-icon
+                  v-if="constitution_version_descending"
+                  name="mdi-sort-descending"
+                />
+                <q-icon v-else name="mdi-sort-ascending" />
+              </q-btn>
             </div>
 
             <q-scroll-area
@@ -189,7 +195,8 @@ export default {
       raw_constitution: false,
       parsed_constitution: "",
       md5_constitution: "",
-      new_constitution_url: ""
+      new_constitution_url: "",
+      constitution_version_descending: true
     };
   },
   computed: {
@@ -207,7 +214,12 @@ export default {
     getParsedMemberTerms() {
       if (!this.getMemberTerms) return [];
       let clone = JSON.parse(JSON.stringify(this.getMemberTerms));
-      return clone.reverse();
+      if (this.constitution_version_descending) {
+        return clone.reverse();
+      } else {
+        return clone;
+      }
+
       // return [...clone, ...clone, ...clone, ...clone, ...clone];
     }
   },
