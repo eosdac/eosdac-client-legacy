@@ -102,8 +102,10 @@
               />
               <span>New Constitution</span>
               <help-btn
-                :content="`dsdfsdfsdfsdf`"
-                :title="`sdqdqsdqsdsd`"
+                :content="
+                  `Input an URL pointing to the updated constitution. Click load to pull in the text and calculate its hash.`
+                "
+                :title="`New Constitution`"
                 color="text1"
                 size="sm"
               />
