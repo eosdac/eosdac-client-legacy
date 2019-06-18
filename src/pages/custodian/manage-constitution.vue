@@ -157,9 +157,13 @@
                 v-html="parsed_constitution"
               />
             </div>
-            <div v-else>
+            <div
+              v-if="parsed_constitution == '' && !isloading"
+              class="animate-fade"
+            >
               No constitution selected
             </div>
+            <div v-else>loading...</div>
           </div>
         </div>
       </div>
