@@ -24,10 +24,11 @@
                 flat
               >
                 <q-icon
+                  color="text2"
                   v-if="constitution_version_descending"
                   name="mdi-sort-descending"
                 />
-                <q-icon v-else name="mdi-sort-ascending" />
+                <q-icon v-else name="mdi-sort-ascending" color="text2" />
               </q-btn>
             </div>
 

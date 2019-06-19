@@ -111,10 +111,10 @@ export class DacApi {
       })
       .catch(e => false);
 
-    if (!res.rows && !res.rows.length) {
-      return false;
-    } else {
+    if (res.rows) {
       return res.rows[0];
+    } else {
+      return false;
     }
   }
   async getVotes(accountname) {
