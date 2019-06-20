@@ -296,7 +296,7 @@ export default {
   },
   data() {
     return {
-      financialaccounts: require("../../extensions/statics/config/financial_accounts.json"),
+      financialaccounts: this.$configFile.get("financialaccounts"),
       permissions_map: [],
 
       trx_qeue: this.$store.state.user.msigTransferQeue
