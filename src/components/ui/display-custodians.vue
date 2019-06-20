@@ -1,8 +1,26 @@
 <template>
   <div>
     <div v-if="getCustodianState.met_initial_votes_threshold === 1">
-      <div class="q-headline">
-        {{ $t("vote_custodians.custodian_board") }}
+      <div class="row items-center justify-between ">
+        <div class="q-headline">
+          {{ $t("vote_custodians.custodian_board") }}
+        </div>
+        <div class="row">
+          <div class="text-text2 q-mr-sm q-caption">New election in</div>
+          <countdown
+            v-if="new_period_millisleft"
+            :time="Number(new_period_millisleft)"
+          >
+            <template slot-scope="props">
+              <div class="q-caption text-weight-light q-mb-xs">
+                <span v-if="props.days">{{ props.days }} days, </span>
+                <span v-if="props.hours">{{ props.hours }} hours, </span>
+                <span v-if="props.minutes">{{ props.minutes }} minutes, </span>
+                <span>{{ props.seconds }} seconds</span>
+              </div>
+            </template>
+          </countdown>
+        </div>
       </div>
       <div class="row justify-between " v-if="custodians.length">
         <div
@@ -52,11 +70,15 @@
 <script>
 import profilePic from "./profile-pic";
 import { mapGetters } from "vuex";
+import countdown from "@chenfengyuan/vue-countdown";
+import { date } from "quasar";
+const { addToDate } = date;
 
 export default {
   name: "displayCustodians",
   components: {
-    profilePic
+    profilePic,
+    countdown
   },
 
   props: {
@@ -85,6 +107,30 @@ export default {
         );
       } else {
         return 0;
+      }
+    },
+    new_period_millisleft() {
+      if (
+        this.getCustodianConfig.periodlength &&
+        this.getCustodianState.lastperiodtime
+      ) {
+        // let lastperiodtime = "2019-05-14T18:42:26";
+        let lastperiodtime = this.getCustodianState.lastperiodtime;
+        if (Number.isInteger(lastperiodtime)) {
+          lastperiodtime = new Date(lastperiodtime * 1000);
+        } else {
+          // example "2019-05-06 18:34:46"
+          lastperiodtime = new Date(
+            Date.parse(lastperiodtime.replace(" UTC", ""))
+          );
+        }
+        let end = addToDate(lastperiodtime, {
+          seconds: this.getCustodianConfig.periodlength
+        });
+        return (
+          Date.parse(date.formatDate(end, "YYYY-MM-DD HH:mm:ss")) -
+          Date.parse(new Date())
+        );
       }
     }
   },
