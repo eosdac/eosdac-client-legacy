@@ -111,7 +111,7 @@
   },
 
   "manage_candidateship": {
-    "amount_to_stake_placeholder": "스테이크할 EOSDAC량",
+    "amount_to_stake_placeholder": "스테이크할 {token_symbol}량",
     "locked_tokens": "락업된 토큰",
     "page_description_active_custodian": "귀하는 현재 {dacname} 관리인단으로서 활동 중입니다.",
     "page_description_registered": "관리인단 후보로 등록해주셔서 감사합니다. 관리인 후보 등록 과정의 일부로 귀하의 토큰은 스테이킹되었습니다.",

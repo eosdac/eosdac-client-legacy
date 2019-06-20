@@ -6,7 +6,7 @@
       </h4>
     </div>
 
-    <q-tabs class="q-mb-md" @select="setActiveTab">
+    <q-tabs class="q-mb-md topbar" @select="setActiveTab">
       <!-- Tabs - notice slot="title" -->
       <q-tab default slot="title" name="open" label="open" />
       <q-tab slot="title" name="executed" label="executed" />
@@ -15,7 +15,7 @@
     </q-tabs>
 
     <div
-      class="row bg-bg1 q-pa-md q-mb-md shadow-5 round-borders justify-between"
+      class="row bg-bg1 q-pa-md q-mb-md shadow-4 round-borders justify-between"
       v-if="true"
     >
       <q-search
@@ -54,7 +54,7 @@
       </div>
     </div>
 
-    <div v-if="proposals.length" style="min-height:200px">
+    <div v-if="proposals && proposals.length">
       <Msigproposal
         v-for="(msig, index) in proposals"
         :key="index"
@@ -63,9 +63,52 @@
     </div>
     <div
       v-else
-      class="text-text2 bg-bg1 q-pa-md round-borders shadow-5 capitalize"
+      class="text-text2 bg-bg1 bg-logo q-pa-md round-borders shadow-4 capitalize"
     >
-      No Multisignature proposals available
+      <span v-if="msigs_loading" class="row items-center">
+        <q-spinner class="on-left" color="primary-light" />Loading
+      </span>
+      <span v-else>No Multisignature proposals available</span>
+    </div>
+
+    <div
+      class="row bg-bg1 q-pa-md q-my-md shadow-4 round-borders justify-between"
+      v-if="true"
+    >
+      <q-search
+        :dark="getIsDark"
+        color="primary"
+        v-model="filter"
+        :placeholder="$t('vote_custodians.search')"
+      />
+      <div class="row inline items-center q-mt-sm" style="font-size:12px;">
+        <span>{{ $t("vote_custodians.rows_per_page") }}:</span>
+        <q-select
+          class="q-ml-sm"
+          style="width:45px;"
+          hide-underline
+          v-model="pagination.items_per_page"
+          :dark="getIsDark"
+          :options="[
+            { label: '1', value: 1 },
+            { label: '4', value: 4 },
+            { label: '8', value: 8 },
+            { label: '16', value: 16 },
+            { label: '24', value: 24 },
+            { label: '48', value: 48 }
+          ]"
+        />
+        <q-pagination
+          color="primary-light"
+          v-show="true"
+          v-model="pagination.page"
+          :min="1"
+          :max="pagination.max"
+          :max-pages="6"
+          direction-links
+          size="12px"
+        />
+      </div>
     </div>
   </q-page>
 </template>
@@ -92,7 +135,8 @@ export default {
         max: 1,
         items_per_page: 8
       },
-      filter: ""
+      filter: "",
+      msigs_loading: false
     };
   },
 
@@ -127,13 +171,18 @@ export default {
     },
 
     async getProposals(query) {
-      //todo: loading animation
+      this.msigs_loading = true;
       this.proposals = [];
       let p = await this.$store.dispatch("dac/fetchMsigProposals", query);
       console.log("msigs", p);
-      this.total = p.count;
-      this.pagination.max = Math.ceil(p.count / this.pagination.items_per_page);
-      this.proposals = p.results;
+      if (p) {
+        this.total = p.count;
+        this.pagination.max = Math.ceil(
+          p.count / this.pagination.items_per_page
+        );
+        this.proposals = p.results;
+      }
+      this.msigs_loading = false;
     },
 
     getProposalsWithDelay() {
@@ -165,9 +214,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.msigproposal_header {
-  height: 80px;
-}
-</style>

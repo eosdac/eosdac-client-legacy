@@ -8,7 +8,7 @@
     </div>
 
     <div class="row">
-      <div class="bg-bg1 round-borders shadow-5 col-xs-12 col-md-6">
+      <div class="bg-bg1 round-borders shadow-4 col-xs-12 col-md-6">
         <div v-if="pendingpay.length" class="animate-fade">
           <q-item v-for="(pay, i) in pendingpay" :key="`pay_id_${i}`">
             <q-item-side left>{{ pay.key }}</q-item-side>
@@ -42,7 +42,7 @@
           >(current pay: {{ getIsCandidate.requestedpay }})</span
         >
       </div>
-      <div class="text-text1 round-borders bg-bg1 q-pa-md">
+      <div class="text-text1 round-borders bg-bg1 shadow-4 q-pa-md">
         <span>{{
           $t("manage_candidateship.pay_description", {
             requested_pay: $helper.assetToLocaleNumber(
@@ -151,13 +151,13 @@ export default {
         actions: actions
       });
       if (result) {
-        this.getClaimPay();
+        setTimeout(this.getClaimPay(), 500);
       }
     },
 
     async claimAll() {
       const contract = this.$configFile.get("custodiancontract");
-      let actions = this.pendingpay.map(pp => {
+      let actions = this.pendingpay.slice(0, 10).map(pp => {
         return {
           account: contract,
           name: "claimpay",
@@ -170,7 +170,7 @@ export default {
         actions: actions
       });
       if (result) {
-        this.getClaimPay();
+        setTimeout(this.getClaimPay(), 500);
       }
     },
 
@@ -224,5 +224,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

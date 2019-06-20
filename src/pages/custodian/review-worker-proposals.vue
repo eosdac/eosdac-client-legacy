@@ -7,14 +7,30 @@
         @click="delegate_modal = true"
       />
     </div>
-    <q-tabs class="q-mb-md" @select="setActiveTab">
-      <q-tab slot="title" name="state_0" label="pending approval" default />
-      <q-tab slot="title" name="state_1" label="work in progress" />
-      <q-tab slot="title" name="state_2" label="Pending claim" />
+
+    <q-tabs class="q-mb-md topbar" @select="setActiveTab">
+      <q-tab
+        v-if="getIsCustodian"
+        slot="title"
+        name="inbox"
+        label="inbox"
+        default
+      />
+      <q-tab
+        slot="title"
+        name="pending_approval"
+        label="pending approval"
+        :default="!getIsCustodian"
+      />
+      <q-tab slot="title" name="work_in_progress" label="work in progress" />
+      <q-tab slot="title" name="pending_claim" label="Pending claim" />
+      <q-tab slot="title" name="claimed" label="completed" />
+      <q-tab slot="title" name="expired" label="Expired" />
+      <q-tab slot="title" name="cancelled" label="cancelled" />
     </q-tabs>
 
     <div
-      class="row bg-bg1 q-pa-md q-mb-md shadow-5 round-borders justify-between"
+      class="row bg-bg1 q-pa-md q-mb-md shadow-4 round-borders justify-between"
       v-if="true"
     >
       <q-search
@@ -53,7 +69,7 @@
       </div>
     </div>
 
-    <div class="row gutter-sm">
+    <div v-if="wps.length" class="row gutter-sm justify-start">
       <div class="col-xs-12 col-xl-6" v-for="(wp, i) in wps" :key="`wp${i}`">
         <wp-proposal
           :read_only="!getIsCustodian"
@@ -63,8 +79,18 @@
             expanded_modal_index = Number($event);
             expanded_modal = true;
           "
+          @delete="wps.splice(i, 1)"
         />
       </div>
+    </div>
+    <div
+      v-else
+      class="text-text2 bg-bg1 bg-logo q-pa-md round-borders shadow-4 capitalize"
+    >
+      <span v-if="loading" class="row items-center">
+        <q-spinner class="on-left" color="primary-light" />Loading
+      </span>
+      <span v-else>No proposals available</span>
     </div>
 
     <q-modal maximized v-model="expanded_modal">
@@ -119,6 +145,10 @@
 import wpProposal from "components/ui/wp-proposal";
 import voteDelegation from "components/controls/vote-delegation";
 import { mapGetters } from "vuex";
+const stateEnum = require("../../modules/wp_state_enum.js");
+
+//https://api-jungle.eosdac.io/v1/eosdac/proposals_inbox?account=evilmikehere
+
 export default {
   name: "ReviewWP",
   components: {
@@ -127,6 +157,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       delegate_modal: false,
       expanded_modal: false,
       expanded_modal_index: 0,
@@ -144,12 +175,29 @@ export default {
     ...mapGetters({
       getWpConfig: "dac/getWpConfig",
       getIsCustodian: "user/getIsCustodian",
-      getIsDark: "ui/getIsDark"
+      getIsDark: "ui/getIsDark",
+      getAccountName: "user/getAccountName"
     })
   },
   methods: {
     async fetchWps(query) {
+      this.loading = true;
       let res = await this.$store.dispatch("dac/fetchWorkerProposals", query);
+      console.log(res);
+      if (res.results) {
+        this.wps = res.results;
+        this.pagination.max = Math.ceil(
+          res.count / this.pagination.items_per_page
+        );
+      }
+      this.loading = false;
+    },
+    async fetchWpsInbox(query) {
+      //{account:'evilmikehere'}
+      let res = await this.$store.dispatch(
+        "dac/fetchWorkerProposalsInbox",
+        query
+      );
       console.log(res);
       if (res.results) {
         this.wps = res.results;
@@ -163,16 +211,22 @@ export default {
       this.active_tab = tab;
     },
     managePagination() {
-      //map tab to number for making the request
-      const map = { state_0: 0, state_1: 1, state_2: 2 };
       //calculate skip
       let skip = (this.pagination.page - 1) * this.pagination.items_per_page;
       //make request
-      this.fetchWps({
-        status: map[this.active_tab],
-        skip: skip,
-        limit: this.pagination.items_per_page
-      });
+      if (this.active_tab == "inbox") {
+        this.fetchWpsInbox({
+          account: this.getAccountName,
+          skip: skip,
+          limit: this.pagination.items_per_page
+        });
+      } else {
+        this.fetchWps({
+          status: stateEnum[this.active_tab],
+          skip: skip,
+          limit: this.pagination.items_per_page
+        });
+      }
     }
   },
 
@@ -204,5 +258,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

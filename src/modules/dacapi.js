@@ -1,6 +1,7 @@
-// const {TextDecoder, TextEncoder} = require('text-encoding');
+const { TextDecoder, TextEncoder } = require("text-encoding");
+const { Serialize } = require("eosjs");
 
-export class EosWrapper {
+export class DacApi {
   constructor(eosApi, config) {
     this.eosapi = eosApi;
     this.eos = eosApi.rpc;
@@ -92,25 +93,28 @@ export class EosWrapper {
 
   async getContractConfig(payload) {
     let contract;
+    let scope;
     let table = "config";
     if (payload == "custodian") {
       contract = this.configobj.get("custodiancontract");
+      scope = contract;
     } else if (payload == "wp") {
       contract = this.configobj.get("wpcontract");
+      scope = this.configobj.get("dacscope");
     }
     let res = await this.eos
       .get_table_rows({
         json: true,
         code: contract,
-        scope: contract,
+        scope: scope,
         table: table
       })
       .catch(e => false);
 
-    if (!res.rows && !res.rows.length) {
-      return false;
-    } else {
+    if (res.rows) {
       return res.rows[0];
+    } else {
+      return false;
     }
   }
   async getVotes(accountname) {
@@ -132,14 +136,14 @@ export class EosWrapper {
     }
   }
 
-  async getCustodians() {
+  async getCustodians(number_custodians_config = 12) {
     let res = await this.eos
       .get_table_rows({
         json: true,
         code: this.configobj.get("custodiancontract"),
         scope: this.configobj.get("custodiancontract"),
         table: "custodians",
-        limit: 12
+        limit: number_custodians_config
       })
       .catch(e => false);
 
@@ -189,6 +193,24 @@ export class EosWrapper {
       return res.rows;
     } else {
       return false;
+    }
+  }
+
+  async getCandidatePermissions() {
+    let res = await this.eos
+      .get_table_rows({
+        json: true,
+        code: this.configobj.get("custodiancontract"),
+        scope: this.configobj.get("custodiancontract"),
+        table: "candperms",
+        limit: -1
+      })
+      .catch(e => false);
+
+    if (res && res.rows[0]) {
+      return res.rows;
+    } else {
+      return [];
     }
   }
 
@@ -280,8 +302,8 @@ export class EosWrapper {
     let catvotes = await this.eos.get_table_rows({
       json: true,
       code: this.configobj.get("wpcontract"),
-      scope: this.configobj.get("authaccountname"),
-      table: "catvotes",
+      scope: this.configobj.get("dacscope"),
+      table: "propvotes",
       lower_bound: accountname,
       upper_bound: accountname,
       index_position: 2,
@@ -292,6 +314,27 @@ export class EosWrapper {
       return [];
     } else {
       return catvotes.rows;
+    }
+  }
+
+  async serializeActionData(action) {
+    try {
+      let account = action.account;
+      let name = action.name;
+      let data = action.data;
+      const contract = await this.eosapi.getContract(account);
+      let hex = Serialize.serializeActionData(
+        contract,
+        account,
+        name,
+        data,
+        new TextEncoder(),
+        new TextDecoder()
+      );
+      return hex;
+    } catch (e) {
+      console.log(e);
+      return false;
     }
   }
 }

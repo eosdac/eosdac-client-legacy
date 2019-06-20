@@ -23,6 +23,18 @@ export function getDacAdmins(state) {
   return state.dacAdmins;
 }
 
+export function getCustodianPermissions(state) {
+  return state.custodianPermissions;
+}
+
+export function getAuthAccountPermLevel(state, getters, rootState) {
+  let level = "one";
+  if (state.dacAdmins.includes(rootState.user.accountName)) {
+    level = "admin";
+  }
+  return level;
+}
+
 export function getlatestTermsUrl(state) {
   return state.latestTermsUrl;
 }

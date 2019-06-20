@@ -4,7 +4,7 @@
     <!--small screens mobile-->
     <div
       v-if="!isHidden"
-      class="q-mb-md bg-bg1 round-borders shadow-5 animate-fade lt-sm"
+      class="q-mb-md bg-bg1 round-borders shadow-4 animate-fade lt-sm"
     >
       <div class="row justify-center q-pa-md relative-position">
         <q-chip
@@ -89,7 +89,7 @@
 
       <!-- mobile details modal -->
       <q-modal maximized v-model="mobile_details_modal">
-        <div class="text-text1 bg-bg2 full-height">
+        <div class="text-text1 bg-bg2">
           <!-- header -->
           <div
             style="height:50px"
@@ -224,6 +224,21 @@
                 label="execute"
               />
             </div>
+            <span v-if="!read_only && msig.status === 3">
+              <q-btn
+                v-if="isCreator"
+                class="full-width q-mb-md"
+                color="negative"
+                label="cancel"
+                @click="cancelProposal(msig.proposer, msig.proposal_name)"
+              />
+              <q-btn
+                class="full-width"
+                color="positive"
+                label="resubmit"
+                @click="resubmit(msig)"
+              />
+            </span>
           </div>
         </div>
       </q-modal>
@@ -233,7 +248,7 @@
     <!--big screens desktop-->
     <div
       v-if="!isHidden"
-      class="q-mb-md bg-bg1 round-borders shadow-5 animate-fade gt-xs"
+      class="q-mb-md bg-bg1 round-borders shadow-4 animate-fade gt-xs"
     >
       <q-collapsible
         icon-toggle
@@ -413,6 +428,20 @@
                   @click="executeProposal(msig.proposer, msig.proposal_name)"
                 />
               </span>
+              <span v-if="!read_only && msig.status === 3">
+                <q-btn
+                  v-if="isCreator"
+                  class="on-left"
+                  color="negative"
+                  label="cancel"
+                  @click="cancelProposal(msig.proposer, msig.proposal_name)"
+                />
+                <q-btn
+                  color="positive"
+                  label="resubmit"
+                  @click="resubmit(msig)"
+                />
+              </span>
               <span>
                 <q-checkbox
                   color="primary-light"
@@ -463,7 +492,9 @@
                 <div class="q-ma-none" style="min-width:100px; overflow:hidden">
                   {{ c.actor }}
                 </div>
+                <div class="q-caption text-text2">@{{ c.permission }}</div>
               </router-link>
+
               <q-icon
                 class="absolute"
                 style="top:-5px; right:-10px"
@@ -483,10 +514,11 @@
                 :scale="0.5"
                 :show_role="true"
               />
-              <router-link class=" a2" :to="{ path: '/profile/' + c.actor }">
+              <router-link class="a2" :to="{ path: '/profile/' + c.actor }">
                 <div class="q-ma-none" style="min-width:100px; overflow:hidden">
                   {{ c.actor }}
                 </div>
+                <div class="q-caption text-text2">@{{ c.permission }}</div>
               </router-link>
             </div>
             <!-- <pre>{{getmsigIsSeenCache}}</pre> -->
@@ -540,7 +572,8 @@ export default {
       getSettingByName: "user/getSettingByName",
       getAuth: "user/getAuth",
       getIsDark: "ui/getIsDark",
-      getCustodians: "dac/getCustodians"
+      getCustodians: "dac/getCustodians",
+      getAuthAccountPermLevel: "dac/getAuthAccountPermLevel"
     }),
 
     read_only: function() {
@@ -664,14 +697,15 @@ export default {
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
-              actor: this.$configFile.get("authaccountname"),
+              actor: this.$configFile.get("authaccount"),
               permission: "one"
             }
           ],
           data: {
             proposer: proposer,
             proposal_name: proposal_name,
-            approver: this.getAccountName
+            approver: this.getAccountName,
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -701,14 +735,15 @@ export default {
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
-              actor: this.$configFile.get("authaccountname"),
+              actor: this.$configFile.get("authaccount"),
               permission: "one"
             }
           ],
           data: {
             proposer: proposer,
             proposal_name: proposal_name,
-            unapprover: this.getAccountName
+            unapprover: this.getAccountName,
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -737,14 +772,15 @@ export default {
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
-              actor: this.$configFile.get("authaccountname"),
+              actor: this.$configFile.get("authaccount"),
               permission: "one"
             }
           ],
           data: {
             proposer: proposer,
             proposal_name: proposal_name,
-            executer: this.getAccountName
+            executer: this.getAccountName,
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -774,14 +810,15 @@ export default {
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
-              actor: this.$configFile.get("authaccountname"),
-              permission: "one"
+              actor: this.$configFile.get("authaccount"),
+              permission: this.getAuthAccountPermLevel //can be one or admin depending of the logged in user
             }
           ],
           data: {
             proposer: proposer,
             proposal_name: proposal_name,
-            canceler: this.getAccountName
+            canceler: this.getAccountName,
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -854,6 +891,14 @@ export default {
           msig_id: this.msig.trxid
         });
       }
+    },
+    async resubmit(msig) {
+      let clone = JSON.parse(JSON.stringify(msig));
+      await this.$store.dispatch("user/proposeMsig", {
+        actions: clone.trx.actions,
+        title: `Resubmit: ${clone.title}`,
+        description: clone.description
+      });
     }
   },
 

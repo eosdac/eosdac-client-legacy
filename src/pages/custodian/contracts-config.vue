@@ -1,9 +1,9 @@
 <template>
   <q-page class="q-pa-md">
-    <!-- <vote-delegation /> -->
-    <!-- <abi-viewer /> -->
-    <!-- <msig-transfer /> -->
-    <div class="q-pa-md round-borders bg-bg1 bg-logo shadow-4">
+    <div
+      class="q-pa-md round-borders bg-bg1 bg-logo shadow-4 row"
+      style="min-height:200px"
+    >
       <q-select
         class="q-mb-md"
         stack-label="Select contract"
@@ -14,33 +14,21 @@
       />
       <contract-settings :contract="selected_contract" />
     </div>
-    <app-manifest />
   </q-page>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-// import abiViewer from "components/controls/abi-viewer";
-// import voteDelegation from "components/controls/vote-delegation";
 import contractSettings from "components/controls/contract-settings";
-import appManifest from "components/controls/app-manifest";
-// import msigTransfer from "components/controls/msig-transfer";
 
 export default {
   name: "playground",
   components: {
-    // abiViewer,
-    // voteDelegation,
-    // msigTransfer,
-    appManifest,
     contractSettings
   },
   data() {
     return {
-      abi: "",
-      wasm: "",
-      test: "",
-      selected_contract: ""
+      selected_contract: this.$configFile.get("custodiancontract")
     };
   },
   computed: {
@@ -51,8 +39,8 @@ export default {
   methods: {
     getContractOptions() {
       let contracts = [
-        this.$configFile.get("custodiancontract"),
-        this.$configFile.get("wpcontract")
+        this.$configFile.get("custodiancontract")
+        //this.$configFile.get("wpcontract")
       ];
       return contracts.map(c => {
         return { value: c, label: c };

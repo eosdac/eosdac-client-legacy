@@ -7,7 +7,7 @@ import axios from "axios";
 
 import { Api, JsonRpc } from "eosjs";
 const { TextDecoder, TextEncoder } = require("text-encoding");
-import { EosWrapper } from "../../modules/eoswrapper.js";
+import { DacApi } from "../../modules/dacapi.js";
 
 //mobile debugging
 // var VConsole = require("vconsole");
@@ -29,7 +29,7 @@ export async function connectScatter(
   trigger_login = false
 ) {
   let network = await state.networks.find(n => n.name == state.active_network);
-
+  commit("setChainId", network.chainId);
   ScatterJS.scatter
     .connect(this._vm.$configFile.get("dacname"), { network })
     .then(async connected => {
@@ -148,7 +148,7 @@ export async function switchAccount({ state, dispatch }) {
   await dispatch("login");
 }
 
-export async function getEosApi({ state, commit }, rebuild = false) {
+export async function getDacApi({ state, commit }, rebuild = false) {
   if (state.eosApi && !rebuild) {
     // console.log('got eos api from store');
     return state.eosApi;
@@ -164,7 +164,7 @@ export async function getEosApi({ state, commit }, rebuild = false) {
     textDecoder: new TextDecoder(),
     textEncoder: new TextEncoder()
   });
-  commit("setEosApi", new EosWrapper(api, this._vm.$configFile));
+  commit("setDacApi", new DacApi(api, this._vm.$configFile));
   return state.eosApi;
 }
 
@@ -185,9 +185,7 @@ export async function getEosScatter({ state, commit }, rebuild = false) {
 
 export async function loadConfig({ Vue, state, commit }, payload) {
   console.log(`loading new config file ${payload.networkname}`);
-  const config = require(`../../extensions/statics/config/config.${
-    payload.networkname
-  }.json`);
+  const config = require(`../../extensions/statics/config/config.${payload.networkname}.json`);
 
   if (payload.vm) {
     //setting new config in the plugin
@@ -219,6 +217,7 @@ export async function switchNetwork(
       position: "bottom-right" // 'top', 'left', 'bottom-left' etc.
     });
   }
+
   commit("setActiveNetwork", payload.networkname);
   await dispatch("loadConfig", payload);
   await dispatch("logout");
@@ -233,13 +232,12 @@ export async function switchNetwork(
   await dispatch("connectScatter", true);
 }
 
-export async function testEndpoint({ state }, endpointurl = false) {
+export async function testEndpoint({ state, commit }, endpointurl = false) {
   if (!endpointurl) {
     let network = await state.networks.find(
       n => n.name == state.active_network
     );
     endpointurl = `${Network.fromJson(network).fullhost()}/v1/chain/get_info`;
-    // endpointurl = `${Network.fromJson(network).fullhost()}/v1/chadddddin/get_info` ;
   }
   let timeout = 3000;
   console.log("testing", endpointurl);
@@ -253,6 +251,7 @@ export async function testEndpoint({ state }, endpointurl = false) {
   })
     .then(res => {
       console.log(res.data);
+      commit("setNodeInfo", res.data);
       return res.data;
     })
     .catch(error => {

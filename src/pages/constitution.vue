@@ -3,7 +3,7 @@
     <div class="row gutter-md reverse-wrap">
       <!-- first column  -->
       <div class="col-xs-12 col-xl-8">
-        <div class=" bg-bg1 shadow-5 round-borders">
+        <div class=" bg-bg1 shadow-4 round-borders">
           <div class="row justify-end bg-bg1 q-pa-md round-borders">
             <q-toggle
               color="primary-light"
@@ -29,7 +29,7 @@
         <div>
           <div
             id="registerbox"
-            class="bg-logo bg-bg1 q-pa-md round-borders shadow-5 relative-position"
+            class="bg-logo bg-bg1 q-pa-md round-borders shadow-4 relative-position"
             style="overflow:hidden"
           >
             <q-item>

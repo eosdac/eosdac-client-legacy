@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 export function setIsLoaded(state, payload) {
   state.isLoaded = payload;
 }
@@ -70,3 +72,29 @@ export const setMsigIsSeenCache = (state, payload) => {
     // code block
   }
 };
+
+export function setMsigTransferQeue(state, payload) {
+  let mode = payload.mode;
+  let qeue_entry = payload.qeue_entry; //can be index or entry object
+
+  switch (mode) {
+    case "add":
+      let f = state.msigTransferQeue.findIndex(qi => qi.status == 3);
+      if (f != -1) {
+        console.log("edit item index", f);
+        qeue_entry.status = 0;
+        Vue.set(state.msigTransferQeue, f, qeue_entry);
+      } else {
+        state.msigTransferQeue.push(qeue_entry);
+      }
+      break;
+    case "remove":
+      state.msigTransferQeue.splice(qeue_entry, 1);
+      break;
+    case "clear":
+      state.msigTransferQeue.splice(0, state.msigTransferQeue.length);
+      break;
+    default:
+    // code block
+  }
+}

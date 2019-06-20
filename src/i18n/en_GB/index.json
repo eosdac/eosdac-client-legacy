@@ -121,7 +121,7 @@
     }
   },
   "manage_candidateship": {
-    "amount_to_stake_placeholder": "amount to stake EOSDAC",
+    "amount_to_stake_placeholder": "amount to stake {token_symbol}",
     "locked_tokens": "locked tokens",
     "page_description_active_custodian": "You are currently active as an {dacname} custodian board member.",
     "page_description_registered": "Thank you for registering as a candidate to serve on the {dacname} custodian board. As part of your candidacy registration, some of your tokens have been staked.",

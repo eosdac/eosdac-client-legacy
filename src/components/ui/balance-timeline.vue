@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="capitalize q-title">
-      {{ account }} <span class="text-text2">({{ getLatestBalance }})</span>
+    <div v-show="show_balance" class="capitalize q-title">
+      {{ account }} <span class="text-text2">({{ balance }})</span>
     </div>
     <div v-if="description != ''" class="text-text2 q-my-md">
       {{ description }}
@@ -10,6 +10,8 @@
       ref="linechart"
       :chartData="chartData"
       :options="chartOptions"
+      :width="width"
+      :height="height"
     />
   </div>
 </template>
@@ -17,6 +19,7 @@
 <script>
 import { colors, date } from "quasar";
 import lineChart from "components/ui/line-chart";
+import { mapGetters } from "vuex";
 
 export default {
   name: "balanceTimeline",
@@ -47,6 +50,26 @@ export default {
     description: {
       type: String,
       default: ""
+    },
+    show_balance: {
+      type: Boolean,
+      default: true
+    },
+    legend: {
+      type: Boolean,
+      default: true
+    },
+    responsive: {
+      type: Boolean,
+      default: true
+    },
+    width: {
+      type: Number,
+      default: 300
+    },
+    height: {
+      type: Number,
+      default: 300
     }
   },
   data() {
@@ -54,9 +77,13 @@ export default {
       refblock: null,
       refdate: null,
       chartData: null,
+      balance: null,
       chartOptions: {
-        responsive: true,
+        responsive: this.responsive,
         maintainAspectRatio: false,
+        legend: {
+          display: this.legend
+        },
         scales: {
           xAxes: [
             {
@@ -76,7 +103,12 @@ export default {
           yAxes: [
             {
               gridLines: {
-                color: "rgba(0, 0, 0, 0)"
+                color: "rgba(0, 0, 0, 0)",
+                zeroLineColor: "#3E3E3E"
+              },
+              ticks: {
+                display: true,
+                beginAtZero: true
               }
             }
           ]
@@ -85,15 +117,30 @@ export default {
     };
   },
   computed: {
-    getLatestBalance() {
-      if (this.chartData) {
-        let vals = this.chartData.datasets[0].data;
-        return `${vals[vals.length - 1]} ${this.symbol}`;
-      }
-    }
+    ...mapGetters({
+      getNodeInfo: "global/getNodeInfo"
+    })
   },
   methods: {
+    async init() {
+      let { head_block_num, head_block_time } =
+        this.getNodeInfo || (await this.$store.dispatch("global/testEndpoint"));
+      this.refblock = head_block_num;
+      this.refdate = new Date(head_block_time);
+      if (this.account && this.contract && this.symbol) {
+        this.getTokenTimeLine({
+          account: this.account,
+          contract: this.contract,
+          symbol: this.symbol,
+          start_block: 0,
+          end_block: this.end_block
+        });
+      }
+    },
     getGradient() {
+      if (!this.$refs.linechart && !this.$refs.linechart.$refs) {
+        return;
+      }
       let { r, g, b } = colors.hexToRgb(colors.getBrand("primary"));
       // console.log(r,g,b)
       let gradient = this.$refs.linechart.$refs.canvas
@@ -123,6 +170,10 @@ export default {
           }
         ]
       };
+      let vals = this.chartData.datasets[0].data;
+      let balance = `${vals[vals.length - 1]} ${this.symbol}`;
+      this.balance = balance;
+      this.$emit("onbalance", balance);
     },
     numToTime(blocknum) {
       let diff = (this.refblock - blocknum) * 2; //seconds
@@ -132,21 +183,16 @@ export default {
     }
   },
   async mounted() {
-    let { head_block_num, head_block_time } = await this.$store.dispatch(
-      "global/testEndpoint"
-    );
-    this.refblock = head_block_num;
-    this.refdate = new Date(head_block_time);
-    this.getTokenTimeLine({
-      account: this.account,
-      contract: this.contract,
-      symbol: this.symbol,
-      start_block: 0,
-      end_block: this.end_block
-    });
+    this.init();
+  },
+  watch: {
+    account: function() {
+      this.init();
+    },
+    symbol: function() {
+      this.init();
+    }
   }
   //
 };
 </script>
-
-<style></style>

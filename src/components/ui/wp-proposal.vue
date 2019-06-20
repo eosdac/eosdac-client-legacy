@@ -1,17 +1,14 @@
 <template>
   <div
-    v-if="wp.id && show"
     style="min-height:100%"
-    class=" q-pa-md column no-wrap justify-between bg-bg1 round-borders shadow-5 bg-logo animate-fade"
+    class=" q-pa-md column no-wrap justify-between bg-bg1 round-borders shadow-4 bg-logo animate-fade"
   >
     <div class="full-width">
       <div class="q-mb-md q-title relative-position">
         <div class="q-py-sm proposal-title-line">
           <span class="capitalize">{{ wp.title }}</span>
           <span class="q-caption on-right text-weight-thin"
-            >({{
-              $t(`wp_categories.${getCategoryNameFromId(wp.category)}`)
-            }})</span
+            >({{ $t(`${getCategoryNameFromId(wp.category)}`) }})</span
           >
         </div>
         <q-btn
@@ -32,7 +29,7 @@
         />
       </div>
 
-      <div class="row items-center relative-position">
+      <div class="row items-center relative-position q-mb-md">
         <profile-pic :accountname="wp.proposer" />
         <q-item>
           <q-item-main>
@@ -58,16 +55,20 @@
             <q-item-tile sublabel>date</q-item-tile>
           </q-item-main>
         </q-item>
-        <!-- <q-item>
+        <q-item>
           <q-item-main>
-            <q-item-tile label>Status</q-item-tile>
+            <q-item-tile label>Status (dev)</q-item-tile>
             <q-item-tile sublabel>{{ wp.status }}</q-item-tile>
           </q-item-main>
-        </q-item> -->
+        </q-item>
       </div>
 
-      <div class="q-my-md">
+      <div
+        class="q-mb-md"
+        v-if="wp.status == 0 || wp.status == 2 || wp.status == 5"
+      >
         <div class="q-caption q-mb-xs text-text2">Time Left</div>
+        <!-- {{ getExpiry }} -->
         <countdown
           v-if="getExpiry.millisleft"
           :time="Number(getExpiry.millisleft)"
@@ -138,23 +139,23 @@
 
     <div class="q-mt-md full-width">
       <div class="row justify-between items-center">
-        <div class="row">
+        <div class="row" v-show="wp.status !== 5 && wp.status !== 100">
           <q-item
             @click.native="expand_votes_modal = true"
             class="cursor-pointer no-padding"
           >
             <q-item-main>
-              <q-item-tile class="q-caption">Approval Threshold</q-item-tile>
-              <q-item-tile class="q-title">{{
-                proposal_threshold_met.score
-              }}</q-item-tile>
+              <q-item-tile class="q-caption">Vote Threshold</q-item-tile>
+              <q-item-tile class="q-title">
+                {{ getVotingScore }}
+              </q-item-tile>
             </q-item-main>
           </q-item>
         </div>
 
-        <div v-if="!read_only && getAccountName" class="row animate-pop">
-          {{ getVotes }}
+        <div v-if="!read_only && getAccountName" class="row">
           <member-select
+            v-if="wp.status == 0 || wp.status == 2"
             :show_selected="false"
             @change="delegatevote($event)"
             :value="MyDirectDelegation || ''"
@@ -162,18 +163,19 @@
             placeholder="Select to Delegate"
             :underline="false"
             label="Delegation"
+            ref="directDelSelect"
           />
           <div v-if="wp.status == 0">
             <q-btn
               v-if="getVoterStatus == 2 || getVoterStatus == 0"
-              class="on-right"
+              class="on-right animate-pop"
               color="positive"
               label="Approve"
               @click="voteprop('voteApprove')"
             />
             <q-btn
               v-if="getVoterStatus == 1 || getVoterStatus == 0"
-              class="on-right"
+              class="on-right animate-pop"
               color="negative"
               label="Deny"
               @click="voteprop('voteDeny')"
@@ -181,55 +183,64 @@
           </div>
           <div v-else-if="wp.status == 2">
             <q-btn
-              class="on-right"
+              v-if="getVoterStatus == 4 || getVoterStatus == 0"
+              class="on-right animate-pop"
               color="positive"
               label="Approve Claim"
               @click="voteprop('claimApprove')"
             />
             <q-btn
-              class="on-right"
+              v-if="getVoterStatus == 3 || getVoterStatus == 0"
+              class="on-right animate-pop"
               color="negative"
               label="Deny Claim"
               @click="voteprop('claimDeny')"
             />
             <q-btn
               v-if="getIsArbitrator"
-              class="on-right"
+              class="on-right animate-pop"
               flat
               color="positive"
               label="arb approve"
               @click="arbApprove()"
             />
           </div>
+
           <div v-else-if="wp.status == 1">
-            Work is being executed
-          </div>
-          <div v-if="getIsCreator">
-            <q-btn
-              class="on-right"
-              flat
-              color="negative"
-              label="cancel"
-              @click="cancelProp()"
-            />
-            <q-btn
-              v-if="proposal_threshold_met.met"
-              class="on-right"
-              flat
-              color="info"
-              label="Start work"
-              @click="startWork()"
-            />
-            <q-btn
-              v-if="wp.status == 1"
-              class="on-right"
-              flat
-              color="info"
-              label="complete work"
-              @click="completeWork()"
-            />
+            Work is in progress
           </div>
         </div>
+        <div v-if="getIsCreator">
+          <q-btn
+            v-if="wp.status == 3"
+            class="on-right animate-pop"
+            color="info"
+            label="Start work"
+            @click="startWork()"
+          />
+          <q-btn
+            v-if="wp.status == 1"
+            class="on-right animate-pop"
+            color="info"
+            label="Complete work"
+            @click="completeWork()"
+          />
+          <q-btn
+            v-if="wp.status == 4"
+            class="on-right animate-pop"
+            color="info"
+            label="claim"
+            @click="finalize()"
+          />
+          <q-btn
+            class="on-right animate-pop"
+            flat
+            color="negative"
+            label="Cancel"
+            @click="cancelProp()"
+          />
+        </div>
+        <!-- <q-btn label="reload dev" @click="actionCallBack(wp.id)" /> -->
       </div>
     </div>
 
@@ -244,11 +255,13 @@
           <q-btn icon="close" @click="expand_votes_modal = false" flat dense />
         </div>
         <!-- content -->
-        <div class="q-pa-md">
+        <div class="q-pa-md" v-if="wp.status !== 5 && wp.status !== 100">
           <div class="row justify-start q-mt-sm">
             <div
               class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
-              v-for="(vote, i) in getVotes.filter(v => v.vote == 1)"
+              v-for="(vote, i) in getVotes.filter(
+                v => v.vote === 1 || v.vote === 3
+              )"
               :key="i + 'p'"
             >
               <profile-pic
@@ -256,7 +269,7 @@
                 :scale="0.5"
                 :show_role="false"
               />
-              <router-link class=" a2" :to="{ path: '/profile/' + vote.voter }">
+              <router-link class="a2" :to="{ path: '/profile/' + vote.voter }">
                 <div class="q-ma-none" style="min-width:100px; overflow:hidden">
                   {{ vote.voter }}
                 </div>
@@ -278,7 +291,9 @@
 
             <div
               class="row items-center relative-position bg-bg1 round-borders q-pr-md q-ma-sm"
-              v-for="(vote, i) in getVotes.filter(v => v.vote == 2)"
+              v-for="(vote, i) in getVotes.filter(
+                v => v.vote === 2 || v.vote === 4
+              )"
               :key="i + 'r'"
             >
               <profile-pic
@@ -305,8 +320,8 @@
                 size="24px"
               />
             </div>
-            <!-- <pre>{{getmsigIsSeenCache}}</pre> -->
           </div>
+          <pre>{{ getVotes }}</pre>
         </div>
       </div>
     </q-modal>
@@ -345,7 +360,6 @@ export default {
   },
   data() {
     return {
-      show: true,
       wp_expiration: 100,
       expand_votes_modal: false
     };
@@ -356,13 +370,29 @@ export default {
       getWpConfig: "dac/getWpConfig",
       getIsDark: "ui/getIsDark",
       getAuth: "user/getAuth",
-      getCustodians: "dac/getCustodians",
-      getCatDelegations: "user/getCatDelegations"
+      getCustodians: "dac/getCustodians"
     }),
 
     getVotes() {
       if (this.wp.votes && this.wp.votes.length) {
-        return this.wp.votes;
+        if (
+          this.wp.status === 0 ||
+          this.wp.status === 1 ||
+          this.wp.status === 3
+        ) {
+          return this.wp.votes.filter(
+            v => v.vote == 1 || v.vote == 2 || v.vote === null
+          );
+        }
+        if (
+          this.wp.status === 2 ||
+          this.wp.status === 4 ||
+          this.wp.status === 101
+        ) {
+          return this.wp.votes.filter(
+            v => v.vote == 3 || v.vote == 4 || v.vote === null
+          );
+        }
       } else {
         return [];
       }
@@ -370,11 +400,18 @@ export default {
 
     MyDirectDelegation() {
       if (!this.getVotes.length) return false;
-      let my_direct_delegatee = false;
 
+      let myvote = this.getVotes.find(
+        v => v.voter == this.getAccountName && v.vote === null
+      );
+      if (myvote) {
+        return myvote.delegatee;
+      }
+
+      let my_direct_delegatee = false;
       for (let i = 0; i < this.getVotes.length; i++) {
         let vote = this.getVotes[i];
-        if (vote.delegates) {
+        if (vote.delegates && vote.delegates.length) {
           let check = vote.delegates.find(
             d => d.voter == this.getAccountName && d.delegate_type == "direct"
           );
@@ -407,37 +444,67 @@ export default {
       if (!myvote) {
         return 0;
       } else {
-        return myvote.vote;
+        if (myvote.vote === null) {
+          return 0;
+        } else {
+          return myvote.vote;
+        }
       }
-    },
-
-    proposal_threshold_met() {
-      return false;
-    },
-    //when wp state is 2
-    claim_threshold_met() {
-      return false;
     },
 
     getExpiry() {
       let expiration_millis;
+      let start;
       if (this.wp.status === 0) {
         expiration_millis = Number(this.getWpConfig.approval_expiry) * 1000;
+        start = Date.parse(this.wp.propose_timestamp);
+        console.log("state 0", expiration_millis, start);
       }
       if (this.wp.status === 2) {
-        expiration_millis = Number(this.getWpConfig.claim_expiry) * 1000;
+        expiration_millis = Number(this.getWpConfig.escrow_expiry) * 1000;
+        start = Date.parse(this.wp.complete_work_timestamp);
+        console.log("state 0", expiration_millis, start);
       }
-      let start = new Date(this.wp.block_timestamp).getTime();
+
       let end = start + expiration_millis;
       let current = new Date().getTime();
-      //todo calculate relative expiration based on NOW and expiration
-
+      //calculate relative expiration based on NOW and expiration
       let perc = 100 - ((current - start) / (end - start)) * 100;
       let msleft = end - current;
+
+      if (this.wp.status === 5) {
+        perc = 0;
+        msleft = 0;
+      }
+
       return {
         percent: perc <= 0 ? 0 : perc,
         millisleft: msleft <= 0 ? 0 : msleft
       };
+    },
+    getVotingScore() {
+      let score = { score: 0, threshold: null };
+      if (
+        this.wp.status === 0 ||
+        this.wp.status === 3 ||
+        this.wp.status === 1
+      ) {
+        score.threshold = this.getWpConfig.proposal_threshold;
+        this.getVotes.forEach(v => {
+          if (v.vote === 1) score.score += v.weight;
+        });
+      }
+      if (
+        this.wp.status === 2 ||
+        this.wp.status === 4 ||
+        this.wp.status === 101
+      ) {
+        score.threshold = this.getWpConfig.finalize_threshold;
+        this.getVotes.forEach(v => {
+          if (v.vote === 3) score.score += v.weight;
+        });
+      }
+      return `${score.score}/${score.threshold}`;
     },
     getCustNames() {
       if (this.getCustodians) {
@@ -458,6 +525,7 @@ export default {
       return wpc.label;
     },
     async delegatevote(delegatee) {
+      console.log(delegatee);
       let actions = [
         {
           account: this.$configFile.get("wpcontract"),
@@ -466,15 +534,15 @@ export default {
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
-              actor: this.$configFile.get("authaccountname"),
+              actor: this.$configFile.get("authaccount"),
               permission: "one"
             }
           ],
           data: {
             custodian: this.getAccountName,
             proposal_id: Number(this.wp.id),
-            dalegatee_custodian: delegatee.new, //xxxx
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            delegatee_custodian: delegatee.new,
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -482,21 +550,33 @@ export default {
         actions: actions
       });
       if (result) {
-        // let vote = this.wp.votes.find(v => v.voter == this.getAccountName);
-        // if (vote) {
-        //   vote.vote = 0;
-        //   vote.delegatee = delegatee.new;
-        // } else {
-        //   this.wp.votes.push({
-        //     proposal_id: Number(this.wp.id),
-        //     voter: this.getAccountName,
-        //     delegatee: delegatee.new,
-        //     vote: 0,
-        //     comment_hash: ""
-        //   });
-        // }
+        this.actionCallBack(this.wp.id);
+        //check if delegatee has voted
+        // let vote = this.wp.votes.find(v => v.voter == delegatee.new);
+        // if (!vote) return;
+
+        // let deltemplate = {
+        //   voter: this.getAccountName,
+        //   delegate_type: "direct"
+        // };
+        // vote.delegates.push(deltemplate);
+        // // if (!vote.delegates.find(vd => vd.voter == this.getAccountName)) {
+        // //   vote.delegates.push(deltemplate);
+        // // }
         // console.log(result);
+      } else {
+        this.$refs.directDelSelect.selected = delegatee.old;
       }
+    },
+    async actionCallBack(id) {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      let res = await this.$store.dispatch("dac/fetchWorkerProposals", {
+        id: id
+      });
+      if (res) {
+        this.wp.votes = res.results[0].votes;
+      }
+      console.log(res);
     },
 
     async voteprop(votetype) {
@@ -514,7 +594,7 @@ export default {
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
-              actor: this.$configFile.get("authaccountname"),
+              actor: this.$configFile.get("authaccount"),
               permission: "one"
             }
           ],
@@ -522,7 +602,7 @@ export default {
             custodian: this.getAccountName,
             proposal_id: Number(this.wp.id),
             vote: map[votetype],
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -531,15 +611,17 @@ export default {
         actions: actions
       });
       if (result) {
+        await this.actionCallBack(this.wp.id);
+        this.$refs.directDelSelect.selected = "";
         // let vote = this.wp.votes.find(v => v.voter == this.getAccountName);
         // if (vote) {
         //   vote.vote = map[votetype];
-        //   vote.delegatee = "";
+        //   vote.delegatee = null;
         // } else {
         //   this.wp.votes.push({
         //     proposal_id: Number(this.wp.id),
         //     voter: this.getAccountName,
-        //     delegatee: "",
+        //     delegatee: null,
         //     vote: map[votetype],
         //     comment_hash: ""
         //   });
@@ -555,13 +637,13 @@ export default {
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
-              actor: this.$configFile.get("authaccountname"),
+              actor: this.$configFile.get("authaccount"),
               permission: "one"
             }
           ],
           data: {
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -570,7 +652,7 @@ export default {
         actions: actions
       });
       if (result) {
-        this.show = false;
+        this.$emit("delete");
         console.log(result);
       }
     },
@@ -582,7 +664,7 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -591,7 +673,7 @@ export default {
         actions: actions
       });
       if (result) {
-        console.log(result);
+        this.$emit("delete");
       }
     },
     async completeWork() {
@@ -602,7 +684,7 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -611,6 +693,7 @@ export default {
         actions: actions
       });
       if (result) {
+        this.$emit("delete");
         console.log(result);
       }
     },
@@ -620,11 +703,19 @@ export default {
         {
           account: this.$configFile.get("wpcontract"),
           name: "arbapprove",
-          // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             arbitrator: this.getAccountName,
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope")
+          }
+        },
+        {
+          account: this.$configFile.get("escrowcontract"),
+          name: "approveext",
+
+          data: {
+            ext_key: Number(this.wp.id),
+            approver: this.getAccountName
           }
         }
       ];
@@ -645,7 +736,15 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("authaccountname") //xxx
+            dac_scope: this.$configFile.get("dacscope")
+          }
+        },
+        {
+          account: this.$configFile.get("escrowcontract"),
+          name: "claimext",
+          // authorization: [ {actor: this.getAccountName, permission: 'active'}],
+          data: {
+            ext_key: Number(this.wp.id)
           }
         }
       ];
@@ -660,7 +759,12 @@ export default {
   }
 };
 
-//  wp status: pending_approval == 0, work_in_progress == 1 after approved when a worker is working on the WP, and pending_claim == 2
+// ProposalStatePending_approval = 0,
+// ProposalStateWork_in_progress = 1,
+// ProposalStatePending_finalize = 2,
+// ProposalStateHas_enough_approvals_votes = 3,
+// ProposalStateHas_enough_finalize_votes = 4,
+// ProposalStateExpired = 5 -->
 
 // enum VoteType {
 //             none = 0,

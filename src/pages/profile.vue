@@ -36,7 +36,7 @@
         <div class="fit profile_image_inner_wrap">
           <div
             v-if="img_loaded"
-            class="profile_image relative-position animate-fade"
+            class="profile_image profile_image_border relative-position animate-fade"
             style="height:140px; width:140px;"
             v-bind:style="{ 'background-image': `url(${setImgSrc})` }"
           ></div>
@@ -107,7 +107,7 @@
 
     <div class="q-px-md">
       <div
-        class="row q-mt-md gutters-md bg-bg1 round-borders shadow-5"
+        class="row q-mt-md gutters-md bg-bg1 round-borders shadow-4"
         style="min-height:265px"
       >
         <div class="col-md-8 col-xs-12 q-pa-md">
@@ -447,6 +447,10 @@ export default {
 .profile_image_inner_wrap {
   overflow: hidden;
   position: relative;
+}
+
+.profile_image_border{
+  border: 2px solid var(--q-color-text2);
 }
 
 .profile_image_outer_wrap {

@@ -84,6 +84,14 @@ class Helper {
     let dots = str.length > length ? "..." : "";
     return str.substring(0, length) + dots;
   }
+
+  chunkArray(arr, chunksize) {
+    let R = [];
+    for (var i = 0; i < arr.length; i += chunksize) {
+      R.push(arr.slice(i, i + chunksize));
+    }
+    return R;
+  }
 }
 
 export default ({ Vue, store }) => {

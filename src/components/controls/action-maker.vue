@@ -2,7 +2,7 @@
   <div>
     <!-- no props set = custom_mode -->
     <div v-if="account == '' && name == ''">
-      <div class="q-mb-sm">
+      <div>
         <q-item>
           <q-item-main>
             <q-input
@@ -15,7 +15,23 @@
                 data_fields = [];
                 custom_mode_parse_actions(custom_mode.account);
               "
-            />
+            >
+              <q-autocomplete
+                :min-characters="0"
+                @selected="custom_mode_parse_actions(custom_mode.account)"
+                :static-data="{
+                  field: 'value',
+                  list: Object.keys($configFile.configFile.contracts)
+                    .sort()
+                    .map(fa => {
+                      return {
+                        value: $configFile.configFile.contracts[fa].name,
+                        label: $configFile.configFile.contracts[fa].name
+                      };
+                    })
+                }"
+              />
+            </q-input>
           </q-item-main>
           <q-item-side right>
             <q-btn
@@ -33,7 +49,7 @@
 
       <div v-if="custom_mode.abi.actions" class="row q-mb-md bg-bg2 q-pa-xs">
         <q-btn
-          size="10px"
+          size="12px"
           :icon="$configFile.icon.action"
           v-for="(action, i) in custom_mode.abi.actions"
           :label="action.name"
@@ -57,8 +73,8 @@
       v-if="data_fields.length"
       class=" animate-fade bg-bg2 q-pa-md q-mt-md round-borders"
     >
-      <div class="row justify-between q-mb-md">
-        <div class="q-py-sm q-title ">
+      <div class="row justify-between items-center q-mb-md">
+        <div class="q-pa-sm q-title bg-bg1 round-borders">
           <q-icon :name="$configFile.icon.action" class="q-mr-xs" size="24px" />
           <span class="text-text1">{{
             this.account || custom_mode.account
@@ -68,7 +84,16 @@
             this.name || custom_mode.action_name
           }}</span>
         </div>
-        <auth-display v-model="authorization" :auth="getAuth" />
+        <auth-display
+          v-if="msigmode"
+          v-model="authorization"
+          :auth="getAuth"
+          :defaultAuth="{
+            actor: custom_mode.account,
+            permission: 'active'
+          }"
+        />
+        <auth-display v-else v-model="authorization" :auth="getAuth" />
       </div>
       <div class="row gutter-md">
         <div
@@ -244,6 +269,10 @@ export default {
       default: function() {
         return [];
       }
+    },
+    msigmode: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -266,7 +295,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getEosApi: "global/getEosApi",
+      getDacApi: "global/getDacApi",
       getIsDark: "ui/getIsDark",
       getAccountName: "user/getAccountName",
       getAccount: "user/getAccount"
@@ -285,11 +314,11 @@ export default {
   methods: {
     prettyHtml,
     async getAbi(contract) {
-      if (!this.getEosApi) return;
+      if (!this.getDacApi) return;
       this.abi_load_error = "";
       this.isLoading = true;
 
-      let abi = await this.getEosApi.eos.get_abi(contract).catch(e => {
+      let abi = await this.getDacApi.eos.get_abi(contract).catch(e => {
         console.log(e);
       });
 
@@ -394,7 +423,7 @@ export default {
         let account = action.account;
         let name = action.name;
         let data = action.data;
-        const contract = await this.getEosApi.eosapi.getContract(account);
+        const contract = await this.getDacApi.eosapi.getContract(account);
         let hex = Serialize.serializeActionData(
           contract,
           account,
@@ -462,5 +491,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

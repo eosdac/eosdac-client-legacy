@@ -104,7 +104,7 @@
     }
   },
   "manage_candidateship": {
-    "amount_to_stake_placeholder": "用于权益押注的 EOSDAC 数量",
+    "amount_to_stake_placeholder": "用于权益押注的 {token_symbol} 数量",
     "locked_tokens": "被锁的代币",
     "page_description_active_custodian": "您目前是一名在任的 {dacname} 托管人董事会成员。",
     "page_description_registered": "感谢您注册成为 {dacname} 托管人董事会的成员候选人。作为候选人注册的一部分，您的部分代币已被用于权益押注。",

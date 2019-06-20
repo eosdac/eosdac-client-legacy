@@ -1,7 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <div class="bg-bg1 shadow-5 round-borders q-pa-md q-mb-md">
-      <div class="q-headline">Custodian Board</div>
+    <div class="bg-bg1 shadow-4 round-borders q-pa-md q-mb-md">
       <display-custodians />
     </div>
 
@@ -9,7 +8,7 @@
       <!-- box profile -->
       <div class="col-xs-12 col-md-6 col-xl-4">
         <div
-          class="bg-bg1 round-borders shadow-5 q-pa-md bg-logo dashboard-box"
+          class="bg-bg1 round-borders shadow-4 q-pa-md bg-logo dashboard-box"
         >
           <q-item class="no-padding">
             <q-item-side left>
@@ -66,7 +65,7 @@
 
       <div v-if="getIsCustodian" class="col-xs-12 col-md-6 col-xl-4">
         <div
-          class="bg-bg1 round-borders shadow-5 q-pa-md bg-logo dashboard-box full-height"
+          class="bg-bg1 round-borders shadow-4 q-pa-md bg-logo dashboard-box full-height"
         >
           <q-item class="no-padding" style="margin-left:-10px;margin-top:-10px">
             <q-item-side left>
@@ -122,7 +121,7 @@
       </div>
 
       <div class="col-xs-12 col-md-6 col-xl-4">
-        <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height bg-logo">
+        <div class="bg-bg1 round-borders shadow-4 q-pa-md full-height bg-logo">
           <period-timer />
           <div class="text-text2 q-mt-md">
             A new custodian board will be elected when the timer expires.
@@ -131,7 +130,7 @@
       </div>
 
       <div class="col-xs-12 col-md-6 col-xl-8">
-        <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height">
+        <div class="bg-bg1 round-borders shadow-4 q-pa-md full-height">
           <balance-timeline
             :account="getAccountName"
             :contract="this.$configFile.get('tokencontract')"

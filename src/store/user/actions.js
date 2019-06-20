@@ -7,12 +7,13 @@ export async function loggedOutRoutine({ commit }) {
   commit("setAccountName", null);
   commit("setDacBalance", null);
   commit("setAgreedTermsVersion", null);
-  commit("global/setEosApi", null, { root: true });
+  commit("global/setDacApi", null, { root: true });
   commit("global/setScatter", null, { root: true });
   commit("global/setEosScatter", null, { root: true });
   commit("setProfilePicture", null);
   commit("setIsCandidate", null);
   commit("setDacVotes", null);
+  commit("dac/setCustodianPermissions", null, { root: true });
 }
 
 export async function loggedInRoutine({ state, commit, dispatch }, account) {
@@ -25,7 +26,7 @@ export async function loggedInRoutine({ state, commit, dispatch }, account) {
     commit("setProfilePicture", a[0].image);
   });
 
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
 
   //requests for setting up the logged in user
   let requests = [
@@ -64,7 +65,7 @@ export async function fetchIsCandidate(
   accountname = false
 ) {
   const accountN = accountname || state.accountName;
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let isCandidate = await api.isCandidate(accountN);
   if (!accountname) {
     commit("setIsCandidate", isCandidate);
@@ -78,7 +79,7 @@ export async function fetchDacVotes(
   accountname = false
 ) {
   const accountN = accountname || state.accountName;
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let votes = await api.getVotes(accountN);
   if (!accountname) {
     commit("setDacVotes", votes);
@@ -93,7 +94,7 @@ export async function fetchBalances(
   accountname = false
 ) {
   const accountN = accountname || state.accountName;
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let requests = [
     api.getBalance(accountN),
     api.getBalance(accountN, "eosio.token", "EOS")
@@ -112,7 +113,7 @@ export async function fetchPendingPay(
   accountname = false
 ) {
   const accountN = accountname || state.accountName;
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let res = await api.getPendingPay(accountN);
   return res;
 }
@@ -122,7 +123,7 @@ export async function fetchCatDelegations(
   accountname = false
 ) {
   const accountN = accountname || state.accountName;
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let res = await api.getCatDelegations(accountN);
   commit("setCatDelegations", res);
   return res;
@@ -231,7 +232,8 @@ export async function transact(
         ]
       });
     }
-    return result;
+    // add a delay befor returning the transaction result. this to give nodes time to sync.
+    return await new Promise(resolve => setTimeout(() => resolve(result), 250));
   } catch (e) {
     console.log(e);
     let message = "unknown_error";
@@ -255,6 +257,103 @@ export async function transact(
     }
     return false;
   }
+}
+
+export async function proposeMsig(
+  { state, rootState, commit, dispatch, getters, rootGetters },
+  payload
+) {
+  //payload example
+  // {
+  //   actions: [], //required
+  //   requested: [],
+  //   proposal_name: "aname",
+  //   expiration: "2019-08-10T19:14:14",
+  //   delay_sec: 0,
+  //   title: "a title",
+  //   description: "a description"
+  //   is_personal_msig: false
+  // }
+
+  const api = await dispatch("global/getDacApi", false, { root: true });
+  //proposalname
+  let proposal_name = payload.proposal_name || this._vm.$helper.randomName();
+  //expiration
+  let exp = new Date();
+  exp.setDate(exp.getDate() + 30);
+  let [expiration] = exp.toISOString().split(".");
+
+  //requested
+  let requested = rootGetters["dac/getCustodianPermissions"];
+  if (!requested) {
+    requested = await dispatch("dac/fetchCustodianPermissions", null, {
+      root: true
+    });
+  }
+  //msig trx template
+  let msigTrx_template = {
+    expiration: payload.expiration || expiration,
+    ref_block_num: 0,
+    ref_block_prefix: 0,
+    max_net_usage_words: 0,
+    max_cpu_usage_ms: 0,
+    delay_sec: payload.delay_sec || 0,
+    actions: [],
+    context_free_actions: [],
+    transaction_extensions: [],
+    signatures: [],
+    context_free_data: []
+  };
+
+  //serialize action data and add to template
+  for (let i = 0; i < payload.actions.length; i++) {
+    let action = payload.actions[i];
+    let hexdata = await api.serializeActionData(action);
+    action.data = hexdata;
+    msigTrx_template.actions.push(action);
+  }
+
+  //do the transaction
+  let propose = {
+    account: this._vm.$configFile.get("systemmsigcontract"),
+    name: "propose",
+    data: {
+      proposer: state.accountName,
+      proposal_name: proposal_name,
+      requested: payload.requested || requested,
+      trx: msigTrx_template
+    }
+  };
+  //handle the correct permission for the "proposed" action
+  let PERM = rootGetters["dac/getAuthAccountPermLevel"];
+
+  let proposed = {
+    account: this._vm.$configFile.get("dacmsigcontract"),
+    name: "proposed",
+    authorization: [
+      { actor: state.accountName, permission: getters["getAuth"] },
+      { actor: this._vm.$configFile.get("authaccount"), permission: PERM }
+    ],
+    data: {
+      proposer: state.accountName,
+      proposal_name: proposal_name,
+      // dac_id: this._vm.$configFile.get("dacscope"),
+      metadata: JSON.stringify({
+        title: payload.title || "Default Msig title",
+        description: payload.description || "default msig description"
+      })
+    }
+  };
+
+  let msig_actions = [propose];
+  if (!payload.is_personal_msig) {
+    msig_actions.push(proposed);
+  }
+  let res = await dispatch("transact", { actions: msig_actions });
+  if (res) {
+    res.proposal_name = proposal_name;
+  }
+  return res;
 }
 
 function parseError(err) {

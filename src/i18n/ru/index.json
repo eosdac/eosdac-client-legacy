@@ -34,7 +34,7 @@
     }
   },
   "manage_candidateship": {
-    "amount_to_stake_placeholder": "сумма ставки EOSDAC",
+    "amount_to_stake_placeholder": "сумма ставки {token_symbol}",
     "locked_tokens": "заблокированные токены",
     "page_description_active_custodian": "В настоящее время вы являетесь активным участником совета Хранителей {dacname}.",
     "page_description_registered": "Благодарим Вас за регистрацию в качестве кандидата в совет Хранителей {dacname}. В рамках регистрации вашей кандидатуры некоторые из ваших токенов были стэкированы.",

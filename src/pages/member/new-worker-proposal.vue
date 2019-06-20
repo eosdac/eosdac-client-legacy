@@ -2,7 +2,7 @@
   <q-page class="q-pa-md">
     <!-- content -->
 
-    <div class="bg-bg1 round-borders shadow-5 q-pa-md bg-logo">
+    <div class="bg-bg1 round-borders shadow-4 q-pa-md bg-logo">
       <div class="text-text1 q-title q-mb-md">Submit Worker Proposal</div>
       <div class="q-mb-md text-text2">
         Please fill in the form to explain your worker proposal. There need to
@@ -140,10 +140,7 @@ import debugData from "components/ui/debug-data";
 import MarkdownViewer from "components/ui/markdown-viewer";
 import helpBtn from "components/controls/help-btn";
 import { required, minValue } from "vuelidate/lib/validators";
-const isEosName = accountname => {
-  const re = /^[a-z1-5.]{1,12}$/;
-  return re.test(accountname);
-};
+import { isEosName } from "../../modules/validators.js";
 
 export default {
   name: "newWorkerProposal",
@@ -184,7 +181,7 @@ export default {
     }),
     getWpCategoriesOptions: function() {
       return this.getWpCategories.map(wpc => {
-        wpc.label = this.$t(`wp_categories.${wpc.label}`);
+        wpc.label = this.$t(wpc.label);
         return wpc;
       });
     }
@@ -221,7 +218,7 @@ export default {
             content_hash: "00000000000000000000000000000000",
             id: this.$helper.randomIntFromInterval(1, 999999999999999999),
             category: this.wp_data.category,
-            dac_scope: this.$configFile.get("authaccountname")
+            dac_scope: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -248,5 +245,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

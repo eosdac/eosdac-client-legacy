@@ -56,6 +56,26 @@ let routes = [
   },
 
   {
+    path: "/dac-activity",
+    component: () => import("layouts/MyLayout.vue"),
+    children: [
+      { path: "", component: () => import("../extensions/pages/home") },
+      {
+        path: "financials",
+        component: () => import("pages/custodian/dac-financials")
+      },
+      {
+        path: "review-msigs",
+        component: () => import("pages/custodian/review-msigs")
+      },
+      {
+        path: "review-worker-proposals",
+        component: () => import("pages/custodian/review-worker-proposals")
+      }
+    ]
+  },
+
+  {
     path: "/custodian",
     component: () => import("layouts/MyLayout.vue"),
     children: [
@@ -63,11 +83,6 @@ let routes = [
       {
         path: "review-msigs",
         component: () => import("pages/custodian/review-msigs")
-      },
-      {
-        path: "create-msigs",
-        component: () => import("pages/custodian/create-msigs"),
-        beforeEnter: Guards.custodianCheck
       },
       /*
       {
@@ -81,8 +96,27 @@ let routes = [
         beforeEnter: Guards.custodianCheck
       },
       {
-        path: "dac-financials",
-        component: () => import("pages/custodian/dac-financials")
+        path: "dac-management",
+        component: () => import("pages/custodian/dac-management"),
+        children: [
+          { path: "", redirect: "financials" },
+          {
+            path: "financials",
+            component: () => import("pages/custodian/dac-financials")
+          },
+          {
+            path: "configuration",
+            component: () => import("pages/custodian/contracts-config")
+          },
+          {
+            path: "constitution",
+            component: () => import("pages/custodian/manage-constitution")
+          },
+          {
+            path: "advanced",
+            component: () => import("pages/custodian/advanced")
+          }
+        ]
       }
     ]
     /*
