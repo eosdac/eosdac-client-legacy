@@ -17,7 +17,7 @@
       >
         <div class="q-ma-none">{{ custodian.cust_name }}</div>
       </router-link>
-      <q-tooltip v-model="custodian.tooltip" class="bg-bg2">
+      <q-tooltip v-model="custodian.tooltip" class="bg-primary">
         <div>Votes: {{ custodian.total_votes / 10000 }}</div>
         <div>Pay: {{ custodian.requestedpay }}</div>
       </q-tooltip>

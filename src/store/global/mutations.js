@@ -1,8 +1,11 @@
+export function setNodeInfo(state, payload) {
+  state.nodeInfo = payload;
+}
 export function setScatter(state, payload) {
   state.scatter = payload;
 }
 
-export function setEosApi(state, payload) {
+export function setDacApi(state, payload) {
   state.eosApi = payload;
 }
 
@@ -12,6 +15,10 @@ export function setEosScatter(state, payload) {
 
 export function setActiveNetwork(state, payload) {
   state.active_network = payload;
+}
+
+export function setChainId(state, payload) {
+  state.chainId = payload;
 }
 
 export function setDapp_version(state, payload) {

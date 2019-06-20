@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <title><%= htmlWebpackPlugin.options.meta_title %></title>
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="<%= htmlWebpackPlugin.options.description %>">
@@ -16,13 +17,13 @@
     <meta name="twitter:image" content="<%= htmlWebpackPlugin.options.host %>/branding/images/social_share_preview/mockup-social-media-client-twitter-1024x512.png">
 
     <!-- Open Graph general (Facebook, Pinterest & Google+) -->
-    <meta name="og:title" content="eosDAC Member Client">
-    <meta name="og:description" content="<%= htmlWebpackPlugin.options.description %>">
-    <meta name="og:image" content="<%= htmlWebpackPlugin.options.host %>/branding/images/social_share_preview/mockup-social-media-client-facebook-1200x630.png">
-    <meta name="og:type" content="website">
+    <meta property="og:title" content="<%= htmlWebpackPlugin.options.meta_title %>">
+    <meta property="og:description" content="<%= htmlWebpackPlugin.options.meta_description %>">
+    <meta property="og:image" content="<%= htmlWebpackPlugin.options.host %>/branding/images/social_share_preview/mockup-social-media-client-facebook-1200x630.png">
+    <meta property="og:type" content="website">
 
-    <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.options.host %>/branding/images/icons/favicon-32x32.png?v=2">
-    <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.options.host %>/branding/images/icons/favicon-16x16.png?v=2">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.options.host %>/branding/images/icons/favicon-32x32.png?v=1">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.options.host %>/branding/images/icons/favicon-16x16.png?v=1">
     <link rel="icon" href="<%= htmlWebpackPlugin.options.host %>/branding/images/social_share_preview/mockup-social-media-client-facebook-1200x630.png" sizes="1200x630" />
     <script>
       //debug code for eoslynx.... this will be deleted when it isn't needed anymore. can be savely removed!

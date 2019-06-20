@@ -14,10 +14,15 @@ export default {
       default: null
     }
   },
+  methods: {
+    render() {
+      if (this.chartData) {
+        this.renderChart(this.chartData, this.options);
+      }
+    }
+  },
   mounted() {
-    this.renderChart(this.chartData, this.options);
+    this.render();
   }
 };
 </script>
-
-<style></style>

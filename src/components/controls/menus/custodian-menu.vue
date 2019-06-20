@@ -10,12 +10,17 @@
         <q-item-main :label="$t('menu.custodian_tools')" class="text-text1" />
       </template>
       <div class="bg-bg1">
-        <q-item class="q-pl-lg animate-fade" link to="/custodian/create-msigs">
+        <q-item
+          class="q-pl-lg animate-fade"
+          link
+          to="/custodian/dac-management"
+        >
           <q-item-main
-            :label="$t('menu.create_msigs')"
+            label="Manage DAC"
             class="text-text1 text-weight-light"
           />
         </q-item>
+
         <q-item class="q-pl-lg animate-fade" link to="/custodian/review-msigs">
           <q-item-main
             :label="$t('menu.vote_msigs')"
@@ -32,22 +37,17 @@
             :label="$t('menu.vote_worker_proposals')"
             class="text-text1 text-weight-light"
           />
+        -->
+          <!-- <q-item-side right>
+            <q-chip round dense color="negative" class="shadow-2">7</q-chip>
+          </q-item-side> -->
+        <!--
         </q-item>
         -->
 
         <q-item class="q-pl-lg animate-fade" link to="/custodian/my-payments">
           <q-item-main
             :label="$t('menu.my_payments')"
-            class="text-text1 text-weight-light"
-          />
-        </q-item>
-        <q-item
-          class="q-pl-lg animate-fade"
-          link
-          to="/custodian/dac-financials"
-        >
-          <q-item-main
-            :label="$t('menu.dac_financials')"
             class="text-text1 text-weight-light"
           />
         </q-item>
@@ -87,10 +87,10 @@
         <q-item
           class="q-pl-lg animate-fade"
           link
-          to="/custodian/dac-financials"
+          to="/custodian/dac-management/financials"
         >
           <q-item-main
-            :label="$t('menu.dac_financials')"
+            :label="$t('menu.view_financials')"
             class="text-text1 text-weight-light"
           />
         </q-item>
@@ -114,5 +114,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

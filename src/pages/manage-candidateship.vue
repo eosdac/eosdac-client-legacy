@@ -4,14 +4,14 @@
       <!-- is already a candidate UNREGISTER-->
       <div
         v-if="getIsCandidate && getIsCandidate.is_active"
-        class=" bg-logo bg-bg1 q-pa-md round-borders shadow-5 relative-position overflow-hidden"
+        class=" bg-logo bg-bg1 q-pa-md round-borders shadow-4 relative-position overflow-hidden"
       >
         <!-- <div class="" style="bottom:-50%;right:-80%;"></div> -->
         <q-item class="no-padding">
           <q-item-side left>
             <div
-              style="width:80px;height:80px"
-              class="profile_image animate-pop"
+              style="width:80px;height:80px;"
+              class="profile_image animate-pop profile_image_border"
               v-bind:style="{ 'background-image': `url(${getProfilePicture})` }"
             ></div>
           </q-item-side>
@@ -82,12 +82,12 @@
       <!-- end already a candidate -->
 
       <!-- Not a candidate REGISTER -->
-      <div v-else class="bg-bg1 bg-logo q-pa-md round-borders shadow-5">
+      <div v-else class="bg-bg1 bg-logo q-pa-md round-borders shadow-4">
         <q-item class="no-padding q-mb-md">
           <q-item-side left>
             <div
               style="width:80px;height:80px"
-              class="profile_image animate-pop"
+              class="profile_image animate-pop profile_image_border"
               v-bind:style="{ 'background-image': `url(${getProfilePicture})` }"
             ></div>
           </q-item-side>
@@ -201,7 +201,7 @@
             !getIsCandidate.is_active &&
             parseFloat(getIsCandidate.locked_tokens)
         "
-        class=" bg-bg1 q-pa-md round-borders shadow-5 q-mt-md"
+        class=" bg-bg1 q-pa-md round-borders shadow-4 q-mt-md"
       >
         <span
           >{{ $t("manage_candidateship.unstake_description")
@@ -433,6 +433,10 @@ export default {
 </script>
 
 <style lang="stylus">
+.profile_image_border{
+  border: 2px solid var(--q-color-text2);
+}
+
 .animate_rotate_ease {
   animation: rotate 4s ease-in-out infinite;
 }

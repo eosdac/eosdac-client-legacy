@@ -34,7 +34,7 @@
     }
   },
   "manage_candidateship": {
-    "amount_to_stake_placeholder": "Cantidad para stake EOSDAC",
+    "amount_to_stake_placeholder": "Cantidad para stake {token_symbol}",
     "page_description_active_custodian": "Actualmente está activo como Miembro del Consejo de Representantes de {dacname}.",
     "page_description_registered": "Gracias por registrarse como candidato para servir en el Consejo de Representantes de {dacname}. Como parte de su registro de candidatura, algunos de sus tokens han sido stakeados.",
     "page_description_unregistered": "Esta página es para registrarse como candidato para un puesto en el Consejo de Representantes. Este puesto viene con las responsabilidades descritas en la Constitución de {dacname}. Por favor, no se registre como Candidato a menos que entienda completamente y pueda cumplir con las responsabilidades de un miembro del Consejo de Representantes de {dacname}. Por favor revise la sección 5 de la constitución cuidadosamente antes de registrarse.",

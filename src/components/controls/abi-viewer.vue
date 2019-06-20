@@ -96,7 +96,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getEosApi: "global/getEosApi",
+      getDacApi: "global/getDacApi",
       getIsDark: "ui/getIsDark"
     })
   },
@@ -104,11 +104,11 @@ export default {
     prettyHtml,
     async getAbi(contract) {
       this.abi = {};
-      if (!this.getEosApi) return;
+      if (!this.getDacApi) return;
       this.abi_load_error = "";
       this.isLoading = true;
 
-      let abi = await this.getEosApi.eos.get_abi(contract).catch(e => {
+      let abi = await this.getDacApi.eos.get_abi(contract).catch(e => {
         console.log(e);
       });
 
@@ -123,5 +123,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

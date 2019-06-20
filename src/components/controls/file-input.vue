@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getEosApi: "global/getEosApi"
+      getDacApi: "global/getDacApi"
     })
   },
   methods: {
@@ -90,7 +90,7 @@ export default {
         textDecoder: new TextDecoder()
       });
       let abi = JSON.parse(abifile);
-      const abiDefinition = await this.getEosApi.eosapi.abiTypes.get(`abi_def`);
+      const abiDefinition = await this.getDacApi.eosapi.abiTypes.get(`abi_def`);
 
       abi = abiDefinition.fields.reduce(
         (acc, { name: fieldName }) =>

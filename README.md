@@ -44,7 +44,7 @@ Use the extensions/i18n folder to add your custom strings or overwrite existing 
 Opens browser window automatically [http://localhost:8080](http://localhost:8080)
 
 ```bash
-$ npm start
+quasar dev
 ```
 
 ## Deployment

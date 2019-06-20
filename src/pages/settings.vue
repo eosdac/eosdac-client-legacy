@@ -2,7 +2,7 @@
   <q-page class="q-pa-md bg-logo">
     <div class="row gutter-sm">
       <!-- <div class="col-xs-12 col-xl-6">
-        <div  class="bg-bg1 round-borders shadow-5 relative-position overflow-hidden full-height q-pa-md " >
+        <div  class="bg-bg1 round-borders shadow-4 relative-position overflow-hidden full-height q-pa-md " >
         Memberclient version: v{{getDapp_version}}
         Local Storage version: v{{getLocal_storage_version}}
         </div>
@@ -14,7 +14,7 @@
         :key="`group_${j}`"
       >
         <div
-          class="bg-bg1 round-borders shadow-5 relative-position overflow-hidden full-height"
+          class="bg-bg1 round-borders shadow-4 relative-position overflow-hidden full-height"
         >
           <q-list no-border>
             <q-list-header class="q-headline capitalize">

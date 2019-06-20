@@ -7,7 +7,7 @@ module.exports = function (ctx) {
   return {
     htmlVariables: { 
       host: build_config.host_no_backslash,
-      description: build_config.meta_description 
+      meta_description: build_config.meta_description 
     },
     // app plugins (/src/plugins)
     plugins: [
@@ -144,7 +144,8 @@ module.exports = function (ctx) {
         'QStep',
         'QStepperNavigation',
         'QDatetimePicker',
-        'QTooltip'
+        'QTooltip',
+        'QAutocomplete'
       ],
       directives: [
         'Ripple',
@@ -155,7 +156,8 @@ module.exports = function (ctx) {
       plugins: [
         'Notify',
         'Dialog',
-        'Meta'
+        'Meta',
+        'Screen'
       ],
       // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
       i18n: 'en-us' // Quasar language

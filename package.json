@@ -14,15 +14,16 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-countdown": "^1.1.2",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "chart.js": "^2.8.0",
     "connect": "^3.6.6",
     "crypto-js": "^3.1.9-1",
     "eosjs": "^20.0.0",
+    "file-saver": "^2.0.2",
     "idle-vue": "^2.0.5",
     "int64-buffer": "^0.99.1007",
     "json-pretty-html": "^1.1.6",
-    "marked": "^0.6.0",
+    "marked": "^0.6.2",
     "nested-object-assign": "^1.0.3",
     "sanitize-html": "^1.20.0",
     "scatterjs-core": "^2.7.17",
@@ -49,7 +50,7 @@
     "eslint-plugin-vue": "^5.2.2",
     "json-loader": "^0.5.7",
     "prettier": "^1.16.4",
-    "quasar-cli": "^0.17.0",
+    "quasar-cli": "^0.17.25",
     "strip-ansi": "=3.0.1"
   },
   "engines": {

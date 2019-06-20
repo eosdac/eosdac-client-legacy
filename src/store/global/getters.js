@@ -1,8 +1,11 @@
+export function getNodeInfo(state, payload) {
+  return state.nodeInfo;
+}
 export function getScatter(state) {
   return state.scatter;
 }
 
-export function getEosApi(state) {
+export function getDacApi(state) {
   return state.eosApi;
 }
 
@@ -24,4 +27,8 @@ export function getDapp_version(state) {
 
 export function getLocal_storage_version(state) {
   return state.local_storage_version;
+}
+
+export function getChainId(state) {
+  return state.chainId;
 }

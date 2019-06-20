@@ -1,10 +1,11 @@
 <template>
   <div v-if="getAccountName && wpcats.length">
-    <!-- <div class="bg-bg1 round-borders shadow-5 q-pa-md q-mb-md">
+    <!-- <div class="bg-bg1 round-borders shadow-4 q-pa-md q-mb-md">
       My Category Delegations
     </div> -->
+    <!-- {{ getCatDelegations }} -->
     <div
-      class="relative-position bg-bg1 bg-logo q-pa-md round-borders shadow-5"
+      class="relative-position bg-bg1 bg-logo q-pa-md round-borders shadow-4"
     >
       <div class="row gutter-sm ">
         <div
@@ -28,10 +29,10 @@
                 class="q-pa-sm absolute-top-right"
               />
               <q-item-tile class="text-text1" label>{{
-                $t(`wp_categories.${cat.label}`)
+                $t(`${cat.label}`)
               }}</q-item-tile>
               <div class="q-caption text-text2 q-my-xs">
-                {{ $t(`wp_categories.${cat.desc}`) }}
+                {{ $t(`${cat.desc}`) }}
               </div>
               <member-select
                 itsme="UNDELEGATE"
@@ -116,15 +117,15 @@ export default {
         authorization: [
           { actor: this.getAccountName, permission: this.getAuth },
           {
-            actor: this.$configFile.get("authaccountname"),
+            actor: this.$configFile.get("authaccount"),
             permission: "one"
           }
         ],
         data: {
           custodian: this.getAccountName,
           category: cat_id,
-          dalegatee_custodian: delegatee.new,
-          dac_scope: this.$configFile.get("authaccountname")
+          delegatee_custodian: delegatee.new,
+          dac_scope: this.$configFile.get("dacscope")
         }
       };
       let undelegate = {
@@ -133,14 +134,14 @@ export default {
         authorization: [
           { actor: this.getAccountName, permission: this.getAuth },
           {
-            actor: this.$configFile.get("authaccountname"),
+            actor: this.$configFile.get("authaccount"),
             permission: "one"
           }
         ],
         data: {
           custodian: this.getAccountName,
           category: cat_id,
-          dac_scope: this.$configFile.get("authaccountname")
+          dac_scope: this.$configFile.get("dacscope")
         }
       };
 
@@ -172,5 +173,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

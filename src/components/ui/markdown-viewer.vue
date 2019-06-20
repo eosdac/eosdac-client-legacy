@@ -6,7 +6,7 @@
       class="markdown-body q-body-ow"
       v-bind:class="{ overwritemd: dark }"
     ></div>
-    <div v-else class="relative-position bg-bg2">
+    <div v-else class="relative-position bg-bg2 round-borders">
       <medium-editor
         ref="markeditor"
         id="markeditor"
@@ -18,7 +18,11 @@
         v-on:edit="applyTextEdit"
       />
     </div>
-    <div v-if="edit" class="row justify-end q-caption q-py-sm" style="">
+    <div
+      v-if="edit"
+      class="row justify-end q-caption q-py-sm text-text2"
+      style=""
+    >
       {{ $t("markdown_viewer.select_text_to_edit") }}
     </div>
   </div>
@@ -220,7 +224,7 @@ export default {
     -webkit-transition: background-color .2s ease-in, color .2s ease-in;
             transition: background-color .2s ease-in, color .2s ease-in; }
     .medium-editor-toolbar li button:hover {
-      background-color: #000;
+      background-color: var(--q-color-dark);
       color: #a2d7c7; }
   .medium-editor-toolbar li .medium-editor-button-first {
 
@@ -231,18 +235,18 @@ export default {
 
     padding-right: 24px; }
   .medium-editor-toolbar li .medium-editor-button-active {
-    background-color: #000;
+    background-color: var(--q-color-bg1);
     color: #a2d7c7;
 
    }
 
 .medium-editor-toolbar-form {
-  background: #000;
-  border-radius: 50px;
+  background: var(--q-color-bg2);
+
   color: #ccc;
   overflow: hidden; }
   .medium-editor-toolbar-form .medium-editor-toolbar-input {
-    background: #000;
+    background: var(--q-color-bg2);
     box-sizing: border-box;
     color: #ccc;
     height: 40px;
@@ -270,8 +274,8 @@ export default {
     margin-right: 16px; }
 
 .medium-editor-toolbar-anchor-preview {
-  background: #000;
-
+  background: var(--q-color-bg1);
+  border-radius: $generic-border-radius;
   padding: 5px 12px; }
 
 .medium-editor-anchor-preview a {

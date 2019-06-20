@@ -38,7 +38,7 @@
     }
   },
   "manage_candidateship": {
-    "amount_to_stake_placeholder": "quantité pour *stake* EOSDAC",
+    "amount_to_stake_placeholder": "quantité pour *stake* {token_symbol}",
     "locked_tokens": "tokens bloqués",
     "page_description_active_custodian": "Vous êtes actuellement actif en tant que membre du conseil des Délégués d'{dacname}.",
     "page_description_registered": "Merci pour vous êtes inscris en tant que candidat pour servir au conseil des Délégués d'{dacname}. Dans le cadre de votre conditature, certains de vos tokens ont été *stake*.",

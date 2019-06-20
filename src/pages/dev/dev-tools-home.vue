@@ -3,7 +3,7 @@
     <div class="q-pa-md">
       <div class="row gutter-sm">
         <div class="col-xs-12 col-md-6">
-          <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="bg-bg1 round-borders shadow-4 q-pa-md">
             <div class="q-title q-mb-md">Profile Cache</div>
             <div class="row">
               <q-btn
@@ -23,12 +23,12 @@
         </div>
 
         <div class="col-xs-12 col-md-6">
-          <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="bg-bg1 round-borders shadow-4 q-pa-md">
             <div class="q-title q-mb-md">Config File</div>
             <div class="row">
               <q-btn
                 class="q-ma-xs"
-                label="log config"
+                label="show configfile"
                 color="primary"
                 @click="logConfigFile"
               />
@@ -37,7 +37,7 @@
         </div>
 
         <div class="col-xs-12 col-md-6 ">
-          <div class="bg-bg1 round-borders shadow-5 q-pa-md">
+          <div class="bg-bg1 round-borders shadow-4 q-pa-md">
             <div class="row justify-between q-mb-md"></div>
             <color-picker />
             <div class="q-mt-md row justify-between">
@@ -51,7 +51,7 @@
         </div>
 
         <div class="col-xs-12 col-md-6 ">
-          <div class="bg-bg1 round-borders shadow-5 q-pa-md full-height">
+          <div class="bg-bg1 round-borders shadow-4 q-pa-md full-height">
             <div class="q-title q-mb-md">Network</div>
             <div class="q-mt-md row">
               <network-switcher class="q-ma-xs" :enable_pin="false" />
@@ -72,6 +72,19 @@
           }
         ]"
       />
+
+      <q-modal maximized v-model="showConfigModal">
+        <div
+          style="height:50px"
+          class="bg-bg1 row items-center justify-between q-px-md text-text1"
+        >
+          <span>Config</span>
+          <q-btn icon="close" @click="showConfigModal = false" flat dense />
+        </div>
+        <div class="q-pa-md bg-bg2 text-text1">
+          <debug-data :data="[$configFile.configFile]" show />
+        </div>
+      </q-modal>
     </div>
     <!-- end wrapper -->
   </q-page>
@@ -80,14 +93,11 @@
 <script>
 import { mapGetters } from "vuex";
 import { colors } from "quasar";
-
 import colorPicker from "components/controls/color-picker";
-
 import networkSwitcher from "components/controls/network-switcher";
-
 import firehose from "components/controls/firehose";
-
 import debugData from "components/ui/debug-data";
+import { saveAs } from "file-saver";
 
 export default {
   name: "test",
@@ -100,7 +110,8 @@ export default {
   data() {
     return {
       scatter: null,
-      assettest: ""
+      assettest: "",
+      showConfigModal: false
     };
   },
   computed: {
@@ -112,14 +123,15 @@ export default {
       getIsDark: "ui/getIsDark",
       getMemberTerms: "dac/getMemberTerms",
       getIsCustodian: "user/getIsCustodian",
-      getEosApi: "global/getEosApi"
+      getDacApi: "global/getDacApi"
       // getCustodians: 'dac/getCustodians',
     })
   },
 
   methods: {
     logConfigFile() {
-      console.log(this.$configFile);
+      console.log(this.$configFile.configFile);
+      this.showConfigModal = true;
     },
     logProfileCache() {
       console.log(this.$profiles);
@@ -140,13 +152,10 @@ export default {
         new_colors += `$${c} = ${colors.getBrand(c)}\n`;
       });
 
-      let a = document.createElement("a");
-      let file = new Blob([new_colors], {
+      let blob = new Blob([new_colors], {
         type: "text/plain;charset=utf-8"
       });
-      a.href = URL.createObjectURL(file);
-      a.download = "new.colors.style";
-      a.click();
+      saveAs(blob, "new.colors.styl");
       console.log(new_colors);
     }
   }

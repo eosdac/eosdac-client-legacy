@@ -37,6 +37,8 @@ class ConfigLoader {
     switch (configquery) {
       case "dacname":
         return this.configFile.dacName;
+      case "dacscope":
+        return this.configFile.dacScope.toLowerCase() || "";
       case "defaultnode":
         return this.configFile.api.default_eos_node;
       case "tokencontract":
@@ -47,6 +49,8 @@ class ConfigLoader {
         return this.configFile.contracts.custodian.memo;
       case "custodiancontract":
         return this.configFile.contracts.custodian.name;
+      case "escrowcontract":
+        return this.configFile.contracts.escrow.name;
       case "dactokensymbol":
         return this.configFile.contracts.token.symbol;
       case "systemtokensymbol":
@@ -62,27 +66,19 @@ class ConfigLoader {
       case "botcontract":
         return this.configFile.contracts.bot.name;
       case "explorer":
-        return this.configFile.external.explorer;
-      case "memberclientapi":
-        return this.configFile.api.memberclient;
+        return this.configFile.external.explorer.replace(/\/+$/, "");
       case "memberclientstateapi":
-        return this.configFile.api.memberclient_state_api;
+        return this.configFile.api.memberclient_state_api.replace(/\/+$/, "");
       case "bpnodeapi":
         return this.configFile.api.bpnodes;
       case "firehoseapi":
         return this.configFile.api.firehose;
-      case "external":
-        return this.configFile.external;
       case "authaccount":
-        return this.configFile.authAccount;
-      case "authaccountname":
-        return this.configFile.authAccount.name;
+        return this.configFile.accounts.authAccount.name;
       case "wpcontract":
         return this.configFile.contracts.wpproposal.name;
-      case "bpaccount":
-        return this.configFile.bpAccount.name;
       case "treasuryaccount":
-        return this.configFile.treasuryAccount.name;
+        return this.configFile.accounts.treasuryAccount.name;
       default:
         return `***${configquery} not yet subscribed in config-loader***`;
     }

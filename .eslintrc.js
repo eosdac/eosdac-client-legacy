@@ -26,7 +26,6 @@ module.exports = {
       // "standard/computed-property-even-spacing": "off",
       'prettier/prettier': 'warn',
       // semi: 'on',
-  
       // Temp Rules
       eqeqeq: 'off',
       'spaced-comment': 'off',

@@ -41,7 +41,7 @@ export default {
         return;
       }
       console.log("starting firehose...");
-      const api = await this.$store.dispatch("global/getEosApi");
+      const api = await this.$store.dispatch("global/getDacApi");
 
       FIREHOSE = new FirehoseClient(
         { server: this.$configFile.get("firehoseapi") },
@@ -86,5 +86,3 @@ export default {
   mounted() {}
 };
 </script>
-
-<style></style>

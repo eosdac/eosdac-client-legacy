@@ -101,8 +101,6 @@ export default {
     return {
       leftDrawerOpen: true,
       loading: false
-
-      // dacloaded : false
     };
   },
   computed: {
@@ -112,9 +110,6 @@ export default {
       getIsloaded: "dac/getIsLoaded",
       getSettingByName: "user/getSettingByName"
     })
-  },
-  created() {
-    // this.$root.$on('dac_loaded', ()=>{this.dacloaded = true})
   },
 
   methods: {
@@ -143,5 +138,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

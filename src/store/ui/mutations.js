@@ -3,7 +3,13 @@ export function setActiveTheme(state, payload) {
 }
 
 export function setShowTransactionOverlay(state, payload) {
-  state.showTransactionOverlay = payload;
+  if (state.enableTransactionOverlay) {
+    state.showTransactionOverlay = payload;
+  }
+}
+
+export function setEnableTransactionOverlay(state, payload) {
+  state.enableTransactionOverlay = payload;
 }
 
 export function setDrawerIsOpen(state, payload) {

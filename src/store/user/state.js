@@ -20,7 +20,9 @@ export default {
   lastTransaction: null,
   isCandidate: null,
   dacVotes: null,
+
   msigIsSeenCache: [],
+  msigTransferQeue: [],
 
   settings: settings,
   catDelegations: null

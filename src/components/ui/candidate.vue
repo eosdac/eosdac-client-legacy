@@ -6,7 +6,7 @@
       v-bind:class="{
         selected_candidate: data.selected,
         unselected_candidate: !data.selected,
-        'shadow-5': !data.selected
+        'shadow-4': !data.selected
       }"
     >
       <q-chip class="q-ma-xs absolute-top-left" color="bg2">{{
@@ -108,12 +108,12 @@
       <q-modal maximized v-model="profilemodal">
         <div
           style="height:50px"
-          class="bg-bg2 row items-center justify-between q-px-md text-text1"
+          class="bg-bg1 row items-center justify-between q-px-md text-text1"
         >
           <span>Bio</span>
           <q-btn icon="close" @click="profilemodal = false" flat dense />
         </div>
-        <div class="q-pa-md bg-bg1 full-height">
+        <div class="q-pa-md bg-bg2 ">
           <div class="row items-center q-mb-md">
             <div
               class="profile_image on-left animate-fade relative-position"
@@ -175,7 +175,7 @@
       v-bind:class="{
         selected_candidate: data.selected,
         unselected_candidate: !data.selected,
-        'shadow-5': !data.selected
+        'shadow-4': !data.selected
       }"
     >
       <q-collapsible

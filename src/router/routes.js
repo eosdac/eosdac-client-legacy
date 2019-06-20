@@ -81,8 +81,27 @@ let routes = [
         beforeEnter: Guards.custodianCheck
       },
       {
-        path: "dac-financials",
-        component: () => import("pages/custodian/dac-financials")
+        path: "dac-management",
+        component: () => import("pages/custodian/dac-management"),
+        children: [
+          { path: "", redirect: "financials" },
+          {
+            path: "financials",
+            component: () => import("pages/custodian/dac-financials")
+          },
+          {
+            path: "configuration",
+            component: () => import("pages/custodian/contracts-config")
+          },
+          {
+            path: "constitution",
+            component: () => import("pages/custodian/manage-constitution")
+          },
+          {
+            path: "advanced",
+            component: () => import("pages/custodian/advanced")
+          }
+        ]
       }
     ]
     /*

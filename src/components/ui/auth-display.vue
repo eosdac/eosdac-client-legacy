@@ -40,6 +40,12 @@ export default {
     auth: {
       type: Array,
       default: () => []
+    },
+    defaultAuth: {
+      type: Object,
+      default: () => {
+        return {};
+      }
     }
   },
   data() {
@@ -55,10 +61,14 @@ export default {
     }),
     getAllAuth() {
       if (this.auth.length == 0 && this.getAccount && this.auths.length == 0) {
-        this.auths.push({
-          actor: this.getAccount.name,
-          permission: this.getAccount.authority
-        });
+        if (!this.defaultAuth.actor) {
+          this.auths.push({
+            actor: this.getAccount.name,
+            permission: this.getAccount.authority
+          });
+        } else {
+          this.auths.push(this.defaultAuth);
+        }
       }
       let all = [...this.auth, ...this.auths];
       this.$emit("input", JSON.stringify(all));
@@ -86,5 +96,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

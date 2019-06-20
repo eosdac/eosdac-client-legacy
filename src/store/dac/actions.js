@@ -1,18 +1,18 @@
 export async function initRoutine({ state, commit, dispatch }, vm) {
   commit("setIsLoaded", false);
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
 
+  let custodianconfig = await api.getContractConfig("custodian");
   //requests to get dac info, doesn't require user to be logged in
   let requests = [
     api.getMemberTerms(),
-    api.getCustodians(),
-    api.getContractConfig("custodian")
+    api.getCustodians(custodianconfig.numelected)
   ];
 
-  let [memberterms, custodians, custconfig] = await Promise.all(requests);
+  let [memberterms, custodians] = await Promise.all(requests);
   commit("setMemberTerms", memberterms);
   commit("setCustodians", custodians);
-  commit("setCustodianConfig", custconfig);
+  commit("setCustodianConfig", custodianconfig);
   commit("setIsLoaded", true);
   //load in background
   dispatch("fetchActiveCandidates");
@@ -22,7 +22,7 @@ export async function initRoutine({ state, commit, dispatch }, vm) {
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 export async function fetchCustodians({ state, commit, dispatch }) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
 
   let requests = [api.getCustodians()];
 
@@ -37,7 +37,7 @@ export async function fetchCustodians({ state, commit, dispatch }) {
 }
 
 export async function fetchActiveCandidates({ state, commit, dispatch }) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
 
   let candidates = await api.getCandidates();
 
@@ -74,8 +74,8 @@ export async function fetchActiveCandidates({ state, commit, dispatch }) {
 }
 
 export async function fetchDacAdmins({ commit, dispatch }) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
-  let res = await api.getAccount(this._vm.$configFile.get("authaccountname"));
+  const api = await dispatch("global/getDacApi", false, { root: true });
+  let res = await api.getAccount(this._vm.$configFile.get("authaccount"));
   if (res && res.permissions) {
     let admins = res.permissions.find(p => p.perm_name == "admin");
     if (!admins) return;
@@ -88,22 +88,30 @@ export async function fetchDacAdmins({ commit, dispatch }) {
   }
 }
 
+export async function fetchAccount({ commit, dispatch }, payload) {
+  const api = await dispatch("global/getDacApi", false, { root: true });
+  let res = await api.getAccount(payload.accountname);
+  if (res && res.account_name) {
+    return res;
+  }
+}
+
 export async function fetchApprovalsFromProposal({ dispatch }, payload) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let res = await api.getApprovalsFromProposal(payload);
   return res;
 }
 
 export async function fetchControlledAccounts({ dispatch }) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let ctrl = await api.getControlledAccounts(
-    this._vm.$configFile.get("authaccountname")
+    this._vm.$configFile.get("authaccount")
   );
   console.log(ctrl);
 }
 
 export async function fetchCustodianContractState({ commit, dispatch, state }) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let xstate = await api.getCustodianContractState();
   if (xstate) {
     commit("setCustodianState", xstate);
@@ -111,17 +119,43 @@ export async function fetchCustodianContractState({ commit, dispatch, state }) {
 }
 
 export async function fetchWpConfig({ commit, dispatch, state }) {
-  const api = await dispatch("global/getEosApi", false, { root: true });
+  const api = await dispatch("global/getDacApi", false, { root: true });
   let conf = await api.getContractConfig("wp");
   if (conf) {
     commit("setWpConfig", conf);
   }
 }
 
+export async function fetchCustodianPermissions({
+  commit,
+  dispatch,
+  state,
+  rootState
+}) {
+  const api = await dispatch("global/getDacApi", false, { root: true });
+  let custom_cand_permissions = await api.getCandidatePermissions();
+  console.log("custom cand permissions", custom_cand_permissions);
+
+  let requested = rootState.dac.candidates
+    .slice(0, rootState.dac.custodianConfig.numelected * 2)
+    .map(c => {
+      let permission = "active"; //default
+      let custom = custom_cand_permissions.find(
+        ccp => ccp.cand == c.candidate_name
+      );
+      if (custom) {
+        permission = custom.permission;
+      }
+      return { actor: c.candidate_name, permission: permission };
+    });
+  commit("setCustodianPermissions", requested);
+  return requested;
+}
+
 export async function fetchWorkerProposals({}, payload = {}) {
   let url = this._vm.$configFile.get("memberclientstateapi");
   const header = {
-    "X-DAC-Name": this._vm.$configFile.get("dacname").toLowerCase()
+    "X-DAC-Name": this._vm.$configFile.get("dacscope")
   };
   return this._vm
     .$axios({
@@ -140,16 +174,15 @@ export async function fetchWorkerProposals({}, payload = {}) {
     });
 }
 
-export async function fetchMsigProposals({}, payload = {}) {
-  // {status: 1, limit:0, skip: 1}
+export async function fetchWorkerProposalsInbox({}, payload = {}) {
   let url = this._vm.$configFile.get("memberclientstateapi");
   const header = {
-    "X-DAC-Name": this._vm.$configFile.get("dacname").toLowerCase()
+    "X-DAC-Name": this._vm.$configFile.get("dacscope")
   };
   return this._vm
     .$axios({
       method: "get",
-      url: `${url}/msig_proposals`,
+      url: `${url}/proposals_inbox`,
       params: payload,
       headers: header
     })
@@ -163,11 +196,41 @@ export async function fetchMsigProposals({}, payload = {}) {
     });
 }
 
+//canceltoken to fix glitch when multiple requests are made fast
+var call;
+export async function fetchMsigProposals({}, payload = {}) {
+  // {status: 1, limit:0, skip: 1}
+  if (call) {
+    call.cancel();
+  }
+  call = this._vm.$axios.CancelToken.source();
+  let url = this._vm.$configFile.get("memberclientstateapi");
+  const header = {
+    "X-DAC-Name": this._vm.$configFile.get("dacscope")
+  };
+  return this._vm
+    .$axios({
+      method: "get",
+      url: `${url}/msig_proposals`,
+      params: payload,
+      headers: header,
+      cancelToken: call.token
+    })
+    .then(r => {
+      // console.log(r.data)
+      return r.data;
+    })
+    .catch(e => {
+      console.log("could not load worker proposals from api");
+      // return [];
+    });
+}
+
 export async function fetchTokenTimeLine({}, payload = {}) {
   // {account: 'piecesnbitss', contract:'kasdactokens', symbol:'KASDAC', start_block:10000000, end_block:17000000}
   let url = this._vm.$configFile.get("memberclientstateapi");
   const header = {
-    "X-DAC-Name": this._vm.$configFile.get("dacname").toLowerCase()
+    "X-DAC-Name": this._vm.$configFile.get("dacscope")
   };
   return this._vm
     .$axios({

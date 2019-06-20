@@ -65,6 +65,7 @@
     "NOMINATECAND_INSUFFICIENT_FUNDS_TO_STAKE": "Insufficient funds have been staked.",
     "NOMINATECAND_PAY_LIMIT_EXCEEDED": "Requested pay limit for a candidate was exceeded.",
     "NOMINATECAND_STAKING_FUNDS_INCOMPLETE": "A registering candidate must transfer sufficient tokens to the contract for staking.",
+    "PROPOSAL_EXPIRED": "The worker proposal is expired.",
     "REMOVECANDIDATE_NOT_CURRENT_CANDIDATE": "Candidate is not already registered.",
     "REMOVECUSTODIAN_NOT_CURRENT_CUSTODIAN": "The entered account name is not for a current custodian.",
     "STARTWORK_INSUFFICIENT_VOTES": "Insufficient votes on worker proposal.",
@@ -96,6 +97,21 @@
     "VOTEPROP_INVALID_PROPOSAL_STATE": "Invalid proposal state to accept votes.",
     "VOTEPROP_INVALID_VOTE": "Invalid vote for the current proposal state.",
     "VOTEPROP_PROPOSAL_NOT_FOUND": "Proposal not found."
+  },
+  "dac_financials":{
+    "clear": "Clear All",
+    "edit": "edit",
+    "empty_qeue": "No transactions in the qeue",
+    "exec": "Exec All",
+    "export": "Export Qeue",
+    "import_file": "Import File",
+    "propose_transfer": "Propose Transfer",
+    "propose_transfer_help": "Fill in the form to propose a transfer from one of the DAC accounts. The transfers will be submitted to the blockchain as multisignature proposals. The custodians need to vote before the transfer can be executed.",
+    "cust_only": "custodians only",
+    "send": "send",
+    "signing": "signing",
+    "trx_que": "Trx Qeue",
+    "view": "view"
   },
   "default": {
     "constitution": "Constitution",
@@ -158,7 +174,7 @@
     "custodian_tools": "Custodian Tools",
     "custodians": "Vote For Custodians",
     "dac_activity": "{dacname} Activity",
-    "dac_financials": "Financials",
+    "manage_financials": "Manage Financials",
     "member_status": "Member Status",
     "member_tools": "Member Tools",
     "my_payments": "My Payments",
@@ -173,6 +189,7 @@
     "token_explorer": "Token Explorer",
     "unregister_as_candidate": "Unregister As Candidate",
     "view_custodians": "View Custodians",
+    "view_financials": "View Financials",
     "view_msigs": "View Msigs",
     "view_worker_proposals": "View Worker Proposals",
     "vote_msigs": "Vote Msigs",
@@ -330,5 +347,51 @@
     "cat_7_desc": "This is a short description about Operations",
     "cat_8_desc": "This is a short description about Translations",
     "cat_9_desc": "This is a short description about Custodians"
+  },
+
+  "conf_cust_contr": {
+    "auth_threshold_high_title": "Vote threshold high",
+    "auth_threshold_low_title": "Vote threshold low",
+    "auth_threshold_mid_title": "Vote threshold mid",
+    "authaccount_title": "Authority account",
+    "initial_vote_quorum_percent_title": "Initial vote quorum (%)",
+    "lockup_release_time_delay_title": "Unstake delay",
+    "lockupasset_title": "Candidate stake amount",
+    "maxvotes_title": "Maximum number of votes",
+    "numelected_title": "Number of custodians",
+    "periodlength_title": "Period length",
+    "requested_pay_max_title": "Maximum requested pay",
+    "serviceprovider_title": "Service provider",
+    "should_pay_via_service_provider_title": "Pay via service provider",
+    "tokenholder_title": "Token holder account",
+    "vote_quorum_percent_title": "Vote quorum (%)",
+
+    "auth_threshold_high_desc": "How many custodians are required to approve highest level actions?",
+    "auth_threshold_low_desc": "How many custodians are required to approve lowest level actions?",
+    "auth_threshold_mid_desc": "How many custodians are required to approve mid level actions?",
+    "authaccount_desc": "The DAC account that manages all permissions.",
+    "initial_vote_quorum_percent_desc": "What percentage of tokens are needed for a quorum to initially launch the DAC?",
+    "lockup_release_time_delay_desc": "How much time before locked up stake can be released back to the candidate using the unstake action?",
+    "lockupasset_desc": "How many tokens does a member need to lock up in order to register as a custodian candidate? This ensure candidates have skin in the game to protect the value of the $TOKENSYBMOL token which secures the DAC.",
+    "maxvotes_desc": "How many votes does each member get when voting for custodians?",
+    "numelected_desc": "How many custodians will be elected to the custodian board?",
+    "periodlength_desc": "How long will each custodian period be in seconds?",    
+    "requested_pay_max_desc": "What is the maximum amount of tokens a custodian can request as a candidate?",
+    "serviceprovider_desc": "The optional account that will be used for legal contracts as a traditionally recognized entity acting as a service provider for the DAC.",
+    "should_pay_via_service_provider_desc": "Do payments need to pass via the service provider?",
+    "tokenholder_desc": "The DAC account that holds the tokens.",
+    "vote_quorum_percent_desc": "Amount of token value in votes required to trigger the allow a new set of custodians to be set after the initial threshold has been achieved."
+  },
+
+  "conf_wp_contr":{
+    "proposal_threshold_title": "",
+    "finalize_threshold_title": "",
+    "escrow_expiry_title": "",
+    "approval_expiry_title": "",
+
+    "proposal_threshold_desc": "",
+    "finalize_threshold_desc": "",
+    "escrow_expiry_desc": "",
+    "approval_expiry_desc": ""
   }
 }
