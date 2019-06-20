@@ -39,8 +39,8 @@ export default {
   methods: {
     getContractOptions() {
       let contracts = [
-        this.$configFile.get("custodiancontract"),
-        this.$configFile.get("wpcontract")
+        this.$configFile.get("custodiancontract")
+        //this.$configFile.get("wpcontract")
       ];
       return contracts.map(c => {
         return { value: c, label: c };
