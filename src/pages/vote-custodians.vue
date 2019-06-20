@@ -4,9 +4,6 @@
       <!-- padding wrapper -->
       <!-- <period-timer style="transform: scale(0.5)" /> -->
       <!-- {{ oldvotes }} -->
-      <div class="q-display-1 q-mb-md ">
-        {{ $t("vote_custodians.custodian_board") }}
-      </div>
 
       <div class="bg-bg1 shadow-4 round-borders q-pa-md q-mb-md">
         <display-custodians />
@@ -337,7 +334,7 @@ export default {
     }
   },
 
-  mounted() {
+  async mounted() {
     this.getAllCandidates();
   },
 
