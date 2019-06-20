@@ -64,11 +64,6 @@ let routes = [
         path: "review-msigs",
         component: () => import("pages/custodian/review-msigs")
       },
-      {
-        path: "create-msigs",
-        component: () => import("pages/custodian/create-msigs"),
-        beforeEnter: Guards.custodianCheck
-      },
       /*
       {
         path: "review-worker-proposals",
