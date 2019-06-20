@@ -114,7 +114,9 @@ export async function fetchCustodianContractState({ commit, dispatch, state }) {
   const api = await dispatch("global/getDacApi", false, { root: true });
   let xstate = await api.getCustodianContractState();
   if (xstate) {
+    console.log("custodianState", xstate);
     commit("setCustodianState", xstate);
+    return xstate;
   }
 }
 

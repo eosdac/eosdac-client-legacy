@@ -4,8 +4,8 @@
       Review the constitution history and propose constitution updates.
     </p>
     <div class="">
-      <div class="row gutter-sm">
-        <div class="col-xs-12 col-md-5 ">
+      <div class="row gutter-sm ">
+        <div class="col-xs-12 col-md-5 animate-fade">
           <div class="round-borders bg-bg1 shadow-4 overflow-hidden">
             <div
               class="bg-primary q-pa-sm row justify-between items-center"
@@ -43,7 +43,11 @@
               }"
             >
               <q-list no-border separator highlight :dark="getIsDark">
-                <q-item v-for="(mt, i) in getParsedMemberTerms" :key="`mt${i}`">
+                <q-item
+                  v-for="(mt, i) in getParsedMemberTerms"
+                  :key="`mt${i}`"
+                  class="animate-fade"
+                >
                   <q-item-side left :icon="$configFile.icon.constitution" />
                   <q-item-main>
                     <q-item-tile label>
@@ -58,7 +62,7 @@
                         class=" overflow-hidden"
                       >
                         <a
-                          class="a2 q-caption"
+                          class=" q-caption"
                           target="_blank"
                           :href="mt.terms"
                           >{{ mt.terms }}</a
@@ -69,7 +73,8 @@
                   <q-item-side right style="min-width:65px">
                     <q-btn
                       v-if="mt.hash != md5_constitution"
-                      color="primary-light"
+                      color="info"
+                      class="animate-fade"
                       flat
                       size="sm"
                       label="load"
@@ -88,7 +93,7 @@
             </q-scroll-area>
           </div>
         </div>
-        <div class="col-xs-12 col-md-7">
+        <div class="col-xs-12 col-md-7 animate-fade">
           <div
             class="round-borders bg-bg1 bg-logo shadow-4  full-height overflow-hidden"
           >
@@ -131,7 +136,7 @@
                     @click="setConstitution(new_constitution_url)"
                     color="primary"
                     :loading="isloading"
-                    class="on-right"
+                    class="on-right animate-fade"
                   />
                 </div>
               </div>
@@ -155,7 +160,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12 animate-scale">
           <div class="q-pa-md round-borders bg-bg1 shadow-4">
             <div v-if="parsed_constitution != ''">
               <div class="row q-pb-md justify-end">
@@ -168,9 +173,9 @@
             </div>
             <div
               v-if="!isloading && parsed_constitution == ''"
-              class="animate-fade"
+              class="animate-fade text-text2"
             >
-              No constitution selected
+              No constitution loaded
             </div>
             <div v-if="isloading" class="animate-fade">loading...</div>
           </div>

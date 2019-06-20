@@ -65,7 +65,11 @@
         />
       </template>
       <div class="bg-bg1">
-        <q-item class="q-pl-lg animate-fade" link to="/custodian/review-msigs">
+        <q-item
+          class="q-pl-lg animate-fade"
+          link
+          to="/dac-activity/review-msigs"
+        >
           <q-item-main
             :label="$t('menu.view_msigs')"
             class="text-text1 text-weight-light"
@@ -76,7 +80,7 @@
         <q-item
           class="q-pl-lg animate-fade"
           link
-          to="/custodian/review-worker-proposals"
+          to="/dac-activity/review-worker-proposals"
         >
           <q-item-main
             :label="$t('menu.view_worker_proposals')"
@@ -84,11 +88,7 @@
           />
         </q-item>
         -->
-        <q-item
-          class="q-pl-lg animate-fade"
-          link
-          to="/custodian/dac-management/financials"
-        >
+        <q-item class="q-pl-lg animate-fade" link to="/dac-activity/financials">
           <q-item-main
             :label="$t('menu.view_financials')"
             class="text-text1 text-weight-light"

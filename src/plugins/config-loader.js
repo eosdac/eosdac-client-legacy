@@ -79,6 +79,8 @@ class ConfigLoader {
         return this.configFile.contracts.wpproposal.name;
       case "treasuryaccount":
         return this.configFile.accounts.treasuryAccount.name;
+      case "financialaccounts":
+        return this.configFile.financial_page_graphs;
       default:
         return `***${configquery} not yet subscribed in config-loader***`;
     }
