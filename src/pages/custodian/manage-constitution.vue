@@ -62,7 +62,7 @@
                         class=" overflow-hidden"
                       >
                         <a
-                          class="a2 q-caption"
+                          class=" q-caption"
                           target="_blank"
                           :href="mt.terms"
                           >{{ mt.terms }}</a
@@ -73,7 +73,8 @@
                   <q-item-side right style="min-width:65px">
                     <q-btn
                       v-if="mt.hash != md5_constitution"
-                      color="primary-light"
+                      color="info"
+                      class="animate-fade"
                       flat
                       size="sm"
                       label="load"
@@ -135,7 +136,7 @@
                     @click="setConstitution(new_constitution_url)"
                     color="primary"
                     :loading="isloading"
-                    class="on-right"
+                    class="on-right animate-fade"
                   />
                 </div>
               </div>
@@ -172,9 +173,9 @@
             </div>
             <div
               v-if="!isloading && parsed_constitution == ''"
-              class="animate-fade"
+              class="animate-fade text-text2"
             >
-              No constitution selected
+              No constitution loaded
             </div>
             <div v-if="isloading" class="animate-fade">loading...</div>
           </div>
