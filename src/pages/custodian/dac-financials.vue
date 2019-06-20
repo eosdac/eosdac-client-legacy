@@ -16,8 +16,9 @@
       >
         <div class="row gutter-sm q-mb-md">
           <div
+            style="height:340px"
             v-for="(account, i) in chunk"
-            class="col-xs-12 col-sm-6 col-lg-4"
+            class="col-xs-12 col-sm-6 col-lg-4 animate-scale"
             :key="`fc${i}`"
           >
             <financial-account
@@ -67,7 +68,7 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-lg-6">
+      <div class="col-xs-12 col-lg-6 ">
         <div class="bg-bg1 round-borders shadow-4 overflow-hidden bg-logo">
           <div
             class="bg-primary q-pa-sm row justify-between items-center"

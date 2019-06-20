@@ -4,8 +4,8 @@
       Review the constitution history and propose constitution updates.
     </p>
     <div class="">
-      <div class="row gutter-sm">
-        <div class="col-xs-12 col-md-5 ">
+      <div class="row gutter-sm ">
+        <div class="col-xs-12 col-md-5 animate-fade">
           <div class="round-borders bg-bg1 shadow-4 overflow-hidden">
             <div
               class="bg-primary q-pa-sm row justify-between items-center"
@@ -43,7 +43,11 @@
               }"
             >
               <q-list no-border separator highlight :dark="getIsDark">
-                <q-item v-for="(mt, i) in getParsedMemberTerms" :key="`mt${i}`">
+                <q-item
+                  v-for="(mt, i) in getParsedMemberTerms"
+                  :key="`mt${i}`"
+                  class="animate-fade"
+                >
                   <q-item-side left :icon="$configFile.icon.constitution" />
                   <q-item-main>
                     <q-item-tile label>
@@ -88,7 +92,7 @@
             </q-scroll-area>
           </div>
         </div>
-        <div class="col-xs-12 col-md-7">
+        <div class="col-xs-12 col-md-7 animate-fade">
           <div
             class="round-borders bg-bg1 bg-logo shadow-4  full-height overflow-hidden"
           >
@@ -155,7 +159,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12 animate-scale">
           <div class="q-pa-md round-borders bg-bg1 shadow-4">
             <div v-if="parsed_constitution != ''">
               <div class="row q-pb-md justify-end">

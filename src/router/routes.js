@@ -56,6 +56,26 @@ let routes = [
   },
 
   {
+    path: "/dac-activity",
+    component: () => import("layouts/MyLayout.vue"),
+    children: [
+      { path: "", component: () => import("../extensions/pages/home") },
+      {
+        path: "financials",
+        component: () => import("pages/custodian/dac-financials")
+      },
+      {
+        path: "review-msigs",
+        component: () => import("pages/custodian/review-msigs")
+      },
+      {
+        path: "review-worker-proposals",
+        component: () => import("pages/custodian/review-worker-proposals")
+      }
+    ]
+  },
+
+  {
     path: "/custodian",
     component: () => import("layouts/MyLayout.vue"),
     children: [
