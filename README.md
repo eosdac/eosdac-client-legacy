@@ -73,6 +73,10 @@ If you want to build and run specifically for the jungle tesnet, you can run `DE
 
 ![image](https://user-images.githubusercontent.com/44613132/55268811-c75ae500-528d-11e9-8332-fd71ff648dc0.png)
 
-![image](https://user-images.githubusercontent.com/44613132/55268494-4bab6900-528a-11e9-8ac6-9e5a27310fb3.png)
+![image](https://user-images.githubusercontent.com/44613132/59903601-ab389100-9401-11e9-942e-7bb437708416.png)
 
-![image](https://user-images.githubusercontent.com/44613132/55268728-d2f9dc00-528c-11e9-890c-d5d7c2997678.png)
+![image](https://user-images.githubusercontent.com/44613132/59903659-db802f80-9401-11e9-874f-6ba7c44fb000.png)
+
+![image](https://user-images.githubusercontent.com/44613132/59903752-12564580-9402-11e9-8dd9-e225286b74c9.png)
+
+
