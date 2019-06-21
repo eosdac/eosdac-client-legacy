@@ -5,22 +5,26 @@
         <div class="q-headline">
           {{ $t("vote_custodians.custodian_board") }}
         </div>
-        <div class="row">
-          <div class="text-text2 q-mr-sm q-caption">New election in</div>
-          <countdown
-            v-if="new_period_millisleft"
-            :time="Number(new_period_millisleft)"
-          >
-            <template slot-scope="props">
-              <div class="q-caption text-weight-light q-mb-xs">
-                <span v-if="props.days">{{ props.days }} days, </span>
-                <span v-if="props.hours">{{ props.hours }} hours, </span>
-                <span v-if="props.minutes">{{ props.minutes }} minutes, </span>
-                <span>{{ props.seconds }} seconds</span>
-              </div>
-            </template>
-          </countdown>
-        </div>
+        <q-chip color="bg2" dense>
+          <div class="row items-center">
+            <div class="text-text2 q-mr-sm q-caption">New election in</div>
+            <countdown
+              v-if="new_period_millisleft"
+              :time="Number(new_period_millisleft)"
+            >
+              <template slot-scope="props">
+                <div class="q-caption text-weight-light">
+                  <span v-if="props.days">{{ props.days }} days, </span>
+                  <span v-if="props.hours">{{ props.hours }} hours, </span>
+                  <span v-if="props.minutes"
+                    >{{ props.minutes }} minutes,
+                  </span>
+                  <span>{{ props.seconds }} seconds</span>
+                </div>
+              </template>
+            </countdown>
+          </div>
+        </q-chip>
       </div>
       <div class="row justify-between " v-if="custodians.length">
         <div

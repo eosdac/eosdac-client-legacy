@@ -7,13 +7,14 @@ export async function loggedOutRoutine({ commit }) {
   commit("setAccountName", null);
   commit("setDacBalance", null);
   commit("setAgreedTermsVersion", null);
-  commit("global/setDacApi", null, { root: true });
-  commit("global/setScatter", null, { root: true });
-  commit("global/setEosScatter", null, { root: true });
   commit("setProfilePicture", null);
   commit("setIsCandidate", null);
   commit("setDacVotes", null);
+  commit("global/setDacApi", null, { root: true });
+  commit("global/setScatter", null, { root: true });
+  commit("global/setEosScatter", null, { root: true });
   commit("dac/setCustodianPermissions", null, { root: true });
+  commit("dac/setCustodianState", null, { root: true });
 }
 
 export async function loggedInRoutine({ state, commit, dispatch }, account) {

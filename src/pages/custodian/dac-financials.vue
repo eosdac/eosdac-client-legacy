@@ -5,7 +5,7 @@
       and can be useful for budgeting and decision making.
     </p>
 
-    <q-carousel class="text-white " arrows>
+    <q-carousel color="text1" class="text-white " arrows>
       <q-carousel-slide
         class="no-padding"
         v-for="(chunk, si) in $helper.chunkArray(
