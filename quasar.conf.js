@@ -145,7 +145,13 @@ module.exports = function (ctx) {
         'QStepperNavigation',
         'QDatetimePicker',
         'QTooltip',
-        'QAutocomplete'
+        'QAutocomplete',
+        'QTable',
+        // pick only what you are using from:
+        'QTh',
+        'QTr',
+        'QTd',
+        'QTableColumns'
       ],
       directives: [
         'Ripple',
