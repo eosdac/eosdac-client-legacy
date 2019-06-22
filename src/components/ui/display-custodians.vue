@@ -5,7 +5,7 @@
         <div class="q-headline">
           {{ $t("vote_custodians.custodian_board") }}
         </div>
-        <q-chip color="bg2" dense>
+        <q-chip color="bg2" dense v-if="new_period_millisleft > 0">
           <div class="row items-center">
             <div class="text-text2 q-mr-sm q-caption">New election in</div>
             <countdown

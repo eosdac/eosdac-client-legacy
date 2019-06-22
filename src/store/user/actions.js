@@ -14,7 +14,6 @@ export async function loggedOutRoutine({ commit }) {
   commit("global/setScatter", null, { root: true });
   commit("global/setEosScatter", null, { root: true });
   commit("dac/setCustodianPermissions", null, { root: true });
-  commit("dac/setCustodianState", null, { root: true });
 }
 
 export async function loggedInRoutine({ state, commit, dispatch }, account) {
