@@ -27,7 +27,7 @@ eosDAC the DAC is branded and customized with the following repo https://github.
 
 ```bash
 cd eosdac-client
-yarn add_extensions https://github.com/eosdac/eosdac-client-extension.git extensions
+yarn add_extensions https://github.com/eosdac/boilerplate-client-extension.git extensions
 ```
 If you want a tighter coupling between the main repo and your extensions repo you can create a git submodule.
 ```bash
