@@ -83,9 +83,10 @@
       text-color="text1"
       class="animate-fade"
       :label="getAccountName"
-      content-style="margin-top:4px"
+      content-style="margin-top:15px;"
+      content-class="round-borders"
     >
-      <q-list link class="bg-bg2 text-text1">
+      <q-list link class="bg-dark text-text1 round-borders">
         <q-list-header class="text-text2" style="min-width:300px">
           {{ getActiveNetworkName }}
           <span class="q-caption">{{ getAuthString }}</span>

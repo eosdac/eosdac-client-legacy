@@ -32,19 +32,18 @@
             }"
           >
             <q-list no-border separator highlight :dark="getIsDark">
-              <q-item v-if="!pendingpay.length">
-                <q-item-main>
-                  <q-item-tile label class="text-text2"
-                    >You don't have any pending payments</q-item-tile
-                  >
-                </q-item-main>
-              </q-item>
+              <div
+                class="row justify-center text-weight-thin q-mt-md"
+                v-if="!pendingpay.length"
+              >
+                You don't have any pending payments
+              </div>
               <q-item
                 v-for="(pay, i) in pendingpay"
                 :key="`pay_id_${i}`"
                 class="animate-fade"
               >
-                <q-item-side left icon="icon-ui-19" />
+                <q-item-side left icon="icon-ui-19" :title="`id: ${pay.key}`" />
                 <q-item-main>
                   <q-item-tile label>
                     <div class="overflow-hidden">
