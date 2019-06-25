@@ -14,7 +14,7 @@
             />
             <span>Pending Payments ({{ pendingpay.length }})</span>
             <help-btn
-              content="Claim your pending custodian payments"
+              content="Each new period you can claim your custodian payment. The payment amount is the mean value of all requested custodian pays."
               title="My pending payments"
               color="text1"
               size="sm"
