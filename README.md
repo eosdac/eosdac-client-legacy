@@ -21,9 +21,7 @@ $ yarn
 ```
 
 ## Extend eosdac-client
-Add custom pages, routes and vuex stores. It's recommended to extend and customize the eosDAC client in the extensions folder so you can pull in future updates without losing your customizations. The eosDAC branded extension repo will already contain a mandatatory home screen (eosDAC) and a custom example page with dedicated vuex store. You'll also find a component to extend the main menu. In production you might want to manage the contents of the extention folder as a git submodule. The command below will simply clone the remote repo in the src/extensions folder.
-
-eosDAC the DAC is branded and customized with the following repo https://github.com/eosdac/eosdac-client-extension. Feel free to fork this repo to get started. In fact it's recommended to fork the repo if you plan to customize the eosDAC client.
+Add custom colors, pages, routes and vuex stores. It's recommended to extend and customize the eosDAC client in the extensions folder so you can pull in future updates without losing your customizations. The boilerplate extension already contains a mandatatory home screen (eosDAC) and a custom example page with dedicated vuex store. You'll also find a component to extend the main menu. In production you might want to manage the contents of the extention folder as a git submodule. The command below will simply clone the remote repo in the src/extensions folder.
 
 ```bash
 cd eosdac-client
@@ -44,10 +42,16 @@ Use the extensions/i18n folder to add your custom strings or overwrite existing 
 Opens browser window automatically [http://localhost:8080](http://localhost:8080)
 
 ```bash
-quasar dev
+yarn dev
 ```
 
 ## Deployment
+
+Build the project for deployment.
+
+```bash
+yarn build
+```
 
 You can run the deploy script to checkout the correct release tag and copy the dist/spa-mat files to a dist/deploy folder which you can then make the root folder of your nginx website.
 
