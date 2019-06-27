@@ -1,5 +1,11 @@
 
 const fs = require('fs');
+
+//check if extensions folder is present
+if (!fs.existsSync("./src/extensions/")) {
+    throw 'extension folder not found. Add an extensions folder to the member client to proceed.'
+}
+
 const source_file = require('../src/extensions/statics/config/theme.json');
 const target_file = './src/css/themes/custom_theme_colors.styl';
 
@@ -10,7 +16,6 @@ if(source_file){
         content += `${c} = ${source_file.colors[c]}\n`;
     })
 }
-
 
 fs.writeFile(target_file, content, function(err) {
     if(err) {
