@@ -8,8 +8,8 @@
   "author": "eosDAC <hello@eosdac.io>",
   "private": true,
   "scripts": {
-    "start": "quasar dev",
-    "build": "quasar build",
+    "build": "node ./build_scripts/before.js && quasar build",
+    "dev": "node ./build_scripts/before.js && quasar dev",
     "add_extensions": "git -C ./src clone"
   },
   "dependencies": {
