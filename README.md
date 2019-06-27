@@ -20,7 +20,10 @@ $ cd eosdac-client
 $ yarn
 ```
 
-## Extend eosdac-client
+## Customize the eosdac-client
+
+Visit https://github.com/eosdac/boilerplate-client-extension for more info.
+
 Add custom colors, pages, routes and vuex stores. It's recommended to extend and customize the eosDAC client in the extensions folder so you can pull in future updates without losing your customizations. The boilerplate extension already contains a mandatatory home screen (eosDAC) and a custom example page with dedicated vuex store. You'll also find a component to extend the main menu. In production you might want to manage the contents of the extention folder as a git submodule. The command below will simply clone the remote repo in the src/extensions folder.
 
 ```bash
@@ -32,9 +35,6 @@ If you want a tighter coupling between the main repo and your extensions repo yo
 cd eosdac-client
 git submodule add https://github.com/your_repo/your_dac-client-extension.git src/extensions
 ```
-
-## Add or change language strings
-Use the extensions/i18n folder to add your custom strings or overwrite existing keys
 
 
 ## Quickstart
