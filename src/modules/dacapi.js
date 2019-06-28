@@ -38,7 +38,7 @@ export class DacApi {
       .get_table_rows({
         json: true,
         code: this.configobj.get("tokencontract"),
-        scope: this.configobj.get("dacscope"),
+        scope: this.configobj.get("tokencontract"),
         lower_bound: accountname,
         table: "members",
         limit: 1
@@ -57,7 +57,7 @@ export class DacApi {
       .get_table_rows({
         json: true,
         code: this.configobj.get("tokencontract"),
-        scope: this.configobj.get("dacscope"),
+        scope: this.configobj.get("tokencontract"),
         table: "memberterms",
         limit: -1
       })
@@ -93,12 +93,14 @@ export class DacApi {
 
   async getContractConfig(payload) {
     let contract;
-    const scope = this.configobj.get("dacscope");
-    const table = "config";
+    let scope;
+    let table = "config";
     if (payload == "custodian") {
       contract = this.configobj.get("custodiancontract");
+      scope = contract;
     } else if (payload == "wp") {
       contract = this.configobj.get("wpcontract");
+      scope = this.configobj.get("dacscope");
     }
     let res = await this.eos
       .get_table_rows({
@@ -109,20 +111,10 @@ export class DacApi {
       })
       .catch(e => false);
 
-    console.log(
-      {
-        json: true,
-        code: contract,
-        scope: scope,
-        table: table
-      },
-      res
-    );
-
-    if (!res.rows && !res.rows.length) {
-      return false;
-    } else {
+    if (res.rows) {
       return res.rows[0];
+    } else {
+      return false;
     }
   }
   async getVotes(accountname) {
@@ -130,7 +122,7 @@ export class DacApi {
       .get_table_rows({
         json: true,
         code: this.configobj.get("custodiancontract"),
-        scope: this.configobj.get("dacscope"),
+        scope: this.configobj.get("custodiancontract"),
         lower_bound: accountname,
         table: "votes",
         limit: 1
@@ -149,7 +141,7 @@ export class DacApi {
       .get_table_rows({
         json: true,
         code: this.configobj.get("custodiancontract"),
-        scope: this.configobj.get("dacscope"),
+        scope: this.configobj.get("custodiancontract"),
         table: "custodians",
         limit: number_custodians_config
       })
@@ -172,7 +164,7 @@ export class DacApi {
       .get_table_rows({
         json: true,
         code: this.configobj.get("custodiancontract"),
-        scope: this.configobj.get("dacscope"),
+        scope: this.configobj.get("custodiancontract"),
         lower_bound: accountname,
         table: "candidates",
         limit: 1
@@ -191,7 +183,7 @@ export class DacApi {
       .get_table_rows({
         json: true,
         code: this.configobj.get("custodiancontract"),
-        scope: this.configobj.get("dacscope"),
+        scope: this.configobj.get("custodiancontract"),
         table: "candidates",
         limit: -1
       })
@@ -209,7 +201,7 @@ export class DacApi {
       .get_table_rows({
         json: true,
         code: this.configobj.get("custodiancontract"),
-        scope: this.configobj.get("dacscope"),
+        scope: this.configobj.get("custodiancontract"),
         table: "candperms",
         limit: -1
       })
@@ -244,7 +236,7 @@ export class DacApi {
     let pendingpays = await this.eos.get_table_rows({
       json: true,
       code: this.configobj.get("custodiancontract"),
-      scope: this.configobj.get("dacscope"),
+      scope: this.configobj.get("custodiancontract"),
       table: "pendingpay",
       lower_bound: accountname,
       upper_bound: accountname,
@@ -288,7 +280,7 @@ export class DacApi {
       .get_table_rows({
         json: true,
         code: this.configobj.get("custodiancontract"),
-        scope: this.configobj.get("dacscope"),
+        scope: this.configobj.get("custodiancontract"),
         table: "state",
         limit: 1
       })

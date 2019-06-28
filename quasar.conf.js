@@ -36,6 +36,11 @@ module.exports = function (ctx) {
     supportIE: false,
     build: {
 
+      beforeDev: async function(){
+        console.log('before dev......');
+        return new Promise(resolve => setTimeout(resolve, 2000))
+      },
+
       env: {
         DEFAULT_NETWORK: JSON.stringify(process.env.DEFAULT_NETWORK)
       },
@@ -145,7 +150,13 @@ module.exports = function (ctx) {
         'QStepperNavigation',
         'QDatetimePicker',
         'QTooltip',
-        'QAutocomplete'
+        'QAutocomplete',
+        'QTable',
+        // pick only what you are using from:
+        'QTh',
+        'QTr',
+        'QTd',
+        'QTableColumns'
       ],
       directives: [
         'Ripple',

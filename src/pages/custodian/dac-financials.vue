@@ -5,7 +5,7 @@
       and can be useful for budgeting and decision making.
     </p>
 
-    <q-carousel class="text-white " arrows>
+    <q-carousel color="text1" class="text-white " arrows>
       <q-carousel-slide
         class="no-padding"
         v-for="(chunk, si) in $helper.chunkArray(
@@ -16,8 +16,9 @@
       >
         <div class="row gutter-sm q-mb-md">
           <div
+            style="height:340px"
             v-for="(account, i) in chunk"
-            class="col-xs-12 col-sm-6 col-lg-4"
+            class="col-xs-12 col-sm-6 col-lg-4 animate-scale"
             :key="`fc${i}`"
           >
             <financial-account
@@ -67,7 +68,7 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-lg-6">
+      <div class="col-xs-12 col-lg-6 ">
         <div class="bg-bg1 round-borders shadow-4 overflow-hidden bg-logo">
           <div
             class="bg-primary q-pa-sm row justify-between items-center"
@@ -144,14 +145,7 @@
               :thumb-style="getThumbStyle()"
               :delay="1500"
             >
-              <q-list
-                dense
-                no-border
-                separator
-                highlight
-                :dark="getIsDark"
-                class="q-pa-xs"
-              >
+              <q-list dense no-border separator highlight :dark="getIsDark">
                 <div
                   v-if="trx_qeue.length == 0"
                   class="text-weight-thin text-center q-body-1 q-mt-md"
@@ -302,35 +296,7 @@ export default {
   },
   data() {
     return {
-      financialaccounts: [
-        {
-          account: this.$configFile.get("bpaccount"),
-          contract: this.$configFile.get("systemtokencontract"),
-          symbol: this.$configFile.get("systemtokensymbol"),
-          description:
-            "The EOS Mainnet block producer account for eosDAC which receives Block Producer rewards."
-        },
-        {
-          account: this.$configFile.get("treasuryaccount"),
-          contract: this.$configFile.get("systemtokencontract"),
-          symbol: this.$configFile.get("systemtokensymbol"),
-          description:
-            "The DAC owner account where DAC funds are secured and controlled by a 12-account multisig permission system of elected custodians."
-        },
-        {
-          account: "dacocoiogmbh",
-          contract: this.$configFile.get("systemtokencontract"),
-          symbol: this.$configFile.get("systemtokensymbol"),
-          description:
-            "The current eosDAC service provider account which manages payroll, employment contracts, and real-world interactions on behalf of the DAC."
-        },
-        {
-          account: this.$configFile.get("custodiancontract"),
-          contract: this.$configFile.get("tokencontract"),
-          symbol: this.$configFile.get("dactokensymbol"),
-          description: "custodian contract description"
-        }
-      ],
+      financialaccounts: this.$configFile.get("financialaccounts"),
       permissions_map: [],
 
       trx_qeue: this.$store.state.user.msigTransferQeue

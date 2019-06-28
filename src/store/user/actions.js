@@ -7,12 +7,12 @@ export async function loggedOutRoutine({ commit }) {
   commit("setAccountName", null);
   commit("setDacBalance", null);
   commit("setAgreedTermsVersion", null);
-  commit("global/setDacApi", null, { root: true });
-  commit("global/setScatter", null, { root: true });
-  commit("global/setEosScatter", null, { root: true });
   commit("setProfilePicture", null);
   commit("setIsCandidate", null);
   commit("setDacVotes", null);
+  commit("global/setDacApi", null, { root: true });
+  commit("global/setScatter", null, { root: true });
+  commit("global/setEosScatter", null, { root: true });
   commit("dac/setCustodianPermissions", null, { root: true });
 }
 
@@ -329,15 +329,15 @@ export async function proposeMsig(
 
   let proposed = {
     account: this._vm.$configFile.get("dacmsigcontract"),
-    name: "proposede",
+    name: "proposed",
     authorization: [
       { actor: state.accountName, permission: getters["getAuth"] },
-      { actor: this._vm.$configFile.get("authaccountname"), permission: PERM }
+      { actor: this._vm.$configFile.get("authaccount"), permission: PERM }
     ],
     data: {
       proposer: state.accountName,
       proposal_name: proposal_name,
-      dac_id: this._vm.$configFile.get("dacscope"),
+      // dac_id: this._vm.$configFile.get("dacscope"),
       metadata: JSON.stringify({
         title: payload.title || "Default Msig title",
         description: payload.description || "default msig description"

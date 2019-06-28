@@ -10,7 +10,7 @@ try {
 let routes = [
   {
     path: "/",
-    component: () => import("layouts/MyLayout.vue"),
+    component: () => import("layouts/dacLayout.vue"),
     children: [
       { path: "", component: () => import("../extensions/pages/home") },
       {
@@ -40,7 +40,7 @@ let routes = [
 
   {
     path: "/dev-tools",
-    component: () => import("layouts/MyLayout.vue"),
+    component: () => import("layouts/dacLayout.vue"),
     children: [
       { path: "", component: () => import("../extensions/pages/home") },
       {
@@ -56,18 +56,33 @@ let routes = [
   },
 
   {
-    path: "/custodian",
-    component: () => import("layouts/MyLayout.vue"),
+    path: "/dac-activity",
+    component: () => import("layouts/dacLayout.vue"),
     children: [
       { path: "", component: () => import("../extensions/pages/home") },
+      {
+        path: "financials",
+        component: () => import("pages/custodian/dac-financials")
+      },
       {
         path: "review-msigs",
         component: () => import("pages/custodian/review-msigs")
       },
       {
-        path: "create-msigs",
-        component: () => import("pages/custodian/create-msigs"),
-        beforeEnter: Guards.custodianCheck
+        path: "review-worker-proposals",
+        component: () => import("pages/custodian/review-worker-proposals")
+      }
+    ]
+  },
+
+  {
+    path: "/custodian",
+    component: () => import("layouts/dacLayout.vue"),
+    children: [
+      { path: "", component: () => import("../extensions/pages/home") },
+      {
+        path: "review-msigs",
+        component: () => import("pages/custodian/review-msigs")
       },
       {
         path: "review-worker-proposals",
@@ -106,7 +121,7 @@ let routes = [
 
   {
     path: "/member",
-    component: () => import("layouts/MyLayout.vue"),
+    component: () => import("layouts/dacLayout.vue"),
     children: [
       { path: "", component: () => import("../extensions/pages/home") },
       {

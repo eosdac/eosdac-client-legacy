@@ -1,7 +1,6 @@
 <template>
   <q-page class="q-pa-md">
     <div class="bg-bg1 shadow-4 round-borders q-pa-md q-mb-md">
-      <div class="q-headline">Custodian Board</div>
       <display-custodians />
     </div>
 

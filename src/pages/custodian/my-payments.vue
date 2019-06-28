@@ -1,87 +1,158 @@
 <template>
   <q-page class="q-pa-md">
-    <div class="q-display-1 text-text1 q-mb-md">
-      Pending Payments
-      <span class="text-text2" v-if="pendingpay.length"
-        >({{ pendingpay.length }})</span
-      >
-    </div>
+    <div class="row gutter-sm ">
+      <div class="col-xs-12 col-md-6 animate-fade">
+        <div class="round-borders bg-bg1 bg-logo shadow-4 overflow-hidden">
+          <div
+            class="bg-primary q-pa-sm row justify-between items-center"
+            style="height:50px"
+          >
+            <q-icon
+              :name="$configFile.icon.dactoken"
+              color="text2"
+              size="24px"
+            />
+            <span>Pending Payments ({{ pendingpay.length }})</span>
+            <help-btn
+              content="Each new period you can claim your custodian payment. The payment amount is the mean value of all requested custodian pays."
+              title="My pending payments"
+              color="text1"
+              size="sm"
+            />
+          </div>
 
-    <div class="row">
-      <div class="bg-bg1 round-borders shadow-4 col-xs-12 col-md-6">
-        <div v-if="pendingpay.length" class="animate-fade">
-          <q-item v-for="(pay, i) in pendingpay" :key="`pay_id_${i}`">
-            <q-item-side left>{{ pay.key }}</q-item-side>
-            <q-item-main>
-              <q-item-tile label>{{ pay.receiver }}</q-item-tile>
-              <q-item-tile sublabel>{{ pay.quantity }}</q-item-tile>
-            </q-item-main>
-            <q-item-side right>
-              <q-btn label="claim" color="primary" @click="claimpay(pay.key)" />
-            </q-item-side>
-          </q-item>
-
+          <q-scroll-area
+            style="width: 100%; height: 250px;"
+            :thumb-style="{
+              right: '0px',
+              borderRadius: '2px',
+              background: '#7c41ba',
+              width: '10px',
+              opacity: 0.8
+            }"
+          >
+            <q-list no-border separator highlight :dark="getIsDark">
+              <div
+                class="row justify-center text-weight-thin q-mt-md"
+                v-if="!pendingpay.length"
+              >
+                You don't have any pending payments
+              </div>
+              <q-item
+                v-for="(pay, i) in pendingpay"
+                :key="`pay_id_${i}`"
+                class="animate-fade"
+              >
+                <q-item-side left icon="icon-ui-19" :title="`id: ${pay.key}`" />
+                <q-item-main>
+                  <q-item-tile label>
+                    <div class="overflow-hidden">
+                      <span>{{ pay.receiver }}</span>
+                    </div>
+                  </q-item-tile>
+                  <q-item-tile sublabel>
+                    <div style="white-space: nowrap;" class=" overflow-hidden">
+                      {{ pay.quantity }}
+                    </div>
+                  </q-item-tile>
+                </q-item-main>
+                <q-item-side right style="min-width:65px">
+                  <q-btn
+                    color="primary"
+                    class="animate-fade"
+                    size="sm"
+                    label="claim"
+                    @click="claimpay(pay.key)"
+                  />
+                </q-item-side>
+              </q-item>
+            </q-list>
+          </q-scroll-area>
           <q-item v-if="pendingpay.length > 1">
             <q-item-main>
               <q-item-tile label>Total</q-item-tile>
               <q-item-tile sublabel>{{ totalPayAmount }}</q-item-tile>
             </q-item-main>
             <q-item-side right>
-              <q-btn color="positive" label="claim all" @click="claimAll" />
+              <q-btn
+                color="positive"
+                :disabled="true"
+                label="claim all"
+                @click="claimAll"
+              />
             </q-item-side>
           </q-item>
         </div>
-        <div v-else class="q-ma-md">
-          You do not have any pending payments.
-        </div>
       </div>
 
-      <div class="q-display-1 text-text1 q-my-md full-width">
-        Update Requested Pay
-        <span class="text-text2 q-caption"
-          >(current pay: {{ getIsCandidate.requestedpay }})</span
-        >
-      </div>
-      <div class="text-text1 round-borders bg-bg1 shadow-4 q-pa-md">
-        <span>{{
-          $t("manage_candidateship.pay_description", {
-            requested_pay: $helper.assetToLocaleNumber(
-              getCustodianConfig.requested_pay_max
-            )
-          })
-        }}</span>
-        <q-item class="q-pl-none">
-          <q-item-side
-            left
-            icon="icon-type-2"
-            v-bind:class="{ 'text-negative': $v.new_requested_pay.$error }"
-          />
-          <q-item-main>
-            <q-input
-              color="primary-light"
-              :dark="getIsDark"
-              type="number"
-              v-model="new_requested_pay"
-              @input="$v.new_requested_pay.$touch()"
-              :error="$v.new_requested_pay.$error"
-              :stack-label="$t('manage_candidateship.requestedpay')"
-              :placeholder="
-                $t('manage_candidateship.requested_custodian_pay_placeholder', {
-                  system_token: $configFile.get('systemtokensymbol')
+      <div class="col-xs-12 col-md-6 animate-fade">
+        <div class="round-borders bg-bg1 shadow-4 overflow-hidden">
+          <div
+            class="bg-primary q-pa-sm row justify-between items-center"
+            style="height:50px"
+          >
+            <q-icon
+              :name="$configFile.icon.dactoken"
+              color="text2"
+              size="24px"
+            />
+            <span>Update Requested Pay</span>
+            <help-btn
+              :content="
+                $t('manage_candidateship.pay_description', {
+                  requested_pay: $helper.assetToLocaleNumber(
+                    getCustodianConfig.requested_pay_max
+                  )
                 })
               "
+              title="Update Requested Pay"
+              color="text1"
+              size="sm"
             />
-          </q-item-main>
-        </q-item>
-        <div class="row justify-end q-mt-md">
-          <q-btn
-            :label="$t('default.update')"
-            @click="updateRequestedPay"
-            color="primary"
-          />
+          </div>
+          <div class="q-pa-md">
+            <span
+              >Your current pay amount is set to
+              {{ getIsCandidate.requestedpay }}</span
+            >
+            <q-item class="q-pl-none">
+              <q-item-side
+                left
+                icon="icon-type-2"
+                v-bind:class="{ 'text-negative': $v.new_requested_pay.$error }"
+              />
+              <q-item-main>
+                <q-input
+                  color="primary-light"
+                  :dark="getIsDark"
+                  type="number"
+                  v-model="new_requested_pay"
+                  @input="$v.new_requested_pay.$touch()"
+                  :error="$v.new_requested_pay.$error"
+                  :stack-label="$t('manage_candidateship.requestedpay')"
+                  :placeholder="
+                    $t(
+                      'manage_candidateship.requested_custodian_pay_placeholder',
+                      {
+                        system_token: $configFile.get('systemtokensymbol')
+                      }
+                    )
+                  "
+                />
+              </q-item-main>
+            </q-item>
+            <div class="row justify-end q-mt-md">
+              <q-btn
+                :label="$t('default.update')"
+                @click="updateRequestedPay"
+                color="primary"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
     <debug-data :data="[{ pendingpay: pendingpay }]" />
   </q-page>
 </template>
@@ -89,11 +160,13 @@
 <script>
 import { mapGetters } from "vuex";
 import debugData from "components/ui/debug-data";
+import helpBtn from "components/controls/help-btn";
 import { required, between } from "vuelidate/lib/validators";
 export default {
   name: "MyPayments",
   components: {
-    debugData
+    debugData,
+    helpBtn
   },
   data() {
     return {
@@ -152,7 +225,7 @@ export default {
         actions: actions
       });
       if (result) {
-        setTimeout(this.getClaimPay(), 500);
+        this.getClaimPay();
       }
     },
 
@@ -172,7 +245,7 @@ export default {
         actions: actions
       });
       if (result) {
-        setTimeout(this.getClaimPay(), 500);
+        this.getClaimPay();
       }
     },
 

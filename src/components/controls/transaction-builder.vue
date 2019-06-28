@@ -219,7 +219,7 @@
               <div class="bg-bg1 q-pa-md round-borders">
                 <span class="text-text2"
                   >Set a date when the msig proposal should expire. The msig
-                  transaction wll not be executable after this date even if
+                  transaction will not be executable after this date even if
                   enough signatures are collected.</span
                 >
                 <q-datetime-picker

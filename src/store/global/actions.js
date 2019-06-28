@@ -1,6 +1,6 @@
-import ScatterJS, { Network } from "scatterjs-core";
-import ScatterEOS from "scatterjs-plugin-eosjs2";
-import ScatterLynx from "scatterjs-plugin-lynx";
+import ScatterJS, { Network } from "@scatterjs/core";
+import ScatterEOS from "@scatterjs/eosjs2";
+import ScatterLynx from "@scatterjs/lynx";
 
 import { Notify } from "quasar";
 import axios from "axios";

@@ -1,5 +1,5 @@
 export function getIsDark(state) {
-  return true;
+  return state.isDark;
 }
 
 export function getShowTransactionOverlay(state) {

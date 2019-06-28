@@ -4,9 +4,6 @@
       <!-- padding wrapper -->
       <!-- <period-timer style="transform: scale(0.5)" /> -->
       <!-- {{ oldvotes }} -->
-      <div class="q-display-1 q-mb-md ">
-        {{ $t("vote_custodians.custodian_board") }}
-      </div>
 
       <div class="bg-bg1 shadow-4 round-borders q-pa-md q-mb-md">
         <display-custodians />
@@ -71,15 +68,22 @@
                 />
               </div>
             </div>
-
-            <Candidate
-              v-for="candidate in paginate"
-              :key="candidate.candidate_name"
-              :ref="candidate.candidate_name"
-              :data="candidate"
-              @clickvotefor="addToVoteList(candidate.candidate_name)"
-              @clickunvotefor="deleteFromVoteList(candidate.candidate_name)"
-            />
+            <div
+              class="q-pa-md round-borders shadow-4 bg-bg1 text-text2"
+              v-if="!custodians.length"
+            >
+              No candidates
+            </div>
+            <div v-else>
+              <Candidate
+                v-for="candidate in paginate"
+                :key="candidate.candidate_name"
+                :ref="candidate.candidate_name"
+                :data="candidate"
+                @clickvotefor="addToVoteList(candidate.candidate_name)"
+                @clickunvotefor="deleteFromVoteList(candidate.candidate_name)"
+              />
+            </div>
 
             <div
               v-if="!loading"
@@ -337,7 +341,7 @@ export default {
     }
   },
 
-  mounted() {
+  async mounted() {
     this.getAllCandidates();
   },
 

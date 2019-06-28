@@ -747,6 +747,28 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@positron/stack-trace/-/stack-trace-1.0.0.tgz#14fcc712a530038ef9be1ce6952315a839f466a8"
 
+"@scatterjs/core@^2.7.26":
+  version "2.7.26"
+  resolved "https://registry.yarnpkg.com/@scatterjs/core/-/core-2.7.26.tgz#dca9a34fc6590dbe839c477deb05104df099cead"
+  dependencies:
+    create-hash "^1.2.0"
+    es6-promise "^4.2.4"
+    get-random-values "^1.2.0"
+    isomorphic-ws "^4.0.1"
+    ws "^6.1.0"
+
+"@scatterjs/eosjs2@^1.5.8":
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/@scatterjs/eosjs2/-/eosjs2-1.5.8.tgz#d02377189011cd5b88c4df034b09b055c0b1c645"
+  dependencies:
+    "@scatterjs/core" "^2.7.26"
+
+"@scatterjs/lynx@^1.6.17":
+  version "1.6.17"
+  resolved "https://registry.yarnpkg.com/@scatterjs/lynx/-/lynx-1.6.17.tgz#11892c6209a25ad2785c42700553b4c48599689e"
+  dependencies:
+    "@scatterjs/core" "^2.7.26"
+
 "@types/q@^1.5.1":
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"

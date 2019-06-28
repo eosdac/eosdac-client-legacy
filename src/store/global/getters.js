@@ -17,6 +17,10 @@ export function getActiveNetwork(state) {
   return state.networks.find(n => n.name == state.active_network);
 }
 
+export function getNetworks(state) {
+  return state.networks;
+}
+
 export function getActiveNetworkName(state) {
   return state.active_network;
 }

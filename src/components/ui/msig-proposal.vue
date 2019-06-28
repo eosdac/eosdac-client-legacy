@@ -697,7 +697,7 @@ export default {
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
-              actor: this.$configFile.get("authaccountname"),
+              actor: this.$configFile.get("authaccount"),
               permission: "one"
             }
           ],
@@ -735,7 +735,7 @@ export default {
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
-              actor: this.$configFile.get("authaccountname"),
+              actor: this.$configFile.get("authaccount"),
               permission: "one"
             }
           ],
@@ -772,7 +772,7 @@ export default {
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
-              actor: this.$configFile.get("authaccountname"),
+              actor: this.$configFile.get("authaccount"),
               permission: "one"
             }
           ],
@@ -810,7 +810,7 @@ export default {
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
-              actor: this.$configFile.get("authaccountname"),
+              actor: this.$configFile.get("authaccount"),
               permission: this.getAuthAccountPermLevel //can be one or admin depending of the logged in user
             }
           ],

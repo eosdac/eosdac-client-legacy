@@ -20,14 +20,15 @@ $ cd eosdac-client
 $ yarn
 ```
 
-## Extend eosdac-client
-Add custom pages, routes and vuex stores. It's recommended to extend and customize the eosDAC client in the extensions folder so you can pull in future updates without losing your customizations. The eosDAC branded extension repo will already contain a mandatatory home screen (eosDAC) and a custom example page with dedicated vuex store. You'll also find a component to extend the main menu. In production you might want to manage the contents of the extention folder as a git submodule. The command below will simply clone the remote repo in the src/extensions folder.
+## Customize the eosdac-client
 
-eosDAC the DAC is branded and customized with the following repo https://github.com/eosdac/eosdac-client-extension. Feel free to fork this repo to get started. In fact it's recommended to fork the repo if you plan to customize the eosDAC client.
+Visit https://github.com/eosdac/boilerplate-client-extension for more info.
+
+Add custom colors, pages, routes and vuex stores. It's recommended to extend and customize the eosDAC client in the extensions folder so you can pull in future updates without losing your customizations. The boilerplate extension already contains a mandatatory home screen (eosDAC) and a custom example page with dedicated vuex store. You'll also find a component to extend the main menu. In production you might want to manage the contents of the extention folder as a git submodule. The command below will simply clone the remote repo in the src/extensions folder.
 
 ```bash
 cd eosdac-client
-yarn add_extensions https://github.com/eosdac/eosdac-client-extension.git extensions
+yarn add_extensions https://github.com/eosdac/boilerplate-client-extension.git extensions
 ```
 If you want a tighter coupling between the main repo and your extensions repo you can create a git submodule.
 ```bash
@@ -35,19 +36,22 @@ cd eosdac-client
 git submodule add https://github.com/your_repo/your_dac-client-extension.git src/extensions
 ```
 
-## Add or change language strings
-Use the extensions/i18n folder to add your custom strings or overwrite existing keys
-
 
 ## Quickstart
 
 Opens browser window automatically [http://localhost:8080](http://localhost:8080)
 
 ```bash
-quasar dev
+yarn dev
 ```
 
 ## Deployment
+
+Build the project for deployment.
+
+```bash
+yarn build
+```
 
 You can run the deploy script to checkout the correct release tag and copy the dist/spa-mat files to a dist/deploy folder which you can then make the root folder of your nginx website.
 
@@ -73,6 +77,10 @@ If you want to build and run specifically for the jungle tesnet, you can run `DE
 
 ![image](https://user-images.githubusercontent.com/44613132/55268811-c75ae500-528d-11e9-8332-fd71ff648dc0.png)
 
-![image](https://user-images.githubusercontent.com/44613132/55268494-4bab6900-528a-11e9-8ac6-9e5a27310fb3.png)
+![image](https://user-images.githubusercontent.com/44613132/59903601-ab389100-9401-11e9-942e-7bb437708416.png)
 
-![image](https://user-images.githubusercontent.com/44613132/55268728-d2f9dc00-528c-11e9-890c-d5d7c2997678.png)
+![image](https://user-images.githubusercontent.com/44613132/59903659-db802f80-9401-11e9-874f-6ba7c44fb000.png)
+
+![image](https://user-images.githubusercontent.com/44613132/59903752-12564580-9402-11e9-8dd9-e225286b74c9.png)
+
+
