@@ -53,7 +53,7 @@
             <color-picker />
             <div class="q-mt-md row justify-between">
               <q-btn
-                label="download scheme"
+                label="download theme"
                 color="primary"
                 @click="getColorScheme"
               />
