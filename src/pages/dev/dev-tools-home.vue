@@ -38,18 +38,6 @@
 
         <div class="col-xs-12 col-md-6 ">
           <div class="bg-bg1 round-borders shadow-4 q-pa-md">
-            <div class="row justify-between q-mb-md">
-              <div
-                v-for="(color, i) in colornames.filter(cn => {
-                  return cn.indexOf('text') === -1;
-                })"
-                :key="`c${i}`"
-                :class="`bg-${color}`"
-                class="q-pa-sm round-borders q-caption q-mb-xs"
-              >
-                {{ color }}
-              </div>
-            </div>
             <color-picker />
             <div class="q-mt-md row justify-between">
               <q-btn

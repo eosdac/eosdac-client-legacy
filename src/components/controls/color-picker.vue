@@ -1,5 +1,18 @@
 <template>
   <div>
+    <div class="row justify-between q-mb-md">
+      <div
+        v-for="(color, i) in colornames.filter(cn => {
+          return cn.indexOf('text') === -1;
+        })"
+        :key="`c${i}`"
+        :class="`bg-${color}`"
+        class="q-pa-sm round-borders q-caption q-mb-xs cursor-pointer"
+        @click="colorvar = color"
+      >
+        {{ color }}
+      </div>
+    </div>
     <q-select
       class="q-mb-md"
       color="primary-light"
@@ -7,7 +20,7 @@
       v-model="colorvar"
       float-label="Select a color variable"
       :options="
-        colorvars.map(cv => {
+        colornames.map(cv => {
           return { label: cv, value: cv };
         })
       "
@@ -30,7 +43,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      colorvars: [
+      colornames: [
         "primary",
         "bg1",
         "bg2",
