@@ -74,7 +74,12 @@
               <q-item-tile sublabel>{{ totalPayAmount }}</q-item-tile>
             </q-item-main>
             <q-item-side right>
-              <q-btn color="positive" label="claim all" @click="claimAll" />
+              <q-btn
+                color="positive"
+                :disabled="true"
+                label="claim all"
+                @click="claimAll"
+              />
             </q-item-side>
           </q-item>
         </div>
