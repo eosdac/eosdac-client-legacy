@@ -145,18 +145,20 @@ export default {
 
     getColorScheme() {
       let colornames = ["primary", "bg1", "bg2", "text1", "text2"];
-      let new_colors =
-        "//add this file in the extensions/branding/colors folder\n\n";
+      let color_file = {
+        is_dark: this.getIsDark,
+        colors: {}
+      };
 
       colornames.forEach(c => {
-        new_colors += `$${c} = ${colors.getBrand(c)}\n`;
+        color_file.colors[`$${c}`] = colors.getBrand(c);
       });
 
-      let blob = new Blob([new_colors], {
+      let blob = new Blob([JSON.stringify(color_file, null, 2)], {
         type: "text/plain;charset=utf-8"
       });
-      saveAs(blob, "new.colors.styl");
-      console.log(new_colors);
+      saveAs(blob, "theme.json");
+      console.log(color_file);
     }
   }
 };
