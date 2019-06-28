@@ -30,7 +30,17 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      colorvars: ["primary", "bg1", "bg2", "text1", "text2"],
+      colorvars: [
+        "primary",
+        "bg1",
+        "bg2",
+        "text1",
+        "text2",
+        "info",
+        "positive",
+        "negative",
+        "dark"
+      ],
       colorvar: "primary",
       color: "#C7044B"
     };

@@ -46,6 +46,13 @@
                 color="primary"
                 @click="getColorScheme"
               />
+              <q-toggle
+                label="is dark?"
+                :dark="getIsDark"
+                color="primary-light"
+                :value="$store.state.ui.isDark"
+                @input="change_is_dark_state"
+              />
             </div>
           </div>
         </div>
@@ -111,7 +118,8 @@ export default {
     return {
       scatter: null,
       assettest: "",
-      showConfigModal: false
+      showConfigModal: false,
+      is_dark: this.$store.state.ui.isDark
     };
   },
   computed: {
@@ -144,7 +152,17 @@ export default {
     },
 
     getColorScheme() {
-      let colornames = ["primary", "bg1", "bg2", "text1", "text2"];
+      let colornames = [
+        "primary",
+        "bg1",
+        "bg2",
+        "text1",
+        "text2",
+        "info",
+        "positive",
+        "negative",
+        "dark"
+      ];
       let color_file = {
         is_dark: this.getIsDark,
         colors: {}
@@ -159,6 +177,9 @@ export default {
       });
       saveAs(blob, "theme.json");
       console.log(color_file);
+    },
+    change_is_dark_state(v) {
+      this.$store.commit("ui/setIsDark", v);
     }
   }
 };
