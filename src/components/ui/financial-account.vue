@@ -19,7 +19,7 @@
         :options="tokens"
         @input="handleTokenSelection"
       />
-      <span class="">{{ accountname }}</span>
+      <span class="text-text1">{{ accountname }}</span>
       <help-btn
         :content="description"
         :title="accountname"

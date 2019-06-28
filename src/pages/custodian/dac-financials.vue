@@ -191,7 +191,7 @@
                       <q-chip
                         dense
                         color="bg2"
-                        class="text-weight-thin on-right q-caption"
+                        class="text-weight-thin on-right q-caption text-text1"
                       >
                         <span>{{ `${trx.asset.amount}` }}</span>
                         <span class="text-weight-bold">
