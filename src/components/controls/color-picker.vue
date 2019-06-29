@@ -13,18 +13,26 @@
         {{ color }}
       </div>
     </div>
-    <q-select
-      class="q-mb-md"
-      color="primary-light"
-      :dark="getIsDark"
-      v-model="colorvar"
-      float-label="Select a color variable"
-      :options="
-        colornames.map(cv => {
-          return { label: cv, value: cv };
-        })
-      "
-    />
+    <div class="row justify-between">
+      <q-select
+        class="q-mb-md"
+        color="primary-light"
+        :dark="getIsDark"
+        v-model="colorvar"
+        float-label="Select a color variable"
+        :options="
+          colornames.map(cv => {
+            return { label: cv, value: cv };
+          })
+        "
+      />
+      <q-toggle
+        label="track color?"
+        :dark="getIsDark"
+        color="primary-light"
+        v-model="track_color"
+      />
+    </div>
     <q-color-picker
       :dark="getIsDark"
       no-parent-field
@@ -55,7 +63,8 @@ export default {
         "dark"
       ],
       colorvar: "primary",
-      color: "#C7044B"
+      color: colors.getBrand("primary"),
+      track_color: false
     };
   },
 
@@ -82,6 +91,11 @@ export default {
   watch: {
     color(v) {
       this.setColor(v);
+    },
+    colorvar(v) {
+      if (this.track_color) {
+        this.color = colors.getBrand(v);
+      }
     }
   }
 };
