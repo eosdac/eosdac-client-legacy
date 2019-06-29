@@ -49,10 +49,10 @@ git pull
 
 if $LOCAL_DEV ;
 then
-  quasar dev
+  yarn dev
 else
   mkdir -p dist/deploy
-  quasar build
+  yarn build
   if [ -z "$(ls -A dist/spa-mat)" ]; then
      echo "======= ERROR: ======="
      echo "dist/spa-mat empty."
