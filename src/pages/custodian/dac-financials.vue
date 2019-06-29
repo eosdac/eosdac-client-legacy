@@ -5,7 +5,7 @@
       and can be useful for budgeting and decision making.
     </p>
 
-    <q-carousel class="text-white " arrows>
+    <q-carousel color="text1" class="text-white " arrows>
       <q-carousel-slide
         class="no-padding"
         v-for="(chunk, si) in $helper.chunkArray(
@@ -191,7 +191,7 @@
                       <q-chip
                         dense
                         color="bg2"
-                        class="text-weight-thin on-right q-caption"
+                        class="text-weight-thin on-right q-caption text-text1"
                       >
                         <span>{{ `${trx.asset.amount}` }}</span>
                         <span class="text-weight-bold">

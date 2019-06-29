@@ -167,7 +167,7 @@
                 <xspan :value="md5_constitution" />
               </div>
               <div
-                class="markdown-body animate-fade bg-text1 q-pa-md"
+                class="markdown-body animate-fade bg-white q-pa-md"
                 v-html="parsed_constitution"
               />
             </div>

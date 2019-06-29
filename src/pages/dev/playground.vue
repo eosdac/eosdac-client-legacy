@@ -15,6 +15,7 @@
       <contract-settings :contract="selected_contract" />
     </div>
     <app-manifest />
+    <table-parser />
   </q-page>
 </template>
 
@@ -24,14 +25,14 @@ import { mapGetters } from "vuex";
 // import voteDelegation from "components/controls/vote-delegation";
 import contractSettings from "components/controls/contract-settings";
 import appManifest from "components/controls/app-manifest";
-// import msigTransfer from "components/controls/msig-transfer";
+import tableParser from "components/controls/table-parser";
 
 export default {
   name: "playground",
   components: {
     // abiViewer,
     // voteDelegation,
-    // msigTransfer,
+    tableParser,
     appManifest,
     contractSettings
   },

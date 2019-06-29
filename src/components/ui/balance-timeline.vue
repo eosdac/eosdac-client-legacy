@@ -138,7 +138,7 @@ export default {
       }
     },
     getGradient() {
-      if (!this.$refs.linechart && !this.$refs.linechart.$refs) {
+      if (!this.$refs.linechart || !this.$refs.linechart.$refs) {
         return;
       }
       let { r, g, b } = colors.hexToRgb(colors.getBrand("primary"));

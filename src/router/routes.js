@@ -10,7 +10,7 @@ try {
 let routes = [
   {
     path: "/",
-    component: () => import("layouts/MyLayout.vue"),
+    component: () => import("layouts/dacLayout.vue"),
     children: [
       { path: "", component: () => import("../extensions/pages/home") },
       {
@@ -40,7 +40,7 @@ let routes = [
 
   {
     path: "/dev-tools",
-    component: () => import("layouts/MyLayout.vue"),
+    component: () => import("layouts/dacLayout.vue"),
     children: [
       { path: "", component: () => import("../extensions/pages/home") },
       {
@@ -57,7 +57,7 @@ let routes = [
 
   {
     path: "/dac-activity",
-    component: () => import("layouts/MyLayout.vue"),
+    component: () => import("layouts/dacLayout.vue"),
     children: [
       { path: "", component: () => import("../extensions/pages/home") },
       {
@@ -77,7 +77,7 @@ let routes = [
 
   {
     path: "/custodian",
-    component: () => import("layouts/MyLayout.vue"),
+    component: () => import("layouts/dacLayout.vue"),
     children: [
       { path: "", component: () => import("../extensions/pages/home") },
       {
@@ -123,7 +123,7 @@ let routes = [
   },
   {
     path: "/member",
-    component: () => import("layouts/MyLayout.vue"),
+    component: () => import("layouts/dacLayout.vue"),
     children: [
       { path: "", component: () => import("../extensions/pages/home") },
       {

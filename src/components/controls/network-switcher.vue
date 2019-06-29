@@ -1,18 +1,12 @@
 <template>
   <div>
-    <q-btn
-      :disable="disable"
-      v-if="getActiveNetworkName != 'jungle'"
-      label="switch to jungle"
-      @click="switchNetwork('jungle')"
+    <q-select
+      v-model="selected_network"
+      :dark="getIsDark"
+      stack-label="Select network"
       color="primary"
-    />
-    <q-btn
-      :disable="disable"
-      v-if="getActiveNetworkName != 'mainnet'"
-      label="switch to mainnet"
-      @click="switchNetwork('mainnet')"
-      color="primary"
+      :options="network_options"
+      @input="switchNetwork($event)"
     />
   </div>
 </template>
@@ -31,15 +25,24 @@ export default {
   },
   data() {
     return {
-      disable: false
+      disable: false,
+      selected_network: this.$store.state.global.active_network
     };
   },
   computed: {
     ...mapGetters({
       getActiveNetwork: "global/getActiveNetwork",
-      getActiveNetworkName: "global/getActiveNetworkName"
+      getActiveNetworkName: "global/getActiveNetworkName",
+      getNetworks: "global/getNetworks",
+      getIsDark: "ui/getIsDark"
       // getCustodians: 'dac/getCustodians',
-    })
+    }),
+    network_options() {
+      if (!this.getNetworks) return [];
+      return this.getNetworks.map(netw => {
+        return { value: netw.name, label: netw.name };
+      });
+    }
   },
   methods: {
     async switchNetwork(networkname) {
