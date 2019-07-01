@@ -67,6 +67,8 @@ class ConfigLoader {
         return this.configFile.contracts.bot.name;
       case "explorer":
         return this.configFile.external.explorer.replace(/\/+$/, "");
+      case "external":
+        return this.configFile.external;
       case "memberclientstateapi":
         return this.configFile.api.memberclient_state_api.replace(/\/+$/, "");
       case "bpnodeapi":
