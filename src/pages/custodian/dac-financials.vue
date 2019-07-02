@@ -84,12 +84,12 @@
             }}</span>
             <q-btn flat round dense icon="more_vert" :disable="!getIsCustodian">
               <q-popover
-                class="bg-bg2 text-text1"
+                class="bg-dark text-text1"
                 style="width:150px"
                 v-if="getIsCustodian"
               >
                 <q-list highlight>
-                  <q-item class="cursor-pointer q-body-1">
+                  <q-item class="cursor-pointer q-body-1 ">
                     <q-item-main>
                       <label
                         style="display:block"
