@@ -1,6 +1,7 @@
 {
   "name": "eosdacmemberclient",
   "version": "0.4.4",
+  "license" : "MIT",
   "local_storage_version": "0.1",
   "description": "Toolkit GUI for eosDAC",
   "productName": "eosDAC Member Client",
