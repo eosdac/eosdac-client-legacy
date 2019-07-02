@@ -190,7 +190,7 @@
                       <span>{{ trx.to }}</span>
                       <q-chip
                         dense
-                        color="bg2"
+                        color="dark"
                         class="text-weight-thin on-right q-caption text-text1"
                       >
                         <span>{{ `${trx.asset.amount}` }}</span>
