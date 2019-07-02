@@ -56,7 +56,7 @@
           :key="`a${i}`"
           color="bg1"
           class="animate-pop q-ma-xs"
-          @click="custom_mode.action_name = action.name"
+          @click="custom_mode.action_name = action.type"
         />
         <q-btn
           size="10px"
@@ -331,9 +331,10 @@ export default {
       }
     },
 
-    getDataFieldsForActionName(abi, action_name) {
+    getDataFieldsForActionType(abi, action_type) {
+      console.log(abi);
       if (abi && abi.structs) {
-        let struct = abi.structs.find(s => s.name == action_name);
+        let struct = abi.structs.find(s => s.name == action_type);
         return struct.fields;
       }
     },
@@ -342,7 +343,7 @@ export default {
       this.data_fields = [];
 
       let actions = abi || (await this.getAbi(contract));
-      let fields = this.getDataFieldsForActionName(actions, action_name);
+      let fields = this.getDataFieldsForActionType(actions, action_name);
       if (!fields) return;
       this.data_fields = fields.map(f => {
         if (this.prefill[f.name]) {
