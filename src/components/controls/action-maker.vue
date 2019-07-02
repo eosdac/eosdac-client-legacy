@@ -56,7 +56,10 @@
           :key="`a${i}`"
           color="bg1"
           class="animate-pop q-ma-xs"
-          @click="custom_mode.action_name = action.type"
+          @click="
+            custom_mode.action_name = action.name;
+            custom_mode.action_type = action.type;
+          "
         />
         <q-btn
           size="10px"
@@ -289,6 +292,7 @@ export default {
       custom_mode: {
         account: "",
         action_name: "",
+        action_type: "",
         abi: {}
       }
     };
@@ -478,7 +482,7 @@ export default {
       if (oldv != newv) {
         this.setFieldsModel(
           this.custom_mode.account,
-          this.custom_mode.action_name,
+          this.custom_mode.action_type,
           JSON.parse(JSON.stringify(this.custom_mode.abi))
         );
       }
