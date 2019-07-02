@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/44613132/55268864-1dc82380-528e-11e9-9715-454457b8506e.png)
 
 ## Purpose
-This is the member client where the DAC members will interface with the deployed smart contract code. The code is written in javascript using Vue.js and Quasar-framework.js.
+This is the member client where the DAC members will interface with the deployed smart contract code. The code is written in javascript using Vue.js and [Quasar Framework](https://quasar.dev).
 
 ## Pre-Requisites
 You want to be able to read javascript code and have a basic understanding of frontend web development. If you want to simply change the assets to your DAC's messaging, branding, and images then the process is not too difficult.
