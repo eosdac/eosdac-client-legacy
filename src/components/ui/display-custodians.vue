@@ -5,15 +5,15 @@
         <div class="q-headline">
           {{ $t("vote_custodians.custodian_board") }}
         </div>
-        <q-chip color="bg2" dense v-if="new_period_millisleft > 0">
+        <q-chip color="dark" dense v-if="new_period_millisleft > 0">
           <div class="row items-center">
-            <div class="text-text2 q-mr-sm q-caption">New election in</div>
+            <div class="text-text1 q-mr-sm q-caption">New election in</div>
             <countdown
               v-if="new_period_millisleft"
               :time="Number(new_period_millisleft)"
             >
               <template slot-scope="props">
-                <div class="q-caption text-weight-light">
+                <div class="q-caption text-weight-light text-text2">
                   <span v-if="props.days">{{ props.days }} days, </span>
                   <span v-if="props.hours">{{ props.hours }} hours, </span>
                   <span v-if="props.minutes"

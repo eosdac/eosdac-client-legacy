@@ -97,6 +97,9 @@ export default {
               },
               gridLines: {
                 color: "rgba(0, 0, 0, 0)"
+              },
+              ticks: {
+                fontColor: colors.getBrand("text2")
               }
             }
           ],
@@ -108,7 +111,8 @@ export default {
               },
               ticks: {
                 display: true,
-                beginAtZero: true
+                beginAtZero: true,
+                fontColor: colors.getBrand("text2")
               }
             }
           ]

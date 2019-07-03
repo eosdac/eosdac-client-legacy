@@ -33,7 +33,7 @@
                     class="animate-pop"
                     dense
                     size="sm"
-                    color="bg2"
+                    color="dark"
                     to="/vote-custodians"
                     :label="getDacVotes ? 'change votes' : 'vote'"
                   />
@@ -89,19 +89,19 @@
                 <div class="row">
                   <q-btn
                     class="animate-pop q-ma-xs"
-                    color="bg2"
+                    color="primary"
                     to="/custodian/review-msigs"
                     label="View Msigs"
                   />
                   <q-btn
                     class="animate-pop q-ma-xs"
-                    color="bg2"
+                    color="primary"
                     to="/custodian/create-msigs"
                     label="Propose Msigs"
                   />
                   <q-btn
                     class="animate-pop q-ma-xs"
-                    color="bg2"
+                    color="primary"
                     icon="icon-social-discord-com"
                     @click="openURL('https://discord.gg/8ARMTmG')"
                     label="Discord"
@@ -109,7 +109,7 @@
                   <q-btn
                     disabled
                     class="animate-pop q-ma-xs"
-                    color="bg2"
+                    color="primary"
                     to="/custodian/create-msigs"
                     label="Review Proposals"
                   />
