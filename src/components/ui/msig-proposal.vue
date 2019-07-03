@@ -806,7 +806,7 @@ export default {
         },
         {
           account: this.dacmsig,
-          name: "cancelled",
+          name: "cancellede",
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
