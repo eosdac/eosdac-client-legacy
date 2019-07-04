@@ -181,7 +181,7 @@
         >
           <q-input
             stack-label="Memo"
-            v-model="form.memo"
+            v-model.trim="form.memo"
             :dark="getIsDark"
             class="no-padding"
           />

@@ -432,7 +432,7 @@ export default {
             ) +
             " " +
             trx_data.asset.symbol,
-          memo: trx_data.memo
+          memo: trx_data.memo.trim()
         },
         authorization: [
           {
