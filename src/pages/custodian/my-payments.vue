@@ -214,9 +214,10 @@ export default {
       let actions = [
         {
           account: this.$configFile.get("custodiancontract"),
-          name: "claimpay",
+          name: "claimpaye",
           data: {
-            payid: id
+            payid: id,
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -233,9 +234,10 @@ export default {
       let actions = this.pendingpay.slice(0, 10).map(pp => {
         return {
           account: contract,
-          name: "claimpay",
+          name: "claimpaye",
           data: {
-            payid: pp.key
+            payid: pp.key,
+            dac_id: this.$configFile.get("dacscope")
           }
         };
       });
@@ -258,10 +260,11 @@ export default {
       let actions = [
         {
           account: this.$configFile.get("custodiancontract"),
-          name: "updatereqpay",
+          name: "updatereqpae",
           data: {
             cand: this.getAccountName,
-            requestedpay: this.verifyAndGetRequestedPay
+            requestedpay: this.verifyAndGetRequestedPay,
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];

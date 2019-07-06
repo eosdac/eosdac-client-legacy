@@ -7002,24 +7002,6 @@ sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-scatterjs-core@^2.7.17:
-  version "2.7.18"
-  resolved "https://registry.yarnpkg.com/scatterjs-core/-/scatterjs-core-2.7.18.tgz#7be773e7d793b2c7137462b2dc3c43cce1f92a07"
-  dependencies:
-    create-hash "^1.2.0"
-    es6-promise "^4.2.4"
-    get-random-values "^1.2.0"
-    isomorphic-ws "^4.0.1"
-    ws "^6.1.0"
-
-scatterjs-plugin-eosjs2@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/scatterjs-plugin-eosjs2/-/scatterjs-plugin-eosjs2-1.5.0.tgz#4e8e08859c82af7b9c0b275ea57c9739a373cc18"
-
-scatterjs-plugin-lynx@1.6.6:
-  version "1.6.6"
-  resolved "https://registry.yarnpkg.com/scatterjs-plugin-lynx/-/scatterjs-plugin-lynx-1.6.6.tgz#6227cf469bb1556bb1f4f50ad7ebd8d55c928654"
-
 schema-utils@^0.4.4, schema-utils@^0.4.5:
   version "0.4.7"
   resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.4.7.tgz#ba74f597d2be2ea880131746ee17d0a093c68187"
