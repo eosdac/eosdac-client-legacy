@@ -94,11 +94,13 @@ export class DacApi {
   async getContractConfig(payload) {
     let contract;
     let scope;
-    let table = "config";
+    let table = "";
     if (payload == "custodian") {
+      table = "config2";
       contract = this.configobj.get("custodiancontract");
       scope = this.configobj.get("dacscope");
     } else if (payload == "wp") {
+      table = "config";
       contract = this.configobj.get("wpcontract");
       scope = this.configobj.get("dacscope");
     }
