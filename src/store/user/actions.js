@@ -195,7 +195,8 @@ export async function transact(
     }
     return action;
   });
-  console.log(JSON.stringify(actions));
+
+  console.log(JSON.stringify(actions, null, 2));
 
   try {
     let [eos] = await dispatch("global/getEosScatter", null, { root: true });
