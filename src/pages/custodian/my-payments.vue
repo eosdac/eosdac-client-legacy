@@ -14,7 +14,7 @@
             />
             <span>Pending Payments ({{ pendingpay.length }})</span>
             <help-btn
-              content="Each new period you can claim your custodian payment. The payment amount is the mean value of all requested custodian pays."
+              content="Each new period you can claim or reject your custodian payment. The payment amount is the mean value of all requested custodian pays. When you reject a payment the funds will not be transfered to your account and will stay in the dac's treasury account."
               title="My pending payments"
               color="text1"
               size="sm"
@@ -57,6 +57,14 @@
                   </q-item-tile>
                 </q-item-main>
                 <q-item-side right style="min-width:65px">
+                  <q-btn
+                    color="negative"
+                    class="animate-fade"
+                    flat
+                    size="sm"
+                    label="reject"
+                    @click="rejectpay(pay.key)"
+                  />
                   <q-btn
                     color="primary"
                     class="animate-fade"
@@ -227,6 +235,26 @@ export default {
       if (result) {
         this.getClaimPay();
       }
+    },
+
+    async rejectpay(id) {
+      // let actions = [
+      //   {
+      //     account: this.$configFile.get("custodiancontract"),
+      //     name: "claimpaye",
+      //     data: {
+      //       payid: id,
+      //       dac_id: this.$configFile.get("dacscope")
+      //     }
+      //   }
+      // ];
+      // let result = await this.$store.dispatch("user/transact", {
+      //   actions: actions
+      // });
+      // if (result) {
+      //   this.getClaimPay();
+      // }
+      alert("todo rejectcuspay");
     },
 
     async claimAll() {
