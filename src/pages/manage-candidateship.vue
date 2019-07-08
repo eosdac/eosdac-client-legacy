@@ -48,17 +48,6 @@
             </q-item-main>
           </q-item>
           <q-item class="q-pl-none">
-            <q-item-side left icon="icon-dac-balance" class="text-text2" />
-            <q-item-main style="margin-left:-5px">
-              <q-item-tile class="text-text1" label>{{
-                $t(`manage_candidateship.locked_tokens`)
-              }}</q-item-tile>
-              <q-item-tile class="text-text2" sublabel>{{
-                $helper.assetToLocaleNumber(getIsCandidate.locked_tokens)
-              }}</q-item-tile>
-            </q-item-main>
-          </q-item>
-          <q-item class="q-pl-none">
             <q-item-side left icon="how_to_vote" class="text-text2" />
             <q-item-main style="margin-left:-5px">
               <q-item-tile class="text-text1" label>{{
@@ -68,6 +57,27 @@
                 $helper.toLocaleNumber(getIsCandidate.total_votes / 10000)
               }}</q-item-tile>
             </q-item-main>
+          </q-item>
+          <q-item class="q-pl-none">
+            <q-item-side left icon="icon-dac-balance" class="text-text2" />
+            <q-item-main style="margin-left:-5px; margin-right:-10px">
+              <q-item-tile class="text-text1" label>{{
+                $t(`manage_candidateship.locked_tokens`)
+              }}</q-item-tile>
+              <q-item-tile class="text-text2" sublabel>{{
+                $helper.assetToLocaleNumber(getIsCandidate.locked_tokens)
+              }}</q-item-tile>
+            </q-item-main>
+            <q-item-side right class="no-padding">
+              <q-btn
+                icon="add"
+                round
+                size="sm"
+                title="Increase stake"
+                color="dark"
+                @click="increase_stake_modal = true"
+              />
+            </q-item-side>
           </q-item>
         </div>
         <div class="row justify-end">
@@ -252,6 +262,31 @@
         ]"
       />
     </div>
+
+    <q-modal v-model="increase_stake_modal" minimized>
+      <div
+        style="height:50px"
+        class="bg-bg1 row items-center justify-between q-px-md text-text1"
+      >
+        <span
+          >Increase Your stake ({{ $configFile.get("dactokensymbol") }})</span
+        >
+        <q-btn icon="close" @click="increase_stake_modal = false" flat dense />
+      </div>
+      <div class="q-pa-md bg-bg2 text-text1">
+        <q-input
+          :dark="getIsDark"
+          type="number"
+          color="primary-light"
+          v-model="increase_stake_amount"
+          stack-label="Extra Stake"
+          placeholder="enter amount"
+        />
+        <div class="row justify-end q-mt-md">
+          <q-btn label="ok" color="primary" @click="increase_stake" />
+        </div>
+      </div>
+    </q-modal>
   </q-page>
 </template>
 
@@ -269,7 +304,9 @@ export default {
         stakeamount: null,
         requestedpay: null
       },
-      requested_pay_max: 0
+      requested_pay_max: 0,
+      increase_stake_amount: "",
+      increase_stake_modal: false
     };
   },
 
@@ -430,6 +467,32 @@ export default {
         this.$store.dispatch("user/fetchIsCandidate");
         this.$store.dispatch("user/fetchBalances");
       }
+    },
+    async increase_stake() {
+      if (!this.increase_stake_amount) return false;
+      this.increase_stake_modal = false;
+      let amount = this.numberToAsset(
+        this.increase_stake_amount.toFixed(4),
+        this.$configFile.get("dactokensymbol")
+      );
+      let stakeaction = {
+        account: this.$configFile.get("tokencontract"),
+        name: "transfer",
+        data: {
+          from: this.getAccountName,
+          to: this.$configFile.get("custodiancontract"),
+          quantity: amount,
+          memo: "Increase stake"
+        }
+      };
+      let result = await this.$store.dispatch("user/transact", {
+        actions: [stakeaction]
+      });
+      if (result) {
+        this.$store.dispatch("user/fetchIsCandidate");
+        this.$store.dispatch("user/fetchBalances");
+      }
+      this.increase_stake_amount = "";
     }
   }
 };

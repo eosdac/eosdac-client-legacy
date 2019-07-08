@@ -58,6 +58,9 @@
                 </q-item-main>
                 <q-item-side right style="min-width:65px">
                   <q-btn
+                    :title="
+                      `Refuse to get paid. The funds will stay in the DAC`
+                    "
                     color="negative"
                     class="animate-fade"
                     flat
@@ -66,6 +69,9 @@
                     @click="rejectpay(pay.key)"
                   />
                   <q-btn
+                    :title="
+                      `Claim your payment. The funds will be transfered to your account.`
+                    "
                     color="primary"
                     class="animate-fade"
                     size="sm"
