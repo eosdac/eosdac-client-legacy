@@ -147,7 +147,7 @@
     "support": "Support & Feedback",
     "switch_account": "Switch Account",
     "token_explorer": "Token Explorer",
-    "unregister_as_candidate": "Unregister As Candidate"
+    "unregister_as_candidate": "Manage Candidateship"
   },
   "msig_creator": {
     "json_description": "For convenience the action data is shown in hex and plain text.",
