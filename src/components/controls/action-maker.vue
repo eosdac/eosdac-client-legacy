@@ -2,7 +2,7 @@
   <div>
     <!-- no props set = custom_mode -->
     <div v-if="account == '' && name == ''">
-      <div>
+      <div class="row">
         <q-item>
           <q-item-main>
             <q-input
