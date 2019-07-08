@@ -542,7 +542,7 @@ export default {
             custodian: this.getAccountName,
             proposal_id: Number(this.wp.id),
             delegatee_custodian: delegatee.new,
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -602,7 +602,7 @@ export default {
             custodian: this.getAccountName,
             proposal_id: Number(this.wp.id),
             vote: map[votetype],
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -643,7 +643,7 @@ export default {
           ],
           data: {
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -664,7 +664,7 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -684,7 +684,7 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -706,7 +706,7 @@ export default {
           data: {
             arbitrator: this.getAccountName,
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         },
         {
@@ -736,7 +736,7 @@ export default {
           // authorization: [ {actor: this.getAccountName, permission: 'active'}],
           data: {
             proposal_id: Number(this.wp.id),
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
