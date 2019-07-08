@@ -244,23 +244,22 @@ export default {
     },
 
     async rejectpay(id) {
-      // let actions = [
-      //   {
-      //     account: this.$configFile.get("custodiancontract"),
-      //     name: "claimpaye",
-      //     data: {
-      //       payid: id,
-      //       dac_id: this.$configFile.get("dacscope")
-      //     }
-      //   }
-      // ];
-      // let result = await this.$store.dispatch("user/transact", {
-      //   actions: actions
-      // });
-      // if (result) {
-      //   this.getClaimPay();
-      // }
-      alert("todo rejectcuspay");
+      let actions = [
+        {
+          account: this.$configFile.get("custodiancontract"),
+          name: "rejectcuspay",
+          data: {
+            payid: id,
+            dac_id: this.$configFile.get("dacscope")
+          }
+        }
+      ];
+      let result = await this.$store.dispatch("user/transact", {
+        actions: actions
+      });
+      if (result) {
+        this.getClaimPay();
+      }
     },
 
     async claimAll() {
