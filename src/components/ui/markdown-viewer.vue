@@ -34,6 +34,16 @@ import marked from "marked";
 import TurndownService from "turndown";
 const turndownService = new TurndownService();
 
+const renderer = new marked.Renderer();
+renderer.link = function(href, title, text) {
+  let link = marked.Renderer.prototype.link.apply(this, arguments);
+  return link.replace("<a", "<a target='_blank'");
+};
+
+marked.setOptions({
+  renderer: renderer
+});
+
 export default {
   name: "MarkdownViewer",
   props: {
