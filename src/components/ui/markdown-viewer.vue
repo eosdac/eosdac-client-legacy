@@ -187,6 +187,18 @@ export default {
 
 <style lang="stylus">
 @import '~variables'
+
+.markdown-body a {
+  color: var(--q-color-primary-light);
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+}
+
+.markdown-body a:hover {
+  color: var(--q-color-text1);
+  text-decoration: none;
+}
+
 .medium-editor-toolbar {
   background-color: var(--q-color-bg2) !important;
   border: 1px solid black !important;
