@@ -116,16 +116,22 @@ export default {
       }
     },
     async updateConfig() {
+      let action_name =
+        this.contract == "dacproposals" ? "updateconfig" : "updateconfige";
       let data =
         this.contract == "dacproposals"
           ? {
               new_config: this.parseConfig(),
-              dac_scope: this.$configFile.get("dacscope")
+              dac_id: this.$configFile.get("dacscope")
             }
-          : { newconfig: this.parseConfig() };
+          : {
+              newconfig: this.parseConfig(),
+              dac_id: this.$configFile.get("dacscope")
+            };
+
       let action = {
         account: this.contract,
-        name: "updateconfig",
+        name: action_name,
         // data: {
         //   newconfig: this.parseConfig()
         // },
