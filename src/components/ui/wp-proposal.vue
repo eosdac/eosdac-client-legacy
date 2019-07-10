@@ -711,10 +711,10 @@ export default {
         },
         {
           account: this.$configFile.get("escrowcontract"),
-          name: "approveext",
+          name: "approve",
 
           data: {
-            ext_key: Number(this.wp.id),
+            key: Number(this.wp.id),
             approver: this.getAccountName
           }
         }
