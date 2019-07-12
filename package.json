@@ -1,6 +1,7 @@
 {
   "name": "eosdacmemberclient",
-  "version": "0.4.4",
+  "version": "0.4.5",
+  "license": "MIT",
   "local_storage_version": "0.1",
   "description": "Toolkit GUI for eosDAC",
   "productName": "eosDAC Member Client",
@@ -16,7 +17,7 @@
     "@chenfengyuan/vue-countdown": "^1.1.2",
     "@scatterjs/core": "^2.7.26",
     "@scatterjs/eosjs2": "^1.5.8",
-    "@scatterjs/lynx": "^1.6.17",
+    "@scatterjs/lynx": "^1.6.20",
     "axios": "^0.19.0",
     "chart.js": "^2.8.0",
     "connect": "^3.6.6",
