@@ -122,7 +122,7 @@
               <span>{{
                 $t("manage_candidateship.stake_description", {
                   minimum_stake: $helper.assetToLocaleNumber(
-                    getCustodianConfig.lockupasset
+                    getCustodianConfig.lockupasset.quantity
                   )
                 })
               }}</span>
@@ -157,7 +157,7 @@
               <span>{{
                 $t("manage_candidateship.pay_description", {
                   requested_pay: $helper.assetToLocaleNumber(
-                    getCustodianConfig.requested_pay_max
+                    getCustodianConfig.requested_pay_max.quantity
                   )
                 })
               }}</span>
@@ -304,7 +304,7 @@ export default {
         stakeamount: null,
         requestedpay: null
       },
-      requested_pay_max: 0,
+      // requested_pay_max: 0,
       increase_stake_amount: "",
       increase_stake_modal: false
     };
@@ -330,7 +330,7 @@ export default {
         this.inputs.requestedpay !== null &&
         this.inputs.requestedpay >= 0 &&
         this.inputs.requestedpay <=
-          this.assetToNumber(this.getCustodianConfig.requested_pay_max)
+          this.assetToNumber(this.getCustodianConfig.requested_pay_max.quantity)
       ) {
         return this.numberToAsset(
           this.inputs.requestedpay.toFixed(
@@ -347,7 +347,7 @@ export default {
       if (
         this.inputs.stakeamount &&
         this.inputs.stakeamount >=
-          this.assetToNumber(this.getCustodianConfig.lockupasset)
+          this.assetToNumber(this.getCustodianConfig.lockupasset.quantity)
       ) {
         return this.numberToAsset(
           this.inputs.stakeamount.toFixed(4),
@@ -365,7 +365,7 @@ export default {
       ) {
         return (
           this.assetToNumber(this.getIsCandidate.locked_tokens) >=
-          this.assetToNumber(this.getCustodianConfig.lockupasset)
+          this.assetToNumber(this.getCustodianConfig.lockupasset.quantity)
         );
       } else {
         return false;

@@ -115,7 +115,7 @@
               :content="
                 $t('manage_candidateship.pay_description', {
                   requested_pay: $helper.assetToLocaleNumber(
-                    getCustodianConfig.requested_pay_max
+                    getCustodianConfig.requested_pay_max.quantity
                   )
                 })
               "
@@ -200,7 +200,7 @@ export default {
 
     totalPayAmount() {
       if (!this.pendingpay.length) return 0;
-
+      let symbol = this.pendingpay[0].quantity.split(" ")[1];
       let total = this.pendingpay.reduce((total, p) => {
         return total + this.$helper.assetToNumber(p.quantity);
       }, 0);
@@ -209,7 +209,9 @@ export default {
         this.$helper.toLocaleNumber(
           total,
           this.$configFile.get("systemtokendecimals")
-        ) + " EOS"
+        ) +
+        " " +
+        symbol
       );
     },
     verifyAndGetRequestedPay() {
@@ -326,7 +328,9 @@ export default {
         required,
         between: between(
           0.0,
-          this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max)
+          this.$helper.assetToNumber(
+            this.getCustodianConfig.requested_pay_max.quantity
+          )
         )
       }
     };
