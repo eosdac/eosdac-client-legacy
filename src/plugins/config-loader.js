@@ -45,6 +45,8 @@ class ConfigLoader {
         return this.configFile.contracts.token.name;
       case "tokendecimals":
         return this.configFile.contracts.token.decimals;
+      case "tokensupply":
+        return this.configFile.contracts.token.totalSupply;
       case "custodianmemo":
         return this.configFile.contracts.custodian.memo;
       case "custodiancontract":

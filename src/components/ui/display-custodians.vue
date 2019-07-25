@@ -104,7 +104,7 @@ export default {
     }),
     getVotingProgress() {
       if (this.getCustodianState.total_weight_of_votes !== null) {
-        let totalsupply = 1000000000.0 * 10000;
+        let totalsupply = this.$configFile.get("tokensupply") * 10000;
 
         return (
           (this.getCustodianState.total_weight_of_votes / totalsupply) * 100
