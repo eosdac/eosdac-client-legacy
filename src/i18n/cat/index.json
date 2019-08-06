@@ -48,69 +48,69 @@
     "select_text_to_edit": "Selecciona el texte que vols editar"
   },
   "menu": {
-    "custodians": "Representantes",
-    "member_status": "Estado",
+    "custodians": "Representants",
+    "member_status": "Estat",
     "profile": "Perfil",
-    "register_as_candidate": "Registrado como Candidato",
+    "register_as_candidate": "Enregistrat com a Candidat",
     "settings": "Configuracion",
-    "unregister_as_candidate": "No registrado como Candidato"
+    "unregister_as_candidate": "No enregistrat como a Candidat"
   },
   "profile": {
-    "account_name": "Nombre de la Cuenta",
+    "account_name": "Nombre del compte",
     "bio": "Bio",
-    "cancel": "Cancelar",
-    "download": "Descargar",
+    "cancel": "Cancel·lar",
+    "download": "Descarregar",
     "edit": "Editar",
-    "familyName": "Apellido",
-    "female": "Mujer",
-    "gender": "Género",
-    "givenName": "Nombre",
-    "male": "Hombre",
-    "maxLinksmsg": "Lo siento, solo se aceptan un máximo de {number_allowed_links} links.",
-    "other": "Otro",
+    "familyName": "Cognom",
+    "female": "Dona",
+    "gender": "Gènere",
+    "givenName": "Nom",
+    "male": "Home",
+    "maxLinksmsg": "Ho sento, sols s'acecpten un màxim de {number_allowed_links} links.",
+    "other": "Altre",
     "profile": "Perfil",
-    "profile_picture_url": "URL de imagen de perfil",
-    "save": "Guardar",
-    "social_link": "Link social",
-    "social_profile_link": "Enlace de perfil social",
-    "website": "Sitio web"
+    "profile_picture_url": "URL la imatge de perfil",
+    "save": "Desar",
+    "social_link": "Enllaç social",
+    "social_profile_link": "Enllaç de perfil social",
+    "website": "Lloc web"
   },
   "settings": {
     "API": "API",
-    "API_endpoint": "Endpoint de la API",
-    "NOT_REGISTERED": "NO REGISTRADO",
-    "REGISTERED": "REGISTRADO",
-    "language_preference": "Preferencia de idioma",
-    "member_status": "Estado de miembro",
-    "register_as_member": "Registrarse como miembro",
-    "register_now": "Regístrate ahora",
-    "settings": "Configuraciones",
-    "transaction_popup_label": "Ventanas emergentes de transacción",
-    "unregister_membership": "Anular el registro de membresía",
-    "user_preference": "Ajustes de usuario"
+    "API_endpoint": "Endpoint de l'API",
+    "NOT_REGISTERED": "NO ENREGISTRAT",
+    "REGISTERED": "ENREGISTRAT",
+    "language_preference": "Preferència d'idioma",
+    "member_status": "Estat de participació",
+    "register_as_member": "Enregistrar-se com a participant",
+    "register_now": "Enregístra-te ara",
+    "settings": "Configuracions",
+    "transaction_popup_label": "Finestres emergents de transició",
+    "unregister_membership": "Anul·lar l'enregistrament de participació",
+    "user_preference": "Ajustaments d'usuari"
   },
   "transaction": {
-    "cancel": "Cancelar",
-    "transaction": "Transacción",
-    "transaction_successful": "Transacción realizada con éxito"
+    "cancel": "Cancel·lar",
+    "transaction": "Transacció",
+    "transaction_successful": "Transacció realitzada amb èxit"
   },
   "vote_custodians": {
-    "candidate_list": "Lista de Candidatos",
-    "description_main": "El Consejo de Representantes gestiona las operaciones y asuntos del DAC, incluidos, entre otros, el gobierno y la administración de los activos y pasivos del DAC. Los siguientes miembros de la DAC avalaron algunos de sus tokens para presentarse ellos mismos y los candidatos para un puesto en el Consejo de Representantes que duran 7 días. Cada 7 días, sus votos se vuelven a calcular para seleccionar quién formará parte del próximo Consejo de Representantes. ¡Votar es importante! Vota a menudo y mantente comprometido con la DAC para saber quién proporciona valor.",
-    "description_side": "Puedes votar por hasta {maxvotes} candidatos a Representante a la vez. Selecciona candidatos que creas que aportarán valor al {dacname}.",
-    "my_votes": "mi voto",
-    "rows_per_page": "Filas por página",
-    "search": "búsqueda",
-    "submit_my_votes": "ENVIAR mis votos",
-    "voting_progress": "progreso de la votación"
+    "candidate_list": "Lista de Candidats",
+    "description_main": "El Consell de Representants gestiona les operacions y tasques de la DAC, inclòsoss, entre d'altres, el govern i l'administració del activus i passius de la DAC. Los seguents participants de la DAC han avalat amb alguns dels seus tokens per presentar-se ellos com a candidats paer un lloc al Consell de Representants que dura 7 dies. Cada 7 dies, els seus vots es tornen a calcular per sel·leccionar qui formarà part del nou Consell de Representants. Votar es important! Vota sovint i estigues compromès amb la DAC para saber quié proporciona valor.",
+    "description_side": "Pots votar fins a {maxvotes} candidats a Representant a l'ora. Sel·lecciona candidats que creguis que aportaràn valor a la {dacname}.",
+    "my_votes": "el meu vot",
+    "rows_per_page": "Filas per pàgina",
+    "search": "recerca",
+    "submit_my_votes": "ENVIAR els meus vots",
+    "voting_progress": "progress de la votació"
   },
   "votingprogress": {
-    "activated_at": "La DAC sera activada al alcanzar un mínimo del 15% de los votos",
-    "loading": "cargando...",
+    "activated_at": "La DAC serà activada al assolir un mínim del 15% dels vots",
+    "loading": "caregant...",
     "refresh": "Refrescar",
-    "seconds": "segundos",
-    "threshold_met": "Quorom del 15% registrado. eosDac se ha desbloqueado.",
-    "update_in": "actualizar en"
+    "seconds": "segons",
+    "threshold_met": "Quorum del 15% enregistrat. eosDac s'ha desbloqueajat.",
+    "update_in": "actualitzar en"
   }
 }
 © 2019 GitHub, Inc.
