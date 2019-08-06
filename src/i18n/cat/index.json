@@ -1,51 +1,51 @@
 {
   "constitution": {
-    "switch_contrast": "Cambiar contraste"
+    "switch_contrast": "Canviar contrast"
   },
   "default": {
-    "constitution": "Constitución",
-    "constitution_has_been_updated": "La Constitución ha sido actualizada. Firma la Constitución actualizada para poder usar el portal de Miembros.",
-    "login": "Iniciar sesión",
-    "logout": "Cerrar sesión",
-    "member_client": "Miembro",
+    "constitution": "Constitució",
+    "constitution_has_been_updated": "La Constitució ha estat actualizada. Signa la Constitución actualizada para poder fer servir el portal de Participants.",
+    "login": "Iniciar sesió",
+    "logout": "Tancar sesió",
+    "member_client": "Participant",
     "menu": "Menú",
-    "sign_the_constitution": "Firme la Constitución",
-    "you_have_not_yet_registered": "Aun no registrado como Miembro. Firma la Constitución para ser un miembro.",
-    "your_token_balance": "Tu saldo {tokenName}"
+    "sign_the_constitution": "Signa la Constitució",
+    "you_have_not_yet_registered": "Encara no estàs enregistrat com a Participant. Signa la Constitució para poder participar.",
+    "your_token_balance": "El teu saldo {tokenName}"
   },
   "four_zero_four": {
-    "go_back": "Voler",
-    "sorry_nothing_here": "Lo siento, nada por aquí ..."
+    "go_back": "Tornar",
+    "sorry_nothing_here": "Ho sento, no hi ha res aquí ..."
   },
   "lang_selector": {
-    "choose_your_language": "Elige tu idioma",
+    "choose_your_language": "Escull idioma",
     "languages": {
-      "chinese": "Chino (Simplificado)",
-      "english_gb": "Inglés (GB)",
-      "english_us": "Inglés (US)",
-      "french": "Francés",
-      "german": "Aleman",
-      "italian": "Italiano",
+      "chinese": "Xinès (Simplificat)",
+      "english_gb": "Anglès (GB)",
+      "english_us": "Anglès (US)",
+      "french": "Francès",
+      "german": "Alemany",
+      "italian": "Italià",
       "japanese": "Japonés",
-      "korean": "Coreano",
-      "russian": "Ruso",
-      "spanish": "Español",
+      "korean": "Coreà",
+      "russian": "Russ",
+      "spanish": "Castellà",
       "vietnamese": "Vietnamita"
     }
   },
   "manage_candidateship": {
-    "amount_to_stake_placeholder": "Cantidad para depositar como aval {token_symbol}",
-    "page_description_active_custodian": "Actualmente estás activo como Miembro del Consejo de Representantes de {dacname}.",
-    "page_description_registered": "Gracias por registrarte como candidato para formar parte  del Consejo de Representantes de {dacname}. Como parte de su registro de candidatura, algunos de sus tokens han sido stakeados.",
-    "page_description_unregistered": "Esta página es para registrarse como candidato para un puesto en el Consejo de Representantes. Este puesto viene con las responsabilidades descritas en la Constitución de {dacname}. Por favor, no se registre como Candidato a menos que entienda completamente y pueda cumplir con las responsabilidades de un miembro del Consejo de Representantes de {dacname}. Por favor revise la sección 5 de la constitución cuidadosamente antes de registrarse.",
-    "register": "Registrarse",
-    "requested_custodian_pay_placeholder": "Pago solicitado en EOS",
-    "requestedpay": "Pago solicitado",
-    "stake_amount": "Cantidad Avalada",
-    "unregister": "No registrado"
+    "amount_to_stake_placeholder": "Quantitat a depositar com aval {token_symbol}",
+    "page_description_active_custodian": "Actualment estàs actiu como Participant del Consell de Representants de {dacname}.",
+    "page_description_registered": "Gracies per enregistrar-te com a candidat para formar part del Consell de Representants de {dacname}. Como a part del enregistrament de la teva candidatura, alguns dels teus tokens han estat depositats com aval.",
+    "page_description_unregistered": "Aquesta pàgina es per enregistrar-se com a candidat per formar part del Consell de Representants. Aqueta tasca comporta les responsabilitats descrites a la Constitució de {dacname}. si us plau, no t'enregistris como a Candidat si no et queda completament clara aqeusta tasca i puguis assumir responsabilitats del Consell de Representants de {dacname}. Si us plau, revisa detalladament la secció 5 de la constitució abans d'enregistrar-te.",
+    "register": "Enregistrar-se",
+    "requested_custodian_pay_placeholder": "Pagament en EOS",
+    "requestedpay": "Pagament demanat",
+    "stake_amount": "Quantitat avalada",
+    "unregister": "No enregistrat"
   },
   "markdown_viewer": {
-    "select_text_to_edit": "Seleccione el texto que quiere editar"
+    "select_text_to_edit": "Selecciona el texte que vols editar"
   },
   "menu": {
     "custodians": "Representantes",
