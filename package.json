@@ -14,7 +14,6 @@
     "add_extensions": "git -C ./src clone"
   },
   "dependencies": {
-    "lodash": "^4.17.13",
     "@chenfengyuan/vue-countdown": "^1.1.2",
     "@scatterjs/core": "^2.7.26",
     "@scatterjs/eosjs2": "^1.5.8",
