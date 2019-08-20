@@ -2,7 +2,7 @@
   <div>
     <!-- no props set = custom_mode -->
     <div v-if="account == '' && name == ''">
-      <div>
+      <div class="row">
         <q-item>
           <q-item-main>
             <q-input
@@ -56,7 +56,10 @@
           :key="`a${i}`"
           color="bg1"
           class="animate-pop q-ma-xs"
-          @click="custom_mode.action_name = action.name"
+          @click="
+            custom_mode.action_name = action.name;
+            custom_mode.action_type = action.type;
+          "
         />
         <q-btn
           size="10px"
@@ -289,6 +292,7 @@ export default {
       custom_mode: {
         account: "",
         action_name: "",
+        action_type: "",
         abi: {}
       }
     };
@@ -331,9 +335,10 @@ export default {
       }
     },
 
-    getDataFieldsForActionName(abi, action_name) {
+    getDataFieldsForActionType(abi, action_type) {
+      console.log(abi);
       if (abi && abi.structs) {
-        let struct = abi.structs.find(s => s.name == action_name);
+        let struct = abi.structs.find(s => s.name == action_type);
         return struct.fields;
       }
     },
@@ -342,7 +347,7 @@ export default {
       this.data_fields = [];
 
       let actions = abi || (await this.getAbi(contract));
-      let fields = this.getDataFieldsForActionName(actions, action_name);
+      let fields = this.getDataFieldsForActionType(actions, action_name);
       if (!fields) return;
       this.data_fields = fields.map(f => {
         if (this.prefill[f.name]) {
@@ -477,7 +482,7 @@ export default {
       if (oldv != newv) {
         this.setFieldsModel(
           this.custom_mode.account,
-          this.custom_mode.action_name,
+          this.custom_mode.action_type,
           JSON.parse(JSON.stringify(this.custom_mode.abi))
         );
       }

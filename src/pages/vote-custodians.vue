@@ -410,10 +410,11 @@ export default {
       let actions = [
         {
           account: this.$configFile.get("custodiancontract"),
-          name: "votecust",
+          name: "votecuste",
           data: {
             voter: this.getAccountName,
-            newvotes: votes
+            newvotes: votes,
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];

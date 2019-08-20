@@ -14,7 +14,7 @@
             />
             <span>Pending Payments ({{ pendingpay.length }})</span>
             <help-btn
-              content="Each new period you can claim your custodian payment. The payment amount is the mean value of all requested custodian pays."
+              content="Each new period you can claim or reject your custodian payment. The payment amount is the mean value of all requested custodian pays. When you reject a payment the funds will not be transfered to your account and will stay in the dac's treasury account."
               title="My pending payments"
               color="text1"
               size="sm"
@@ -58,6 +58,20 @@
                 </q-item-main>
                 <q-item-side right style="min-width:65px">
                   <q-btn
+                    :title="
+                      `Refuse to get paid. The funds will stay in the DAC`
+                    "
+                    color="negative"
+                    class="animate-fade"
+                    flat
+                    size="sm"
+                    label="reject"
+                    @click="rejectpay(pay.key)"
+                  />
+                  <q-btn
+                    :title="
+                      `Claim your payment. The funds will be transfered to your account.`
+                    "
                     color="primary"
                     class="animate-fade"
                     size="sm"
@@ -101,7 +115,7 @@
               :content="
                 $t('manage_candidateship.pay_description', {
                   requested_pay: $helper.assetToLocaleNumber(
-                    getCustodianConfig.requested_pay_max
+                    getCustodianConfig.requested_pay_max.quantity
                   )
                 })
               "
@@ -186,7 +200,7 @@ export default {
 
     totalPayAmount() {
       if (!this.pendingpay.length) return 0;
-
+      let symbol = this.pendingpay[0].quantity.split(" ")[1];
       let total = this.pendingpay.reduce((total, p) => {
         return total + this.$helper.assetToNumber(p.quantity);
       }, 0);
@@ -195,7 +209,9 @@ export default {
         this.$helper.toLocaleNumber(
           total,
           this.$configFile.get("systemtokendecimals")
-        ) + " EOS"
+        ) +
+        " " +
+        symbol
       );
     },
     verifyAndGetRequestedPay() {
@@ -214,9 +230,29 @@ export default {
       let actions = [
         {
           account: this.$configFile.get("custodiancontract"),
-          name: "claimpay",
+          name: "claimpaye",
           data: {
-            payid: id
+            payid: id,
+            dac_id: this.$configFile.get("dacscope")
+          }
+        }
+      ];
+      let result = await this.$store.dispatch("user/transact", {
+        actions: actions
+      });
+      if (result) {
+        this.getClaimPay();
+      }
+    },
+
+    async rejectpay(id) {
+      let actions = [
+        {
+          account: this.$configFile.get("custodiancontract"),
+          name: "rejectcuspay",
+          data: {
+            payid: id,
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -233,9 +269,10 @@ export default {
       let actions = this.pendingpay.slice(0, 10).map(pp => {
         return {
           account: contract,
-          name: "claimpay",
+          name: "claimpaye",
           data: {
-            payid: pp.key
+            payid: pp.key,
+            dac_id: this.$configFile.get("dacscope")
           }
         };
       });
@@ -258,10 +295,11 @@ export default {
       let actions = [
         {
           account: this.$configFile.get("custodiancontract"),
-          name: "updatereqpay",
+          name: "updatereqpae",
           data: {
             cand: this.getAccountName,
-            requestedpay: this.verifyAndGetRequestedPay
+            requestedpay: this.verifyAndGetRequestedPay,
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -290,7 +328,9 @@ export default {
         required,
         between: between(
           0.0,
-          this.$helper.assetToNumber(this.getCustodianConfig.requested_pay_max)
+          this.$helper.assetToNumber(
+            this.getCustodianConfig.requested_pay_max.quantity
+          )
         )
       }
     };

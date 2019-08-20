@@ -215,10 +215,11 @@ export default {
       let actions = [
         {
           account: this.$configFile.get("tokencontract"),
-          name: "memberreg",
+          name: "memberrege",
           data: {
             sender: this.getAccountName,
-            agreedterms: this.md5_constitution
+            agreedterms: this.md5_constitution,
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -238,9 +239,10 @@ export default {
       let actions = [
         {
           account: this.$configFile.get("tokencontract"),
-          name: "memberunreg",
+          name: "memberunrege",
           data: {
-            sender: this.getAccountName
+            sender: this.getAccountName,
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];

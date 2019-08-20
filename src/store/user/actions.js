@@ -195,7 +195,8 @@ export async function transact(
     }
     return action;
   });
-  console.log(JSON.stringify(actions));
+
+  console.log(JSON.stringify(actions, null, 2));
 
   try {
     let [eos] = await dispatch("global/getEosScatter", null, { root: true });
@@ -233,7 +234,7 @@ export async function transact(
       });
     }
     // add a delay befor returning the transaction result. this to give nodes time to sync.
-    return await new Promise(resolve => setTimeout(() => resolve(result), 250));
+    return await new Promise(resolve => setTimeout(() => resolve(result), 500));
   } catch (e) {
     console.log(e);
     let message = "unknown_error";
@@ -329,7 +330,7 @@ export async function proposeMsig(
 
   let proposed = {
     account: this._vm.$configFile.get("dacmsigcontract"),
-    name: "proposed",
+    name: "proposede",
     authorization: [
       { actor: state.accountName, permission: getters["getAuth"] },
       { actor: this._vm.$configFile.get("authaccount"), permission: PERM }
@@ -337,7 +338,7 @@ export async function proposeMsig(
     data: {
       proposer: state.accountName,
       proposal_name: proposal_name,
-      // dac_id: this._vm.$configFile.get("dacscope"),
+      dac_id: this._vm.$configFile.get("dacscope"),
       metadata: JSON.stringify({
         title: payload.title || "Default Msig title",
         description: payload.description || "default msig description"

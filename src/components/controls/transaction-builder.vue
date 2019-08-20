@@ -89,7 +89,7 @@
         swipeable
         ref="trx_builder_tabs"
       >
-        <q-tab slot="title" name="tab-1" :label="`Add Action`" default />
+        <q-tab slot="title" name="tab-1" :label="`Add Actions`" default />
         <q-tab
           slot="title"
           name="tab-2"
@@ -277,7 +277,7 @@
         </q-tab-pane>
       </q-tabs>
 
-      <div class="row q-mt-md">
+      <div class="row q-mt-md justify-between">
         <q-item class="animate-pop no-padding">
           <q-item-main>
             <q-item-tile class="text-text1 q-body1" label
@@ -293,20 +293,25 @@
             </q-item-tile>
           </q-item-main>
         </q-item>
-        <!-- <q-item class="animate-pop no-padding on-right">
+        <q-item class="cursor-pointer q-body-1 ">
           <q-item-main>
-            <q-item-tile class="text-text1 q-body1" label
-              >Broadcast</q-item-tile
+            <label
+              style="display:block"
+              for="myInput"
+              class="cursor-pointer full-width"
             >
-            <q-item-tile sublabel>
-              <q-toggle
-                :dark="getIsDark"
-                color="primary-light"
-                v-model="broadcast"
-              />
-            </q-item-tile>
+              Import Actions
+            </label>
+            <input
+              id="myInput"
+              type="file"
+              style="display:none"
+              ref="inputFile"
+              accept=".json,application/json"
+              @input="handleFileInput()"
+            />
           </q-item-main>
-        </q-item> -->
+        </q-item>
       </div>
     </div>
 
@@ -465,6 +470,29 @@ export default {
         this.msig_requested_signatures.push({ actor: actor, permission: perm });
         this.new_requested_signature = "";
       }
+    },
+    async handleFileInput() {
+      let file = this.$refs.inputFile.files[0];
+      console.log(file);
+      let content = await new Promise((resolve, reject) => {
+        var fr = new FileReader();
+        fr.onload = function(result) {
+          return resolve(fr.result);
+        };
+        fr.readAsText(file, `utf8`);
+      });
+
+      try {
+        content = JSON.parse(content);
+      } catch (e) {
+        alert("Malformed import file !!", e);
+        return;
+      }
+
+      for (let i = 0; i < content.length; i++) {
+        this.addAction(content[i]);
+      }
+      document.getElementById("myInput").value = "";
     }
   },
   watch: {

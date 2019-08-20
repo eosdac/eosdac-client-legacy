@@ -88,8 +88,8 @@
       </div>
 
       <!-- mobile details modal -->
-      <q-modal maximized v-model="mobile_details_modal">
-        <div class="text-text1 bg-bg2">
+      <q-modal maximized v-model="mobile_details_modal" class="bg-bg2">
+        <div class="text-text1 bg-bg2 full-height">
           <!-- header -->
           <div
             style="height:50px"
@@ -104,7 +104,7 @@
             />
           </div>
           <!-- content -->
-          <div class="q-pa-md ">
+          <div class="q-pa-md">
             <q-item>
               <q-item-side left>
                 <q-icon
@@ -145,11 +145,29 @@
                   new Date(msig.block_timestamp).toUTCString()
                 }}</span>
               </div>
-              <div class="q-pb-xs">
+              <div class="q-pb-xs" v-if="msig.status != 2">
                 <span>Expiration: </span>
                 <span class="text-text2">{{
                   new Date(msig.trx.expiration).toUTCString()
                 }}</span>
+              </div>
+              <div class="q-pb-xs" v-if="msig.status == 2">
+                <span>Executed by: </span>
+                <span class="text-text2">
+                  {{ msig.executer }}
+                  <q-btn
+                    @click="
+                      openURL(
+                        $configFile.get('explorer') +
+                          `/transaction/${msig.executed_trxid}`
+                      )
+                    "
+                    label="view"
+                    dense
+                    size="sm"
+                    color="dark"
+                  />
+                </span>
               </div>
 
               <div class="q-mb-xs">
@@ -331,7 +349,7 @@
         <div class="q-px-md q-pb-md">
           <div style="border-top: 1px solid grey">
             <div class="row q-mt-md">
-              <q-item class="no-padding">
+              <q-item class="no-padding" v-if="msig.status != 2">
                 <q-item-main>
                   <q-item-tile class="text-text1 q-caption" label
                     >Expiration</q-item-tile
@@ -339,6 +357,28 @@
                   <q-item-tile class="text-text1" sublabel>{{
                     new Date(msig.trx.expiration).toUTCString()
                   }}</q-item-tile>
+                </q-item-main>
+              </q-item>
+              <q-item class="no-padding" v-if="msig.status == 2">
+                <q-item-main>
+                  <q-item-tile class="text-text1 q-caption" label>
+                    Executed by
+                  </q-item-tile>
+                  <q-item-tile class="text-text1" sublabel>
+                    {{ msig.executer }}
+                    <q-btn
+                      @click="
+                        openURL(
+                          $configFile.get('explorer') +
+                            `/transaction/${msig.executed_trxid}`
+                        )
+                      "
+                      label="view"
+                      dense
+                      size="sm"
+                      color="dark"
+                    />
+                  </q-item-tile>
                 </q-item-main>
               </q-item>
               <q-item class="no-padding q-ml-md">
@@ -475,7 +515,7 @@
           <q-btn icon="close" @click="approvals_modal = false" flat dense />
         </div>
         <!-- content -->
-        <div class="q-pa-md">
+        <div class=" q-pa-md">
           <div class="row justify-start q-mt-sm">
             <!-- <pre>{{provided_approvals}}</pre> -->
             <div
@@ -534,6 +574,7 @@
 import Actionparser from "components/ui/action-parser";
 import profilePic from "components/ui/profile-pic";
 import MarkdownViewer from "components/ui/markdown-viewer";
+import { openURL } from "quasar";
 
 import { mapGetters } from "vuex";
 export default {
@@ -656,6 +697,7 @@ export default {
   },
 
   methods: {
+    openURL,
     async checkApprovals() {
       let avatars = await this.$profiles.getAvatars([
         ...this.msig.provided_approvals.map(a => a.actor),
@@ -693,7 +735,7 @@ export default {
         },
         {
           account: this.dacmsig,
-          name: "approved",
+          name: "approvede",
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
@@ -705,7 +747,7 @@ export default {
             proposer: proposer,
             proposal_name: proposal_name,
             approver: this.getAccountName,
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -731,7 +773,7 @@ export default {
         },
         {
           account: this.dacmsig,
-          name: "unapproved",
+          name: "unapprovede",
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
@@ -743,7 +785,7 @@ export default {
             proposer: proposer,
             proposal_name: proposal_name,
             unapprover: this.getAccountName,
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -768,7 +810,7 @@ export default {
         },
         {
           account: this.dacmsig,
-          name: "executed",
+          name: "executede",
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
@@ -780,7 +822,7 @@ export default {
             proposer: proposer,
             proposal_name: proposal_name,
             executer: this.getAccountName,
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];
@@ -806,7 +848,7 @@ export default {
         },
         {
           account: this.dacmsig,
-          name: "cancelled",
+          name: "cancellede",
           authorization: [
             { actor: this.getAccountName, permission: this.getAuth },
             {
@@ -818,7 +860,7 @@ export default {
             proposer: proposer,
             proposal_name: proposal_name,
             canceler: this.getAccountName,
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];

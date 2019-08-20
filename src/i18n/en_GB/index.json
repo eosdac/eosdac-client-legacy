@@ -124,7 +124,7 @@
     "amount_to_stake_placeholder": "amount to stake {token_symbol}",
     "locked_tokens": "locked tokens",
     "page_description_active_custodian": "You are currently active as an {dacname} custodian board member.",
-    "page_description_registered": "Thank you for registering as a candidate to serve on the {dacname} custodian board. As part of your candidacy registration, some of your tokens have been staked.",
+    "page_description_registered": "Thank you for registering as a candidate to serve on the {dacname} custodian board. As part of your candidacy registration, some of your tokens have been staked. Click the \"+\" button to increase your stake.",
     "page_description_unregistered": "This page is for registering as a candidate for a position on the custodian board. This position comes with responsibiliies outlined in the {dacname} Constitution. Please, do not register as a candidate unless you fully understand and can meet the responsibilites of an {dacname} custodian board member. Please review section 5 of the constitution carefully before registering.",
     "pay_description": "Please fill in The amount you want to receive for being a custodian during one period. The maximum amount is {requested_pay}.",
     "register": "register",
@@ -147,7 +147,7 @@
     "support": "Support & Feedback",
     "switch_account": "Switch Account",
     "token_explorer": "Token Explorer",
-    "unregister_as_candidate": "Unregister As Candidate"
+    "unregister_as_candidate": "Manage Candidateship"
   },
   "msig_creator": {
     "json_description": "For convenience the action data is shown in hex and plain text.",
