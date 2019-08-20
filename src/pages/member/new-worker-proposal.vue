@@ -218,7 +218,7 @@ export default {
             content_hash: "00000000000000000000000000000000",
             id: this.$helper.randomIntFromInterval(1, 999999999999999999),
             category: this.wp_data.category,
-            dac_scope: this.$configFile.get("dacscope")
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];

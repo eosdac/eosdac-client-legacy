@@ -283,10 +283,11 @@ export default {
         return;
       let action = {
         account: this.$configFile.get("tokencontract"),
-        name: "newmemterms",
+        name: "newmemtermse", //xxxxx
         data: {
           terms: this.new_constitution_url,
-          hash: this.md5_constitution
+          hash: this.md5_constitution,
+          dac_id: this.$configFile.get("dacscope")
         },
         authorization: [
           {

@@ -125,7 +125,7 @@ export default {
           custodian: this.getAccountName,
           category: cat_id,
           delegatee_custodian: delegatee.new,
-          dac_scope: this.$configFile.get("dacscope")
+          dac_id: this.$configFile.get("dacscope")
         }
       };
       let undelegate = {
@@ -141,7 +141,7 @@ export default {
         data: {
           custodian: this.getAccountName,
           category: cat_id,
-          dac_scope: this.$configFile.get("dacscope")
+          dac_id: this.$configFile.get("dacscope")
         }
       };
 

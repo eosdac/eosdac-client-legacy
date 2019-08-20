@@ -84,12 +84,12 @@
             }}</span>
             <q-btn flat round dense icon="more_vert" :disable="!getIsCustodian">
               <q-popover
-                class="bg-bg2 text-text1"
+                class="bg-dark text-text1"
                 style="width:150px"
                 v-if="getIsCustodian"
               >
                 <q-list highlight>
-                  <q-item class="cursor-pointer q-body-1">
+                  <q-item class="cursor-pointer q-body-1 ">
                     <q-item-main>
                       <label
                         style="display:block"
@@ -190,7 +190,7 @@
                       <span>{{ trx.to }}</span>
                       <q-chip
                         dense
-                        color="bg2"
+                        color="dark"
                         class="text-weight-thin on-right q-caption text-text1"
                       >
                         <span>{{ `${trx.asset.amount}` }}</span>
@@ -432,7 +432,7 @@ export default {
             ) +
             " " +
             trx_data.asset.symbol,
-          memo: trx_data.memo
+          memo: trx_data.memo.trim()
         },
         authorization: [
           {

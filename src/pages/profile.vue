@@ -358,10 +358,11 @@ export default {
       let actions = [
         {
           account: this.$configFile.get("custodiancontract"),
-          name: "stprofileuns",
+          name: "stprofile",
           data: {
             cand: this.getAccountName,
-            profile: JSON.stringify(this.form)
+            profile: JSON.stringify(this.form),
+            dac_id: this.$configFile.get("dacscope")
           }
         }
       ];

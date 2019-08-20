@@ -3,6 +3,7 @@ export async function initRoutine({ state, commit, dispatch }, vm) {
   const api = await dispatch("global/getDacApi", false, { root: true });
 
   let custodianconfig = await api.getContractConfig("custodian");
+  console.log("custodian config", custodianconfig);
   //requests to get dac info, doesn't require user to be logged in
   let requests = [
     api.getMemberTerms(),

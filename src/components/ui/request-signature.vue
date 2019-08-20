@@ -27,7 +27,7 @@
 
       <div class="row justify-end">
         <q-btn
-          color="bg1"
+          color="dark"
           to="/constitution"
           icon="receipt"
           :label="$t('default.sign_the_constitution')"

@@ -99,6 +99,9 @@ export default {
       for (let conf in current_config) {
         let item = config_struct.find(cs => cs.name == conf);
         item.value = current_config[conf];
+        if (typeof item.value === "object" && item.value !== null) {
+          item.value = JSON.stringify(item.value);
+        }
       }
       this.contract_config = config_struct;
     },
@@ -116,22 +119,28 @@ export default {
       }
     },
     async updateConfig() {
+      let action_name =
+        this.contract == "dacproposals" ? "updateconfig" : "updateconfige";
       let data =
         this.contract == "dacproposals"
           ? {
               new_config: this.parseConfig(),
-              dac_scope: this.$configFile.get("dacscope")
+              dac_id: this.$configFile.get("dacscope")
             }
-          : { newconfig: this.parseConfig() };
+          : {
+              newconfig: this.parseConfig(),
+              dac_id: this.$configFile.get("dacscope")
+            };
+
       let action = {
         account: this.contract,
-        name: "updateconfig",
+        name: action_name,
         // data: {
         //   newconfig: this.parseConfig()
         // },
         authorization: [
           {
-            actor: this.contract,
+            actor: this.$configFile.get("authaccount"),
             permission: "active"
           }
         ]
@@ -147,7 +156,8 @@ export default {
     },
 
     parseConfig() {
-      let new_config = this.contract_config.reduce((result, item) => {
+      let clone = JSON.parse(JSON.stringify(this.contract_config));
+      let new_config = clone.reduce((result, item) => {
         switch (item.type) {
           case "bool":
             if (
@@ -159,6 +169,9 @@ export default {
             } else {
               item.value = true;
             }
+            break;
+          case "extended_asset":
+            item.value = JSON.parse(item.value);
             break;
 
           default:

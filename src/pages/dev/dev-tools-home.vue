@@ -39,20 +39,6 @@
         <div class="col-xs-12 col-md-6 ">
           <div class="bg-bg1 round-borders shadow-4 q-pa-md">
             <color-picker />
-            <div class="q-mt-md row justify-between">
-              <q-btn
-                label="download theme"
-                color="primary"
-                @click="getColorScheme"
-              />
-              <q-toggle
-                label="is dark?"
-                :dark="getIsDark"
-                color="primary-light"
-                :value="$store.state.ui.isDark"
-                @input="change_is_dark_state"
-              />
-            </div>
           </div>
         </div>
 
@@ -98,12 +84,11 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { colors } from "quasar";
+
 import colorPicker from "components/controls/color-picker";
 import networkSwitcher from "components/controls/network-switcher";
 import firehose from "components/controls/firehose";
 import debugData from "components/ui/debug-data";
-import { saveAs } from "file-saver";
 
 export default {
   name: "test",
@@ -117,19 +102,7 @@ export default {
     return {
       scatter: null,
       assettest: "",
-      showConfigModal: false,
-      is_dark: this.$store.state.ui.isDark,
-      colornames: [
-        "primary",
-        "bg1",
-        "bg2",
-        "text1",
-        "text2",
-        "info",
-        "positive",
-        "negative",
-        "dark"
-      ]
+      showConfigModal: false
     };
   },
   computed: {
@@ -159,26 +132,6 @@ export default {
     },
     switchNode() {
       this.$store.commit("global/setNode", "http://testerino.com");
-    },
-
-    getColorScheme() {
-      let color_file = {
-        is_dark: this.getIsDark,
-        colors: {}
-      };
-
-      this.colornames.forEach(c => {
-        color_file.colors[`$${c}`] = colors.getBrand(c);
-      });
-
-      let blob = new Blob([JSON.stringify(color_file, null, 2)], {
-        type: "text/plain;charset=utf-8"
-      });
-      saveAs(blob, "theme.json");
-      console.log(color_file);
-    },
-    change_is_dark_state(v) {
-      this.$store.commit("ui/setIsDark", v);
     }
   }
 };

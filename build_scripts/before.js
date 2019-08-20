@@ -14,7 +14,8 @@ let content = '//This file is generated in the pre build script. \n\n';
 if(source_file){
     Object.keys(source_file.colors).forEach(c => {
         content += `${c} = ${source_file.colors[c]}\n`;
-    })
+    });
+
 }
 
 fs.writeFile(target_file, content, function(err) {

@@ -138,7 +138,7 @@
               <q-icon
                 :title="$t('candidate.nominated_next')"
                 style="margin-top:-5px"
-                v-if="data.rank < 13"
+                v-if="data.rank <= getCustodianConfig.numelected"
                 name="fiber_manual_record"
                 color="primary"
               />{{ data.candidate_name }}
@@ -217,9 +217,9 @@
                 :to="{ path: '/profile/' + data.candidate_name }"
               >
                 <q-icon
-                  title="Nominated for next custodian board"
+                  :title="$t('candidate.nominated_next')"
                   style="margin-top:-5px"
-                  v-if="data.rank < 13"
+                  v-if="data.rank <= getCustodianConfig.numelected"
                   name="fiber_manual_record"
                   color="primary"
                 />{{ data.candidate_name }}
@@ -339,6 +339,7 @@ export default {
   computed: {
     ...mapGetters({
       getCustodians: "dac/getCustodians",
+      getCustodianConfig: "dac/getCustodianConfig",
       getTokenBalance: "user/getDacBalance",
       getIsDark: "ui/getIsDark"
     }),
