@@ -238,7 +238,8 @@ export class DacApi {
     let pendingpays = await this.eos.get_table_rows({
       json: true,
       code: this.configobj.get("custodiancontract"),
-      scope: this.configobj.get("dacscope"),
+      scope: this.configobj.get("custodiancontract"),
+      // scope: this.configobj.get("dacscope"),
       table: "pendingpay",
       lower_bound: accountname,
       upper_bound: accountname,

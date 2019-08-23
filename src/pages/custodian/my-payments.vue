@@ -90,7 +90,6 @@
             <q-item-side right>
               <q-btn
                 color="positive"
-                :disabled="true"
                 label="claim all"
                 @click="claimAll"
               />
