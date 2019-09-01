@@ -747,37 +747,28 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@positron/stack-trace/-/stack-trace-1.0.0.tgz#14fcc712a530038ef9be1ce6952315a839f466a8"
 
-"@scatterjs/core@^2.7.26":
-  version "2.7.26"
-  resolved "https://registry.yarnpkg.com/@scatterjs/core/-/core-2.7.26.tgz#dca9a34fc6590dbe839c477deb05104df099cead"
+"@scatterjs/core@^2.7.44":
+  version "2.7.44"
+  resolved "https://registry.yarnpkg.com/@scatterjs/core/-/core-2.7.44.tgz#da6db19fd02fdae37dc251864f28ab11844bf223"
   dependencies:
     create-hash "^1.2.0"
+    device-uuid "^1.0.4"
     es6-promise "^4.2.4"
     get-random-values "^1.2.0"
     isomorphic-ws "^4.0.1"
     ws "^6.1.0"
 
-"@scatterjs/core@^2.7.27":
-  version "2.7.27"
-  resolved "https://registry.yarnpkg.com/@scatterjs/core/-/core-2.7.27.tgz#6a9bf58ee93572def5b0165788d5816fcb5da1f1"
+"@scatterjs/eosjs2@^1.5.26":
+  version "1.5.26"
+  resolved "https://registry.yarnpkg.com/@scatterjs/eosjs2/-/eosjs2-1.5.26.tgz#1d0dc10864caeb11d6ca1bcc8528d9b4c7084672"
   dependencies:
-    create-hash "^1.2.0"
-    es6-promise "^4.2.4"
-    get-random-values "^1.2.0"
-    isomorphic-ws "^4.0.1"
-    ws "^6.1.0"
+    "@scatterjs/core" "^2.7.44"
 
-"@scatterjs/eosjs2@^1.5.8":
-  version "1.5.8"
-  resolved "https://registry.yarnpkg.com/@scatterjs/eosjs2/-/eosjs2-1.5.8.tgz#d02377189011cd5b88c4df034b09b055c0b1c645"
+"@scatterjs/lynx@^1.6.37":
+  version "1.6.37"
+  resolved "https://registry.yarnpkg.com/@scatterjs/lynx/-/lynx-1.6.37.tgz#c1aa2b52400b624b1f11c38699d4d7c954933971"
   dependencies:
-    "@scatterjs/core" "^2.7.26"
-
-"@scatterjs/lynx@^1.6.20":
-  version "1.6.20"
-  resolved "https://registry.yarnpkg.com/@scatterjs/lynx/-/lynx-1.6.20.tgz#8b07444aab3464badd264ba8d4980d08e68ebad0"
-  dependencies:
-    "@scatterjs/core" "^2.7.27"
+    "@scatterjs/core" "^2.7.44"
 
 "@types/q@^1.5.1":
   version "1.5.2"
@@ -2864,6 +2855,10 @@ detect-libc@^1.0.2:
 detect-node@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.0.4.tgz#014ee8f8f669c5c58023da64b8179c083a28c46c"
+
+device-uuid@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/device-uuid/-/device-uuid-1.0.4.tgz#f6973e58f19b92a237aeca7b16a395ae7195a883"
 
 diffie-hellman@^5.0.0:
   version "5.0.3"
