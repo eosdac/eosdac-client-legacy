@@ -24,14 +24,14 @@
             <img
               class="cursor-pointer gt-xs"
               @click="$router.push('/')"
-              src="../extensions/branding/images/logo/logo-main.svg"
+              :src="$configFile.get('theme_images').logo_url"
               style="height:48px;"
               :title="$t('default.member_client')"
             />
             <img
               class="cursor-pointer lt-sm"
               @click="$router.push('/')"
-              src="../extensions/branding/images/logo/logo-notext.svg"
+              :src="$configFile.get('theme_images').logo_notext_url"
               style="height:48px;"
               :title="$t('default.member_client')"
             />

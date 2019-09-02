@@ -25,6 +25,7 @@ class ConfigLoader {
   constructor(networkname) {
     this.configFile = require(`../extensions/statics/config/config.${networkname}.json`);
     this.icon = require(`../extensions/statics/config/iconmap.json`);
+    this.theme = require(`../extensions/statics/config/theme.json`);
 
     styledConsoleLog(
       `<span style="color:white;background-color:hsl(268, 87%, 53%); font-size:21px; padding:5px;">Welcome To the ${this.get(
@@ -35,6 +36,8 @@ class ConfigLoader {
 
   get(configquery) {
     switch (configquery) {
+      case "theme_images":
+        return this.theme.images;
       case "dacname":
         return this.configFile.dacName;
       case "dacscope":
