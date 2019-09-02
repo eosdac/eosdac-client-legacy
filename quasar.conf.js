@@ -1,13 +1,15 @@
 // Configuration for your app
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const build_config = require('./src/extensions/statics/config/build.config.json');
+const favicon_url = require('./src/extensions/statics/config/theme.json').images.favicon_url;
 
 module.exports = function (ctx) {
   
   return {
     htmlVariables: { 
       host: build_config.host_no_backslash,
-      meta_description: build_config.meta_description 
+      meta_description: build_config.meta_description,
+      favicon_url: favicon_url 
     },
     // app plugins (/src/plugins)
     plugins: [
