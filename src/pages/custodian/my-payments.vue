@@ -84,8 +84,11 @@
                   <div v-else>
                     in progress
                     <countdown
-                      :time="DueDateExpired(pay.due_date).milis_left + 2000"
-                      @end="getClaimPay"
+                      :time="DueDateExpired(pay.due_date).milis_left + 5000"
+                      @end="
+                        getClaimPay();
+                        $store.dispatch('user/fetchBalances');
+                      "
                     >
                       <template slot-scope="props">
                         <div class="q-caption text-weight-light text-text2">
