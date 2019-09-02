@@ -16,17 +16,20 @@
       @request="request"
     >
       <q-td slot="body-cell-from" slot-scope="props" :props="props">
-        {{ props.value }}
-        <!-- <router-link :to="{ path: '/account/' + props.value }">{{
+        <!-- {{ props.value }} -->
+        <router-link class="a2" :to="{ path: '/profile/' + props.value }">{{
           props.value
-        }}</router-link> -->
+        }}</router-link>
       </q-td>
 
       <q-td slot="body-cell-to" slot-scope="props" :props="props">
-        {{ props.value }}
-        <!-- <router-link :to="{ path: '/account/' + props.value }">{{
+        <router-link class="a2" :to="{ path: '/profile/' + props.value }">{{
           props.value
-        }}</router-link> -->
+        }}</router-link>
+      </q-td>
+
+      <q-td slot="body-cell-block_time" slot-scope="props" :props="props">
+        {{ props.value.relative }}
       </q-td>
 
       <q-td slot="body-cell-trx_id" slot-scope="props" :props="props">
@@ -39,7 +42,7 @@
       </q-td>
 
       <template slot="top-right" slot-scope="props">
-        <q-search hide-underline v-model.trim="filter" />
+        <!-- <q-search v-model.trim="filter" :dark="getIsDark"  /> -->
         <q-btn
           flat
           round
@@ -78,15 +81,15 @@ export default {
           name: "from",
           label: "FROM",
           field: "from",
-          align: "left",
-          searchable: true
+          align: "left"
+          // searchable: true
         },
         {
           name: "to",
           label: "TO",
           field: "to",
-          align: "left",
-          searchable: true
+          align: "left"
+          // searchable: true
         },
         {
           name: "quantity",
@@ -100,14 +103,19 @@ export default {
           label: "TIME",
           field: "block_time",
           align: "left",
-          format: val => rf.format(new Date(val))
+          format: val => {
+            return {
+              relative: rf.format(new Date(val)),
+              abs: val
+            };
+          }
         },
         {
           name: "trx_id",
           label: "TRXID",
           field: "trx_id",
-          align: "right",
-          searchable: true
+          align: "right"
+          // searchable: true
         }
       ]
     };
@@ -149,4 +157,7 @@ export default {
 .q-table-top {
   border-top: 0px !important;
 }
+/* .q-table-control .q-btn {
+  background: blue !important;
+} */
 </style>
