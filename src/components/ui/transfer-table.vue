@@ -28,6 +28,10 @@
         }}</router-link>
       </q-td>
 
+      <q-td slot="body-cell-memo" slot-scope="props" :props="props">
+        <span class="q-caption">{{ $helper.truncate(props.value, 40) }}</span>
+      </q-td>
+
       <q-td slot="body-cell-block_time" slot-scope="props" :props="props">
         {{ props.value.relative }}
       </q-td>
@@ -78,6 +82,13 @@ export default {
       },
       columns: [
         {
+          name: "block_num",
+          label: "# BLOCK",
+          field: "block_num",
+          align: "left"
+          // searchable: true
+        },
+        {
           name: "from",
           label: "FROM",
           field: "from",
@@ -95,6 +106,12 @@ export default {
           name: "quantity",
           label: "QUANTITY",
           field: "quantity",
+          align: "left"
+        },
+        {
+          name: "memo",
+          label: "MEMO",
+          field: "memo",
           align: "left"
         },
 
@@ -128,7 +145,7 @@ export default {
   methods: {
     async request(props) {
       this.loading = true;
-      console.log(props);
+      // console.log(props);
       let res = await this.$store.dispatch("dac/fetchDACTokenTransfers", {
         limit: props.pagination.rowsPerPage,
         skip: props.pagination.rowsPerPage * (props.pagination.page - 1)
@@ -138,6 +155,7 @@ export default {
       this.serverData = res.results.map(r => {
         let transfer = r.action.data;
         transfer.block_time = r.block_timestamp;
+        transfer.block_num = r.block_num;
         transfer.trx_id = r.trx_id;
         return transfer;
       });
