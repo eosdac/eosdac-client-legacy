@@ -350,7 +350,11 @@ export default {
           this.assetToNumber(this.getCustodianConfig.lockupasset.quantity)
       ) {
         return this.numberToAsset(
-          this.inputs.stakeamount.toFixed(4),
+          this.inputs.stakeamount.toFixed(
+            this.quantityToPrecision(
+              this.getCustodianConfig.lockupasset.quantity
+            )
+          ),
           this.$configFile.get("dactokensymbol")
         );
       } else {
@@ -386,6 +390,12 @@ export default {
     assetToNumber(asset) {
       if (asset) {
         return parseFloat(asset.split(" ")[0]);
+      }
+    },
+    quantityToPrecision(quantity) {
+      if (quantity) {
+        let [quan] = quantity.split(" ");
+        return quan.split(".")[1].length;
       }
     },
 
@@ -472,7 +482,9 @@ export default {
       if (!this.increase_stake_amount) return false;
       this.increase_stake_modal = false;
       let amount = this.numberToAsset(
-        this.increase_stake_amount.toFixed(4),
+        this.increase_stake_amount.toFixed(
+          this.quantityToPrecision(this.getCustodianConfig.lockupasset.quantity)
+        ),
         this.$configFile.get("dactokensymbol")
       );
       let stakeaction = {
