@@ -26,6 +26,7 @@
     "file-saver": "^2.0.2",
     "idle-vue": "^2.0.5",
     "int64-buffer": "^0.99.1007",
+    "intl-relativeformat": "^6.4.3",
     "json-pretty-html": "^1.1.6",
     "marked": "^0.6.2",
     "nested-object-assign": "^1.0.3",

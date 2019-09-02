@@ -251,3 +251,25 @@ export async function fetchTokenTimeLine({}, payload = {}) {
       return [];
     });
 }
+
+export async function fetchDACTokenTransfers({}, payload = {}) {
+  let url = this._vm.$configFile.get("memberclientstateapi");
+  const header = {
+    "X-DAC-Name": this._vm.$configFile.get("dacscope")
+  };
+  return this._vm
+    .$axios({
+      method: "get",
+      url: `${url}/transfers`,
+      params: payload,
+      headers: header
+    })
+    .then(r => {
+      // console.log(r.data)
+      return r.data;
+    })
+    .catch(e => {
+      console.log("could not load transfers from api");
+      return [];
+    });
+}
