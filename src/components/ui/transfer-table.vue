@@ -87,7 +87,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-// var { IntlRelativeFormat } = require("intl-relativeformat");
 import "@formatjs/intl-relativetimeformat/polyfill";
 import { selectUnit } from "@formatjs/intl-utils";
 var rf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });

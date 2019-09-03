@@ -29,7 +29,6 @@
     "int64-buffer": "^0.99.1007",
     "json-pretty-html": "^1.1.6",
     "marked": "^0.6.2",
-    "moment": "^2.24.0",
     "nested-object-assign": "^1.0.3",
     "sanitize-html": "^1.20.0",
     "turndown": "^5.0.3",

@@ -64,7 +64,7 @@
 
     <menu-extension />
 
-    <q-item v-if="getAccountName" to="/settings">
+    <q-item to="/settings">
       <q-item-side :icon="$configFile.icon.settings" color="text2" />
       <q-item-main :label="$t('menu.settings')" class="text-text1" />
     </q-item>
