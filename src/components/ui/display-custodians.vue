@@ -50,6 +50,9 @@
           </q-tooltip>
         </div>
       </div>
+      <div v-else class="q-py-md">
+        No custodians yet
+      </div>
     </div>
     <div v-else-if="getCustodianState.met_initial_votes_threshold === 0">
       <div class="q-headline q-mb-md">

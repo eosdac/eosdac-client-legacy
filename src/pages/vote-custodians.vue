@@ -69,7 +69,7 @@
               </div>
             </div>
             <div
-              class="q-pa-md round-borders shadow-4 bg-bg1 text-text2"
+              class="q-pa-md q-mb-md round-borders shadow-4 bg-bg1 text-text2"
               v-if="!custodians.length"
             >
               No candidates
