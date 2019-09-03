@@ -52,7 +52,7 @@
           flat
           round
           dense
-          color="brand"
+          color="primary-light"
           :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
           @click="props.toggleFullscreen"
         />
