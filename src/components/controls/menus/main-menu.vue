@@ -5,11 +5,6 @@
       <q-item-main :label="$t('menu.profile')" class="text-text1" />
     </q-item>
 
-    <q-item to="/token-and-votes">
-      <q-item-side :icon="$configFile.icon.vote" color="text2" />
-      <q-item-main :label="$t('menu.token-and-votes')" class="text-text1" />
-    </q-item>
-
     <q-item to="/vote-custodians">
       <q-item-side :icon="$configFile.icon.vote" color="text2" />
       <q-item-main

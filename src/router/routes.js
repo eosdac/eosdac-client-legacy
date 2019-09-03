@@ -34,10 +34,6 @@ let routes = [
       {
         path: "manage-candidateship",
         component: () => import("pages/manage-candidateship.vue")
-      },
-      {
-        path: "token-and-votes",
-        component: () => import("pages/token-and-votes.vue")
       }
     ]
   },
@@ -75,6 +71,10 @@ let routes = [
       {
         path: "review-worker-proposals",
         component: () => import("pages/custodian/review-worker-proposals")
+      },
+      {
+        path: "explore-dac",
+        component: () => import("pages/custodian/explore-dac")
       }
     ]
   },
@@ -119,6 +119,10 @@ let routes = [
             component: () => import("pages/custodian/advanced")
           }
         ]
+      },
+      {
+        path: "explore-dac",
+        component: () => import("pages/custodian/explore-dac")
       }
     ]
   },
