@@ -42,7 +42,12 @@
           </q-item-side> -->
         </q-item>
 
-        <q-item class="q-pl-lg animate-fade" link to="/custodian/my-payments">
+        <q-item
+          v-if="getEnableCustPayments"
+          class="q-pl-lg animate-fade"
+          link
+          to="/custodian/my-payments"
+        >
           <q-item-main
             :label="$t('menu.my_payments')"
             class="text-text1 text-weight-light"
@@ -114,7 +119,8 @@ export default {
   computed: {
     ...mapGetters({
       getAccountName: "user/getAccountName",
-      getIsCustodian: "user/getIsCustodian"
+      getIsCustodian: "user/getIsCustodian",
+      getEnableCustPayments: "dac/getEnableCustPayments"
     })
   }
 };

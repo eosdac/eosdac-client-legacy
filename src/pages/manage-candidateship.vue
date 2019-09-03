@@ -36,7 +36,7 @@
         </div>
 
         <div class="row q-mt-md">
-          <q-item class="q-pl-none">
+          <q-item class="q-pl-none" v-if="getEnableCustPayments">
             <q-item-side left icon="icon-type-2" class="text-text2" />
             <q-item-main style="margin-left:-5px">
               <q-item-tile class="text-text1" label>{{
@@ -152,7 +152,7 @@
               </q-item>
             </div>
           </div>
-          <div class="col-xs-12 col-md-6">
+          <div class="col-xs-12 col-md-6" v-if="getEnableCustPayments">
             <div>
               <span>{{
                 $t("manage_candidateship.pay_description", {
@@ -317,7 +317,8 @@ export default {
       getIsCandidate: "user/getIsCandidate",
       getProfilePicture: "user/getProfilePicture",
       getCustodianConfig: "dac/getCustodianConfig",
-      getIsDark: "ui/getIsDark"
+      getIsDark: "ui/getIsDark",
+      getEnableCustPayments: "dac/getEnableCustPayments"
     }),
 
     lockup_release_time_delay_days() {
@@ -377,7 +378,7 @@ export default {
     },
     allowRegister() {
       return (
-        this.verifyAndGetRequestedPay &&
+        (this.verifyAndGetRequestedPay || !this.getEnableCustPayments) &&
         (this.verifyAndGetStakeAmount || this.checkAlreadyStaked)
       );
     }
@@ -415,7 +416,7 @@ export default {
         name: "nominatecane",
         data: {
           cand: this.getAccountName,
-          requestedpay: this.verifyAndGetRequestedPay,
+          requestedpay: this.verifyAndGetRequestedPay || "0.0000 EOS",
           dac_id: this.$configFile.get("dacscope")
         }
       };

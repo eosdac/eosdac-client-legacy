@@ -51,6 +51,23 @@ export function getCustodianConfig(state) {
   return state.custodianConfig;
 }
 
+export function getEnableCustPayments(state) {
+  if (
+    state.custodianConfig.requested_pay_max === null ||
+    state.custodianConfig.requested_pay_max.contract === undefined
+  ) {
+    return false;
+  }
+  let req_pay_max_value = Number(
+    state.custodianConfig.requested_pay_max.quantity.split(" ")[0]
+  );
+  if (req_pay_max_value <= 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 export function getWpConfig(state) {
   return state.wpConfig;
 }
