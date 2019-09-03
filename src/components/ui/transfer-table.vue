@@ -47,6 +47,7 @@
 
       <template slot="top-right" slot-scope="props">
         <!-- <q-search v-model.trim="filter" :dark="getIsDark"  /> -->
+        <!-- {{ props }} -->
         <q-btn
           flat
           round
@@ -56,17 +57,41 @@
           @click="props.toggleFullscreen"
         />
       </template>
+      <!-- <div slot="pagination" slot-scope="props" class="row flex-center">
+        <div class="q-mr-sm q-caption">
+          {{ props.pagination.page }}-{{ props.pagination.rowsPerPage }} /
+          {{ props.pagination.rowsNumber }}
+        </div>
+        <q-btn
+          round
+          size="sm"
+          icon="chevron_left"
+          color="primary-light"
+          class="q-mr-sm"
+          :disable="props.isFirstPage"
+          @click="props.prevPage"
+        />
+
+        <q-btn
+          round
+          size="sm"
+          icon="chevron_right"
+          color="primary-light"
+          :disable="props.isLastPage"
+          @click="props.nextPage"
+        />
+      </div> -->
     </q-table>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-var IntlRelativeFormat = require("intl-relativeformat");
-// if (!global.Intl) {
-//   global.Intl = require("intl"); // polyfill for `Intl`
-// }
-var rf = new IntlRelativeFormat("en");
+// var { IntlRelativeFormat } = require("intl-relativeformat");
+import "@formatjs/intl-relativetimeformat/polyfill";
+import { selectUnit } from "@formatjs/intl-utils";
+var rf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+
 export default {
   name: "TransferTable",
   data() {
@@ -121,8 +146,11 @@ export default {
           field: "block_time",
           align: "left",
           format: val => {
+            let secago = Date.now() - new Date(val).getTime();
+            const diff = selectUnit(Date.now() - secago);
+            let rel = rf.format(diff.value, diff.unit);
             return {
-              relative: rf.format(new Date(val)),
+              relative: rel,
               abs: val
             };
           }
@@ -150,11 +178,12 @@ export default {
         limit: props.pagination.rowsPerPage,
         skip: props.pagination.rowsPerPage * (props.pagination.page - 1)
       });
+      console.log(res);
       this.serverPagination = props.pagination;
       this.serverPagination.rowsNumber = res.count;
       this.serverData = res.results.map(r => {
         let transfer = r.action.data;
-        transfer.block_time = r.block_timestamp;
+        transfer.block_time = r.block_timestamp.split(".")[0] + ".000+00:00";
         transfer.block_num = r.block_num;
         transfer.trx_id = r.trx_id;
         return transfer;

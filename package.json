@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-countdown": "^1.1.2",
+    "@formatjs/intl-relativetimeformat": "^3.0.1",
     "@scatterjs/core": "^2.7.44",
     "@scatterjs/eosjs2": "^1.5.26",
     "@scatterjs/lynx": "^1.6.37",
@@ -26,9 +27,9 @@
     "file-saver": "^2.0.2",
     "idle-vue": "^2.0.5",
     "int64-buffer": "^0.99.1007",
-    "intl-relativeformat": "^6.4.3",
     "json-pretty-html": "^1.1.6",
     "marked": "^0.6.2",
+    "moment": "^2.24.0",
     "nested-object-assign": "^1.0.3",
     "sanitize-html": "^1.20.0",
     "turndown": "^5.0.3",
