@@ -51,7 +51,7 @@
         </div>
       </div>
       <div v-else class="q-py-md">
-        No custodians yet
+        {{ $t("vote_custodians.no_custodians") }}
       </div>
     </div>
     <div v-else-if="getCustodianState.met_initial_votes_threshold === 0">
