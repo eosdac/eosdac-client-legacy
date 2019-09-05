@@ -18,10 +18,10 @@
       <q-tab-pane name="members">coming soon...</q-tab-pane>
       <q-tab-pane name="votes">
         <vote-timeline
-          class="q-mt-sm"
+          class="q-mt-sm bg-bg1 q-pa-md"
           :responsive="true"
-          :height="230"
-          :accounts="['piecesnbitss']"
+          :height="400"
+          :accounts="getCustNames"
           :legend="true"
         />
       </q-tab-pane>
@@ -44,7 +44,20 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters({})
+    ...mapGetters({
+      getCustodians: "dac/getCustodians",
+      getAccountName: "user/getAccountName",
+      getIsDark: "ui/getIsDark"
+    }),
+    getCustNames() {
+      if (this.getCustodians) {
+        return this.getCustodians.map(c => {
+          return c.cust_name;
+        });
+      } else {
+        return [];
+      }
+    }
   },
 
   methods: {},

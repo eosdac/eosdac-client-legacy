@@ -11,8 +11,9 @@
 </template>
 
 <script>
-import { colors, date } from "quasar";
+import { colors } from "quasar";
 import lineChart from "components/ui/line-chart";
+//chartjs bug https://github.com/chartjs/Chart.js/pull/5578
 import { mapGetters } from "vuex";
 
 export default {
@@ -59,10 +60,10 @@ export default {
             {
               type: "time",
               time: {
-                unit: "month",
+                unit: "day",
                 unitStepSize: 3,
                 displayFormats: {
-                  month: "MMM"
+                  month: "DDD"
                 }
               },
               gridLines: {
@@ -90,32 +91,38 @@ export default {
           ]
         },
         hover: {
-          mode: "index",
+          mode: "nearest",
           intersect: false
         },
         tooltips: {
-          mode: "index",
+          mode: "nearest",
           intersect: false,
           position: "average",
           caretPadding: 10,
           callbacks: {
-            title: function(tooltipItem, data) {
-              let pd = date.formatDate(
-                data["labels"][tooltipItem[0]["index"]],
-                "YYYY-MM-DD"
-              );
-              return `${pd}`;
-            },
-            label: function(tooltipItem, data) {
-              return `${data["datasets"][0]["data"][tooltipItem["index"]]}`;
-            }
+            // title: function(tooltipItem, data) {
+            //   let pd = date.formatDate(
+            //     data["labels"][tooltipItem[0]["index"]],
+            //     "YYYY-MM-DD"
+            //   );
+            //   return `${pd}`;
+            // },
+            // label: function(tooltipItem, data) {
+            //   console.log(data);
+            //   console.log(tooltipItem);
+            //   return JSON.stringify(
+            //     data["datasets"][tooltipItem["datasetIndex"]]["data"][
+            //       tooltipItem["index"]
+            //     ]
+            //   );
+            // }
           },
           backgroundColor: colors.getBrand("dark"),
           titleFontSize: 12,
           titleFontColor: colors.getBrand("text1"),
           bodyFontColor: colors.getBrand("text2"),
           bodyFontSize: 12,
-          displayColors: false
+          displayColors: true
         }
       }
     };
@@ -133,39 +140,60 @@ export default {
         });
       }
     },
-    getGradient(colorstylvar) {
+    getGradient(hexcolor) {
       if (!this.$refs.linechart || !this.$refs.linechart.$refs) {
         return;
       }
-      let { r, g, b } = colors.hexToRgb(colors.getBrand(colorstylvar));
+      let { r, g, b } = colors.hexToRgb(hexcolor);
       // console.log(r,g,b)
       let gradient = this.$refs.linechart.$refs.canvas
         .getContext("2d")
         .createLinearGradient(0, 0, 0, 450);
-      gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.5)`);
-      gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, 0.25)`);
+      gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.3)`);
+      gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, 0.1)`);
       gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
       return gradient;
     },
     async setChartData(query) {
       let res = await this.$store.dispatch("dac/fetchVotesTimeline", query);
+      let c = [
+        "#aaec33",
+        "#00a5e3",
+        "#8dd7bf",
+        "#fbd803",
+        "#ff96c5",
+        "#ff5768",
+        "#ffa23a",
+        "#ff7400",
+        "#8cd8f4",
+        "#eff066",
+        "#cb91ec",
+        "#6dc38e"
+      ];
       if (!res || !res.results) return false;
-      this.chartData = {
-        labels: res.results[0].votes.map(v => v.block_timestamp),
-        datasets: [
-          {
-            label: `${res.results[0].candidate}`,
-            data: res.results[0].votes.map(v => v.votes),
-            lineTension: 0,
-            backgroundColor: this.getGradient("primary"),
-            borderColor: colors.getBrand("primary"),
-            pointBackgroundColor: "none",
-            borderWidth: 1,
-            pointBorderColor: "none",
-            pointRadius: 0
-          }
-        ]
+      let chartdata = {
+        // labels: res.results[4].votes.map(v => v.block_timestamp),
+        datasets: []
       };
+
+      for (let i = 0; i < res.results.length; i++) {
+        let dataset = {
+          label: `${res.results[i].candidate}`,
+          data: res.results[i].votes.map(v => {
+            return { x: new Date(v.block_timestamp), y: v.votes / 10000 };
+          }),
+          lineTension: 0,
+          backgroundColor: this.getGradient(c[i]),
+          borderColor: c[i],
+          pointBackgroundColor: c[i],
+          borderWidth: 1,
+          pointBorderColor: colors.getBrand("dark"),
+          pointRadius: 0
+        };
+        chartdata.datasets.push(dataset);
+      }
+
+      this.chartData = chartdata;
 
       // this.$emit("onbalance", balance);
     }
