@@ -134,7 +134,7 @@ export default {
                 data["labels"][tooltipItem[0]["index"]],
                 "YYYY-MM-DD"
               );
-              return `${pd + " " + tooltipItem[0]["index"]}`;
+              return `${pd}`;
             },
             label: function(tooltipItem, data) {
               return `${data["datasets"][0]["data"][tooltipItem["index"]]}`;
