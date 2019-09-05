@@ -9,6 +9,11 @@
     /> -->
     <pre>{{ $configFile.configFile.contracts.token }}</pre>
     <pre>{{ membercounts }}</pre>
+
+    <div v-if="market_data">
+      usd value {{ market_data.current_price.usd }}
+      {{ market_data.price_change_percentage_24h }}% (24h)
+    </div>
   </div>
 </template>
 
@@ -22,7 +27,8 @@ export default {
   },
   data() {
     return {
-      membercounts: ""
+      membercounts: "",
+      market_data: ""
     };
   },
   computed: {
@@ -43,6 +49,7 @@ export default {
   },
   async mounted() {
     this.membercounts = await this.$store.dispatch("dac/fetchMemberCounts");
+    this.market_data = await this.$store.dispatch("dac/fetchTokenMarketData");
   }
 };
 </script>

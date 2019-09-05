@@ -295,3 +295,18 @@ export async function fetchMemberCounts({}, payload = {}) {
       return [];
     });
 }
+
+export async function fetchTokenMarketData({}, payload = {}) {
+  let url = this._vm.$configFile.get("marketapi");
+  console.log(url);
+  if (url) {
+    let market = await this._vm.$axios
+      .get(url)
+      .then(m => m.data.market_data)
+      .catch(e => false);
+    console.log(market);
+    return market;
+  } else {
+    return false;
+  }
+}
