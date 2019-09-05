@@ -16,7 +16,15 @@
         <transfer-table />
       </q-tab-pane>
       <q-tab-pane name="members">coming soon...</q-tab-pane>
-      <q-tab-pane name="votes">coming soon...</q-tab-pane>
+      <q-tab-pane name="votes">
+        <vote-timeline
+          class="q-mt-sm"
+          :responsive="true"
+          :height="230"
+          :accounts="['piecesnbitss']"
+          :legend="true"
+        />
+      </q-tab-pane>
     </q-tabs>
   </q-page>
 </template>
@@ -25,10 +33,12 @@
 import { mapGetters } from "vuex";
 import transferTable from "components/ui/transfer-table";
 import tokenStatistics from "components/ui/token-statistics";
+import voteTimeline from "components/ui/vote-timeline";
 export default {
   components: {
     transferTable,
-    tokenStatistics
+    tokenStatistics,
+    voteTimeline
   },
   data() {
     return {};

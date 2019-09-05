@@ -1,11 +1,5 @@
 <template>
   <div>
-    <div v-show="show_balance" class="capitalize q-title">
-      {{ account }} <span class="text-text2">({{ balance }})</span>
-    </div>
-    <div v-if="description != ''" class="text-text2 q-my-md">
-      {{ description }}
-    </div>
     <line-chart
       ref="linechart"
       :chartData="chartData"
@@ -27,33 +21,9 @@ export default {
     lineChart
   },
   props: {
-    account: {
-      type: String,
-      default: ""
-    },
-    contract: {
-      type: String,
-      default: ""
-    },
-    symbol: {
-      type: String,
-      default: ""
-    },
-    start_block: {
-      type: Number,
-      default: 0
-    },
-    end_block: {
-      type: Number,
-      default: 0
-    },
-    description: {
-      type: String,
-      default: ""
-    },
-    show_balance: {
-      type: Boolean,
-      default: true
+    accounts: {
+      type: Array,
+      default: () => []
     },
     legend: {
       type: Boolean,
@@ -77,7 +47,7 @@ export default {
       refblock: null,
       refdate: null,
       chartData: null,
-      balance: null,
+
       chartOptions: {
         responsive: this.responsive,
         maintainAspectRatio: false,
@@ -157,17 +127,9 @@ export default {
   },
   methods: {
     async init() {
-      let { head_block_num, head_block_time } =
-        this.getNodeInfo || (await this.$store.dispatch("global/testEndpoint"));
-      this.refblock = head_block_num;
-      this.refdate = new Date(head_block_time);
-      if (this.account && this.contract && this.symbol) {
-        this.getTokenTimeLine({
-          account: this.account,
-          contract: this.contract,
-          symbol: this.symbol,
-          start_block: 0,
-          end_block: this.end_block
+      if (this.accounts.length) {
+        this.setChartData({
+          account: this.accounts.join(",")
         });
       }
     },
@@ -185,15 +147,15 @@ export default {
       gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
       return gradient;
     },
-    async getTokenTimeLine(query) {
-      let res = await this.$store.dispatch("dac/fetchTokenTimeLine", query);
+    async setChartData(query) {
+      let res = await this.$store.dispatch("dac/fetchVotesTimeline", query);
       if (!res || !res.results) return false;
       this.chartData = {
-        labels: res.results.map(p => this.numToTime(p.block_num)),
+        labels: res.results[0].votes.map(v => v.block_timestamp),
         datasets: [
           {
-            label: `${query.account} ${query.symbol}`,
-            data: res.results.map(p => p.balance.split(" ")[0]),
+            label: `${res.results[0].candidate}`,
+            data: res.results[0].votes.map(v => v.votes),
             lineTension: 0,
             backgroundColor: this.getGradient("primary"),
             borderColor: colors.getBrand("primary"),
@@ -204,16 +166,8 @@ export default {
           }
         ]
       };
-      let vals = this.chartData.datasets[0].data;
-      let balance = `${vals[vals.length - 1]} ${this.symbol}`;
-      this.balance = balance;
-      this.$emit("onbalance", balance);
-    },
-    numToTime(blocknum) {
-      let diff = (this.refblock - blocknum) * 2; //seconds
-      let r = date.subtractFromDate(this.refdate, { seconds: diff });
-      return r;
-      // return date.formatDate(r, 'MMM DD');
+
+      // this.$emit("onbalance", balance);
     }
   },
   async mounted() {
@@ -221,9 +175,6 @@ export default {
   },
   watch: {
     account: function() {
-      this.init();
-    },
-    symbol: function() {
       this.init();
     }
   }

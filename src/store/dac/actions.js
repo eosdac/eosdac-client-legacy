@@ -296,6 +296,28 @@ export async function fetchMemberCounts({}, payload = {}) {
     });
 }
 
+export async function fetchVotesTimeline({}, payload = {}) {
+  let url = this._vm.$configFile.get("memberclientstateapi");
+  const header = {
+    "X-DAC-Name": this._vm.$configFile.get("dacscope")
+  };
+  return this._vm
+    .$axios({
+      method: "get",
+      url: `${url}/votes_timeline`,
+      params: payload,
+      headers: header
+    })
+    .then(r => {
+      console.log(r.data);
+      return r.data;
+    })
+    .catch(e => {
+      console.log("could not load votes_timeline from api");
+      return [];
+    });
+}
+
 export async function fetchTokenMarketData({}, payload = {}) {
   let url = this._vm.$configFile.get("marketapi");
   console.log(url);
