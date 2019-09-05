@@ -100,6 +100,8 @@ export default {
               },
               ticks: {
                 fontColor: colors.getBrand("text2")
+                // beginAtZero: false,
+                // stepSize: 15
               }
             }
           ],
@@ -116,6 +118,34 @@ export default {
               }
             }
           ]
+        },
+        hover: {
+          mode: "index",
+          intersect: false
+        },
+        tooltips: {
+          mode: "index",
+          intersect: false,
+          position: "average",
+          caretPadding: 10,
+          callbacks: {
+            title: function(tooltipItem, data) {
+              let pd = date.formatDate(
+                data["labels"][tooltipItem[0]["index"]],
+                "YYYY-MM-DD"
+              );
+              return `${pd + " " + tooltipItem[0]["index"]}`;
+            },
+            label: function(tooltipItem, data) {
+              return `${data["datasets"][0]["data"][tooltipItem["index"]]}`;
+            }
+          },
+          backgroundColor: colors.getBrand("dark"),
+          titleFontSize: 12,
+          titleFontColor: colors.getBrand("text1"),
+          bodyFontColor: colors.getBrand("text2"),
+          bodyFontSize: 12,
+          displayColors: false
         }
       }
     };
