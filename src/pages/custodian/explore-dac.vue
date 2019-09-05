@@ -2,9 +2,13 @@
   <q-page>
     <!--  -->
     <q-tabs color="primary">
+      <q-tab default label="Token Stats" name="token" slot="title" />
       <q-tab default label="Transfers" name="transfers" slot="title" />
       <q-tab label="Votes" name="votes" slot="title" />
       <!-- Targets -->
+      <q-tab-pane name="token" class="q-pa-md">
+        <token-statistics />
+      </q-tab-pane>
       <q-tab-pane name="transfers" class="q-pa-md">
         <transfer-table />
       </q-tab-pane>
@@ -16,9 +20,11 @@
 <script>
 import { mapGetters } from "vuex";
 import transferTable from "components/ui/transfer-table";
+import tokenStatistics from "components/ui/token-statistics";
 export default {
   components: {
-    transferTable
+    transferTable,
+    tokenStatistics
   },
   data() {
     return {};

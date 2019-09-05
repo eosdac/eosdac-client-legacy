@@ -273,3 +273,25 @@ export async function fetchDACTokenTransfers({}, payload = {}) {
       return [];
     });
 }
+
+export async function fetchMemberCounts({}, payload = {}) {
+  let url = this._vm.$configFile.get("memberclientstateapi");
+  const header = {
+    "X-DAC-Name": this._vm.$configFile.get("dacscope")
+  };
+  return this._vm
+    .$axios({
+      method: "get",
+      url: `${url}/member_counts`,
+      params: payload,
+      headers: header
+    })
+    .then(r => {
+      console.log(r.data);
+      return r.data;
+    })
+    .catch(e => {
+      console.log("could not load membercounts from api");
+      return [];
+    });
+}

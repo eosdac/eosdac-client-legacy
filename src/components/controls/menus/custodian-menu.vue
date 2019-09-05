@@ -54,7 +54,10 @@
           />
         </q-item>
         <q-item class="q-pl-lg animate-fade" link to="/custodian/explore-dac">
-          <q-item-main :label="$t('menu.explore')" class="text-text1" />
+          <q-item-main
+            :label="$t('menu.explore')"
+            class="text-text1 text-weight-light"
+          />
         </q-item>
       </div>
     </q-collapsible>

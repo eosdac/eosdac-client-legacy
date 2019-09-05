@@ -68,6 +68,15 @@ export function getEnableCustPayments(state) {
   }
 }
 
+export function getCustStakeConfig(state) {
+  // let res = {
+  //   enabled: false,
+  //   symbol: null,
+  //   quantity: null,
+  //   contract: null
+  // };
+}
+
 export function getWpConfig(state) {
   return state.wpConfig;
 }
