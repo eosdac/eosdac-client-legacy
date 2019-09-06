@@ -320,7 +320,7 @@ export async function fetchVotesTimeline({}, payload = {}) {
 
 export async function fetchTokenMarketData({}, payload = {}) {
   let url = this._vm.$configFile.get("marketapi");
-  console.log(url);
+  console.log("marketdata", url);
   if (url) {
     let market = await this._vm.$axios
       .get(url)
@@ -328,6 +328,22 @@ export async function fetchTokenMarketData({}, payload = {}) {
       .catch(e => false);
     console.log(market);
     return market;
+  } else {
+    return false;
+  }
+}
+
+export async function fetchTokenHistoryPrice({}, payload = {}) {
+  let url =
+    "https://api.coingecko.com/api/v3/coins/eosdac/market_chart?vs_currency=usd&days=7";
+  console.log(url);
+  if (url) {
+    let history = await this._vm.$axios
+      .get(url)
+      .then(m => m.data.prices)
+      .catch(e => false);
+    console.log(history);
+    return history;
   } else {
     return false;
   }

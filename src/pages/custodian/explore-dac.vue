@@ -12,7 +12,7 @@
       <q-tab label="Votes" name="votes" slot="title" />
       <!-- Targets -->
       <q-tab-pane name="token" class="q-pa-md">
-        <token-statistics />
+        <token-statistics class="q-mb-md" />
         <transfer-table />
       </q-tab-pane>
       <q-tab-pane name="members">coming soon...</q-tab-pane>
