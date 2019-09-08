@@ -71,6 +71,10 @@ let routes = [
       {
         path: "review-worker-proposals",
         component: () => import("pages/custodian/review-worker-proposals")
+      },
+      {
+        path: "explore-dac",
+        component: () => import("pages/custodian/explore-dac")
       }
     ]
   },
@@ -115,6 +119,10 @@ let routes = [
             component: () => import("pages/custodian/advanced")
           }
         ]
+      },
+      {
+        path: "explore-dac",
+        component: () => import("pages/custodian/explore-dac")
       }
     ]
   },

@@ -23,6 +23,7 @@
         color="primary"
         v-model="filter"
         :placeholder="$t('vote_custodians.search')"
+        style="visibility:hidden"
       />
       <div class="row inline items-center q-mt-sm" style="font-size:12px;">
         <span>{{ $t("vote_custodians.rows_per_page") }}:</span>
@@ -80,6 +81,7 @@
         color="primary"
         v-model="filter"
         :placeholder="$t('vote_custodians.search')"
+        style="visibility:hidden"
       />
       <div class="row inline items-center q-mt-sm" style="font-size:12px;">
         <span>{{ $t("vote_custodians.rows_per_page") }}:</span>

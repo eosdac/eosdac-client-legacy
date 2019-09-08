@@ -42,6 +42,7 @@
                 v-for="(pay, i) in pendingpay"
                 :key="`pay_id_${i}`"
                 class="animate-fade"
+                :id="`pay_id_${i}`"
               >
                 <q-item-side left icon="icon-ui-19" :title="`id: ${pay.key}`" />
                 <q-item-main>
@@ -57,27 +58,52 @@
                   </q-item-tile>
                 </q-item-main>
                 <q-item-side right style="min-width:65px">
-                  <q-btn
-                    :title="
-                      `Refuse to get paid. The funds will stay in the DAC`
-                    "
-                    color="negative"
-                    class="animate-fade"
-                    flat
-                    size="sm"
-                    label="reject"
-                    @click="rejectpay(pay.key)"
-                  />
-                  <q-btn
-                    :title="
-                      `Claim your payment. The funds will be transfered to your account.`
-                    "
-                    color="primary"
-                    class="animate-fade"
-                    size="sm"
-                    label="claim"
-                    @click="claimpay(pay.key)"
-                  />
+                  <div v-if="DueDateExpired(pay.due_date).expired">
+                    <q-btn
+                      :title="
+                        `Refuse to get paid. The funds will stay in the DAC`
+                      "
+                      color="negative"
+                      class="animate-fade"
+                      flat
+                      size="sm"
+                      label="reject"
+                      @click="rejectpay(pay.key)"
+                    />
+                    <q-btn
+                      :title="
+                        `Claim your payment. The funds will be transfered to your account.`
+                      "
+                      color="primary"
+                      class="animate-fade"
+                      size="sm"
+                      label="claim"
+                      @click="claimpay(pay.key)"
+                    />
+                  </div>
+                  <div v-else>
+                    in progress
+                    <countdown
+                      :time="DueDateExpired(pay.due_date).milis_left + 5000"
+                      @end="
+                        getClaimPay();
+                        $store.dispatch('user/fetchBalances');
+                      "
+                    >
+                      <template slot-scope="props">
+                        <div class="q-caption text-weight-light text-text2">
+                          <span v-if="props.days">{{ props.days }} days, </span>
+                          <span v-if="props.hours"
+                            >{{ props.hours }} hours,
+                          </span>
+                          <span v-if="props.minutes"
+                            >{{ props.minutes }} minutes,
+                          </span>
+                          <span>{{ props.seconds }} seconds</span>
+                        </div>
+                      </template>
+                    </countdown>
+                  </div>
                 </q-item-side>
               </q-item>
             </q-list>
@@ -88,11 +114,7 @@
               <q-item-tile sublabel>{{ totalPayAmount }}</q-item-tile>
             </q-item-main>
             <q-item-side right>
-              <q-btn
-                color="positive"
-                label="claim all"
-                @click="claimAll"
-              />
+              <q-btn color="positive" label="claim all" @click="claimAll" />
             </q-item-side>
           </q-item>
         </div>
@@ -174,12 +196,14 @@
 import { mapGetters } from "vuex";
 import debugData from "components/ui/debug-data";
 import helpBtn from "components/controls/help-btn";
+import countdown from "@chenfengyuan/vue-countdown";
 import { required, between } from "vuelidate/lib/validators";
 export default {
   name: "MyPayments",
   components: {
     debugData,
-    helpBtn
+    helpBtn,
+    countdown
   },
   data() {
     return {
@@ -225,6 +249,19 @@ export default {
     }
   },
   methods: {
+    DueDateExpired(due_date) {
+      if (due_date === undefined) {
+        return {
+          expired: true
+        };
+      }
+      let due = new Date(due_date + ".000+00:00").getTime();
+      let now = new Date().getTime();
+      return {
+        expired: due < now,
+        milis_left: due - now
+      };
+    },
     async claimpay(id) {
       let actions = [
         {

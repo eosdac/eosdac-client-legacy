@@ -254,6 +254,25 @@ export class DacApi {
     }
   }
 
+  async getPendingPay2(accountname) {
+    let pendingpays = await this.eos.get_table_rows({
+      json: true,
+      code: this.configobj.get("custodiancontract"),
+      scope: this.configobj.get("dacscope"),
+      table: "pendingpay2",
+      lower_bound: accountname,
+      upper_bound: accountname,
+      index_position: 2,
+      key_type: "name",
+      limit: -1
+    });
+    if (!pendingpays.rows.length) {
+      return [];
+    } else {
+      return pendingpays.rows;
+    }
+  }
+
   async getControlledAccounts(accountname) {
     let ctrl = await this.eos.history_get_controlled_accounts(accountname);
     return ctrl;

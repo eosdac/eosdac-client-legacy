@@ -32,7 +32,9 @@
       <xspan
         class="q-caption absolute-right q-mr-md q-mt-sm text-text2"
         :value="balance"
+        style="display:block; height:20px; overflow:hidden"
       />
+
       <balance-timeline
         class="q-mt-sm"
         :responsive="true"

@@ -1,36 +1,31 @@
 <template>
   <transition
     appear
-    enter-active-class="animated fadeInDown"
-    leave-active-class="animated fadeOutUp"
+    enter-active-class="animated fadeInUp"
+    leave-active-class="animated fadeOutDown"
   >
     <div
-      v-if="getAccountName && needSignature && time_flag && showHere"
+      v-if="getAccountName && time_flag && showHere && NeedFirstNewPeriod"
       v-bind:class="{ 'drawer-margin': getDrawerIsOpen }"
-      class=" request_signature_msg bg-bg2 q-pa-md bg-logo fixed"
+      class=" trigger_new_period_msg bg-blue q-pa-md bg-logo fixed"
     >
       <div class="row justify-between items-center q-mb-md ">
-        <div class="q-title">{{ $t("default.sign_the_constitution") }}</div>
+        <div class="q-title">{{ $t("default.call_new_period") }}</div>
         <q-btn class="no-shadow" icon="close" @click="close" />
       </div>
 
       <div class="q-mb-md full-width">
-        <span v-if="!getAgreedTermsVersion" class="on-left">{{
-          $t("default.you_have_not_yet_registered")
-        }}</span>
-        <span v-else class="on-left">{{
-          $t("default.constitution_has_been_updated")
-        }}</span>
-        <!-- <span class="on-left">{{ $t('default.you_have_not_yet_registered') }}</span>
-          <span class="on-left">{{ $t('default.constitution_has_been_updated') }}</span> -->
+        The DAC is unlocked but newperiod should be called manually for the
+        first time.
+        <!-- <pre>{{ getCustodianState }}</pre> -->
       </div>
 
       <div class="row justify-end">
         <q-btn
           color="primary-light"
-          to="/constitution"
           icon="receipt"
-          :label="$t('default.sign_the_constitution')"
+          @click="callNewPeriod"
+          :label="$t('default.start_new_period')"
         />
       </div>
       <div style="clear:both"></div>
@@ -51,22 +46,21 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getMemberTerms: "dac/getMemberTerms",
-      getLatestMemberTerm: "dac/getLatestMemberTerm",
       getAccountName: "user/getAccountName",
-      getAgreedTermsVersion: "user/getAgreedTermsVersion",
+      getCustodianState: "dac/getCustodianState",
       getDrawerIsOpen: "ui/getDrawerIsOpen"
     }),
 
-    needSignature() {
+    NeedFirstNewPeriod() {
       if (
-        this.getLatestMemberTerm &&
-        this.getAgreedTermsVersion &&
-        this.getLatestMemberTerm.version === this.getAgreedTermsVersion
+        this.getCustodianState.met_initial_votes_threshold === 1 &&
+        new Date(
+          this.getCustodianState.lastperiodtime + ".000+00:00"
+        ).getTime() === 0
       ) {
-        return false;
-      } else {
         return true;
+      } else {
+        return false;
       }
     }
   },
@@ -83,9 +77,31 @@ export default {
     close() {
       this.stopTimer();
       this.startTimer(10000); //reapear after user has closed
+    },
+    async callNewPeriod() {
+      let actions = [
+        {
+          account: this.$configFile.get("custodiancontract"),
+          name: "newperiode",
+          data: {
+            message: `First new period called by ${this.getAccountName}`,
+            dac_id: this.$configFile.get("dacscope")
+          }
+        }
+      ];
+
+      let result = await this.$store.dispatch("user/transact", {
+        actions: actions
+      });
+      if (result) {
+        await this.$store.dispatch("dac/fetchCustodianContractState");
+      }
     }
   },
-  mounted() {
+  async mounted() {
+    if (this.getCustodianState.lastperiodtime == null) {
+      await this.$store.dispatch("dac/fetchCustodianContractState");
+    }
     this.startTimer(2000);
     if (this.$router.currentRoute.path == "/constitution") {
       this.showHere = false;
@@ -115,14 +131,14 @@ export default {
 <style lang="stylus">
 @import '~variables'
 
-.request_signature_msg{
-  border-bottom: 4px solid var(--q-color-info);
+.trigger_new_period_msg{
+  border-top: 4px solid var(--q-color-info);
   // border-left: 4px solid var(--q-color-info);
   // border-right: 4px solid var(--q-color-info);
   z-index:2;
   width:100%;
-
   right:0;
+  bottom:0;
 }
 
 .drawer-margin{
