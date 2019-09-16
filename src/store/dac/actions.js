@@ -251,3 +251,100 @@ export async function fetchTokenTimeLine({}, payload = {}) {
       return [];
     });
 }
+
+export async function fetchDACTokenTransfers({}, payload = {}) {
+  let url = this._vm.$configFile.get("memberclientstateapi");
+  const header = {
+    "X-DAC-Name": this._vm.$configFile.get("dacscope")
+  };
+  return this._vm
+    .$axios({
+      method: "get",
+      url: `${url}/transfers`,
+      params: payload,
+      headers: header
+    })
+    .then(r => {
+      // console.log(r.data)
+      return r.data;
+    })
+    .catch(e => {
+      console.log("could not load transfers from api");
+      return [];
+    });
+}
+
+export async function fetchMemberCounts({}, payload = {}) {
+  let url = this._vm.$configFile.get("memberclientstateapi");
+  const header = {
+    "X-DAC-Name": this._vm.$configFile.get("dacscope")
+  };
+  return this._vm
+    .$axios({
+      method: "get",
+      url: `${url}/member_counts`,
+      params: payload,
+      headers: header
+    })
+    .then(r => {
+      console.log(r.data);
+      return r.data;
+    })
+    .catch(e => {
+      console.log("could not load membercounts from api");
+      return [];
+    });
+}
+
+export async function fetchVotesTimeline({}, payload = {}) {
+  let url = this._vm.$configFile.get("memberclientstateapi");
+  const header = {
+    "X-DAC-Name": this._vm.$configFile.get("dacscope")
+  };
+  return this._vm
+    .$axios({
+      method: "get",
+      url: `${url}/votes_timeline`,
+      params: payload,
+      headers: header
+    })
+    .then(r => {
+      console.log(r.data);
+      return r.data;
+    })
+    .catch(e => {
+      console.log("could not load votes_timeline from api");
+      return [];
+    });
+}
+
+export async function fetchTokenMarketData({}, payload = {}) {
+  let url = this._vm.$configFile.get("marketapi");
+  console.log("marketdata", url);
+  if (url) {
+    let market = await this._vm.$axios
+      .get(url)
+      .then(m => m.data.market_data)
+      .catch(e => false);
+    console.log(market);
+    return market;
+  } else {
+    return false;
+  }
+}
+
+export async function fetchTokenHistoryPrice({}, payload = {}) {
+  let url =
+    "https://api.coingecko.com/api/v3/coins/eosdac/market_chart?vs_currency=usd&days=7";
+  console.log(url);
+  if (url) {
+    let history = await this._vm.$axios
+      .get(url)
+      .then(m => m.data.prices)
+      .catch(e => false);
+    console.log(history);
+    return history;
+  } else {
+    return false;
+  }
+}

@@ -108,13 +108,34 @@ export async function fetchBalances(
   }
 }
 
+// export async function fetchPendingPay(
+//   { state, dispatch },
+//   accountname = false
+// ) {
+//   const accountN = accountname || state.accountName;
+//   const api = await dispatch("global/getDacApi", false, { root: true });
+//   let res = await api.getPendingPay(accountN);
+//   console.log(res);
+//   return res;
+// }
+
 export async function fetchPendingPay(
   { state, dispatch },
   accountname = false
 ) {
   const accountN = accountname || state.accountName;
   const api = await dispatch("global/getDacApi", false, { root: true });
-  let res = await api.getPendingPay(accountN);
+
+  let requests = [api.getPendingPay(accountN), api.getPendingPay2(accountN)];
+  let [pay1, pay2] = await Promise.all(requests);
+
+  pay2 = pay2.map(p2 => {
+    p2.quantity = p2.quantity.quantity;
+    return p2;
+  });
+
+  let res = [...pay1, ...pay2];
+  console.log(res);
   return res;
 }
 

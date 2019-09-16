@@ -50,6 +50,9 @@
           </q-tooltip>
         </div>
       </div>
+      <div v-else class="q-py-md">
+        {{ $t("vote_custodians.no_custodians") }}
+      </div>
     </div>
     <div v-else-if="getCustodianState.met_initial_votes_threshold === 0">
       <div class="q-headline q-mb-md">

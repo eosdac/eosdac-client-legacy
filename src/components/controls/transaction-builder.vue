@@ -353,6 +353,12 @@ export default {
 
     MarkdownViewer
   },
+  props: {
+    enable_msig: {
+      type: Boolean,
+      default: false
+    }
+  },
 
   data() {
     return {
@@ -362,7 +368,7 @@ export default {
       actions: [],
       view_actions_modal: false,
       broadcast: true,
-      msigMode: false,
+      msigMode: this.enable_msig,
 
       is_personal_msig: false,
       msig_proposal_name: "",

@@ -41,6 +41,7 @@ export function getAgreedTermsVersion(state) {
 export function getSettings(state) {
   return state.settings;
 }
+
 export function getSettingByName(state) {
   return settingname => {
     return state.settings.find(s => settingname == s.name);
@@ -51,7 +52,18 @@ export function getMemberStatus(state, getters) {
   if (!getters.getAccountName || !getters.getAgreedTermsVersion) {
     return false;
   }
-  if (getters.getDacBalance && getters.getAgreedTermsVersion) {
+  let stake_balance = false;
+  if (getters.getIsCandidate) {
+    let locked_tokens = getters.getIsCandidate.locked_tokens;
+    if (locked_tokens) {
+      stake_balance = Number(locked_tokens.split(" ")[0]);
+    }
+  }
+
+  if (
+    (getters.getDacBalance || stake_balance) &&
+    getters.getAgreedTermsVersion
+  ) {
     return "member";
   } else {
     return "pending";

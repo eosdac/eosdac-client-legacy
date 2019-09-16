@@ -45,9 +45,20 @@
         </q-item>
         -->
 
-        <q-item class="q-pl-lg animate-fade" link to="/custodian/my-payments">
+        <q-item
+          v-if="getEnableCustPayments"
+          class="q-pl-lg animate-fade"
+          link
+          to="/custodian/my-payments"
+        >
           <q-item-main
             :label="$t('menu.my_payments')"
+            class="text-text1 text-weight-light"
+          />
+        </q-item>
+        <q-item class="q-pl-lg animate-fade" link to="/custodian/explore-dac">
+          <q-item-main
+            :label="$t('menu.explore')"
             class="text-text1 text-weight-light"
           />
         </q-item>
@@ -94,6 +105,13 @@
             class="text-text1 text-weight-light"
           />
         </q-item>
+        <q-item
+          class="q-pl-lg animate-fade"
+          link
+          to="/dac-activity/explore-dac"
+        >
+          <q-item-main :label="$t('menu.explore')" class="text-text1" />
+        </q-item>
       </div>
     </q-collapsible>
   </div>
@@ -109,7 +127,8 @@ export default {
   computed: {
     ...mapGetters({
       getAccountName: "user/getAccountName",
-      getIsCustodian: "user/getIsCustodian"
+      getIsCustodian: "user/getIsCustodian",
+      getEnableCustPayments: "dac/getEnableCustPayments"
     })
   }
 };

@@ -69,7 +69,7 @@
               </div>
             </div>
             <div
-              class="q-pa-md round-borders shadow-4 bg-bg1 text-text2"
+              class="q-pa-md q-mb-md round-borders shadow-4 bg-bg1 text-text2"
               v-if="!custodians.length"
             >
               No candidates
@@ -301,7 +301,8 @@ export default {
       getCandidates: "dac/getCandidates",
       getDacVotes: "user/getDacVotes",
       getIsDark: "ui/getIsDark",
-      getCustodianConfig: "dac/getCustodianConfig"
+      getCustodianConfig: "dac/getCustodianConfig",
+      getCustodianState: "dac/getCustodianState"
       // getMemberRoles: 'account/getMemberRoles'
     }),
 
@@ -427,7 +428,10 @@ export default {
         this.sortCandidatesByVotes();
         this.oldvotes = votes;
         this.$store.dispatch("user/fetchDacVotes");
-        // $refs.votebar.initProgressbar();
+        //only refresh cust state when dac is locked
+        if (this.getCustodianState.met_initial_votes_threshold === 0) {
+          this.$store.dispatch("dac/fetchCustodianContractState");
+        }
       }
     },
 

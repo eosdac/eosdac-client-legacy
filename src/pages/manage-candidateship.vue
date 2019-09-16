@@ -36,7 +36,7 @@
         </div>
 
         <div class="row q-mt-md">
-          <q-item class="q-pl-none">
+          <q-item class="q-pl-none" v-if="getEnableCustPayments">
             <q-item-side left icon="icon-type-2" class="text-text2" />
             <q-item-main style="margin-left:-5px">
               <q-item-tile class="text-text1" label>{{
@@ -152,7 +152,7 @@
               </q-item>
             </div>
           </div>
-          <div class="col-xs-12 col-md-6">
+          <div class="col-xs-12 col-md-6" v-if="getEnableCustPayments">
             <div>
               <span>{{
                 $t("manage_candidateship.pay_description", {
@@ -317,7 +317,8 @@ export default {
       getIsCandidate: "user/getIsCandidate",
       getProfilePicture: "user/getProfilePicture",
       getCustodianConfig: "dac/getCustodianConfig",
-      getIsDark: "ui/getIsDark"
+      getIsDark: "ui/getIsDark",
+      getEnableCustPayments: "dac/getEnableCustPayments"
     }),
 
     lockup_release_time_delay_days() {
@@ -350,7 +351,11 @@ export default {
           this.assetToNumber(this.getCustodianConfig.lockupasset.quantity)
       ) {
         return this.numberToAsset(
-          this.inputs.stakeamount.toFixed(4),
+          this.inputs.stakeamount.toFixed(
+            this.quantityToPrecision(
+              this.getCustodianConfig.lockupasset.quantity
+            )
+          ),
           this.$configFile.get("dactokensymbol")
         );
       } else {
@@ -373,7 +378,7 @@ export default {
     },
     allowRegister() {
       return (
-        this.verifyAndGetRequestedPay &&
+        (this.verifyAndGetRequestedPay || !this.getEnableCustPayments) &&
         (this.verifyAndGetStakeAmount || this.checkAlreadyStaked)
       );
     }
@@ -386,6 +391,12 @@ export default {
     assetToNumber(asset) {
       if (asset) {
         return parseFloat(asset.split(" ")[0]);
+      }
+    },
+    quantityToPrecision(quantity) {
+      if (quantity) {
+        let [quan] = quantity.split(" ");
+        return quan.split(".")[1].length;
       }
     },
 
@@ -405,7 +416,7 @@ export default {
         name: "nominatecane",
         data: {
           cand: this.getAccountName,
-          requestedpay: this.verifyAndGetRequestedPay,
+          requestedpay: this.verifyAndGetRequestedPay || "0.0000 EOS",
           dac_id: this.$configFile.get("dacscope")
         }
       };
@@ -472,7 +483,9 @@ export default {
       if (!this.increase_stake_amount) return false;
       this.increase_stake_modal = false;
       let amount = this.numberToAsset(
-        this.increase_stake_amount.toFixed(4),
+        this.increase_stake_amount.toFixed(
+          this.quantityToPrecision(this.getCustodianConfig.lockupasset.quantity)
+        ),
         this.$configFile.get("dactokensymbol")
       );
       let stakeaction = {

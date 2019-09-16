@@ -100,6 +100,8 @@ export default {
               },
               ticks: {
                 fontColor: colors.getBrand("text2")
+                // beginAtZero: false,
+                // stepSize: 15
               }
             }
           ],
@@ -116,6 +118,34 @@ export default {
               }
             }
           ]
+        },
+        hover: {
+          mode: "index",
+          intersect: false
+        },
+        tooltips: {
+          mode: "index",
+          intersect: false,
+          position: "average",
+          caretPadding: 10,
+          callbacks: {
+            title: function(tooltipItem, data) {
+              let pd = date.formatDate(
+                data["labels"][tooltipItem[0]["index"]],
+                "YYYY-MM-DD"
+              );
+              return `${pd}`;
+            },
+            label: function(tooltipItem, data) {
+              return `${data["datasets"][0]["data"][tooltipItem["index"]]}`;
+            }
+          },
+          backgroundColor: colors.getBrand("dark"),
+          titleFontSize: 12,
+          titleFontColor: colors.getBrand("text1"),
+          bodyFontColor: colors.getBrand("text2"),
+          bodyFontSize: 12,
+          displayColors: false
         }
       }
     };
@@ -141,11 +171,11 @@ export default {
         });
       }
     },
-    getGradient() {
+    getGradient(colorstylvar) {
       if (!this.$refs.linechart || !this.$refs.linechart.$refs) {
         return;
       }
-      let { r, g, b } = colors.hexToRgb(colors.getBrand("primary"));
+      let { r, g, b } = colors.hexToRgb(colors.getBrand(colorstylvar));
       // console.log(r,g,b)
       let gradient = this.$refs.linechart.$refs.canvas
         .getContext("2d")
@@ -165,7 +195,7 @@ export default {
             label: `${query.account} ${query.symbol}`,
             data: res.results.map(p => p.balance.split(" ")[0]),
             lineTension: 0,
-            backgroundColor: this.getGradient(),
+            backgroundColor: this.getGradient("primary"),
             borderColor: colors.getBrand("primary"),
             pointBackgroundColor: "none",
             borderWidth: 1,

@@ -24,14 +24,14 @@
             <img
               class="cursor-pointer gt-xs"
               @click="$router.push('/')"
-              src="../extensions/branding/images/logo/logo-main.svg"
+              :src="$configFile.get('theme_images').logo_url"
               style="height:48px;"
               :title="$t('default.member_client')"
             />
             <img
               class="cursor-pointer lt-sm"
               @click="$router.push('/')"
-              src="../extensions/branding/images/logo/logo-notext.svg"
+              :src="$configFile.get('theme_images').logo_notext_url"
               style="height:48px;"
               :title="$t('default.member_client')"
             />
@@ -64,6 +64,7 @@
     <q-page-container class="bg-bg2 text-text1 relative-position">
       <request-signature />
       <router-view />
+      <trigger-newperiod />
       <transactionOverlay />
     </q-page-container>
 
@@ -88,6 +89,7 @@ import transactionOverlay from "components/ui/transaction-overlay";
 import toolbarMenu from "components/controls/menus/toolbar-menu";
 import mainMenu from "components/controls/menus/main-menu";
 import requestSignature from "components/ui/request-signature";
+import triggerNewperiod from "components/controls/trigger-newperiod";
 
 export default {
   name: "MyLayout",
@@ -95,7 +97,8 @@ export default {
     transactionOverlay,
     toolbarMenu,
     mainMenu,
-    requestSignature
+    requestSignature,
+    triggerNewperiod
   },
   data() {
     return {
