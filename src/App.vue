@@ -90,6 +90,15 @@ export default {
         default: this.$t("meta.noscript")
       }
     };
+  },
+
+  watch: {
+    "$route.query.theme": function(v) {
+      console.log(v);
+      if (v) {
+        this.$store.dispatch("ui/loadTheme", JSON.parse(v));
+      }
+    }
   }
 };
 </script>
