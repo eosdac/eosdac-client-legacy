@@ -110,7 +110,7 @@
           link
           to="/dac-activity/explore-dac"
         >
-          <q-item-main :label="$t('menu.explore')" class="text-text1" />
+          <!-- <q-item-main :label="$t('menu.explore')" class="text-text1" /> -->
         </q-item>
       </div>
     </q-collapsible>
