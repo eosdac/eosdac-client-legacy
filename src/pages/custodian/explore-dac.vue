@@ -8,14 +8,14 @@
         name="token"
         slot="title"
       />
-      <q-tab label="Members" name="members" slot="title" />
-      <q-tab label="Votes" name="votes" slot="title" />
+      <!--<q-tab label="Members" name="members" slot="title" />
+      <q-tab label="Votes" name="votes" slot="title" />-->
       <!-- Targets -->
       <q-tab-pane name="token" class="q-pa-md">
         <token-statistics class="q-mb-md" />
         <transfer-table />
       </q-tab-pane>
-      <q-tab-pane name="members">coming soon...</q-tab-pane>
+      <!--<q-tab-pane name="members">coming soon...</q-tab-pane>
       <q-tab-pane name="votes">
         <vote-timeline
           class="q-mt-sm bg-bg1 q-pa-md"
@@ -24,7 +24,7 @@
           :accounts="getCustNames"
           :legend="true"
         />
-      </q-tab-pane>
+      </q-tab-pane>-->
     </q-tabs>
   </q-page>
 </template>
