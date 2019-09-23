@@ -12,7 +12,7 @@
       <q-tab label="Votes" name="votes" slot="title" />-->
       <!-- Targets -->
       <q-tab-pane name="token" class="q-pa-md">
-        <token-statistics class="q-mb-md" />
+        <!--<token-statistics class="q-mb-md" />-->
         <transfer-table />
       </q-tab-pane>
       <!--<q-tab-pane name="members">coming soon...</q-tab-pane>
@@ -32,13 +32,13 @@
 <script>
 import { mapGetters } from "vuex";
 import transferTable from "components/ui/transfer-table";
-import tokenStatistics from "components/ui/token-statistics";
-import voteTimeline from "components/ui/vote-timeline";
+// import tokenStatistics from "components/ui/token-statistics";
+// import voteTimeline from "components/ui/vote-timeline";
 export default {
   components: {
-    transferTable,
-    tokenStatistics,
-    voteTimeline
+    transferTable
+    // tokenStatistics,
+    // voteTimeline
   },
   data() {
     return {};
