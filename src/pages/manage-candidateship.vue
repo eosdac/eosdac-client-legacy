@@ -346,7 +346,7 @@ export default {
     },
     verifyAndGetStakeAmount() {
       if (
-        this.inputs.stakeamount &&
+        this.inputs.stakeamount !== null &&
         this.inputs.stakeamount >=
           this.assetToNumber(this.getCustodianConfig.lockupasset.quantity)
       ) {
