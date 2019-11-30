@@ -424,7 +424,11 @@ export default {
       let actions = [registeraction];
 
       if (!this.checkAlreadyStaked) {
-        actions.unshift(stakeaction);
+        const stake_amount = parseFloat(this.verifyAndGetStakeAmount.split(' ')[0]);
+        if ((stake_amount * 1000) > 0){
+            actions.unshift(stakeaction);
+        }
+
       }
 
       let result = await this.$store.dispatch("user/transact", {
