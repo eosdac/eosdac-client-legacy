@@ -424,7 +424,7 @@ export default {
       let actions = [registeraction];
 
       if (!this.checkAlreadyStaked) {
-        const stake_amount = parseFloat(this.verifyAndGetStakeAmount.split(' ')[0]);
+        const stake_amount = this.assetToNumber(this.verifyAndGetStakeAmount);
         if ((stake_amount * 1000) > 0){
             actions.unshift(stakeaction);
         }
