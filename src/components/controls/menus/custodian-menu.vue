@@ -16,7 +16,7 @@
           to="/custodian/dac-management"
         >
           <q-item-main
-            label="Manage DAC"
+            :label="$t('menu.manage_dac')"
             class="text-text1 text-weight-light"
           />
         </q-item>
@@ -38,7 +38,7 @@
             class="text-text1 text-weight-light"
           />
         -->
-          <!-- <q-item-side right>
+        <!-- <q-item-side right>
             <q-chip round dense color="negative" class="shadow-2">7</q-chip>
           </q-item-side> -->
         <!--
