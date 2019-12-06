@@ -396,7 +396,11 @@ export default {
     quantityToPrecision(quantity) {
       if (quantity) {
         let [quan] = quantity.split(" ");
-        return quan.split(".")[1].length;
+        const [, decimals] = quan.split(".");
+        if (decimals) {
+          return decimals.length;
+        }
+        return 0;
       }
     },
 
