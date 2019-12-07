@@ -88,12 +88,10 @@ let routes = [
         path: "review-msigs",
         component: () => import("pages/custodian/review-msigs")
       },
-      /*
       {
         path: "review-worker-proposals",
         component: () => import("pages/custodian/review-worker-proposals")
       },
-      */
       {
         path: "my-payments",
         component: () => import("pages/custodian/my-payments"),
@@ -127,7 +125,6 @@ let routes = [
         component: () => import("pages/custodian/explore-dac")
       }
     ]
-    /*
   },
   {
     path: "/member",
@@ -144,7 +141,6 @@ let routes = [
       }
     ],
     beforeEnter: Guards.memberCheck
-*/
   }
 ];
 

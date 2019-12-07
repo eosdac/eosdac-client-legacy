@@ -30,7 +30,7 @@
       />
     </q-item>
     <q-item
-      v-if="getAccountName && (getIsCandidate && getIsCandidate.is_active)"
+      v-if="getAccountName && getIsCandidate && getIsCandidate.is_active"
       to="/manage-candidateship"
     >
       <q-item-side :icon="$configFile.icon.cand_reg" color="text2" />
@@ -55,7 +55,7 @@
     </q-item>
 
     <custodian-menu />
-    <!--<member-menu />-->
+    <member-menu />
 
     <menu-extension />
 
@@ -80,14 +80,14 @@
 <script>
 import { mapGetters } from "vuex";
 import custodianMenu from "./custodian-menu";
-//import memberMenu from "./member-menu";
+import memberMenu from "./member-menu";
 import devMenu from "./dev-menu";
 import menuExtension from "../../../extensions/components/menu/menu-extension";
 export default {
   name: "MainMenu",
   components: {
     custodianMenu,
-    //    memberMenu,
+    memberMenu,
     devMenu,
     menuExtension
   },
