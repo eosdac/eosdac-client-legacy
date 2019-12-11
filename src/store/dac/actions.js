@@ -7,11 +7,13 @@ export async function initRoutine({ state, commit, dispatch }, vm) {
   //requests to get dac info, doesn't require user to be logged in
   let requests = [
     api.getMemberTerms(),
-    api.getCustodians(custodianconfig.numelected)
+    api.getCustodians(custodianconfig.numelected),
+    api.getTokenStats()
   ];
 
-  let [memberterms, custodians] = await Promise.all(requests);
+  let [memberterms, custodians, tokenstats] = await Promise.all(requests);
   commit("setMemberTerms", memberterms);
+  commit("setTokenStats", tokenstats);
   commit("setCustodians", custodians);
   commit("setCustodianConfig", custodianconfig);
   commit("setIsLoaded", true);
@@ -109,6 +111,17 @@ export async function fetchControlledAccounts({ dispatch }) {
     this._vm.$configFile.get("authaccount")
   );
   console.log(ctrl);
+}
+
+export async function fetchTokenStats({ commit, dispatch, state }) {
+  const api = await dispatch("global/getDacApi", false, { root: true });
+  let stats = await api.getTokenStats();
+  if (stats) {
+    debugger;
+    commit("setTokenStats", stats);
+    console.log("stats", stats);
+    return stats;
+  }
 }
 
 export async function fetchCustodianContractState({ commit, dispatch, state }) {

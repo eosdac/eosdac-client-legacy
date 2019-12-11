@@ -101,17 +101,31 @@ export default {
 
   computed: {
     ...mapGetters({
+      tokenStats: "dac/getTokenStats",
       getCustodians: "dac/getCustodians",
       getCustodianState: "dac/getCustodianState",
       getCustodianConfig: "dac/getCustodianConfig"
     }),
     getVotingProgress() {
-      if (this.getCustodianState.total_weight_of_votes !== null) {
-        let totalsupply = this.$configFile.get("tokensupply") * 10000;
+      // this.$store.dispatch("api/getTokenStats");
+      if (
+        this.getCustodianState.total_weight_of_votes !== null &&
+        this.tokenStats.supply !== null
+      ) {
+        let [amount] = this.tokenStats.supply.split(" ");
+        const totalsupply =
+          parseFloat(amount) * Math.pow(10, this.tokenStats.precision);
+        const quorum =
+          totalsupply *
+          (this.getCustodianConfig.initial_vote_quorum_percent / 100);
 
-        return (
-          (this.getCustodianState.total_weight_of_votes / totalsupply) * 100
-        );
+        //return totalsupply;
+        let percentage =
+          (this.getCustodianState.total_weight_of_votes / quorum) * 100;
+        if (percentage > 100) {
+          percentage = 100;
+        }
+        return percentage;
       } else {
         return 0;
       }

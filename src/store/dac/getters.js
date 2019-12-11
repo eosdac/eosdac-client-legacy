@@ -77,6 +77,10 @@ export function getCustStakeConfig(state) {
   // };
 }
 
+export function getTokenStats(state) {
+  return state.tokenStats;
+}
+
 export function getWpConfig(state) {
   return state.wpConfig;
 }

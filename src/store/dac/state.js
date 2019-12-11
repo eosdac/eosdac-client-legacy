@@ -24,6 +24,14 @@ export default {
     requested_pay_max: null
   },
 
+  tokenStats: {
+    maxSupply: null,
+    supply: null,
+    precision: null,
+    symbol: null,
+    transferLocked: null
+  },
+
   custodianState: {
     lastperiodtime: null,
     total_weight_of_votes: null,

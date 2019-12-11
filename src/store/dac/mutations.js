@@ -11,6 +11,10 @@ export function setMemberTerms(state, memberterms) {
   state.memberTerms = memberterms;
 }
 
+export function setTokenStats(state, payload) {
+  state.tokenStats = payload;
+}
+
 export function setCustodians(state, payload) {
   state.custodians = payload;
 }
