@@ -224,8 +224,10 @@ export async function transact(
     setTimeout(() => {
       commit("ui/setShowTransactionOverlay", "sign", { root: true });
     }, 1500);
+
+    delete payload.options;
     const result = await eos.transact(
-      { delay_sec: DELAY_SEC, actions: actions },
+      { ...{ delay_sec: DELAY_SEC }, ...payload },
       { blocksBehind: 3, expireSeconds: 60, broadcast: BROADCAST }
     );
     commit("ui/setShowTransactionOverlay", "success", { root: true });
@@ -292,9 +294,9 @@ export async function proposeMsig(
   //   proposal_name: "aname",
   //   expiration: "2019-08-10T19:14:14",
   //   delay_sec: 0,
+  //   max_cpu_usage_ms: 0,
   //   title: "a title",
   //   description: "a description"
-  //   is_personal_msig: false
   // }
 
   const api = await dispatch("global/getDacApi", false, { root: true });
@@ -349,6 +351,17 @@ export async function proposeMsig(
   //handle the correct permission for the "proposed" action
   let PERM = rootGetters["dac/getAuthAccountPermLevel"];
 
+  const paycpu = {
+    account: this._vm.$configFile.get("custodiancontract"),
+    name: "paycpu",
+    authorization: [
+      { actor: this._vm.$configFile.get("authaccount"), permission: PERM }
+    ],
+    data: {
+      dac_id: this._vm.$configFile.get("dacscope")
+    }
+  };
+
   let proposed = {
     account: this._vm.$configFile.get("dacmsigcontract"),
     name: "proposede",
@@ -367,11 +380,12 @@ export async function proposeMsig(
     }
   };
 
-  let msig_actions = [propose];
-  if (!payload.is_personal_msig) {
-    msig_actions.push(proposed);
-  }
-  let res = await dispatch("transact", { actions: msig_actions });
+  let msig_actions = [paycpu, propose, proposed];
+
+  let res = await dispatch("transact", {
+    actions: msig_actions,
+    max_cpu_usage_ms: 2
+  });
   if (res) {
     res.proposal_name = proposal_name;
   }

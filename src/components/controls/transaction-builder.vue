@@ -113,75 +113,7 @@
           class="text-text1  tb-builder-pane-height no-padding"
         >
           <div class="row gutter-sm q-pa-md">
-            <div v-if="is_personal_msig" class="col-xs-12 col-md-6 col-lg-4">
-              <div class="bg-bg1 q-pa-md round-borders full-height">
-                <div class="text-text2">
-                  Add a proposal name and requested signatures to your personal
-                  msig.
-                </div>
-
-                <q-input
-                  :dark="getIsDark"
-                  stack-label="Proposal Name"
-                  v-model="msig_proposal_name"
-                  class="q-mb-lg"
-                />
-                <div
-                  class="row justify-between items-center q-pa-xs"
-                  style="border-bottom:1px solid grey"
-                >
-                  <div class="q-body1">Requested Signatures</div>
-                  <div class="no-wrap row items-center">
-                    <q-input
-                      v-model="new_requested_signature"
-                      class="bg-bg2 q-pa-xs q-mr-xs round-borders"
-                      hide-underline
-                      placeholder="actor@permission"
-                      :dark="getIsDark"
-                    />
-                    <q-btn
-                      round
-                      dense
-                      icon="add"
-                      color="primary"
-                      @click="addRequestedSignature(new_requested_signature)"
-                      @keyup.enter.native="
-                        addRequestedSignature(new_requested_signature)
-                      "
-                    />
-                  </div>
-                </div>
-                <div class="row bg-dark">
-                  <div
-                    class="q-py-md q-ml-md text-negative"
-                    v-if="!msig_requested_signatures.length"
-                  >
-                    No signatures added yet
-                  </div>
-                  <div
-                    v-for="(req, i) in msig_requested_signatures"
-                    :key="`rs${i}`"
-                    class="row items-center bg-bg2 round-borders q-ma-sm q-pl-xs"
-                  >
-                    <q-icon
-                      name="mdi-shield-account"
-                      class=" text-text2 on-left"
-                      size="16px"
-                    />
-                    <div>{{ `${req.actor}@${req.permission}` }}</div>
-                    <q-btn
-                      icon="close"
-                      flat
-                      dense
-                      color="negative"
-                      class="on-right"
-                      @click="msig_requested_signatures.splice(i, 1)"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div v-if="!is_personal_msig" class="col-xs-12 col-md-6 col-lg-4">
+            <div class="col-xs-12 col-md-6 col-lg-4">
               <div class="bg-bg1 q-pa-md round-borders full-height">
                 <span class="text-text2"
                   >Add a Title and Description to your DAC proposal.</span
@@ -251,25 +183,6 @@
                     v-model="msig_delay"
                     color="primary-light"
                   />
-                </div>
-                <div class="bg-bg1 q-pa-md round-borders">
-                  <div class="text-text2 q-mb-sm">
-                    The msig will be send in the name of the DAC and shown to
-                    the {{ getCustodianConfig.numelected }} custodians for
-                    voting. By enabling personal mode you can send msigs outside
-                    the scope of the DAC.
-                  </div>
-                  <q-toggle
-                    :dark="getIsDark"
-                    color="primary-light"
-                    v-model="is_personal_msig"
-                  />
-                  <span
-                    v-if="is_personal_msig"
-                    class="on-right animate-fade q-caption text-positive"
-                  >
-                    personal msig!
-                  </span>
                 </div>
               </div>
             </div>
@@ -370,7 +283,6 @@ export default {
       broadcast: true,
       msigMode: this.enable_msig,
 
-      is_personal_msig: false,
       msig_proposal_name: "",
       msig_requested_signatures: [],
 
@@ -435,13 +347,8 @@ export default {
         expiration: this.msig_expiration.split(".")[0],
         delay_sec: this.msig_delay,
         title: this.msig_title,
-        description: this.msig_description,
-        is_personal_msig: this.is_personal_msig
+        description: this.msig_description
       };
-      if (this.is_personal_msig) {
-        msigOptions.proposal_name = this.msig_proposal_name;
-        msigOptions.requested = this.msig_requested_signatures;
-      }
       console.log(msigOptions);
       let result = await this.$store.dispatch(
         "user/proposeMsig",

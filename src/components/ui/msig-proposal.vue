@@ -593,6 +593,7 @@ export default {
     return {
       systemmsig: this.$configFile.get("systemmsigcontract"),
       dacmsig: this.$configFile.get("dacmsigcontract"),
+      custodian: this.$configFile.get("custodiancontract"),
       provided_approvals: null,
       requested_approvals: null,
 
@@ -751,8 +752,25 @@ export default {
           }
         }
       ];
+
+      const paycpu = {
+        account: this.$configFile.get("custodiancontract"),
+        name: "paycpu",
+        authorization: [
+          {
+            actor: this.$configFile.get("authaccount"),
+            permission: this.getAuthAccountPermLevel
+          }
+        ],
+        data: {
+          dac_id: this.$configFile.get("dacscope")
+        }
+      };
+      actions.unshift(paycpu);
+
       let result = await this.$store.dispatch("user/transact", {
-        actions: actions
+        actions: actions,
+        max_cpu_usage_ms: 2
       });
       if (result) {
         this.transactionCallback("e_approval");
@@ -789,8 +807,25 @@ export default {
           }
         }
       ];
+
+      const paycpu = {
+        account: this.$configFile.get("custodiancontract"),
+        name: "paycpu",
+        authorization: [
+          {
+            actor: this.$configFile.get("authaccount"),
+            permission: this.getAuthAccountPermLevel
+          }
+        ],
+        data: {
+          dac_id: this.$configFile.get("dacscope")
+        }
+      };
+      actions.unshift(paycpu);
+
       let result = await this.$store.dispatch("user/transact", {
-        actions: actions
+        actions: actions,
+        max_cpu_usage_ms: 2
       });
       if (result) {
         this.transactionCallback("e_unapproval");
@@ -826,8 +861,25 @@ export default {
           }
         }
       ];
+
+      const paycpu = {
+        account: this.$configFile.get("custodiancontract"),
+        name: "paycpu",
+        authorization: [
+          {
+            actor: this.$configFile.get("authaccount"),
+            permission: this.getAuthAccountPermLevel
+          }
+        ],
+        data: {
+          dac_id: this.$configFile.get("dacscope")
+        }
+      };
+      actions.unshift(paycpu);
+
       let result = await this.$store.dispatch("user/transact", {
-        actions: actions
+        actions: actions,
+        max_cpu_usage_ms: 2
       });
       if (result) {
         this.transactionCallback("e_exec");
@@ -864,8 +916,25 @@ export default {
           }
         }
       ];
+
+      const paycpu = {
+        account: this.$configFile.get("custodiancontract"),
+        name: "paycpu",
+        authorization: [
+          {
+            actor: this.$configFile.get("authaccount"),
+            permission: this.getAuthAccountPermLevel
+          }
+        ],
+        data: {
+          dac_id: this.$configFile.get("dacscope")
+        }
+      };
+      actions.unshift(paycpu);
+
       let result = await this.$store.dispatch("user/transact", {
-        actions: actions
+        actions: actions,
+        max_cpu_usage_ms: 2
       });
       if (result) {
         this.transactionCallback("e_cancel");
