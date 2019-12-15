@@ -21,6 +21,10 @@ export function setDacBalance(state, payload) {
   state.dacBalance = payload;
 }
 
+export function setStakedDacBalance(state, payload) {
+  state.stakedDacBalance = payload;
+}
+
 export function setSystemBalance(state, payload) {
   state.systemBalance = payload;
 }

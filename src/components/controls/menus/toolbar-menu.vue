@@ -22,6 +22,20 @@
                   )
                 "
             /></q-item-tile>
+            <q-item-tile
+              class="text-text2 q-caption text-weight-light"
+              sublabel
+            >
+              <xspan
+                :value="
+                  $helper.toLocaleNumber(
+                    getStakedDacBalance,
+                    $configFile.get('tokendecimals')
+                  )
+                "
+              />
+              staked</q-item-tile
+            >
           </q-item-main>
         </q-item>
 
@@ -190,6 +204,7 @@ export default {
       getAgreedTermsVersion: "user/getAgreedTermsVersion",
       getProfilePicture: "user/getProfilePicture",
       getDacBalance: "user/getDacBalance",
+      getStakedDacBalance: "user/getStakedDacBalance",
       getSystemBalance: "user/getSystemBalance",
       getMemberStatus: "user/getMemberStatus",
       getActiveNetworkName: "global/getActiveNetworkName",

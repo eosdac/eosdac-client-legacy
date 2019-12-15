@@ -380,12 +380,11 @@ export default {
       );
       if (from_permissions) return from_permissions.permissions;
 
-      let account_permissions = (await this.$store.dispatch(
-        "dac/fetchAccount",
-        {
+      let account_permissions = (
+        await this.$store.dispatch("dac/fetchAccount", {
           accountname: accountname
-        }
-      )).permissions;
+        })
+      ).permissions;
       if (account_permissions) {
         this.permissions_map.push({
           account: accountname,

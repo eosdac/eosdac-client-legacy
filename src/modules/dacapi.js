@@ -33,6 +33,32 @@ export class DacApi {
       .catch(e => false);
   }
 
+  async getStaked(
+    accountname,
+    code = this.configobj.get("tokencontract"),
+    symbol = this.configobj.get("dactokensymbol"),
+    scope = this.configobj.get("dacscope")
+  ) {
+    return this.eos
+      .get_table_rows({
+        code,
+        scope,
+        table: "stakes",
+        lower_bound: accountname,
+        upper_bound: accountname
+      })
+      .then(res => {
+        if (res.rows.length) {
+          let [qty] = res.rows[0].stake.split(" ");
+          //alert(`qty = ${qty}`);
+          return parseFloat(qty);
+        } else {
+          return 0;
+        }
+      })
+      .catch(e => false);
+  }
+
   async getAgreedTermsVersion(accountname) {
     let res = await this.eos
       .get_table_rows({
@@ -218,14 +244,16 @@ export class DacApi {
 
   async getApprovalsFromProposal(payload) {
     try {
-      let approvals = (await this.eos.get_table_rows({
-        code: this.configobj.get("systemmsigcontract"),
-        json: true,
-        limit: 1,
-        lower_bound: payload.proposal_name,
-        scope: payload.proposer,
-        table: "approvals"
-      })).rows[0];
+      let approvals = (
+        await this.eos.get_table_rows({
+          code: this.configobj.get("systemmsigcontract"),
+          json: true,
+          limit: 1,
+          lower_bound: payload.proposal_name,
+          scope: payload.proposer,
+          table: "approvals"
+        })
+      ).rows[0];
 
       return approvals;
     } catch (e) {

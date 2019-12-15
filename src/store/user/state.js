@@ -15,6 +15,7 @@ export default {
   profilePicture: null,
   account: null,
   dacBalance: null,
+  stakedDacBalance: null,
   systemBalance: null,
   agreedTermsVersion: null,
   lastTransaction: null,

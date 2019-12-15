@@ -30,6 +30,10 @@ export function getDacBalance(state) {
   return state.dacBalance;
 }
 
+export function getStakedDacBalance(state) {
+  return state.stakedDacBalance;
+}
+
 export function getSystemBalance(state) {
   return state.systemBalance;
 }

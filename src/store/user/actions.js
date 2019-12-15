@@ -6,6 +6,7 @@ export async function loggedOutRoutine({ commit }) {
   commit("setAccount", null);
   commit("setAccountName", null);
   commit("setDacBalance", null);
+  commit("setStakedDacBalance", null);
   commit("setAgreedTermsVersion", null);
   commit("setProfilePicture", null);
   commit("setIsCandidate", null);
@@ -31,13 +32,17 @@ export async function loggedInRoutine({ state, commit, dispatch }, account) {
   //requests for setting up the logged in user
   let requests = [
     api.getBalance(accountname),
+    api.getStaked(accountname),
     api.getAgreedTermsVersion(accountname),
     api.isCandidate(accountname)
   ];
   console.log(JSON.stringify(await api.getAccount(accountname)));
-  let [balance, termsversion, isCandidate] = await Promise.all(requests);
+  let [balance, staked, termsversion, isCandidate] = await Promise.all(
+    requests
+  );
   console.log("is canddate:", isCandidate);
   commit("setDacBalance", balance);
+  commit("setStakedDacBalance", staked);
   commit("setAgreedTermsVersion", termsversion);
   // commit('setAccount', account);
   commit("setIsCandidate", isCandidate);
@@ -97,11 +102,15 @@ export async function fetchBalances(
   const api = await dispatch("global/getDacApi", false, { root: true });
   let requests = [
     api.getBalance(accountN),
+    api.getStaked(accountN),
     api.getBalance(accountN, "eosio.token", "EOS")
   ];
-  let [dacbalance, systembalance] = await Promise.all(requests);
+  let [dacbalance, stakeddacbalance, systembalance] = await Promise.all(
+    requests
+  );
   if (!accountname) {
     commit("setDacBalance", dacbalance);
+    commit("setStakedDacBalance", stakeddacbalance);
     commit("setSystemBalance", systembalance);
   } else {
     return [dacbalance, systembalance];

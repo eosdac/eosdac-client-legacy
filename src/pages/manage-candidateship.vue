@@ -65,7 +65,9 @@
                 $t(`manage_candidateship.locked_tokens`)
               }}</q-item-tile>
               <q-item-tile class="text-text2" sublabel>{{
-                $helper.assetToLocaleNumber(getIsCandidate.locked_tokens)
+                $helper.assetToLocaleNumber(
+                  `${getStakedDacBalance} ${$configFile.get("dactokensymbol")}`
+                )
               }}</q-item-tile>
             </q-item-main>
             <q-item-side right class="no-padding">
@@ -205,11 +207,9 @@
       </div>
       <!-- end not a candidate -->
 
-      <div
+      <!--<div
         v-if="
-          getIsCandidate &&
-            !getIsCandidate.is_active &&
-            parseFloat(getIsCandidate.locked_tokens)
+          getIsCandidate && !getIsCandidate.is_active && getStakedDacBalance
         "
         class=" bg-bg1 q-pa-md round-borders shadow-4 q-mt-md"
       >
@@ -223,7 +223,9 @@
             <span class="text-positive"
               >Your stake
               {{
-                $helper.assetToLocaleNumber(getIsCandidate.locked_tokens)
+                $helper.assetToLocaleNumber(
+                  `${getStakedDacBalance} ${$configFile.get("dactokensymbol")}`
+                )
               }}</span
             >
             <span class="on-right"
@@ -242,7 +244,7 @@
             :label="$t('manage_candidateship.unstake')"
           />
         </div>
-      </div>
+      </div>-->
       <!-- {{$t('manage_candidateship.page_description_active_custodian', {dacname: $configFile.get('dacname')})}} -->
     </div>
 
@@ -317,6 +319,7 @@ export default {
       getIsCandidate: "user/getIsCandidate",
       getProfilePicture: "user/getProfilePicture",
       getCustodianConfig: "dac/getCustodianConfig",
+      getStakedDacBalance: "user/getStakedDacBalance",
       getIsDark: "ui/getIsDark",
       getEnableCustPayments: "dac/getEnableCustPayments"
     }),
@@ -347,7 +350,7 @@ export default {
     verifyAndGetStakeAmount() {
       if (
         this.inputs.stakeamount !== null &&
-        this.inputs.stakeamount >=
+        this.inputs.stakeamount + this.getStakedDacBalance >=
           this.assetToNumber(this.getCustodianConfig.lockupasset.quantity)
       ) {
         return this.numberToAsset(
@@ -359,27 +362,13 @@ export default {
           this.$configFile.get("dactokensymbol")
         );
       } else {
-        console.log("stake out of range");
-        return false;
-      }
-    },
-    checkAlreadyStaked() {
-      if (
-        this.getIsCandidate &&
-        this.assetToNumber(this.getIsCandidate.locked_tokens)
-      ) {
-        return (
-          this.assetToNumber(this.getIsCandidate.locked_tokens) >=
-          this.assetToNumber(this.getCustodianConfig.lockupasset.quantity)
-        );
-      } else {
         return false;
       }
     },
     allowRegister() {
       return (
         (this.verifyAndGetRequestedPay || !this.getEnableCustPayments) &&
-        (this.verifyAndGetStakeAmount || this.checkAlreadyStaked)
+        this.verifyAndGetStakeAmount
       );
     }
   },
@@ -405,16 +394,20 @@ export default {
     },
 
     async registerAsCandidtate() {
-      let stakeaction = {
-        account: this.$configFile.get("tokencontract"),
-        name: "transfer",
-        data: {
-          from: this.getAccountName,
-          to: this.$configFile.get("custodiancontract"),
-          quantity: this.verifyAndGetStakeAmount,
-          memo: this.$configFile.get("dacscope")
-        }
-      };
+      const stake_qty = this.verifyAndGetStakeAmount;
+      const [stake_qty_float] = stake_qty.split(" ");
+      let stakeaction;
+      if (stake_qty_float) {
+        stakeaction = {
+          account: this.$configFile.get("tokencontract"),
+          name: "stake",
+          data: {
+            account: this.getAccountName,
+            quantity: stake_qty
+          }
+        };
+      }
+
       let registeraction = {
         account: this.$configFile.get("custodiancontract"),
         name: "nominatecane",
@@ -427,7 +420,7 @@ export default {
 
       let actions = [registeraction];
 
-      if (!this.checkAlreadyStaked) {
+      if (stake_qty_float > 0) {
         actions.unshift(stakeaction);
       }
 
@@ -465,23 +458,23 @@ export default {
     },
 
     async unstake() {
-      let actions = [
-        {
-          account: this.$configFile.get("custodiancontract"),
-          name: "unstakee",
-          data: {
-            cand: this.getAccountName,
-            dac_id: this.$configFile.get("dacscope")
-          }
-        }
-      ];
-      let result = await this.$store.dispatch("user/transact", {
-        actions: actions
-      });
-      if (result) {
-        this.$store.dispatch("user/fetchIsCandidate");
-        this.$store.dispatch("user/fetchBalances");
-      }
+      // let actions = [
+      //   {
+      //     account: this.$configFile.get("tokencontract"),
+      //     name: "unstake",
+      //     data: {
+      //       cand: this.getAccountName,
+      //       dac_id: this.$configFile.get("dacscope")
+      //     }
+      //   }
+      // ];
+      // let result = await this.$store.dispatch("user/transact", {
+      //   actions: actions
+      // });
+      // if (result) {
+      //   this.$store.dispatch("user/fetchIsCandidate");
+      //   this.$store.dispatch("user/fetchBalances");
+      // }
     },
     async increase_stake() {
       if (!this.increase_stake_amount) return false;
@@ -494,12 +487,10 @@ export default {
       );
       let stakeaction = {
         account: this.$configFile.get("tokencontract"),
-        name: "transfer",
+        name: "stake",
         data: {
-          from: this.getAccountName,
-          to: this.$configFile.get("custodiancontract"),
-          quantity: amount,
-          memo: "Increase stake"
+          account: this.getAccountName,
+          quantity: amount
         }
       };
       let result = await this.$store.dispatch("user/transact", {
