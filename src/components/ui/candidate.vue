@@ -38,8 +38,14 @@
         >
         <span
           ><span class="text-text2">{{ $t("candidate.staked") }}:</span>
-          {{ $helper.assetToLocaleNumber(data.locked_tokens) }}</span
-        >
+          <xspan
+            :value="
+              $helper.toLocaleNumber(
+                stakedTokens,
+                $configFile.get('tokendecimals')
+              )
+            "
+        /></span>
       </div>
 
       <div class="row justify-between  q-px-md q-pb-md q-body-1">
@@ -239,12 +245,22 @@
                 ><span class="text-text2">{{ $t("candidate.votes") }}:</span>
                 {{ $helper.toLocaleNumber(data.total_votes / 10000) }}</span
               >
-              <span
-                ><span class="q-pl-md text-text2"
+              <span>
+                <span class="q-pl-md text-text2"
                   >{{ $t("candidate.staked") }}:</span
                 >
-                {{ $helper.assetToLocaleNumber(data.locked_tokens) }}</span
-              >
+                <span class="text-text2"
+                  >&nbsp;<xspan
+                    :value="
+                      $helper.toLocaleNumber(
+                        stakedTokens,
+                        $configFile.get('tokendecimals')
+                      )
+                    "
+                  />
+                  {{ $configFile.get("dactokensymbol") }}</span
+                >
+              </span>
             </div>
           </q-item-main>
         </template>
@@ -312,13 +328,15 @@ import SocialLinks from "components/ui/social-links";
 import profilePic from "components/ui/profile-pic";
 import voteAnimation from "components/ui/vote-animation";
 import MarkdownViewer from "components/ui/markdown-viewer";
+import xspan from "components/ui/xspan";
 export default {
   name: "Candidate",
   components: {
     SocialLinks,
     MarkdownViewer,
     voteAnimation,
-    profilePic
+    profilePic,
+    xspan
   },
 
   props: {
@@ -328,6 +346,7 @@ export default {
   data() {
     return {
       profileImage: this.data.profile.image || this.$profiles.default_avatar,
+      stakedTokens: null,
       sociallinks: this.data.profile.sameAs
         ? this.data.profile.sameAs.map(p => p.link)
         : [],
@@ -336,12 +355,14 @@ export default {
       vote_delta: 0
     };
   },
+
   computed: {
     ...mapGetters({
       getCustodians: "dac/getCustodians",
       getCustodianConfig: "dac/getCustodianConfig",
       getTokenBalance: "user/getDacBalance",
-      getIsDark: "ui/getIsDark"
+      getIsDark: "ui/getIsDark",
+      getDacApi: "global/getDacApi"
     }),
     is_custodian() {
       if (this.getCustodians) {
@@ -354,6 +375,11 @@ export default {
     }
   },
   methods: {
+    async loadStake() {
+      this.stakedTokens = await this.getDacApi.getStaked(
+        this.data.candidate_name
+      );
+    },
     emit_add_vote() {
       this.$emit("clickvotefor");
     }
@@ -362,6 +388,9 @@ export default {
     "data.total_votes": function(newVal, oldVal) {
       this.vote_delta = parseInt(newVal) - parseInt(oldVal);
     }
+  },
+  mounted: function() {
+    this.loadStake();
   }
 };
 </script>

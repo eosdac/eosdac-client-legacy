@@ -53,11 +53,10 @@ export async function fetchActiveCandidates({ state, commit, dispatch }) {
     return t;
   });
 
-  candidates = candidates.map((c, i) => {
-    c.rank = i + 1;
-    c.selected = false;
-    return c;
-  });
+  for (let i = 0; i < candidates.length; i++) {
+    candidates[i].rank = i + 1;
+    candidates[i].selected = false;
+  }
 
   let candidate_names = candidates.map(c => c.candidate_name);
   let profiles = await this._vm.$profiles.getProfiles(candidate_names);
