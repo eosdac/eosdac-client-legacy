@@ -124,11 +124,17 @@ export default {
         });
       }
 
-      this.selected_token = this.tokens.find(
+      const has_default_token = this.tokens.find(
         t =>
           t.value.symbol == this.default_symbol &&
           t.value.contract == this.default_contract
-      ).value;
+      );
+      if (has_default_token){
+        this.selected_token = has_default_token;
+      }
+      else if (this.tokens.length) {
+        this.selected_token = this.tokens[0];
+      }
     },
     handleTokenSelection(v) {
       this.balance = null;
