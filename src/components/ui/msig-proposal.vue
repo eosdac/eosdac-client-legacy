@@ -329,13 +329,6 @@
             <div class="q-caption text-text2">Received Approvals:</div>
             <div class="text-text1 q-display-1">
               <span
-                ><q-spinner
-                  v-if="provided_approvals == null"
-                  color="primary"
-                  size="25px"
-                  style="margin-top:-4px"
-              /></span>
-              <span
                 v-if="provided_approvals"
                 class="text-primary-light cursor-pointer animate-fade"
                 @click="approvals_modal = true"
@@ -622,16 +615,16 @@ export default {
     },
     getCustodianApprovals() {
       let cust_names = this.getCustodians.map(c => c.cust_name);
-      let custodian_approvals = this.provided_approvals.filter(pa =>
+      let custodian_approvals = this.msig.provided_approvals.filter(pa =>
         cust_names.includes(pa.actor)
       );
       return custodian_approvals;
     },
 
     isExecutable: function() {
-      if (this.provided_approvals) {
+      if (this.msig.provided_approvals) {
         let cust_names = this.getCustodians.map(c => c.cust_name);
-        let custodian_approvals = this.provided_approvals.filter(pa =>
+        let custodian_approvals = this.msig.provided_approvals.filter(pa =>
           cust_names.includes(pa.actor)
         );
         return custodian_approvals.length >= this.msig.threshold;
@@ -640,8 +633,8 @@ export default {
       }
     },
     isApproved: function() {
-      if (this.provided_approvals) {
-        return !!this.provided_approvals.find(
+      if (this.msig.provided_approvals) {
+        return !!this.msig.provided_approvals.find(
           a => a.actor == this.getAccountName
         );
       } else {
@@ -698,28 +691,6 @@ export default {
 
   methods: {
     openURL,
-    async checkApprovals() {
-      let avatars = await this.$profiles.getAvatars([
-        ...this.msig.provided_approvals.map(a => a.actor),
-        ...this.msig.requested_approvals.map(a => a.actor)
-      ]);
-
-      // let cust_names = this.getCustodians.map(c => c.cust_name);
-
-      this.provided_approvals = this.msig.provided_approvals
-        // .filter(ra => cust_names.includes(ra.actor))
-        .map(pa => {
-          pa.avatar = avatars.find(p => p.account === pa.actor);
-          return pa;
-        });
-
-      this.requested_approvals = this.msig.requested_approvals
-        // .filter(ra => cust_names.includes(ra.actor))
-        .map(ra => {
-          ra.avatar = avatars.find(p => p.account === ra.actor);
-          return ra;
-        });
-    },
 
     //approve a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
     async approveProposal(proposer, proposal_name) {
@@ -945,7 +916,8 @@ export default {
   },
 
   mounted: function() {
-    this.checkApprovals();
+    this.provided_approvals = this.msig.provided_approvals;
+    this.requested_approvals = this.msig.requested_approvals;
   }
 };
 </script>
