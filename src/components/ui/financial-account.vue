@@ -130,7 +130,7 @@ export default {
           t.value.contract == this.default_contract
       );
       if (has_default_token){
-        this.selected_token = has_default_token;
+        this.selected_token = has_default_token.value;
       }
       else if (this.tokens.length) {
         this.selected_token = this.tokens[0];
