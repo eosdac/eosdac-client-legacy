@@ -98,7 +98,7 @@
           </div>
           <div class="col-md-2 col-xs-6">
             <div class=" q-caption uppercase">Type</div>
-            <div>Member</div>
+            <div>{{ form.member_type }}</div>
           </div>
         </div>
       </div>
@@ -325,11 +325,25 @@ export default {
       this.getProfileData();
     },
 
+    memberTypeToText(type) {
+      switch (type) {
+        case 0:
+          return "Non-Member";
+        case 1:
+          return "Member";
+        case 2:
+          return "Candidate";
+        case 3:
+          return "Custodian";
+      }
+    },
+
     async getProfileData() {
       let p = await this.$profiles.getProfiles([this.account_name]);
       if (p && p.length && this.validateProfile(p[0].profile)) {
         //todo validate profile
         this.form = p[0].profile;
+        this.form.member_type = this.memberTypeToText(p[0].member_type);
         this.allow_edit = this.account_name === this.getAccountName;
       } else {
         this.allow_edit = this.account_name === this.getAccountName;

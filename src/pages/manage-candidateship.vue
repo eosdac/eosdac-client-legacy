@@ -207,7 +207,7 @@
       </div>
       <!-- end not a candidate -->
 
-      <!--<div
+      <div
         v-if="
           getIsCandidate && !getIsCandidate.is_active && getStakedDacBalance
         "
@@ -244,7 +244,7 @@
             :label="$t('manage_candidateship.unstake')"
           />
         </div>
-      </div>-->
+      </div>
       <!-- {{$t('manage_candidateship.page_description_active_custodian', {dacname: $configFile.get('dacname')})}} -->
     </div>
 

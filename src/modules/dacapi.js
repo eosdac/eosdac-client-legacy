@@ -100,21 +100,41 @@ export class DacApi {
   }
 
   async getTokenStats() {
-    let res = await this.eos
-      .get_table_rows({
-        json: true,
-        code: this.configobj.get("tokencontract"),
-        scope: this.configobj.get("dactokensymbol"),
-        table: "stat",
-        limit: 1
-      })
-      .catch(e => false);
+    let res = await this.eos.get_table_rows({
+      json: true,
+      code: this.configobj.get("tokencontract"),
+      scope: this.configobj.get("dactokensymbol"),
+      table: "stat",
+      limit: 1
+    });
+    console.log(res.rows[0]);
 
-    if (res.rows) {
+    const [amount, symbol] = res.rows[0].max_supply.split(" ");
+    const [, decs] = amount.split(".");
+
+    const stats = {
+      maxSupply: res.rows[0].max_supply,
+      supply: res.rows[0].supply,
+      precision: decs.length,
+      transferLocked: !!res.rows[0].transfer_locked,
+      symbol
+    };
+
+    return stats;
+    /*debugger;
+
+    return {
+      maxSupply: "1000000000.0000 SENSE",
+      supply: "1000000000.0000 SENSE",
+      precision: 4,
+      symbol: "SENSE"
+    };*/
+
+    /*if (res.rows) {
       return res.rows[0];
     } else {
       return false;
-    }
+    }*/
   }
 
   async getContractConfig(payload) {

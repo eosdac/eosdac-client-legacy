@@ -16,7 +16,7 @@
           to="/custodian/dac-management"
         >
           <q-item-main
-            label="Manage DAC"
+            :label="$t('menu.manage_dac')"
             class="text-text1 text-weight-light"
           />
         </q-item>
